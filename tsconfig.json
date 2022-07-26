@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es6",
+    "noEmitHelpers": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules",
+  ]
+}

@@ -1,0 +1,6 @@
+.idea
+.laya
+.rpt2_cache
+.vscode
+bin/js
+node_modules
