@@ -9,10 +9,6 @@ import { ViewID } from '../../core/ui/core/ViewID'
  */
 export class MainScene extends BaseScene {
 
-	getResArray(): string[] {
-		return [];
-	}
-
 	protected onEnter(): void {
 		this.dispatch(NotifyConst.AddView, ViewID.MainView);
 		//历练日志

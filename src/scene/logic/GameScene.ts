@@ -10,10 +10,6 @@ import { BaseScene } from './BaseScene';
 
 export class GameScene extends BaseScene {
 
-	getResArray(): string[] {
-		return [];
-	}
-
 	protected onEnter(): void {
 		this.dispatch(NotifyConst.AddView, [ ViewID.ChooseBattleView, this.data ]);
 	}

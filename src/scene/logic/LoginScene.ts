@@ -1,7 +1,7 @@
-import { BaseScene } from './BaseScene'
-import { ViewID } from '../../core/ui/core/ViewID'
-import { NotifyConst } from '../../core/common/NotifyConst'
-import { ResPath } from '../../core/common/ResPath'
+import { NotifyConst } from '../../core/common/NotifyConst';
+import { ResPath } from '../../core/common/ResPath';
+import { ViewID } from '../../core/ui/core/ViewID';
+import { BaseScene } from './BaseScene';
 
 /**
  *@Author zsk
@@ -9,9 +9,8 @@ import { ResPath } from '../../core/common/ResPath'
  *@Description
  */
 export class LoginScene extends BaseScene {
-
-	getResArray(): string[] {
-		return [];
+	protected getResArray(): string[] {
+		return [ ResPath.Ui_PkgLogin ];
 	}
 
 	protected onEnter(): void {
@@ -19,7 +18,6 @@ export class LoginScene extends BaseScene {
 	}
 
 	protected onExit(): void {
-		fgui.UIPackage.removePackage(ResPath.Ui_PkgLogin);
 	}
 
 }

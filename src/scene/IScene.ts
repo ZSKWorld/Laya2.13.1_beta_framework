@@ -6,8 +6,8 @@
 export interface IScene {
 	readonly name: string;
 
-	/** 获取进入场景要加载的资源数组 */
-	getResArray(): string[];
+	/**加载场景，进入场景前的资源加载 */
+	load(): Promise<void>;
 
 	/** 进入场景 */
 	enter(data: any): void;

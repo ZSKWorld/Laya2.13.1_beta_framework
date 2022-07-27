@@ -1,14 +1,14 @@
-import { BaseScene } from './BaseScene'
+import { NotifyConst } from '../../core/common/NotifyConst'
+import { platform, PlatformType } from '../../core/common/platform/Platform'
 import { ResPath } from '../../core/common/ResPath'
-import { FixEngine } from '../../FixEngine'
-import { ViewExtend } from '../../core/ui/core/ViewExtend'
 import { tableMgr } from '../../core/table/TableManager'
-import { uiRegister } from '../../core/ui/core/ViewRegister'
 import { layerMgr } from '../../core/ui/core/GameLayer'
 import { uiMgr } from '../../core/ui/core/UIManager'
-import { platform, PlatformType } from '../../core/common/platform/Platform'
+import { ViewExtend } from '../../core/ui/core/ViewExtend'
+import { uiRegister } from '../../core/ui/core/ViewRegister'
+import { FixEngine } from '../../FixEngine'
 import { SceneType } from '../SceneConst'
-import { NotifyConst } from '../../core/common/NotifyConst'
+import { BaseScene } from './BaseScene'
 
 /**
  *@Author zsk
@@ -17,7 +17,7 @@ import { NotifyConst } from '../../core/common/NotifyConst'
  */
 export class InitScene extends BaseScene {
 
-	getResArray(): string[] {
+	protected getConstResArray(): string[] {
 		return [
 			ResPath.Table_Config,
 			ResPath.Font_HYDiShengYingXiongTiW,
