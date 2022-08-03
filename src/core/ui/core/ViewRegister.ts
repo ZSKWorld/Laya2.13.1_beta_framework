@@ -16,9 +16,11 @@ import PkgCommonBinder from "../ui/PkgCommon/PkgCommonBinder";
 import PkgLoginBinder from "../ui/PkgLogin/PkgLoginBinder";
 import PkgMainBinder from "../ui/PkgMain/PkgMainBinder";
 import RenderBag from "../ui/PkgMain/RenderBag";
+import RenderChatMsg from "../ui/PkgMain/RenderChatMsg";
 import RenderChooseBattle from "../ui/PkgBattle/RenderChooseBattle";
-import RenderLiLian from "../ui/PkgMain/RenderLiLian";
+import RenderText from "../ui/PkgMain/RenderText";
 import UIBattle from "../ui/PkgBattle/UIBattle";
+import UIChat from "../ui/PkgMain/UIChat";
 import UIChooseBattle from "../ui/PkgBattle/UIChooseBattle";
 import UIEquipmentInfo from "../ui/PkgMain/UIEquipmentInfo";
 import UILoginMain from "../ui/PkgLogin/UILoginMain";
@@ -54,14 +56,18 @@ import { ComZhiZuoCtrl } from "../viewCtrl/PkgMain/Coms/ComZhiZuoCtrl";
 import { ComZhiZuoView } from "../view/PkgMain/Coms/ComZhiZuoView";
 import { IViewCtrl_Class, IView_Class } from "./interfaces";
 import { RenderBagView } from "../view/PkgMain/Renders/RenderBagView";
+import { RenderChatMsgView } from "../view/PkgMain/Renders/RenderChatMsgView";
 import { RenderChooseBattleView } from "../view/PkgBattle/Renders/RenderChooseBattleView";
-import { RenderLiLianView } from "../view/PkgMain/Renders/RenderLiLianView";
+import { RenderTextView } from "../view/PkgMain/Renders/RenderTextView";
 import { UIBattleCtrl } from "../viewCtrl/PkgBattle/UIBattleCtrl";
 import { UIBattleView } from "../view/PkgBattle/UIBattleView";
+import { UIChatCtrl } from "../viewCtrl/PkgMain/UIChatCtrl";
+import { UIChatView } from "../view/PkgMain/UIChatView";
 import { UIChooseBattleCtrl } from "../viewCtrl/PkgBattle/UIChooseBattleCtrl";
 import { UIChooseBattleView } from "../view/PkgBattle/UIChooseBattleView";
 import { UIEquipmentInfoCtrl } from "../viewCtrl/PkgMain/UIEquipmentInfoCtrl";
 import { UIEquipmentInfoView } from "../view/PkgMain/UIEquipmentInfoView";
+import { UILoadingCtrl } from "../viewCtrl/PkgCommon/UILoadingCtrl";
 import { UILoginMainCtrl } from "../viewCtrl/PkgLogin/UILoginMainCtrl";
 import { UILoginMainView } from "../view/PkgLogin/UILoginMainView";
 import { UIMainCtrl } from "../viewCtrl/PkgMain/UIMainCtrl";
@@ -114,13 +120,15 @@ export class ViewRegister {
 		//Renders
 		fairygui.UIObjectFactory.setExtension(RenderChooseBattle.URL, RenderChooseBattleView);
 		fairygui.UIObjectFactory.setExtension(RenderBag.URL, RenderBagView);
-		fairygui.UIObjectFactory.setExtension(RenderLiLian.URL, RenderLiLianView);
+		fairygui.UIObjectFactory.setExtension(RenderChatMsg.URL, RenderChatMsgView);
+		fairygui.UIObjectFactory.setExtension(RenderText.URL, RenderTextView);
 
 		//Views
 		fairygui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);
 		fairygui.UIObjectFactory.setExtension(UIChooseBattle.URL, UIChooseBattleView);
 		fairygui.UIObjectFactory.setExtension(UITipConfirm.URL, UITipConfirmView);
 		fairygui.UIObjectFactory.setExtension(UILoginMain.URL, UILoginMainView);
+		fairygui.UIObjectFactory.setExtension(UIChat.URL, UIChatView);
 		fairygui.UIObjectFactory.setExtension(UIEquipmentInfo.URL, UIEquipmentInfoView);
 		fairygui.UIObjectFactory.setExtension(UIMain.URL, UIMainView);
 		fairygui.UIObjectFactory.setExtension(UIPlayerInfo.URL, UIPlayerInfoView);
@@ -151,6 +159,7 @@ export class ViewRegister {
 		register(ViewID.ChooseBattleView, UIChooseBattleView, UIChooseBattleCtrl);
 		register(ViewID.TipConfirmView, UITipConfirmView, UITipConfirmCtrl);
 		register(ViewID.LoginMainView, UILoginMainView, UILoginMainCtrl);
+		register(ViewID.ChatView, UIChatView, UIChatCtrl);
 		register(ViewID.EquipmentInfoView, UIEquipmentInfoView, UIEquipmentInfoCtrl);
 		register(ViewID.MainView, UIMainView, UIMainCtrl);
 		register(ViewID.PlayerInfoView, UIPlayerInfoView, UIPlayerInfoCtrl);

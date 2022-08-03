@@ -19,6 +19,7 @@ export default class UIMain extends fgui.GComponent {
 	public BtnWuPin:fgui.GButton;
 	public BtnShangCheng:fgui.GButton;
 	public BtnDongFu:fgui.GButton;
+	public BtnChat:fgui.GButton;
 	public BtnInfo:fgui.GGraph;
 	public TxtNickName:fgui.GTextField;
 	public TxtLevel:fgui.GTextField;
@@ -48,16 +49,17 @@ export default class UIMain extends fgui.GComponent {
 		this.BtnWuPin = <fgui.GButton>(this.getChildAt(9));
 		this.BtnShangCheng = <fgui.GButton>(this.getChildAt(10));
 		this.BtnDongFu = <fgui.GButton>(this.getChildAt(11));
-		this.BtnInfo = <fgui.GGraph>(this.getChildAt(12));
-		this.TxtNickName = <fgui.GTextField>(this.getChildAt(15));
-		this.TxtLevel = <fgui.GTextField>(this.getChildAt(17));
-		this.TxtExp = <fgui.GTextField>(this.getChildAt(18));
-		this.TxtSect = <fgui.GTextField>(this.getChildAt(19));
-		this.TxtJinBi = <fgui.GTextField>(this.getChildAt(21));
-		this.TxtYuanBao = <fgui.GTextField>(this.getChildAt(22));
-		this.BtnHead = <fgui.GLoader>(this.getChildAt(23));
-		this.BtnSetting = <fgui.GButton>(this.getChildAt(24));
-		this.BtnRank = <fgui.GButton>(this.getChildAt(25));
-		this.BtnSphere = <fgui.GButton>(this.getChildAt(26));
+		this.BtnChat = <fgui.GButton>(this.getChildAt(12));
+		this.BtnInfo = <fgui.GGraph>(this.getChildAt(13));
+		this.TxtNickName = <fgui.GTextField>(this.getChildAt(16));
+		this.TxtLevel = <fgui.GTextField>(this.getChildAt(18));
+		this.TxtExp = <fgui.GTextField>(this.getChildAt(19));
+		this.TxtSect = <fgui.GTextField>(this.getChildAt(20));
+		this.TxtJinBi = <fgui.GTextField>(this.getChildAt(22));
+		this.TxtYuanBao = <fgui.GTextField>(this.getChildAt(23));
+		this.BtnHead = <fgui.GLoader>(this.getChildAt(24));
+		this.BtnSetting = <fgui.GButton>(this.getChildAt(25));
+		this.BtnRank = <fgui.GButton>(this.getChildAt(26));
+		this.BtnSphere = <fgui.GButton>(this.getChildAt(28));
 	}
 }

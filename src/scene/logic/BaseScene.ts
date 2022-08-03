@@ -45,7 +45,6 @@ export abstract class BaseScene extends Observer implements IScene {
 		normalRes.forEach(v => Laya.loader.clearRes(v));
 		uiRes.forEach(v => fgui.UIPackage.removePackage(v));
 		Laya.Resource.destroyUnusedResources();
-		console.warn(this.name);
 		
 	}
 

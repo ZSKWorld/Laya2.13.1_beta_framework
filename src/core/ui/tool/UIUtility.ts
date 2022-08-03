@@ -13,10 +13,7 @@ export class UIUtility {
 	 * @param color 文字颜色，默认："#ffffff"
 	 */
 	static ShowTipInfo(text: string, color?: string) {
-		const tip = this.getViewFromPool(UIPoolKey.TipInfo, ViewID.ComTipInfoView, Layer.BottomUI, {
-			info: text,
-			color
-		}, false);
+		const tip = this.getViewFromPool(UIPoolKey.TipInfo, ViewID.ComTipInfoView, Layer.Bottom, { info: text, color }, false);
 		tip.touchable = false;
 		eventMgr.event(NotifyConst.AddMainLog, text);
 	}
@@ -29,11 +26,7 @@ export class UIUtility {
 	 */
 	static ShowTipConfirm(text: string, title?: string) {
 		return new Promise<boolean>((resolve) => {
-			this.getViewFromPool(UIPoolKey.TipConfirm, ViewID.TipConfirmView, Layer.MiddleUI, {
-				text,
-				title,
-				callback: resolve
-			});
+			this.getViewFromPool(UIPoolKey.TipConfirm, ViewID.TipConfirmView, Layer.Middle, { text, title, callback: resolve });
 		});
 	}
 
@@ -46,12 +39,7 @@ export class UIUtility {
 	 */
 	static ShowNumInput(title: string, min: number, max: number) {
 		return new Promise<number>((resolve) => {
-			this.getViewFromPool(UIPoolKey.NumInput, ViewID.ComNumInputView, Layer.BottomUI, {
-				title,
-				min,
-				max,
-				callback: resolve
-			});
+			this.getViewFromPool(UIPoolKey.NumInput, ViewID.ComNumInputView, Layer.Bottom, { title, min, max, callback: resolve });
 		});
 	}
 
@@ -61,10 +49,7 @@ export class UIUtility {
 	 * @param buy 是否显示购买选项
 	 */
 	static ShowItemInfo(id: number, buy: boolean) {
-		this.getViewFromPool(UIPoolKey.ItemInfo, ViewID.ComItemInfoView, Layer.BottomUI, {
-			id,
-			buy
-		});
+		this.getViewFromPool(UIPoolKey.ItemInfo, ViewID.ComItemInfoView, Layer.Bottom, { id, buy });
 	}
 
 	/**

@@ -10,6 +10,7 @@ import UIMain from "../../ui/PkgMain/UIMain";
 
 export const enum UIMainMsg {
 	OnBtnLiLianClick = "UIMain_OnBtnLiLianClick",
+	OnBtnChatClick = "UIMain_OnBtnChatClick",
 	OnBtnInfoClick = "UIMain_OnBtnInfoClick",
 	OnBtnHeadClick = "UIMain_OnBtnHeadClick",
 	OnBtnSettingClick = "UIMain_OnBtnSettingClick",
@@ -24,10 +25,11 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 	onCreate(): void {
 		const {
 			listener, ComLiLian, ComJueSe, ComWuPin, ComShangCheng, ComDongFu, BtnLiLian, BtnInfo, BtnHead, BtnSetting,
-			BtnRank, BtnSphere
+			BtnRank, BtnSphere, BtnChat
 		} = this;
 
 		BtnLiLian.onClick(this, this.sendMessage, [UIMainMsg.OnBtnLiLianClick]);
+		BtnChat.onClick(this, this.sendMessage, [UIMainMsg.OnBtnChatClick]);
 		BtnInfo.onClick(this, this.sendMessage, [UIMainMsg.OnBtnInfoClick]);
 		BtnHead.onClick(this, this.sendMessage, [UIMainMsg.OnBtnHeadClick]);
 		BtnSetting.onClick(this, this.sendMessage, [UIMainMsg.OnBtnSettingClick]);

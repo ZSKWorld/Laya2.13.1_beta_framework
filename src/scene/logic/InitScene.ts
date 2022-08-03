@@ -1,13 +1,14 @@
 import { NotifyConst } from '../../core/common/NotifyConst'
 import { platform, PlatformType } from '../../core/common/platform/Platform'
 import { ResPath } from '../../core/common/ResPath'
+import { websocket } from '../../core/net/WebSocket'
 import { tableMgr } from '../../core/table/TableManager'
 import { layerMgr } from '../../core/ui/core/GameLayer'
 import { uiMgr } from '../../core/ui/core/UIManager'
 import { ViewExtend } from '../../core/ui/core/ViewExtend'
 import { uiRegister } from '../../core/ui/core/ViewRegister'
 import { FixEngine } from '../../FixEngine'
-import { SceneType } from '../SceneConst'
+import { SceneType } from '../SceneType'
 import { BaseScene } from './BaseScene'
 
 /**

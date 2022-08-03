@@ -7,7 +7,7 @@ import { UIUtility } from "../../tool/UIUtility";
 import { RenderChooseBattleView } from "../../view/PkgBattle/Renders/RenderChooseBattleView";
 import { UIChooseBattleMsg, UIChooseBattleView } from "../../view/PkgBattle/UIChooseBattleView";
 import { UIBattleData } from "./UIBattleCtrl";
-import { SceneType } from '../../../../scene/SceneConst'
+import { SceneType } from '../../../../scene/SceneType'
 import { NotifyConst } from '../../../common/NotifyConst'
 
 export type BattleLevel = ConfigLevelData | ConfigFuBenData | ConfigMiJingData | ConfigBossData;

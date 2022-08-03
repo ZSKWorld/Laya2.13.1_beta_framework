@@ -7,7 +7,7 @@ import { GetLang } from "../../../libs/utils/Util";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { UILoginMainMsg, UILoginMainView } from "../../view/PkgLogin/UILoginMainView";
-import { SceneType } from '../../../../scene/SceneConst'
+import { SceneType } from '../../../../scene/SceneType'
 
 export interface UILoginMainData {
 

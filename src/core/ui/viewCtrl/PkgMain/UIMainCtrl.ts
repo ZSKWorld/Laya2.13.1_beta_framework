@@ -24,6 +24,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 	onAwake(): void {
 		super.onAwake();
 		this.addMessageListener(UIMainMsg.OnBtnLiLianClick, this.UIMain_OnBtnLiLianClick);
+		this.addMessageListener(UIMainMsg.OnBtnChatClick, this.showView, [ViewID.ChatView]);
 		this.addMessageListener(UIMainMsg.OnBtnInfoClick, this.showView, [ViewID.PlayerInfoView]);
 		this.addMessageListener(UIMainMsg.OnBtnSettingClick, this.showView, [ViewID.SettingView]);
 		this.addMessageListener(UIMainMsg.OnBtnSphereClick, this.showView, [ViewID.SphereToolView, null, null, false]);

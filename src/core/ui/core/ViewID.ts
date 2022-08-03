@@ -19,6 +19,7 @@ export const enum ViewID {
 	ChooseBattleView = "ChooseBattleView",
 	TipConfirmView = "TipConfirmView",
 	LoginMainView = "LoginMainView",
+	ChatView = "ChatView",
 	EquipmentInfoView = "EquipmentInfoView",
 	MainView = "MainView",
 	PlayerInfoView = "PlayerInfoView",

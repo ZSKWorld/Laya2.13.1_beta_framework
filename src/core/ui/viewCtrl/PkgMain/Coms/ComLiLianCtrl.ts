@@ -1,11 +1,11 @@
+import { SceneType } from '../../../../../scene/SceneType';
 import { NotifyConst } from "../../../../common/NotifyConst";
 import { InsertNotify } from "../../../../libs/event/EventMgr";
 import { BattleType } from "../../../../playerData/Interface";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIUtility } from "../../../tool/UIUtility";
 import { ComLiLianMsg, ComLiLianView } from "../../../view/PkgMain/Coms/ComLiLianView";
-import { RenderLiLianView } from "../../../view/PkgMain/Renders/RenderLiLianView";
-import { SceneType } from '../../../../../scene/SceneConst'
+import { RenderTextView } from "../../../view/PkgMain/Renders/RenderTextView";
 
 export interface ComLiLianData {
 
@@ -44,7 +44,7 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData> {
 
 	@InsertNotify(NotifyConst.AddMainLog)
 	private addMainLog(log: string | string[]) {
-		if ( Array.isArray(log) ) this.logs.push(...log);
+		if (Array.isArray(log)) this.logs.push(...log);
 		else this.logs.push(log);
 		Laya.timer.callLater(this, this.refreshLogList);
 	}
@@ -60,8 +60,8 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData> {
 		this.view.ListLog.scrollToView(this.logs.length - 1);
 	}
 
-	private logRenderer(index: number, item: RenderLiLianView) {
-		item.setText(this.logs[index]);
+	private logRenderer(index: number, item: RenderTextView) {
+		item.setText(this.logs[ index ]);
 	}
 
 	private ComLiLian_OnBtnGongLueClick(): void {

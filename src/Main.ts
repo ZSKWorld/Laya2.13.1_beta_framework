@@ -1,6 +1,6 @@
 import GameConfig from "./GameConfig";
 import { sceneMgr } from './scene/SceneMgr'
-import { SceneType } from './scene/SceneConst'
+import { SceneType } from './scene/SceneType'
 import { InitScene } from './scene/logic/InitScene'
 import { LoginScene } from './scene/logic/LoginScene'
 import { MainScene } from './scene/logic/MainScene'

@@ -1,26 +1,26 @@
 export enum Layer {
-    BottomUI = "BottomUI",
-    MiddleUI = "MiddleUI",
-    TopUI = "TopUI",
+    Bottom = "Bottom",
+    Middle = "Middle",
+    Top = "Top",
     Dialog = "Dialog",
-    Lock = "Lock",
     Alert = "Alert",
+    Lock = "Lock",
 }
-class GameLayer {
-    private _layerMap: { [key in Layer]: fgui.GComponent };
+class LayerManager {
+    private layerMap: { [ key in Layer ]: fgui.GComponent };
 
     init() {
-        if (this._layerMap) return;
-        this._layerMap = {} as any;
+        if (this.layerMap) return;
+        this.layerMap = {} as any;
         const gRoot = fgui.GRoot.inst;
         Laya.stage.addChild(gRoot.displayObject);
 
         for (const key in Layer) {
             if (Object.prototype.hasOwnProperty.call(Layer, key)) {
                 const layer = new fgui.GComponent();
-                layer.name = Layer[key];
+                layer.name = Layer[ key ];
                 gRoot.addChild(layer);
-                this._layerMap[layer.name] = layer;
+                this.layerMap[ layer.name ] = layer;
                 layer.displayObject.mouseThrough = true;
                 layer.displayObject.mouseEnabled = true;
                 layer.setSize(Laya.stage.width, Laya.stage.height);
@@ -29,9 +29,9 @@ class GameLayer {
     }
 
     addObject(obj: fgui.GObject, layer: Layer) {
-        if (!obj || obj.isDisposed || !this._layerMap[layer]) return;
-        this._layerMap[layer].addChild(obj);
+        if (!obj || obj.isDisposed || !this.layerMap[ layer ]) return;
+        this.layerMap[ layer ].addChild(obj);
     }
 
 }
-export const layerMgr = new GameLayer();
+export const layerMgr = new LayerManager();

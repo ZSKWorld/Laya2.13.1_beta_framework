@@ -9,7 +9,7 @@ import { tableMgr } from "../../../table/TableManager";
 import { BaseViewCtrl, InsertKeyEvent, KeyEventType } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { UIBattleMsg, UIBattleView } from "../../view/PkgBattle/UIBattleView";
-import { RenderLiLianView } from "../../view/PkgMain/Renders/RenderLiLianView";
+import { RenderTextView } from "../../view/PkgMain/Renders/RenderTextView";
 import { BattleLevel } from "./UIChooseBattleCtrl";
 
 export interface UIBattleData {
@@ -37,7 +37,7 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 	private prelogs: string[] = [];
 	private logIndex: number;
 	private battleProcessor = new BattleProcessor();
-	private beiSu: number[] = tableMgr.Const[1006].Value.split(",").map((v) => Number(v));
+	private beiSu: number[] = tableMgr.Const[ 1006 ].Value.split(",").map((v) => Number(v));
 
 	onAwake(): void {
 		super.onAwake();
@@ -46,8 +46,8 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 		this.addMessageListener(UIBattleMsg.OnBtnEnemyInfoClick, this.UIBattle_OnBtnEnemyInfoClick);
 		this.addMessageListener(UIBattleMsg.OnBtnQuitBattleClick, this.UIBattle_OnBtnQuitBattleClick);
 		this.view.refreshTitle(this.data.cfg);
-		let tempSpeed = storage.get(LocalStorageKey.BattleSpeed) || this.beiSu[0];
-		tempSpeed = this.beiSu.indexOf(tempSpeed) == -1 ? this.beiSu[0] : tempSpeed;
+		let tempSpeed = storage.get(LocalStorageKey.BattleSpeed) || this.beiSu[ 0 ];
+		tempSpeed = this.beiSu.indexOf(tempSpeed) == -1 ? this.beiSu[ 0 ] : tempSpeed;
 		this.battleSpeed = tempSpeed;
 		UIUtility.SetCombox(this.view.CmbBeiSu, this.beiSu.map(v => v + "倍速"), this.beiSu, this, this.setBeiSu, tempSpeed);
 		this.battleProcessor.init(this.data.cfg);
@@ -83,8 +83,8 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 		} else this.doBattle();
 	}
 
-	private listRenderer(index: number, item: RenderLiLianView) {
-		item.title.text = this.logs[index];
+	private listRenderer(index: number, item: RenderTextView) {
+		item.title.text = this.logs[ index ];
 	}
 
 	private doBattle() {
@@ -97,19 +97,19 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 					this._logTime = 0;
 					this.logs.length = 0;
 					this.prelogs.length = 0;
-					this.prelogs.push("即将开始挑战 " + v.data[0]);
+					this.prelogs.push("即将开始挑战 " + v.data[ 0 ]);
 				} else if (v.isHurt) {
-					let [gamerAttack, hurt, isCri, _, __, attackName] = v.data;
+					let [ gamerAttack, hurt, isCri, _, __, attackName ] = v.data;
 					if (gamerAttack)
-						this.prelogs.push(`[${++hurtNum}]你使用[color=#308930]基本剑术[/color]对怪物造成[color=#308930]${hurt}[/color]${isCri ? "[color=#FF0000][暴][/color]" : ""}点伤害`);
+						this.prelogs.push(`[${ ++hurtNum }]你使用[color=#308930]基本剑术[/color]对怪物造成[color=#308930]${ hurt }[/color]${ isCri ? "[color=#FF0000][暴][/color]" : "" }点伤害`);
 					else
-						this.prelogs.push(`[${++hurtNum}]怪物使用[color=#0000FF]${attackName}[/color]对你造成[color=#0000FF]${hurt}[/color]点伤害`);
+						this.prelogs.push(`[${ ++hurtNum }]怪物使用[color=#0000FF]${ attackName }[/color]对你造成[color=#0000FF]${ hurt }[/color]点伤害`);
 				} else if (v.isSuccess) {
 					this.prelogs.push("你赢得了这场战斗！");
-					if (v.data[1] > 0)
-						this.prelogs.push(`[color=#E2FF45]剩余${v.data[1]}波[/color]`);
+					if (v.data[ 1 ] > 0)
+						this.prelogs.push(`[color=#E2FF45]剩余${ v.data[ 1 ] }波[/color]`);
 				} else if (v.isOut) {
-					this.prelogs.push(`${v.data}：和你战斗太无聊了`);
+					this.prelogs.push(`${ v.data }：和你战斗太无聊了`);
 					this.prelogs.push(`[color=#FF0000]挑战失败！[/color]`);
 				} else if (v.isEnd) {
 					this.prelogs.push(v.data ? "[color=#66FF00]挑战成功！[/color]" : "[color=#FF0000]你被击败了！[/color]");
@@ -128,17 +128,17 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 		const rewards = this.userData.battleWaveSuccess(this.data.battleType, this.data.cfg.ID);
 		rewards.forEach((v, index) => {
 			this.logIndex++;
-			const { Name, Quality } = tableMgr.Item[v.id];
+			const { Name, Quality } = tableMgr.Item[ v.id ];
 			this.prelogs.splice(1 + index, 0, Name + " + " + v.count);
 			if (v.special) {
 				if (this.data.battleType != BattleType.Boss)
-					mainLogs.push(`在&nbsp;${this.data.cfg.Name}&nbsp;战胜&nbsp;${this.battleProcessor.enemyCfg.Name}
-                    &nbsp;获得&nbsp;${GetColorStr(Quality, Name)}&nbsp;x${v.count}`);
+					mainLogs.push(`在&nbsp;${ this.data.cfg.Name }&nbsp;战胜&nbsp;${ this.battleProcessor.enemyCfg.Name }
+                    &nbsp;获得&nbsp;${ GetColorStr(Quality, Name) }&nbsp;x${ v.count }`);
 				else
-					mainLogs.push(`战胜BOSS&nbsp;${this.battleProcessor.enemyCfg.Name}&nbsp;获得&nbsp;${GetColorStr(Quality, Name)}&nbsp;x${v.count}`);
+					mainLogs.push(`战胜BOSS&nbsp;${ this.battleProcessor.enemyCfg.Name }&nbsp;获得&nbsp;${ GetColorStr(Quality, Name) }&nbsp;x${ v.count }`);
 			}
 		});
-		mainLogs.length && this.dispatch(NotifyConst.AddMainLog, [mainLogs]);
+		mainLogs.length && this.dispatch(NotifyConst.AddMainLog, [ mainLogs ]);
 	}
 
 	@InsertNotify(BattleMsg.Battle_End)
@@ -152,10 +152,10 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 	}
 
 	private setBeiSu() {
-		const speed = this.beiSu[this.view.CmbBeiSu.selectedIndex];
+		const speed = this.beiSu[ this.view.CmbBeiSu.selectedIndex ];
 		this.battleSpeed = speed;
 		storage.set(LocalStorageKey.BattleSpeed, speed);
-		this.dispatch(NotifyConst.AddMainLog, `战斗速度调整为${speed}倍速`);
+		this.dispatch(NotifyConst.AddMainLog, `战斗速度调整为${ speed }倍速`);
 	}
 
 	private UIBattle_OnCmbBeiSuDropDownDisplay(): void {
