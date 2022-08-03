@@ -1,4 +1,4 @@
-import { SceneType } from '../../../../../scene/SceneType';
+import { LogicSceneType } from '../../../../../logicScene/LogicSceneType';
 import { NotifyConst } from "../../../../common/NotifyConst";
 import { InsertNotify } from "../../../../libs/event/EventMgr";
 import { BattleType } from "../../../../playerData/Interface";
@@ -39,7 +39,7 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData> {
 	}
 
 	private enterBattle(data: any) {
-		this.dispatch(NotifyConst.EnterScene, [ SceneType.GameScene, data ]);
+		this.dispatch(NotifyConst.EnterScene, [ LogicSceneType.GameScene, data ]);
 	}
 
 	@InsertNotify(NotifyConst.AddMainLog)

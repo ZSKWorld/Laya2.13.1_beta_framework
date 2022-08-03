@@ -1,18 +1,18 @@
 import GameConfig from "./GameConfig";
-import { sceneMgr } from './scene/SceneMgr'
-import { SceneType } from './scene/SceneType'
-import { InitScene } from './scene/logic/InitScene'
-import { LoginScene } from './scene/logic/LoginScene'
-import { MainScene } from './scene/logic/MainScene'
-import { GameScene } from './scene/logic/GameScene'
+import { logicSceneMgr } from './logicScene/LogicSceneMgr';
+import { LogicSceneType } from './logicScene/LogicSceneType';
+import { LogicSceneGame } from './logicScene/scene/LogicSceneGame';
+import { LogicSceneInit } from './logicScene/scene/LogicSceneInit';
+import { LogicSceneLogin } from './logicScene/scene/LogicSceneLogin';
+import { LogicSceneMain } from './logicScene/scene/LogicSceneMain';
 
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎
-		if ( window["Laya3D"] ) Laya3D.init(GameConfig.width, GameConfig.height);
-		else Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);
-		Laya["Physics"] && Laya["Physics"].enable();
-		Laya["DebugPanel"] && Laya["DebugPanel"].enable();
+		if (window[ "Laya3D" ]) Laya3D.init(GameConfig.width, GameConfig.height);
+		else Laya.init(GameConfig.width, GameConfig.height, Laya[ "WebGL" ]);
+		Laya[ "Physics" ] && Laya[ "Physics" ].enable();
+		Laya[ "DebugPanel" ] && Laya[ "DebugPanel" ].enable();
 		Laya.stage.scaleMode = GameConfig.scaleMode;
 		Laya.stage.screenMode = GameConfig.screenMode;
 		Laya.stage.alignV = GameConfig.alignV;
@@ -21,9 +21,9 @@ class Main {
 		Laya.URL.exportSceneToJson = GameConfig.exportSceneToJson;
 
 		//打开调试面板（通过IDE设置调试模式，或者url地址增加debug=true参数，均可打开调试面板）
-		if ( GameConfig.debug || Laya.Utils.getQueryString("debug") == "true" ) Laya.enableDebugPanel();
-		if ( GameConfig.physicsDebug && Laya["PhysicsDebugDraw"] ) Laya["PhysicsDebugDraw"].enable();
-		if ( GameConfig.stat ) Laya.Stat.show();
+		if (GameConfig.debug || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();
+		if (GameConfig.physicsDebug && Laya[ "PhysicsDebugDraw" ]) Laya[ "PhysicsDebugDraw" ].enable();
+		if (GameConfig.stat) Laya.Stat.show();
 		// Laya.alertGlobalError(true);
 
 		fairygui.UIConfig.packageFileExtension = "zip";
@@ -39,13 +39,13 @@ class Main {
 	}
 
 	onConfigLoaded() {
-		sceneMgr.init([
-			[ SceneType.InitScene, new InitScene() ],
-			[ SceneType.LoginScene, new LoginScene() ],
-			[ SceneType.MainScene, new MainScene() ],
-			[ SceneType.GameScene, new GameScene() ],
+		logicSceneMgr.init([
+			[ LogicSceneType.InitScene, new LogicSceneInit() ],
+			[ LogicSceneType.LoginScene, new LogicSceneLogin() ],
+			[ LogicSceneType.MainScene, new LogicSceneMain() ],
+			[ LogicSceneType.GameScene, new LogicSceneGame() ],
 		]);
-		sceneMgr.enterScene(SceneType.InitScene);
+		logicSceneMgr.enterScene(LogicSceneType.InitScene);
 	}
 
 }

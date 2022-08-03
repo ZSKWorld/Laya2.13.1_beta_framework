@@ -1,27 +1,27 @@
 import { NotifyConst } from '../core/common/NotifyConst'
 import { InsertNotify } from '../core/libs/event/EventMgr'
 import { Observer } from '../core/libs/event/Observer'
-import { IScene } from './IScene'
-import { SceneType } from './SceneType'
+import { IScene } from './ILogicScene'
+import { LogicSceneType } from './LogicSceneType'
 
 /**
  *@Author zsk
  *@Date 2022/7/25 21:42
  *@Description 场景管理
  */
-class SceneMgr extends Observer {
-	private currentType: SceneType;
+class LogicSceneMgr extends Observer {
+	private currentType: LogicSceneType;
 	private currentScene: IScene;
 	private enterCompleted: boolean = true;
-	private sceneMap: Map<SceneType, IScene>;
+	private sceneMap: Map<LogicSceneType, IScene>;
 
-	init(sceneMap: [ SceneType, IScene ][]) {
+	init(sceneMap: [ LogicSceneType, IScene ][]) {
 		if (!this.sceneMap)
 			this.sceneMap = new Map(sceneMap);
 	}
 
 	@InsertNotify(NotifyConst.EnterScene)
-	enterScene(type: SceneType, data?: any) {		
+	enterScene(type: LogicSceneType, data?: any) {
 		if (!this.enterCompleted) return;
 		if (this.currentType != type) {
 			this.enterCompleted = false;
@@ -38,4 +38,4 @@ class SceneMgr extends Observer {
 	}
 }
 
-export const sceneMgr = new SceneMgr()
+export const logicSceneMgr = new LogicSceneMgr()

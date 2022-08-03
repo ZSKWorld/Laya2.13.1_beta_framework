@@ -1,3 +1,4 @@
+import { LogicSceneType } from '../../../../logicScene/LogicSceneType';
 import { NotifyConst } from "../../../common/NotifyConst";
 import { platform } from "../../../common/platform/Platform";
 import { storage } from "../../../libs/localStorage/LocalStorage";
@@ -7,7 +8,6 @@ import { GetLang } from "../../../libs/utils/Util";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { UILoginMainMsg, UILoginMainView } from "../../view/PkgLogin/UILoginMainView";
-import { SceneType } from '../../../../scene/SceneType'
 
 export interface UILoginMainData {
 
@@ -36,8 +36,8 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
 	private async UILoginMain_OnBtnLoginClick(): Promise<void> {
 		const [ account, password ] = [ this.view.TxtAccount.text, this.view.TxtPassword.text ];
 		const msgCode = await platform.login(account, password);
-		if ( !msgCode ) {
-			this.dispatch(NotifyConst.EnterScene, SceneType.MainScene);
+		if (!msgCode) {
+			this.dispatch(NotifyConst.EnterScene, LogicSceneType.MainScene);
 			Laya.timer.frameOnce(2, null, () => {
 				let jingli = this.userData.calOfflineReward();
 				const txt1 = `
@@ -71,11 +71,11 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
 			this.view.TxtRegisterPassword.text,
 			this.view.TxtRegisterName.text
 		];
-		if ( !account ) UIUtility.ShowTipInfo("请输入账号");
-		else if ( !password ) UIUtility.ShowTipInfo("请输入密码");
-		else if ( !nickName ) UIUtility.ShowTipInfo("请输入昵称");
+		if (!account) UIUtility.ShowTipInfo("请输入账号");
+		else if (!password) UIUtility.ShowTipInfo("请输入密码");
+		else if (!nickName) UIUtility.ShowTipInfo("请输入昵称");
 		const msgCode = await platform.register(account, password, nickName);
-		if ( !msgCode ) this.dispatch(NotifyConst.EnterScene, SceneType.MainScene);
+		if (!msgCode) this.dispatch(NotifyConst.EnterScene, LogicSceneType.MainScene);
 		else UIUtility.ShowTipInfo(GetLang(msgCode));
 	}
 }
