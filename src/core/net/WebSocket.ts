@@ -1,5 +1,9 @@
 import { Observer } from "../libs/event/Observer";
+import { Logger } from "../libs/utils/Logger";
 type Resolve = (value: any) => void;
+
+const logger = Logger.Create("WebSocket").setEnable(true);
+
 class WebSocket extends Observer {
     private url: string = "ws://localhost:3000?id=123&name=zsk";
     private socket: Laya.Socket;
@@ -47,7 +51,7 @@ class WebSocket extends Observer {
     }
 
     private onSocketOpen(): void {
-        console.log("socket open");
+        logger.log("socket open");
         this.executeWaitMsg();
     }
 
@@ -70,14 +74,14 @@ class WebSocket extends Observer {
     }
 
     private onSocketError(e): void {
-        console.log("socket error");
+        logger.error("socket error");
         // this.onSocketClose();
     }
 
     private onSocketClose(): void {
-        console.log("socket close");
+        logger.warn("socket close");
         this.socket.connectByUrl(this.url);
-        console.log("socket reconnectting...");
+        logger.warn("socket reconnectting...");
     }
 
     private executeWaitMsg(): void {

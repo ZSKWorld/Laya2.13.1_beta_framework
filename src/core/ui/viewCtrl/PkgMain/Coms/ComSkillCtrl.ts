@@ -1,4 +1,5 @@
 import { InsertNotify } from "../../../../libs/event/EventMgr";
+import { Logger } from "../../../../libs/utils/Logger";
 import { tableMgr } from "../../../../table/TableManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIUtility } from "../../../tool/UIUtility";
@@ -8,6 +9,8 @@ import { RenderBagView } from "../../../view/PkgMain/Renders/RenderBagView";
 export interface ComSkillData {
 
 }
+
+const logger = Logger.Create("ComSkillCtrl").setEnable(true);
 
 export class ComSkillCtrl extends BaseViewCtrl<ComSkillView, ComSkillData>{
 
@@ -29,7 +32,7 @@ export class ComSkillCtrl extends BaseViewCtrl<ComSkillView, ComSkillData>{
 		this.addMessageListener(ComSkillMsg.OnBtnXian4Click, this.onXianSkillClick, [4]);
 		Object.keys(tableMgr.XinFaBook).forEach(v => {
 			const skills = tableMgr.XinFaBook[v].Skills;
-			if (skills.length > 4) console.error(v + ":技能大于4个");
+			if (skills.length > 4) logger.error(v + ":技能大于4个");
 			this._skills.push(...skills);
 			if (skills.length < 4) {
 				for (let i = 4 - skills.length; i > 0; i--) {

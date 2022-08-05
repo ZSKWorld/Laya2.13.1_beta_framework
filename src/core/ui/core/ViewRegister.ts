@@ -55,6 +55,7 @@ import { ComXinFaView } from "../view/PkgMain/Coms/ComXinFaView";
 import { ComZhiZuoCtrl } from "../viewCtrl/PkgMain/Coms/ComZhiZuoCtrl";
 import { ComZhiZuoView } from "../view/PkgMain/Coms/ComZhiZuoView";
 import { IViewCtrl_Class, IView_Class } from "./interfaces";
+import { Logger } from "../../libs/utils/Logger";
 import { RenderBagView } from "../view/PkgMain/Renders/RenderBagView";
 import { RenderChatMsgView } from "../view/PkgMain/Renders/RenderChatMsgView";
 import { RenderChooseBattleView } from "../view/PkgBattle/Renders/RenderChooseBattleView";
@@ -67,7 +68,6 @@ import { UIChooseBattleCtrl } from "../viewCtrl/PkgBattle/UIChooseBattleCtrl";
 import { UIChooseBattleView } from "../view/PkgBattle/UIChooseBattleView";
 import { UIEquipmentInfoCtrl } from "../viewCtrl/PkgMain/UIEquipmentInfoCtrl";
 import { UIEquipmentInfoView } from "../view/PkgMain/UIEquipmentInfoView";
-import { UILoadingCtrl } from "../viewCtrl/PkgCommon/UILoadingCtrl";
 import { UILoginMainCtrl } from "../viewCtrl/PkgLogin/UILoginMainCtrl";
 import { UILoginMainView } from "../view/PkgLogin/UILoginMainView";
 import { UIMainCtrl } from "../viewCtrl/PkgMain/UIMainCtrl";
@@ -84,6 +84,8 @@ import { UITipConfirmCtrl } from "../viewCtrl/PkgCommon/UITipConfirmCtrl";
 import { UITipConfirmView } from "../view/PkgCommon/UITipConfirmView";
 import { ViewClass, CtrlClass } from "./UIGlobal";
 import { ViewID } from "./ViewID";
+
+const logger = Logger.Create("ViewRegister").setEnable(true);
 
 export class ViewRegister {
 
@@ -174,7 +176,7 @@ export class ViewRegister {
 			(ViewClass as any)[viewId] = viewCls;
 			(CtrlClass as any)[viewId] = ctrlCls;
 		} else {
-			console.warn(`重复添加映射 => ${viewId}`);
+			logger.warn(`重复添加映射 => ${viewId}`);
 		}
 	}
 }

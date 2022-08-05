@@ -2,17 +2,20 @@
  * @Author       : zsk
  * @Date         : 2022-04-18 22:11:15
  * @LastEditors  : zsk
- * @LastEditTime : 2022-08-03 22:29:02
+ * @LastEditTime : 2022-08-06 01:45:37
  * @Description  : UI管理类
  */
 import { NotifyConst } from "../../common/NotifyConst";
 import { platform } from "../../common/platform/Platform";
 import { InsertNotify } from "../../libs/event/EventMgr";
 import { Observer } from "../../libs/event/Observer";
+import { Logger } from "../../libs/utils/Logger";
 import { Layer, layerMgr } from "./GameLayer";
 import { IView } from "./interfaces";
 import { ViewClass } from "./UIGlobal";
 import { ViewID } from "./ViewID";
+
+const logger = Logger.Create("UIManager").setEnable(true);
 
 class UIManager extends Observer {
 	/**销毁缓存时间，毫秒 */
@@ -43,7 +46,7 @@ class UIManager extends Observer {
 			for (const iterator of this.destroyCache) {
 				const [ viewID, [ view, startTime ] ] = iterator;
 				if ((Date.now() - startTime) >= UIManager.DestroyCacheTime) {
-					console.warn("dispose view", view.name);
+					logger.warn("dispose view", view.name);
 					view.dispose();
 					this.destroyCache.delete(viewID);
 				}
@@ -119,7 +122,7 @@ class UIManager extends Observer {
 			}
 		} else {
 			let oldTopView: IView, newTopView: IView;
-			if (openedIndex == 0) console.error(`Error:${ viewId }已经被被打开`);
+			if (openedIndex == 0) logger.error(`Error:${ viewId }已经被被打开`);
 			else {
 				[ oldTopView, newTopView ] = [ this.topView, this.openedViews[ openedIndex ] ];
 				this.openedViews.splice(openedIndex, 1);
