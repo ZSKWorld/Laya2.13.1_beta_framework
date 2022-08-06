@@ -1,4 +1,5 @@
 import { NotifyConst } from '../../core/common/NotifyConst';
+import { ResPath } from '../../core/common/ResPath';
 import { ViewID } from '../../core/ui/core/ViewID';
 import { LogicSceneBase } from './LogicSceneBase';
 
@@ -8,6 +9,12 @@ import { LogicSceneBase } from './LogicSceneBase';
  *@Description
  */
 export class LogicSceneMain extends LogicSceneBase {
+
+	protected getResArray(): string[] {
+		return [
+			ResPath.Ui_PkgMain
+		];
+	}
 
 	protected onEnter(): void {
 		this.dispatch(NotifyConst.AddView, ViewID.MainView);

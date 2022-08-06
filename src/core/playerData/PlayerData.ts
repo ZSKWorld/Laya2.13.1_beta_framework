@@ -1,5 +1,4 @@
 import { NotifyConst } from "../common/NotifyConst";
-import { ViewID } from "../ui/core/ViewID";
 import { InsertNotify } from "../libs/event/EventMgr";
 import { Observer } from "../libs/event/Observer";
 import { storage } from "../libs/localStorage/LocalStorage";
@@ -8,6 +7,7 @@ import { MathUtil } from "../libs/math/MathUtil";
 import { GetColorStr } from "../libs/utils/Util";
 import { LangCode } from "../table/LangCode";
 import { tableMgr } from "../table/TableManager";
+import { ViewID } from "../ui/core/ViewID";
 import { AccountData } from "./AccountData";
 import { BagData, EquipmentItem } from "./BagData";
 import { BaseData } from "./BaseData";
@@ -183,7 +183,7 @@ class Attribute extends Observer {
 	private getEquipAddition(type: AttributeType) {
 		let result = 0;
 		const { wuQi, touKui, xiangLian, yiFu, jieZhi, kuZi, huFu, xieZi, zuoQi, anQi, shiZhuang, faBao } = playerData.base;
-		[wuQi, touKui, xiangLian, yiFu, jieZhi, kuZi, huFu, xieZi, zuoQi, anQi, shiZhuang, faBao].forEach(
+		[ wuQi, touKui, xiangLian, yiFu, jieZhi, kuZi, huFu, xieZi, zuoQi, anQi, shiZhuang, faBao ].forEach(
 			v1 => v1?.addition?.forEach(v2 => v2.type == type && (result += v2.value))
 		);
 		return result;
@@ -281,14 +281,14 @@ class PlayerData extends Observer {
 
 	private checkJingJie(require: UseRequireType) {
 		if (!require) return true;
-		const [jingJie, cengJi] = [this._base.jingJie, this._base.cengJi];
+		const [ jingJie, cengJi ] = [ this._base.jingJie, this._base.cengJi ];
 		if (jingJie < require.jingJie || (jingJie == require.jingJie && cengJi < require.cengJi)) return false;
 		return true;
 	}
 
 	/**变更物品数量 */
 	changeItemCount(id: number, count: number, uid?: string) {
-		const type = tableMgr.Item[id]?.DataType;
+		const type = tableMgr.Item[ id ]?.DataType;
 		if (count < 0 && this.getItemCount(id, uid) < Math.abs(count)) return LangCode._1005;
 		switch (type) {
 			case DataType.Base:
@@ -307,7 +307,7 @@ class PlayerData extends Observer {
 
 	/**获取物品数量 */
 	getItemCount(id: number, uid?: string) {
-		const type = tableMgr.Item[id]?.DataType;
+		const type = tableMgr.Item[ id ]?.DataType;
 		switch (type) {
 			case DataType.Base:
 				return this._base.getItemCount(id);
@@ -325,8 +325,8 @@ class PlayerData extends Observer {
 		if (!item) return LangCode._1004;
 		if (this.checkJingJie(item.useRequire) == false) return LangCode._1018;
 		count = Math.min(item.count, count);
-		const [prop, food, skillBook, xinFaBook] = [
-			tableMgr.Props[id], tableMgr.Food[id], tableMgr.SkillBook[id], tableMgr.XinFaBook[id],
+		const [ prop, food, skillBook, xinFaBook ] = [
+			tableMgr.Props[ id ], tableMgr.Food[ id ], tableMgr.SkillBook[ id ], tableMgr.XinFaBook[ id ],
 		];
 		let log = GetColorStr(item.quality, item.name);
 		if (prop) {
@@ -348,17 +348,17 @@ class PlayerData extends Observer {
 					subLog = "，BOSS刷新时间已重置";
 					break;
 				case 2010:
-					this.dispatch(NotifyConst.AddView, [ViewID.SectView]);
+					this.dispatch(NotifyConst.AddView, [ ViewID.SectView ]);
 					count = 1;
 					break;
 				default:
 					prop.Rewards.forEach(v => {
 						this.changeItemCount(v.id, v.count * count);
-						subLog += `<br>获得&nbsp;${GetColorStr(tableMgr.Item[v.id].Quality, tableMgr.Item[v.id].Name)}x${v.count * count}`;
+						subLog += `<br>获得&nbsp;${ GetColorStr(tableMgr.Item[ v.id ].Quality, tableMgr.Item[ v.id ].Name) }x${ v.count * count }`;
 					});
 					break;
 			}
-			log = `使用&nbsp;${log}x${count}` + subLog;
+			log = `使用&nbsp;${ log }x${ count }` + subLog;
 		} else if (food) {
 			if (this._base.jingLi >= this._base.maxJingLi) return LangCode._1016;
 			let singleRecover = 0;
@@ -380,17 +380,17 @@ class PlayerData extends Observer {
 			else if (subJingLi % singleRecover == 0) count = Math.min(subJingLi / singleRecover, count);
 			else count = Math.min(Math.floor(subJingLi / singleRecover) + 1, count);
 			this.changeItemCount(BaseItemType.JingLi, singleRecover * count);
-			log = `使用&nbsp;${log}x${count}，恢复精力${Math.floor(singleRecover * count)}点`;
+			log = `使用&nbsp;${ log }x${ count }，恢复精力${ Math.floor(singleRecover * count) }点`;
 		} else if (skillBook) {
-			const SectRequire = tableMgr.SkillBook[id].SectRequire;
+			const SectRequire = tableMgr.SkillBook[ id ].SectRequire;
 			if (SectRequire.length && SectRequire.indexOf(this._base.sect) == -1) return LangCode._1020;
 			if (this._base.learnSkill(id)) count = 1;
 			else return LangCode._1019;
-			log = `使用&nbsp;${log}x${count}<br>恭喜你学会了&nbsp;${log}`;
+			log = `使用&nbsp;${ log }x${ count }<br>恭喜你学会了&nbsp;${ log }`;
 		} else if (xinFaBook) {
 			if (this._base.learnXinFa(id)) count = 1;
 			else return LangCode._1017;
-			log = `使用&nbsp;${log}x${count}<br>恭喜你学会了&nbsp;${log}`;
+			log = `使用&nbsp;${ log }x${ count }<br>恭喜你学会了&nbsp;${ log }`;
 		} else return LangCode._1014;
 		this.changeItemCount(id, -count);
 		this.dispatch(NotifyConst.AddMainLog, log);
@@ -405,9 +405,9 @@ class PlayerData extends Observer {
 		count = Math.min(item.count, count);
 		if (!item.sellReward) return LangCode._1007;
 		this.changeItemCount(id, -count, uid);
-		let log = `出售&nbsp;${GetColorStr(item.quality, item.name)}x${count}，获得&nbsp;`;
+		let log = `出售&nbsp;${ GetColorStr(item.quality, item.name) }x${ count }，获得&nbsp;`;
 		item.sellReward.forEach((v, index) => {
-			log += `${GetColorStr(tableMgr.Item[v.id].Quality, tableMgr.Item[v.id].Name)}x${v.count * count}${index == item.sellReward.length - 1 ? "" : "、"}`;
+			log += `${ GetColorStr(tableMgr.Item[ v.id ].Quality, tableMgr.Item[ v.id ].Name) }x${ v.count * count }${ index == item.sellReward.length - 1 ? "" : "、" }`;
 			this.changeItemCount(v.id, v.count * count);
 		});
 		this.dispatch(NotifyConst.AddMainLog, log);
@@ -417,19 +417,19 @@ class PlayerData extends Observer {
 	/**购买商店物品 */
 	buyShopItem(id: number, count: number) {
 		if (count <= 0) return LangCode._1010;
-		const item = tableMgr.Shop[id];
+		const item = tableMgr.Shop[ id ];
 		if (!item) return LangCode._1008;
 		for (let i = 0, n = item.SellPrice.length; i < n; i++) {
-			const element = item.SellPrice[i];
+			const element = item.SellPrice[ i ];
 			if (this.getItemCount(element.id) < element.count * count) return LangCode._1009;
 		}
 		let log = "消耗&nbsp;";
 		item.SellPrice.forEach((v, index) => {
 			this.changeItemCount(v.id, -v.count * count);
-			log += `${GetColorStr(tableMgr.Item[v.id].Quality, tableMgr.Item[v.id].Name)}x${v.count * count}
-                ${index == item.SellPrice.length - 1 ? "" : "、"}`;
+			log += `${ GetColorStr(tableMgr.Item[ v.id ].Quality, tableMgr.Item[ v.id ].Name) }x${ v.count * count }
+                ${ index == item.SellPrice.length - 1 ? "" : "、" }`;
 		});
-		log = `购买&nbsp;${GetColorStr(tableMgr.Item[item.SellID].Quality, tableMgr.Item[item.SellID].Name)}x${count}，${log}`;
+		log = `购买&nbsp;${ GetColorStr(tableMgr.Item[ item.SellID ].Quality, tableMgr.Item[ item.SellID ].Name) }x${ count }，${ log }`;
 		this.changeItemCount(item.SellID, count);
 		this.dispatch(NotifyConst.AddMainLog, log);
 		return LangCode.None;
@@ -470,16 +470,16 @@ class PlayerData extends Observer {
 		let vigorCost: number;
 		switch (type) {
 			case BattleType.GuanQia:
-				vigorCost = tableMgr.Level[id].VigorCost;
+				vigorCost = tableMgr.Level[ id ].VigorCost;
 				break;
 			case BattleType.FuBen:
-				vigorCost = tableMgr.FuBen[id].VigorCost;
+				vigorCost = tableMgr.FuBen[ id ].VigorCost;
 				break;
 			case BattleType.MiJing:
-				vigorCost = tableMgr.MiJing[id].VigorCost;
+				vigorCost = tableMgr.MiJing[ id ].VigorCost;
 				break;
 			case BattleType.Boss:
-				vigorCost = tableMgr.Boss[id].VigorCost;
+				vigorCost = tableMgr.Boss[ id ].VigorCost;
 				break;
 			default:
 				return LangCode._1014;
@@ -497,16 +497,16 @@ class PlayerData extends Observer {
 		let rewards: (BaseDropOutType & { special: boolean })[] = [];
 		switch (type) {
 			case BattleType.GuanQia:
-				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.Level[id]);
+				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.Level[ id ]);
 				break;
 			case BattleType.FuBen:
-				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.FuBen[id]);
+				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.FuBen[ id ]);
 				break;
 			case BattleType.MiJing:
-				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.MiJing[id]);
+				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.MiJing[ id ]);
 				break;
 			case BattleType.Boss:
-				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.Boss[id]);
+				({ BaseDropOut: baseDropOut, RandomDropOut: randomDropOut } = tableMgr.Boss[ id ]);
 				break;
 			default:
 				return rewards;
@@ -533,7 +533,7 @@ class PlayerData extends Observer {
 
 	/**更换门派 */
 	translatorSect(id: number) {
-		if (tableMgr.Sect[id] == null) return LangCode._1014;
+		if (tableMgr.Sect[ id ] == null) return LangCode._1014;
 		this._base.translatorMenPai(id);
 		this.saveBaseDataCallLater();
 		return LangCode.None;
@@ -602,4 +602,4 @@ class PlayerData extends Observer {
 
 export const playerData = new PlayerData();
 export type IPlayerData = PlayerData;
-window["playerData"] = playerData;
+windowImmit("playerData", playerData);

@@ -8,10 +8,10 @@ class EventListener extends Laya.EventDispatcher {
         const interestNotifyList = caller.__interestNotifyList;
         if (interestNotifyList) {
             for (const notifyName in interestNotifyList) {
-                const callbackList = interestNotifyList[notifyName];
+                const callbackList = interestNotifyList[ notifyName ];
                 for (const k in callbackList) {
-                    const callback: any = callbackList[k];
-                    const param = callback[notifyName];
+                    const callback: any = callbackList[ k ];
+                    const param = callback[ notifyName ];
                     const once = param ? param.__once : false;
                     const args = param ? param.__args : null;
                     if (once) {
@@ -28,7 +28,7 @@ class EventListener extends Laya.EventDispatcher {
 
 /** 全局事件管理中心 */
 export const eventMgr = new EventListener();
-window["eventMgr"] = eventMgr;
+windowImmit("eventMgr", eventMgr);
 
 /**
  * @description: 添加全局事件监听
@@ -40,19 +40,19 @@ window["eventMgr"] = eventMgr;
 export function InsertNotify(notifyName: string, once?: boolean, args?: any[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         if (!target.__interestNotifyList) target.__interestNotifyList = {};
-        if (!target.__interestNotifyList[notifyName]) target.__interestNotifyList[notifyName] = [];
+        if (!target.__interestNotifyList[ notifyName ]) target.__interestNotifyList[ notifyName ] = [];
 
         const func = descriptor.value;
-        const list: Function[] = target.__interestNotifyList[notifyName];
+        const list: Function[] = target.__interestNotifyList[ notifyName ];
         if (list.indexOf(func) == -1) {
             list.push(func);
             if (once) {
-                func[notifyName] = func[notifyName] || {};
-                func[notifyName].__once = once;
+                func[ notifyName ] = func[ notifyName ] || {};
+                func[ notifyName ].__once = once;
             }
             if (args) {
-                func[notifyName] = func[notifyName] || {};
-                func[notifyName].__args = args;
+                func[ notifyName ] = func[ notifyName ] || {};
+                func[ notifyName ].__args = args;
             }
         }
     };

@@ -3,6 +3,12 @@ import { loadMgr } from '../../core/libs/load/LoadMgr';
 import { uiMgr } from '../../core/ui/core/UIManager';
 import { IScene } from '../ILogicScene';
 
+const enum ResGroupType {
+	Normal,
+	Const,
+	All,
+}
+
 /**
  *@Author zsk
  *@Date 2022/7/25 22:02
@@ -15,13 +21,13 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 	get name(): string { return this[ "__proto__" ].constructor.name; }
 
 	load() {
-		const [ normalRes, uiRes ] = this.getResGroup(true);
+		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.All);
 		// let totalProgress = 0;
 		// const progressHandler = Laya.Handler.create(this, (progress: number) => {
 		// 	totalProgress += progress;
 		// }, null, false);
 		return Promise.all([
-			loadMgr.create(normalRes),
+			loadMgr.create(notUIRes),
 			loadMgr.loadPackage(uiRes),
 		]).then(() => Promise.resolve(), () => {
 			this.exit();
@@ -41,8 +47,8 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 		uiMgr.removeAllView();
 
 		//卸载资源
-		const [ normalRes, uiRes ] = this.getResGroup(false);
-		normalRes.forEach(v => Laya.loader.clearRes(v));
+		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.Normal);
+		notUIRes.forEach(v => Laya.loader.clearRes(v));
 		uiRes.forEach(v => fgui.UIPackage.removePackage(v));
 
 	}
@@ -59,15 +65,20 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 	/** 退出场景时执行 */
 	protected abstract onExit(): void;
 
-	private getResGroup(inclueConst: boolean): [ string[], string[], string[] ] {
-		const normalRes: string[] = [];
+	private getResGroup(groupType: ResGroupType): [ string[], string[] ] {
+		const notUIRes: string[] = [];
 		const uiRes: string[] = [];
-		let resArr = this.getResArray();
-		inclueConst && (resArr = resArr.concat(this.getConstResArray()));
+		let resArr: string[];
+		switch (groupType) {
+			case ResGroupType.Normal: resArr = this.getResArray(); break;
+			case ResGroupType.Const: resArr = this.getConstResArray(); break;
+			case ResGroupType.All: resArr = this.getResArray().concat(this.getConstResArray()); break;
+			default: return [ null, null ];
+		}
 		resArr.forEach(res => {
 			if (res.startsWith("res/ui/")) uiRes.push(res);
-			else normalRes.push(res);
+			else notUIRes.push(res);
 		});
-		return [ normalRes, uiRes, resArr ];
+		return [ notUIRes, uiRes ];
 	}
 }

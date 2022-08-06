@@ -39,9 +39,9 @@ export type IView = fgui.GComponent & ViewExtension;
 /**页面类类型 */
 export interface IView_Class {
 	new(): IView;
-
 	PkgRes?: string;
-
+	/** 是否不可销毁 */
+	DontDestroy?: boolean;
 	createInstance?(): IView;
 };
 

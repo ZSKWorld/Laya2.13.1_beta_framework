@@ -2,7 +2,7 @@
  * @Author       : zsk
  * @Date         : 2022-04-18 22:11:15
  * @LastEditors  : zsk
- * @LastEditTime : 2022-08-06 01:45:37
+ * @LastEditTime : 2022-08-06 16:41:41
  * @Description  : UI管理类
  */
 import { NotifyConst } from "../../common/NotifyConst";
@@ -17,9 +17,60 @@ import { ViewID } from "./ViewID";
 
 const logger = Logger.Create("UIManager").setEnable(true);
 
-class UIManager extends Observer {
+/** 页面缓存管理 */
+class UICache {
 	/**销毁缓存时间，毫秒 */
 	private static readonly DestroyCacheTime = 60000;
+
+	/**销毁缓存，销毁前保留一段时间，期间不在使用就销毁 */
+	private destroyCache: Map<ViewID, [ IView, number ]> = new Map();
+
+	/**不会销毁的页面缓存 */
+	private dontDestroyCache: Map<ViewID, IView> = new Map();
+
+	constructor() { Laya.timer.loop(10000, this, this.checkDestroyCache); }
+
+
+	/** 添加待销毁页面 */
+	addDestroyCache(viewId: ViewID, viewInst: IView) {
+		if (ViewClass[ viewId ].DontDestroy) this.dontDestroyCache.set(viewId, viewInst);
+		else this.destroyCache.set(viewId, [ viewInst, Date.now() ])
+	}
+
+	/** 从缓存中获取页面 */
+	getViewFromCache(viewId: ViewID) {
+		let viewInst: IView;
+		if (ViewClass[ viewId ].DontDestroy) {
+			if (this.dontDestroyCache.has(viewId)) {
+				viewInst = this.dontDestroyCache.get(viewId);
+				this.dontDestroyCache.delete(viewId);
+			}
+		}
+		else if (this.destroyCache.has(viewId)) {
+			viewInst = this.destroyCache.get(viewId)[ 0 ];
+			this.destroyCache.delete(viewId);
+		}
+		return viewInst;
+	}
+
+	/** 检测销毁页面 */
+	private checkDestroyCache() {
+		if (this.destroyCache.size > 0) {
+			for (const iterator of this.destroyCache) {
+				const [ viewID, [ view, startTime ] ] = iterator;
+				if ((Date.now() - startTime) >= UICache.DestroyCacheTime) {
+					logger.warn("dispose view", view.name);
+					view.dispose();
+					this.destroyCache.delete(viewID);
+				}
+			}
+		}
+	}
+
+}
+
+class UIManager extends Observer {
+	private cache: UICache;
 
 	/** 已打开页面 */
 	private openedViews: IView[] = [];
@@ -27,8 +78,6 @@ class UIManager extends Observer {
 	/** 锁屏面板 */
 	private lockPanel: fgui.GGraph;
 
-	/**销毁缓存，销毁前保留一段时间，期间不在使用就销毁 */
-	private destroyCache: Map<ViewID, [ IView, number ]> = new Map();
 
 	/** 当前显示的顶层页面 */
 	private get topView() { return this.openedViews[ 0 ]; }
@@ -41,20 +90,9 @@ class UIManager extends Observer {
 		}
 	}
 
-	private checkDestroyCache() {
-		if (this.destroyCache.size > 0) {
-			for (const iterator of this.destroyCache) {
-				const [ viewID, [ view, startTime ] ] = iterator;
-				if ((Date.now() - startTime) >= UIManager.DestroyCacheTime) {
-					logger.warn("dispose view", view.name);
-					view.dispose();
-					this.destroyCache.delete(viewID);
-				}
-			}
-		}
-	}
-
 	init() {
+		this.cache = new UICache();
+
 		this.lockPanel = new fgui.GGraph();
 		this.lockPanel.makeFullScreen();
 		this.lockPanel.drawRect(0, "", "#00000000");
@@ -62,7 +100,6 @@ class UIManager extends Observer {
 
 		//延迟250是为了防抖
 		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(250, this, this.onResize));
-		Laya.timer.loop(10000, this, this.checkDestroyCache);
 	}
 
 	/** 获取一打开的页面索引
@@ -105,17 +142,15 @@ class UIManager extends Observer {
 		let openedIndex = this.getOpenViewIndex(viewId);
 		if (openedIndex == -1) {
 			//先尝试从待销毁缓存池中获取
-			if (this.destroyCache.has(viewId)) {
-				const viewInst = this.destroyCache.get(viewId)[ 0 ];
-				this.destroyCache.delete(viewId);
-				this.addView2(viewId, viewInst, data, hideTop, this.topView, callback);
-			} else {
+			let viewInst = this.cache.getViewFromCache(viewId);
+			if (viewInst) this.addView2(viewId, viewInst, data, hideTop, this.topView, callback);
+			else {
 				fgui.UIPackage.loadPackage([ ViewClass[ viewId ].PkgRes ], Laya.Handler.create(this, (res: any[]) => {
 					if (!res || !res.length) {
 						platform.confirm(`界面 ${ viewId } 加载失败，是否重试?`,
 							"", false, () => this.addView(viewId, data, callback, hideTop));
 					} else {
-						const viewInst = this.createViewInstance(viewId);
+						viewInst = this.createViewInstance(viewId);
 						this.addView2(viewId, viewInst, data, hideTop, this.topView, callback);
 					}
 				}));
@@ -161,8 +196,8 @@ class UIManager extends Observer {
 			const view = _openedViews[ i ];
 			if (view.name == viewId) {
 				view.removeFromParent();
-				this.destroyCache.set(viewId, [ view, Date.now() ]);
 				_openedViews.splice(i, 1);
+				this.cache.addDestroyCache(viewId, view);
 				break;
 			}
 		}
@@ -172,11 +207,11 @@ class UIManager extends Observer {
 	removeAllView() {
 		this.openedViews.forEach(view => {
 			view.removeFromParent();
-			this.destroyCache.set(view.name as ViewID, [ view, Date.now() ]);
+			this.cache.addDestroyCache(view.name as ViewID, view);
 		});
 		this.openedViews.length = 0;
 	}
 }
 
 export const uiMgr = new UIManager();
-window[ "uiMgr" ] = uiMgr;
+windowImmit("uiMgr", uiMgr)
