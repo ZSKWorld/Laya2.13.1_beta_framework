@@ -13772,9 +13772,7 @@
                             if (!UIPackage._instById[pkg.id]) {
                                 UIPackage._instById[pkg.id] = pkg;
                                 UIPackage._instByName[pkg.name] = pkg;
-                                //modify
-                                // UIPackage._instByName[pkg._resKey] = pkg;
-                                UIPackage._instById[pkg._resKey] = pkg;
+                                UIPackage._instByName[pkg._resKey] = pkg;
                             }
                         }
                         completeHandler.runWith([pkgArr]);
@@ -13786,9 +13784,7 @@
                         if (!UIPackage._instById[pkg.id]) {
                             UIPackage._instById[pkg.id] = pkg;
                             UIPackage._instByName[pkg.name] = pkg;
-                            //modify
-                            // UIPackage._instByName[pkg._resKey] = pkg;
-                            UIPackage._instById[pkg._resKey] = pkg;
+                            UIPackage._instByName[pkg._resKey] = pkg;
                         }
                     }
                     completeHandler.runWith([pkgArr]);

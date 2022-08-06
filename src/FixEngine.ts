@@ -1,10 +1,11 @@
 export class FixEngine {
-	static fix() {
-		this.ubbTagI();
-		this.addGUIObjectEventLockable();
+	static Fix() {
+		this.UbbTagI();
+		this.AddGUIObjectEventLockable();
+		this.LoadPackage();
 	}
 
-	private static ubbTagI() {
+	private static UbbTagI() {
 		const inst = fairygui.UBBParser.inst as any;
 		inst._handlers[ "i" ] = function onTag_I(tagName, end, attr) {
 			return end ? ("</span>") : ("<span style='italic:true'>");
@@ -16,7 +17,7 @@ export class FixEngine {
 	}
 
 	/**添加ui节点事件锁 */
-	private static addGUIObjectEventLockable() {
+	private static AddGUIObjectEventLockable() {
 		const touchMgrPrototype = Laya.TouchManager.prototype;
 		const lockChildMap: Map<number, boolean> = new Map();
 		//拦截触摸事件派发，处理事件锁
@@ -86,7 +87,7 @@ export class FixEngine {
 	}
 
 	/** 修复gui GBasicText.text 自动‘宽度’最大尺寸限制不起作用的问题 */
-	private static basicText() {
+	private static BasicText() {
 		const prototype = fgui.GBasicTextField.prototype;
 		Object.defineProperty(prototype, "text", {
 			get() { return this._text; },
@@ -113,5 +114,90 @@ export class FixEngine {
 					this._textField.typeset();
 			}
 		})
+	}
+
+	/** 修复loadPackage重复加载的bug */
+	private static LoadPackage() {
+		fgui.UIPackage.loadPackage = function loadPackage(resKey, completeHandler, progressHandler) {
+			const UIPackage = fgui.UIPackage as any;
+			let loadKeyArr = [];
+			let keys = [];
+			let i;
+			if (Array.isArray(resKey)) {
+				for (i = 0; i < resKey.length; i++) {
+					loadKeyArr.push({ url: resKey[ i ] + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER });
+					keys.push(resKey[ i ]);
+				}
+			}
+			else {
+				loadKeyArr = [ { url: resKey + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER } ];
+				keys = [ resKey ];
+			}
+			let pkgArr = [];
+			let pkg;
+			for (i = 0; i < loadKeyArr.length; i++) {
+				pkg = UIPackage._instById[ keys[ i ] ];
+				if (pkg) {
+					pkgArr.push(pkg);
+					loadKeyArr.splice(i, 1);
+					keys.splice(i, 1);
+					i--;
+				}
+			}
+			if (loadKeyArr.length == 0) {
+				completeHandler.runWith([ pkgArr ]);
+				return;
+			}
+			var descCompleteHandler = Laya.Handler.create(this, function () {
+				let pkg;
+				let urls = [];
+				for (i = 0; i < loadKeyArr.length; i++) {
+					let asset = fgui.AssetProxy.inst.getRes(loadKeyArr[ i ].url);
+					if (asset) {
+						pkg = new UIPackage();
+						pkgArr.push(pkg);
+						pkg._resKey = keys[ i ];
+						pkg.loadPackage(new fgui.ByteBuffer(asset));
+						let cnt = pkg._items.length;
+						for (let j = 0; j < cnt; j++) {
+							let pi = pkg._items[ j ];
+							if (pi.type == fgui.PackageItemType.Atlas) {
+								urls.push({ url: pi.file, type: Laya.Loader.IMAGE });
+							}
+							else if (pi.type == fgui.PackageItemType.Sound) {
+								urls.push({ url: pi.file, type: Laya.Loader.SOUND });
+							}
+						}
+					}
+				}
+				if (urls.length > 0) {
+					fgui.AssetProxy.inst.load(urls, Laya.Handler.create(this, function () {
+						for (i = 0; i < pkgArr.length; i++) {
+							pkg = pkgArr[ i ];
+							if (!UIPackage._instById[ pkg.id ]) {
+								UIPackage._instById[ pkg.id ] = pkg;
+								UIPackage._instByName[ pkg.name ] = pkg;
+								// UIPackage._instByName[pkg._resKey] = pkg;
+								UIPackage._instById[ pkg._resKey ] = pkg;
+							}
+						}
+						completeHandler.runWith([ pkgArr ]);
+					}, null, true), progressHandler);
+				}
+				else {
+					for (i = 0; i < pkgArr.length; i++) {
+						pkg = pkgArr[ i ];
+						if (!UIPackage._instById[ pkg.id ]) {
+							UIPackage._instById[ pkg.id ] = pkg;
+							UIPackage._instByName[ pkg.name ] = pkg;
+							// UIPackage._instByName[pkg._resKey] = pkg;
+							UIPackage._instById[ pkg._resKey ] = pkg;
+						}
+					}
+					completeHandler.runWith([ pkgArr ]);
+				}
+			}, null, true);
+			fgui.AssetProxy.inst.load(loadKeyArr, descCompleteHandler, null, Laya.Loader.BUFFER);
+		}
 	}
 }

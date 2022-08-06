@@ -33,6 +33,7 @@ class LogicSceneMgr extends Observer {
 				this.currentScene = newScene;
 				this.enterCompleted = true;
 				this.currentScene.enter(data);
+				Laya.Resource.destroyUnusedResources();
 			}, () => (this.enterCompleted = true));
 		}
 	}
