@@ -2,7 +2,10 @@ import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ComNumInputMsg, ComNumInputView } from "../../../view/PkgCommon/Coms/ComNumInputView";
 
 export interface ComNumInputData {
-
+  title: string;
+  min: number;
+  max: number;
+  callback?: Laya.Handler;
 }
 
 export class ComNumInputCtrl extends BaseViewCtrl<ComNumInputView, ComNumInputData>{

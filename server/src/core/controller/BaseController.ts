@@ -1,5 +1,5 @@
 import { Connection } from "../Connection";
-import { ErrorCode } from "../ErrorCode";
+import { ErrorCode } from "../enum/ErrorCode";
 
 export class BaseController {
     private _cmds: { [ key: string ]: Function };

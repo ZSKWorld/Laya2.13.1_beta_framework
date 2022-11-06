@@ -7,29 +7,29 @@ export interface UIChatData {
 
 export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
 
-    override onAwake(): void {
-		this.addMessageListener(UIChatMsg.OnBtnSendClick, this.onBtnSendClick);
-		this.addMessageListener(UIChatMsg.OnBtnBackClick, this.onBtnBackClick);
-    }
+  override onAwake(): void {
+    this.addMessageListener(UIChatMsg.OnBtnSendClick, this.onBtnSendClick);
+    this.addMessageListener(UIChatMsg.OnBtnBackClick, this.onBtnBackClick);
+  }
 
-    override onEnable(): void {
-        
-    }
+  override onEnable(): void {
 
-    override onDisable(): void {
-        
-    }
+  }
 
-    override onDestroy(): void {
-        
-    }
+  override onDisable(): void {
 
-	private onBtnSendClick(): void {
-	
-	}
+  }
 
-	private onBtnBackClick(): void {
-	
-	}
+  override onDestroy(): void {
+
+  }
+
+  private onBtnSendClick(): void {
+
+  }
+
+  private onBtnBackClick(): void {
+    this.removeSelf();
+  }
 
 }

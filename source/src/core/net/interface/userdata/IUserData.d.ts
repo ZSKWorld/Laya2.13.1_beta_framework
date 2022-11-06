@@ -1,8 +1,6 @@
 
 declare interface KeyData<T = number> { [ id: string ]: T; }
 declare interface Offline {
-    /** 最后一次在线时间 */
-    lastOnlineTime: number;
     /** 离线时长 */
     offlineTime: number;
     /** 获得的精力 */

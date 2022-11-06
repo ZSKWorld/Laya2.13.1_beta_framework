@@ -11,7 +11,7 @@ export const enum GameEvent {
 	/** socket关闭 */
 	SocketClosed = "SocketClosed",
 
-	//----------------------------------以下为派发事件-------------------------------------------
+
 	/**
 	 * 切换场景
 	 * @param sceneType 场景类型 {@link LogicSceneType}
@@ -25,4 +25,6 @@ export const enum GameEvent {
 	AddExperienceLog = "AddExperienceLog",
 	/** 清理历练日志 */
 	ClearExperienceLog = "ClearExperienceLog",
+	/** 刷新日志显示 */
+	RefreshExperienceLog = "RefreshExperienceLog",
 }

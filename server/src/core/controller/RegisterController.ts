@@ -1,5 +1,5 @@
 import { Util } from "../../utils/Util";
-import { ErrorCode } from "../ErrorCode";
+import { ErrorCode } from "../enum/ErrorCode";
 import { UserData } from "../userdata/UserData";
 import { AddCMD, BaseController } from "./BaseController";
 

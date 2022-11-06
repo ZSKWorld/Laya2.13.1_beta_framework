@@ -1,58 +1,60 @@
 class RichStr {
-    private str: string = "";
+    private _str: string = "";
 
     start(text: string = "") {
-        this.str = text;
+        this._str = text;
         return this;
     }
 
+    getStr() { return this._str; }
+
     /** 添加空格 */
     space(num: number) {
-        this.str += new Array(num).fill("&nbsp;").join("");
+        this._str += new Array(num).fill("&nbsp;").join("");
         return this;
     }
 
     /** 添加换行 */
     break(num: number = 1) {
-        this.str += new Array(num).fill("<br>").join("");
+        this._str += new Array(num).fill("<br>").join("");
         return this;
     }
 
     /** 设置大小 */
     size(size: number) {
-        this.str = `[size=${ size }]${ this.str }[/size]`;
+        this._str = `[size=${ size }]${ this._str }[/size]`;
         return this;
     }
 
     /** 设置颜色 */
     color(color: string) {
-        this.str = `[color=${ color }]${ this.str }[/color]`;
+        this._str = `[color=${ color }]${ this._str }[/color]`;
         return this;
     }
 
     combineSpace(str: string, num: number = 1) {
-        this.str += str + new Array(num).fill("&nbsp;").join("");
+        this._str += str + new Array(num).fill("&nbsp;").join("");
         return this;
     }
 
     combineBreak(str: string, num: number = 1) {
-        this.str += str + new Array(num).fill("<br>").join("");
+        this._str += str + new Array(num).fill("<br>").join("");
         return this;
     }
 
     combineSize(str: string, size: number) {
-        this.str += `[size=${ size }]${ str }[/size]`;
+        this._str += `[size=${ size }]${ str }[/size]`;
         return this;
     }
 
     combineColor(str: string, color: string) {
-        this.str += `[color=${ color }]${ str }[/color]`;
+        this._str += `[color=${ color }]${ str }[/color]`;
         return this;
     }
 
     end() {
         Laya.Pool.recoverByClass(this);
-        return this.str;
+        return this._str;
     }
 }
 export class RichStrMgr {

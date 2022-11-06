@@ -12,8 +12,8 @@ export interface UILoginMainData {
 export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainData>{
 
     override onAwake(): void {
-		this.addMessageListener(UILoginMainMsg.OnBtnLoginClick, this.onBtnLoginClick);
-		this.addMessageListener(UILoginMainMsg.OnBtnRegisterClick, this.onBtnRegisterClick);
+        this.addMessageListener(UILoginMainMsg.OnBtnLoginClick, this.onBtnLoginClick);
+        this.addMessageListener(UILoginMainMsg.OnBtnRegisterClick, this.onBtnRegisterClick);
     }
 
     override onEnable(): void {
@@ -22,24 +22,24 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
     }
 
     override onDisable(): void {
-        
+
     }
 
     override onDestroy(): void {
-        
+
     }
 
-	private onBtnLoginClick(): void {
+    private onBtnLoginClick(): void {
         const { TxtAccount, TxtPassword } = this.view;
         const param = { account: TxtAccount.text, password: TxtPassword.text };
         LoginService.Inst.login(param);
-	}
+    }
 
-	private onBtnRegisterClick(): void {
+    private onBtnRegisterClick(): void {
         const { TxtRegisterAccount, TxtRegisterPassword, TxtRegisterName } = this.view;
-        if (!TxtRegisterAccount.text.trim()) UIUtility.ShowTipInfo("请输入账号");
-        else if (!TxtRegisterPassword.text.trim()) UIUtility.ShowTipInfo("请输入密码");
-        else if (!TxtRegisterName.text.trim()) UIUtility.ShowTipInfo("请输入昵称");
+        if (!TxtRegisterAccount.text.trim()) UIUtility.showTipInfo("请输入账号");
+        else if (!TxtRegisterPassword.text.trim()) UIUtility.showTipInfo("请输入密码");
+        else if (!TxtRegisterName.text.trim()) UIUtility.showTipInfo("请输入昵称");
         else {
             RegisterService.Inst.register({
                 account: TxtRegisterAccount.text,
@@ -47,6 +47,6 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
                 nickname: TxtRegisterName.text
             });
         }
-	}
+    }
 
 }

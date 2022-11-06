@@ -1,5 +1,5 @@
 import { ResPath } from "../../../common/ResPath";
-import { InsertNotify } from "../../../libs/event/EventMgr";
+import { InsertEvent } from "../../../libs/event/EventMgr";
 import { MathUtil } from "../../../libs/math/MathUtil";
 import { ExtensionClass } from "../../../libs/utils/Util";
 import { tableMgr } from "../../../table/TableManager";
@@ -51,13 +51,13 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 		BtnSphere.draggable = true;
 	}
 
-	@InsertNotify(UserDataEvent.Nickname_Changed)
-	@InsertNotify(UserDataEvent.JingJie_Changed)
-	@InsertNotify(UserDataEvent.CengJi_Changed)
-	@InsertNotify(UserDataEvent.Exp_Changed)
-	@InsertNotify(UserDataEvent.Coin_Changed)
-	@InsertNotify(UserDataEvent.Vcoin_Changed)
-	@InsertNotify(UserDataEvent.Sect_Changed)
+	@InsertEvent(UserDataEvent.Nickname_Changed)
+	@InsertEvent(UserDataEvent.JingJie_Changed)
+	@InsertEvent(UserDataEvent.CengJi_Changed)
+	@InsertEvent(UserDataEvent.Exp_Changed)
+	@InsertEvent(UserDataEvent.Coin_Changed)
+	@InsertEvent(UserDataEvent.Vcoin_Changed)
+	@InsertEvent(UserDataEvent.Sect_Changed)
 	refreshPlayerInfo() {
 		this.TxtNickName.text = this.userData.nickname;
 		const { jingJie, cengJi, exp, coin, vcoin, sect } = this.userData;

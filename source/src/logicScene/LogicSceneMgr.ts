@@ -1,5 +1,5 @@
 import { GameEvent } from "../core/common/GameEvent";
-import { InsertNotify } from "../core/libs/event/EventMgr";
+import { InsertEvent } from "../core/libs/event/EventMgr";
 import { Observer } from "../core/libs/event/Observer";
 import { Logger } from "../core/libs/utils/Logger";
 import { IScene } from "./ILogicScene";
@@ -19,7 +19,7 @@ class LogicSceneMgr extends Observer {
 			this._sceneMap = new Map(sceneMap);
 	}
 
-	@InsertNotify(GameEvent.EnterScene)
+	@InsertEvent(GameEvent.EnterScene)
 	private enterScene(type: LogicSceneType, data?: any) {
 		if (!this._enterCompleted) return;
 		if (this._currentType != type) {

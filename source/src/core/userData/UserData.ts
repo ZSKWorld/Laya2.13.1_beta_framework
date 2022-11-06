@@ -1,8 +1,9 @@
-import { InsertNotify } from "../libs/event/EventMgr";
+import { InsertEvent } from "../libs/event/EventMgr";
 import { Observer } from "../libs/event/Observer";
 import { Logger } from "../libs/utils/Logger";
 import { UpperFirst } from "../libs/utils/Util";
 import { NetResponse } from "../net/NetResponse";
+import { tableMgr } from "../table/TableManager";
 
 const logger = Logger.Create("UserData", true);
 
@@ -106,7 +107,7 @@ class UserData extends Observer implements IUserData {
     /**出战技能 */
     usingSkill: number[];
 
-    @InsertNotify(NetResponse.Response_SyncInfo)
+    @InsertEvent(NetResponse.Response_SyncInfo)
     private syncInfo(data: IUserData) {
         Object.keys(data).forEach(v => {
             const oldValue = this[ v ];

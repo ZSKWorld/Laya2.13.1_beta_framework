@@ -28,6 +28,7 @@ function ServiceInst<T>() {
     }
 }
 
+export const BattleService = ServiceInst<IBattle>();
 export const HeartService = ServiceInst<IHeart>();
 export const LoginService = ServiceInst<ILogin>();
 export const RegisterService = ServiceInst<IRegister>();

@@ -15,7 +15,7 @@ export const enum ViewEvent {
 export interface GComponentExtend {
 
 	/**派发全局事件 */
-	dispatch?(notifyName: string, data?: any): void;
+	dispatch?(eventName: string, data?: any): void;
 	/**
 	 * 打开页面
 	 * @param viewId {@link ViewID} 页面id

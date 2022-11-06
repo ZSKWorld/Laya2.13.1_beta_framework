@@ -2,6 +2,7 @@ import { Layer, layerMgr } from "../core/GameLayer";
 import { IView } from "../core/Interfaces";
 import { uiMgr } from "../core/UIManager";
 import { ViewID } from "../core/ViewID";
+import { ComNumInputData } from "../viewCtrl/PkgCommon/Coms/ComNumInputCtrl";
 import { UIPoolKey } from "./UIPoolKey";
 
 /** UI工具类 */
@@ -24,7 +25,7 @@ export class UIUtility {
 	 * @param text 文字
 	 * @param color 文字颜色，默认："#ffffff"
 	 */
-	static ShowTipInfo(text: string, color?: string) {
+	static showTipInfo(text: string, color?: string) {
 		const tip = this.getViewFromPool(UIPoolKey.TipInfo, ViewID.ComTipInfoView, Layer.Bottom, { text, color }, false);
 		tip.touchable = false;
 	}
@@ -33,15 +34,21 @@ export class UIUtility {
 	 * 弹确认窗口
 	 * @param text 内容
 	 * @param title 标题，默认："提示"
-	 */
-	/**
-	 * 弹确认窗口
-	 * @param text 内容
-	 * @param title 标题，默认："提示"
 	 * @param callback {@link Laya.Handler} 回调函数
 	 */
-	static ShowConfirm(text: string, title?: string, callback?: Laya.Handler) {
+	static showConfirm(text: string, title?: string, callback?: Laya.Handler) {
 		uiMgr.addView(ViewID.TipConfirmView, { text, title, callback }, null, false);
+	}
+
+	/**
+	 * 弹数量（整数）输入窗口
+	 * @param title 标题
+	 * @param min 最小值
+	 * @param max 最大值
+	 * @param callback {@link Laya.Handler} 回调函数，参数为输入数字
+	 */
+	static showNumInput(title: string, min: number, max: number, callback?: Laya.Handler) {
+		uiMgr.addView<ComNumInputData>(ViewID.ComNumInputView, { title, min, max, callback }, null, false);
 	}
 
 	/**
@@ -52,7 +59,7 @@ export class UIUtility {
 	 * @param renderFunc 渲染回调
 	 * @param clickFunc 点击回调
 	 */
-	static SetList(
+	static setList(
 		list: fgui.GList,
 		numItems: number,
 		caller: any,
@@ -78,7 +85,7 @@ export class UIUtility {
 	 * @param defaultValue 默认值
 	 * @param showItemCount 下拉显示数量
 	 */
-	static SetCombox(
+	static setCombox(
 		cmb: fgui.GComboBox,
 		items: string[],
 		values: any[],

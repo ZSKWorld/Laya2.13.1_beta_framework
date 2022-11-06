@@ -5,7 +5,7 @@ import { connectionMgr } from "./ConnectionMgr";
 import { HeartController } from "./controller/HeartController";
 import { LoginController } from "./controller/LoginController";
 import { RegisterController } from "./controller/RegisterController";
-import { ErrorCode } from "./ErrorCode";
+import { ErrorCode } from "./enum/ErrorCode";
 import { UserData } from "./userdata/UserData";
 export class Connection {
     private _listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);

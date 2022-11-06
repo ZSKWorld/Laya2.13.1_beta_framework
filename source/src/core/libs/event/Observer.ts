@@ -6,18 +6,18 @@ import { Notifier } from "./Notifier";
  * @author wizardc
  */
 export abstract class Observer extends Notifier {
-    private __interestNotifyList: { [ key: string ]: Function[] };
+    private __interestEventList: { [ key: string ]: Function[] };
 
     public constructor() {
         super();
-        eventMgr.registerNotify(this);
+        eventMgr.registerEvent(this);
     }
 
-    protected removeNotify(notifyName: string, caller: any, callback: Function): void {
-        eventMgr.off(notifyName, caller, callback);
+    protected removeEvent(eventName: string, caller: any, callback: Function): void {
+        eventMgr.off(eventName, caller, callback);
     }
 
-    protected removeAllNotify() {
+    protected removeAllEvent() {
         eventMgr.offAllCaller(this);
     }
 }

@@ -42,11 +42,11 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	/**
 	 * 封装一个派发全局事件的接口，避免eventMgr过度引用
-	 * @param notifyName 事件名称
+	 * @param eventName 事件名称
 	 * @param data 参数
 	 */
-	override dispatch(notifyName: string, data?: any) {
-		eventMgr.event(notifyName, data);
+	override dispatch(eventName: string, data?: any) {
+		eventMgr.event(eventName, data);
 	}
 
 	override onReset() {
@@ -103,9 +103,9 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		logger.assert(!this._netProcessor, "_netProcessor未清除");
 		this._netProcessor = Laya.Pool.createByClass(NetProcessorClass[ this.viewId ]);
 		this._netProcessor.viewCtrl = this;
-		eventMgr.registerNotify(this);
-		eventMgr.registerNotify(this._view);
-		eventMgr.registerNotify(this._netProcessor);
+		eventMgr.registerEvent(this);
+		eventMgr.registerEvent(this._view);
+		eventMgr.registerEvent(this._netProcessor);
 		ViewCtrlDIExtend.registerDeviceEvent(this);
 		this.addMessageListener(ViewEvent.OnRemoved, this.__onRemoved);
 		this.addMessageListener(ViewEvent.OnForeground, this.__onForeground);

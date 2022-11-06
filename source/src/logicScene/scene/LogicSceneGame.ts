@@ -8,12 +8,12 @@ export class LogicSceneGame extends LogicSceneBase {
 
 	protected override getResArray(): string[] {
 		return [
-			ResPath.UIPath.PkgGame
+			ResPath.UIPath.PkgBattle
 		];
 	}
 
 	protected onEnter(): void {
-		uiMgr.addView(ViewID.GameMainView);
+		uiMgr.addView(ViewID.ChooseBattleView, this.data);
 	}
 
 	protected onExit(): void {

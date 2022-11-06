@@ -12,7 +12,6 @@ export class UserData implements IUserData {
     lastOnlineTime: number = 0;
     /** 离线奖励 */
     offline?: Offline = null;
-
     /** 金币 */
     coin: number = 0;
     /** 元宝 */
@@ -119,6 +118,6 @@ export class UserData implements IUserData {
         if (!this.lastOnlineTime) return null;
         const timeOffset = ((TimeUtil.getTimeStamp() - this.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5) return null;
-        else return { lastOnlineTime: this.lastOnlineTime, offlineTime: timeOffset, vigor: (UserDataUtil.getVigorRecoveryRate(this.citta) * timeOffset) << 0 };
+        else return { offlineTime: timeOffset, vigor: (UserDataUtil.getVigorRecoveryRate(this.citta) * timeOffset) << 0 };
     }
 }

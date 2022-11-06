@@ -3,6 +3,9 @@ export const enum NetResponse {
 	/** 参数类型：{@link IUserData} */
 	Response_SyncInfo = "Response_SyncInfo",
 
+	/** 参数类型：{@link BattleOutput} */
+	Response_StartBattle = "Response_StartBattle",
+
 	/** 参数类型：{@link HeartOutput} */
 	Response_Heart = "Response_Heart",
 

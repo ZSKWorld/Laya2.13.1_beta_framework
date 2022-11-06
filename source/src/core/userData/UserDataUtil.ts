@@ -1,3 +1,4 @@
+import { GameUtil } from "../common/GameUtil";
 import { MathUtil } from "../libs/math/MathUtil";
 import { tableMgr } from "../table/TableManager";
 import { UserDataFormula } from "./UserDataFormula";
@@ -23,7 +24,7 @@ export class UserDataUtil {
         }
         return { jingJie, cengJi };
     }
-    
+
     /** 获取升级经验 */
     static getUpgradExp(jingJie: number, cengJi: number) {
         if (!tableMgr.JingJie[ jingJie + 1 ]) return 0;
@@ -47,5 +48,18 @@ export class UserDataUtil {
         let xinFaJLHF = 0;
         Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
         return 1 + xinFaJLHF;
+    }
+
+    /** 副本剩余次数 */
+    static getCopyTime(copyId: number, copy: KeyData) {
+        return tableMgr.FuBen[ copyId ].BattleCount - (copy[ copyId ] ?? 0);
+    }
+    /** 秘境剩余次数 */
+    static getSecretTime(secretId: number, secret: KeyData) {
+        return tableMgr.FuBen[ secretId ].BattleCount - (secret[ secretId ] ?? 0);
+    }
+    /** 获取boss剩余冷却时间 */
+    static getBossCoolDown(bossId: number, boss: KeyData) {
+        return Math.max(tableMgr.Boss[ bossId ].CoolTime - Math.floor(GameUtil.getServerTime() / 1000 - (boss[ bossId ] ?? 0)), 0);
     }
 }

@@ -1,7 +1,7 @@
 import { GameEvent } from "../../core/common/GameEvent";
 import { ResPath } from "../../core/common/ResPath";
 import { CustomSpriteManager } from "../../core/libs/customSprite/CustomSpriteManager";
-import { InsertNotify } from "../../core/libs/event/EventMgr";
+import { InsertEvent } from "../../core/libs/event/EventMgr";
 import { websocket } from "../../core/net/WebSocket";
 import { tableMgr } from "../../core/table/TableManager";
 import { layerMgr } from "../../core/ui/core/GameLayer";
@@ -42,16 +42,16 @@ export class LogicSceneInit extends LogicSceneBase {
 	protected onExit(): void {
 	}
 
-	@InsertNotify(GameEvent.SocketOpened, false, [ true ])
-	@InsertNotify(GameEvent.SocketClosed, false, [ false ])
+	@InsertEvent(GameEvent.SocketOpened, false, [ true ])
+	@InsertEvent(GameEvent.SocketClosed, false, [ false ])
 	private socketConnectChanged(open: boolean) {
 		if (open) uiMgr.removeView(ViewID.WaitingView);
 		else uiMgr.addView(ViewID.WaitingView, "网络已断开");
 	}
 
-	@InsertNotify(GameEvent.NetMsgError)
+	@InsertEvent(GameEvent.NetMsgError)
 	private netMsgError(msg: UserOutput) {
-		UIUtility.ShowTipInfo(tableMgr.Error[msg.error].text);
+		UIUtility.showTipInfo(tableMgr.Error[ msg.error ].text);
 	}
 
 }
