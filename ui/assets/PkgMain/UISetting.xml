@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334" designImage="ui://vith2b66sbd0w" designImageOffsetX="-759" designImageAlpha="100">
+  <displayList>
+    <graph id="n0_sbd0" name="BtnBg" xy="0,0" size="750,1334" type="rect" lineSize="0" fillColor="#ff111318">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_sbd0" name="n1" xy="20,27" size="710,1291" touchable="false" type="rect" lineSize="3" lineColor="#ff6d6e71" fillColor="#ff111318">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n3_sbd0" name="n3" xy="20,1144" size="710,174" touchable="false" type="rect" lineSize="3" lineColor="#ff6d6e71" fillColor="#ff272b37">
+      <relation target="" sidePair="width-width,bottom-bottom"/>
+    </graph>
+    <component id="n4_sbd0" name="BtnHangUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="208,1183" size="334,105" controller="ctrlBgColor,1">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <Button title="离线挂机" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n5_sbd0" name="BtnMute" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,328" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="静音" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n6_sbd0" name="BtnSignIn" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,439" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="签到" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n7_sbd0" name="BtnHelp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,550" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="帮助" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n8_sbd0" name="BtnClearAccount" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,661" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="清号重来" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n9_sbd0" name="n9" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,772" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="读取云存档" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n10_sbd0" name="n10" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,883" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="上传云存档" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n11_sbd0" name="BtnBack" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="209,994" size="331,101" group="n12_sbd0" controller="ctrlBgColor,9">
+      <Button title="返回" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <group id="n12_sbd0" name="n12" xy="209,328" size="331,767" advanced="true" layout="vt" lineGap="10" excludeInvisibles="true">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+    </group>
+  </displayList>
+</component>

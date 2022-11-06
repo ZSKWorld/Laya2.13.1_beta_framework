@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="150,200" overflow="hidden">
+  <displayList>
+    <list id="n1_sbd0" name="list" xy="0,0" size="150,200" overflow="scroll" scrollBarFlags="128" defaultItem="ui://vith2b66sbd0l">
+      <relation target="" sidePair="width-width"/>
+      <item title="第三个发射点犯得上发射点"/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+  <relation target="n1_sbd0" sidePair="height-height"/>
+  <transition name="t0" autoPlay="true">
+    <item time="0" type="Alpha" tween="true" startValue="0" endValue="1" duration="12"/>
+  </transition>
+</component>

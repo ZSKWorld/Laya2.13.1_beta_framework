@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="40,40" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0">
+    <action type="play_transition" fromPage="2" toPage="3" transition="t0"/>
+    <action type="play_transition" fromPage="3" toPage="2" transition="t1"/>
+  </controller>
+  <displayList>
+    <graph id="n0_j87q" name="n0" xy="0,0" size="40,40" touchable="false" type="eclipse" lineSize="0" fillColor="#fff0f0f0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_j87q" name="n1" xy="5,5" pivot="0.5,0.5" size="30,30" scale="0,0" touchable="false" type="eclipse" lineSize="0" fillColor="#ff33ff00">
+      <relation target="" sidePair="width-width%,height-height%,center-center,middle-middle"/>
+    </graph>
+    <text id="n3_j87q" name="title" xy="40,2" size="94,42" fontSize="30" color="#ffffff" autoClearText="true" text="百分比">
+      <relation target="" sidePair="middle-middle"/>
+    </text>
+  </displayList>
+  <Button mode="Check"/>
+  <transition name="t0">
+    <item time="0" type="Scale" target="n1_j87q" tween="true" startValue="0,0" endValue="1.333,1.33" duration="5"/>
+    <item time="5" type="Scale" target="n1_j87q" tween="true" startValue="1.333,1.33" endValue="1,1" duration="3"/>
+  </transition>
+  <transition name="t1">
+    <item time="0" type="Scale" target="n1_j87q" tween="true" startValue="1,1" endValue="1.333,1.33" duration="3"/>
+    <item time="3" type="Scale" target="n1_j87q" tween="true" startValue="1.333,1.33" endValue="0,0" duration="5"/>
+  </transition>
+</component>

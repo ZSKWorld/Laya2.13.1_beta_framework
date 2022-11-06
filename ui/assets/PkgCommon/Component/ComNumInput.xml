@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <graph id="n0_sbd0" name="BtnBg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_sbd0" name="n1" xy="140,712" size="800,495" group="n11_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115"/>
+    <graph id="n2_sbd0" name="n2" xy="140,712" size="800,100" group="n11_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <relation target="n1_sbd0" sidePair="width-width"/>
+    </graph>
+    <graph id="n3_sbd0" name="n3" xy="140,1107" size="800,100" group="n11_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <relation target="n1_sbd0" sidePair="width-width,bottom-bottom"/>
+    </graph>
+    <component id="n4_sbd0" name="Slider" src="sbd05x" fileName="Component/SliderBar/SliderH.xml" xy="235,926" size="610,68" group="n11_sbd0">
+      <Slider value="1" max="100" min="1"/>
+    </component>
+    <richtext id="n5_sbd0" name="TxtTitle" xy="349,735" size="381,66" group="n11_sbd0" touchable="false" fontSize="50" color="#ffffff" ubb="true" singleLine="true" text="洪七公[color=#ff0000][绝对物防][/color]">
+      <relation target="n1_sbd0" sidePair="center-center"/>
+    </richtext>
+    <component id="n9_sbd0" name="BtnBattle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="434,1123" size="211,69" group="n11_sbd0" controller="ctrlBgColor,1">
+      <relation target="n1_sbd0" sidePair="bottom-bottom"/>
+      <Button title="确定" titleColor="#000000" titleFontSize="40"/>
+    </component>
+    <group id="n11_sbd0" name="n11" xy="140,712" size="800,495" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+</component>

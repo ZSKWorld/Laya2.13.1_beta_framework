@@ -1,0 +1,16 @@
+{
+  "objectStatus": {
+    "n71_o772": {
+      "collapsed": true
+    }
+  },
+  "adaptiveTest": true,
+  "designImages": [
+    "ui://vith2b66sbd0e",
+    "ui://vith2b66sbd0f",
+    "ui://vith2b66sbd0g",
+    "ui://vith2b66sbd0h",
+    "ui://vith2b66sbd0i"
+  ],
+  "fitScreen": "FitSize"
+}

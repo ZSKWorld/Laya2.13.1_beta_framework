@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="100,23" extention="ProgressBar">
+  <controller name="ctrlColor" exported="true" pages="0,粉,1,黄,2,红,3,天蓝" selected="0"/>
+  <controller name="ctrlFontSize" exported="true" pages="0,20,1,21,2,22,3,23,4,24,5,25,6,26,7,27,8,28,9,29,10,30" selected="0"/>
+  <controller name="ctrlText" exported="true" pages="0,,1," selected="0"/>
+  <displayList>
+    <graph id="n0_sbd0" name="n0" xy="0,0" size="100,23" type="rect" lineSize="0" lineColor="#ffa0a0a0" fillColor="#fff0f0f0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_sbd0" name="bar" xy="0,0" size="100,23" type="rect" lineSize="0" fillColor="#ffffa2ba">
+      <gearColor controller="ctrlColor" pages="0,1,2,3" values="#ffa2ba|#b1dc35|#ff0000|#91c7ff"/>
+      <relation target="" sidePair="height-height"/>
+    </graph>
+    <text id="n2_sbd0" name="title" xy="0,0" size="100,29" fontSize="20" align="center" vAlign="middle" autoSize="shrink" singleLine="true" text="23/23">
+      <gearDisplay controller="ctrlText" pages="0"/>
+      <gearFontSize controller="ctrlFontSize" pages="0,1,2,3,4,5,6,7,8,9" values="20|21|22|23|24|25|26|27|28|29" default="30"/>
+      <relation target="" sidePair="width-width,middle-middle"/>
+    </text>
+  </displayList>
+  <ProgressBar titleType="valueAndmax"/>
+</component>

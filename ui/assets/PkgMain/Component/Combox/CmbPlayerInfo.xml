@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="231,38" extention="ComboBox">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <graph id="n0_sbd0" name="n0" xy="0,0" size="231,38" touchable="false" type="rect" lineSize="0" fillColor="#ff101115">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n3_sbd0" name="title" xy="7,4" size="58,38" fontSize="27" color="#9c9a9a" vAlign="middle" strokeColor="#000000" singleLine="true" text="50级"/>
+  </displayList>
+  <ComboBox dropdown="ui://vith2b66sbd0m"/>
+</component>

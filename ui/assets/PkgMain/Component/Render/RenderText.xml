@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="690,48">
+  <displayList>
+    <richtext id="n0_sbd0" name="title" xy="10,8" size="670,48" fontSize="35" vAlign="middle" leading="10" ubb="true" autoSize="height" text="士大夫撒大苏打给 的分公司的">
+      <relation target="" sidePair="width-width"/>
+    </richtext>
+  </displayList>
+  <relation target="n0_sbd0" sidePair="height-height"/>
+  <customProperty target="title" propertyId="0"/>
+</component>

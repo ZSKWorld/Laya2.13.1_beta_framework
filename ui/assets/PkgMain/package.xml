@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="vith2b66">
+  <resources>
+    <component id="qjdo0" name="UIMain.xml" path="/" exported="true"/>
+    <component id="sbd01" name="ComLiLian.xml" path="/Component/"/>
+    <component id="sbd02" name="ComWuPin.xml" path="/Component/"/>
+    <component id="sbd03" name="ComShangCheng.xml" path="/Component/"/>
+    <component id="sbd04" name="ComJueSe.xml" path="/Component/"/>
+    <component id="sbd05" name="ComDongFu.xml" path="/Component/"/>
+    <component id="sbd0j" name="RenderText.xml" path="/Component/Render/"/>
+    <component id="sbd0l" name="CmbDongFu_item.xml" path="/Component/Combox/"/>
+    <component id="sbd0m" name="CmbDongFu_popup.xml" path="/Component/Combox/"/>
+    <component id="sbd0n" name="CmbDongFu.xml" path="/Component/Combox/" exported="true"/>
+    <component id="sbd0x" name="UISetting.xml" path="/" exported="true"/>
+    <component id="sbd0z" name="RenderBag.xml" path="/Component/Render/"/>
+    <component id="sbd010" name="UIPlayerInfo.xml" path="/" exported="true"/>
+    <component id="sbd013" name="CmbPlayerInfo.xml" path="/Component/Combox/"/>
+    <component id="sbd01b" name="UIEquipmentInfo.xml" path="/" exported="true"/>
+    <component id="whk31d" name="ComRenWu.xml" path="/Component/JueSe/"/>
+    <component id="irlv1e" name="ComItemInfo.xml" path="/Component/" exported="true"/>
+    <component id="9f1k1h" name="ComZhiZuo.xml" path="/Component/DongFu/"/>
+    <component id="btv51i" name="ComXinFa.xml" path="/Component/JueSe/"/>
+    <component id="btv51j" name="ItemXinFa.xml" path="/Component/JueSe/Item/"/>
+    <component id="btv51q" name="UISect.xml" path="/" exported="true"/>
+    <component id="rwel1r" name="ComSkill.xml" path="/Component/JueSe/"/>
+    <component id="amcp1u" name="BtnSphere.xml" path="/Component/"/>
+    <component id="e3vt1v" name="UISphereTool.xml" path="/" exported="true"/>
+    <component id="j87q1w" name="BtnCheck.xml" path="/Component/"/>
+    <image id="sbd0c" name="IconGear.png" path="/Texture/" exported="true"/>
+    <image id="sbd0d" name="IconRank.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2b" name="Pic_Gouxuan.png" path="/Texture/" exported="true"/>
+    <component id="o7722c" name="UIChat.xml" path="/" exported="true"/>
+    <component id="j0ry2d" name="RenderChatMsg.xml" path="/Component/Render/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

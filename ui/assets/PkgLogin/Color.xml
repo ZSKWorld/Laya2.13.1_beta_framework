@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="800,600">
+  <displayList>
+    <graph id="n1_whk3" name="n1" xy="0,0" size="800,600" type="rect" lineSize="0" fillColor="#ff272b37" corner="10">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n3_whk3" name="1" xy="13,61" size="223,33" group="n15_whk3" fontSize="23" color="#7d8180" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#7D8180">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n4_whk3" name="2" xy="12,104" size="225,33" group="n15_whk3" fontSize="23" color="#ffffff" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#FFFFFF">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n5_whk3" name="3" xy="11,147" size="228,33" group="n15_whk3" fontSize="23" color="#00d8af" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#00D8AF">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n6_whk3" name="4" xy="14,190" size="221,33" group="n15_whk3" fontSize="23" color="#33ff00" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#33FF00">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n7_whk3" name="5" xy="12,233" size="225,33" group="n15_whk3" fontSize="23" color="#008dff" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#008DFF">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n8_whk3" name="6" xy="12,276" size="226,33" group="n15_whk3" fontSize="23" color="#004cef" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#004CEF">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n9_whk3" name="7" xy="13,319" size="223,33" group="n15_whk3" fontSize="23" color="#ff66ff" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#FF66FF">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n10_whk3" name="8" xy="14,362" size="222,33" group="n15_whk3" fontSize="23" color="#ff358f" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#FF358F">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n11_whk3" name="9" xy="12,405" size="225,33" group="n15_whk3" fontSize="23" color="#a400ff" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#A400FF">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n12_whk3" name="10" xy="12,448" size="226,33" group="n15_whk3" fontSize="23" color="#f9ea28" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#F9EA28">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n13_whk3" name="11" xy="14,491" size="221,33" group="n15_whk3" fontSize="23" color="#e99938" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#E99938">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <text id="n14_whk3" name="12" xy="10,534" size="229,33" group="n15_whk3" fontSize="23" color="#ff1b1b" align="center" vAlign="middle" leading="0" bold="true" singleLine="true" text="100000经验#FF1B1B">
+      <relation target="" sidePair="center-center"/>
+    </text>
+    <group id="n15_whk3" name="n15" xy="10,61" size="229,506" advanced="true" layout="vt" lineGap="10" excludeInvisibles="true"/>
+  </displayList>
+</component>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334" designImage="ui://vith2b66irlv1f" designImageOffsetX="-750" designImageAlpha="97">
+  <controller name="ctrlUse" pages="0,无,1,使用,2,购买" selected="0"/>
+  <controller name="ctrlSell" pages="0,不可售出,2,可售出" selected="0"/>
+  <displayList>
+    <graph id="n0_irlv" name="BtnBg" xy="0,0" size="750,1334" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_irlv" name="n1" xy="28,473" size="691,396" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115">
+      <relation target="n5_irlv" sidePair="height-height"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </graph>
+    <graph id="n2_irlv" name="n2" xy="28,473" size="691,84" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <relation target="n1_irlv" sidePair="width-width,left-left,top-top"/>
+    </graph>
+    <graph id="n3_irlv" name="n3" xy="28,783" size="691,86" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <relation target="n1_irlv" sidePair="width-width,left-left,bottom-bottom"/>
+    </graph>
+    <graph id="n10_irlv" name="n10" xy="46,799" size="648,54" touchable="false" type="rect">
+      <gearDisplay controller="ctrlUse" pages="1,2"/>
+      <gearDisplay2 controller="ctrlSell" pages="2" condition="1"/>
+      <relation target="n9_irlv" sidePair="width-width,height-height,left-left,bottom-bottom"/>
+    </graph>
+    <richtext id="n5_irlv" name="TxtContent" xy="71,676" pivot="0,0.5" anchor="true" size="610,125" touchable="false" fontSize="25" color="#e7c235" vAlign="middle" leading="15" ubb="true" autoSize="height" autoClearText="true" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
+      <relation target="n1_irlv" sidePair="center-center,middle-middle"/>
+    </richtext>
+    <text id="n6_irlv" name="n6" xy="52,495" size="104,66" fontSize="50" color="#ffffff" text="提示">
+      <relation target="n1_irlv" sidePair="left-left,top-top"/>
+    </text>
+    <text id="n9_irlv" name="TxtUseNum" xy="46,804" size="648,54" fontSize="40" autoSize="none" singleLine="true" text="1" input="true" restrict="[0-9]">
+      <gearDisplay controller="ctrlUse" pages="1,2"/>
+      <gearDisplay2 controller="ctrlSell" pages="2" condition="1"/>
+      <relation target="n1_irlv" sidePair="left-left,bottom-bottom"/>
+      <relation target="n17_btv5" sidePair="rightext-left"/>
+    </text>
+    <component id="n15_irlv" name="BtnShouCang" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="621,465" size="100,100">
+      <relation target="n1_irlv" sidePair="right-right,top-top"/>
+      <Button icon="ui://vx9zwserqjdob"/>
+    </component>
+    <component id="n16_ictn" name="BtnSell" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="703,852" size="157,54" group="n17_btv5" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlSell" pages="1,2"/>
+      <gearDisplay2 controller="ctrlUse" pages="0,1" condition="0"/>
+      <Button title="出售" titleColor="#ffffff" titleFontSize="37"/>
+    </component>
+    <component id="n8_irlv" name="BtnUse" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="870,852" size="157,54" group="n17_btv5" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlUse" pages="1"/>
+      <Button title="使用" titleColor="#ffffff" titleFontSize="37"/>
+    </component>
+    <component id="n13_irlv" name="BtnBuy" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="703,852" size="157,54" group="n17_btv5" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlUse" pages="2"/>
+      <Button title="购买" titleColor="#ffffff" titleFontSize="37"/>
+    </component>
+    <group id="n17_btv5" name="n17" xy="703,852" size="0,0" advanced="true" layout="hz" colGap="10" excludeInvisibles="true">
+      <relation target="n3_irlv" sidePair="right-right,bottom-bottom"/>
+    </group>
+  </displayList>
+</component>

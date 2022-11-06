@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334" designImageOffsetX="-542" designImageAlpha="100">
+  <displayList>
+    <graph id="n0_btv5" name="n0" xy="0,0" size="750,1334" type="rect" lineSize="0" lineColor="#ff91c7ff" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n1_btv5" name="ProBar0" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,286" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n10_btv5" name="ProBar1" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,331" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n11_btv5" name="ProBar2" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,376" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n12_btv5" name="ProBar3" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,421" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n13_btv5" name="ProBar4" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,466" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n14_btv5" name="ProBar5" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,511" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n15_btv5" name="ProBar6" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="175,556" size="465,30" group="n34_btv5" touchable="false" controller="ctrlColor,3,ctrlText,1">
+      <ProgressBar value="583" max="1000"/>
+    </component>
+    <component id="n17_btv5" name="BtnSect0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="109,623" size="144,67" group="n34_btv5" controller="ctrlBgColor,7">
+      <Button title="少林"/>
+    </component>
+    <component id="n23_btv5" name="BtnSect1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="303,623" size="144,67" group="n34_btv5" controller="ctrlBgColor,7">
+      <Button title="星宿"/>
+    </component>
+    <component id="n24_btv5" name="BtnSect2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="497,623" size="144,67" group="n34_btv5" controller="ctrlBgColor,7">
+      <Button title="天山"/>
+    </component>
+    <component id="n25_btv5" name="BtnSect3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="109,713" size="144,67" group="n34_btv5" controller="ctrlBgColor,7">
+      <Button title="明教"/>
+    </component>
+    <component id="n26_btv5" name="BtnSect4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="303,713" size="144,67" group="n34_btv5" controller="ctrlBgColor,7">
+      <Button title="慕容"/>
+    </component>
+    <component id="n27_btv5" name="BtnSect5" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="497,713" size="144,67" group="n34_btv5" controller="ctrlBgColor,7">
+      <Button title="丐帮"/>
+    </component>
+    <component id="n31_btv5" name="BtnSubmit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="298,1004" group="n34_btv5">
+      <Button title="确定"/>
+    </component>
+    <text id="n30_btv5" name="TxtDesc" xy="0,813" size="750,115" group="n34_btv5" fontSize="25" color="#ffffff" align="center" leading="10" autoSize="height" text="主属性-金木水火土&#xA;各项成长都一样&#xA;「丐帮」"/>
+    <text id="n32_btv5" name="n32" xy="285,959" size="179,35" group="n34_btv5" fontSize="25" color="#f10000" align="center" text="你确定要加入么"/>
+    <text id="n2_btv5" name="n2" xy="109,291" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="攻击"/>
+    <text id="n3_btv5" name="n3" xy="109,336" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="防御"/>
+    <text id="n4_btv5" name="n4" xy="109,381" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="生命"/>
+    <text id="n5_btv5" name="n5" xy="109,426" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="命中"/>
+    <text id="n6_btv5" name="n6" xy="109,471" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="闪避"/>
+    <text id="n7_btv5" name="n7" xy="109,516" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="暴击"/>
+    <text id="n8_btv5" name="n8" xy="109,561" size="54,35" group="n34_btv5" fontSize="25" color="#00ff00" text="暴抗"/>
+    <group id="n34_btv5" name="n34" xy="0,286" size="750,771" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+</component>

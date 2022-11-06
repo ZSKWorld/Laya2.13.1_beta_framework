@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="690,64">
+  <controller name="ctrlAlign" pages="0,right,1,left" selected="0"/>
+  <displayList>
+    <loader id="n1_j0ry" name="n1" xy="0,0" size="441,64" url="ui://vx9zwserqjdo2z" fill="scaleFree">
+      <relation target="n0_sbd0" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </loader>
+    <text id="n0_sbd0" name="TxtMsg" xy="31,18" size="379,35" restrictSize="0,400,0,0" fontSize="25" color="#ff0000" vAlign="middle" leading="10" ubb="true" autoSize="height" text="你好你好你好你好你好你好你好你"/>
+  </displayList>
+  <relation target="n0_sbd0" sidePair="height-height"/>
+  <customProperty target="text" propertyId="0"/>
+</component>

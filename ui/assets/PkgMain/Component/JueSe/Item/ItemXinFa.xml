@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="712,98" extention="Label">
+  <controller name="c1" exported="true" pages="0,,1," selected="0"/>
+  <displayList>
+    <graph id="n0_btv5" name="n0" xy="0,0" size="712,98" touchable="false" type="rect" lineSize="0" fillColor="#ff91e4e4">
+      <gearColor controller="c1" pages="1" values="#4d7373" default="#91e4e4"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <richtext id="n1_btv5" name="title" xy="187,12" size="364,79" touchable="false" fontSize="60" color="#ee711b" ubb="true" singleLine="true" text="心法·逍遥卷">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </richtext>
+  </displayList>
+  <customProperty target="n1" propertyId="0"/>
+</component>

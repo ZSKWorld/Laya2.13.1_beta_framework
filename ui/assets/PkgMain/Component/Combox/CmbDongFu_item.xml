@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="100,60" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <controller name="ctrlSelected" pages="0,,1," selected="0"/>
+  <displayList>
+    <graph id="n4_9f1k" name="n4" xy="0,0" size="100,60" touchable="false" type="rect">
+      <gearColor controller="button" pages="1,2,3" values="#666666|#999999|#999999" default="#ffffff" tween="true"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <richtext id="n2_sbd0" name="title" xy="38,10" size="56,48" touchable="false" fontSize="35" vAlign="middle" ubb="true" strokeColor="#333333" singleLine="true" text="505">
+      <relation target="" sidePair="middle-middle"/>
+    </richtext>
+    <image id="n3_sbd0" name="n3" src="qjdo2b" fileName="Texture/Pic_Gouxuan.png" xy="2,19" scale="0.7,0.7" color="#000000">
+      <gearDisplay controller="ctrlSelected" pages="1"/>
+      <relation target="" sidePair="middle-middle"/>
+    </image>
+  </displayList>
+  <Button/>
+</component>

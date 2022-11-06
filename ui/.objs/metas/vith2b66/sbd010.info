@@ -1,0 +1,12 @@
+{
+  "objectStatus": {
+    "n63_sbd0": {
+      "collapsed": true
+    }
+  },
+  "adaptiveTest": true,
+  "designImages": [
+    "ui://vith2b66sbd012"
+  ],
+  "fitScreen": "FitSize"
+}

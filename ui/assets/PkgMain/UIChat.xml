@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334">
+  <displayList>
+    <image id="n1_o772" name="n1" src="qjdo2c" fileName="Texture/Pic_GouxuanBG.png" pkg="vx9zwser" xy="0,1234" size="637,100">
+      <relation target="n0_o772" sidePair="height-height,top-top"/>
+    </image>
+    <list id="n4_j0ry" name="ListMsg" xy="0,56" size="750,1169" overflow="scroll" defaultItem="ui://vith2b66j0ry2d" autoClearItems="true">
+      <item>
+        <property target="text" propertyId="0" value="你好你手动阀手动手动阀手动阀手动阀手动阀阀手动阀手动阀好你好你好安抚如果都会让他个人"/>
+      </item>
+      <item>
+        <property target="text" propertyId="0" value="你好"/>
+      </item>
+      <item/>
+      <item/>
+    </list>
+    <text id="n0_o772" name="InputMsg" xy="9,1245" size="620,80" fontSize="25" color="#ffffff" leading="0" autoSize="none" autoClearText="true" text="撒旦发射点发射点&#xA;撒旦发射点发射点&#xA;撒旦发射点发射点&#xA;撒旦发射点发射点" input="true">
+      <relation target="" sidePair="bottom-bottom"/>
+    </text>
+    <component id="n2_o772" name="BtnSend" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="638,1234" size="111,100" controller="ctrlBgColor,0">
+      <Button title="发送" titleFontSize="30"/>
+    </component>
+    <component id="n3_o772" name="BtnBack" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="-35,-2" size="177,50">
+      <Button icon="ui://vx9zwserqjdo3n"/>
+    </component>
+  </displayList>
+</component>

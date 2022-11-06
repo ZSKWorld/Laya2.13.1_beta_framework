@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="va1qbl3h">
+  <resources>
+    <component id="sbd0u" name="RenderChooseBattle.xml" path="/Component/Render/"/>
+    <component id="sbd0s" name="UIChooseBattle.xml" path="/" exported="true"/>
+    <component id="sbd00" name="UIBattle.xml" path="/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

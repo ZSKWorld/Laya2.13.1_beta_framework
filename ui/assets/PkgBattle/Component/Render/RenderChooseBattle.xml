@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="692,300" extention="Button" designImage="ui://vith2b66sbd0t" designImageOffsetX="-664" designImageOffsetY="-137" designImageAlpha="64">
+  <controller name="ctrlState" exported="true" pages="0,关卡,3,副本,4,秘境,5,boss,2,采集" selected="4"/>
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <graph id="n0_sbd0" name="n0" xy="0,0" size="692,300" touchable="false" type="rect" lineSize="0" fillColor="#ff272b37" corner="15">
+      <gearSize controller="ctrlState" pages="0,3,4,5,2" values="692,170,1,1|692,170,1,1|692,170,1,1|692,170,1,1|692,300,1,1"/>
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n5_mz80" name="n5" xy="0,0" size="692,300" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00272b37" corner="13">
+      <gearSize controller="ctrlState" pages="0,3,4,5,2" values="692,170,1,1|692,170,1,1|692,170,1,1|692,170,1,1|692,300,1,1"/>
+      <gearLook controller="button" pages="1,2,3" values="1,0,0,0|1,0,0,0|1,0,0,0" default="0,0,0,0" tween="true"/>
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <richtext id="n1_sbd0" name="TxtContent1" xy="20,115" size="292,73" fontSize="55" color="#d5c187" ubb="true" text="Lv.10 墓穴">
+      <gearDisplay controller="ctrlState" pages="0,3,4,5"/>
+      <relation target="" sidePair="middle-middle"/>
+    </richtext>
+    <richtext id="n3_sbd0" name="TxtContent2" xy="93,85" size="528,129" fontSize="100" color="#d5c187" text="Lv.10 墓穴">
+      <gearDisplay controller="ctrlState" pages="2"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </richtext>
+    <text id="n2_sbd0" name="TxtContent3" xy="453,233" size="224,54" fontSize="40" color="#77f7d1" text="剩余次数：3">
+      <gearDisplay controller="ctrlState" pages="0,3,4,5"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </text>
+    <component id="n4_sbd0" name="BtnBreak" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="502,210" size="175,75">
+      <gearDisplay controller="ctrlState" pages="2"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="中断" titleFontSize="45"/>
+    </component>
+  </displayList>
+  <Button/>
+  <relation target="n0_sbd0" sidePair="height-height"/>
+</component>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1060,1585" overflow="hidden" designImage="ui://vith2b66sbd0y" designImageOffsetX="-763" designImageOffsetY="-233" designImageAlpha="46" designImageLayer="1" bgColorEnabled="true" bgColor="#000000">
+  <controller name="ctrlSelectType" pages="0,,1,,2,,3,,4,,5,,6," selected="0"/>
+  <displayList>
+    <component id="n19_sbd0" name="BtnShouCang" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="19,12" size="110,65">
+      <Button title="收藏" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="0"/>
+    </component>
+    <component id="n20_sbd0" name="BtnEquip" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="139,12" size="110,65">
+      <Button title="装备" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="1"/>
+    </component>
+    <component id="n21_sbd0" name="BtnProp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="259,12" size="110,65">
+      <Button title="道具" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="2"/>
+    </component>
+    <component id="n22_sbd0" name="BtnGem" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="379,12" size="110,65">
+      <Button title="宝石" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="3"/>
+    </component>
+    <component id="n23_sbd0" name="BtnMaterial" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="499,12" size="110,65">
+      <Button title="材料" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="4"/>
+    </component>
+    <component id="n24_sbd0" name="BtnBook" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="619,12" size="110,65">
+      <Button title="书籍" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="5"/>
+    </component>
+    <component id="n25_sbd0" name="BtnOther" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="739,12" size="110,65">
+      <Button title="其他" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="6"/>
+    </component>
+    <graph id="n37_9f1k" name="n37" xy="19,12" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
+      <gearXY controller="ctrlSelectType" pages="0,1,2,3,4,5,6" values="19,12|139,12|259,12|379,12|499,12|619,12|739,12" tween="true" duration=".2"/>
+    </graph>
+    <component id="n27_sbd0" name="BtnQualityUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,523" size="170,80" group="n31_sbd0" controller="ctrlBgColor,1">
+      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
+      <Button title="品质升序" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n28_sbd0" name="BtnQualityDown" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,613" size="170,80" group="n31_sbd0" controller="ctrlBgColor,2">
+      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
+      <Button title="品质降序" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n29_sbd0" name="BtnTypeUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,703" size="170,80" group="n31_sbd0">
+      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
+      <Button title="类型升序" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n30_sbd0" name="BtnTypeDown" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,793" size="170,80" group="n31_sbd0" controller="ctrlBgColor,4">
+      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
+      <Button title="类型降序" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n32_sbd0" name="BtnScoreUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,883" size="170,80" group="n31_sbd0" controller="ctrlBgColor,6">
+      <gearDisplay controller="ctrlSelectType" pages="1"/>
+      <Button title="评分升序" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n33_sbd0" name="BtnScoreDown" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,973" size="170,80" group="n31_sbd0" controller="ctrlBgColor,7">
+      <gearDisplay controller="ctrlSelectType" pages="1"/>
+      <Button title="评分降序" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <group id="n31_sbd0" name="n31" xy="875,523" size="170,530" advanced="true" layout="vt" lineGap="10">
+      <relation target="" sidePair="middle-middle,right-right"/>
+    </group>
+    <list id="n36_sbd0" name="ListItem" xy="19,102" size="765,1463" layout="flow_hz" overflow="scroll" lineGap="15" colGap="15" lineItemCount="3" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+  <transition name="EffectShow" autoPlay="true">
+    <item time="0" type="Alpha" target="n37_9f1k" value="0"/>
+    <item time="0" type="XY" target="n19_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="0" type="XY" target="n20_sbd0" value="-,-66"/>
+    <item time="0" type="XY" target="n21_sbd0" value="-,-66"/>
+    <item time="0" type="XY" target="n22_sbd0" value="-,-66"/>
+    <item time="0" type="XY" target="n23_sbd0" value="-,-66"/>
+    <item time="0" type="XY" target="n24_sbd0" value="-,-66"/>
+    <item time="0" type="XY" target="n25_sbd0" value="-,-66"/>
+    <item time="1" type="XY" target="n20_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="2" type="XY" target="n21_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="3" type="XY" target="n22_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="4" type="XY" target="n23_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="5" type="XY" target="n24_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="6" type="XY" target="n25_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
+    <item time="8" type="Alpha" target="n37_9f1k" tween="true" startValue="0" endValue="1" duration="3"/>
+  </transition>
+  <transition name="EffectList" autoPlay="true">
+    <item time="0" type="Size" target="n36_sbd0" tween="true" startValue="-,0" endValue="-,1463" duration="15"/>
+  </transition>
+</component>

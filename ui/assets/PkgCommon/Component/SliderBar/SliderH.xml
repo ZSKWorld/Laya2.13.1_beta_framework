@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="150,20" extention="Slider">
+  <displayList>
+    <graph id="n0_sbd0" name="n0" xy="0,0" size="150,20" type="rect" lineSize="0" lineColor="#ffa0a0a0" fillColor="#fff0f0f0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_sbd0" name="bar" xy="0,0" size="150,20" type="rect" lineSize="0" fillColor="#ffff9966">
+      <relation target="" sidePair="height-height"/>
+    </graph>
+    <graph id="n4_sbd0" name="grip" xy="135,-10" size="30,40" type="rect">
+      <relation target="" sidePair="height-height,middle-middle"/>
+      <relation target="n1_sbd0" sidePair="right-right"/>
+      <relation target="n5_sbd0" sidePair="width-width"/>
+    </graph>
+    <text id="n5_sbd0" name="title" xy="145,-13" size="10,48" fontSize="35" leading="0" singleLine="true" text="">
+      <relation target="n4_sbd0" sidePair="center-center,middle-middle"/>
+    </text>
+  </displayList>
+  <Slider titleType="value" wholeNumbers="true"/>
+</component>

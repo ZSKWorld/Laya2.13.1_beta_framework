@@ -1,0 +1,14 @@
+{
+  "scaleMode": "ConstantPixelSize",
+  "screenMathMode": "MatchWidthOrHeight",
+  "designResolutionX": 750,
+  "designResolutionY": 1334,
+  "devices": [
+    {
+      "name": "noname",
+      "resolutionX": 900,
+      "resolutionY": 600
+    }
+  ],
+  "fileName": "Adaptation"
+}
