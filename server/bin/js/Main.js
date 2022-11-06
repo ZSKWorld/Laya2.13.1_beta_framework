@@ -5,6 +5,7 @@ var websocket = require("websocket");
 var Connection_1 = require("./core/Connection");
 var TableManager_1 = require("./core/table/TableManager");
 var Logger_1 = require("./utils/Logger");
+require("../libs/extends.js");
 Logger_1.Logger.setEnable(true);
 TableManager_1.tableMgr.loadTable();
 var server = http.createServer(function (request, response) {

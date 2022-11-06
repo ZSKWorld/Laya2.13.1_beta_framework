@@ -16,4 +16,18 @@ export const enum ErrorCode {
     NICKNAME_IS_EMPTY,
     /** 异地登陆 */
     LOGIN_OTHER_PLACE,
+    /** 精力不足 */
+    VIGOR_NOT_ENOUGH,
+    /** 功能暂未开放 */
+    FUNCTION_NOT_OPENED,
+    /** 数量错误 */
+    NUMBER_ERROR,
+    /** 境界不足，无法使用 */
+    JINGJIE_NOT_ENOUGH_USE,
+    /**物品不存在 */
+    ITEM_NOT_EXIST,
+    /** 物品数量不足 */
+    ITEM_COUNT_NOT_ENOUGH,
+    /** 当前部位未穿戴装备 */
+    PART_NOT_DRESSED_EQUIP,
 }

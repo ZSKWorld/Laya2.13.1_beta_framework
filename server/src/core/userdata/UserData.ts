@@ -1,8 +1,10 @@
 import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
+import { Bag } from "./Bag";
 import { UserDataUtil } from "./UserDataUtil";
 
 export class UserData implements IUserData {
+    //#region 字段
     uid: string = Util.CreateUID();
     nickname: string = "";
     account: string = "";
@@ -10,8 +12,10 @@ export class UserData implements IUserData {
     registerTime: number = TimeUtil.getTimeStamp();
     lastLoginTime: number = 0;
     lastOnlineTime: number = 0;
-    /** 离线奖励 */
+    /** 离线数据 */
     offline?: Offline = null;
+    /** 背包数据 */
+    bag: IBag = new Bag();
     /** 金币 */
     coin: number = 0;
     /** 元宝 */
@@ -41,29 +45,29 @@ export class UserData implements IUserData {
     /** 宝石积分 */
     gemScore: number = 0;
     /** 武器 */
-    weapon: Equipment = null;
+    weapon: IEquipment = null;
     /** 头盔 */
-    helmet: Equipment = null;
+    helmet: IEquipment = null;
     /** 项链 */
-    necklace: Equipment = null;
+    necklace: IEquipment = null;
     /** 衣服 */
-    clothes: Equipment = null;
+    clothes: IEquipment = null;
     /** 戒指 */
-    ring: Equipment = null;
+    ring: IEquipment = null;
     /** 裤子 */
-    trousers: Equipment = null;
+    trousers: IEquipment = null;
     /** 护符 */
-    amulet: Equipment = null;
+    amulet: IEquipment = null;
     /** 鞋子 */
-    shoes: Equipment = null;
+    shoes: IEquipment = null;
     /** 坐骑 */
-    mount: SpecialEquipment = null;
+    mount: IEquipment = null;
     /** 暗器 */
-    hiddenWeeapon: SpecialEquipment = null;
+    hiddenWeeapon: IEquipment = null;
     /** 时装 */
-    fashion: SpecialEquipment = null;
+    fashion: IEquipment = null;
     /** 法宝 */
-    magicWeapon: SpecialEquipment = null;
+    magicWeapon: IEquipment = null;
     /** 武器上装备的宝石 */
     weaponGems: number[] = [];
     /** 头盔上装备的宝石 */
@@ -94,6 +98,7 @@ export class UserData implements IUserData {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
+    //#endregion
 
     constructor(account: string = "", password: string = "", nickname: string = "") {
         this.account = String(account);
@@ -110,6 +115,7 @@ export class UserData implements IUserData {
     }
 
     save() {
+        this.offline = null;
         this.lastOnlineTime = TimeUtil.getTimeStamp();
         Util.saveData(this);
     }

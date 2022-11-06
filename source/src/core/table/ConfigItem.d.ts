@@ -15,6 +15,8 @@ declare interface ConfigItemData {
 	readonly ItemType: number;
 	/**描述 */
 	readonly Description: string;
+	/**是否可出售 */
+	readonly Salable: number;
 	/**售卖获得物品 */
 	readonly SellRewards: BaseDropOutType[];
 	/**可使用境界 */

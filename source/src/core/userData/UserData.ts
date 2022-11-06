@@ -3,7 +3,6 @@ import { Observer } from "../libs/event/Observer";
 import { Logger } from "../libs/utils/Logger";
 import { UpperFirst } from "../libs/utils/Util";
 import { NetResponse } from "../net/NetResponse";
-import { tableMgr } from "../table/TableManager";
 
 const logger = Logger.Create("UserData", true);
 
@@ -23,6 +22,8 @@ class UserData extends Observer implements IUserData {
     lastOnlineTime: number;
     /** 离线数据 */
     offline?: Offline;
+    /** 背包数据 */
+    bag: IBag;
 
     /** 金币 */
     coin: number;
@@ -69,13 +70,13 @@ class UserData extends Observer implements IUserData {
     /** 鞋子 */
     shoes: Equipment;
     /** 坐骑 */
-    mount: SpecialEquipment;
+    mount: Equipment;
     /** 暗器 */
-    hiddenWeeapon: SpecialEquipment;
+    hiddenWeeapon: Equipment;
     /** 时装 */
-    fashion: SpecialEquipment;
+    fashion: Equipment;
     /** 法宝 */
-    magicWeapon: SpecialEquipment;
+    magicWeapon: Equipment;
     /** 武器上装备的宝石 */
     weaponGems: number[];
     /** 头盔上装备的宝石 */

@@ -1,14 +1,13 @@
 import { LogicSceneType } from "../../../../logicScene/LogicSceneType";
 import { GameEvent } from "../../../common/GameEvent";
 import { BattleType } from "../../../net/enum/BattleEnums";
+import { BattleService } from "../../../net/Services";
 import { tableMgr } from "../../../table/TableManager";
 import { UserDataUtil } from "../../../userData/UserDataUtil";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
-import { ViewID } from "../../core/ViewID";
 import { UIUtility } from "../../tool/UIUtility";
 import { RenderChooseBattleView } from "../../view/PkgBattle/Renders/RenderChooseBattleView";
 import { UIChooseBattleMsg, UIChooseBattleView } from "../../view/PkgBattle/UIChooseBattleView";
-import { UIBattleData } from "./UIBattleCtrl";
 
 export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType>{
 	private items: BattleLevel[];
@@ -77,10 +76,10 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		this.clickIndex = index;
 		if (this.data == BattleType.CaiJi) {
 			UIUtility.showNumInput("你要采集多久呢？(小时)", 1, 24, Laya.Handler.create(this, (value: number) => {
-
+				if (value != null) this.onBtnBattleClick(value);
 			}));
 		} else
-			this.view.showConfirm(true, this.items[ index ] as any);
+			this.view.showConfirm(true, this.items[ index ]);
 	}
 
 	private onBtnBackClick(): void {
@@ -105,12 +104,10 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		}));
 	}
 
-	private onBtnBattleClick(): void {
+	private onBtnBattleClick(hour: number): void {
+		hour = typeof hour == "number" ? hour : 0;
 		const [ battleType, cfg ] = [ this.data, this.items[ this.clickIndex ] ];
-		const startResult = this.userData.startBattle(battleType, cfg.ID);
-		if (startResult) return UIUtility.showTipInfo(GetLang(startResult));
-		this.addView<UIBattleData>(ViewID.BattleView, { battleType, cfg });
-		this.view.ListBattle.refreshVirtualList();
+		BattleService.Inst.startBattle({ type: battleType, id: cfg.ID, hour });
 	}
 
 }

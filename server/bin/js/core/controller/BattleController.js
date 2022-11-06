@@ -21,29 +21,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.LoginController = void 0;
-var Util_1 = require("../../utils/Util");
+exports.BattleController = void 0;
 var BaseController_1 = require("./BaseController");
-var LoginController = /** @class */ (function (_super) {
-    __extends(LoginController, _super);
-    function LoginController() {
+var BattleController = /** @class */ (function (_super) {
+    __extends(BattleController, _super);
+    function BattleController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    LoginController.prototype.login = function (data) {
-        var userData;
-        if (this.connection.logined == false) {
-            userData = Util_1.Util.getData(data.account, data.password);
-            if (!userData)
-                return this.response(data.cmd, null, 1002 /* ErrorCode.USER_NOT_EXIST */);
-            else
-                this.connection.userLogin(userData);
-        }
-        userData = JSON.parse(JSON.stringify(this.connection.userData));
-        this.response(data.cmd, { syncInfo: userData });
+    BattleController.prototype.startBattle = function (data) {
+        this.response(data.cmd);
     };
     __decorate([
         BaseController_1.AddCMD
-    ], LoginController.prototype, "login");
-    return LoginController;
+    ], BattleController.prototype, "startBattle");
+    return BattleController;
 }(BaseController_1.BaseController));
-exports.LoginController = LoginController;
+exports.BattleController = BattleController;

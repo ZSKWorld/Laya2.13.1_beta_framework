@@ -16,4 +16,8 @@ export const enum ErrorCode {
     NICKNAME_IS_EMPTY,
     /** 异地登陆 */
     LOGIN_OTHER_PLACE,
+    /** 精力不足 */
+    VIGOR_NOT_ENOUGH,
+    /** 功能暂未开放 */
+    FUNCTION_NOT_OPENED,
 }

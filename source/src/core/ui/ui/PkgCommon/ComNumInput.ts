@@ -7,7 +7,7 @@ export default class ComNumInput extends fgui.GComponent {
 	public BtnBg:fgui.GGraph;
 	public Slider:fgui.GSlider;
 	public TxtTitle:fgui.GRichTextField;
-	public BtnBattle:BtnCornerTxt;
+	public BtnSubmit:BtnCornerTxt;
 	public static URL:string = "ui://vx9zwsersbd05y";
 
 	public static createInstance():ComNumInput {
@@ -18,6 +18,6 @@ export default class ComNumInput extends fgui.GComponent {
 		this.BtnBg = <fgui.GGraph>(this.getChildAt(0));
 		this.Slider = <fgui.GSlider>(this.getChildAt(4));
 		this.TxtTitle = <fgui.GRichTextField>(this.getChildAt(5));
-		this.BtnBattle = <BtnCornerTxt>(this.getChildAt(6));
+		this.BtnSubmit = <BtnCornerTxt>(this.getChildAt(6));
 	}
 }

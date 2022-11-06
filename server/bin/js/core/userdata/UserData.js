@@ -3,12 +3,15 @@ exports.__esModule = true;
 exports.UserData = void 0;
 var TimeUtil_1 = require("../../utils/TimeUtil");
 var Util_1 = require("../../utils/Util");
+var Bag_1 = require("./Bag");
 var UserDataUtil_1 = require("./UserDataUtil");
 var UserData = /** @class */ (function () {
+    //#endregion
     function UserData(account, password, nickname) {
         if (account === void 0) { account = ""; }
         if (password === void 0) { password = ""; }
         if (nickname === void 0) { nickname = ""; }
+        //#region 字段
         this.uid = Util_1.Util.CreateUID();
         this.nickname = "";
         this.account = "";
@@ -16,8 +19,10 @@ var UserData = /** @class */ (function () {
         this.registerTime = TimeUtil_1.TimeUtil.getTimeStamp();
         this.lastLoginTime = 0;
         this.lastOnlineTime = 0;
-        /** 离线奖励 */
+        /** 离线数据 */
         this.offline = null;
+        /** 背包数据 */
+        this.bag = new Bag_1.Bag();
         /** 金币 */
         this.coin = 0;
         /** 元宝 */
@@ -112,6 +117,7 @@ var UserData = /** @class */ (function () {
         this.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
     };
     UserData.prototype.save = function () {
+        this.offline = null;
         this.lastOnlineTime = TimeUtil_1.TimeUtil.getTimeStamp();
         Util_1.Util.saveData(this);
     };
@@ -122,7 +128,7 @@ var UserData = /** @class */ (function () {
         if (timeOffset <= 5)
             return null;
         else
-            return { lastOnlineTime: this.lastOnlineTime, offlineTime: timeOffset, vigor: (UserDataUtil_1.UserDataUtil.getVigorRecoveryRate(this.citta) * timeOffset) << 0 };
+            return { offlineTime: timeOffset, vigor: (UserDataUtil_1.UserDataUtil.getVigorRecoveryRate(this.citta) * timeOffset) << 0 };
     };
     return UserData;
 }());

@@ -17,7 +17,7 @@
     <richtext id="n5_sbd0" name="TxtTitle" xy="349,735" size="381,66" group="n11_sbd0" touchable="false" fontSize="50" color="#ffffff" ubb="true" singleLine="true" text="洪七公[color=#ff0000][绝对物防][/color]">
       <relation target="n1_sbd0" sidePair="center-center"/>
     </richtext>
-    <component id="n9_sbd0" name="BtnBattle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="434,1123" size="211,69" group="n11_sbd0" controller="ctrlBgColor,1">
+    <component id="n9_sbd0" name="BtnSubmit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="434,1123" size="211,69" group="n11_sbd0" controller="ctrlBgColor,1">
       <relation target="n1_sbd0" sidePair="bottom-bottom"/>
       <Button title="确定" titleColor="#000000" titleFontSize="40"/>
     </component>

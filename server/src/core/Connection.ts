@@ -2,6 +2,7 @@ import * as websocket from "websocket";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
 import { connectionMgr } from "./ConnectionMgr";
+import { BattleController } from "./controller/BattleController";
 import { HeartController } from "./controller/HeartController";
 import { LoginController } from "./controller/LoginController";
 import { RegisterController } from "./controller/RegisterController";
@@ -10,6 +11,7 @@ import { UserData } from "./userdata/UserData";
 export class Connection {
     private _listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
     private _controllers = [
+        new BattleController(this),
         new HeartController(this),
         new RegisterController(this),
         new LoginController(this),
@@ -17,9 +19,9 @@ export class Connection {
 
     private _logined: boolean;
     private _socket: websocket.connection;
-    private _playerData: UserData;
+    private _userData: UserData;
     get logined() { return !!this._logined; }
-    get playerData() { return this._playerData; }
+    get userData() { return this._userData; }
     get listener() { return this._listener; }
     get socket() { return this._socket; }
     constructor(connection: websocket.connection) {
@@ -48,10 +50,10 @@ export class Connection {
             oldConnection._socket.close(websocket.connection.CLOSE_REASON_NORMAL, "login other place");
         }
         if (!this._logined) {
-            this._playerData = new UserData();
-            this._playerData.loginInit(data);
+            this._userData = new UserData();
+            this._userData.loginInit(data);
             this._logined = true;
-            connectionMgr.addConnection(this._playerData.uid, this._playerData.account, this);
+            connectionMgr.addConnection(this._userData.uid, this._userData.account, this);
         }
     }
 
@@ -60,9 +62,9 @@ export class Connection {
     }
 
     private connectionClose() {
-        if (this._playerData) {
-            this._playerData.save();
-            connectionMgr.removeConnectionByUid(this._playerData.uid);
+        if (this._userData) {
+            this._userData.save();
+            connectionMgr.removeConnectionByUid(this._userData.uid);
         }
         this._listener.offAll();
         Pool.recover(PoolKey.EventDispatcher, this._listener);
@@ -70,7 +72,7 @@ export class Connection {
         this._logined = false;
         this._listener = null;
         this._socket = null;
-        this._playerData = null;
+        this._userData = null;
         this._controllers = null;
     }
 }

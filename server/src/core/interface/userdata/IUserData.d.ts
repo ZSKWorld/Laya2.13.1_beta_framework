@@ -22,6 +22,8 @@ declare interface IUserData {
     lastOnlineTime: number;
     /** 离线数据 */
     offline?: Offline;
+    /** 背包数据 */
+    bag: IBag;
     /** 金币 */
     coin: number;
     /** 元宝 */
@@ -51,29 +53,29 @@ declare interface IUserData {
     /** 宝石积分 */
     gemScore: number;
     /** 武器 */
-    weapon: Equipment;
+    weapon: IEquipment;
     /** 头盔 */
-    helmet: Equipment;
+    helmet: IEquipment;
     /** 项链 */
-    necklace: Equipment;
+    necklace: IEquipment;
     /** 衣服 */
-    clothes: Equipment;
+    clothes: IEquipment;
     /** 戒指 */
-    ring: Equipment;
+    ring: IEquipment;
     /** 裤子 */
-    trousers: Equipment;
+    trousers: IEquipment;
     /** 护符 */
-    amulet: Equipment;
+    amulet: IEquipment;
     /** 鞋子 */
-    shoes: Equipment;
+    shoes: IEquipment;
     /** 坐骑 */
-    mount: SpecialEquipment;
+    mount: IEquipment;
     /** 暗器 */
-    hiddenWeeapon: SpecialEquipment;
+    hiddenWeeapon: IEquipment;
     /** 时装 */
-    fashion: SpecialEquipment;
+    fashion: IEquipment;
     /** 法宝 */
-    magicWeapon: SpecialEquipment;
+    magicWeapon: IEquipment;
     /** 武器上装备的宝石 */
     weaponGems: number[];
     /** 头盔上装备的宝石 */

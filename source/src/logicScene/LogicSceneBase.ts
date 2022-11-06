@@ -44,7 +44,7 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 		//卸载资源
 		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.Normal);
 		notUIRes.forEach(v => Laya.loader.clearRes(v));
-		uiRes.forEach(v => fgui.UIPackage.removePackage(v));
+		uiRes.forEach(v => fgui.UIPackage.getById(v).unloadAssets());
 
 	}
 

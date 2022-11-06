@@ -25,4 +25,12 @@ declare interface ConfigError extends KeyMap<ConfigErrorData> {
 	readonly 1006: ConfigErrorData;
 	/**异地登陆 */
 	readonly 1007: ConfigErrorData;
+	/**精力不足 */
+	readonly 1008: ConfigErrorData;
+	/**功能暂未开放 */
+	readonly 1009: ConfigErrorData;
+	/**数量错误 */
+	readonly 1010: ConfigErrorData;
+	/**境界不足，无法使用 */
+	readonly 1011: ConfigErrorData;
 }

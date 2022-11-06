@@ -1,21 +1,27 @@
+import { ResPath } from "../../../../common/ResPath";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { ViewExtension } from "../../../core/Interfaces";
 import ComNumInput from "../../../ui/PkgCommon/ComNumInput";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum ComNumInputMsg {
 	OnBtnBgClick = "ComNumInput_OnBtnBgClick",
-	OnBtnBattleClick = "ComNumInput_OnBtnBattleClick",
+	OnBtnSubmitClick = "ComNumInput_OnBtnSubmitClick",
 }
 
 export class ComNumInputView extends ExtensionClass<ViewExtension, ComNumInput>(ComNumInput) {
-    static readonly PkgRes = ResPath.UIPath.PkgCommon;
+	static readonly PkgRes = ResPath.UIPath.PkgCommon;
 	static readonly DontDestroy = true;
 
 	override onCreate(): void {
-        const { BtnBg, BtnBattle } = this;
-	    BtnBg.onClick(this, this.sendMessage, [ ComNumInputMsg.OnBtnBgClick ]);
-	    BtnBattle.onClick(this, this.sendMessage, [ ComNumInputMsg.OnBtnBattleClick ]);
-    }
+		const { BtnBg, BtnSubmit } = this;
+		BtnBg.onClick(this, this.sendMessage, [ ComNumInputMsg.OnBtnBgClick ]);
+		BtnSubmit.onClick(this, this.sendMessage, [ ComNumInputMsg.OnBtnSubmitClick ]);
+	}
+
+	refresh(title: string, min: number, max: number) {
+		this.TxtTitle.text = title;
+		this.Slider.min = min;
+		this.Slider.max = max;
+	}
 
 }
