@@ -1,10 +1,8 @@
 import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
 import { Bag } from "./Bag";
-import { UserDataUtil } from "./UserDataUtil";
 
 export class UserData implements IUserData {
-    //#region 字段
     uid: string = Util.CreateUID();
     nickname: string = "";
     account: string = "";
@@ -98,32 +96,4 @@ export class UserData implements IUserData {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
-    //#endregion
-
-    constructor(account: string = "", password: string = "", nickname: string = "") {
-        this.account = String(account);
-        this.password = String(password);
-        this.nickname = String(nickname);
-
-        this.vigor = UserDataUtil.getMaxVigro(this.citta);
-    }
-
-    loginInit(data: IUserData) {
-        Object.keys(data).forEach(v => this[ v ] = data[ v ]);
-        this.offline = this.initOffline();
-        this.lastLoginTime = TimeUtil.getTimeStamp();
-    }
-
-    save() {
-        this.offline = null;
-        this.lastOnlineTime = TimeUtil.getTimeStamp();
-        Util.saveData(this);
-    }
-
-    private initOffline(): Offline {
-        if (!this.lastOnlineTime) return null;
-        const timeOffset = ((TimeUtil.getTimeStamp() - this.lastOnlineTime) / 1000) << 0;
-        if (timeOffset <= 5) return null;
-        else return { offlineTime: timeOffset, vigor: (UserDataUtil.getVigorRecoveryRate(this.citta) * timeOffset) << 0 };
-    }
 }

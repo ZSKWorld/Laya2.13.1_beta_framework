@@ -4,14 +4,8 @@ exports.UserData = void 0;
 var TimeUtil_1 = require("../../utils/TimeUtil");
 var Util_1 = require("../../utils/Util");
 var Bag_1 = require("./Bag");
-var UserDataUtil_1 = require("./UserDataUtil");
 var UserData = /** @class */ (function () {
-    //#endregion
-    function UserData(account, password, nickname) {
-        if (account === void 0) { account = ""; }
-        if (password === void 0) { password = ""; }
-        if (nickname === void 0) { nickname = ""; }
-        //#region 字段
+    function UserData() {
         this.uid = Util_1.Util.CreateUID();
         this.nickname = "";
         this.account = "";
@@ -105,31 +99,7 @@ var UserData = /** @class */ (function () {
         this.skill = [5000];
         /**出战技能 */
         this.usingSkill = [5000, 5000, 5000, 5000, 5000];
-        this.account = String(account);
-        this.password = String(password);
-        this.nickname = String(nickname);
-        this.vigor = UserDataUtil_1.UserDataUtil.getMaxVigro(this.citta);
     }
-    UserData.prototype.loginInit = function (data) {
-        var _this = this;
-        Object.keys(data).forEach(function (v) { return _this[v] = data[v]; });
-        this.offline = this.initOffline();
-        this.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
-    };
-    UserData.prototype.save = function () {
-        this.offline = null;
-        this.lastOnlineTime = TimeUtil_1.TimeUtil.getTimeStamp();
-        Util_1.Util.saveData(this);
-    };
-    UserData.prototype.initOffline = function () {
-        if (!this.lastOnlineTime)
-            return null;
-        var timeOffset = ((TimeUtil_1.TimeUtil.getTimeStamp() - this.lastOnlineTime) / 1000) << 0;
-        if (timeOffset <= 5)
-            return null;
-        else
-            return { offlineTime: timeOffset, vigor: (UserDataUtil_1.UserDataUtil.getVigorRecoveryRate(this.citta) * timeOffset) << 0 };
-    };
     return UserData;
 }());
 exports.UserData = UserData;

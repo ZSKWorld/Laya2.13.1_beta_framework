@@ -7,7 +7,7 @@ import { HeartController } from "./controller/HeartController";
 import { LoginController } from "./controller/LoginController";
 import { RegisterController } from "./controller/RegisterController";
 import { ErrorCode } from "./enum/ErrorCode";
-import { UserData } from "./userdata/UserData";
+import { UserDataProxy } from "./userdata/dataProxy/UserDataProxy";
 export class Connection {
     private _listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
     private _controllers = [
@@ -19,7 +19,7 @@ export class Connection {
 
     private _logined: boolean;
     private _socket: websocket.connection;
-    private _userData: UserData;
+    private _userData: UserDataProxy;
     get logined() { return !!this._logined; }
     get userData() { return this._userData; }
     get listener() { return this._listener; }
@@ -50,10 +50,10 @@ export class Connection {
             oldConnection._socket.close(websocket.connection.CLOSE_REASON_NORMAL, "login other place");
         }
         if (!this._logined) {
-            this._userData = new UserData();
+            this._userData = new UserDataProxy();
             this._userData.loginInit(data);
             this._logined = true;
-            connectionMgr.addConnection(this._userData.uid, this._userData.account, this);
+            connectionMgr.addConnection(data.uid, data.account, this);
         }
     }
 
@@ -64,7 +64,7 @@ export class Connection {
     private connectionClose() {
         if (this._userData) {
             this._userData.save();
-            connectionMgr.removeConnectionByUid(this._userData.uid);
+            connectionMgr.removeConnectionByUid(this._userData.data.uid);
         }
         this._listener.offAll();
         Pool.recover(PoolKey.EventDispatcher, this._listener);

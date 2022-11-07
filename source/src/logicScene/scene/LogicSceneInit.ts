@@ -46,7 +46,7 @@ export class LogicSceneInit extends LogicSceneBase {
 	@InsertEvent(GameEvent.SocketClosed, false, [ false ])
 	private socketConnectChanged(open: boolean) {
 		if (open) uiMgr.removeView(ViewID.WaitingView);
-		else uiMgr.addView(ViewID.WaitingView, "网络已断开");
+		else uiMgr.addView(ViewID.WaitingView, "网络已断开", null, false);
 	}
 
 	@InsertEvent(GameEvent.NetMsgError)

@@ -5,5 +5,5 @@ declare interface UserInput {
 declare interface UserOutput {
     cmd: string;
     error?: number;
-    syncInfo?: IUserData;
+    syncInfo?: Partial<IUserData>;
 }

@@ -23,7 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.RegisterController = void 0;
 var Util_1 = require("../../utils/Util");
-var UserData_1 = require("../userdata/UserData");
+var UserDataProxy_1 = require("../userdata/dataProxy/UserDataProxy");
 var BaseController_1 = require("./BaseController");
 var RegisterController = /** @class */ (function (_super) {
     __extends(RegisterController, _super);
@@ -42,7 +42,7 @@ var RegisterController = /** @class */ (function (_super) {
             else if (!data.nickname)
                 this.response(data.cmd, null, 1006 /* ErrorCode.NICKNAME_IS_EMPTY */);
             else {
-                Util_1.Util.saveData(new UserData_1.UserData(data.account, data.password, data.nickname));
+                Util_1.Util.saveData(new UserDataProxy_1.UserDataProxy().data);
                 this.response(data.cmd, null);
             }
         }

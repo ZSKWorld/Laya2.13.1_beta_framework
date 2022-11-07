@@ -9,7 +9,7 @@ var BattleController_1 = require("./controller/BattleController");
 var HeartController_1 = require("./controller/HeartController");
 var LoginController_1 = require("./controller/LoginController");
 var RegisterController_1 = require("./controller/RegisterController");
-var UserData_1 = require("./userdata/UserData");
+var UserDataProxy_1 = require("./userdata/dataProxy/UserDataProxy");
 var Connection = /** @class */ (function () {
     function Connection(connection) {
         var _this = this;
@@ -64,10 +64,10 @@ var Connection = /** @class */ (function () {
             oldConnection._socket.close(websocket.connection.CLOSE_REASON_NORMAL, "login other place");
         }
         if (!this._logined) {
-            this._userData = new UserData_1.UserData();
+            this._userData = new UserDataProxy_1.UserDataProxy();
             this._userData.loginInit(data);
             this._logined = true;
-            ConnectionMgr_1.connectionMgr.addConnection(this._userData.uid, this._userData.account, this);
+            ConnectionMgr_1.connectionMgr.addConnection(data.uid, data.account, this);
         }
     };
     Connection.prototype.response = function (data) {
@@ -76,7 +76,7 @@ var Connection = /** @class */ (function () {
     Connection.prototype.connectionClose = function () {
         if (this._userData) {
             this._userData.save();
-            ConnectionMgr_1.connectionMgr.removeConnectionByUid(this._userData.uid);
+            ConnectionMgr_1.connectionMgr.removeConnectionByUid(this._userData.data.uid);
         }
         this._listener.offAll();
         Pool_1.Pool.recover("EventDispatcher" /* PoolKey.EventDispatcher */, this._listener);

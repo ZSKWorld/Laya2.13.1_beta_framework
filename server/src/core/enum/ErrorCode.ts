@@ -24,10 +24,20 @@ export const enum ErrorCode {
     NUMBER_ERROR,
     /** 境界不足，无法使用 */
     JINGJIE_NOT_ENOUGH_USE,
+    /** 境界不足，无法穿戴 */
+    JINGJIE_NOT_ENOUGH_DRESS,
     /**物品不存在 */
     ITEM_NOT_EXIST,
     /** 物品数量不足 */
     ITEM_COUNT_NOT_ENOUGH,
     /** 当前部位未穿戴装备 */
     PART_NOT_DRESSED_EQUIP,
+    /** 不能学习其他门派的技能 */
+    CAN_NOT_STUDY_OTHER_SECT_SKILL,
+    /** 你已经学习了此技能 */
+    SKILL_IS_LEARNED,
+    /** 你已经学习了此心法 */
+    CITTA_IS_LEARNED,
+    /** 物品不可出售 */
+    ITEM_CAN_NOT_SELL,
 }

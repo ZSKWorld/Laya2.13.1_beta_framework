@@ -1,6 +1,6 @@
 import { Util } from "../../utils/Util";
 import { ErrorCode } from "../enum/ErrorCode";
-import { UserData } from "../userdata/UserData";
+import { UserDataProxy } from "../userdata/dataProxy/UserDataProxy";
 import { AddCMD, BaseController } from "./BaseController";
 
 export class RegisterController extends BaseController implements IRegister {
@@ -13,7 +13,7 @@ export class RegisterController extends BaseController implements IRegister {
             else if (!data.password) this.response(data.cmd, null, ErrorCode.PASSWORD_IS_EMPTY);
             else if (!data.nickname) this.response(data.cmd, null, ErrorCode.NICKNAME_IS_EMPTY);
             else {
-                Util.saveData(new UserData(data.account, data.password, data.nickname));
+                Util.saveData(new UserDataProxy().data);
                 this.response(data.cmd, null);
             }
         }

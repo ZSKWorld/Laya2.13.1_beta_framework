@@ -1,9 +1,9 @@
 declare interface IBag {
     cangPin: number[];
     equipment: IEquipment[];
-    gem: ItemBase[];
-    prop: ItemBase[];
-    material: ItemBase[];
-    skillBook: ItemBase[];
-    other: ItemBase[];
+    gem: IItemBase[];
+    prop: IItemBase[];
+    material: IItemBase[];
+    skillBook: IItemBase[];
+    other: IItemBase[];
 }

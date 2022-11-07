@@ -21,10 +21,10 @@ declare interface UseItemInput extends UserInput {
 
 declare interface UseItemOutput extends UserOutput {
     /** 使用获得的奖励 */
-    useRewards: ItemBase[];
+    useRewards: IItemBase[];
 }
 
-declare interface SellItemInput extends UserInput, ItemBase {
+declare interface SellItemInput extends UserInput, IItemBase {
     /** 物品id */
     id: number;
     /** 物品数量 */
@@ -33,7 +33,7 @@ declare interface SellItemInput extends UserInput, ItemBase {
 
 declare interface SellItemOutput extends UserOutput {
     /** 出售获得的奖励  */
-    sellRewards: ItemBase[];
+    sellRewards: IItemBase[];
 }
 
 declare interface DressEquipInput extends UserInput {
