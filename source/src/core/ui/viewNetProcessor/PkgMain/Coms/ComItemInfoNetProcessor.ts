@@ -11,6 +11,11 @@ export class ComItemInfoNetProcessor extends BaseNetProcessor<ComItemInfoCtrl>{
         this.sendMessage(ComItemInfoMsg.OnBtnBgClick);
     }
 
+    @InsertEvent(NetResponse.Response_SellItem)
+    private sellItemResponse(){
+        this.sendMessage(ComItemInfoMsg.OnBtnBgClick);
+    }
+
     @InsertEvent(NetResponse.Response_BuyGoods)
     private buyGoodsResponse() {
         this.sendMessage(ComItemInfoMsg.OnBtnBgClick);

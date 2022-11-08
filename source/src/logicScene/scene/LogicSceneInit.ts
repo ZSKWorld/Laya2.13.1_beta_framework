@@ -53,7 +53,7 @@ export class LogicSceneInit extends LogicSceneBase {
 	@InsertEvent(GameEvent.NetMsgError)
 	private netMsgError(msg: UserOutput) {
 		UIUtility.showTipInfo(tableMgr.Error[ msg.error ].text);
-		if(msg.error == ErrorCode.Notlo)
+		if(msg.error == ErrorCode.NOT_LOGIN) this.dispatch(GameEvent.EnterScene, LogicSceneType.LoginScene);
 	}
 
 }

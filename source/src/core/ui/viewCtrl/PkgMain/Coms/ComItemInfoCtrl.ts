@@ -41,7 +41,8 @@ export class ComItemInfoCtrl extends BaseViewCtrl<ComItemInfoView, ComItemInfoDa
 	}
 
 	private onBtnSellClick(): void {
-
+        const count = +this.view.TxtUseNum.text;
+		ItemHandleService.Inst.sellItem({id:this.data.id, count});
 	}
 
 	private onBtnUseClick(): void {
