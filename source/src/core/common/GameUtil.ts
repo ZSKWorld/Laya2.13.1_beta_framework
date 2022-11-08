@@ -19,4 +19,12 @@ export class GameUtil {
             + (hasCount ? `x${ v.count }` : "") + (index == items.length - 1 ? "" : "、"));
         return str;
     }
+
+    static isEquip(id: number) {
+        return !!tableMgr.Equipment[ id ];
+    }
+    
+	static canUseItem(id: number) {
+		return !!(tableMgr.Props[id] || tableMgr.Food[id] || tableMgr.SkillBook[id] || tableMgr.XinFaBook[id]);
+	}
 }

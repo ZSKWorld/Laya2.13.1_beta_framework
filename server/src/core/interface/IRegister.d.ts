@@ -8,6 +8,6 @@ declare interface RegisterInput extends UserInput {
     nickname: string;
 }
 
-declare interface RegisterOutput extends UserOutput {
+declare interface BuyGoodsOutput extends UserOutput {
 
 }

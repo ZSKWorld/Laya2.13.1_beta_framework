@@ -14,6 +14,8 @@ export const enum ErrorCode {
     PASSWORD_IS_EMPTY,
     /** 昵称为空 */
     NICKNAME_IS_EMPTY,
+    /** 用户未登录 */
+    NOT_LOGIN,
     /** 异地登陆 */
     LOGIN_OTHER_PLACE,
     /** 精力不足 */
@@ -40,4 +42,14 @@ export const enum ErrorCode {
     CITTA_IS_LEARNED,
     /** 物品不可出售 */
     ITEM_CAN_NOT_SELL,
+    /** 物品不可使用 */
+    ITEM_CAN_NOT_USE,
+    /** 商品不存在 */
+    GOODS_NOT_EXIST,
+    /** 装备不能收藏 */
+    EQUIP_CAN_NOT_COLLECT,
+    /** 已收藏过 */
+    ITEM_ALREADY_COLLECTED,
+    /** 物品没有收藏过 */
+    ITEM_DOES_NOT_COLLECT,
 }

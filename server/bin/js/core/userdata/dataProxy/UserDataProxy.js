@@ -16,6 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 exports.UserDataProxy = void 0;
+var GameUtil_1 = require("../../../utils/GameUtil");
 var MathUtil_1 = require("../../../utils/MathUtil");
 var TimeUtil_1 = require("../../../utils/TimeUtil");
 var Util_1 = require("../../../utils/Util");
@@ -43,18 +44,27 @@ var UserDataProxy = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    UserDataProxy.prototype.loginInit = function (source) {
+    UserDataProxy.prototype.getUid = function () {
+        return this.data.uid;
+    };
+    UserDataProxy.prototype.getJSONData = function () {
+        return JSON.stringify(this.data);
+    };
+    UserDataProxy.prototype.login = function (source) {
         var data = this.data;
         Object.keys(source).forEach(function (v) { return data[v] = source[v]; });
         data.offline = this.initOffline();
         data.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
         this._bag = new BagProxy_1.BagProxy(data.bag);
     };
-    UserDataProxy.prototype.save = function () {
+    UserDataProxy.prototype.logout = function () {
         var data = this.data;
         data.offline = null;
         data.lastOnlineTime = TimeUtil_1.TimeUtil.getTimeStamp();
-        Util_1.Util.saveData(data);
+        this.save();
+    };
+    UserDataProxy.prototype.save = function () {
+        Util_1.Util.saveData(this.data);
     };
     /** 改变物品数量 */
     UserDataProxy.prototype.changeItemCount = function (id, count) {
@@ -69,6 +79,15 @@ var UserDataProxy = /** @class */ (function (_super) {
             default: break;
         }
     };
+    /** 获取物品数量 */
+    UserDataProxy.prototype.getItemCount = function (id) {
+        var item = TableManager_1.tableMgr.Item[id];
+        switch (item.DataType) {
+            case 1 /* DataType.BaseData */: return this.data[DataConst_1.BaseDataKeyMap[id]];
+            case 2 /* DataType.BagData */: return this.bag.getItemCount(id);
+            default: return 0;
+        }
+    };
     //#region 各种检查
     /** 检查当前境界是否满足物品境界需求 */
     UserDataProxy.prototype.checkJingJieEnough = function (id) {
@@ -81,65 +100,92 @@ var UserDataProxy = /** @class */ (function (_super) {
     };
     /** 检查是否可以使用物品 */
     UserDataProxy.prototype.checkUseItem = function (id, count) {
-        var _a = [
-            TableManager_1.tableMgr.Props[id], TableManager_1.tableMgr.Food[id], TableManager_1.tableMgr.SkillBook[id], TableManager_1.tableMgr.XinFaBook[id],
-        ], prop = _a[0], food = _a[1], skillBook = _a[2], xinFaBook = _a[3];
-        if (!prop && !food && !skillBook && !xinFaBook)
-            return 1013 /* ErrorCode.ITEM_NOT_EXIST */;
+        if (count <= 0)
+            return 1011 /* ErrorCode.NUMBER_ERROR */;
         var item = this._bag.getItem(id);
         if (item == null)
-            return 1013 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1014 /* ErrorCode.ITEM_NOT_EXIST */;
+        var typeItem = GameUtil_1.GameUtil.canUseItem(id);
+        if (!typeItem)
+            return 1021 /* ErrorCode.ITEM_CAN_NOT_USE */;
         else if (item.count < count)
-            return 1014 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
+            return 1015 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
         else if (this.checkJingJieEnough(id) == false)
-            return 1011 /* ErrorCode.JINGJIE_NOT_ENOUGH_USE */;
-        else if (skillBook) {
-            var SectRequire = skillBook.SectRequire;
+            return 1012 /* ErrorCode.JINGJIE_NOT_ENOUGH_USE */;
+        else if (GameUtil_1.GameUtil.isSkillBook(id)) {
+            var SectRequire = typeItem.SectRequire;
             if (SectRequire.length && SectRequire.indexOf(this.data.sect) == -1)
-                return 1016 /* ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL */;
+                return 1017 /* ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL */;
             else if (this.data.skill.indexOf(id) != -1)
-                return 1017 /* ErrorCode.SKILL_IS_LEARNED */;
+                return 1018 /* ErrorCode.SKILL_IS_LEARNED */;
         }
-        else if (xinFaBook) {
+        else if (GameUtil_1.GameUtil.isXinFaBook(id)) {
             if (this.data.citta[id] != null)
-                return 1018 /* ErrorCode.CITTA_IS_LEARNED */;
+                return 1019 /* ErrorCode.CITTA_IS_LEARNED */;
         }
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以出售物品 */
     UserDataProxy.prototype.checkSellItem = function (id, count) {
+        if (count <= 0)
+            return 1011 /* ErrorCode.NUMBER_ERROR */;
         if (!TableManager_1.tableMgr.Item[id].Salable)
-            return 1019 /* ErrorCode.ITEM_CAN_NOT_SELL */;
+            return 1020 /* ErrorCode.ITEM_CAN_NOT_SELL */;
         var item = this._bag.getItem(id);
         if (item == null)
-            return 1013 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1014 /* ErrorCode.ITEM_NOT_EXIST */;
         else if (item.count < count)
-            return 1014 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
+            return 1015 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以穿戴装备 */
     UserDataProxy.prototype.checkDressEquip = function (uid) {
         var equip = this._bag.getEquip(uid);
         if (equip == null)
-            return 1013 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1014 /* ErrorCode.ITEM_NOT_EXIST */;
         else if (this.checkJingJieEnough(equip.id) == false)
-            return 1012 /* ErrorCode.JINGJIE_NOT_ENOUGH_DRESS */;
+            return 1013 /* ErrorCode.JINGJIE_NOT_ENOUGH_DRESS */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以脱下装备 */
     UserDataProxy.prototype.checkTakeOffEquip = function (part) {
         var equip = this.data[DataConst_1.DressedEquipMap[part]];
         if (equip == null)
-            return 1015 /* ErrorCode.PART_NOT_DRESSED_EQUIP */;
+            return 1016 /* ErrorCode.PART_NOT_DRESSED_EQUIP */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以出售装备 */
     UserDataProxy.prototype.checkSellEquip = function (uid) {
         var equip = this._bag.getEquip(uid);
         if (equip)
-            return 1013 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1014 /* ErrorCode.ITEM_NOT_EXIST */;
         else if (!TableManager_1.tableMgr.Item[equip.id].Salable)
-            return 1019 /* ErrorCode.ITEM_CAN_NOT_SELL */;
+            return 1020 /* ErrorCode.ITEM_CAN_NOT_SELL */;
+        return 0 /* ErrorCode.NONE */;
+    };
+    /** 检查物品收藏 */
+    UserDataProxy.prototype.checkCollect = function (id, collect) {
+        if (this.isEquip(id))
+            return 1023 /* ErrorCode.EQUIP_CAN_NOT_COLLECT */;
+        if (collect && this._bag.isCollect(id))
+            return 1024 /* ErrorCode.ITEM_ALREADY_COLLECTED */;
+        if (!collect && !this._bag.isCollect(id))
+            return 1025 /* ErrorCode.ITEM_DOES_NOT_COLLECT */;
+        return 0 /* ErrorCode.NONE */;
+    };
+    /** 检查是否可以购买物品 */
+    UserDataProxy.prototype.checkBuyItem = function (id, count) {
+        if (count <= 0)
+            return 1011 /* ErrorCode.NUMBER_ERROR */;
+        var item = TableManager_1.tableMgr.Shop[id];
+        if (!item)
+            return 1022 /* ErrorCode.GOODS_NOT_EXIST */;
+        var userData = this.data;
+        for (var i = 0, n = item.SellPrice.length; i < n; i++) {
+            var element = item.SellPrice[i];
+            if (this.getItemCount(element.id) < element.count * count)
+                return 1015 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
+        }
         return 0 /* ErrorCode.NONE */;
     };
     //#endregion
@@ -188,7 +234,7 @@ var UserDataProxy = /** @class */ (function (_super) {
                         syncInfo[DataConst_1.BaseDataKeyMap[v.id]] = _this.data[DataConst_1.BaseDataKeyMap[v.id]];
                 }
             });
-            syncInfo["bag"] = this._bag.data;
+            syncInfo["bag"] = this.data.bag;
         }
         this.changeItemCount(id, -count);
         return syncInfo;
@@ -224,6 +270,33 @@ var UserDataProxy = /** @class */ (function (_super) {
         var syncInfo = this.sellItem(equip.id, 1);
         this._bag.removeEquip(uid);
         return syncInfo;
+    };
+    UserDataProxy.prototype.buyGoods = function (id, count) {
+        var _this = this;
+        var syncInfo = {};
+        var item = TableManager_1.tableMgr.Shop[id];
+        item.SellPrice.forEach(function (v) {
+            _this.changeItemCount(v.id, -v.count);
+            var dataType = TableManager_1.tableMgr.Item[v.id].DataType;
+            if (dataType == 1 /* DataType.BaseData */)
+                syncInfo[DataConst_1.BaseDataKeyMap[v.id]] = _this.getItemCount(v.id);
+            else if (dataType == 2 /* DataType.BagData */)
+                syncInfo["bag"] = _this.data.bag;
+        });
+        if (GameUtil_1.GameUtil.isEquip(item.SellID))
+            this.bag.addNewEquip(item.SellID, count);
+        else
+            this.changeItemCount(item.SellID, count);
+        var dataType = TableManager_1.tableMgr.Item[item.SellID].DataType;
+        if (dataType == 1 /* DataType.BaseData */)
+            syncInfo[DataConst_1.BaseDataKeyMap[item.SellID]] = this.getItemCount(item.SellID);
+        else if (dataType == 2 /* DataType.BagData */)
+            syncInfo["bag"] = this.data.bag;
+        return syncInfo;
+    };
+    UserDataProxy.prototype.changeCollect = function (id, collect) {
+        this.bag.changeCollect(id, collect);
+        return { bag: this.data.bag };
     };
     /** 使用道具 */
     UserDataProxy.prototype.useProp = function (id, count) {

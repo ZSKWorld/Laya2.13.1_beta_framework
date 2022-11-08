@@ -3,12 +3,12 @@ exports.__esModule = true;
 exports.Bag = void 0;
 var Bag = /** @class */ (function () {
     function Bag() {
-        this.cangPin = [];
+        this.collect = [];
         this.equipment = [];
         this.gem = [];
         this.prop = [];
         this.material = [];
-        this.skillBook = [];
+        this.book = [];
         this.other = [];
     }
     return Bag;

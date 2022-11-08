@@ -11,7 +11,7 @@ export class LoginController extends BaseController implements ILogin {
             if (!userData) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
             else this.connection.userLogin(userData);
         }
-        userData = JSON.parse(JSON.stringify(this.connection.userData));
+        userData = JSON.parse(this.connection.userData.getJSONData());
         this.response(data.cmd, { syncInfo: userData });
     }
 }

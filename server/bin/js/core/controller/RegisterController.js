@@ -42,7 +42,7 @@ var RegisterController = /** @class */ (function (_super) {
             else if (!data.nickname)
                 this.response(data.cmd, null, 1006 /* ErrorCode.NICKNAME_IS_EMPTY */);
             else {
-                Util_1.Util.saveData(new UserDataProxy_1.UserDataProxy().data);
+                new UserDataProxy_1.UserDataProxy(data.account, data.password, data.nickname).save();
                 this.response(data.cmd, null);
             }
         }

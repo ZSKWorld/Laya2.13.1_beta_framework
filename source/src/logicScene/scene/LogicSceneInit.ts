@@ -2,6 +2,7 @@ import { GameEvent } from "../../core/common/GameEvent";
 import { ResPath } from "../../core/common/ResPath";
 import { CustomSpriteManager } from "../../core/libs/customSprite/CustomSpriteManager";
 import { InsertEvent } from "../../core/libs/event/EventMgr";
+import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { websocket } from "../../core/net/WebSocket";
 import { tableMgr } from "../../core/table/TableManager";
 import { layerMgr } from "../../core/ui/core/GameLayer";
@@ -52,6 +53,7 @@ export class LogicSceneInit extends LogicSceneBase {
 	@InsertEvent(GameEvent.NetMsgError)
 	private netMsgError(msg: UserOutput) {
 		UIUtility.showTipInfo(tableMgr.Error[ msg.error ].text);
+		if(msg.error == ErrorCode.Notlo)
 	}
 
 }

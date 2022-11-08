@@ -23,14 +23,42 @@ declare interface ConfigError extends KeyMap<ConfigErrorData> {
 	readonly 1005: ConfigErrorData;
 	/**昵称为空 */
 	readonly 1006: ConfigErrorData;
-	/**异地登陆 */
+	/**用户未登录 */
 	readonly 1007: ConfigErrorData;
-	/**精力不足 */
+	/**异地登陆 */
 	readonly 1008: ConfigErrorData;
-	/**功能暂未开放 */
+	/**精力不足 */
 	readonly 1009: ConfigErrorData;
-	/**数量错误 */
+	/**功能暂未开放 */
 	readonly 1010: ConfigErrorData;
-	/**境界不足，无法使用 */
+	/**数量错误 */
 	readonly 1011: ConfigErrorData;
+	/**境界不足，无法使用 */
+	readonly 1012: ConfigErrorData;
+	/**境界不足，无法穿戴 */
+	readonly 1013: ConfigErrorData;
+	/**物品不存在 */
+	readonly 1014: ConfigErrorData;
+	/**物品数量不足 */
+	readonly 1015: ConfigErrorData;
+	/**当前部位未穿戴装备 */
+	readonly 1016: ConfigErrorData;
+	/**不能学习其他门派的技能 */
+	readonly 1017: ConfigErrorData;
+	/**你已经学习了此技能 */
+	readonly 1018: ConfigErrorData;
+	/**你已经学习了此心法 */
+	readonly 1019: ConfigErrorData;
+	/**物品不可出售 */
+	readonly 1020: ConfigErrorData;
+	/**物品不可使用 */
+	readonly 1021: ConfigErrorData;
+	/**商品不存在 */
+	readonly 1022: ConfigErrorData;
+	/**装备不能收藏 */
+	readonly 1023: ConfigErrorData;
+	/**已收藏过 */
+	readonly 1024: ConfigErrorData;
+	/**物品没有收藏过 */
+	readonly 1025: ConfigErrorData;
 }

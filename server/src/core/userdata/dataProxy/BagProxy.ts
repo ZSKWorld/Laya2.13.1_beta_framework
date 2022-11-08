@@ -4,6 +4,11 @@ import { Equipment } from "../Equipment";
 import { ProxyBase } from "./ProxyBase";
 
 export class BagProxy extends ProxyBase<IBag> {
+    isCollect(id: number) { return this.data.collect.includes(id); }
+    changeCollect(id: number, collect: boolean) {
+        if (collect) this.data.collect.push(id);
+        else this.data.collect.remove(id);
+    }
 
     /** 获取背包物品 */
     getItem(id: number) {
@@ -12,15 +17,15 @@ export class BagProxy extends ProxyBase<IBag> {
         const bag = this.data;
         let datas: IItemBase[];
         switch (item.BagType) {
-            // case ItemBagType.ShouCang: break;
+            // case ItemBagType.Collect: break;
             // case ItemBagType.Equip: break;
             case ItemBagType.Prop: datas = bag.prop; break;
             case ItemBagType.Gem: datas = bag.gem; break;
             case ItemBagType.Material: datas = bag.material; break;
-            case ItemBagType.SkillBook: datas = bag.skillBook; break;
+            case ItemBagType.Book: datas = bag.book; break;
             case ItemBagType.Other: datas = bag.other; break;
         }
-        if (datas) return datas.find(v => v.id = id);
+        if (datas) return datas.find(v => v.id == id);
         else return null;
     }
 
@@ -35,12 +40,12 @@ export class BagProxy extends ProxyBase<IBag> {
         const bag = this.data;
         let datas: IItemBase[];
         switch (item.BagType) {
-            // case ItemBagType.ShouCang: break;
+            // case ItemBagType.Collect: break;
             // case ItemBagType.Equip: break;
             case ItemBagType.Prop: datas = bag.prop; break;
             case ItemBagType.Gem: datas = bag.gem; break;
             case ItemBagType.Material: datas = bag.material; break;
-            case ItemBagType.SkillBook: datas = bag.skillBook; break;
+            case ItemBagType.Book: datas = bag.book; break;
             case ItemBagType.Other: datas = bag.other; break;
             default: return;
         }
@@ -50,9 +55,15 @@ export class BagProxy extends ProxyBase<IBag> {
                 datas[ i ].count += count;
                 if (datas[ i ].count <= 0)
                     datas.splice(i, 1);
-                break;
+                return;
             }
         }
+        if (count > 0) datas.push({ id, count });
+    }
+
+    /** 获取背包物品数量 */
+    getItemCount(id: number) {
+        return this.getItem(id)?.count || 0;
     }
 
     /** 添加装备 */

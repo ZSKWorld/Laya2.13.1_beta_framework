@@ -24,6 +24,13 @@ var BagProxy = /** @class */ (function (_super) {
     function BagProxy() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    BagProxy.prototype.isCollect = function (id) { return this.data.collect.includes(id); };
+    BagProxy.prototype.changeCollect = function (id, collect) {
+        if (collect)
+            this.data.collect.push(id);
+        else
+            this.data.collect.remove(id);
+    };
     /** 获取背包物品 */
     BagProxy.prototype.getItem = function (id) {
         var item = TableManager_1.tableMgr.Item[id];
@@ -32,7 +39,7 @@ var BagProxy = /** @class */ (function (_super) {
         var bag = this.data;
         var datas;
         switch (item.BagType) {
-            // case ItemBagType.ShouCang: break;
+            // case ItemBagType.Collect: break;
             // case ItemBagType.Equip: break;
             case 2 /* ItemBagType.Prop */:
                 datas = bag.prop;
@@ -43,15 +50,15 @@ var BagProxy = /** @class */ (function (_super) {
             case 4 /* ItemBagType.Material */:
                 datas = bag.material;
                 break;
-            case 5 /* ItemBagType.SkillBook */:
-                datas = bag.skillBook;
+            case 5 /* ItemBagType.Book */:
+                datas = bag.book;
                 break;
             case 6 /* ItemBagType.Other */:
                 datas = bag.other;
                 break;
         }
         if (datas)
-            return datas.find(function (v) { return v.id = id; });
+            return datas.find(function (v) { return v.id == id; });
         else
             return null;
     };
@@ -65,7 +72,7 @@ var BagProxy = /** @class */ (function (_super) {
         var bag = this.data;
         var datas;
         switch (item.BagType) {
-            // case ItemBagType.ShouCang: break;
+            // case ItemBagType.Collect: break;
             // case ItemBagType.Equip: break;
             case 2 /* ItemBagType.Prop */:
                 datas = bag.prop;
@@ -76,8 +83,8 @@ var BagProxy = /** @class */ (function (_super) {
             case 4 /* ItemBagType.Material */:
                 datas = bag.material;
                 break;
-            case 5 /* ItemBagType.SkillBook */:
-                datas = bag.skillBook;
+            case 5 /* ItemBagType.Book */:
+                datas = bag.book;
                 break;
             case 6 /* ItemBagType.Other */:
                 datas = bag.other;
@@ -90,9 +97,16 @@ var BagProxy = /** @class */ (function (_super) {
                 datas[i].count += count;
                 if (datas[i].count <= 0)
                     datas.splice(i, 1);
-                break;
+                return;
             }
         }
+        if (count > 0)
+            datas.push({ id: id, count: count });
+    };
+    /** 获取背包物品数量 */
+    BagProxy.prototype.getItemCount = function (id) {
+        var _a;
+        return ((_a = this.getItem(id)) === null || _a === void 0 ? void 0 : _a.count) || 0;
     };
     /** 添加装备 */
     BagProxy.prototype.addNewEquip = function (id, count) {

@@ -1,13 +1,13 @@
-export const enum DataType{
+export const enum DataType {
     /** 基础数据 */
     BaseData = 1,
     /** 背包数据 */
     BagData,
 }
 /** 物品背包类型 */
-export const enum ItemBagType{
+export const enum ItemBagType {
     /**藏品 */
-    ShouCang,
+    Collect,
     /**装备 */
     Equip,
     /**道具 */
@@ -17,7 +17,7 @@ export const enum ItemBagType{
     /**材料 */
     Material,
     /**书籍 */
-    SkillBook,
+    Book,
     /**其他 */
     Other,
 }

@@ -33,3 +33,4 @@ export const HeartService = ServiceInst<IHeart>();
 export const ItemHandleService = ServiceInst<IItemHandle>();
 export const LoginService = ServiceInst<ILogin>();
 export const RegisterService = ServiceInst<IRegister>();
+export const ShopService = ServiceInst<IShop>();

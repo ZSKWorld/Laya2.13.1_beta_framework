@@ -13,7 +13,7 @@ export class RegisterController extends BaseController implements IRegister {
             else if (!data.password) this.response(data.cmd, null, ErrorCode.PASSWORD_IS_EMPTY);
             else if (!data.nickname) this.response(data.cmd, null, ErrorCode.NICKNAME_IS_EMPTY);
             else {
-                Util.saveData(new UserDataProxy().data);
+                new UserDataProxy(data.account, data.password, data.nickname).save();
                 this.response(data.cmd, null);
             }
         }

@@ -24,9 +24,15 @@ export const enum NetResponse {
 	/** 参数类型：{@link SellEquipOutput} */
 	Response_SellEquip = "Response_SellEquip",
 
+	/** 参数类型：{@link ChangeCollectPinOutput} */
+	Response_ChangeCollect = "Response_ChangeCollect",
+
 	/** 参数类型：{@link LoginOutput} */
 	Response_Login = "Response_Login",
 
 	/** 参数类型：{@link RegisterOutput} */
 	Response_Register = "Response_Register",
+
+	/** 参数类型：{@link BuyGoodsOutput} */
+	Response_BuyGoods = "Response_BuyGoods",
 }

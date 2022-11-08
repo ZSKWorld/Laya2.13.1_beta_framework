@@ -1,6 +1,7 @@
-import { BaseController } from "./BaseController";
+import { AddCMD, BaseController } from "./BaseController";
 
 export class ItemHandleController extends BaseController implements IItemHandle {
+    @AddCMD
     useItem(data: UseItemInput): void {
         const userData = this.connection.userData;
         const errorCode = userData.checkUseItem(data.id, data.count);
@@ -11,6 +12,7 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         }
     }
 
+    @AddCMD
     sellItem(data: SellItemInput): void {
         const userData = this.connection.userData;
         const errorCode = userData.checkSellItem(data.id, data.count);
@@ -21,6 +23,7 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         }
     }
 
+    @AddCMD
     dressEquip(data: DressEquipInput): void {
         const userData = this.connection.userData;
         const errorCode = userData.checkDressEquip(data.uid);
@@ -31,6 +34,7 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         }
     }
 
+    @AddCMD
     takeOffEquip(data: TakeOffEquipInput): void {
         const userData = this.connection.userData;
         const errorCode = userData.checkTakeOffEquip(data.part);
@@ -41,12 +45,24 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         }
     }
 
+    @AddCMD
     sellEquip(data: SellEquipInput): void {
         const userData = this.connection.userData;
         const errorCode = userData.checkSellEquip(data.uid);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
             const syncInfo = userData.sellEquip(data.uid);
+            this.response(data.cmd, { syncInfo });
+        }
+    }
+
+    @AddCMD
+    changeCollect(data: ChangeCollectPinInput): void {
+        const userData = this.connection.userData;
+        const errorCode = userData.checkCollect(data.id, data.collect);
+        if (errorCode) this.response(data.cmd, null, errorCode);
+        else {
+            const syncInfo = userData.changeCollect(data.id, data.collect);
             this.response(data.cmd, { syncInfo });
         }
     }

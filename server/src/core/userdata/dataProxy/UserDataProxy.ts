@@ -1,3 +1,4 @@
+import { GameUtil } from "../../../utils/GameUtil";
 import { MathUtil } from "../../../utils/MathUtil";
 import { TimeUtil } from "../../../utils/TimeUtil";
 import { Util } from "../../../utils/Util";
@@ -24,7 +25,15 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         userdata.vigor = this.getMaxVigro();
     }
 
-    loginInit(source: IUserData) {
+    getUid() {
+        return this.data.uid;
+    }
+
+    getJSONData() {
+        return JSON.stringify(this.data);
+    }
+
+    login(source: IUserData) {
         const data = this.data;
         Object.keys(source).forEach(v => data[ v ] = source[ v ]);
         data.offline = this.initOffline();
@@ -33,11 +42,15 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         this._bag = new BagProxy(data.bag);
     }
 
-    save() {
+    logout() {
         const data = this.data;
         data.offline = null;
         data.lastOnlineTime = TimeUtil.getTimeStamp();
-        Util.saveData(data);
+        this.save();
+    }
+
+    save() {
+        Util.saveData(this.data);
     }
 
     /** 改变物品数量 */
@@ -54,6 +67,16 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         }
     }
 
+    /** 获取物品数量 */
+    getItemCount(id: number): number {
+        const item = tableMgr.Item[ id ];
+        switch (item.DataType) {
+            case DataType.BaseData: return this.data[ BaseDataKeyMap[ id ] ];
+            case DataType.BagData: return this.bag.getItemCount(id);
+            default: return 0;
+        }
+    }
+
     //#region 各种检查
     /** 检查当前境界是否满足物品境界需求 */
     checkJingJieEnough(id: number): boolean {
@@ -65,25 +88,25 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     }
     /** 检查是否可以使用物品 */
     checkUseItem(id: number, count: number): ErrorCode {
-        const [ prop, food, skillBook, xinFaBook ] = [
-            tableMgr.Props[ id ], tableMgr.Food[ id ], tableMgr.SkillBook[ id ], tableMgr.XinFaBook[ id ],
-        ];
-        if (!prop && !food && !skillBook && !xinFaBook) return ErrorCode.ITEM_NOT_EXIST;
+        if (count <= 0) return ErrorCode.NUMBER_ERROR;
         const item = this._bag.getItem(id);
         if (item == null) return ErrorCode.ITEM_NOT_EXIST;
+        const typeItem = GameUtil.canUseItem(id);
+        if (!typeItem) return ErrorCode.ITEM_CAN_NOT_USE;
         else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         else if (this.checkJingJieEnough(id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
-        else if (skillBook) {
-            const SectRequire = skillBook.SectRequire;
+        else if (GameUtil.isSkillBook(id)) {
+            const SectRequire = (<ConfigSkillBookData>typeItem).SectRequire;
             if (SectRequire.length && SectRequire.indexOf(this.data.sect) == -1) return ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL;
             else if (this.data.skill.indexOf(id) != -1) return ErrorCode.SKILL_IS_LEARNED;
-        } else if (xinFaBook) {
+        } else if (GameUtil.isXinFaBook(id)) {
             if (this.data.citta[ id ] != null) return ErrorCode.CITTA_IS_LEARNED;
         }
         return ErrorCode.NONE;
     }
     /** 检查是否可以出售物品 */
     checkSellItem(id: number, count: number): ErrorCode {
+        if (count <= 0) return ErrorCode.NUMBER_ERROR;
         if (!tableMgr.Item[ id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
         const item = this._bag.getItem(id);
         if (item == null) return ErrorCode.ITEM_NOT_EXIST;
@@ -108,6 +131,28 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         const equip = this._bag.getEquip(uid);
         if (equip) return ErrorCode.ITEM_NOT_EXIST;
         else if (!tableMgr.Item[ equip.id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
+        return ErrorCode.NONE;
+    }
+
+    /** 检查物品收藏 */
+    checkCollect(id: number, collect: boolean) {
+        if (this.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
+        if (collect && this._bag.isCollect(id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
+        if (!collect && !this._bag.isCollect(id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
+        return ErrorCode.NONE;
+    }
+
+    /** 检查是否可以购买物品 */
+    checkBuyItem(id: number, count: number) {
+        if (count <= 0) return ErrorCode.NUMBER_ERROR;
+        const item = tableMgr.Shop[ id ];
+        if (!item) return ErrorCode.GOODS_NOT_EXIST;
+        const userData = this.data;
+        for (let i = 0, n = item.SellPrice.length; i < n; i++) {
+            const element = item.SellPrice[ i ];
+            if (this.getItemCount(element.id) < element.count * count)
+                return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
+        }
         return ErrorCode.NONE;
     }
     //#endregion
@@ -153,7 +198,7 @@ export class UserDataProxy extends ProxyBase<IUserData>{
                         syncInfo[ BaseDataKeyMap[ v.id ] ] = this.data[ BaseDataKeyMap[ v.id ] ];
                 }
             });
-            syncInfo[ "bag" ] = this._bag.data;
+            syncInfo[ "bag" ] = this.data.bag;
         }
         this.changeItemCount(id, -count);
         return syncInfo;
@@ -193,6 +238,33 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         const syncInfo = this.sellItem(equip.id, 1);
         this._bag.removeEquip(uid);
         return syncInfo;
+    }
+
+    buyGoods(id: number, count: number) {
+        const syncInfo = {};
+        const item = tableMgr.Shop[ id ];
+        item.SellPrice.forEach(v => {
+            this.changeItemCount(v.id, -v.count)
+            const dataType = tableMgr.Item[ v.id ].DataType;
+            if (dataType == DataType.BaseData)
+                syncInfo[ BaseDataKeyMap[ v.id ] ] = this.getItemCount(v.id);
+            else if (dataType == DataType.BagData)
+                syncInfo[ "bag" ] = this.data.bag;
+        });
+        if (GameUtil.isEquip(item.SellID)) this.bag.addNewEquip(item.SellID, count);
+        else this.changeItemCount(item.SellID, count);
+
+        const dataType = tableMgr.Item[ item.SellID ].DataType;
+        if (dataType == DataType.BaseData)
+            syncInfo[ BaseDataKeyMap[ item.SellID ] ] = this.getItemCount(item.SellID);
+        else if (dataType == DataType.BagData)
+            syncInfo[ "bag" ] = this.data.bag;
+        return syncInfo;
+    }
+
+    changeCollect(id: number, collect: boolean) {
+        this.bag.changeCollect(id, collect);
+        return { bag: this.data.bag };
     }
 
     /** 使用道具 */

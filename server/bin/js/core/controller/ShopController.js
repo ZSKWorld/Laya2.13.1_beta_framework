@@ -21,29 +21,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.LoginController = void 0;
-var Util_1 = require("../../utils/Util");
+exports.ShopController = void 0;
 var BaseController_1 = require("./BaseController");
-var LoginController = /** @class */ (function (_super) {
-    __extends(LoginController, _super);
-    function LoginController() {
+var ShopController = /** @class */ (function (_super) {
+    __extends(ShopController, _super);
+    function ShopController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    LoginController.prototype.login = function (data) {
-        var userData;
-        if (this.connection.logined == false) {
-            userData = Util_1.Util.getData(data.account, data.password);
-            if (!userData)
-                return this.response(data.cmd, null, 1002 /* ErrorCode.USER_NOT_EXIST */);
-            else
-                this.connection.userLogin(userData);
+    ShopController.prototype.buyGoods = function (data) {
+        var userData = this.connection.userData;
+        var errorCode = userData.checkBuyItem(data.id, data.count);
+        if (errorCode)
+            this.response(data.cmd, null, errorCode);
+        else {
+            var syncInfo = userData.buyGoods(data.id, data.count);
+            this.response(data.cmd, { syncInfo: syncInfo });
         }
-        userData = JSON.parse(this.connection.userData.getJSONData());
-        this.response(data.cmd, { syncInfo: userData });
     };
     __decorate([
         BaseController_1.AddCMD
-    ], LoginController.prototype, "login");
-    return LoginController;
+    ], ShopController.prototype, "buyGoods");
+    return ShopController;
 }(BaseController_1.BaseController));
-exports.LoginController = LoginController;
+exports.ShopController = ShopController;

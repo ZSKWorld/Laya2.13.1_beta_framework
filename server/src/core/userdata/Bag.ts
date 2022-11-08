@@ -1,10 +1,10 @@
 
 export class Bag implements IBag {
-    cangPin: number[] = [];
+    collect: number[] = [];
     equipment: IEquipment[] = [];
     gem: IItemBase[] = [];
     prop: IItemBase[] = [];
     material: IItemBase[] = [];
-    skillBook: IItemBase[] = [];
+    book: IItemBase[] = [];
     other: IItemBase[] = [];
 }

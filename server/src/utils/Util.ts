@@ -20,7 +20,7 @@ export class Util {
 
     static saveData(data: IUserData) {
         const filePath = this.getDataPath(data.account, data.password);
-        if (!filePath) return;
+        if (!filePath) return console.log("路径不存在", data.account, data.password, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data));
     }
 

@@ -4,8 +4,10 @@ import { Pool, PoolKey } from "../libs/pool/Pool";
 import { connectionMgr } from "./ConnectionMgr";
 import { BattleController } from "./controller/BattleController";
 import { HeartController } from "./controller/HeartController";
+import { ItemHandleController } from "./controller/ItemHandleController";
 import { LoginController } from "./controller/LoginController";
 import { RegisterController } from "./controller/RegisterController";
+import { ShopController } from "./controller/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
 import { UserDataProxy } from "./userdata/dataProxy/UserDataProxy";
 export class Connection {
@@ -15,6 +17,8 @@ export class Connection {
         new HeartController(this),
         new RegisterController(this),
         new LoginController(this),
+        new ItemHandleController(this),
+        new ShopController(this),
     ];
 
     private _logined: boolean;
@@ -29,6 +33,7 @@ export class Connection {
         connection.on('message', (message) => {
             if (message.type === 'utf8') {
                 const data: UserInput = JSON.parse(message.utf8Data);
+                if(data.cmd != "register" && data.cmd != "login" && !this._logined) return this.response({cmd:data.cmd, error:ErrorCode.NOT_LOGIN});
                 if (this._listener.hasListener(data.cmd))
                     this._listener.event(data.cmd, data);
                 else
@@ -51,7 +56,7 @@ export class Connection {
         }
         if (!this._logined) {
             this._userData = new UserDataProxy();
-            this._userData.loginInit(data);
+            this._userData.login(data);
             this._logined = true;
             connectionMgr.addConnection(data.uid, data.account, this);
         }
@@ -63,8 +68,8 @@ export class Connection {
 
     private connectionClose() {
         if (this._userData) {
-            this._userData.save();
-            connectionMgr.removeConnectionByUid(this._userData.data.uid);
+            this._userData.logout();
+            connectionMgr.removeConnectionByUid(this._userData.getUid());
         }
         this._listener.offAll();
         Pool.recover(PoolKey.EventDispatcher, this._listener);

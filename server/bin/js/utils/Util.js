@@ -26,7 +26,7 @@ var Util = /** @class */ (function () {
     Util.saveData = function (data) {
         var filePath = this.getDataPath(data.account, data.password);
         if (!filePath)
-            return;
+            return console.log("路径不存在", data.account, data.password, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data));
     };
     Util.getDataPath = function (account, password) {

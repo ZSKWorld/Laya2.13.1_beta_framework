@@ -10,6 +10,8 @@ declare interface IItemHandle {
     takeOffEquip(data: TakeOffEquipInput): void;
     /** 出售装备 */
     sellEquip(data: SellEquipInput): void;
+    /** 添加/取消 收藏 */
+    changeCollect(data: ChangeCollectPinInput): void;
 }
 
 declare interface UseItemInput extends UserInput {
@@ -58,4 +60,14 @@ declare interface SellEquipInput extends UserInput {
 }
 
 declare interface SellEquipOutput extends UserOutput {
+}
+
+declare interface ChangeCollectPinInput extends UserInput {
+    /** 要收藏物品id */
+    id: number;
+    /** 添加/取消 */
+    collect: boolean;
+}
+
+declare interface ChangeCollectOutput extends UserOutput {
 }
