@@ -1,6 +1,7 @@
 import { GameUtil } from "../../../../common/GameUtil";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { tableMgr } from "../../../../table/TableManager";
+import { Equipment, ItemBase } from "../../../../userData/proxy/ItemProxy";
 import { GComponentExtend } from "../../../core/Interfaces";
 import RenderBag from "../../../ui/PkgMain/RenderBag";
 
@@ -15,18 +16,17 @@ export class RenderBagView extends ExtensionClass<GComponentExtend, RenderBag>(R
         TxtCount.color = TxtName.color;
     }
 
-    refreshWuPin(data: IItemBase) {
-        const item = tableMgr.Item[ data.id ];
+    refreshWuPin(data: ItemBase) {
         const { TxtName, TxtCount } = this;
         if (GameUtil.isEquip(data.id)) {
-            TxtName.text = item.Name + " +" + (<IEquipment>data).level;
+            TxtName.text = data.name + " +" + (<Equipment>data).level;
             TxtCount.text = "";
         } else {
-            TxtName.text = item.Name;
+            TxtName.text = data.name;
             TxtCount.text = data.count.toString();
         }
-        TxtName.color = tableMgr.Color[item.Quality].Color;
-        TxtCount.color = tableMgr.Color[item.Quality].Color;
+        TxtName.color = data.color;
+        TxtCount.color = data.color;
     }
 
     refreshSkill(skillID: number, unlock: boolean, sect: number) {

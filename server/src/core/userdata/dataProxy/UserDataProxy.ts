@@ -11,23 +11,22 @@ import { UserData } from "../UserData";
 import { BagProxy } from "./BagProxy";
 import { ProxyBase } from "./ProxyBase";
 
+const EquipmentsSign = "$equipments";
+
 export class UserDataProxy extends ProxyBase<IUserData>{
     private _bag: BagProxy;
     get bag() { return this._bag; }
 
     constructor(account: string = "", password: string = "", nickname: string = "") {
-        super(new UserData());
+        super(new UserData(account, password, nickname));
         const userdata = this.data;
-
-        userdata.account = String(account);
-        userdata.password = String(password);
-        userdata.nickname = String(nickname);
         userdata.vigor = this.getMaxVigro();
     }
 
-    getUid() {
-        return this.data.uid;
-    }
+    getUid() { return this.data.uid; }
+    getAccount() { return this.data.account; }
+    getPassword() { return this.data.password; }
+    getNickname() { return this.data.nickname; }
 
     getJSONData() {
         return JSON.stringify(this.data);
@@ -35,7 +34,29 @@ export class UserDataProxy extends ProxyBase<IUserData>{
 
     login(source: IUserData) {
         const data = this.data;
+
+        const equipments: any[][] = source[ EquipmentsSign ];
+        delete source[ EquipmentsSign ];
+
         Object.keys(source).forEach(v => data[ v ] = source[ v ]);
+        const bagEquips = this.data.bag.equipment;
+        equipments && equipments.forEach(v => {
+            let index = 0;
+            bagEquips.push({
+                id: v[ index++ ],
+                count: v[ index++ ],
+                uid: v[ index++ ],
+                star: v[ index++ ],
+                level: v[ index++ ],
+                mingKe: v[ index++ ],
+                shenYou: v[ index++ ],
+
+                mainAttri: JSON.parse(v[ index++ ]),
+                wuXingAttri: JSON.parse(v[ index++ ]),
+                secondAttri: JSON.parse(v[ index++ ]),
+                bodyAttri: JSON.parse(v[ index++ ]),
+            })
+        });
         data.offline = this.initOffline();
         data.lastLoginTime = TimeUtil.getTimeStamp();
 
@@ -50,6 +71,25 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     }
 
     save() {
+        if (this.data.bag.equipment.length) {
+            const equipments = this.data[ "$equipments" ] = [];
+            this.data.bag.equipment.forEach(equip => {
+                equipments.push([
+                    equip.id,
+                    equip.count,
+                    equip.uid,
+                    equip.star,
+                    equip.level,
+                    equip.mingKe,
+                    equip.shenYou,
+                    JSON.stringify(equip.mainAttri),
+                    JSON.stringify(equip.wuXingAttri),
+                    JSON.stringify(equip.secondAttri),
+                    JSON.stringify(equip.bodyAttri),
+                ]);
+            });
+            this.data.bag.equipment.length = 0;
+        }
         Util.saveData(this.data);
     }
 
@@ -69,12 +109,24 @@ export class UserDataProxy extends ProxyBase<IUserData>{
 
     /** 获取物品数量 */
     getItemCount(id: number): number {
-        const item = tableMgr.Item[ id ];
-        switch (item.DataType) {
+        switch (tableMgr.Item[ id ].DataType) {
             case DataType.BaseData: return this.data[ BaseDataKeyMap[ id ] ];
             case DataType.BagData: return this.bag.getItemCount(id);
             default: return 0;
         }
+    }
+
+    /** 获取已穿戴装备 */
+    getDressedEquip(part: EquipmentPart): IEquipment {
+        const key = DressedEquipMap[ part ];
+        if (key) return this.data[ key ];
+        else return null;
+    }
+
+    /** 设置穿戴装备 */
+    setDressedEquip(part: EquipmentPart, equip: IEquipment) {
+        const key = DressedEquipMap[ part ];
+        key && (this.data[ key ] = equip);
     }
 
     //#region 各种检查
@@ -95,6 +147,10 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         if (!typeItem) return ErrorCode.ITEM_CAN_NOT_USE;
         else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         else if (this.checkJingJieEnough(id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
+        else if (GameUtil.isFood(id)) {
+            if (this.data.vigor >= this.getMaxVigro())
+                return ErrorCode.VIGOR_IS_FULL;
+        }
         else if (GameUtil.isSkillBook(id)) {
             const SectRequire = (<ConfigSkillBookData>typeItem).SectRequire;
             if (SectRequire.length && SectRequire.indexOf(this.data.sect) == -1) return ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL;
@@ -122,21 +178,20 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     }
     /** 检查是否可以脱下装备 */
     checkTakeOffEquip(part: EquipmentPart): ErrorCode {
-        let equip = this.data[ DressedEquipMap[ part ] ];
-        if (equip == null) return ErrorCode.PART_NOT_DRESSED_EQUIP;
+        if (this.getDressedEquip(part) == null) return ErrorCode.PART_NOT_DRESSED_EQUIP;
         return ErrorCode.NONE;
     }
     /** 检查是否可以出售装备 */
     checkSellEquip(uid: string): ErrorCode {
         const equip = this._bag.getEquip(uid);
-        if (equip) return ErrorCode.ITEM_NOT_EXIST;
+        if (!equip) return ErrorCode.ITEM_NOT_EXIST;
         else if (!tableMgr.Item[ equip.id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
         return ErrorCode.NONE;
     }
 
     /** 检查物品收藏 */
     checkCollect(id: number, collect: boolean) {
-        if (this.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
+        if (GameUtil.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
         if (collect && this._bag.isCollect(id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
         if (!collect && !this._bag.isCollect(id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
         return ErrorCode.NONE;
@@ -147,7 +202,6 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
         const item = tableMgr.Shop[ id ];
         if (!item) return ErrorCode.GOODS_NOT_EXIST;
-        const userData = this.data;
         for (let i = 0, n = item.SellPrice.length; i < n; i++) {
             const element = item.SellPrice[ i ];
             if (this.getItemCount(element.id) < element.count * count)
@@ -188,17 +242,16 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     /** 出售物品 */
     sellItem(id: number, count: number) {
         const sellRewards = tableMgr.Item[ id ].SellRewards;
-        const syncInfo = {};
+        const syncInfo: Partial<IUserData> = {};
         if (sellRewards.length) {
             sellRewards.forEach(v => {
-                if (this.isEquip(v.id)) this._bag.addNewEquip(v.id, v.count * count);
+                if (GameUtil.isEquip(v.id)) this._bag.addNewEquip(v.id, v.count * count);
                 else {
                     this.changeItemCount(v.id, v.count * count);
-                    if (tableMgr.Item[ v.id ].DataType == DataType.BaseData)
-                        syncInfo[ BaseDataKeyMap[ v.id ] ] = this.data[ BaseDataKeyMap[ v.id ] ];
+                    this.setSyncInfo(syncInfo, v.id);
                 }
             });
-            syncInfo[ "bag" ] = this.data.bag;
+            syncInfo.bag = this.data.bag;
         }
         this.changeItemCount(id, -count);
         return syncInfo;
@@ -209,13 +262,13 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         const userdata = this.data;
         const equip = this._bag.getEquip(uid);
         const part = tableMgr.Equipment[ equip.id ].Part;
-        const keyWord = DressedEquipMap[ part ];
         userdata.bag.equipment.remove(equip);
-        const dressedEquip = userdata[ keyWord ];
+        const dressedEquip = this.getDressedEquip(part);
         if (dressedEquip) userdata.bag.equipment.push(dressedEquip);
-        userdata[ keyWord ] = equip;
+        this.setDressedEquip(part, equip);
 
         const syncInfo = { bag: userdata.bag };
+        const keyWord = DressedEquipMap[ part ];
         syncInfo[ keyWord ] = userdata[ keyWord ];
         return syncInfo;
     }
@@ -223,16 +276,17 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     /** 脱下装备 */
     takeOffEquip(part: EquipmentPart) {
         const userdata = this.data;
-        const keyWord = DressedEquipMap[ part ];
-        const equip: IEquipment = userdata[ keyWord ];
-        userdata[ keyWord ] = null;
+        const equip = this.getDressedEquip(part);
+        this.setDressedEquip(part, null);
         userdata.bag.equipment.push(equip);
 
         const syncInfo = { bag: userdata.bag };
+        const keyWord = DressedEquipMap[ part ];
         syncInfo[ keyWord ] = userdata[ keyWord ];
         return syncInfo;
     }
 
+    /** 出售装备 */
     sellEquip(uid: string) {
         const equip = this._bag.getEquip(uid);
         const syncInfo = this.sellItem(equip.id, 1);
@@ -240,28 +294,36 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         return syncInfo;
     }
 
+    /** 分解装备 */
+    decomposeEquip(star: number) {
+        const syncInfo = {};
+        const equips = this.data.bag.equipment;
+        const equipCnt = equips.length;
+        for (let i = equipCnt - 1; i >= 0; i--) {
+            if (equips[ i ].star == star) {
+                const tempInfo = this.sellItem(equips[ i ].id, 1);
+                Object.assign(syncInfo, tempInfo);
+                equips.splice(i, 1);
+            }
+        }
+        return syncInfo;
+    }
+
+    /** 购买物品 */
     buyGoods(id: number, count: number) {
         const syncInfo = {};
         const item = tableMgr.Shop[ id ];
         item.SellPrice.forEach(v => {
             this.changeItemCount(v.id, -v.count)
-            const dataType = tableMgr.Item[ v.id ].DataType;
-            if (dataType == DataType.BaseData)
-                syncInfo[ BaseDataKeyMap[ v.id ] ] = this.getItemCount(v.id);
-            else if (dataType == DataType.BagData)
-                syncInfo[ "bag" ] = this.data.bag;
+            this.setSyncInfo(syncInfo, v.id);
         });
         if (GameUtil.isEquip(item.SellID)) this.bag.addNewEquip(item.SellID, count);
         else this.changeItemCount(item.SellID, count);
-
-        const dataType = tableMgr.Item[ item.SellID ].DataType;
-        if (dataType == DataType.BaseData)
-            syncInfo[ BaseDataKeyMap[ item.SellID ] ] = this.getItemCount(item.SellID);
-        else if (dataType == DataType.BagData)
-            syncInfo[ "bag" ] = this.data.bag;
+        this.setSyncInfo(syncInfo, item.SellID);
         return syncInfo;
     }
 
+    /** 添加/取消 收藏 */
     changeCollect(id: number, collect: boolean) {
         this.bag.changeCollect(id, collect);
         return { bag: this.data.bag };
@@ -270,35 +332,34 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     /** 使用道具 */
     private useProp(id: number, count: number) {
         const userdata = this.data;
-        const syncInfo = {};
+        const syncInfo: Partial<IUserData> = {};
         let useCount = 1;
         switch (id) {
             case 2007:
                 userdata.copy = {};
-                syncInfo[ "copy" ] = userdata.copy;
+                syncInfo.copy = userdata.copy;
                 break;
             case 2008:
                 userdata.secret = {};
-                syncInfo[ "secret" ] = userdata.secret;
+                syncInfo.secret = userdata.secret;
                 break;
             case 2009:
                 userdata.boss = {};
-                syncInfo[ "boss" ] = userdata.boss;
+                syncInfo.boss = userdata.boss;
                 break;
             case 2010: break;
             default:
                 useCount = count;
                 tableMgr.Props[ id ].Rewards.forEach(v => {
-                    if (this.isEquip(v.id)) this._bag.addNewEquip(v.id, v.count);
+                    if (GameUtil.isEquip(v.id)) this._bag.addNewEquip(v.id, v.count * count);
                     else {
                         this.changeItemCount(v.id, v.count * count);
-                        if (tableMgr.Item[ v.id ].DataType == DataType.BaseData)
-                            syncInfo[ BaseDataKeyMap[ v.id ] ] = this.data[ BaseDataKeyMap[ v.id ] ];
+                        this.setSyncInfo(syncInfo, v.id);
                     }
                 });
                 break;
         }
-        syncInfo[ "bag" ] = userdata.bag;
+        syncInfo.bag = userdata.bag;
         this.changeItemCount(id, -useCount);
         return syncInfo;
     }
@@ -307,26 +368,24 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     private useFood(id: number, count: number) {
         const userdata = this.data;
         const maxVigro = this.getMaxVigro();
-        const syncInfo = {};
+        const syncInfo: Partial<IUserData> = {};
         let useCount = 0;
-        if (userdata.vigor < maxVigro) {
-            const food = tableMgr.Food[ id ];
-            let singleRecover = 0;
-            switch (food.RecoverType) {
-                case FoodRecoverType.NumberRecover: singleRecover = food.RecoverValue; break;
-                case FoodRecoverType.TimeRecover: singleRecover = food.RecoverValue * this.getVigorRecoveryRate(); break;
-                case FoodRecoverType.PercentRecover: singleRecover = food.RecoverValue * maxVigro; break;
-                default: return LangCode._1014;
-            }
-            const subVigro = maxVigro - userdata.vigor;
-            if (subVigro <= singleRecover) useCount = 1;
-            else if (subVigro % singleRecover == 0) useCount = Math.min(subVigro / singleRecover, count);
-            else useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
-            userdata.vigor = MathUtil.Clamp(userdata.vigor + singleRecover * useCount, 0, maxVigro);
-            this.changeItemCount(id, -useCount);
-            syncInfo[ "bag" ] = userdata.bag;
-            syncInfo[ "vigor" ] = userdata.vigor;
+        const food = tableMgr.Food[ id ];
+        let singleRecover = 0;
+        switch (food.RecoverType) {
+            case FoodRecoverType.NumberRecover: singleRecover = food.RecoverValue; break;
+            case FoodRecoverType.TimeRecover: singleRecover = food.RecoverValue * this.getVigorRecoveryRate(); break;
+            case FoodRecoverType.PercentRecover: singleRecover = food.RecoverValue * maxVigro; break;
+            default: return LangCode._1014;
         }
+        const subVigro = maxVigro - userdata.vigor;
+        if (subVigro <= singleRecover) useCount = 1;
+        else if (subVigro % singleRecover == 0) useCount = Math.min(subVigro / singleRecover, count);
+        else useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
+        userdata.vigor = MathUtil.Clamp(userdata.vigor + singleRecover * useCount, 0, maxVigro);
+        this.changeItemCount(id, -useCount);
+        syncInfo.bag = userdata.bag;
+        syncInfo.vigor = userdata.vigor;
         return syncInfo;
     }
 
@@ -349,7 +408,7 @@ export class UserDataProxy extends ProxyBase<IUserData>{
     }
 
     /** 初始化离线数据 */
-    private initOffline(): Offline {
+    private initOffline(): IOffline {
         const data = this.data;
         if (!data.lastOnlineTime) return null;
         const timeOffset = ((TimeUtil.getTimeStamp() - data.lastOnlineTime) / 1000) << 0;
@@ -357,7 +416,14 @@ export class UserDataProxy extends ProxyBase<IUserData>{
         else return { offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate() * timeOffset) << 0 };
     }
 
-    private isEquip(id: number) {
-        return !!tableMgr.Equipment[ id ];
+    private setSyncInfo(syncInfo: Partial<IUserData>, id: number) {
+        switch (tableMgr.Item[ id ].DataType) {
+            case DataType.BaseData:
+                syncInfo[ BaseDataKeyMap[ id ] ] = this.data[ BaseDataKeyMap[ id ] ];
+                break;
+            case DataType.BagData:
+                syncInfo.bag = this.data.bag;
+            default: break;
+        }
     }
 }

@@ -1,3 +1,4 @@
+import { UserDataProxy } from "../../userData/proxy/UserDataProxy";
 import { BaseNetProcessor } from "./BaseNetProcessor";
 import { BaseViewCtrl } from "./BaseViewCtrl";
 import { Layer } from "./GameLayer";
@@ -46,7 +47,7 @@ interface IViewMethod extends GComponentExtend {
 
 interface IViewCommon {
 	readonly viewId?: ViewID;
-	userData?: RealReadonly<IUserData>;
+	userData?: UserDataProxy;
 }
 
 /**页面实例类型 */

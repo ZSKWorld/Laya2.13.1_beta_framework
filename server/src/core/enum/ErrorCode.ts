@@ -20,6 +20,8 @@ export const enum ErrorCode {
     LOGIN_OTHER_PLACE,
     /** 精力不足 */
     VIGOR_NOT_ENOUGH,
+    /** 精力已满 */
+    VIGOR_IS_FULL,
     /** 功能暂未开放 */
     FUNCTION_NOT_OPENED,
     /** 数量错误 */

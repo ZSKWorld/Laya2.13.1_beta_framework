@@ -16,13 +16,13 @@ export const DressedEquipMap: { readonly [ key in EquipmentPart ]: string } = {
 };
 
 export const BaseDataKeyMap: { [ key: string ]: string } = {
-    1001:"coin",
-    1002:"vcoin",
-    1003:"exp",
-    1004:"moHe",
-    1005:"moBi",
-    1006:"spiritStones",
-    1007:"soul",
-    1008:"gemScore",
-    1009:"vigor",    
+    1001: "coin",
+    1002: "vcoin",
+    1003: "exp",
+    1004: "moHe",
+    1005: "moBi",
+    1006: "spiritStones",
+    1007: "soul",
+    1008: "gemScore",
+    1009: "vigor",
 }

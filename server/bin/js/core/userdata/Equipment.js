@@ -27,6 +27,10 @@ var Equipment = /** @class */ (function (_super) {
         _this.level = 0;
         _this.mingKe = 0;
         _this.shenYou = 0;
+        _this.mainAttri = [];
+        _this.wuXingAttri = [];
+        _this.secondAttri = [];
+        _this.bodyAttri = [];
         return _this;
     }
     return Equipment;

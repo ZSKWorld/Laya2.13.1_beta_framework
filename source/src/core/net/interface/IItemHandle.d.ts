@@ -12,6 +12,8 @@ declare interface IItemHandle {
     sellEquip(data: SellEquipInput): void;
     /** 添加/取消 收藏 */
     changeCollect(data: ChangeCollectPinInput): void;
+    /** 分解装备 */
+    decomposeEquip(data: DecomposeEquipInput): void;
 }
 
 declare interface UseItemInput extends UserInput {
@@ -71,3 +73,12 @@ declare interface ChangeCollectPinInput extends UserInput {
 
 declare interface ChangeCollectOutput extends UserOutput {
 }
+
+declare interface DecomposeEquipInput extends UserInput {
+    star: number;
+}
+
+declare interface DecomposeEquipOutput extends UserOutput {
+
+}
+

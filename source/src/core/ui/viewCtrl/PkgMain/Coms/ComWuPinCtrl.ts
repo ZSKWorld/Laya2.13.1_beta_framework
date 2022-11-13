@@ -1,12 +1,13 @@
 import { InsertEvent } from "../../../../libs/event/EventMgr";
 import { ItemBagType } from "../../../../net/enum/ItemEnum";
+import { Equipment, ItemBase } from "../../../../userData/proxy/ItemProxy";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
-import { UserDataUtil } from "../../../../userData/UserDataUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ViewID } from "../../../core/ViewID";
 import { UIUtility } from "../../../tool/UIUtility";
 import { ComWuPinMsg, ComWuPinView } from "../../../view/PkgMain/Coms/ComWuPinView";
 import { RenderBagView } from "../../../view/PkgMain/Renders/RenderBagView";
+import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
 import { ComItemInfoData } from "./ComItemInfoCtrl";
 
 export interface ComWuPinData {
@@ -14,8 +15,8 @@ export interface ComWuPinData {
 }
 
 export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
-	private items: IItemBase[];
-	private showType: ItemBagType;
+	private items: ItemBase[];
+	private showType: ItemBagType = ItemBagType.Collect;
 
 	override onAwake(): void {
 		this.addMessageListener(ComWuPinMsg.OnBtnShouCangClick, this.refreshList, [ ItemBagType.Collect ]);
@@ -32,8 +33,6 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 		this.addMessageListener(ComWuPinMsg.OnBtnTypeDownClick, this.onBtnTypeDownClick);
 		this.addMessageListener(ComWuPinMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
 		this.addMessageListener(ComWuPinMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
-
-		this.showType = ItemBagType.Collect;
 	}
 
 	override onEnable(): void {
@@ -52,7 +51,7 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 	private refreshList(type: ItemBagType) {
 		const same = type == null || type == this.showType;
 		this.showType = type ?? this.showType;
-		this.items = UserDataUtil.getItems(this.userData.bag as IBag, this.showType);
+		this.items = this.userData.bag.getItems(this.showType);
 		UIUtility.setList(this.view.ListItem, this.items.length, this, this.listRenderer, this.listClick);
 		!same && this.view.EffectList.play();
 	}
@@ -63,14 +62,13 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 
 	private listClick(_, __, index: number) {
 		const data = this.items[ index ];
-		// if (this.showType == ItemBagType.Equip) {
-		// 	let equip1 = <IEquipment>data;
-		// 	let equip2 = this.userData.base.getEquipmentByType(equip1.part);
-		// 	this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1, equip2, openBag: true }, null, false);
-		// } else {
-		// UIUtility.ShowItemInfo(data.id, false);
-		this.addView<ComItemInfoData>(ViewID.ComItemInfoView, { id: data.id, buy: false }, null, false);
-		// }
+		if (this.showType == ItemBagType.Equip) {
+			let equip1 = <Equipment>data;
+			let equip2 = this.userData.getDressedEquip(equip1.part);
+			this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1, equip2, fromBag: true }, null, false);
+		} else {
+			this.addView<ComItemInfoData>(ViewID.ComItemInfoView, { id: data.id, buy: false }, null, false);
+		}
 	}
 
 	private onBtnQualityUpClick(): void {

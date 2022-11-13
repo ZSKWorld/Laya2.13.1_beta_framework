@@ -27,7 +27,7 @@ class EventListener extends Laya.EventDispatcher {
 
 /** 全局事件中心 */
 export const eventMgr = new EventListener();
-windowImmit("eventCenter", eventMgr)
+windowImmit("eventMgr", eventMgr)
 
 /**
  * @description: 添加全局事件监听

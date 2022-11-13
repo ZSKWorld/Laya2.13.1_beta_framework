@@ -11,7 +11,6 @@ export const enum GameEvent {
 	/** socket关闭 */
 	SocketClosed = "SocketClosed",
 
-
 	/**
 	 * 切换场景
 	 * @param sceneType 场景类型 {@link LogicSceneType}

@@ -1,5 +1,10 @@
+import { GameUtil } from "../../../../common/GameUtil";
+import { EquipmentPart } from "../../../../net/enum/ItemEnum";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
+import { ViewID } from "../../../core/ViewID";
+import { UIUtility } from "../../../tool/UIUtility";
 import { ComRenWuMsg, ComRenWuView } from "../../../view/PkgMain/Coms/ComRenWuView";
+import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
 
 export interface ComRenWuData {
 
@@ -7,79 +12,37 @@ export interface ComRenWuData {
 
 export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
 
-    override onAwake(): void {
-		this.addMessageListener(ComRenWuMsg.OnBtnWQClick, this.onBtnWQClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnXLClick, this.onBtnXLClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnJZClick, this.onBtnJZClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnHFClick, this.onBtnHFClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnZQClick, this.onBtnZQClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnAQClick, this.onBtnAQClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnTKClick, this.onBtnTKClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnYFClick, this.onBtnYFClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnXZClick, this.onBtnXZClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnXieZClick, this.onBtnXieZClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnSZClick, this.onBtnSZClick);
-		this.addMessageListener(ComRenWuMsg.OnBtnFBClick, this.onBtnFBClick);
-    }
-
-    override onEnable(): void {
-        
-    }
-
-    override onDisable(): void {
-        
-    }
-
-    override onDestroy(): void {
-        
-    }
-
-	private onBtnWQClick(): void {
-	
+	override onAwake(): void {
+		this.addMessageListener(ComRenWuMsg.OnBtnWQClick, this.showEquipmentInfo, [ EquipmentPart.Weapon ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnXLClick, this.showEquipmentInfo, [ EquipmentPart.Necklace ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnJZClick, this.showEquipmentInfo, [ EquipmentPart.Ring ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnHFClick, this.showEquipmentInfo, [ EquipmentPart.Amulet ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnZQClick, this.showEquipmentInfo, [ EquipmentPart.Mount ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnAQClick, this.showEquipmentInfo, [ EquipmentPart.HiddenWeeapon ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnTKClick, this.showEquipmentInfo, [ EquipmentPart.Helmet ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnYFClick, this.showEquipmentInfo, [ EquipmentPart.Clothes ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnXZClick, this.showEquipmentInfo, [ EquipmentPart.Trousers ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnXieZClick, this.showEquipmentInfo, [ EquipmentPart.Shoes ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnSZClick, this.showEquipmentInfo, [ EquipmentPart.Fashion ]);
+		this.addMessageListener(ComRenWuMsg.OnBtnFBClick, this.showEquipmentInfo, [ EquipmentPart.MagicWeapon ]);
 	}
 
-	private onBtnXLClick(): void {
-	
+	override onEnable(): void {
+		this.view.refreshEquipInfo();
 	}
 
-	private onBtnJZClick(): void {
-	
+	override onDisable(): void {
+
 	}
 
-	private onBtnHFClick(): void {
-	
+	override onDestroy(): void {
+
 	}
 
-	private onBtnZQClick(): void {
-	
-	}
-
-	private onBtnAQClick(): void {
-	
-	}
-
-	private onBtnTKClick(): void {
-	
-	}
-
-	private onBtnYFClick(): void {
-	
-	}
-
-	private onBtnXZClick(): void {
-	
-	}
-
-	private onBtnXieZClick(): void {
-	
-	}
-
-	private onBtnSZClick(): void {
-	
-	}
-
-	private onBtnFBClick(): void {
-	
+	private showEquipmentInfo(type: EquipmentPart) {
+		let equip1 = this.userData.getDressedEquip(type);
+		if (!equip1) return UIUtility.showTipInfo(GameUtil.getLang(1012));
+		this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1 });
 	}
 
 }

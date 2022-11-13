@@ -1,6 +1,7 @@
+import { MathUtil } from "../../../utils/MathUtil";
 import { ItemBagType } from "../../enum/ItemEnum";
 import { tableMgr } from "../../table/TableManager";
-import { Equipment } from "../Equipment";
+import { ItemBase, Equipment } from "../Item";
 import { ProxyBase } from "./ProxyBase";
 
 export class BagProxy extends ProxyBase<IBag> {
@@ -58,7 +59,7 @@ export class BagProxy extends ProxyBase<IBag> {
                 return;
             }
         }
-        if (count > 0) datas.push({ id, count });
+        if (count > 0) datas.push(new ItemBase(id, count));
     }
 
     /** 获取背包物品数量 */
@@ -68,8 +69,29 @@ export class BagProxy extends ProxyBase<IBag> {
 
     /** 添加装备 */
     addNewEquip(id: number, count: number) {
+        const equipInfo = tableMgr.Equipment[ id ];
+        const { Main, WuXing, Second, Body } = tableMgr.EquipmentAddition[ equipInfo.Part ];
+        const randomAttri = (source: number[], attri: number[], randomLen: boolean) => {
+            attri.length = 0;
+            if (source.length) {
+                let attriCount = randomLen ? MathUtil.RandomInt(1, source.length) : source.length;
+                while (attriCount > 0) {
+                    attri.push(...source.splice(MathUtil.RandomInt(0, source.length - 1), 1));
+                    attriCount--;
+                }
+            }
+            return attri;
+        }
+        const sortFunc = (a: number, b: number) => a > b ? 1 : -1;
         for (let i = 0; i < count; i++) {
-            this.data.equipment.push(new Equipment(id));
+            const equip = new Equipment(id);
+            equip.star = MathUtil.RandomInt(1, +tableMgr.Const[ 1010 ].Value);
+
+            randomAttri([ ...Main ], equip.mainAttri, false).sort(sortFunc);
+            randomAttri([ ...WuXing ], equip.wuXingAttri, true).sort(sortFunc);
+            randomAttri([ ...Second ], equip.secondAttri, true).sort(sortFunc);
+            randomAttri([ ...Body ], equip.bodyAttri, true).sort(sortFunc);
+            this.data.equipment.push(equip);
         }
     }
 

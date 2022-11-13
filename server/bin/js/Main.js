@@ -29,3 +29,18 @@ wsServer.on("close", function (connection, reson, desc) {
     Logger_1.Logger.log("".concat(connection.remoteAddress, "\uFF1A\u65AD\u5F00\u8FDE\u63A5\u3002").concat(reson, "-").concat(desc), "red" /* Color.red */);
     Logger_1.Logger.log("\u5269\u4F59\u8FDE\u63A5\u6570\u91CF\uFF1A".concat(wsServer.connections.length));
 });
+var a = {
+    a: 0,
+    b: "",
+    c: [],
+    d: {}
+};
+var setter = function set(target, p, value, receiver) {
+    if (value !== null && typeof value === "object")
+        target[p] = new Proxy(value, { set: setter });
+    else
+        target[p] = value;
+    return true;
+};
+var proxy = new Proxy(a, { set: setter });
+console.log(proxy instanceof Proxy, proxy.c instanceof Proxy, proxy.d instanceof Proxy);

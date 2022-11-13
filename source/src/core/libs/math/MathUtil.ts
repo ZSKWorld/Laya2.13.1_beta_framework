@@ -1,4 +1,3 @@
-import { GameUtil } from "../../common/GameUtil";
 
 /** 数学工具类 */
 export class MathUtil {
@@ -39,11 +38,6 @@ export class MathUtil {
         else if (num < 1e8) return (num / 1e4).toFixed(fixed) + "万";
         else if (num < 1e12) return (num / 1e8).toFixed(fixed) + "亿";
         else return (num / 1e12).toFixed(fixed) + "万亿";
-    }
-
-    /**生成uid */
-    static CreateUID() {
-        return (GameUtil.getServerTime() ** (Math.random() + 0.01)).toString(32).replace(".", "");
     }
 
     /** 

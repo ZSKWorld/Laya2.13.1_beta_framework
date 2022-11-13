@@ -49,6 +49,8 @@ declare interface ConfigLang extends KeyMap<ConfigLangData> {
 	readonly 1020: ConfigLangData;
 	/**账号已登录 */
 	readonly 1021: ConfigLangData;
+	/**分解成功 */
+	readonly 1022: ConfigLangData;
 	/**道具 */
 	readonly 1101: ConfigLangData;
 	/**特殊道具 */

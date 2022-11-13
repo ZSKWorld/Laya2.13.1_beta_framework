@@ -21,7 +21,7 @@ export interface ComShangChengData {
 }
 
 export class ComShangChengCtrl extends BaseViewCtrl<ComShangChengView, ComShangChengData>{
-	private showType: SellType;
+	private showType: SellType = SellType.Prop;
 	private showFilter: (...args: any) => boolean;
 	private items: ConfigShopData[];
 
@@ -51,8 +51,6 @@ export class ComShangChengCtrl extends BaseViewCtrl<ComShangChengView, ComShangC
 		this.addMessageListener(ComShangChengMsg.OnBtnJNClick, this.onBtnJNClick);
 		this.addMessageListener(ComShangChengMsg.OnBtnQTClick, this.onBtnQTClick);
 		this.addMessageListener(ComShangChengMsg.OnBtnYRClick, this.onBtnYRClick);
-
-		this.showType = SellType.Prop;
 	}
 
 	override onEnable(): void {

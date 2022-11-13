@@ -2,21 +2,19 @@ import * as websocket from "websocket";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
 import { connectionMgr } from "./ConnectionMgr";
+import { AccouontController } from "./controller/AccouontController";
 import { BattleController } from "./controller/BattleController";
 import { HeartController } from "./controller/HeartController";
 import { ItemHandleController } from "./controller/ItemHandleController";
-import { LoginController } from "./controller/LoginController";
-import { RegisterController } from "./controller/RegisterController";
 import { ShopController } from "./controller/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
 import { UserDataProxy } from "./userdata/dataProxy/UserDataProxy";
 export class Connection {
     private _listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
     private _controllers = [
+        new AccouontController(this),
         new BattleController(this),
         new HeartController(this),
-        new RegisterController(this),
-        new LoginController(this),
         new ItemHandleController(this),
         new ShopController(this),
     ];
@@ -33,7 +31,7 @@ export class Connection {
         connection.on('message', (message) => {
             if (message.type === 'utf8') {
                 const data: UserInput = JSON.parse(message.utf8Data);
-                if(data.cmd != "register" && data.cmd != "login" && !this._logined) return this.response({cmd:data.cmd, error:ErrorCode.NOT_LOGIN});
+                if (data.cmd != "register" && data.cmd != "login" && !this._logined) return this.response({ cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
                 if (this._listener.hasListener(data.cmd))
                     this._listener.event(data.cmd, data);
                 else
@@ -56,10 +54,10 @@ export class Connection {
         }
         if (!this._logined) {
             this._userData = new UserDataProxy();
-            this._userData.login(data);
             this._logined = true;
             connectionMgr.addConnection(data.uid, data.account, this);
         }
+        this._userData.login(data);
     }
 
     response(data: UserOutput) {

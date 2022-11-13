@@ -9,7 +9,7 @@ export default class GameConfig {
 	static scaleMode: string = "showall";
 	static screenMode: string = "none";
 	static alignV: string = "middle";
-	static alignH: string = "center";
+	static alignH: string = "right";
 	static startScene: any = "";
 	static sceneRoot: string = "";
 	static debug: boolean = false;

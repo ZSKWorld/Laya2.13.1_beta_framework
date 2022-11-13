@@ -3,6 +3,15 @@ export const enum NetResponse {
 	/** 参数类型：{@link IUserData} */
 	Response_SyncInfo = "Response_SyncInfo",
 
+	/** 参数类型：{@link RegisterOutput} */
+	Response_Register = "Response_Register",
+
+	/** 参数类型：{@link LoginOutput} */
+	Response_Login = "Response_Login",
+
+	/** 参数类型：{@link UserOutput} */
+	Response_ClearAccount = "Response_ClearAccount",
+
 	/** 参数类型：{@link BattleOutput} */
 	Response_StartBattle = "Response_StartBattle",
 
@@ -27,11 +36,8 @@ export const enum NetResponse {
 	/** 参数类型：{@link ChangeCollectPinOutput} */
 	Response_ChangeCollect = "Response_ChangeCollect",
 
-	/** 参数类型：{@link LoginOutput} */
-	Response_Login = "Response_Login",
-
-	/** 参数类型：{@link RegisterOutput} */
-	Response_Register = "Response_Register",
+	/** 参数类型：{@link DecomposeEquipOutput} */
+	Response_DecomposeEquip = "Response_DecomposeEquip",
 
 	/** 参数类型：{@link BuyGoodsOutput} */
 	Response_BuyGoods = "Response_BuyGoods",

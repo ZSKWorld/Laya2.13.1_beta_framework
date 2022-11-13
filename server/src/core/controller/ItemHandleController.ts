@@ -67,4 +67,10 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         }
     }
 
+    @AddCMD
+    decomposeEquip(data: DecomposeEquipInput): void {
+        const syncInfo = this.connection.userData.decomposeEquip(data.star);
+        this.response(data.cmd, { syncInfo });
+    }
+
 }

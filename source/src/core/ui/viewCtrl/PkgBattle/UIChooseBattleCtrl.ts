@@ -3,7 +3,6 @@ import { GameEvent } from "../../../common/GameEvent";
 import { BattleType } from "../../../net/enum/BattleEnums";
 import { BattleService } from "../../../net/Services";
 import { tableMgr } from "../../../table/TableManager";
-import { UserDataUtil } from "../../../userData/UserDataUtil";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { RenderChooseBattleView } from "../../view/PkgBattle/Renders/RenderChooseBattleView";
@@ -57,13 +56,13 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 				item.refreshGuanQia(<ConfigLevelData>data);
 				break;
 			case BattleType.FuBen:
-				item.refreshFuBen(<ConfigFuBenData>data, UserDataUtil.getCopyTime(data.ID, this.userData.copy));
+				item.refreshFuBen(<ConfigFuBenData>data, this.userData.getCopyTime(data.ID));
 				break;
 			case BattleType.MiJing:
-				item.refreshMiJing(<ConfigMiJingData>data, UserDataUtil.getSecretTime(data.ID, this.userData.secret));
+				item.refreshMiJing(<ConfigMiJingData>data, this.userData.getSecretTime(data.ID));
 				break;
 			case BattleType.Boss:
-				item.refreshBoss(<ConfigBossData>data, UserDataUtil.getBossCoolDown(data.ID, this.userData.boss));
+				item.refreshBoss(<ConfigBossData>data, this.userData.getBossCoolDown(data.ID));
 				break;
 			case BattleType.CaiJi:
 				item.refreshCaiJi(data);

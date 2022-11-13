@@ -88,6 +88,10 @@ var ItemHandleController = /** @class */ (function (_super) {
             this.response(data.cmd, { syncInfo: syncInfo });
         }
     };
+    ItemHandleController.prototype.decomposeEquip = function (data) {
+        var syncInfo = this.connection.userData.decomposeEquip(data.star);
+        this.response(data.cmd, { syncInfo: syncInfo });
+    };
     __decorate([
         BaseController_1.AddCMD
     ], ItemHandleController.prototype, "useItem");
@@ -106,6 +110,9 @@ var ItemHandleController = /** @class */ (function (_super) {
     __decorate([
         BaseController_1.AddCMD
     ], ItemHandleController.prototype, "changeCollect");
+    __decorate([
+        BaseController_1.AddCMD
+    ], ItemHandleController.prototype, "decomposeEquip");
     return ItemHandleController;
 }(BaseController_1.BaseController));
 exports.ItemHandleController = ItemHandleController;

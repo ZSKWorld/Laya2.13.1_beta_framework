@@ -1,12 +1,12 @@
-import { InsertEvent } from "../libs/event/EventMgr";
 import { Observer } from "../libs/event/Observer";
 import { Logger } from "../libs/utils/Logger";
-import { UpperFirst } from "../libs/utils/Util";
-import { NetResponse } from "../net/NetResponse";
+import { UserDataProxy } from "./proxy/UserDataProxy";
 
 const logger = Logger.Create("UserData", true);
 
 class UserData extends Observer implements IUserData {
+
+    //#region Properties
     uid: string;
     /** 昵称 */
     nickname: string;
@@ -21,7 +21,7 @@ class UserData extends Observer implements IUserData {
     /** 最后一次在线时间 */
     lastOnlineTime: number;
     /** 离线数据 */
-    offline?: Offline;
+    offline?: IOffline;
     /** 背包数据 */
     bag: IBag;
 
@@ -107,16 +107,10 @@ class UserData extends Observer implements IUserData {
     skill: number[];
     /**出战技能 */
     usingSkill: number[];
+    //#endregion
 
-    @InsertEvent(NetResponse.Response_SyncInfo)
-    private syncInfo(data: IUserData) {
-        Object.keys(data).forEach(v => {
-            const oldValue = this[ v ];
-            this[ v ] = data[ v ];
-            this.dispatch(`${ UpperFirst(v) }_Changed`, [ oldValue, data[ v ] ]);
-        });
-    }
 }
 
-export const userData: RealReadonly<UserData> = new UserData();
+UserDataProxy.Inst.setSource(new UserData());
+export const userData = UserDataProxy.Inst;
 windowImmit("userData", userData);

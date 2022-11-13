@@ -1,230 +1,152 @@
-import { BaseViewCtrl } from "../../core/BaseViewCtrl";
+import { GameEvent } from "../../../common/GameEvent";
+import { GameUtil } from "../../../common/GameUtil";
+import { Logger } from "../../../libs/utils/Logger";
+import { tableMgr } from "../../../table/TableManager";
+import { BaseViewCtrl, InsertKeyEvent, KeyEvent } from "../../core/BaseViewCtrl";
+import { UIUtility } from "../../tool/UIUtility";
 import { UISphereToolMsg, UISphereToolView } from "../../view/PkgMain/UISphereToolView";
 
 export interface UISphereToolData {
 
 }
 
+interface AddType {
+    id: number;
+    count: number;
+}
+
+const logger = Logger.Create("UISphereToolCtrl", true);
+
 export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToolData>{
 
-    override onAwake(): void {
+    private _adds: AddType[] = [];
+
+    private _items: ConfigItemData[] = Object.keys(tableMgr.Item).map(v => tableMgr.Item[ v ]);
+
+	override onAwake(): void {
 		this.addMessageListener(UISphereToolMsg.OnBtnBgClick, this.onBtnBgClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnClearLogClick, this.onBtnClearLogClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnHFJLClick, this.onBtnHFJLClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnCreateClick, this.onBtnCreateClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnClearClick, this.onBtnClearClick);
-		this.addMessageListener(UISphereToolMsg.OnBtnPercentClick, this.onBtnPercentClick);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck0Click, this.onBtnCheck0Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck1Click, this.onBtnCheck1Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck2Click, this.onBtnCheck2Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck3Click, this.onBtnCheck3Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck4Click, this.onBtnCheck4Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck5Click, this.onBtnCheck5Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck6Click, this.onBtnCheck6Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck7Click, this.onBtnCheck7Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck8Click, this.onBtnCheck8Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck9Click, this.onBtnCheck9Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck10Click, this.onBtnCheck10Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck11Click, this.onBtnCheck11Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck12Click, this.onBtnCheck12Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck13Click, this.onBtnCheck13Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck14Click, this.onBtnCheck14Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck15Click, this.onBtnCheck15Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck16Click, this.onBtnCheck16Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck17Click, this.onBtnCheck17Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck18Click, this.onBtnCheck18Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck19Click, this.onBtnCheck19Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck20Click, this.onBtnCheck20Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck21Click, this.onBtnCheck21Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck22Click, this.onBtnCheck22Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck23Click, this.onBtnCheck23Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck24Click, this.onBtnCheck24Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck25Click, this.onBtnCheck25Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck26Click, this.onBtnCheck26Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck27Click, this.onBtnCheck27Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck28Click, this.onBtnCheck28Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck31Click, this.onBtnCheck31Click);
-		this.addMessageListener(UISphereToolMsg.OnBtnCheck32Click, this.onBtnCheck32Click);
 		this.addMessageListener(UISphereToolMsg.OnBtnAddClick, this.onBtnAddClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnSubmitClick, this.onBtnSubmitClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnRemoveClick, this.onBtnRemoveClick);
 		this.addMessageListener(UISphereToolMsg.OnBtnRemoveAllClick, this.onBtnRemoveAllClick);
-    }
+        this.addMessageListener(UISphereToolMsg.OnIpt29Input, this.onIpt29Input);
+        this.addMessageListener(UISphereToolMsg.OnCmbItemDropDownDisplay, this.onCmbItemDropDownDisplay);
+        UIUtility.setCombox(this.view.CmbItem, this._items.map(v => GameUtil.getColorStr(v.Quality, v.Name)), this._items, null, null, null, 25);
+	}
 
-    override onEnable(): void {
-        
-    }
+	override onEnable(): void {
+        this.onBtnClearClick();
+        this.onBtnRemoveAllClick();
+	}
 
-    override onDisable(): void {
-        
-    }
+	override onDisable(): void {
 
-    override onDestroy(): void {
-        
-    }
+	}
 
+	override onDestroy(): void {
+
+	}
+
+    @InsertKeyEvent(KeyEvent.KeyUp, Laya.Keyboard.ESCAPE)
 	private onBtnBgClick(): void {
-	
+		this.removeTopView();
 	}
 
 	private onBtnClearLogClick(): void {
-	
+        this.dispatch(GameEvent.ClearExperienceLog);
 	}
 
 	private onBtnHFJLClick(): void {
-	
+
 	}
 
+    @InsertKeyEvent(KeyEvent.KeyUp, Laya.Keyboard.ENTER)
 	private onBtnCreateClick(): void {
-	
+        const { Ipt0, Ipt1, Ipt2, Ipt3, Ipt4, Ipt5, Ipt6, Ipt7, Ipt8, Ipt9, Ipt10, Ipt11, Ipt12, Ipt13, Ipt14, Ipt15, Ipt16, Ipt17, Ipt18, Ipt19, Ipt20, Ipt21, Ipt22, Ipt23, Ipt24, Ipt25, Ipt26, Ipt27, Ipt28, Ipt31, Ipt32 } = this.view;
+        const { BtnCheck0, BtnCheck1, BtnCheck2, BtnCheck3, BtnCheck4, BtnCheck5, BtnCheck6, BtnCheck7, BtnCheck8, BtnCheck9, BtnCheck10, BtnCheck11, BtnCheck12, BtnCheck13, BtnCheck14, BtnCheck15, BtnCheck16, BtnCheck17, BtnCheck18, BtnCheck19, BtnCheck20, BtnCheck21, BtnCheck22, BtnCheck23, BtnCheck24, BtnCheck25, BtnCheck26, BtnCheck27, BtnCheck28, BtnCheck31, BtnCheck32 } = this.view;
+        const inputs = [ Ipt0, Ipt1, Ipt2, Ipt3, Ipt4, Ipt5, Ipt6, Ipt7, Ipt8, Ipt9, Ipt10, Ipt11, Ipt12, Ipt13, Ipt14, Ipt15, Ipt16, Ipt17, Ipt18, Ipt19, Ipt20, Ipt21, Ipt22, Ipt23, Ipt24, Ipt25, Ipt26, Ipt27, Ipt28, Ipt31, Ipt32 ];
+        const checkBtns = [ BtnCheck0, BtnCheck1, BtnCheck2, BtnCheck3, BtnCheck4, BtnCheck5, BtnCheck6, BtnCheck7, BtnCheck8, BtnCheck9, BtnCheck10, BtnCheck11, BtnCheck12, BtnCheck13, BtnCheck14, BtnCheck15, BtnCheck16, BtnCheck17, BtnCheck18, BtnCheck19, BtnCheck20, BtnCheck21, BtnCheck22, BtnCheck23, BtnCheck24, BtnCheck25, BtnCheck26, BtnCheck27, BtnCheck28, BtnCheck31, BtnCheck32 ];
+        let str = "";
+        let percent = !!this.view.BtnPercent.selected;
+        inputs.forEach((v, index) => str += (+v.text ? `|${ index + 1 }-${ v.text }${ percent ? (`-${ +(!!checkBtns[ index ].selected) }`) : "" }` : ""));
+        logger.log(str ? str.substring(1) : "无");
 	}
 
 	private onBtnClearClick(): void {
-	
+        const { Ipt0, Ipt1, Ipt2, Ipt3, Ipt4, Ipt5, Ipt6, Ipt7, Ipt8, Ipt9, Ipt10, Ipt11, Ipt12, Ipt13, Ipt14, Ipt15, Ipt16, Ipt17, Ipt18, Ipt19, Ipt20, Ipt21, Ipt22, Ipt23, Ipt24, Ipt25, Ipt26, Ipt27, Ipt28, Ipt31, Ipt32 } = this.view;
+        const { BtnCheck0, BtnCheck1, BtnCheck2, BtnCheck3, BtnCheck4, BtnCheck5, BtnCheck6, BtnCheck7, BtnCheck8, BtnCheck9, BtnCheck10, BtnCheck11, BtnCheck12, BtnCheck13, BtnCheck14, BtnCheck15, BtnCheck16, BtnCheck17, BtnCheck18, BtnCheck19, BtnCheck20, BtnCheck21, BtnCheck22, BtnCheck23, BtnCheck24, BtnCheck25, BtnCheck26, BtnCheck27, BtnCheck28, BtnCheck31, BtnCheck32 } = this.view;
+        const inputs = [ Ipt0, Ipt1, Ipt2, Ipt3, Ipt4, Ipt5, Ipt6, Ipt7, Ipt8, Ipt9, Ipt10, Ipt11, Ipt12, Ipt13, Ipt14, Ipt15, Ipt16, Ipt17, Ipt18, Ipt19, Ipt20, Ipt21, Ipt22, Ipt23, Ipt24, Ipt25, Ipt26, Ipt27, Ipt28, Ipt31, Ipt32 ];
+        const checkBtns = [ BtnCheck0, BtnCheck1, BtnCheck2, BtnCheck3, BtnCheck4, BtnCheck5, BtnCheck6, BtnCheck7, BtnCheck8, BtnCheck9, BtnCheck10, BtnCheck11, BtnCheck12, BtnCheck13, BtnCheck14, BtnCheck15, BtnCheck16, BtnCheck17, BtnCheck18, BtnCheck19, BtnCheck20, BtnCheck21, BtnCheck22, BtnCheck23, BtnCheck24, BtnCheck25, BtnCheck26, BtnCheck27, BtnCheck28, BtnCheck31, BtnCheck32 ];
+
+        inputs.forEach(v => v.text = "0");
+        checkBtns.forEach(v => v.selected = false);
+        [ BtnCheck13, BtnCheck14, BtnCheck15, BtnCheck22 ].forEach(v => v.selected = true);
 	}
 
-	private onBtnPercentClick(): void {
-	
+	private onIpt29Input(){
+        const id = +this.view.Ipt29.text;
+        for (let i = 0; i < this._items.length; i++) {
+            if (this._items[ i ].ID == id) {
+                this.view.CmbItem.selectedIndex = i;
+                return;
+            }
+        }
 	}
 
-	private onBtnCheck0Click(): void {
-	
-	}
-
-	private onBtnCheck1Click(): void {
-	
-	}
-
-	private onBtnCheck2Click(): void {
-	
-	}
-
-	private onBtnCheck3Click(): void {
-	
-	}
-
-	private onBtnCheck4Click(): void {
-	
-	}
-
-	private onBtnCheck5Click(): void {
-	
-	}
-
-	private onBtnCheck6Click(): void {
-	
-	}
-
-	private onBtnCheck7Click(): void {
-	
-	}
-
-	private onBtnCheck8Click(): void {
-	
-	}
-
-	private onBtnCheck9Click(): void {
-	
-	}
-
-	private onBtnCheck10Click(): void {
-	
-	}
-
-	private onBtnCheck11Click(): void {
-	
-	}
-
-	private onBtnCheck12Click(): void {
-	
-	}
-
-	private onBtnCheck13Click(): void {
-	
-	}
-
-	private onBtnCheck14Click(): void {
-	
-	}
-
-	private onBtnCheck15Click(): void {
-	
-	}
-
-	private onBtnCheck16Click(): void {
-	
-	}
-
-	private onBtnCheck17Click(): void {
-	
-	}
-
-	private onBtnCheck18Click(): void {
-	
-	}
-
-	private onBtnCheck19Click(): void {
-	
-	}
-
-	private onBtnCheck20Click(): void {
-	
-	}
-
-	private onBtnCheck21Click(): void {
-	
-	}
-
-	private onBtnCheck22Click(): void {
-	
-	}
-
-	private onBtnCheck23Click(): void {
-	
-	}
-
-	private onBtnCheck24Click(): void {
-	
-	}
-
-	private onBtnCheck25Click(): void {
-	
-	}
-
-	private onBtnCheck26Click(): void {
-	
-	}
-
-	private onBtnCheck27Click(): void {
-	
-	}
-
-	private onBtnCheck28Click(): void {
-	
-	}
-
-	private onBtnCheck31Click(): void {
-	
-	}
-
-	private onBtnCheck32Click(): void {
-	
+	private onCmbItemDropDownDisplay(){
+        const { selectedIndex, dropdown } = this.view.CmbItem;
+        const list = dropdown.getChild("list").asList;
+        list._children.forEach(
+            (v, index) => v.asCom.getController("ctrlSelected").selectedIndex = Number(selectedIndex == index)
+        );
+        list.scrollToView(selectedIndex);
 	}
 
 	private onBtnAddClick(): void {
-	
+        const item = this._items[ this.view.CmbItem.selectedIndex ];
+        const count = +this.view.Ipt30.text;
+        if (count > 0) {
+            let exist: AddType;
+            for (let i = 0; i < this._adds.length; i++) {
+                if (this._adds[ i ].id == item.ID) {
+                    exist = this._adds[ i ];
+                    exist.count += count;
+                    break;
+                }
+            }
+            !exist && this._adds.push({ id: item.ID, count });
+            this.view.refreshAdds(this._adds);
+        }
 	}
 
 	private onBtnSubmitClick(): void {
-	
+        let str = "";
+        this._adds.forEach(v => str += `|${ v.id }-${ v.count }`);
+        logger.log(str ? str.substring(1) : "无");
 	}
 
 	private onBtnRemoveClick(): void {
-	
+        const item = this._items[ this.view.CmbItem.selectedIndex ];
+        const count = +this.view.Ipt30.text;
+        if (count > 0) {
+            for (let i = 0; i < this._adds.length; i++) {
+                if (this._adds[ i ].id == item.ID) {
+                    this._adds[ i ].count -= count;
+                    this._adds[ i ].count <= 0 && this._adds.splice(i, 1);
+                    break;
+                }
+            }
+            this.view.refreshAdds(this._adds);
+        }
 	}
 
 	private onBtnRemoveAllClick(): void {
-	
+        this._adds.length = 0;
+        this.view.refreshAdds(this._adds);
 	}
 
 }

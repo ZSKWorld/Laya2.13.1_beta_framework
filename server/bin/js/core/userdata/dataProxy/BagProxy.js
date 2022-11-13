@@ -14,10 +14,21 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 exports.__esModule = true;
 exports.BagProxy = void 0;
+var MathUtil_1 = require("../../../utils/MathUtil");
 var TableManager_1 = require("../../table/TableManager");
 var Equipment_1 = require("../Equipment");
+var ItemBase_1 = require("../ItemBase");
 var ProxyBase_1 = require("./ProxyBase");
 var BagProxy = /** @class */ (function (_super) {
     __extends(BagProxy, _super);
@@ -101,7 +112,7 @@ var BagProxy = /** @class */ (function (_super) {
             }
         }
         if (count > 0)
-            datas.push({ id: id, count: count });
+            datas.push(new ItemBase_1.ItemBase(id, count));
     };
     /** 获取背包物品数量 */
     BagProxy.prototype.getItemCount = function (id) {
@@ -110,8 +121,28 @@ var BagProxy = /** @class */ (function (_super) {
     };
     /** 添加装备 */
     BagProxy.prototype.addNewEquip = function (id, count) {
+        var equipInfo = TableManager_1.tableMgr.Equipment[id];
+        var _a = TableManager_1.tableMgr.EquipmentAddition[equipInfo.Part], Main = _a.Main, WuXing = _a.WuXing, Second = _a.Second, Body = _a.Body;
+        var randomAttri = function (source, attri, randomLen) {
+            attri.length = 0;
+            if (source.length) {
+                var attriCount = randomLen ? MathUtil_1.MathUtil.RandomInt(1, source.length) : source.length;
+                while (attriCount > 0) {
+                    attri.push.apply(attri, source.splice(MathUtil_1.MathUtil.RandomInt(0, source.length - 1), 1));
+                    attriCount--;
+                }
+            }
+            return attri;
+        };
+        var sortFunc = function (a, b) { return a > b ? 1 : -1; };
         for (var i = 0; i < count; i++) {
-            this.data.equipment.push(new Equipment_1.Equipment(id));
+            var equip = new Equipment_1.Equipment(id);
+            equip.star = MathUtil_1.MathUtil.RandomInt(1, +TableManager_1.tableMgr.Const[1010].Value);
+            randomAttri(__spreadArray([], Main, true), equip.mainAttri, false).sort(sortFunc);
+            randomAttri(__spreadArray([], WuXing, true), equip.wuXingAttri, true).sort(sortFunc);
+            randomAttri(__spreadArray([], Second, true), equip.secondAttri, true).sort(sortFunc);
+            randomAttri(__spreadArray([], Body, true), equip.bodyAttri, true).sort(sortFunc);
+            this.data.equipment.push(equip);
         }
     };
     /** 移除装备 */

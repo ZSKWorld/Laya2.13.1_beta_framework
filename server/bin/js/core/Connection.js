@@ -5,11 +5,10 @@ var websocket = require("websocket");
 var EventDispatcher_1 = require("../libs/event/EventDispatcher");
 var Pool_1 = require("../libs/pool/Pool");
 var ConnectionMgr_1 = require("./ConnectionMgr");
+var AccouontController_1 = require("./controller/AccouontController");
 var BattleController_1 = require("./controller/BattleController");
 var HeartController_1 = require("./controller/HeartController");
 var ItemHandleController_1 = require("./controller/ItemHandleController");
-var LoginController_1 = require("./controller/LoginController");
-var RegisterController_1 = require("./controller/RegisterController");
 var ShopController_1 = require("./controller/ShopController");
 var UserDataProxy_1 = require("./userdata/dataProxy/UserDataProxy");
 var Connection = /** @class */ (function () {
@@ -17,10 +16,9 @@ var Connection = /** @class */ (function () {
         var _this = this;
         this._listener = Pool_1.Pool.get("EventDispatcher" /* PoolKey.EventDispatcher */, EventDispatcher_1.EventDispatcher);
         this._controllers = [
+            new AccouontController_1.AccouontController(this),
             new BattleController_1.BattleController(this),
             new HeartController_1.HeartController(this),
-            new RegisterController_1.RegisterController(this),
-            new LoginController_1.LoginController(this),
             new ItemHandleController_1.ItemHandleController(this),
             new ShopController_1.ShopController(this),
         ];
@@ -71,10 +69,10 @@ var Connection = /** @class */ (function () {
         }
         if (!this._logined) {
             this._userData = new UserDataProxy_1.UserDataProxy();
-            this._userData.login(data);
             this._logined = true;
             ConnectionMgr_1.connectionMgr.addConnection(data.uid, data.account, this);
         }
+        this._userData.login(data);
     };
     Connection.prototype.response = function (data) {
         this._socket.sendUTF(JSON.stringify(data));

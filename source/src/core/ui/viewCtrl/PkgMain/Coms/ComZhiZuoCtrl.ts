@@ -1,4 +1,8 @@
+import { GameUtil } from "../../../../common/GameUtil";
+import { ItemHandleService } from "../../../../net/Services";
+import { tableMgr } from "../../../../table/TableManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
+import { UIUtility } from "../../../tool/UIUtility";
 import { ComZhiZuoMsg, ComZhiZuoView } from "../../../view/PkgMain/Coms/ComZhiZuoView";
 
 export interface ComZhiZuoData {
@@ -7,7 +11,7 @@ export interface ComZhiZuoData {
 
 export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
 
-    override onAwake(): void {
+	override onAwake(): void {
 		this.addMessageListener(ComZhiZuoMsg.OnBtnFJZBClick, this.onBtnFJZBClick);
 		this.addMessageListener(ComZhiZuoMsg.OnBtnFJBSClick, this.onBtnFJBSClick);
 		this.addMessageListener(ComZhiZuoMsg.OnBtnYJHCClick, this.onBtnYJHCClick);
@@ -17,54 +21,59 @@ export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
 		this.addMessageListener(ComZhiZuoMsg.OnBtnCZZBClick, this.onBtnCZZBClick);
 		this.addMessageListener(ComZhiZuoMsg.OnBtnBSHCClick, this.onBtnBSHCClick);
 		this.addMessageListener(ComZhiZuoMsg.OnBtnZZTZClick, this.onBtnZZTZClick);
-    }
 
-    override onEnable(): void {
-        
-    }
+		const fjzbArr: string[] = [];//this._fjzbArr.map(v => GetColorStr(v, `${v}星装备`));
+		for (let i = 1, max = +tableMgr.Const[ 1010 ].Value; i <= max; i++)
+			fjzbArr.push(GameUtil.getColorStr(i, `${ i }星装备`));
+		UIUtility.setCombox(this.view.CmbFJZBDJ, fjzbArr, fjzbArr, this, null, fjzbArr[ 0 ]);
+	}
 
-    override onDisable(): void {
-        
-    }
+	override onEnable(): void {
 
-    override onDestroy(): void {
-        
-    }
+	}
+
+	override onDisable(): void {
+
+	}
+
+	override onDestroy(): void {
+
+	}
 
 	private onBtnFJZBClick(): void {
-	
+		ItemHandleService.Inst.decomposeEquip({ star: this.view.CmbFJZBDJ.selectedIndex + 1 });
 	}
 
 	private onBtnFJBSClick(): void {
-	
+
 	}
 
 	private onBtnYJHCClick(): void {
-	
+
 	}
 
 	private onBtnJPYLClick(): void {
-	
+
 	}
 
 	private onBtnDZZBClick(): void {
-	
+
 	}
 
 	private onBtnZJZBClick(): void {
-	
+
 	}
 
 	private onBtnCZZBClick(): void {
-	
+
 	}
 
 	private onBtnBSHCClick(): void {
-	
+
 	}
 
 	private onBtnZZTZClick(): void {
-	
+
 	}
 
 }

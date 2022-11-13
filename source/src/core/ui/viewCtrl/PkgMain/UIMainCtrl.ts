@@ -81,7 +81,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 	}
 
 	private onBtnSettingClick(): void {
-
+		this.addView(ViewID.SettingView);
 	}
 
 	private onBtnRankClick(): void {
@@ -90,6 +90,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 
 	private onBtnSphereClick(): void {
 		if (this._sphereDragged) return;
+		this.addView(ViewID.SphereToolView, null, null, false);
 	}
 
 	private onBtnSphereDraged(draged: boolean) {

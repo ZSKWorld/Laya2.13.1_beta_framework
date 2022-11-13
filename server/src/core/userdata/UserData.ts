@@ -11,7 +11,7 @@ export class UserData implements IUserData {
     lastLoginTime: number = 0;
     lastOnlineTime: number = 0;
     /** 离线数据 */
-    offline?: Offline = null;
+    offline?: IOffline = null;
     /** 背包数据 */
     bag: IBag = new Bag();
     /** 金币 */
@@ -96,4 +96,9 @@ export class UserData implements IUserData {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
+    constructor(account: string, password: string, nickname: string) {
+        this.account = String(account);
+        this.password = String(password);
+        this.nickname = String(nickname);
+    }
 }

@@ -1,4 +1,12 @@
 {
+  "objectStatus": {
+    "n4_qjdo": {
+      "collapsed": true
+    },
+    "n24_sbd0": {
+      "collapsed": true
+    }
+  },
   "adaptiveTest": true,
   "fitScreen": "FitSize"
 }

@@ -1,276 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="750,1334" overflow="hidden" designImage="ui://vith2b66sbd0i" designImageOffsetX="-766" designImageAlpha="100" designImageLayer="1" bgColor="#000000">
+<component size="1080,1920" overflow="hidden" designImage="ui://vith2b66sbd0i" designImageOffsetX="-766" designImageAlpha="100" designImageLayer="1" bgColor="#000000">
   <controller name="ctrlState" pages="0,,1,,2," selected="2"/>
   <controller name="c1" pages="0,,1," selected="1"/>
   <displayList>
-    <graph id="n67_e3vt" name="BtnBg" xy="0,0" size="750,1334" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+    <graph id="n67_e3vt" name="BtnBg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n68_e3vt" name="BtnClearLog" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="79,588" size="192,75" group="n238_j87q" controller="ctrlBgColor,8">
-      <Button title="清理日志" titleColor="#ffffff"/>
+    <component id="n68_e3vt" name="BtnClearLog" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,719" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
+      <Button title="清理日志" titleColor="#ffffff" titleFontSize="50"/>
     </component>
-    <component id="n69_e3vt" name="BtnHFJL" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="279,587" size="192,75" group="n238_j87q" controller="ctrlBgColor,8">
-      <Button title="回复精力" titleColor="#ffffff"/>
+    <component id="n69_e3vt" name="BtnHFJL" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,842" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
+      <Button title="回复精力" titleColor="#ffffff" titleFontSize="50"/>
     </component>
-    <component id="n73_mz80" name="n73" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="479,587" size="192,75" group="n238_j87q" controller="ctrlBgColor,8">
-      <Button title="加成工具" titleColor="#ffffff" controller="ctrlState" page="1"/>
+    <component id="n73_mz80" name="n73" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,965" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
+      <Button title="加成工具" titleColor="#ffffff" titleFontSize="50" controller="ctrlState" page="1"/>
     </component>
-    <component id="n237_j87q" name="n237" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="80,671" size="192,75" group="n238_j87q" controller="ctrlBgColor,8">
-      <Button title="组合工具" titleColor="#ffffff" controller="ctrlState" page="2"/>
+    <component id="n237_j87q" name="n237" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,1088" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
+      <Button title="组合工具" titleColor="#ffffff" titleFontSize="50" controller="ctrlState" page="2"/>
     </component>
-    <group id="n238_j87q" name="n238" xy="79,587" size="592,159"/>
-    <graph id="n70_mz80" name="n70" xy="0,0" size="750,1334" type="rect" lineSize="0" fillColor="#ff000000">
+    <group id="n238_j87q" name="n238" xy="350,719" size="380,482" advanced="true" layout="vt" lineGap="10" excludeInvisibles="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+    <graph id="n70_mz80" name="n70" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
       <gearDisplay controller="ctrlState" pages="1,2"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n71_mz80" name="n71" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="0,0" controller="ctrlBgColor,1">
+    <component id="n71_mz80" name="n71" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="20,20" size="200,70" controller="ctrlBgColor,1">
       <gearDisplay controller="ctrlState" pages="1,2"/>
-      <Button title="返回" titleColor="#ffffff" controller="ctrlState" page="0"/>
+      <Button title="返回" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="0"/>
     </component>
-    <component id="n196_j87q" name="BtnCreate" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="627,0" size="123,53" group="n72_mz80" controller="ctrlBgColor,4">
-      <Button title="生成"/>
+    <component id="n196_j87q" name="BtnCreate" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="860,20" size="200,70" group="n72_mz80" controller="ctrlBgColor,4">
+      <Button title="生成" titleFontSize="45"/>
     </component>
-    <component id="n369_tqik" name="BtnClear" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="486,0" size="123,53" group="n72_mz80" controller="ctrlBgColor,1">
-      <Button title="清除"/>
+    <component id="n369_tqik" name="BtnClear" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="649,20" size="200,70" group="n72_mz80" controller="ctrlBgColor,1">
+      <Button title="清除" titleFontSize="45"/>
     </component>
-    <component id="n247_tqik" name="BtnPercent" src="j87q1w" fileName="Component/BtnCheck.xml" xy="273,4" group="n72_mz80">
-      <Button checked="true" title="带有百分制" controller="c1" page="1"/>
+    <component id="n247_tqik" name="BtnPercent" src="j87q1w" fileName="Component/BtnCheck.xml" xy="421,32" group="n72_mz80">
+      <Button checked="true" title="带有百分制" titleFontSize="35" controller="c1" page="1"/>
     </component>
-    <text id="n75_mz80" name="n75" xy="75,70" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="攻击"/>
-    <text id="n76_j87q" name="n76" xy="75,113" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="防御"/>
-    <text id="n77_j87q" name="n77" xy="75,156" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="生命"/>
-    <text id="n78_j87q" name="n78" xy="75,199" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="体力"/>
-    <text id="n79_j87q" name="n79" xy="75,242" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="力量"/>
-    <text id="n80_j87q" name="n80" xy="75,285" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="耐力"/>
-    <text id="n81_j87q" name="n81" xy="75,328" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="身法"/>
-    <text id="n82_j87q" name="n82" xy="75,371" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="命中"/>
-    <text id="n83_j87q" name="n83" xy="75,414" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="闪避"/>
-    <text id="n84_j87q" name="n84" xy="75,457" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="暴击"/>
-    <text id="n85_j87q" name="n85" xy="75,500" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="暴抗"/>
-    <text id="n86_j87q" name="n86" xy="75,543" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="暴伤"/>
-    <text id="n87_j87q" name="n87" xy="75,586" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="吸收"/>
-    <text id="n88_j87q" name="n88" xy="75,629" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="金攻"/>
-    <text id="n89_j87q" name="n89" xy="75,672" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="木攻"/>
-    <text id="n90_j87q" name="n90" xy="75,715" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="水攻"/>
-    <text id="n91_j87q" name="n91" xy="75,758" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="火攻"/>
-    <text id="n92_j87q" name="n92" xy="75,801" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="土攻"/>
-    <text id="n93_j87q" name="n93" xy="75,844" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="金防"/>
-    <text id="n94_j87q" name="n94" xy="75,887" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="木防"/>
-    <text id="n95_j87q" name="n95" xy="75,930" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="水防"/>
-    <text id="n96_j87q" name="n96" xy="75,973" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="火防"/>
-    <text id="n97_j87q" name="n97" xy="75,1016" size="54,35" group="n105_j87q" fontSize="25" color="#ffffff" text="土防"/>
-    <text id="n98_j87q" name="n98" xy="26,1059" size="104,35" group="n105_j87q" fontSize="25" color="#ffffff" text="五行攻击"/>
-    <text id="n99_j87q" name="n99" xy="26,1102" size="104,35" group="n105_j87q" fontSize="25" color="#ffffff" text="五行防御"/>
-    <text id="n100_j87q" name="n100" xy="26,1145" size="104,35" group="n105_j87q" fontSize="25" color="#ffffff" text="所有属性"/>
-    <text id="n101_j87q" name="n101" xy="26,1188" size="104,35" group="n105_j87q" fontSize="25" color="#ffffff" text="最终伤害"/>
-    <text id="n102_j87q" name="n102" xy="26,1231" size="104,35" group="n105_j87q" fontSize="25" color="#ffffff" text="增加命中"/>
-    <text id="n103_j87q" name="n103" xy="26,1274" size="104,35" group="n105_j87q" fontSize="25" color="#ffffff" text="增加暴击"/>
-    <group id="n105_j87q" name="n105" xy="26,70" size="104,1239" group="n248_tqik"/>
-    <graph id="n106_j87q" name="n106" xy="130,61" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <text id="n75_mz80" name="n75" xy="96,159" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="攻击"/>
+    <text id="n76_j87q" name="n76" xy="96,217" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="防御"/>
+    <text id="n77_j87q" name="n77" xy="96,275" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="生命"/>
+    <text id="n78_j87q" name="n78" xy="96,333" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="体力"/>
+    <text id="n79_j87q" name="n79" xy="96,391" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="力量"/>
+    <text id="n80_j87q" name="n80" xy="96,449" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="耐力"/>
+    <text id="n81_j87q" name="n81" xy="96,507" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="身法"/>
+    <text id="n82_j87q" name="n82" xy="96,565" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="命中"/>
+    <text id="n83_j87q" name="n83" xy="96,623" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="闪避"/>
+    <text id="n84_j87q" name="n84" xy="96,681" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="暴击"/>
+    <text id="n85_j87q" name="n85" xy="96,739" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="暴抗"/>
+    <text id="n86_j87q" name="n86" xy="96,797" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="暴伤"/>
+    <text id="n87_j87q" name="n87" xy="96,855" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="吸收"/>
+    <text id="n88_j87q" name="n88" xy="96,913" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="金攻"/>
+    <text id="n89_j87q" name="n89" xy="96,971" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="木攻"/>
+    <text id="n90_j87q" name="n90" xy="96,1029" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="水攻"/>
+    <text id="n91_j87q" name="n91" xy="96,1087" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="火攻"/>
+    <text id="n92_j87q" name="n92" xy="96,1145" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="土攻"/>
+    <text id="n93_j87q" name="n93" xy="96,1203" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="金防"/>
+    <text id="n94_j87q" name="n94" xy="96,1261" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="木防"/>
+    <text id="n95_j87q" name="n95" xy="96,1319" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="水防"/>
+    <text id="n96_j87q" name="n96" xy="96,1377" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="火防"/>
+    <text id="n97_j87q" name="n97" xy="96,1435" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="土防"/>
+    <text id="n98_j87q" name="n98" xy="26,1493" size="144,48" group="n105_j87q" fontSize="35" color="#ffffff" text="五行攻击"/>
+    <text id="n99_j87q" name="n99" xy="26,1551" size="144,48" group="n105_j87q" fontSize="35" color="#ffffff" text="五行防御"/>
+    <text id="n100_j87q" name="n100" xy="26,1609" size="144,48" group="n105_j87q" fontSize="35" color="#ffffff" text="所有属性"/>
+    <text id="n101_j87q" name="n101" xy="26,1667" size="144,48" group="n105_j87q" fontSize="35" color="#ffffff" text="最终伤害"/>
+    <text id="n102_j87q" name="n102" xy="26,1725" size="144,48" group="n105_j87q" fontSize="35" color="#ffffff" text="增加命中"/>
+    <text id="n103_j87q" name="n103" xy="26,1783" size="144,48" group="n105_j87q" fontSize="35" color="#ffffff" text="增加暴击"/>
+    <group id="n105_j87q" name="n105" xy="26,159" size="144,1672" group="n248_tqik"/>
+    <graph id="n106_j87q" name="n106" xy="171,150" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n107_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n111_j87q" name="n111" xy="130,104" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n111_j87q" name="n111" xy="171,208" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n112_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n114_j87q" name="n114" xy="130,147" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n114_j87q" name="n114" xy="171,266" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n115_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n117_j87q" name="n117" xy="130,190" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n117_j87q" name="n117" xy="171,324" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n118_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n120_j87q" name="n120" xy="130,233" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n120_j87q" name="n120" xy="171,382" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n121_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n123_j87q" name="n123" xy="130,276" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n123_j87q" name="n123" xy="171,440" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n124_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n126_j87q" name="n126" xy="130,319" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n126_j87q" name="n126" xy="171,498" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n127_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n129_j87q" name="n129" xy="130,362" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n129_j87q" name="n129" xy="171,556" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n130_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n132_j87q" name="n132" xy="130,405" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n132_j87q" name="n132" xy="171,614" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n133_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n135_j87q" name="n135" xy="130,448" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n135_j87q" name="n135" xy="171,672" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n136_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n138_j87q" name="n138" xy="130,491" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n138_j87q" name="n138" xy="171,730" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n139_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n141_j87q" name="n141" xy="130,534" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n141_j87q" name="n141" xy="171,788" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n142_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n144_j87q" name="n144" xy="130,577" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n144_j87q" name="n144" xy="171,846" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n145_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n147_j87q" name="n147" xy="130,620" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n147_j87q" name="n147" xy="171,904" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n148_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n150_j87q" name="n150" xy="130,663" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n150_j87q" name="n150" xy="171,962" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n151_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n153_j87q" name="n153" xy="130,706" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n153_j87q" name="n153" xy="171,1020" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n154_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n156_j87q" name="n156" xy="130,749" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n156_j87q" name="n156" xy="171,1078" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n157_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n159_j87q" name="n159" xy="130,792" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n159_j87q" name="n159" xy="171,1136" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n160_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n162_j87q" name="n162" xy="130,835" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n162_j87q" name="n162" xy="171,1194" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n163_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n165_j87q" name="n165" xy="130,878" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n165_j87q" name="n165" xy="171,1252" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n166_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n168_j87q" name="n168" xy="130,921" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n168_j87q" name="n168" xy="171,1310" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n169_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n171_j87q" name="n171" xy="130,964" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n171_j87q" name="n171" xy="171,1368" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n172_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n174_j87q" name="n174" xy="130,1007" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n174_j87q" name="n174" xy="171,1426" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n175_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n177_j87q" name="n177" xy="130,1050" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n177_j87q" name="n177" xy="171,1484" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n178_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n180_j87q" name="n180" xy="130,1093" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n180_j87q" name="n180" xy="171,1542" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n181_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n183_j87q" name="n183" xy="130,1136" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n183_j87q" name="n183" xy="171,1600" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n184_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n186_j87q" name="n186" xy="130,1179" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n186_j87q" name="n186" xy="171,1658" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n187_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n189_j87q" name="n189" xy="130,1222" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n189_j87q" name="n189" xy="171,1716" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n190_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n192_j87q" name="n192" xy="130,1265" size="200,42" group="n195_j87q" touchable="false" type="rect" lineSize="0">
+    <graph id="n192_j87q" name="n192" xy="171,1774" size="200,48" group="n195_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n193_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <text id="n107_j87q" name="Ipt0" xy="130,67" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n112_j87q" name="Ipt1" xy="130,110" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n115_j87q" name="Ipt2" xy="130,153" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n118_j87q" name="Ipt3" xy="130,196" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n121_j87q" name="Ipt4" xy="130,239" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n124_j87q" name="Ipt5" xy="130,282" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n127_j87q" name="Ipt6" xy="130,325" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n130_j87q" name="Ipt7" xy="130,368" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n133_j87q" name="Ipt8" xy="130,411" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n136_j87q" name="Ipt9" xy="130,454" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n139_j87q" name="Ipt10" xy="130,497" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n142_j87q" name="Ipt11" xy="130,540" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n145_j87q" name="Ipt12" xy="130,583" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n148_j87q" name="Ipt13" xy="130,626" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n151_j87q" name="Ipt14" xy="130,669" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n154_j87q" name="Ipt15" xy="130,712" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n157_j87q" name="Ipt16" xy="130,755" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n160_j87q" name="Ipt17" xy="130,798" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n163_j87q" name="Ipt18" xy="130,841" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n166_j87q" name="Ipt19" xy="130,884" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n169_j87q" name="Ipt20" xy="130,927" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n172_j87q" name="Ipt21" xy="130,970" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n175_j87q" name="Ipt22" xy="130,1013" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n178_j87q" name="Ipt23" xy="130,1056" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n181_j87q" name="Ipt24" xy="130,1099" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n184_j87q" name="Ipt25" xy="130,1142" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n187_j87q" name="Ipt26" xy="130,1185" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n190_j87q" name="Ipt27" xy="130,1228" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n193_j87q" name="Ipt28" xy="130,1271" size="200,42" group="n195_j87q" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <group id="n195_j87q" name="n195" xy="130,61" size="200,1252" group="n248_tqik"/>
-    <component id="n197_j87q" name="BtnCheck0" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,62" group="n226_j87q"/>
-    <component id="n198_j87q" name="BtnCheck1" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,105" group="n226_j87q"/>
-    <component id="n199_j87q" name="BtnCheck2" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,148" group="n226_j87q"/>
-    <component id="n200_j87q" name="BtnCheck3" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,191" group="n226_j87q"/>
-    <component id="n201_j87q" name="BtnCheck4" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,234" group="n226_j87q"/>
-    <component id="n202_j87q" name="BtnCheck5" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,277" group="n226_j87q"/>
-    <component id="n203_j87q" name="BtnCheck6" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,320" group="n226_j87q"/>
-    <component id="n204_j87q" name="BtnCheck7" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,363" group="n226_j87q"/>
-    <component id="n205_j87q" name="BtnCheck8" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,406" group="n226_j87q"/>
-    <component id="n206_j87q" name="BtnCheck9" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,449" group="n226_j87q"/>
-    <component id="n207_j87q" name="BtnCheck10" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,492" group="n226_j87q"/>
-    <component id="n208_j87q" name="BtnCheck11" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,535" group="n226_j87q"/>
-    <component id="n209_j87q" name="BtnCheck12" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,578" group="n226_j87q"/>
-    <component id="n210_j87q" name="BtnCheck13" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,621" group="n226_j87q"/>
-    <component id="n211_j87q" name="BtnCheck14" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,664" group="n226_j87q"/>
-    <component id="n212_j87q" name="BtnCheck15" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,707" group="n226_j87q"/>
-    <component id="n213_j87q" name="BtnCheck16" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,750" group="n226_j87q"/>
-    <component id="n214_j87q" name="BtnCheck17" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,793" group="n226_j87q"/>
-    <component id="n215_j87q" name="BtnCheck18" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,836" group="n226_j87q"/>
-    <component id="n216_j87q" name="BtnCheck19" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,879" group="n226_j87q"/>
-    <component id="n217_j87q" name="BtnCheck20" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,922" group="n226_j87q"/>
-    <component id="n218_j87q" name="BtnCheck21" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,965" group="n226_j87q"/>
-    <component id="n219_j87q" name="BtnCheck22" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1008" group="n226_j87q"/>
-    <component id="n220_j87q" name="BtnCheck23" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1051" group="n226_j87q"/>
-    <component id="n221_j87q" name="BtnCheck24" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1094" group="n226_j87q"/>
-    <component id="n222_j87q" name="BtnCheck25" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1137" group="n226_j87q"/>
-    <component id="n223_j87q" name="BtnCheck26" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1180" group="n226_j87q"/>
-    <component id="n224_j87q" name="BtnCheck27" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1223" group="n226_j87q">
-      <Button checked="true"/>
+    <text id="n107_j87q" name="Ipt0" xy="171,156" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n112_j87q" name="Ipt1" xy="171,214" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n115_j87q" name="Ipt2" xy="171,272" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n118_j87q" name="Ipt3" xy="171,330" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n121_j87q" name="Ipt4" xy="171,388" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n124_j87q" name="Ipt5" xy="171,446" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n127_j87q" name="Ipt6" xy="171,504" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n130_j87q" name="Ipt7" xy="171,562" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n133_j87q" name="Ipt8" xy="171,620" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n136_j87q" name="Ipt9" xy="171,678" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n139_j87q" name="Ipt10" xy="171,736" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n142_j87q" name="Ipt11" xy="171,794" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n145_j87q" name="Ipt12" xy="171,852" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n148_j87q" name="Ipt13" xy="171,910" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n151_j87q" name="Ipt14" xy="171,968" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n154_j87q" name="Ipt15" xy="171,1026" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n157_j87q" name="Ipt16" xy="171,1084" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n160_j87q" name="Ipt17" xy="171,1142" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n163_j87q" name="Ipt18" xy="171,1200" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n166_j87q" name="Ipt19" xy="171,1258" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n169_j87q" name="Ipt20" xy="171,1316" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n172_j87q" name="Ipt21" xy="171,1374" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n175_j87q" name="Ipt22" xy="171,1432" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n178_j87q" name="Ipt23" xy="171,1490" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n181_j87q" name="Ipt24" xy="171,1548" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n184_j87q" name="Ipt25" xy="171,1606" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n187_j87q" name="Ipt26" xy="171,1664" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n190_j87q" name="Ipt27" xy="171,1722" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n193_j87q" name="Ipt28" xy="171,1780" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <group id="n195_j87q" name="n195" xy="171,150" size="200,1678" group="n248_tqik"/>
+    <component id="n197_j87q" name="BtnCheck0" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,156" group="n226_j87q">
+      <Button titleFontSize="35"/>
     </component>
-    <component id="n225_j87q" name="BtnCheck28" src="j87q1w" fileName="Component/BtnCheck.xml" xy="331,1266" group="n226_j87q">
-      <Button checked="true"/>
+    <component id="n198_j87q" name="BtnCheck1" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,214" group="n226_j87q">
+      <Button titleFontSize="35"/>
     </component>
-    <group id="n226_j87q" name="n226" xy="331,62" size="40,1244" group="n248_tqik" advanced="true" layout="vt" lineGap="3" excludeInvisibles="true">
+    <component id="n199_j87q" name="BtnCheck2" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,272" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n200_j87q" name="BtnCheck3" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,330" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n201_j87q" name="BtnCheck4" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,388" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n202_j87q" name="BtnCheck5" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,446" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n203_j87q" name="BtnCheck6" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,504" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n204_j87q" name="BtnCheck7" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,562" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n205_j87q" name="BtnCheck8" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,620" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n206_j87q" name="BtnCheck9" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,678" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n207_j87q" name="BtnCheck10" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,736" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n208_j87q" name="BtnCheck11" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,794" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n209_j87q" name="BtnCheck12" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,852" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n210_j87q" name="BtnCheck13" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,910" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n211_j87q" name="BtnCheck14" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,968" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n212_j87q" name="BtnCheck15" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1026" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n213_j87q" name="BtnCheck16" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1084" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n214_j87q" name="BtnCheck17" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1142" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n215_j87q" name="BtnCheck18" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1200" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n216_j87q" name="BtnCheck19" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1258" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n217_j87q" name="BtnCheck20" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1316" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n218_j87q" name="BtnCheck21" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1374" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n219_j87q" name="BtnCheck22" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1432" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n220_j87q" name="BtnCheck23" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1490" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n221_j87q" name="BtnCheck24" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1548" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n222_j87q" name="BtnCheck25" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1606" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n223_j87q" name="BtnCheck26" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1664" group="n226_j87q">
+      <Button titleFontSize="35"/>
+    </component>
+    <component id="n224_j87q" name="BtnCheck27" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1722" group="n226_j87q">
+      <Button checked="true" titleFontSize="35"/>
+    </component>
+    <component id="n225_j87q" name="BtnCheck28" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1780" group="n226_j87q">
+      <Button checked="true" titleFontSize="35"/>
+    </component>
+    <group id="n226_j87q" name="n226" xy="376,156" size="40,1664" group="n248_tqik" advanced="true" layout="vt" lineGap="18" excludeInvisibles="true">
       <gearDisplay controller="c1" pages="1"/>
     </group>
-    <group id="n248_tqik" name="n248" xy="26,61" size="345,1252" group="n72_mz80"/>
-    <text id="n249_tqik" name="n249" xy="404,70" size="104,35" group="n278_tqik" fontSize="25" color="#ffffff" text="减免伤害"/>
-    <text id="n250_tqik" name="n250" xy="379,113" size="129,35" group="n278_tqik" fontSize="25" color="#ffffff" text="减五行攻防"/>
-    <group id="n278_tqik" name="n278" xy="379,70" size="129,78" group="n368_tqik"/>
-    <graph id="n279_tqik" name="n279" xy="509,61" size="200,42" group="n337_tqik" touchable="false" type="rect" lineSize="0">
+    <group id="n248_tqik" name="n248" xy="26,150" size="390,1681" group="n72_mz80"/>
+    <text id="n249_tqik" name="n249" xy="581,159" size="144,48" group="n278_tqik" fontSize="35" color="#ffffff" text="减免伤害"/>
+    <text id="n250_tqik" name="n250" xy="546,217" size="179,48" group="n278_tqik" fontSize="35" color="#ffffff" text="减五行攻防"/>
+    <group id="n278_tqik" name="n278" xy="546,159" size="179,106" group="n368_tqik"/>
+    <graph id="n279_tqik" name="n279" xy="726,150" size="200,51" group="n337_tqik" touchable="false" type="rect" lineSize="0">
       <relation target="n308_tqik" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n280_tqik" name="n280" xy="509,104" size="200,42" group="n337_tqik" touchable="false" type="rect" lineSize="0">
+    <graph id="n280_tqik" name="n280" xy="726,211" size="200,51" group="n337_tqik" touchable="false" type="rect" lineSize="0">
       <relation target="n309_tqik" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <text id="n308_tqik" name="Ipt31" xy="509,67" size="200,42" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n309_tqik" name="Ipt32" xy="509,110" size="200,42" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <group id="n337_tqik" name="n337" xy="509,61" size="200,91" group="n368_tqik"/>
-    <component id="n338_tqik" name="BtnCheck31" src="j87q1w" fileName="Component/BtnCheck.xml" xy="710,62" group="n367_tqik">
-      <Button checked="true"/>
+    <text id="n308_tqik" name="Ipt31" xy="726,156" size="200,51" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n309_tqik" name="Ipt32" xy="726,217" size="200,51" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <group id="n337_tqik" name="n337" xy="726,150" size="200,118" group="n368_tqik"/>
+    <component id="n338_tqik" name="BtnCheck31" src="j87q1w" fileName="Component/BtnCheck.xml" xy="931,156" size="40,44" group="n367_tqik">
+      <Button checked="true" titleFontSize="35"/>
     </component>
-    <component id="n339_tqik" name="BtnCheck32" src="j87q1w" fileName="Component/BtnCheck.xml" xy="710,105" group="n367_tqik">
-      <Button checked="true"/>
+    <component id="n339_tqik" name="BtnCheck32" src="j87q1w" fileName="Component/BtnCheck.xml" xy="931,218" size="40,45" group="n367_tqik">
+      <Button checked="true" titleFontSize="35"/>
     </component>
-    <group id="n367_tqik" name="n367" xy="710,62" size="40,83" group="n368_tqik" advanced="true" layout="vt" lineGap="3" excludeInvisibles="true">
+    <group id="n367_tqik" name="n367" xy="931,156" size="40,107" group="n368_tqik" advanced="true" layout="vt" lineGap="18" excludeInvisibles="true">
       <gearDisplay controller="c1" pages="1"/>
     </group>
-    <group id="n368_tqik" name="n368" xy="379,61" size="371,91" group="n72_mz80"/>
-    <group id="n72_mz80" name="n72" xy="26,0" size="724,1313" advanced="true">
+    <group id="n368_tqik" name="n368" xy="546,150" size="425,118" group="n72_mz80"/>
+    <group id="n72_mz80" name="n72" xy="26,20" size="1034,1811" advanced="true">
       <gearDisplay controller="ctrlState" pages="1"/>
     </group>
-    <component id="n227_j87q" name="BtnAdd" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="348,210" size="150,53" group="n228_j87q" controller="ctrlBgColor,4">
-      <Button title="添加"/>
+    <component id="n227_j87q" name="BtnAdd" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="392,379" size="216,81" group="n228_j87q" controller="ctrlBgColor,4">
+      <Button title="添加" titleFontSize="50"/>
     </component>
-    <component id="n246_j87q" name="BtnSubmit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="506,210" size="150,53" group="n228_j87q" controller="ctrlBgColor,0">
-      <Button title="确定"/>
+    <component id="n246_j87q" name="BtnSubmit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="620,379" size="216,81" group="n228_j87q" controller="ctrlBgColor,0">
+      <Button title="确定" titleFontSize="50"/>
     </component>
-    <component id="n236_j87q" name="BtnRemove" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="348,269" size="123,53" group="n228_j87q" controller="ctrlBgColor,1">
-      <Button title="删除"/>
+    <component id="n236_j87q" name="BtnRemove" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="392,470" size="189,81" group="n228_j87q" controller="ctrlBgColor,1">
+      <Button title="删除" titleFontSize="50"/>
     </component>
-    <component id="n239_j87q" name="BtnRemoveAll" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="481,270" size="175,53" group="n228_j87q" controller="ctrlBgColor,1">
-      <Button title="删除全部"/>
+    <component id="n239_j87q" name="BtnRemoveAll" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="595,470" size="241,81" group="n228_j87q" controller="ctrlBgColor,1">
+      <Button title="删除全部" titleFontSize="50"/>
     </component>
-    <text id="n232_j87q" name="n232" xy="100,88" size="64,42" group="n228_j87q" fontSize="30" color="#ffffff" text="物品"/>
-    <text id="n229_j87q" name="n229" xy="100,149" size="64,42" group="n228_j87q" fontSize="30" color="#ffffff" text="数量"/>
-    <richtext id="n235_j87q" name="TxtContent" xy="93,336" size="559,162" group="n228_j87q" fontSize="30" color="#ffffff" ubb="true" autoSize="none" autoClearText="true" text="你好、&#xA;你好、&#xA;你好、&#xA;你好、"/>
-    <graph id="n233_j87q" name="n233" xy="180,140" size="476,42" group="n228_j87q" touchable="false" type="rect" lineSize="0">
+    <text id="n232_j87q" name="n232" xy="232,163" size="104,66" group="n228_j87q" fontSize="50" color="#ffffff" text="物品"/>
+    <text id="n229_j87q" name="n229" xy="232,268" size="104,66" group="n228_j87q" fontSize="50" color="#ffffff" text="数量"/>
+    <richtext id="n235_j87q" name="TxtContent" xy="231,604" size="605,258" group="n228_j87q" fontSize="50" color="#ffffff" ubb="true" autoSize="none" autoClearText="true" text="你好、&#xA;你好、&#xA;你好、&#xA;你好、"/>
+    <graph id="n233_j87q" name="n233" xy="343,259" size="495,66" group="n228_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n234_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n243_j87q" name="CmbItem" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="180,79" size="331,42" group="n228_j87q">
+    <component id="n243_j87q" name="CmbItem" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="343,154" size="344,72" group="n228_j87q">
       <ComboBox visibleItemCount="10" direction="down"/>
     </component>
-    <text id="n234_j87q" name="Ipt30" xy="180,146" size="476,42" group="n228_j87q" fontSize="30" autoSize="none" singleLine="true" text="1" input="true" restrict="0-9" keyboardType="4"/>
-    <graph id="n244_j87q" name="n244" xy="514,79" size="142,42" group="n228_j87q" touchable="false" type="rect" lineSize="0">
+    <text id="n234_j87q" name="Ipt30" xy="343,265" size="495,66" group="n228_j87q" fontSize="50" autoSize="none" singleLine="true" text="1" input="true" restrict="0-9" keyboardType="4"/>
+    <graph id="n244_j87q" name="n244" xy="696,156" size="142,66" group="n228_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n245_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <text id="n245_j87q" name="Ipt29" xy="514,85" size="142,42" group="n228_j87q" fontSize="30" autoSize="none" singleLine="true" text="0" input="true" restrict="0-9" keyboardType="4"/>
-    <group id="n228_j87q" name="n228" xy="93,79" size="563,419" advanced="true">
+    <text id="n245_j87q" name="Ipt29" xy="696,162" size="142,66" group="n228_j87q" fontSize="50" autoSize="none" singleLine="true" text="0" input="true" restrict="0-9" keyboardType="4"/>
+    <group id="n228_j87q" name="n228" xy="231,154" size="607,708" advanced="true">
       <gearDisplay controller="ctrlState" pages="2"/>
     </group>
   </displayList>

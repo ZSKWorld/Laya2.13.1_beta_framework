@@ -1,6 +1,6 @@
 import { localData } from "../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../libs/localData/LocalDataKey";
-import { LoginService, RegisterService } from "../../../net/Services";
+import { AccountService } from "../../../net/Services";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { UILoginMainMsg, UILoginMainView } from "../../view/PkgLogin/UILoginMainView";
@@ -32,7 +32,7 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
     private onBtnLoginClick(): void {
         const { TxtAccount, TxtPassword } = this.view;
         const param = { account: TxtAccount.text, password: TxtPassword.text };
-        LoginService.Inst.login(param);
+        AccountService.Inst.login(param);
     }
 
     private onBtnRegisterClick(): void {
@@ -41,7 +41,7 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
         else if (!TxtRegisterPassword.text.trim()) UIUtility.showTipInfo("请输入密码");
         else if (!TxtRegisterName.text.trim()) UIUtility.showTipInfo("请输入昵称");
         else {
-            RegisterService.Inst.register({
+            AccountService.Inst.register({
                 account: TxtRegisterAccount.text,
                 password: TxtRegisterPassword.text,
                 nickname: TxtRegisterName.text

@@ -1,6 +1,6 @@
 
 declare interface KeyData<T = number> { [ id: string ]: T; }
-declare interface Offline {
+declare interface IOffline {
     /** 离线时长 */
     offlineTime: number;
     /** 获得的精力 */
@@ -21,7 +21,7 @@ declare interface IUserData {
     /** 最后一次在线时间 */
     lastOnlineTime: number;
     /** 离线数据 */
-    offline?: Offline;
+    offline?: IOffline;
     /** 背包数据 */
     bag: IBag;
     /** 金币 */

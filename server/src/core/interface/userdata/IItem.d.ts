@@ -17,4 +17,12 @@ declare interface IEquipment extends IItemBase {
     mingKe: number;
     /** 神佑等级 */
     shenYou: number;
+    /** 主属性 */
+    mainAttri: number[];
+    /** 五行属性 */
+    wuXingAttri: number[];
+    /** 副属性 */
+    secondAttri: number[];
+    /** 体质属性 */
+    bodyAttri: number[];
 }

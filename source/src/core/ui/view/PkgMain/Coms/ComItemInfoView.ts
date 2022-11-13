@@ -2,7 +2,6 @@ import { GameUtil } from "../../../../common/GameUtil";
 import { ResPath } from "../../../../common/ResPath";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { tableMgr } from "../../../../table/TableManager";
-import { UserDataUtil } from "../../../../userData/UserDataUtil";
 import { ViewExtension } from "../../../core/Interfaces";
 import ComItemInfo from "../../../ui/PkgMain/ComItemInfo";
 
@@ -39,12 +38,12 @@ export class ComItemInfoView extends ExtensionClass<ViewExtension, ComItemInfo>(
 		this.ctrlSell.selectedIndex = canSell ? 1 : 0;
 		const sellTxt = buy ? "" : (canSell ? `<br>出售：${ GameUtil.getItemString(SellRewards, true, true) }` : "<br>[color=#FF0000]不可出售[/color]");
 		const buyTxt = buy ? `<br>价格：${ GameUtil.getItemString(tableMgr.Shop[ id ].SellPrice) }` : "";
-		this.TxtContent.text = `${ GameUtil.getColorStr(Quality, Name + (buy ? "" : ` x${ UserDataUtil.getItemCount(this.userData as IUserData, id) }`)) }
-			<br>境界需求：${ UseRequire ? UserDataUtil.getJingJieStr(UseRequire.jingJie, UseRequire.cengJi) : "无" }
+		this.TxtContent.text = `${ GameUtil.getColorStr(Quality, Name + (buy ? "" : ` x${ this.userData.getItemCount(id) }`)) }
+			<br>境界需求：${ UseRequire ? GameUtil.getJingJieStr(UseRequire.jingJie, UseRequire.cengJi) : "无" }
 			<br>类别：${ GameUtil.getLang(ItemType || 1110) }
 			<br>${ Description }` + sellTxt + buyTxt;
 		this.BtnShouCang.visible = buy == false;
-		this.BtnShouCang.grayed = UserDataUtil.isCollect(this.userData.bag as IBag, id) == false;
+		this.BtnShouCang.grayed = !this.userData.bag.isCollect(id);
 	}
 
 	setNumText(text: string | number) {

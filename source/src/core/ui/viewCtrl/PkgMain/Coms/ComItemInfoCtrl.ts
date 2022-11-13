@@ -1,5 +1,4 @@
 import { ItemHandleService, ShopService } from "../../../../net/Services";
-import { UserDataUtil } from "../../../../userData/UserDataUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ComItemInfoMsg, ComItemInfoView } from "../../../view/PkgMain/Coms/ComItemInfoView";
 
@@ -36,13 +35,13 @@ export class ComItemInfoCtrl extends BaseViewCtrl<ComItemInfoView, ComItemInfoDa
 	}
 
 	private onBtnShouCangClick(): void {
-		const isCollect = UserDataUtil.isCollect(this.userData.bag as IBag, this.data.id);
+		const isCollect = this.userData.bag.isCollect(this.data.id);
 		ItemHandleService.Inst.changeCollect({ id: this.data.id, collect: !isCollect });
 	}
 
 	private onBtnSellClick(): void {
-        const count = +this.view.TxtUseNum.text;
-		ItemHandleService.Inst.sellItem({id:this.data.id, count});
+		const count = +this.view.TxtUseNum.text;
+		ItemHandleService.Inst.sellItem({ id: this.data.id, count });
 	}
 
 	private onBtnUseClick(): void {

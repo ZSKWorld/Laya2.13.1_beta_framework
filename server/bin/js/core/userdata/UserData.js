@@ -5,7 +5,7 @@ var TimeUtil_1 = require("../../utils/TimeUtil");
 var Util_1 = require("../../utils/Util");
 var Bag_1 = require("./Bag");
 var UserData = /** @class */ (function () {
-    function UserData() {
+    function UserData(account, password, nickname) {
         this.uid = Util_1.Util.CreateUID();
         this.nickname = "";
         this.account = "";
@@ -99,6 +99,9 @@ var UserData = /** @class */ (function () {
         this.skill = [5000];
         /**出战技能 */
         this.usingSkill = [5000, 5000, 5000, 5000, 5000];
+        this.account = String(account);
+        this.password = String(password);
+        this.nickname = String(nickname);
     }
     return UserData;
 }());

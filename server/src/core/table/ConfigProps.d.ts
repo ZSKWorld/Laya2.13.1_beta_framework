@@ -31,4 +31,6 @@ declare interface ConfigProps extends KeyMap<ConfigPropsData> {
 	readonly 2010: ConfigPropsData;
 	/**首充礼包 */
 	readonly 2011: ConfigPropsData;
+	/**首充礼包2 */
+	readonly 2012: ConfigPropsData;
 }
