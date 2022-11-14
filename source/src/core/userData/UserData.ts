@@ -22,9 +22,6 @@ class UserData extends Observer implements IUserData {
     lastOnlineTime: number;
     /** 离线数据 */
     offline?: IOffline;
-    /** 背包数据 */
-    bag: IBag;
-
     /** 金币 */
     coin: number;
     /** 元宝 */
@@ -107,6 +104,16 @@ class UserData extends Observer implements IUserData {
     skill: number[];
     /**出战技能 */
     usingSkill: number[];
+
+    //#region BagData
+    collect: number[];
+    equipment: IEquipment[];
+    gem: IItemBase[];
+    prop: IItemBase[];
+    material: IItemBase[];
+    book: IItemBase[];
+    other: IItemBase[];
+    //#endregion
     //#endregion
 
 }

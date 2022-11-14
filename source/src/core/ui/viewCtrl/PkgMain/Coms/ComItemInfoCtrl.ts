@@ -35,7 +35,7 @@ export class ComItemInfoCtrl extends BaseViewCtrl<ComItemInfoView, ComItemInfoDa
 	}
 
 	private onBtnShouCangClick(): void {
-		const isCollect = this.userData.bag.isCollect(this.data.id);
+		const isCollect = this.userData.isCollect(this.data.id);
 		ItemHandleService.Inst.changeCollect({ id: this.data.id, collect: !isCollect });
 	}
 

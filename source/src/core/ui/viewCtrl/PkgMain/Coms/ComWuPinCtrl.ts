@@ -47,11 +47,17 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 
 	}
 
-	@InsertEvent(UserDataEvent.Bag_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Collect_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Equipment_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Gem_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Prop_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Material_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Book_Changed, false, [ null ])
+	@InsertEvent(UserDataEvent.Other_Changed, false, [ null ])
 	private refreshList(type: ItemBagType) {
 		const same = type == null || type == this.showType;
 		this.showType = type ?? this.showType;
-		this.items = this.userData.bag.getItems(this.showType);
+		this.items = this.userData.getItems(this.showType) as any;
 		UIUtility.setList(this.view.ListItem, this.items.length, this, this.listRenderer, this.listClick);
 		!same && this.view.EffectList.play();
 	}

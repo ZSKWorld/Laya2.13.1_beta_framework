@@ -23,7 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.AccouontController = void 0;
 var Util_1 = require("../../utils/Util");
-var UserDataProxy_1 = require("../userdata/dataProxy/UserDataProxy");
+var UserData_1 = require("../userdata/UserData");
 var BaseController_1 = require("./BaseController");
 var AccouontController = /** @class */ (function (_super) {
     __extends(AccouontController, _super);
@@ -42,7 +42,7 @@ var AccouontController = /** @class */ (function (_super) {
             else if (!data.nickname)
                 this.response(data.cmd, null, 1006 /* ErrorCode.NICKNAME_IS_EMPTY */);
             else {
-                new UserDataProxy_1.UserDataProxy(data.account, data.password, data.nickname).save();
+                new UserData_1.UserData(data.account, data.password, data.nickname).save();
                 this.response(data.cmd);
             }
         }
@@ -56,13 +56,14 @@ var AccouontController = /** @class */ (function (_super) {
             else
                 this.connection.userLogin(userData);
         }
-        userData = JSON.parse(this.connection.userData.getJSONData());
+        userData = JSON.parse(JSON.stringify(this.connection.userData));
+        userData.offline = this.connection.userData.getOffline();
         this.response(data.cmd, { syncInfo: userData });
     };
     AccouontController.prototype.clearAccount = function (data) {
         var userData = this.connection.userData;
-        new UserDataProxy_1.UserDataProxy(userData.getAccount(), userData.getPassword(), userData.getNickname()).save();
-        var newData = Util_1.Util.getData(userData.getAccount(), userData.getPassword());
+        new UserData_1.UserData(userData.account, userData.password, userData.nickname).save();
+        var newData = Util_1.Util.getData(userData.account, userData.password);
         this.connection.userLogin(newData);
         this.response(data.cmd, { syncInfo: newData });
     };

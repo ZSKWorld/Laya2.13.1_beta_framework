@@ -43,7 +43,7 @@ export class ComItemInfoView extends ExtensionClass<ViewExtension, ComItemInfo>(
 			<br>类别：${ GameUtil.getLang(ItemType || 1110) }
 			<br>${ Description }` + sellTxt + buyTxt;
 		this.BtnShouCang.visible = buy == false;
-		this.BtnShouCang.grayed = !this.userData.bag.isCollect(id);
+		this.BtnShouCang.grayed = !this.userData.isCollect(id);
 	}
 
 	setNumText(text: string | number) {

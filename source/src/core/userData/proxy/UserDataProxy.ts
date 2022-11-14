@@ -2,12 +2,11 @@ import { GameUtil } from "../../common/GameUtil";
 import { InsertEvent } from "../../libs/event/EventMgr";
 import { MathUtil } from "../../libs/math/MathUtil";
 import { UpperFirst } from "../../libs/utils/Util";
-import { DataType, EquipmentPart } from "../../net/enum/ItemEnum";
+import { DataType, EquipmentPart, ItemBagType } from "../../net/enum/ItemEnum";
 import { NetResponse } from "../../net/NetResponse";
 import { tableMgr } from "../../table/TableManager";
-import { Bag } from "./Bag";
 import { BaseProxy } from "./BaseProxy";
-import { Equipment } from "./ItemProxy";
+import { Equipment, ItemBase } from "./ItemProxy";
 
 export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     private static _inst: UserDataProxy;
@@ -22,7 +21,6 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     get lastLoginTime(): number { return this.source.lastLoginTime; }
     get lastOnlineTime(): number { return this.source.lastOnlineTime; }
     get offline(): IOffline { return this.source.offline; }
-    get bag(): Bag { return this.source.bag as any; }
     get coin(): number { return this.source.coin; }
     get vcoin(): number { return this.source.vcoin; }
     get vigor(): number { return this.source.vigor; }
@@ -65,6 +63,14 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     get skill(): number[] { return this.source.skill; }
     get usingSkill(): number[] { return this.source.usingSkill; }
 
+    get collect(): number[] { return this.source.collect; }
+    get equipment(): IEquipment[] { return this.source.equipment; }
+    get gem(): IItemBase[] { return this.source.gem; }
+    get prop(): IItemBase[] { return this.source.prop; }
+    get material(): IItemBase[] { return this.source.material; }
+    get book(): IItemBase[] { return this.source.book; }
+    get other(): IItemBase[] { return this.source.other; }
+
     private set uid(value: string) { this.source.uid = value; }
     private set nickname(value: string) { this.source.nickname = value; }
     private set account(value: string) { this.source.account = value; }
@@ -73,7 +79,6 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     private set lastLoginTime(value: number) { this.source.lastLoginTime = value; }
     private set lastOnlineTime(value: number) { this.source.lastOnlineTime = value; }
     private set offline(value: IOffline) { this.source.offline = value; }
-    private set bag(value: IBag) { this.source.bag = new Bag(value); }
     private set coin(value: number) { this.source.coin = value; }
     private set vcoin(value: number) { this.source.vcoin = value; }
     private set vigor(value: number) { this.source.vigor = value; }
@@ -115,6 +120,15 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     private set citta(value: KeyData<number>) { this.source.citta = value; }
     private set skill(value: number[]) { this.source.skill = value; }
     private set usingSkill(value: number[]) { this.source.usingSkill = value; }
+
+
+    private set collect(value: number[]) { this.source.collect = value; }
+    private set equipment(value: IEquipment[]) { this.source.equipment = value.map(v => new Equipment(v));; }
+    private set gem(value: IItemBase[]) { this.source.gem = value.map(v => new ItemBase(v));; }
+    private set prop(value: IItemBase[]) { this.source.prop = value.map(v => new ItemBase(v));; }
+    private set material(value: IItemBase[]) { this.source.material = value.map(v => new ItemBase(v));; }
+    private set book(value: IItemBase[]) { this.source.book = value.map(v => new ItemBase(v));; }
+    private set other(value: IItemBase[]) { this.source.other = value.map(v => new ItemBase(v));; }
     //#endregion
 
     /** 升级经验 */
@@ -154,7 +168,7 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
                     case 1009: return this.vigor;
                     default: return 0;
                 }
-            case DataType.BagData: return this.bag.getItem(id)?.count || 0;
+            case DataType.BagData: return this.getItem(id)?.count || 0;
             default: return 0;
         }
     }
@@ -233,6 +247,37 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     /** 获取boss剩余冷却时间 */
     getBossCoolDown(bossId: number) {
         return Math.max(tableMgr.Boss[ bossId ].CoolTime - Math.floor(GameUtil.getServerTime() / 1000 - (this.boss[ bossId ] ?? 0)), 0);
+    }
+
+
+    isCollect(id: number) { return this.collect.includes(id); }
+
+    getItem(id: number) {
+        const item = tableMgr.Item[ id ];
+        if (!item) return null;
+        let datas: IItemBase[];
+        switch (item.BagType) {
+            case ItemBagType.Prop: datas = this.prop; break;
+            case ItemBagType.Gem: datas = this.gem; break;
+            case ItemBagType.Material: datas = this.material; break;
+            case ItemBagType.Book: datas = this.book; break;
+            case ItemBagType.Other: datas = this.other; break;
+        }
+        if (datas) return datas.find(v => v.id == id);
+        else return null;
+    }
+
+    getItems(type: ItemBagType) {
+        switch (type) {
+            case ItemBagType.Collect: return this.collect.filter(v => !!this.getItem(v)).map(v => this.getItem(v));
+            case ItemBagType.Equip: return this.equipment;
+            case ItemBagType.Prop: return this.prop;
+            case ItemBagType.Gem: return this.gem;
+            case ItemBagType.Material: return this.material;
+            case ItemBagType.Book: return this.book;
+            case ItemBagType.Other: return this.other;
+            default: return null;
+        }
     }
 
 

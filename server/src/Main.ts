@@ -35,18 +35,3 @@ wsServer.on("close", (connection, reson, desc) => {
     Logger.log(`${ connection.remoteAddress }：断开连接。${ reson }-${ desc }`, Color.red);
     Logger.log(`剩余连接数量：${ wsServer.connections.length }`);
 });
-
-
-const a = {
-    a: 0,
-    b: "",
-    c: [],
-    d: {}
-}
-const setter = function set(target: any, p: string | symbol, value: any, receiver: any): boolean {
-    if (value !== null && typeof value === "object") target[ p ] = new Proxy(value, { set: setter });
-    else target[p] = value;
-    return true;
-};
-const proxy = new Proxy<typeof a>(a, { set: setter });
-console.log(proxy instanceof Proxy, proxy.c instanceof Proxy,  proxy.d instanceof Proxy);

@@ -1,6 +1,6 @@
 import { Util } from "../../utils/Util";
 import { ErrorCode } from "../enum/ErrorCode";
-import { UserDataProxy } from "../userdata/dataProxy/UserDataProxy";
+import { UserData } from "../userdata/UserData";
 import { AddCMD, BaseController } from "./BaseController";
 
 export class AccouontController extends BaseController implements IAccount {
@@ -13,7 +13,7 @@ export class AccouontController extends BaseController implements IAccount {
             else if (!data.password) this.response(data.cmd, null, ErrorCode.PASSWORD_IS_EMPTY);
             else if (!data.nickname) this.response(data.cmd, null, ErrorCode.NICKNAME_IS_EMPTY);
             else {
-                new UserDataProxy(data.account, data.password, data.nickname).save();
+                new UserData(data.account, data.password, data.nickname).save();
                 this.response(data.cmd);
             }
         }
@@ -27,15 +27,16 @@ export class AccouontController extends BaseController implements IAccount {
             if (!userData) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
             else this.connection.userLogin(userData);
         }
-        userData = JSON.parse(this.connection.userData.getJSONData());
+        userData = JSON.parse(JSON.stringify(this.connection.userData));
+        userData.offline = this.connection.userData.getOffline();
         this.response(data.cmd, { syncInfo: userData });
     }
 
     @AddCMD
     clearAccount(data: UserInput): void {
         const userData = this.connection.userData;
-        new UserDataProxy(userData.getAccount(), userData.getPassword(), userData.getNickname()).save();
-        const newData = Util.getData(userData.getAccount(), userData.getPassword());
+        new UserData(userData.account, userData.password, userData.nickname).save();
+        const newData = Util.getData(userData.account, userData.password);
         this.connection.userLogin(newData);
         this.response(data.cmd, { syncInfo: newData });
     }

@@ -1,6 +1,9 @@
 import { tableMgr } from "../core/table/TableManager";
 
 export class GameUtil {
+    static decodeData(target: any, source: any) {
+        
+    }
     static isEquip(id: number) { return !!tableMgr.Equipment[ id ]; }
     static isProp(id: number) { return !!tableMgr.Props[ id ]; }
     static isFood(id: number) { return !!tableMgr.Food[ id ]; }

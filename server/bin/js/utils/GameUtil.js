@@ -5,6 +5,8 @@ var TableManager_1 = require("../core/table/TableManager");
 var GameUtil = /** @class */ (function () {
     function GameUtil() {
     }
+    GameUtil.decodeData = function (target, source) {
+    };
     GameUtil.isEquip = function (id) { return !!TableManager_1.tableMgr.Equipment[id]; };
     GameUtil.isProp = function (id) { return !!TableManager_1.tableMgr.Props[id]; };
     GameUtil.isFood = function (id) { return !!TableManager_1.tableMgr.Food[id]; };
