@@ -29,7 +29,7 @@ export class AccouontController extends BaseController implements IAccount {
         }
         userData = JSON.parse(JSON.stringify(this.connection.userData));
         userData.offline = this.connection.userData.getOffline();
-        this.response(data.cmd, { syncInfo: userData });
+        this.response(data.cmd, userData);
     }
 
     @AddCMD
@@ -38,6 +38,6 @@ export class AccouontController extends BaseController implements IAccount {
         new UserData(userData.account, userData.password, userData.nickname).save();
         const newData = Util.getData(userData.account, userData.password);
         this.connection.userLogin(newData);
-        this.response(data.cmd, { syncInfo: newData });
+        this.response(data.cmd, newData);
     }
 }

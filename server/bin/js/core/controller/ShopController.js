@@ -34,8 +34,8 @@ var ShopController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.buyGoods(data.id, data.count);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.buyGoods(data.id, data.count);
+            this.response(data.cmd);
         }
     };
     __decorate([

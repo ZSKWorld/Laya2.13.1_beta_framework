@@ -7,8 +7,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkUseItem(data.id, data.count);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            const syncInfo = userData.useItem(data.id, data.count);
-            this.response(data.cmd, { syncInfo });
+            userData.useItem(data.id, data.count);
+            this.response(data.cmd);
         }
     }
 
@@ -18,8 +18,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkSellItem(data.id, data.count);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            const syncInfo = userData.sellItem(data.id, data.count);
-            this.response(data.cmd, { syncInfo });
+            userData.sellItem(data.id, data.count);
+            this.response(data.cmd);
         }
     }
 
@@ -29,8 +29,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkDressEquip(data.uid);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            const syncInfo = userData.dressEquip(data.uid);
-            this.response(data.cmd, { syncInfo });
+            userData.dressEquip(data.uid);
+            this.response(data.cmd);
         }
     }
 
@@ -40,8 +40,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkTakeOffEquip(data.part);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            const syncInfo = userData.takeOffEquip(data.part);
-            this.response(data.cmd, { syncInfo });
+            userData.takeOffEquip(data.part);
+            this.response(data.cmd);
         }
     }
 
@@ -51,8 +51,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkSellEquip(data.uid);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            const syncInfo = userData.sellEquip(data.uid);
-            this.response(data.cmd, { syncInfo });
+            userData.sellEquip(data.uid);
+            this.response(data.cmd);
         }
     }
 
@@ -62,15 +62,16 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkCollect(data.id, data.collect);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            const syncInfo = userData.changeCollect(data.id, data.collect);
-            this.response(data.cmd, { syncInfo });
+            userData.changeCollect(data.id, data.collect);
+            this.response(data.cmd);
         }
     }
 
     @AddCMD
     decomposeEquip(data: DecomposeEquipInput): void {
-        const syncInfo = this.connection.userData.decomposeEquip(data.star);
-        this.response(data.cmd, { syncInfo });
+        const userData = this.connection.userData;
+        userData.decomposeEquip(data.star);
+        this.response(data.cmd);
     }
 
 }

@@ -25,14 +25,15 @@ export class Connection {
     private _userData: Readonly<UserData>;
     get logined() { return !!this._logined; }
     get userData() { return this._userData; }
-    get listener() { return this._listener; }
     get socket() { return this._socket; }
     constructor(connection: websocket.connection) {
         this._socket = connection;
         connection.on('message', (message) => {
             if (message.type === 'utf8') {
+                this._userData && this._userData.clearSyncInfo();
                 const data: UserInput = JSON.parse(message.utf8Data);
-                if (data.cmd != "register" && data.cmd != "login" && !this._logined) return this.response({ cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
+                if (data.cmd != "register" && data.cmd != "login" && !this._logined)
+                    return this.response({ cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
                 if (this._listener.hasListener(data.cmd))
                     this._listener.event(data.cmd, data);
                 else
@@ -47,6 +48,14 @@ export class Connection {
         });
     }
 
+    registerEvent(keyMap: any, caller: any) {
+        if (keyMap) {
+            for (let key in keyMap) {
+                this._listener.on(key, caller, caller[ key ]);
+            }
+        }
+    }
+
     userLogin(data: IUserData) {
         const oldConnection = connectionMgr.getConnectionByUid(data.uid);
         if (oldConnection && oldConnection != this) {
@@ -54,7 +63,7 @@ export class Connection {
             oldConnection._socket.close(websocket.connection.CLOSE_REASON_NORMAL, "login other place");
         }
         if (!this._logined) {
-            this._userData = ProxyMgr.createUserData(data.uid);
+            this._userData = ProxyMgr.getTargetProxy(data.uid, null, new UserData("", "", ""));
             this._logined = true;
             connectionMgr.addConnection(data.uid, data.account, this);
         }
@@ -62,6 +71,13 @@ export class Connection {
     }
 
     response(data: UserOutput) {
+        if (this._userData) {
+            const userSyncInfo = this._userData.getSyncInfo();
+            if (userSyncInfo) {
+                if (!data.syncInfo) data.syncInfo = userSyncInfo;
+                else data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
+            }
+        }
         this._socket.sendUTF(JSON.stringify(data));
     }
 

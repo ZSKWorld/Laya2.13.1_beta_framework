@@ -4,11 +4,7 @@ exports.AddCMD = exports.BaseController = void 0;
 var BaseController = /** @class */ (function () {
     function BaseController(connection) {
         this.connection = connection;
-        if (this._cmds) {
-            for (var key in this._cmds) {
-                this.connection.listener.on(key, this, this[key]);
-            }
-        }
+        this.connection.registerEvent(this._cmds, this);
         this.onConstruct();
     }
     BaseController.prototype.onConstruct = function () { };
@@ -17,6 +13,7 @@ var BaseController = /** @class */ (function () {
         this.connection = null;
     };
     BaseController.prototype.response = function (cmd, data, error) {
+        if (data === void 0) { data = null; }
         if (error === void 0) { error = 0 /* ErrorCode.NONE */; }
         if (this.connection) {
             var args = {
@@ -24,7 +21,7 @@ var BaseController = /** @class */ (function () {
                 error: error
             };
             if (data)
-                args = Object.assign(args, data);
+                args.syncInfo = data;
             this.connection.response(args);
         }
     };

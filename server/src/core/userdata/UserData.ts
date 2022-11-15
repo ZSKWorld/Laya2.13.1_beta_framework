@@ -6,10 +6,11 @@ import { ErrorCode } from "../enum/ErrorCode";
 import { DataType, EquipmentPart, FoodRecoverType, ItemBagType } from "../enum/ItemEnum";
 import { LangCode } from "../table/LangCode";
 import { tableMgr } from "../table/TableManager";
-import { BaseDataKeyMap, DressedEquipMap, EquipmentsSign, UserKeyMap } from "./DataConst";
-import { ProxyMgr } from "./ProxyMgr";
+import { BaseDataKeyMap, DressedEquipMap, EquipmentsSign } from "./DataConst";
+import { Equipment, ItemBase } from "./Item";
+import { SyncProxy } from "./ProxyMgr";
 
-export class UserData implements IUserData {
+export class UserData implements IUserData, SyncProxy<IUserData> {
     //#region Properties
     //#region BaseData
     uid: string = Util.CreateUID();
@@ -121,16 +122,14 @@ export class UserData implements IUserData {
         this.nickname = String(nickname);
         this.vigor = this.getMaxVigro();
     }
+    getSyncInfo(): any { }
+    clearSyncInfo(): any { }
 
     //#region BaseData
-    decode(source: any): this {
-        Object.keys(source).forEach(v => this[ v ] = source[ v ]);
-        return this;
-    }
     login(source: IUserData) {
         const equipments: any[][] = source[ EquipmentsSign ];
         delete source[ EquipmentsSign ];
-        this.decode(source);
+        Object.keys(source).forEach(v => this[ v ] = source[ v ]);
 
         const bagEquips = this.equipment;
         equipments && equipments.forEach(v => {
@@ -143,11 +142,10 @@ export class UserData implements IUserData {
                 level: v[ index++ ],
                 mingKe: v[ index++ ],
                 shenYou: v[ index++ ],
-
-                mainAttri: JSON.parse(v[ index++ ]),
-                wuXingAttri: JSON.parse(v[ index++ ]),
-                secondAttri: JSON.parse(v[ index++ ]),
-                bodyAttri: JSON.parse(v[ index++ ]),
+                mainAttri: v[ index++ ],
+                wuXingAttri: v[ index++ ],
+                secondAttri: v[ index++ ],
+                bodyAttri: v[ index++ ],
             })
         });
         this.lastLoginTime = TimeUtil.getTimeStamp();
@@ -174,10 +172,10 @@ export class UserData implements IUserData {
                     equip.level,
                     equip.mingKe,
                     equip.shenYou,
-                    JSON.stringify(equip.mainAttri),
-                    JSON.stringify(equip.wuXingAttri),
-                    JSON.stringify(equip.secondAttri),
-                    JSON.stringify(equip.bodyAttri),
+                    equip.mainAttri,
+                    equip.wuXingAttri,
+                    equip.secondAttri,
+                    equip.bodyAttri,
                 ]);
             });
             this.equipment.length = 0;
@@ -216,15 +214,14 @@ export class UserData implements IUserData {
                 break;
             case DataType.BagData:
                 let datas: IItemBase[];
-                let dataKey: string;
                 switch (item.BagType) {
                     // case ItemBagType.Collect: break;
                     // case ItemBagType.Equip: break;
-                    case ItemBagType.Prop: datas = this.prop; dataKey = UserKeyMap.prop; break;
-                    case ItemBagType.Gem: datas = this.gem; dataKey = UserKeyMap.gem; break;
-                    case ItemBagType.Material: datas = this.material; dataKey = UserKeyMap.material; break;
-                    case ItemBagType.Book: datas = this.book; dataKey = UserKeyMap.book; break;
-                    case ItemBagType.Other: datas = this.other; dataKey = UserKeyMap.other; break;
+                    case ItemBagType.Prop: datas = this.prop; break;
+                    case ItemBagType.Gem: datas = this.gem; break;
+                    case ItemBagType.Material: datas = this.material; break;
+                    case ItemBagType.Book: datas = this.book; break;
+                    case ItemBagType.Other: datas = this.other; break;
                     default: return;
                 }
                 const dataLen = datas.length;
@@ -236,7 +233,7 @@ export class UserData implements IUserData {
                         return;
                     }
                 }
-                if (count > 0) datas.push(ProxyMgr.createItem(this.uid, dataKey, id, count));
+                if (count > 0) datas.push(new ItemBase(id, count));
                 break;
             default: break;
         }
@@ -348,7 +345,6 @@ export class UserData implements IUserData {
 
     /** 使用物品 */
     useItem(id: number, count: number) {
-        ProxyMgr.clearSyncInfo(this.uid);
         const [ prop, food, skillBook, xinFaBook ] = [
             tableMgr.Props[ id ], tableMgr.Food[ id ], tableMgr.SkillBook[ id ], tableMgr.XinFaBook[ id ],
         ];
@@ -362,19 +358,24 @@ export class UserData implements IUserData {
             this.changeItemCount(id, -1);
             this.citta[ id ] = 1;
         }
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 出售物品 */
     sellItem(id: number, count: number) {
-        ProxyMgr.clearSyncInfo(this.uid);
-        this._sellItem(id, count);
-        return ProxyMgr.getSyncInfo(this);
+        const sellRewards = tableMgr.Item[ id ].SellRewards;
+        if (sellRewards.length) {
+            sellRewards.forEach(v => {
+                if (GameUtil.isEquip(v.id)) this.addNewEquip(v.id, v.count * count);
+                else {
+                    this.changeItemCount(v.id, v.count * count);
+                }
+            });
+        }
+        this.changeItemCount(id, -count);
     }
 
     /** 穿戴装备 */
     dressEquip(uid: string) {
-        ProxyMgr.clearSyncInfo(this.uid);
         const userdata = this;
         const equip = this.getEquip(uid);
         const part = tableMgr.Equipment[ equip.id ].Part;
@@ -382,59 +383,47 @@ export class UserData implements IUserData {
         const dressedEquip = this.getDressedEquip(part);
         if (dressedEquip) userdata.equipment.push(dressedEquip);
         this.setDressedEquip(part, equip);
-
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 脱下装备 */
     takeOffEquip(part: EquipmentPart) {
-        ProxyMgr.clearSyncInfo(this.uid);
         const userdata = this;
         const equip = this.getDressedEquip(part);
         this.setDressedEquip(part, null);
         userdata.equipment.push(equip);
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 出售装备 */
     sellEquip(uid: string) {
-        ProxyMgr.clearSyncInfo(this.uid);
         const equip = this.getEquip(uid);
-        this._sellItem(equip.id, 1);
+        this.sellItem(equip.id, 1);
         this.removeEquip(uid);
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 分解装备 */
     decomposeEquip(star: number) {
-        ProxyMgr.clearSyncInfo(this.uid);
         const equips = this.equipment;
         const equipCnt = equips.length;
         for (let i = equipCnt - 1; i >= 0; i--) {
             if (equips[ i ].star == star) {
-                this._sellItem(equips[ i ].id, 1);
+                this.sellItem(equips[ i ].id, 1);
                 equips.splice(i, 1);
             }
         }
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 购买物品 */
     buyGoods(id: number, count: number) {
-        ProxyMgr.clearSyncInfo(this.uid);
         const item = tableMgr.Shop[ id ];
         item.SellPrice.forEach(v => this.changeItemCount(v.id, -v.count));
         if (GameUtil.isEquip(item.SellID)) this.addNewEquip(item.SellID, count);
         else this.changeItemCount(item.SellID, count);
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 添加/取消 收藏 */
     changeCollect(id: number, collect: boolean) {
-        ProxyMgr.clearSyncInfo(this.uid);
         if (collect) this.collect.push(id);
         else this.collect.remove(id);
-        return ProxyMgr.getSyncInfo(this);
     }
 
     /** 使用道具 */
@@ -478,18 +467,6 @@ export class UserData implements IUserData {
         this.changeItemCount(id, -useCount);
     }
 
-    private _sellItem(id: number, count: number) {
-        const sellRewards = tableMgr.Item[ id ].SellRewards;
-        if (sellRewards.length) {
-            sellRewards.forEach(v => {
-                if (GameUtil.isEquip(v.id)) this.addNewEquip(v.id, v.count * count);
-                else {
-                    this.changeItemCount(v.id, v.count * count);
-                }
-            });
-        }
-        this.changeItemCount(id, -count);
-    }
     //#endregion
 
     //#region BagData
@@ -521,7 +498,7 @@ export class UserData implements IUserData {
     /** 添加装备 */
     addNewEquip(id: number, count: number) {
         for (let i = 0; i < count; i++) {
-            const equip = ProxyMgr.createEquipment(this.uid, UserKeyMap.equipment, id);
+            const equip = new Equipment(id);
             this.equipment.push(equip);
         }
     }

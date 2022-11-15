@@ -34,8 +34,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.useItem(data.id, data.count);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.useItem(data.id, data.count);
+            this.response(data.cmd);
         }
     };
     ItemHandleController.prototype.sellItem = function (data) {
@@ -44,8 +44,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.sellItem(data.id, data.count);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.sellItem(data.id, data.count);
+            this.response(data.cmd);
         }
     };
     ItemHandleController.prototype.dressEquip = function (data) {
@@ -54,8 +54,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.dressEquip(data.uid);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.dressEquip(data.uid);
+            this.response(data.cmd);
         }
     };
     ItemHandleController.prototype.takeOffEquip = function (data) {
@@ -64,8 +64,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.takeOffEquip(data.part);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.takeOffEquip(data.part);
+            this.response(data.cmd);
         }
     };
     ItemHandleController.prototype.sellEquip = function (data) {
@@ -74,8 +74,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.sellEquip(data.uid);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.sellEquip(data.uid);
+            this.response(data.cmd);
         }
     };
     ItemHandleController.prototype.changeCollect = function (data) {
@@ -84,13 +84,14 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            var syncInfo = userData.changeCollect(data.id, data.collect);
-            this.response(data.cmd, { syncInfo: syncInfo });
+            userData.changeCollect(data.id, data.collect);
+            this.response(data.cmd);
         }
     };
     ItemHandleController.prototype.decomposeEquip = function (data) {
-        var syncInfo = this.connection.userData.decomposeEquip(data.star);
-        this.response(data.cmd, { syncInfo: syncInfo });
+        var userData = this.connection.userData;
+        userData.decomposeEquip(data.star);
+        this.response(data.cmd);
     };
     __decorate([
         BaseController_1.AddCMD

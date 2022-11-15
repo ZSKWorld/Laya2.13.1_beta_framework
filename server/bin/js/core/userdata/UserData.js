@@ -7,7 +7,7 @@ var TimeUtil_1 = require("../../utils/TimeUtil");
 var Util_1 = require("../../utils/Util");
 var TableManager_1 = require("../table/TableManager");
 var DataConst_1 = require("./DataConst");
-var ProxyMgr_1 = require("./ProxyMgr");
+var Item_1 = require("./Item");
 var UserData = /** @class */ (function () {
     //#endregion
     //#endregion
@@ -119,16 +119,14 @@ var UserData = /** @class */ (function () {
         this.nickname = String(nickname);
         this.vigor = this.getMaxVigro();
     }
+    UserData.prototype.getSyncInfo = function () { };
+    UserData.prototype.clearSyncInfo = function () { };
     //#region BaseData
-    UserData.prototype.decode = function (source) {
-        var _this = this;
-        Object.keys(source).forEach(function (v) { return _this[v] = source[v]; });
-        return this;
-    };
     UserData.prototype.login = function (source) {
+        var _this = this;
         var equipments = source[DataConst_1.EquipmentsSign];
         delete source[DataConst_1.EquipmentsSign];
-        this.decode(source);
+        Object.keys(source).forEach(function (v) { return _this[v] = source[v]; });
         var bagEquips = this.equipment;
         equipments && equipments.forEach(function (v) {
             var index = 0;
@@ -140,10 +138,10 @@ var UserData = /** @class */ (function () {
                 level: v[index++],
                 mingKe: v[index++],
                 shenYou: v[index++],
-                mainAttri: JSON.parse(v[index++]),
-                wuXingAttri: JSON.parse(v[index++]),
-                secondAttri: JSON.parse(v[index++]),
-                bodyAttri: JSON.parse(v[index++])
+                mainAttri: v[index++],
+                wuXingAttri: v[index++],
+                secondAttri: v[index++],
+                bodyAttri: v[index++]
             });
         });
         this.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
@@ -171,10 +169,10 @@ var UserData = /** @class */ (function () {
                     equip.level,
                     equip.mingKe,
                     equip.shenYou,
-                    JSON.stringify(equip.mainAttri),
-                    JSON.stringify(equip.wuXingAttri),
-                    JSON.stringify(equip.secondAttri),
-                    JSON.stringify(equip.bodyAttri),
+                    equip.mainAttri,
+                    equip.wuXingAttri,
+                    equip.secondAttri,
+                    equip.bodyAttri,
                 ]);
             });
             this.equipment.length = 0;
@@ -209,29 +207,23 @@ var UserData = /** @class */ (function () {
                 break;
             case 2 /* DataType.BagData */:
                 var datas = void 0;
-                var dataKey = void 0;
                 switch (item.BagType) {
                     // case ItemBagType.Collect: break;
                     // case ItemBagType.Equip: break;
                     case 2 /* ItemBagType.Prop */:
                         datas = this.prop;
-                        dataKey = DataConst_1.UserKeyMap.prop;
                         break;
                     case 3 /* ItemBagType.Gem */:
                         datas = this.gem;
-                        dataKey = DataConst_1.UserKeyMap.gem;
                         break;
                     case 4 /* ItemBagType.Material */:
                         datas = this.material;
-                        dataKey = DataConst_1.UserKeyMap.material;
                         break;
                     case 5 /* ItemBagType.Book */:
                         datas = this.book;
-                        dataKey = DataConst_1.UserKeyMap.book;
                         break;
                     case 6 /* ItemBagType.Other */:
                         datas = this.other;
-                        dataKey = DataConst_1.UserKeyMap.other;
                         break;
                     default: return;
                 }
@@ -245,7 +237,7 @@ var UserData = /** @class */ (function () {
                     }
                 }
                 if (count > 0)
-                    datas.push(ProxyMgr_1.ProxyMgr.createItem(this.uid, dataKey, id, count));
+                    datas.push(new Item_1.ItemBase(id, count));
                 break;
             default: break;
         }
@@ -377,7 +369,6 @@ var UserData = /** @class */ (function () {
     //#endregion
     /** 使用物品 */
     UserData.prototype.useItem = function (id, count) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         var _a = [
             TableManager_1.tableMgr.Props[id], TableManager_1.tableMgr.Food[id], TableManager_1.tableMgr.SkillBook[id], TableManager_1.tableMgr.XinFaBook[id],
         ], prop = _a[0], food = _a[1], skillBook = _a[2], xinFaBook = _a[3];
@@ -385,21 +376,32 @@ var UserData = /** @class */ (function () {
             this.useProp(id, count);
         else if (food)
             this.useFood(id, count);
-        else if (skillBook)
-            this.useSkillBook(id, count);
-        else if (xinFaBook)
-            this.useCittaBook(id, count);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
+        else if (skillBook) {
+            this.changeItemCount(id, -1);
+            this.skill.push(id);
+        }
+        else if (xinFaBook) {
+            this.changeItemCount(id, -1);
+            this.citta[id] = 1;
+        }
     };
     /** 出售物品 */
     UserData.prototype.sellItem = function (id, count) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
-        this._sellItem(id, count);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
+        var _this = this;
+        var sellRewards = TableManager_1.tableMgr.Item[id].SellRewards;
+        if (sellRewards.length) {
+            sellRewards.forEach(function (v) {
+                if (GameUtil_1.GameUtil.isEquip(v.id))
+                    _this.addNewEquip(v.id, v.count * count);
+                else {
+                    _this.changeItemCount(v.id, v.count * count);
+                }
+            });
+        }
+        this.changeItemCount(id, -count);
     };
     /** 穿戴装备 */
     UserData.prototype.dressEquip = function (uid) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         var userdata = this;
         var equip = this.getEquip(uid);
         var part = TableManager_1.tableMgr.Equipment[equip.id].Part;
@@ -408,58 +410,47 @@ var UserData = /** @class */ (function () {
         if (dressedEquip)
             userdata.equipment.push(dressedEquip);
         this.setDressedEquip(part, equip);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
     };
     /** 脱下装备 */
     UserData.prototype.takeOffEquip = function (part) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         var userdata = this;
         var equip = this.getDressedEquip(part);
         this.setDressedEquip(part, null);
         userdata.equipment.push(equip);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
     };
     /** 出售装备 */
     UserData.prototype.sellEquip = function (uid) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         var equip = this.getEquip(uid);
-        this._sellItem(equip.id, 1);
+        this.sellItem(equip.id, 1);
         this.removeEquip(uid);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
     };
     /** 分解装备 */
     UserData.prototype.decomposeEquip = function (star) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         var equips = this.equipment;
         var equipCnt = equips.length;
         for (var i = equipCnt - 1; i >= 0; i--) {
             if (equips[i].star == star) {
-                this._sellItem(equips[i].id, 1);
+                this.sellItem(equips[i].id, 1);
                 equips.splice(i, 1);
             }
         }
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
     };
     /** 购买物品 */
     UserData.prototype.buyGoods = function (id, count) {
         var _this = this;
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         var item = TableManager_1.tableMgr.Shop[id];
         item.SellPrice.forEach(function (v) { return _this.changeItemCount(v.id, -v.count); });
         if (GameUtil_1.GameUtil.isEquip(item.SellID))
             this.addNewEquip(item.SellID, count);
         else
             this.changeItemCount(item.SellID, count);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
     };
     /** 添加/取消 收藏 */
     UserData.prototype.changeCollect = function (id, collect) {
-        ProxyMgr_1.ProxyMgr.clearSyncInfo(this.uid);
         if (collect)
             this.collect.push(id);
         else
             this.collect.remove(id);
-        return ProxyMgr_1.ProxyMgr.getSyncInfo(this);
     };
     /** 使用道具 */
     UserData.prototype.useProp = function (id, count) {
@@ -518,32 +509,6 @@ var UserData = /** @class */ (function () {
         userdata.vigor = MathUtil_1.MathUtil.Clamp(userdata.vigor + singleRecover * useCount, 0, maxVigro);
         this.changeItemCount(id, -useCount);
     };
-    /** 使用技能书 */
-    UserData.prototype.useSkillBook = function (id, count) {
-        var userData = this;
-        this.changeItemCount(id, -1);
-        userData.skill.push(id);
-    };
-    /** 使用心法书 */
-    UserData.prototype.useCittaBook = function (id, count) {
-        var userData = this;
-        this.changeItemCount(id, -1);
-        userData.citta[id] = 1;
-    };
-    UserData.prototype._sellItem = function (id, count) {
-        var _this = this;
-        var sellRewards = TableManager_1.tableMgr.Item[id].SellRewards;
-        if (sellRewards.length) {
-            sellRewards.forEach(function (v) {
-                if (GameUtil_1.GameUtil.isEquip(v.id))
-                    _this.addNewEquip(v.id, v.count * count);
-                else {
-                    _this.changeItemCount(v.id, v.count * count);
-                }
-            });
-        }
-        this.changeItemCount(id, -count);
-    };
     //#endregion
     //#region BagData
     UserData.prototype.isCollect = function (id) { return this.collect.includes(id); };
@@ -584,7 +549,7 @@ var UserData = /** @class */ (function () {
     /** 添加装备 */
     UserData.prototype.addNewEquip = function (id, count) {
         for (var i = 0; i < count; i++) {
-            var equip = ProxyMgr_1.ProxyMgr.createEquipment(this.uid, DataConst_1.UserKeyMap.equipment, id);
+            var equip = new Item_1.Equipment(id);
             this.equipment.push(equip);
         }
     };

@@ -11,6 +11,7 @@ var HeartController_1 = require("./controller/HeartController");
 var ItemHandleController_1 = require("./controller/ItemHandleController");
 var ShopController_1 = require("./controller/ShopController");
 var ProxyMgr_1 = require("./userdata/ProxyMgr");
+var UserData_1 = require("./userdata/UserData");
 var Connection = /** @class */ (function () {
     function Connection(connection) {
         var _this = this;
@@ -25,6 +26,7 @@ var Connection = /** @class */ (function () {
         this._socket = connection;
         connection.on('message', function (message) {
             if (message.type === 'utf8') {
+                _this._userData && _this._userData.clearSyncInfo();
                 var data = JSON.parse(message.utf8Data);
                 if (data.cmd != "register" && data.cmd != "login" && !_this._logined)
                     return _this.response({ cmd: data.cmd, error: 1007 /* ErrorCode.NOT_LOGIN */ });
@@ -51,16 +53,18 @@ var Connection = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Connection.prototype, "listener", {
-        get: function () { return this._listener; },
-        enumerable: false,
-        configurable: true
-    });
     Object.defineProperty(Connection.prototype, "socket", {
         get: function () { return this._socket; },
         enumerable: false,
         configurable: true
     });
+    Connection.prototype.registerEvent = function (keyMap, caller) {
+        if (keyMap) {
+            for (var key in keyMap) {
+                this._listener.on(key, caller, caller[key]);
+            }
+        }
+    };
     Connection.prototype.userLogin = function (data) {
         var oldConnection = ConnectionMgr_1.connectionMgr.getConnectionByUid(data.uid);
         if (oldConnection && oldConnection != this) {
@@ -68,13 +72,22 @@ var Connection = /** @class */ (function () {
             oldConnection._socket.close(websocket.connection.CLOSE_REASON_NORMAL, "login other place");
         }
         if (!this._logined) {
-            this._userData = ProxyMgr_1.ProxyMgr.createUserData(data.uid);
+            this._userData = ProxyMgr_1.ProxyMgr.getTargetProxy(data.uid, null, new UserData_1.UserData("", "", ""));
             this._logined = true;
             ConnectionMgr_1.connectionMgr.addConnection(data.uid, data.account, this);
         }
         this._userData.login(data);
     };
     Connection.prototype.response = function (data) {
+        if (this._userData) {
+            var userSyncInfo = this._userData.getSyncInfo();
+            if (userSyncInfo) {
+                if (!data.syncInfo)
+                    data.syncInfo = userSyncInfo;
+                else
+                    data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
+            }
+        }
         this._socket.sendUTF(JSON.stringify(data));
     };
     Connection.prototype.connectionClose = function () {

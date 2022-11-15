@@ -6,11 +6,7 @@ export class BaseController {
     protected connection: Connection;
     constructor(connection: Connection) {
         this.connection = connection;
-        if (this._cmds) {
-            for (let key in this._cmds) {
-                this.connection.listener.on(key, this, this[ key ]);
-            }
-        }
+        this.connection.registerEvent(this._cmds, this);
         this.onConstruct();
     }
 
@@ -21,13 +17,13 @@ export class BaseController {
         this.connection = null;
     }
 
-    protected response(cmd: string, data?: object, error: number = ErrorCode.NONE) {
+    protected response(cmd: string, data: any = null, error: number = ErrorCode.NONE) {
         if (this.connection) {
-            let args = {
+            let args: UserOutput = {
                 cmd,
                 error,
             };
-            if (data) args = Object.assign(args, data);
+            if (data) args.syncInfo = data;
             this.connection.response(args);
         }
     }
