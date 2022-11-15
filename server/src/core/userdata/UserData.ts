@@ -354,8 +354,14 @@ export class UserData implements IUserData {
         ];
         if (prop) this.useProp(id, count);
         else if (food) this.useFood(id, count);
-        else if (skillBook) this.useSkillBook(id, count);
-        else if (xinFaBook) this.useCittaBook(id, count);
+        else if (skillBook) {
+            this.changeItemCount(id, -1);
+            this.skill.push(id);
+        }
+        else if (xinFaBook) {
+            this.changeItemCount(id, -1);
+            this.citta[ id ] = 1;
+        }
         return ProxyMgr.getSyncInfo(this);
     }
 
@@ -470,20 +476,6 @@ export class UserData implements IUserData {
         else useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
         userdata.vigor = MathUtil.Clamp(userdata.vigor + singleRecover * useCount, 0, maxVigro);
         this.changeItemCount(id, -useCount);
-    }
-
-    /** 使用技能书 */
-    private useSkillBook(id: number, count: number) {
-        const userData = this;
-        this.changeItemCount(id, -1);
-        userData.skill.push(id);
-    }
-
-    /** 使用心法书 */
-    private useCittaBook(id: number, count: number) {
-        const userData = this;
-        this.changeItemCount(id, -1);
-        userData.citta[ id ] = 1;
     }
 
     private _sellItem(id: number, count: number) {

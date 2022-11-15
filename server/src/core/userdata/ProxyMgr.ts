@@ -12,34 +12,20 @@ const enum DataType {
     Equipment = "Equipment",
 }
 
+type SyncProxy<T> = T & {
+    getSyncKeys(): void;
+    clearSyncInfo(): void;
+}
+
+const ProxyKey = Symbol(111);
 export class ProxyMgr {
-    private static readonly ProxyKey = Symbol(111);
     private static proxyMap: { [ uid: string ]: any } = new Proxy({}, {
         get(target, p, receiver) {
             if (target[ p ] === void 0) target[ p ] = {};
             return target[ p ];
         },
     });
-    private static getProxyHandlerSet(uid: string, dataKey: string) {
-        return function set(target: any, p: string | symbol, value: any, receiver: any): boolean {
-            target[ p ] = value;
-            ProxyMgr.proxyMap[ uid ][ dataKey ] = true;
-            return true;
-        };
-    }
-
-    private static decodeProxy<T>(uid: string, dataKey: string, target: T, source: any) {
-        if (target[ this.ProxyKey ]) return target;
-        Object.keys(source).forEach(key => {
-            if (source[ key ] !== null && typeof source[ key ] == "object")
-                target[ key ] = new Proxy(source[ key ], { set: ProxyMgr.getProxyHandlerSet(uid, dataKey) });
-            else
-                target[ key ] = source[ key ];
-        });
-        const result = new Proxy(target, { set: ProxyMgr.getProxyHandlerSet(uid, dataKey) }) as T;
-        result[ this.ProxyKey ] = true;
-        return result;
-    }
+    
 
     static getSyncInfo(userData: IUserData) {
         const keyMap = this.proxyMap[ userData.uid ];
@@ -53,9 +39,9 @@ export class ProxyMgr {
         this.proxyMap[ uid ] = {};
     }
 
-    static createUserData(uid:string) {
+    static createUserData(uid: string) {
         const _this = this;
-        let user: IUserData = new UserData("","","");
+        let user: IUserData = new UserData("", "", "");
         return new Proxy(user, {
             set(target: any, p: string, value: any, receiver: any): boolean {
                 switch (p) {
@@ -81,7 +67,7 @@ export class ProxyMgr {
                     case UserKeyMap.sect: break;
                     case UserKeyMap.soul: break;
                     case UserKeyMap.gemScore: break;
-                    case EquipmentsSign:break;
+                    case EquipmentsSign: break;
 
                     case UserKeyMap.weapon: value = _this.createEquipment(uid, p, value); break;
                     case UserKeyMap.helmet: value = _this.createEquipment(uid, p, value); break;
@@ -105,11 +91,11 @@ export class ProxyMgr {
                     case UserKeyMap.amuletGems: value = _this.createArray(uid, p, value); break;
                     case UserKeyMap.shoesGems: value = _this.createArray(uid, p, value); break;
 
-                    case UserKeyMap.level: value = _this.createObj(uid, p, value); break;
-                    case UserKeyMap.copy: value = _this.createObj(uid, p, value); break;
-                    case UserKeyMap.secret: value = _this.createObj(uid, p, value); break;
-                    case UserKeyMap.boss: value = _this.createObj(uid, p, value); break;
-                    case UserKeyMap.citta: value = _this.createObj(uid, p, value); break;
+                    case UserKeyMap.level: value = _this.getTargetProxy(uid, p, value); break;
+                    case UserKeyMap.copy: value = _this.getTargetProxy(uid, p, value); break;
+                    case UserKeyMap.secret: value = _this.getTargetProxy(uid, p, value); break;
+                    case UserKeyMap.boss: value = _this.getTargetProxy(uid, p, value); break;
+                    case UserKeyMap.citta: value = _this.getTargetProxy(uid, p, value); break;
 
                     case UserKeyMap.skill: value = _this.createArray(uid, p, value); break;
                     case UserKeyMap.usingSkill: value = _this.createArray(uid, p, value); break;
@@ -136,7 +122,7 @@ export class ProxyMgr {
         let obj: Equipment;
         if (typeof arg == "number") obj = new Equipment(arg);
         else obj = arg ? Object.assign(new Equipment(0), arg) : null;
-        return obj ? this.decodeProxy(uid, dataKey, obj, obj) : null;
+        return this.getTargetProxy(uid, dataKey, obj);
     }
 
     static createItem(uid: string, dataKey: string, id: number, count: number): ItemBase;
@@ -145,13 +131,13 @@ export class ProxyMgr {
         let obj: ItemBase;
         if (typeof arg1 == "number") obj = new ItemBase(arg1, arg2);
         else obj = arg1 ? Object.assign(new ItemBase(0, 0), arg1) : null;
-        return obj ? this.decodeProxy(uid, dataKey, obj, obj) : null;
+        return this.getTargetProxy(uid, dataKey, obj);
     }
 
     static createArray<T = number>(uid: string, dataKey: string, source: T[]) {
         const _this = this;
         let obj: T[] = source || [];
-        if (obj[ this.ProxyKey ]) return obj;
+        if (obj[ ProxyKey ]) return obj;
         const result = new Proxy(obj, {
             set(target: any, p: string | symbol, value: any, receiver: any): boolean {
                 const type = value.constructor.name;
@@ -159,7 +145,7 @@ export class ProxyMgr {
                     case DataType.Number:
                     case DataType.String:
                     case DataType.Boolean: target[ p ] = value; break;
-                    case DataType.Object: target[ p ] = _this.createObj(uid, dataKey, value); break;
+                    case DataType.Object: target[ p ] = _this.getTargetProxy(uid, dataKey, value); break;
                     case DataType.Array: target[ p ] = _this.createArray(uid, dataKey, value); break;
                     case DataType.ItemBase: target[ p ] = _this.createItem(uid, dataKey, value); break;
                     case DataType.Equipment: target[ p ] = _this.createEquipment(uid, dataKey, value); break;
@@ -169,12 +155,29 @@ export class ProxyMgr {
                 return true;
             },
         });
-        result[ this.ProxyKey ] = true;
+        result[ ProxyKey ] = true;
         return result as T;
     }
 
-    static createObj<T>(uid: string, dataKey: string, source?: any) {
-        let obj: T = source || {};
-        return this.decodeProxy(uid, dataKey, obj, obj);
+    static getTargetProxy<T extends object>(uid: string, dataKey: string, target: T): SyncProxy<T> {
+        if (typeof target === "object" && target !== null && !target[ ProxyKey ]) {
+            Object.keys(target).forEach(key => target[ key ] = this.getTargetProxy(uid, dataKey, target[ key ]));
+            target[ "getSyncKeys" ] = function () { return Object.keys(ProxyMgr.proxyMap[ uid ]); };
+            target[ "clearSyncInfo" ] = function () { ProxyMgr.proxyMap[ uid ] = {}; }
+            const result = new Proxy(target, {
+                set(target: any, p: string | symbol, value: any, receiver: any): boolean {
+                    target[ p ] = ProxyMgr.getTargetProxy(uid, dataKey, value);
+                    ProxyMgr.proxyMap[ uid ][ dataKey ] = true;
+                    return true;
+                }
+            });
+            result[ ProxyKey ] = true;
+            return result;
+        } else
+            return target as any;
+    }
+
+    static aaa() {
+
     }
 }
