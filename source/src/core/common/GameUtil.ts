@@ -31,14 +31,20 @@ export class GameUtil {
     static getColorStr(id: number, text: string) {
         return RichStrMgr.start(text).color(tableMgr.Color[ id ].Color).end();
     }
-	static getAttributeName = (function () {
-		const strs = ["", "攻击", "防御", "生命", "体力", "力量", "耐力", "身法", "命中", "闪避", "暴击", "暴抗", "暴伤", "吸收", "金攻",
-			"木攻", "水攻", "火攻", "土攻", "金防", "木防", "水防", "火防", "土防", "五行攻击", "五行防御", "所有属性", "最终伤害", "增加命中",
-			"增加暴击", "减免伤害", "减五行攻防",];
-		return function (attriType: AttributeEnum) {
-			return strs[attriType];
-		}
-	})();
+
+    static getItemCountStr(item: IItemBase) {
+        const { Name, Quality } = tableMgr.Item[ item.id ];
+        const color = GameUtil.getColorStr(Quality, Name);
+        return RichStrMgr.start().space().combineSpace(`${ color } x${ item.count }`).space().end();
+    }
+    static getAttributeName = (function () {
+        const strs = [ "", "攻击", "防御", "生命", "体力", "力量", "耐力", "身法", "命中", "闪避", "暴击", "暴抗", "暴伤", "吸收", "金攻",
+            "木攻", "水攻", "火攻", "土攻", "金防", "木防", "水防", "火防", "土防", "五行攻击", "五行防御", "所有属性", "最终伤害", "增加命中",
+            "增加暴击", "减免伤害", "减五行攻防", ];
+        return function (attriType: AttributeEnum) {
+            return strs[ attriType ];
+        }
+    })();
 
     /**获取多个物品字符串 */
     static getItemString(items: { id: number, count: number }[], hasCount = true, color = false) {
@@ -47,7 +53,7 @@ export class GameUtil {
             + (hasCount ? `x${ v.count }` : "") + (index == items.length - 1 ? "" : "、"));
         return str;
     }
-    
+
     /** 境界转等级 */
     static jingJieToLevel(jingJie: number, cengJi: number) {
         return (jingJie - 1) * (+tableMgr.Const[ 1005 ].Value) + cengJi;
@@ -83,8 +89,8 @@ export class GameUtil {
     static isEquip(id: number) {
         return !!tableMgr.Equipment[ id ];
     }
-    
-	static canUseItem(id: number) {
-		return !!(tableMgr.Props[id] || tableMgr.Food[id] || tableMgr.SkillBook[id] || tableMgr.XinFaBook[id]);
-	}
+
+    static canUseItem(id: number) {
+        return !!(tableMgr.Props[ id ] || tableMgr.Food[ id ] || tableMgr.SkillBook[ id ] || tableMgr.XinFaBook[ id ]);
+    }
 }

@@ -1,7 +1,7 @@
 declare interface IAccount {
     register(data: RegisterInput): void;
     login(data: LoginInput): void;
-    clearAccount(data: UserInput): void;
+    clearAccount(data: ClearAccountInput): void;
 }
 
 declare interface LoginInput extends UserInput {
@@ -22,10 +22,10 @@ declare interface RegisterOutput extends UserOutput {
 
 }
 
-declare interface ClearInput extends UserInput {
+declare interface ClearAccountInput extends UserInput {
 
 }
 
-declare interface ClearOutput extends UserOutput {
+declare interface ClearAccountOutput extends UserOutput {
 
 }

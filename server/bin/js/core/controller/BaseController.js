@@ -21,7 +21,7 @@ var BaseController = /** @class */ (function () {
                 error: error
             };
             if (data)
-                args.syncInfo = data;
+                Object.assign(args, data);
             this.connection.response(args);
         }
     };

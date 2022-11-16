@@ -34,8 +34,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            userData.useItem(data.id, data.count);
-            this.response(data.cmd);
+            var rewards = userData.useItem(data.id, data.count);
+            this.response(data.cmd, { rewards: rewards });
         }
     };
     ItemHandleController.prototype.sellItem = function (data) {
@@ -44,8 +44,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            userData.sellItem(data.id, data.count);
-            this.response(data.cmd);
+            var rewards = userData.sellItem(data.id, data.count);
+            this.response(data.cmd, { rewards: rewards });
         }
     };
     ItemHandleController.prototype.dressEquip = function (data) {
@@ -74,8 +74,8 @@ var ItemHandleController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            userData.sellEquip(data.uid);
-            this.response(data.cmd);
+            var rewards = userData.sellEquip(data.uid);
+            this.response(data.cmd, { rewards: rewards });
         }
     };
     ItemHandleController.prototype.changeCollect = function (data) {
@@ -90,8 +90,8 @@ var ItemHandleController = /** @class */ (function (_super) {
     };
     ItemHandleController.prototype.decomposeEquip = function (data) {
         var userData = this.connection.userData;
-        userData.decomposeEquip(data.star);
-        this.response(data.cmd);
+        var rewards = userData.decomposeEquip(data.star);
+        this.response(data.cmd, { rewards: rewards });
     };
     __decorate([
         BaseController_1.AddCMD

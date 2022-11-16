@@ -121,28 +121,24 @@ var UserData = /** @class */ (function () {
     }
     UserData.prototype.getSyncInfo = function () { };
     UserData.prototype.clearSyncInfo = function () { };
-    //#region BaseData
     UserData.prototype.login = function (source) {
         var _this = this;
-        var equipments = source[DataConst_1.EquipmentsSign];
-        delete source[DataConst_1.EquipmentsSign];
+        var encodeDatas = [];
+        Object.keys(DataConst_1.EncodeKey).forEach(function (key) {
+            encodeDatas.push(source[DataConst_1.EncodeKey[key]]);
+            delete source[DataConst_1.EncodeKey[key]];
+        });
         Object.keys(source).forEach(function (v) { return _this[v] = source[v]; });
-        var bagEquips = this.equipment;
-        equipments && equipments.forEach(function (v) {
-            var index = 0;
-            bagEquips.push({
-                id: v[index++],
-                count: v[index++],
-                uid: v[index++],
-                star: v[index++],
-                level: v[index++],
-                mingKe: v[index++],
-                shenYou: v[index++],
-                mainAttri: v[index++],
-                wuXingAttri: v[index++],
-                secondAttri: v[index++],
-                bodyAttri: v[index++]
-            });
+        var _a = this, equipment = _a.equipment, prop = _a.prop, gem = _a.gem, material = _a.material, book = _a.book, other = _a.other;
+        var objects = [equipment, prop, gem, material, book, other];
+        encodeDatas.forEach(function (typeData, objIndex) {
+            if (typeData) {
+                var keys_1 = typeData.shift();
+                typeData.forEach(function (data) {
+                    var item = keys_1.reduce(function (pv, cv, index) { return (pv[cv] = data[index], pv); }, {});
+                    objects[objIndex].push(item);
+                });
+            }
         });
         this.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
     };
@@ -158,29 +154,27 @@ var UserData = /** @class */ (function () {
             return { offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate() * timeOffset) << 0 };
     };
     UserData.prototype.save = function () {
-        if (this.equipment.length) {
-            var equipments_1 = this[DataConst_1.EquipmentsSign] = [];
-            this.equipment.forEach(function (equip) {
-                equipments_1.push([
-                    equip.id,
-                    equip.count,
-                    equip.uid,
-                    equip.star,
-                    equip.level,
-                    equip.mingKe,
-                    equip.shenYou,
-                    equip.mainAttri,
-                    equip.wuXingAttri,
-                    equip.secondAttri,
-                    equip.bodyAttri,
-                ]);
-            });
-            this.equipment.length = 0;
-        }
+        var _this = this;
+        this.offline = null;
+        var encodeKeys = [];
+        Object.keys(DataConst_1.EncodeKey).forEach(function (key) { return encodeKeys.push(DataConst_1.EncodeKey[key]); });
+        var _a = this, equipment = _a.equipment, prop = _a.prop, gem = _a.gem, material = _a.material, book = _a.book, other = _a.other;
+        var objects = [equipment, prop, gem, material, book, other];
+        objects.forEach(function (obj, objIndex) {
+            if (obj.length) {
+                var itemKeys_1 = Object.keys(obj[0]);
+                var items_1 = _this[encodeKeys[objIndex]] = [itemKeys_1];
+                obj.forEach(function (data) {
+                    var result = [];
+                    itemKeys_1.forEach(function (key) { return result.push(data[key]); });
+                    items_1.push(result);
+                });
+                obj.length = 0;
+            }
+        });
         Util_1.Util.saveData(this);
     };
     UserData.prototype.logout = function () {
-        this.offline = null;
         this.lastOnlineTime = TimeUtil_1.TimeUtil.getTimeStamp();
         this.save();
     };
@@ -373,24 +367,29 @@ var UserData = /** @class */ (function () {
             TableManager_1.tableMgr.Props[id], TableManager_1.tableMgr.Food[id], TableManager_1.tableMgr.SkillBook[id], TableManager_1.tableMgr.XinFaBook[id],
         ], prop = _a[0], food = _a[1], skillBook = _a[2], xinFaBook = _a[3];
         if (prop)
-            this.useProp(id, count);
+            return this.useProp(id, count);
         else if (food)
-            this.useFood(id, count);
+            return this.useFood(id, count);
         else if (skillBook) {
             this.changeItemCount(id, -1);
             this.skill.push(id);
+            return [new Item_1.ItemBase(skillBook.ID, 1)];
         }
         else if (xinFaBook) {
             this.changeItemCount(id, -1);
             this.citta[id] = 1;
+            return [new Item_1.ItemBase(xinFaBook.ID, 1)];
         }
+        return [];
     };
     /** 出售物品 */
     UserData.prototype.sellItem = function (id, count) {
         var _this = this;
+        var rewards = [];
         var sellRewards = TableManager_1.tableMgr.Item[id].SellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(function (v) {
+                rewards.push(new Item_1.ItemBase(v.id, v.count * count));
                 if (GameUtil_1.GameUtil.isEquip(v.id))
                     _this.addNewEquip(v.id, v.count * count);
                 else {
@@ -399,6 +398,7 @@ var UserData = /** @class */ (function () {
             });
         }
         this.changeItemCount(id, -count);
+        return rewards;
     };
     /** 穿戴装备 */
     UserData.prototype.dressEquip = function (uid) {
@@ -421,19 +421,21 @@ var UserData = /** @class */ (function () {
     /** 出售装备 */
     UserData.prototype.sellEquip = function (uid) {
         var equip = this.getEquip(uid);
-        this.sellItem(equip.id, 1);
         this.removeEquip(uid);
+        return this.sellItem(equip.id, 1);
     };
     /** 分解装备 */
     UserData.prototype.decomposeEquip = function (star) {
         var equips = this.equipment;
         var equipCnt = equips.length;
+        var rewards = [];
         for (var i = equipCnt - 1; i >= 0; i--) {
             if (equips[i].star == star) {
-                this.sellItem(equips[i].id, 1);
+                rewards = rewards.concat(this.sellItem(equips[i].id, 1));
                 equips.splice(i, 1);
             }
         }
+        return rewards;
     };
     /** 购买物品 */
     UserData.prototype.buyGoods = function (id, count) {
@@ -444,6 +446,8 @@ var UserData = /** @class */ (function () {
             this.addNewEquip(item.SellID, count);
         else
             this.changeItemCount(item.SellID, count);
+        var rewards = [new Item_1.ItemBase(item.SellID, count)];
+        return rewards;
     };
     /** 添加/取消 收藏 */
     UserData.prototype.changeCollect = function (id, collect) {
@@ -456,6 +460,7 @@ var UserData = /** @class */ (function () {
     UserData.prototype.useProp = function (id, count) {
         var _this = this;
         var userdata = this;
+        var rewards = [];
         var useCount = 1;
         switch (id) {
             case 2007:
@@ -471,6 +476,7 @@ var UserData = /** @class */ (function () {
             default:
                 useCount = count;
                 TableManager_1.tableMgr.Props[id].Rewards.forEach(function (v) {
+                    rewards.push(new Item_1.ItemBase(v.id, v.count * count));
                     if (GameUtil_1.GameUtil.isEquip(v.id))
                         _this.addNewEquip(v.id, v.count * count);
                     else
@@ -479,6 +485,7 @@ var UserData = /** @class */ (function () {
                 break;
         }
         this.changeItemCount(id, -useCount);
+        return rewards;
     };
     /** 使用食物 */
     UserData.prototype.useFood = function (id, count) {
@@ -497,7 +504,7 @@ var UserData = /** @class */ (function () {
             case 3 /* FoodRecoverType.PercentRecover */:
                 singleRecover = food.RecoverValue * maxVigro;
                 break;
-            default: return 1014 /* LangCode._1014 */;
+            default: throw new Error("未知食物类型");
         }
         var subVigro = maxVigro - userdata.vigor;
         if (subVigro <= singleRecover)
@@ -508,9 +515,8 @@ var UserData = /** @class */ (function () {
             useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
         userdata.vigor = MathUtil_1.MathUtil.Clamp(userdata.vigor + singleRecover * useCount, 0, maxVigro);
         this.changeItemCount(id, -useCount);
+        return [new Item_1.ItemBase(1009 /* BaseDataType.Vigor */, subVigro)];
     };
-    //#endregion
-    //#region BagData
     UserData.prototype.isCollect = function (id) { return this.collect.includes(id); };
     /** 获取背包物品 */
     UserData.prototype.getItem = function (id) {

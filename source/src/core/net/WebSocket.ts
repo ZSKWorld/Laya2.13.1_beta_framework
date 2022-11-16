@@ -42,12 +42,14 @@ class WebSocket extends Observer {
     }
 
     private onSocketMessage(message: string): void {
-        const msg: UserOutput = JSON.parse(message);
+        let msg: UserOutput = JSON.parse(message);
         if (msg && !msg.error) {
             if (msg.syncInfo) this.dispatch(NetResponse.Response_SyncInfo, msg.syncInfo);
-            this.dispatch(`Response_${ msg.cmd[ 0 ].toUpperCase() + msg.cmd.substring(1) }`, msg);
-            if (this._current && this._current.cmd == msg.cmd)
+            if (this._current && this._current.cmd == msg.cmd){
+                msg = Object.assign(msg, this._current);
                 this._current = null;
+            }
+            this.dispatch(`Response_${ msg.cmd[ 0 ].toUpperCase() + msg.cmd.substring(1) }`, msg);
         } else {
             this.dispatch(GameEvent.NetMsgError, msg);
             this._current = null;

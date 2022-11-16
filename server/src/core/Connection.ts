@@ -71,7 +71,7 @@ export class Connection {
     }
 
     response(data: UserOutput) {
-        if (this._userData) {
+        if (data.cmd != "heart" && this._userData) {
             const userSyncInfo = this._userData.getSyncInfo();
             if (userSyncInfo) {
                 if (!data.syncInfo) data.syncInfo = userSyncInfo;

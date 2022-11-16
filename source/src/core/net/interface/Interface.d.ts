@@ -3,7 +3,7 @@ declare interface UserInput {
 }
 
 declare interface UserOutput {
-    cmd: string;
+    cmd?: string;
     error?: number;
     syncInfo?: Partial<IUserData>;
 }

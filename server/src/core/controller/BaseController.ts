@@ -17,13 +17,13 @@ export class BaseController {
         this.connection = null;
     }
 
-    protected response(cmd: string, data: any = null, error: number = ErrorCode.NONE) {
+    protected response<T>(cmd: string, data: T = null, error: number = ErrorCode.NONE) {
         if (this.connection) {
             let args: UserOutput = {
                 cmd,
                 error,
             };
-            if (data) args.syncInfo = data;
+            if (data) Object.assign(args, data);
             this.connection.response(args);
         }
     }

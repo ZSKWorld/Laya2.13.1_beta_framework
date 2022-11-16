@@ -5,13 +5,42 @@ import { ViewID } from "../core/ViewID";
 import { ComNumInputData } from "../viewCtrl/PkgCommon/Coms/ComNumInputCtrl";
 import { UIPoolKey } from "./UIPoolKey";
 
+class TipInfoMgr {
+	private static cache: string[];
+	private static readonly showDelay = 150;
+	private static curTime = this.showDelay;
+
+	static addTip(text: string, color: string) {
+		if (!this.cache) {
+			this.cache = [];
+			Laya.timer.frameLoop(1, this, this.update);
+		}
+		this.cache.push(text, color);
+	}
+
+
+	private static update() {
+		this.curTime += Laya.timer.delta;
+		if (this.cache.length && this.curTime >= this.showDelay) {
+			this.curTime = 0;
+			const viewInst = <IView>Laya.Pool.getItemByCreateFun(UIPoolKey.TipInfo, () => {
+				const inst = uiMgr.createViewInstance(ViewID.ComTipInfoView, false);
+				inst.touchable = false;
+				return inst;
+			});
+			viewInst.initView(viewInst, null, { text: this.cache.shift(), color: this.cache.shift() });
+			layerMgr.addObject(viewInst, Layer.Bottom);
+		}
+	}
+}
+
 /** UI工具类 */
 export class UIUtility {
 	/**
 	 * 获取gui图集贴图
 	 * @param pkg 包名
 	 * @param name 贴图名字
-	 * @returns 
+	 * @returns
 	 */
 	static getFGUITexture(pkg: string, name: string) {
 		let temp = fgui.UIPackage.getItemByURL(fgui.UIPackage.getItemURL(pkg, name)).getBranch();
@@ -26,8 +55,7 @@ export class UIUtility {
 	 * @param color 文字颜色，默认："#ffffff"
 	 */
 	static showTipInfo(text: string, color?: string) {
-		const tip = this.getViewFromPool(UIPoolKey.TipInfo, ViewID.ComTipInfoView, Layer.Bottom, { text, color }, false);
-		tip.touchable = false;
+		TipInfoMgr.addTip(text, color);
 	}
 
 	/**

@@ -58,14 +58,14 @@ var AccouontController = /** @class */ (function (_super) {
         }
         userData = JSON.parse(JSON.stringify(this.connection.userData));
         userData.offline = this.connection.userData.getOffline();
-        this.response(data.cmd, userData);
+        this.response(data.cmd, { syncInfo: userData });
     };
     AccouontController.prototype.clearAccount = function (data) {
         var userData = this.connection.userData;
         new UserData_1.UserData(userData.account, userData.password, userData.nickname).save();
         var newData = Util_1.Util.getData(userData.account, userData.password);
         this.connection.userLogin(newData);
-        this.response(data.cmd, newData);
+        this.response(data.cmd, { syncInfo: newData });
     };
     __decorate([
         BaseController_1.AddCMD

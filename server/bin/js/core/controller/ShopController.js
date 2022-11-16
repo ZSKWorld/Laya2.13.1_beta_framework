@@ -34,8 +34,8 @@ var ShopController = /** @class */ (function (_super) {
         if (errorCode)
             this.response(data.cmd, null, errorCode);
         else {
-            userData.buyGoods(data.id, data.count);
-            this.response(data.cmd);
+            var rewards = userData.buyGoods(data.id, data.count);
+            this.response(data.cmd, { rewards: rewards });
         }
     };
     __decorate([

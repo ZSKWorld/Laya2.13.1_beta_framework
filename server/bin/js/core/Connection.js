@@ -79,7 +79,7 @@ var Connection = /** @class */ (function () {
         this._userData.login(data);
     };
     Connection.prototype.response = function (data) {
-        if (this._userData) {
+        if (data.cmd != "heart" && this._userData) {
             var userSyncInfo = this._userData.getSyncInfo();
             if (userSyncInfo) {
                 if (!data.syncInfo)

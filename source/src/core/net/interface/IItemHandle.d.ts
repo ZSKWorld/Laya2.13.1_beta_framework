@@ -24,8 +24,8 @@ declare interface UseItemInput extends UserInput {
 }
 
 declare interface UseItemOutput extends UserOutput {
-    /** 使用获得的奖励 */
-    useRewards: IItemBase[];
+    /** 获得的奖励 */
+    rewards: IItemBase[];
 }
 
 declare interface SellItemInput extends UserInput, IItemBase {
@@ -35,9 +35,7 @@ declare interface SellItemInput extends UserInput, IItemBase {
     count: number;
 }
 
-declare interface SellItemOutput extends UserOutput {
-    /** 出售获得的奖励  */
-    sellRewards: IItemBase[];
+declare interface SellItemOutput extends UseItemOutput {
 }
 
 declare interface DressEquipInput extends UserInput {
@@ -61,7 +59,7 @@ declare interface SellEquipInput extends UserInput {
     uid: string;
 }
 
-declare interface SellEquipOutput extends UserOutput {
+declare interface SellEquipOutput extends UseItemOutput {
 }
 
 declare interface ChangeCollectPinInput extends UserInput {
@@ -78,7 +76,7 @@ declare interface DecomposeEquipInput extends UserInput {
     star: number;
 }
 
-declare interface DecomposeEquipOutput extends UserOutput {
+declare interface DecomposeEquipOutput extends UseItemOutput {
 
 }
 

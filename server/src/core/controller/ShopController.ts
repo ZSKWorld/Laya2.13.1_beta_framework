@@ -7,8 +7,8 @@ export class ShopController extends BaseController implements IShop {
         const errorCode = userData.checkBuyItem(data.id, data.count);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            userData.buyGoods(data.id, data.count);
-            this.response(data.cmd);
+            const rewards = userData.buyGoods(data.id, data.count);
+            this.response<BuyGoodsOutput>(data.cmd, { rewards });
         }
     }
 }

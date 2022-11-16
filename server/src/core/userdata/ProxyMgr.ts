@@ -29,7 +29,10 @@ export class ProxyMgr {
             });
             const result = new Proxy(target, {
                 set(target: any, p: string, value: any, receiver: any): boolean {
-                    target[ p ] = ProxyMgr.getTargetProxy(uid, dataKey || p, value);
+                    if (typeof p === "string" && p.startsWith("$"))
+                        target[ p ] = value;
+                    else
+                        target[ p ] = ProxyMgr.getTargetProxy(uid, dataKey || p, value);
                     ProxyMgr.proxyMap[ uid ] = ProxyMgr.proxyMap[ uid ] || {};
                     ProxyMgr.proxyMap[ uid ][ dataKey || p ] = true;
                     return true;

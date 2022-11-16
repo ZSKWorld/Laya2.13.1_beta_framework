@@ -29,15 +29,15 @@ export class AccouontController extends BaseController implements IAccount {
         }
         userData = JSON.parse(JSON.stringify(this.connection.userData));
         userData.offline = this.connection.userData.getOffline();
-        this.response(data.cmd, userData);
+        this.response<LoginOutput>(data.cmd, { syncInfo: userData });
     }
 
     @AddCMD
-    clearAccount(data: UserInput): void {
+    clearAccount(data: ClearAccountInput): void {
         const userData = this.connection.userData;
         new UserData(userData.account, userData.password, userData.nickname).save();
         const newData = Util.getData(userData.account, userData.password);
         this.connection.userLogin(newData);
-        this.response(data.cmd, newData);
+        this.response<ClearAccountOutput>(data.cmd, { syncInfo: newData });
     }
 }

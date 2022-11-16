@@ -7,8 +7,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkUseItem(data.id, data.count);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            userData.useItem(data.id, data.count);
-            this.response(data.cmd);
+            const rewards = userData.useItem(data.id, data.count);
+            this.response<UseItemOutput>(data.cmd, { rewards });
         }
     }
 
@@ -18,8 +18,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkSellItem(data.id, data.count);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            userData.sellItem(data.id, data.count);
-            this.response(data.cmd);
+            const rewards = userData.sellItem(data.id, data.count);
+            this.response<SellItemOutput>(data.cmd, { rewards });
         }
     }
 
@@ -51,8 +51,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
         const errorCode = userData.checkSellEquip(data.uid);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            userData.sellEquip(data.uid);
-            this.response(data.cmd);
+            const rewards = userData.sellEquip(data.uid);
+            this.response<SellEquipOutput>(data.cmd, { rewards });
         }
     }
 
@@ -70,8 +70,8 @@ export class ItemHandleController extends BaseController implements IItemHandle 
     @AddCMD
     decomposeEquip(data: DecomposeEquipInput): void {
         const userData = this.connection.userData;
-        userData.decomposeEquip(data.star);
-        this.response(data.cmd);
+        const rewards = userData.decomposeEquip(data.star);
+        this.response<DecomposeEquipOutput>(data.cmd, { rewards });
     }
 
 }

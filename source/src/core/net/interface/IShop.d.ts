@@ -8,5 +8,6 @@ declare interface BuyGoodsInput extends UserInput {
 }
 
 declare interface BuyGoodsOutput extends UserOutput {
-
+    /** 获得的奖励 */
+    rewards: IItemBase[];
 }

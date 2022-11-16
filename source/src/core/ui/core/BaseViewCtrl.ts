@@ -16,8 +16,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	data: D;
 	/** 控制器挂载的ui页面 */
 	private _view: V;
-	/** 页面是否显示中 */
-	private _isShow: boolean;
 	/** 页面消息中心 */
 	private _listener: Laya.EventDispatcher;
 	/** 处理控制器网络回包 */
@@ -26,7 +24,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _subCtrls: BaseViewCtrl[] = [];
 
 	get view() { return this._view; }
-	get isShow() { return !!this._isShow; }
 	get listener() { return this._listener; }
 	set listener(value: Laya.EventDispatcher) {
 		if (value && value != this._listener) {
@@ -110,16 +107,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		this.addMessageListener(ViewEvent.OnRemoved, this.__onRemoved);
 		this.addMessageListener(ViewEvent.OnForeground, this.__onForeground);
 		this.addMessageListener(ViewEvent.OnBackground, this.__onBackground);
-	}
-
-	private _onEnable() {
-		this._isShow = true;
-		super[ "_onEnable" ]();
-	}
-
-	private _onDisable() {
-		this._isShow = false;
-		super[ "_onDisable" ]();
 	}
 
 	private __onForeground() {

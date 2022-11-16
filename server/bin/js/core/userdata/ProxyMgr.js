@@ -29,7 +29,10 @@ var ProxyMgr = /** @class */ (function () {
             });
             var result = new Proxy(target, {
                 set: function (target, p, value, receiver) {
-                    target[p] = ProxyMgr.getTargetProxy(uid, dataKey || p, value);
+                    if (typeof p === "string" && p.startsWith("$"))
+                        target[p] = value;
+                    else
+                        target[p] = ProxyMgr.getTargetProxy(uid, dataKey || p, value);
                     ProxyMgr.proxyMap[uid] = ProxyMgr.proxyMap[uid] || {};
                     ProxyMgr.proxyMap[uid][dataKey || p] = true;
                     return true;

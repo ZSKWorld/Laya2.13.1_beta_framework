@@ -9,7 +9,7 @@ class RichStr {
     getStr() { return this._str; }
 
     /** 添加空格 */
-    space(num: number) {
+    space(num: number = 1) {
         this._str += new Array(num).fill("&nbsp;").join("");
         return this;
     }

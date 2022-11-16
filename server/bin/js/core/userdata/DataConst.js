@@ -1,7 +1,14 @@
 "use strict";
 exports.__esModule = true;
-exports.BaseDataKeyMap = exports.DressedEquipMap = exports.EquipmentsSign = void 0;
-exports.EquipmentsSign = "$equipments";
+exports.BaseDataKeyMap = exports.DressedEquipMap = exports.EncodeKey = void 0;
+exports.EncodeKey = {
+    1: "$equipments",
+    2: "$Prop",
+    3: "$Gem",
+    4: "$Material",
+    5: "$Book",
+    6: "$Other"
+};
 exports.DressedEquipMap = {
     1: "weapon",
     2: "helmet",
