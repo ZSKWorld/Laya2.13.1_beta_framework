@@ -206,7 +206,7 @@ export class FixEngine {
 					}
 					if (count === n)
 						delete this._events[ type ];
-					else if (count > 5000) {
+					else if (count > 1000) {
 						const temp = [];
 						for (var i = 0, n = listeners.length; i < n; i++) {
 							var item = listeners[ i ];

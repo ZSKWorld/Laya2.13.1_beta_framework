@@ -39,7 +39,7 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 	}
 
 	private onBtnCloseInfoClick(): void {
-
+		this.view.setInfoVisible(false);
 	}
 
 }

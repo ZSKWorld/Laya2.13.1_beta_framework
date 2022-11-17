@@ -9,7 +9,7 @@ export const enum NetResponse {
 	/** 参数类型：{@link LoginOutput} */
 	Response_Login = "Response_Login",
 
-	/** 参数类型：{@link UserOutput} */
+	/** 参数类型：{@link ClearAccountOutput} */
 	Response_ClearAccount = "Response_ClearAccount",
 
 	/** 参数类型：{@link BattleOutput} */
@@ -33,7 +33,7 @@ export const enum NetResponse {
 	/** 参数类型：{@link SellEquipOutput} */
 	Response_SellEquip = "Response_SellEquip",
 
-	/** 参数类型：{@link ChangeCollectPinOutput} */
+	/** 参数类型：{@link ChangeCollectOutput} */
 	Response_ChangeCollect = "Response_ChangeCollect",
 
 	/** 参数类型：{@link DecomposeEquipOutput} */

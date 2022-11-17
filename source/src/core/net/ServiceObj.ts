@@ -6,7 +6,7 @@ export class ServiceObj implements IFacade {
     
 	register(data: RegisterInput): void { throw new Error("Method not implemented."); }
 	login(data: LoginInput): void { throw new Error("Method not implemented."); }
-	clearAccount(data: UserInput): void { throw new Error("Method not implemented."); }
+	clearAccount(data: ClearAccountInput): void { throw new Error("Method not implemented."); }
 	startBattle(data: BattleInput): void { throw new Error("Method not implemented."); }
 	heart(data: HeartInput): void { throw new Error("Method not implemented."); }
 	useItem(data: UseItemInput): void { throw new Error("Method not implemented."); }
@@ -14,7 +14,7 @@ export class ServiceObj implements IFacade {
 	dressEquip(data: DressEquipInput): void { throw new Error("Method not implemented."); }
 	takeOffEquip(data: TakeOffEquipInput): void { throw new Error("Method not implemented."); }
 	sellEquip(data: SellEquipInput): void { throw new Error("Method not implemented."); }
-	changeCollect(data: ChangeCollectPinInput): void { throw new Error("Method not implemented."); }
+	changeCollect(data: ChangeCollectInput): void { throw new Error("Method not implemented."); }
 	decomposeEquip(data: DecomposeEquipInput): void { throw new Error("Method not implemented."); }
 	buyGoods(data: BuyGoodsInput): void { throw new Error("Method not implemented."); }
 

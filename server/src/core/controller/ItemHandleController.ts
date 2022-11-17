@@ -57,7 +57,7 @@ export class ItemHandleController extends BaseController implements IItemHandle 
     }
 
     @AddCMD
-    changeCollect(data: ChangeCollectPinInput): void {
+    changeCollect(data: ChangeCollectInput): void {
         const userData = this.connection.userData;
         const errorCode = userData.checkCollect(data.id, data.collect);
         if (errorCode) this.response(data.cmd, null, errorCode);
