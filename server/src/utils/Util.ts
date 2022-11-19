@@ -7,8 +7,22 @@ export class Util {
         return (TimeUtil.getTimeStamp() ** (Math.random() + 0.01)).toString(32).replace(".", "");
     }
 
-    static getData(account: string, password: string): IUserData {
-        const filePath = this.getDataPath(account, password);
+    static generateUUID() {
+        let d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === "function") {
+            d += performance.now(); //use high-precision timer if available
+        }
+        const temp = 36;
+        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * temp) % temp | 0;
+            d = Math.floor(d / temp);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(temp);
+        });
+        return uuid;
+    }
+
+    static getData(account: string): IUserData {
+        const filePath = this.getDataPath(account);
         if (fs.existsSync(filePath) == false) return null;
         const conent = fs.readFileSync(filePath).toString();
         try {
@@ -19,14 +33,14 @@ export class Util {
     }
 
     static saveData(data: IUserData) {
-        const filePath = this.getDataPath(data.account, data.password);
-        if (!filePath) return console.log("路径不存在", data.account, data.password, filePath);
+        const filePath = this.getDataPath(data.account);
+        if (!filePath) return console.log("路径不存在", data.account, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data));
     }
 
-    private static getDataPath(account: string, password: string) {
-        if (!account || !password) return null;
-        const fileName = (account + "" + password).split("").reduce((pValue, value) => {
+    private static getDataPath(account: string) {
+        if (!account) return null;
+        const fileName = (account).split("").reduce((pValue, value) => {
             return pValue + value.charCodeAt(0);
         }, "");
         return path.resolve(__dirname, "../../../data/" + fileName + ".json");

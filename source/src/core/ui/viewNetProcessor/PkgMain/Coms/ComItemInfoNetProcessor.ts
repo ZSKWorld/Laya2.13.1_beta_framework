@@ -3,34 +3,38 @@ import { GameUtil } from "../../../../common/GameUtil";
 import { InsertEvent } from "../../../../libs/event/EventMgr";
 import { NetResponse } from "../../../../net/NetResponse";
 import { BaseNetProcessor } from "../../../core/BaseNetProcessor";
+import { ViewID } from "../../../core/ViewID";
 import { RichStrMgr } from "../../../tool/RichStrMgr";
 import { UIUtility } from "../../../tool/UIUtility";
-import { ComItemInfoMsg } from "../../../view/PkgMain/Coms/ComItemInfoView";
 import { ComItemInfoCtrl } from "../../../viewCtrl/PkgMain/Coms/ComItemInfoCtrl";
 
 export class ComItemInfoNetProcessor extends BaseNetProcessor<ComItemInfoCtrl>{
 
     @InsertEvent(NetResponse.Response_UseItem)
     private useItemResponse(outPut: UseItemOutput & UseItemInput) {
-        this.sendMessage(ComItemInfoMsg.OnBtnBgClick);
-        let logStr = RichStrMgr.start(`使用${ GameUtil.getItemCountStr(outPut) }获得`).break();
-        outPut.rewards?.forEach(v => {
-            const str = GameUtil.getItemCountStr(v);
-            UIUtility.showTipInfo(`恭喜获得${ str }`);
-            logStr.combineBreak(str);
-        });
-        this.dispatch(GameEvent.AddExperienceLog, logStr.end());
+        if (outPut.id == 2010) {
+            this.viewCtrl.addView(ViewID.SectView, null, null, false);
+        } else {
+            let logStr = RichStrMgr.start(`使用${ GameUtil.getItemCountStr(outPut) }获得`).break();
+            outPut.rewards?.forEach(v => {
+                const str = GameUtil.getItemCountStr(v);
+                UIUtility.showTipInfo(`恭喜获得${ str }`);
+                logStr.combineBreak(str);
+            });
+            this.dispatch(GameEvent.AddExperienceLog, logStr.end());
+        }
+        this.viewCtrl.removeSelf();
     }
 
     @InsertEvent(NetResponse.Response_SellItem)
     private sellItemResponse(outPut: SellItemOutput & SellItemInput) {
-        this.sendMessage(ComItemInfoMsg.OnBtnBgClick);
+        this.viewCtrl.removeSelf();
         outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
     }
 
     @InsertEvent(NetResponse.Response_BuyGoods)
     private buyGoodsResponse(outPut: BuyGoodsOutput & BuyGoodsInput) {
-        this.sendMessage(ComItemInfoMsg.OnBtnBgClick);
+        this.viewCtrl.removeSelf();
         outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
     }
 

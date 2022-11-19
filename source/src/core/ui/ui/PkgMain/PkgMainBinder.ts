@@ -10,6 +10,7 @@ import RenderChatMsg from "./RenderChatMsg";
 import BtnCheck from "./BtnCheck";
 import UIChat from "./UIChat";
 import UIMain from "./UIMain";
+import RenderFriend from "./RenderFriend";
 import ComSkill from "./ComSkill";
 import ComLiLian from "./ComLiLian";
 import UIPlayerInfo from "./UIPlayerInfo";
@@ -38,6 +39,7 @@ export default class PkgMainBinder {
 		fgui.UIObjectFactory.setExtension(BtnCheck.URL, BtnCheck);
 		fgui.UIObjectFactory.setExtension(UIChat.URL, UIChat);
 		fgui.UIObjectFactory.setExtension(UIMain.URL, UIMain);
+		fgui.UIObjectFactory.setExtension(RenderFriend.URL, RenderFriend);
 		fgui.UIObjectFactory.setExtension(ComSkill.URL, ComSkill);
 		fgui.UIObjectFactory.setExtension(ComLiLian.URL, ComLiLian);
 		fgui.UIObjectFactory.setExtension(UIPlayerInfo.URL, UIPlayerInfo);

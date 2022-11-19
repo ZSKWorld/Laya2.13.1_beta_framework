@@ -26,6 +26,20 @@ export class GameUtil {
         return Date.now();
     }
 
+    static generateUUID() {
+        let d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === "function") {
+            d += performance.now(); //use high-precision timer if available
+        }
+        const temp = 36;
+        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * temp) % temp | 0;
+            d = Math.floor(d / temp);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(temp);
+        });
+        return uuid;
+    }
+
     static getLang(id: number) { return tableMgr.Lang[ id ].Text; }
 
     static getColorStr(id: number, text: string) {
@@ -94,3 +108,4 @@ export class GameUtil {
         return !!(tableMgr.Props[ id ] || tableMgr.Food[ id ] || tableMgr.SkillBook[ id ] || tableMgr.XinFaBook[ id ]);
     }
 }
+windowImmit("GameUtil", GameUtil);

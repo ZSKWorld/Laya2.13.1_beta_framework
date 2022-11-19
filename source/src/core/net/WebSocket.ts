@@ -1,6 +1,7 @@
 import { GameEvent } from "../common/GameEvent";
 import { Observer } from "../libs/event/Observer";
 import { Logger } from "../libs/utils/Logger";
+import { userData } from "../userData/UserData";
 import { NetResponse } from "./NetResponse";
 
 const logger = Logger.Create("WebSocket", true);
@@ -45,7 +46,7 @@ class WebSocket extends Observer {
         let msg: UserOutput = JSON.parse(message);
         if (msg && !msg.error) {
             if (msg.syncInfo) this.dispatch(NetResponse.Response_SyncInfo, msg.syncInfo);
-            if (this._current && this._current.cmd == msg.cmd){
+            if (this._current && this._current.cmd == msg.cmd) {
                 msg = Object.assign(msg, this._current);
                 this._current = null;
             }
@@ -62,6 +63,8 @@ class WebSocket extends Observer {
     private onSocketError(e): void { }
 
     private onSocketClose(): void {
+        this._current = null;
+        this._waitList.length = 0;
         this.dispatch(GameEvent.SocketClosed);
         this._socket.connectByUrl(this._url);
     }
@@ -69,6 +72,7 @@ class WebSocket extends Observer {
     private executeWaitMsg(): void {
         if (this.connected && !this._current && this._waitList.length > 0) {
             this._current = this._waitList.shift();
+            this._current.token = this._current["account"] || userData.account;
             this._socket.send(JSON.stringify(this._current));
         }
     }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="690,64">
-  <controller name="ctrlAlign" pages="0,right,1,left" selected="0"/>
+<component size="1080,121">
   <displayList>
-    <loader id="n1_j0ry" name="n1" xy="0,0" size="441,64" url="ui://vx9zwserqjdo2z" fill="scaleFree">
-      <relation target="n0_sbd0" sidePair="width-width,height-height,center-center,middle-middle"/>
+    <loader id="n1_j0ry" name="n1" xy="0,0" size="683,121" url="ui://vx9zwserqjdo2z" fill="scaleFree">
+      <relation target="n0_sbd0" sidePair="width-width,height-height,left-left,top-top"/>
     </loader>
-    <text id="n0_sbd0" name="TxtMsg" xy="31,18" size="379,35" restrictSize="0,400,0,0" fontSize="25" color="#ff0000" vAlign="middle" leading="10" ubb="true" autoSize="height" text="你好你好你好你好你好你好你好你"/>
+    <text id="n0_sbd0" name="TxtMsg" xy="39,41" size="604,54" fontSize="40" color="#ff0000" vAlign="middle" leading="10" ubb="true" autoSize="height" autoClearText="true" text="你好你好你好你好你好你好你好好"/>
   </displayList>
-  <relation target="n0_sbd0" sidePair="height-height"/>
+  <relation target="n1_j0ry" sidePair="height-height"/>
   <customProperty target="text" propertyId="0"/>
 </component>

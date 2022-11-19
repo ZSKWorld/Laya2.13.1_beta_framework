@@ -12,6 +12,8 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     private static _inst: UserDataProxy;
     static get Inst() { return this._inst || (this._inst = new UserDataProxy()) }
 
+    token:string;
+
     //#region SourceProperties
     get uid(): string { return this.source.uid; }
     get nickname(): string { return this.source.nickname; }

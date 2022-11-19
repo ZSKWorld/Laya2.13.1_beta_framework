@@ -1,30 +1,40 @@
+import { Pool } from "../../libs/pool/Pool";
 import { Connection } from "../Connection";
 import { ErrorCode } from "../enum/ErrorCode";
 
 export class BaseController {
     private _cmds: { [ key: string ]: Function };
     protected connection: Connection;
-    constructor(connection: Connection) {
-        this.connection = connection;
-        this.connection.registerEvent(this._cmds, this);
-        this.onConstruct();
+
+    static create(connection: Connection) {
+        const result = Pool.get(this.prototype.constructor.name as any, this);
+        result.connection = connection;
+        for (let key in result._cmds) {
+            connection.listener.on(key, result, result[ key ]);
+        }
+        result.onCreate();
+        return result;
     }
 
-    onConstruct() { }
-
-    clear() {
-        this._cmds = null;
+    recover() {
         this.connection = null;
+        Pool.recover(this.constructor.name as any, this);
     }
+
+    protected onCreate() { }
 
     protected response<T>(cmd: string, data: T = null, error: number = ErrorCode.NONE) {
         if (this.connection) {
-            let args: UserOutput = {
-                cmd,
-                error,
-            };
+            let args: UserOutput = { cmd, error, };
             if (data) Object.assign(args, data);
             this.connection.response(args);
+        }
+    }
+
+    protected notify(cmd: string, data: string) {
+        if (this.connection) {
+            let args: UserNotify = { cmd, data };
+            this.connection.notify(args);
         }
     }
 }

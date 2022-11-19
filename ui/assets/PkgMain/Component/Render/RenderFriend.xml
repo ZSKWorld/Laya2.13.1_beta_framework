@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="683,183">
+  <controller name="state" pages="0,在线,1,离线" selected="0"/>
+  <displayList>
+    <loader id="n1_j0ry" name="n1" xy="0,0" size="683,183" url="ui://vx9zwserqjdo2z" fill="scaleFree">
+      <relation target="" sidePair="width-width,height-height"/>
+    </loader>
+    <text id="n2_roh2" name="n2" xy="36,33" size="124,54" fontSize="40" vAlign="middle" leading="10" ubb="true" autoClearText="true" text="昵称："/>
+    <text id="n0_sbd0" name="TxtNickname" xy="161,33" size="10,54" fontSize="40" vAlign="middle" leading="10" ubb="true" autoClearText="true" text=""/>
+    <text id="n3_roh2" name="n3" xy="37,89" size="124,54" fontSize="40" vAlign="middle" leading="10" ubb="true" autoClearText="true" text="账号："/>
+    <text id="n4_roh2" name="TxtAccount" xy="161,89" size="10,54" fontSize="40" vAlign="middle" leading="10" ubb="true" autoClearText="true" text=""/>
+    <text id="n5_roh2" name="TxtState" xy="562,89" size="84,54" fontSize="40" color="#198619" vAlign="middle" leading="10" ubb="true" autoClearText="true" text="在线">
+      <gearColor controller="state" pages="0,1" values="#198619,#000000|#777777,#000000"/>
+      <gearText controller="state" pages="0,1" values="在线|离线"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </text>
+    <component id="n6_roh2" name="BtnChat" src="fhzd5a" fileName="Component/BtnCircleIcon.xml" pkg="vx9zwser" xy="578,33">
+      <relation target="" sidePair="right-right"/>
+      <Button titleFontSize="23"/>
+    </component>
+  </displayList>
+  <customProperty target="text" propertyId="0"/>
+</component>

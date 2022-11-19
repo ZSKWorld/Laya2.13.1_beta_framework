@@ -11,8 +11,21 @@ var Util = /** @class */ (function () {
     Util.CreateUID = function () {
         return (Math.pow(TimeUtil_1.TimeUtil.getTimeStamp(), (Math.random() + 0.01))).toString(32).replace(".", "");
     };
-    Util.getData = function (account, password) {
-        var filePath = this.getDataPath(account, password);
+    Util.generateUUID = function () {
+        var d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === "function") {
+            d += performance.now(); //use high-precision timer if available
+        }
+        var temp = 36;
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * temp) % temp | 0;
+            d = Math.floor(d / temp);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(temp);
+        });
+        return uuid;
+    };
+    Util.getData = function (account) {
+        var filePath = this.getDataPath(account);
         if (fs.existsSync(filePath) == false)
             return null;
         var conent = fs.readFileSync(filePath).toString();
@@ -24,15 +37,15 @@ var Util = /** @class */ (function () {
         }
     };
     Util.saveData = function (data) {
-        var filePath = this.getDataPath(data.account, data.password);
+        var filePath = this.getDataPath(data.account);
         if (!filePath)
-            return console.log("路径不存在", data.account, data.password, filePath);
+            return console.log("路径不存在", data.account, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data));
     };
-    Util.getDataPath = function (account, password) {
-        if (!account || !password)
+    Util.getDataPath = function (account) {
+        if (!account)
             return null;
-        var fileName = (account + "" + password).split("").reduce(function (pValue, value) {
+        var fileName = (account).split("").reduce(function (pValue, value) {
             return pValue + value.charCodeAt(0);
         }, "");
         return path.resolve(__dirname, "../../../data/" + fileName + ".json");

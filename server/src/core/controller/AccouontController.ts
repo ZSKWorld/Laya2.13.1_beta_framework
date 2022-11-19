@@ -6,7 +6,7 @@ import { AddCMD, BaseController } from "./BaseController";
 export class AccouontController extends BaseController implements IAccount {
     @AddCMD
     register(data: RegisterInput): void {
-        const userData = Util.getData(data.account, data.password);
+        const userData = Util.getData(data.account);
         if (userData) this.response(data.cmd, null, ErrorCode.USER_EXIST);
         else {
             if (!data.account) this.response(data.cmd, null, ErrorCode.ACCOUNT_IS_EMPTY);
@@ -21,23 +21,19 @@ export class AccouontController extends BaseController implements IAccount {
 
     @AddCMD
     login(data: LoginInput): void {
-        let userData: IUserData;
-        if (this.connection.logined == false) {
-            userData = Util.getData(data.account, data.password);
-            if (!userData) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
-            else this.connection.userLogin(userData);
-        }
-        userData = JSON.parse(JSON.stringify(this.connection.userData));
-        userData.offline = this.connection.userData.getOffline();
-        this.response<LoginOutput>(data.cmd, { syncInfo: userData });
+        if(this.connection.logined) return this.response(data.cmd, null, ErrorCode.USER_LOGINED);
+        let userData = Util.getData(data.account);
+        if (!userData) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
+        else this.connection.userLogin(userData);
+        this.response<LoginOutput>(data.cmd);
     }
 
     @AddCMD
     clearAccount(data: ClearAccountInput): void {
         const userData = this.connection.userData;
         new UserData(userData.account, userData.password, userData.nickname).save();
-        const newData = Util.getData(userData.account, userData.password);
+        const newData = Util.getData(userData.account);
         this.connection.userLogin(newData);
-        this.response<ClearAccountOutput>(data.cmd, { syncInfo: newData });
+        this.response<ClearAccountOutput>(data.cmd);
     }
 }

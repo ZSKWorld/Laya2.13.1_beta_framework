@@ -9,11 +9,8 @@ class BaseService<T> {
     protected constructor() {
         this._proxy = ProxyAdapter(ServiceObj.Objs, {
             get(_target, property) {
-                return (args: Object) => {
-                    const netArgs = {
-                        cmd: property
-                    };
-                    Object.assign(args, netArgs);
+                return (args: UserInput) => {
+                    args.cmd = property;
                     websocket.sendMsg(args);
                 };
             }
@@ -30,6 +27,7 @@ function ServiceInst<T>() {
 
 export const AccountService = ServiceInst<IAccount>();
 export const BattleService = ServiceInst<IBattle>();
+export const FriendService = ServiceInst<IFriend>();
 export const HeartService = ServiceInst<IHeart>();
 export const ItemHandleService = ServiceInst<IItemHandle>();
 export const ShopService = ServiceInst<IShop>();

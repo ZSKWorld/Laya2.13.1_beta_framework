@@ -5,9 +5,19 @@ import { Util } from "../../utils/Util";
 import { ErrorCode } from "../enum/ErrorCode";
 import { BaseDataType, DataType, EquipmentPart, FoodRecoverType, ItemBagType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
-import { BaseDataKeyMap, DressedEquipMap, EncodeKey } from "./DataConst";
+import { DressedEquipMap } from "./DataConst";
+import { Formula } from "./Formula";
 import { Equipment, ItemBase } from "./Item";
 import { SyncProxy } from "./ProxyMgr";
+
+const EncodeKey: { [ key in ItemBagType ]?: string } = {
+    1: "$equipments",//ItemBagType.Equip
+    2: "$Prop",//ItemBagType.Prop
+    3: "$Gem",//ItemBagType.Gem
+    4: "$Material",//ItemBagType.Material
+    5: "$Book",//ItemBagType.Book
+    6: "$Other",//ItemBagType.Other
+};
 
 export class UserData implements IUserData, SyncProxy<IUserData> {
     //#region Properties
@@ -121,6 +131,8 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         this.nickname = String(nickname);
         this.vigor = this.getMaxVigro();
     }
+
+    //#region 初始化相关
     getSyncInfo(): any { }
     clearSyncInfo(): any { }
 
@@ -145,16 +157,11 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
             }
         });
         this.lastLoginTime = TimeUtil.getTimeStamp();
+        this.offline = this.getOffline();
     }
 
     /** 获取离线数据 */
-    getOffline(): IOffline {
-        const data = this;
-        if (!data.lastOnlineTime) return null;
-        const timeOffset = ((TimeUtil.getTimeStamp() - data.lastOnlineTime) / 1000) << 0;
-        if (timeOffset <= 5) return null;
-        else return { offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate() * timeOffset) << 0 };
-    }
+    getOffline(): IOffline { return GameUtil.getOffline(this); }
 
     save() {
         this.offline = null;
@@ -183,6 +190,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         this.lastOnlineTime = TimeUtil.getTimeStamp();
         this.save();
     }
+    //#endregion
 
     /** 获取当前境界最大精力 */
     getMaxVigro() {
@@ -194,10 +202,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
 
     /** 获取精力恢复速率 */
     getVigorRecoveryRate() {
-        const citta = this.citta;
-        let xinFaJLHF = 0;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
-        return 1 + xinFaJLHF;
+        return GameUtil.getVigorRecoveryRate(this);
     }
 
     /** 改变物品数量 */
@@ -205,19 +210,28 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         const item = tableMgr.Item[ id ];
         switch (item.DataType) {
             case DataType.BaseData:
-                this[ BaseDataKeyMap[ id ] ] = Math.max(this[ BaseDataKeyMap[ id ] ] + count, 0);
+                switch (id) {
+                    case BaseDataType.Coin: this.coin = Math.max(this.coin + count, 0); break;
+                    case BaseDataType.Vcoin: this.vcoin = Math.max(this.vcoin + count, 0); break;
+                    case BaseDataType.Exp: this.addExp(count); break;
+                    case BaseDataType.MoHe: this.moHe = Math.max(this.moHe + count, 0); break;
+                    case BaseDataType.MoBi: this.moBi = Math.max(this.moBi + count, 0); break;
+                    case BaseDataType.SpiritStones: this.spiritStones = Math.max(this.spiritStones + count, 0); break;
+                    case BaseDataType.Soul: this.soul = Math.max(this.soul + count, 0); break;
+                    case BaseDataType.GemScore: this.gemScore = Math.max(this.gemScore + count, 0); break;
+                    case BaseDataType.Vigor: this.vigor = Math.max(this.vigor + count, 0); break;
+                    default: throw new Error("未知基础数据类型" + id);
+                }
                 break;
             case DataType.BagData:
                 let datas: IItemBase[];
                 switch (item.BagType) {
-                    // case ItemBagType.Collect: break;
-                    // case ItemBagType.Equip: break;
                     case ItemBagType.Prop: datas = this.prop; break;
                     case ItemBagType.Gem: datas = this.gem; break;
                     case ItemBagType.Material: datas = this.material; break;
                     case ItemBagType.Book: datas = this.book; break;
                     case ItemBagType.Other: datas = this.other; break;
-                    default: return;
+                    default: throw new Error("未知背包数据类型" + id);
                 }
                 const dataLen = datas.length;
                 for (let i = 0; i < dataLen; i++) {
@@ -234,12 +248,70 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         }
     }
 
+    /** 是否收藏 */
+    isCollect(id: number) { return this.collect.includes(id); }
+
+    /** 获取背包物品 */
+    getItem(id: number) {
+        const item = tableMgr.Item[ id ];
+        if (!item) return null;
+        let datas: IItemBase[];
+        switch (item.BagType) {
+            // case ItemBagType.Collect: break;
+            // case ItemBagType.Equip: break;
+            case ItemBagType.Prop: datas = this.prop; break;
+            case ItemBagType.Gem: datas = this.gem; break;
+            case ItemBagType.Material: datas = this.material; break;
+            case ItemBagType.Book: datas = this.book; break;
+            case ItemBagType.Other: datas = this.other; break;
+        }
+        if (datas) return datas.find(v => v.id == id);
+        else return null;
+    }
+
     /** 获取物品数量 */
     getItemCount(id: number): number {
         switch (tableMgr.Item[ id ].DataType) {
-            case DataType.BaseData: return this[ BaseDataKeyMap[ id ] ];
+            case DataType.BaseData:
+                switch (id) {
+                    case BaseDataType.Coin: return this.coin;
+                    case BaseDataType.Vcoin: return this.vcoin;
+                    case BaseDataType.Exp: return this.exp;
+                    case BaseDataType.MoHe: return this.moHe;
+                    case BaseDataType.MoBi: return this.moBi;
+                    case BaseDataType.SpiritStones: return this.spiritStones;
+                    case BaseDataType.Soul: return this.soul;
+                    case BaseDataType.GemScore: return this.gemScore;
+                    case BaseDataType.Vigor: return this.vigor;
+                    default: throw new Error("未知基础数据类型" + id);
+                }
             case DataType.BagData: return this.getItem(id)?.count || 0;
             default: return 0;
+        }
+    }
+
+    /** 获取背包里的装备 */
+    getEquip(uid: string) {
+        return this.equipment.find(v => v.uid == uid);
+    }
+
+    /** 添加装备 */
+    addNewEquip(id: number, count: number) {
+        for (let i = 0; i < count; i++) {
+            const equip = new Equipment(id);
+            this.equipment.push(equip);
+        }
+    }
+
+    /** 移除装备 */
+    removeEquip(uid: string) {
+        const equips = this.equipment;
+        const equipCount = equips.length;
+        for (let i = 0; i < equipCount; i++) {
+            if (equips[ i ].uid == uid) {
+                equips.splice(i, 1);
+                break;
+            }
         }
     }
 
@@ -418,7 +490,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     /** 购买物品 */
     buyGoods(id: number, count: number) {
         const item = tableMgr.Shop[ id ];
-        item.SellPrice.forEach(v => this.changeItemCount(v.id, -v.count));
+        item.SellPrice.forEach(v => this.changeItemCount(v.id, -v.count * count));
         if (GameUtil.isEquip(item.SellID)) this.addNewEquip(item.SellID, count);
         else this.changeItemCount(item.SellID, count);
         const rewards: ItemBase[] = [ new ItemBase(item.SellID, count) ];
@@ -476,50 +548,32 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         return [ new ItemBase(BaseDataType.Vigor, subVigro) ];
     }
 
-
-    isCollect(id: number) { return this.collect.includes(id); }
-
-    /** 获取背包物品 */
-    getItem(id: number) {
-        const item = tableMgr.Item[ id ];
-        if (!item) return null;
-        let datas: IItemBase[];
-        switch (item.BagType) {
-            // case ItemBagType.Collect: break;
-            // case ItemBagType.Equip: break;
-            case ItemBagType.Prop: datas = this.prop; break;
-            case ItemBagType.Gem: datas = this.gem; break;
-            case ItemBagType.Material: datas = this.material; break;
-            case ItemBagType.Book: datas = this.book; break;
-            case ItemBagType.Other: datas = this.other; break;
-        }
-        if (datas) return datas.find(v => v.id == id);
-        else return null;
+    /**升级经验 ，没有为0*/
+    private getUpgradeExp() {
+        if (!tableMgr.JingJie[ this.jingJie + 1 ]) return 0;
+        else return Formula.exp(this.jingJie, this.cengJi);
     }
 
-    /** 获取背包里的装备 */
-    getEquip(uid: string) {
-        return this.equipment.find(v => v.uid == uid);
-    }
-
-    /** 添加装备 */
-    addNewEquip(id: number, count: number) {
-        for (let i = 0; i < count; i++) {
-            const equip = new Equipment(id);
-            this.equipment.push(equip);
-        }
-    }
-
-    /** 移除装备 */
-    removeEquip(uid: string) {
-        const equips = this.equipment;
-        const equipCount = equips.length;
-        for (let i = 0; i < equipCount; i++) {
-            if (equips[ i ].uid == uid) {
-                equips.splice(i, 1);
-                break;
+    private addExp(num: number) {
+        if (this.getUpgradeExp() == 0) return;
+        this.exp = Math.max(this.exp + num, 0);
+        const addExp2 = () => {
+            //升层级
+            if (this.exp >= this.getUpgradeExp()) {
+                this.exp -= this.getUpgradeExp();
+                this.cengJi++;
+            };
+            const maxCengji = +tableMgr.Const[ 1005 ].Value;
+            if (tableMgr.JingJie[ this.jingJie + 1 ]) {
+                //升境界
+                if (this.cengJi > maxCengji) {
+                    this.cengJi -= maxCengji;
+                    this.jingJie++;
+                }
             }
+            if (this.getUpgradeExp() != 0) this.exp >= this.getUpgradeExp() && addExp2();
+            else (this.exp = 0) && (this.cengJi = 0);
         }
-
+        addExp2();
     }
 }

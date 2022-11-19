@@ -142,4 +142,9 @@ declare interface ConfigShop extends KeyMap<ConfigShopData> {
 	readonly 1128: ConfigShopData;
 	readonly 1129: ConfigShopData;
 	readonly 1130: ConfigShopData;
+	readonly 1131: ConfigShopData;
+	readonly 1132: ConfigShopData;
+	readonly 1133: ConfigShopData;
+	readonly 1134: ConfigShopData;
+	readonly 1135: ConfigShopData;
 }

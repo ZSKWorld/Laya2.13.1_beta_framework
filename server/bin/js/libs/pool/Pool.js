@@ -8,12 +8,19 @@ var Pool = /** @class */ (function () {
         var pool = this._pool[key];
         if (!pool || pool.length === 0)
             return new cls();
-        else
-            return pool.pop();
+        else {
+            var result = pool.pop();
+            result.__inPool = false;
+            return result;
+        }
+        ;
     };
     Pool.recover = function (key, value) {
         if (!value)
             return;
+        if (value.__inPool)
+            return;
+        value.__inPool = true;
         var pool = this._pool[key];
         if (!pool)
             this._pool[key] = [value];

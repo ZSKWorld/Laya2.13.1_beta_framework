@@ -31,6 +31,7 @@
     <image id="qjdo2b" name="Pic_Gouxuan.png" path="/Texture/" exported="true"/>
     <component id="o7722c" name="UIChat.xml" path="/" exported="true"/>
     <component id="j0ry2d" name="RenderChatMsg.xml" path="/Component/Render/"/>
+    <component id="roh22e" name="RenderFriend.xml" path="/Component/Render/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

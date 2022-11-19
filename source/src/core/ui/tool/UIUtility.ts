@@ -8,7 +8,7 @@ import { UIPoolKey } from "./UIPoolKey";
 class TipInfoMgr {
 	private static cache: string[];
 	private static readonly showDelay = 150;
-	private static curTime = this.showDelay;
+	private static curTime = TipInfoMgr.showDelay;
 
 	static addTip(text: string, color: string) {
 		if (!this.cache) {

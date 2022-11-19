@@ -7,7 +7,16 @@ var TimeUtil_1 = require("../../utils/TimeUtil");
 var Util_1 = require("../../utils/Util");
 var TableManager_1 = require("../table/TableManager");
 var DataConst_1 = require("./DataConst");
+var Formula_1 = require("./Formula");
 var Item_1 = require("./Item");
+var EncodeKey = {
+    1: "$equipments",
+    2: "$Prop",
+    3: "$Gem",
+    4: "$Material",
+    5: "$Book",
+    6: "$Other"
+};
 var UserData = /** @class */ (function () {
     //#endregion
     //#endregion
@@ -119,14 +128,15 @@ var UserData = /** @class */ (function () {
         this.nickname = String(nickname);
         this.vigor = this.getMaxVigro();
     }
+    //#region 初始化相关
     UserData.prototype.getSyncInfo = function () { };
     UserData.prototype.clearSyncInfo = function () { };
     UserData.prototype.login = function (source) {
         var _this = this;
         var encodeDatas = [];
-        Object.keys(DataConst_1.EncodeKey).forEach(function (key) {
-            encodeDatas.push(source[DataConst_1.EncodeKey[key]]);
-            delete source[DataConst_1.EncodeKey[key]];
+        Object.keys(EncodeKey).forEach(function (key) {
+            encodeDatas.push(source[EncodeKey[key]]);
+            delete source[EncodeKey[key]];
         });
         Object.keys(source).forEach(function (v) { return _this[v] = source[v]; });
         var _a = this, equipment = _a.equipment, prop = _a.prop, gem = _a.gem, material = _a.material, book = _a.book, other = _a.other;
@@ -141,23 +151,15 @@ var UserData = /** @class */ (function () {
             }
         });
         this.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
+        this.offline = this.getOffline();
     };
     /** 获取离线数据 */
-    UserData.prototype.getOffline = function () {
-        var data = this;
-        if (!data.lastOnlineTime)
-            return null;
-        var timeOffset = ((TimeUtil_1.TimeUtil.getTimeStamp() - data.lastOnlineTime) / 1000) << 0;
-        if (timeOffset <= 5)
-            return null;
-        else
-            return { offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate() * timeOffset) << 0 };
-    };
+    UserData.prototype.getOffline = function () { return GameUtil_1.GameUtil.getOffline(this); };
     UserData.prototype.save = function () {
         var _this = this;
         this.offline = null;
         var encodeKeys = [];
-        Object.keys(DataConst_1.EncodeKey).forEach(function (key) { return encodeKeys.push(DataConst_1.EncodeKey[key]); });
+        Object.keys(EncodeKey).forEach(function (key) { return encodeKeys.push(EncodeKey[key]); });
         var _a = this, equipment = _a.equipment, prop = _a.prop, gem = _a.gem, material = _a.material, book = _a.book, other = _a.other;
         var objects = [equipment, prop, gem, material, book, other];
         objects.forEach(function (obj, objIndex) {
@@ -178,6 +180,7 @@ var UserData = /** @class */ (function () {
         this.lastOnlineTime = TimeUtil_1.TimeUtil.getTimeStamp();
         this.save();
     };
+    //#endregion
     /** 获取当前境界最大精力 */
     UserData.prototype.getMaxVigro = function () {
         var citta = this.citta;
@@ -187,23 +190,47 @@ var UserData = /** @class */ (function () {
     };
     /** 获取精力恢复速率 */
     UserData.prototype.getVigorRecoveryRate = function () {
-        var citta = this.citta;
-        var xinFaJLHF = 0;
-        Object.keys(citta).forEach(function (v) { return xinFaJLHF += (citta[v] * TableManager_1.tableMgr.XinFaBook[v].JLHFAdd); });
-        return 1 + xinFaJLHF;
+        return GameUtil_1.GameUtil.getVigorRecoveryRate(this);
     };
     /** 改变物品数量 */
     UserData.prototype.changeItemCount = function (id, count) {
         var item = TableManager_1.tableMgr.Item[id];
         switch (item.DataType) {
             case 1 /* DataType.BaseData */:
-                this[DataConst_1.BaseDataKeyMap[id]] = Math.max(this[DataConst_1.BaseDataKeyMap[id]] + count, 0);
+                switch (id) {
+                    case 1001 /* BaseDataType.Coin */:
+                        this.coin = Math.max(this.coin + count, 0);
+                        break;
+                    case 1002 /* BaseDataType.Vcoin */:
+                        this.vcoin = Math.max(this.vcoin + count, 0);
+                        break;
+                    case 1003 /* BaseDataType.Exp */:
+                        this.addExp(count);
+                        break;
+                    case 1004 /* BaseDataType.MoHe */:
+                        this.moHe = Math.max(this.moHe + count, 0);
+                        break;
+                    case 1005 /* BaseDataType.MoBi */:
+                        this.moBi = Math.max(this.moBi + count, 0);
+                        break;
+                    case 1006 /* BaseDataType.SpiritStones */:
+                        this.spiritStones = Math.max(this.spiritStones + count, 0);
+                        break;
+                    case 1007 /* BaseDataType.Soul */:
+                        this.soul = Math.max(this.soul + count, 0);
+                        break;
+                    case 1008 /* BaseDataType.GemScore */:
+                        this.gemScore = Math.max(this.gemScore + count, 0);
+                        break;
+                    case 1009 /* BaseDataType.Vigor */:
+                        this.vigor = Math.max(this.vigor + count, 0);
+                        break;
+                    default: throw new Error("未知基础数据类型" + id);
+                }
                 break;
             case 2 /* DataType.BagData */:
                 var datas = void 0;
                 switch (item.BagType) {
-                    // case ItemBagType.Collect: break;
-                    // case ItemBagType.Equip: break;
                     case 2 /* ItemBagType.Prop */:
                         datas = this.prop;
                         break;
@@ -219,7 +246,7 @@ var UserData = /** @class */ (function () {
                     case 6 /* ItemBagType.Other */:
                         datas = this.other;
                         break;
-                    default: return;
+                    default: throw new Error("未知背包数据类型" + id);
                 }
                 var dataLen = datas.length;
                 for (var i = 0; i < dataLen; i++) {
@@ -236,13 +263,79 @@ var UserData = /** @class */ (function () {
             default: break;
         }
     };
+    /** 是否收藏 */
+    UserData.prototype.isCollect = function (id) { return this.collect.includes(id); };
+    /** 获取背包物品 */
+    UserData.prototype.getItem = function (id) {
+        var item = TableManager_1.tableMgr.Item[id];
+        if (!item)
+            return null;
+        var datas;
+        switch (item.BagType) {
+            // case ItemBagType.Collect: break;
+            // case ItemBagType.Equip: break;
+            case 2 /* ItemBagType.Prop */:
+                datas = this.prop;
+                break;
+            case 3 /* ItemBagType.Gem */:
+                datas = this.gem;
+                break;
+            case 4 /* ItemBagType.Material */:
+                datas = this.material;
+                break;
+            case 5 /* ItemBagType.Book */:
+                datas = this.book;
+                break;
+            case 6 /* ItemBagType.Other */:
+                datas = this.other;
+                break;
+        }
+        if (datas)
+            return datas.find(function (v) { return v.id == id; });
+        else
+            return null;
+    };
     /** 获取物品数量 */
     UserData.prototype.getItemCount = function (id) {
         var _a;
         switch (TableManager_1.tableMgr.Item[id].DataType) {
-            case 1 /* DataType.BaseData */: return this[DataConst_1.BaseDataKeyMap[id]];
+            case 1 /* DataType.BaseData */:
+                switch (id) {
+                    case 1001 /* BaseDataType.Coin */: return this.coin;
+                    case 1002 /* BaseDataType.Vcoin */: return this.vcoin;
+                    case 1003 /* BaseDataType.Exp */: return this.exp;
+                    case 1004 /* BaseDataType.MoHe */: return this.moHe;
+                    case 1005 /* BaseDataType.MoBi */: return this.moBi;
+                    case 1006 /* BaseDataType.SpiritStones */: return this.spiritStones;
+                    case 1007 /* BaseDataType.Soul */: return this.soul;
+                    case 1008 /* BaseDataType.GemScore */: return this.gemScore;
+                    case 1009 /* BaseDataType.Vigor */: return this.vigor;
+                    default: throw new Error("未知基础数据类型" + id);
+                }
             case 2 /* DataType.BagData */: return ((_a = this.getItem(id)) === null || _a === void 0 ? void 0 : _a.count) || 0;
             default: return 0;
+        }
+    };
+    /** 获取背包里的装备 */
+    UserData.prototype.getEquip = function (uid) {
+        return this.equipment.find(function (v) { return v.uid == uid; });
+    };
+    /** 添加装备 */
+    UserData.prototype.addNewEquip = function (id, count) {
+        for (var i = 0; i < count; i++) {
+            var equip = new Item_1.Equipment(id);
+            this.equipment.push(equip);
+        }
+    };
+    /** 移除装备 */
+    UserData.prototype.removeEquip = function (uid) {
+        var equips = this.equipment;
+        var equipCount = equips.length;
+        for (var i = 0; i < equipCount; i++) {
+            if (equips[i].uid == uid) {
+                equips.splice(i, 1);
+                break;
+            }
         }
     };
     /** 获取已穿戴装备 */
@@ -271,92 +364,92 @@ var UserData = /** @class */ (function () {
     /** 检查是否可以使用物品 */
     UserData.prototype.checkUseItem = function (id, count) {
         if (count <= 0)
-            return 1012 /* ErrorCode.NUMBER_ERROR */;
+            return 1013 /* ErrorCode.NUMBER_ERROR */;
         var item = this.getItem(id);
         if (item == null)
-            return 1015 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1016 /* ErrorCode.ITEM_NOT_EXIST */;
         var typeItem = GameUtil_1.GameUtil.canUseItem(id);
         if (!typeItem)
-            return 1022 /* ErrorCode.ITEM_CAN_NOT_USE */;
+            return 1023 /* ErrorCode.ITEM_CAN_NOT_USE */;
         else if (item.count < count)
-            return 1016 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
+            return 1017 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
         else if (this.checkJingJieEnough(id) == false)
-            return 1013 /* ErrorCode.JINGJIE_NOT_ENOUGH_USE */;
+            return 1014 /* ErrorCode.JINGJIE_NOT_ENOUGH_USE */;
         else if (GameUtil_1.GameUtil.isFood(id)) {
             if (this.vigor >= this.getMaxVigro())
-                return 1010 /* ErrorCode.VIGOR_IS_FULL */;
+                return 1011 /* ErrorCode.VIGOR_IS_FULL */;
         }
         else if (GameUtil_1.GameUtil.isSkillBook(id)) {
             var SectRequire = typeItem.SectRequire;
             if (SectRequire.length && SectRequire.indexOf(this.sect) == -1)
-                return 1018 /* ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL */;
+                return 1019 /* ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL */;
             else if (this.skill.indexOf(id) != -1)
-                return 1019 /* ErrorCode.SKILL_IS_LEARNED */;
+                return 1020 /* ErrorCode.SKILL_IS_LEARNED */;
         }
         else if (GameUtil_1.GameUtil.isXinFaBook(id)) {
             if (this.citta[id] != null)
-                return 1020 /* ErrorCode.CITTA_IS_LEARNED */;
+                return 1021 /* ErrorCode.CITTA_IS_LEARNED */;
         }
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以出售物品 */
     UserData.prototype.checkSellItem = function (id, count) {
         if (count <= 0)
-            return 1012 /* ErrorCode.NUMBER_ERROR */;
+            return 1013 /* ErrorCode.NUMBER_ERROR */;
         if (!TableManager_1.tableMgr.Item[id].Salable)
-            return 1021 /* ErrorCode.ITEM_CAN_NOT_SELL */;
+            return 1022 /* ErrorCode.ITEM_CAN_NOT_SELL */;
         var item = this.getItem(id);
         if (item == null)
-            return 1015 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1016 /* ErrorCode.ITEM_NOT_EXIST */;
         else if (item.count < count)
-            return 1016 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
+            return 1017 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以穿戴装备 */
     UserData.prototype.checkDressEquip = function (uid) {
         var equip = this.getEquip(uid);
         if (equip == null)
-            return 1015 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1016 /* ErrorCode.ITEM_NOT_EXIST */;
         else if (this.checkJingJieEnough(equip.id) == false)
-            return 1014 /* ErrorCode.JINGJIE_NOT_ENOUGH_DRESS */;
+            return 1015 /* ErrorCode.JINGJIE_NOT_ENOUGH_DRESS */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以脱下装备 */
     UserData.prototype.checkTakeOffEquip = function (part) {
         if (this.getDressedEquip(part) == null)
-            return 1017 /* ErrorCode.PART_NOT_DRESSED_EQUIP */;
+            return 1018 /* ErrorCode.PART_NOT_DRESSED_EQUIP */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以出售装备 */
     UserData.prototype.checkSellEquip = function (uid) {
         var equip = this.getEquip(uid);
         if (!equip)
-            return 1015 /* ErrorCode.ITEM_NOT_EXIST */;
+            return 1016 /* ErrorCode.ITEM_NOT_EXIST */;
         else if (!TableManager_1.tableMgr.Item[equip.id].Salable)
-            return 1021 /* ErrorCode.ITEM_CAN_NOT_SELL */;
+            return 1022 /* ErrorCode.ITEM_CAN_NOT_SELL */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查物品收藏 */
     UserData.prototype.checkCollect = function (id, collect) {
         if (GameUtil_1.GameUtil.isEquip(id))
-            return 1024 /* ErrorCode.EQUIP_CAN_NOT_COLLECT */;
+            return 1025 /* ErrorCode.EQUIP_CAN_NOT_COLLECT */;
         if (collect && this.isCollect(id))
-            return 1025 /* ErrorCode.ITEM_ALREADY_COLLECTED */;
+            return 1026 /* ErrorCode.ITEM_ALREADY_COLLECTED */;
         if (!collect && !this.isCollect(id))
-            return 1026 /* ErrorCode.ITEM_DOES_NOT_COLLECT */;
+            return 1027 /* ErrorCode.ITEM_DOES_NOT_COLLECT */;
         return 0 /* ErrorCode.NONE */;
     };
     /** 检查是否可以购买物品 */
     UserData.prototype.checkBuyItem = function (id, count) {
         if (count <= 0)
-            return 1012 /* ErrorCode.NUMBER_ERROR */;
+            return 1013 /* ErrorCode.NUMBER_ERROR */;
         var item = TableManager_1.tableMgr.Shop[id];
         if (!item)
-            return 1023 /* ErrorCode.GOODS_NOT_EXIST */;
+            return 1024 /* ErrorCode.GOODS_NOT_EXIST */;
         for (var i = 0, n = item.SellPrice.length; i < n; i++) {
             var element = item.SellPrice[i];
             if (this.getItemCount(element.id) < element.count * count)
-                return 1016 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
+                return 1017 /* ErrorCode.ITEM_COUNT_NOT_ENOUGH */;
         }
         return 0 /* ErrorCode.NONE */;
     };
@@ -441,7 +534,7 @@ var UserData = /** @class */ (function () {
     UserData.prototype.buyGoods = function (id, count) {
         var _this = this;
         var item = TableManager_1.tableMgr.Shop[id];
-        item.SellPrice.forEach(function (v) { return _this.changeItemCount(v.id, -v.count); });
+        item.SellPrice.forEach(function (v) { return _this.changeItemCount(v.id, -v.count * count); });
         if (GameUtil_1.GameUtil.isEquip(item.SellID))
             this.addNewEquip(item.SellID, count);
         else
@@ -517,58 +610,39 @@ var UserData = /** @class */ (function () {
         this.changeItemCount(id, -useCount);
         return [new Item_1.ItemBase(1009 /* BaseDataType.Vigor */, subVigro)];
     };
-    UserData.prototype.isCollect = function (id) { return this.collect.includes(id); };
-    /** 获取背包物品 */
-    UserData.prototype.getItem = function (id) {
-        var item = TableManager_1.tableMgr.Item[id];
-        if (!item)
-            return null;
-        var datas;
-        switch (item.BagType) {
-            // case ItemBagType.Collect: break;
-            // case ItemBagType.Equip: break;
-            case 2 /* ItemBagType.Prop */:
-                datas = this.prop;
-                break;
-            case 3 /* ItemBagType.Gem */:
-                datas = this.gem;
-                break;
-            case 4 /* ItemBagType.Material */:
-                datas = this.material;
-                break;
-            case 5 /* ItemBagType.Book */:
-                datas = this.book;
-                break;
-            case 6 /* ItemBagType.Other */:
-                datas = this.other;
-                break;
-        }
-        if (datas)
-            return datas.find(function (v) { return v.id == id; });
+    /**升级经验 ，没有为0*/
+    UserData.prototype.getUpgradeExp = function () {
+        if (!TableManager_1.tableMgr.JingJie[this.jingJie + 1])
+            return 0;
         else
-            return null;
+            return Formula_1.Formula.exp(this.jingJie, this.cengJi);
     };
-    /** 获取背包里的装备 */
-    UserData.prototype.getEquip = function (uid) {
-        return this.equipment.find(function (v) { return v.uid == uid; });
-    };
-    /** 添加装备 */
-    UserData.prototype.addNewEquip = function (id, count) {
-        for (var i = 0; i < count; i++) {
-            var equip = new Item_1.Equipment(id);
-            this.equipment.push(equip);
-        }
-    };
-    /** 移除装备 */
-    UserData.prototype.removeEquip = function (uid) {
-        var equips = this.equipment;
-        var equipCount = equips.length;
-        for (var i = 0; i < equipCount; i++) {
-            if (equips[i].uid == uid) {
-                equips.splice(i, 1);
-                break;
+    UserData.prototype.addExp = function (num) {
+        var _this = this;
+        if (this.getUpgradeExp() == 0)
+            return;
+        this.exp = Math.max(this.exp + num, 0);
+        var addExp2 = function () {
+            //升层级
+            if (_this.exp >= _this.getUpgradeExp()) {
+                _this.exp -= _this.getUpgradeExp();
+                _this.cengJi++;
             }
-        }
+            ;
+            var maxCengji = +TableManager_1.tableMgr.Const[1005].Value;
+            if (TableManager_1.tableMgr.JingJie[_this.jingJie + 1]) {
+                //升境界
+                if (_this.cengJi > maxCengji) {
+                    _this.cengJi -= maxCengji;
+                    _this.jingJie++;
+                }
+            }
+            if (_this.getUpgradeExp() != 0)
+                _this.exp >= _this.getUpgradeExp() && addExp2();
+            else
+                (_this.exp = 0) && (_this.cengJi = 0);
+        };
+        addExp2();
     };
     return UserData;
 }());

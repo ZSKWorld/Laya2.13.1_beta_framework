@@ -68,6 +68,16 @@ declare interface ConfigItem extends KeyMap<ConfigItemData> {
 	readonly 2011: ConfigItemData;
 	/**首充礼包2 */
 	readonly 2012: ConfigItemData;
+	/**微型经验胶囊 */
+	readonly 2013: ConfigItemData;
+	/**小型经验胶囊 */
+	readonly 2014: ConfigItemData;
+	/**中型经验胶囊 */
+	readonly 2015: ConfigItemData;
+	/**大型经验胶囊 */
+	readonly 2016: ConfigItemData;
+	/**巨型经验胶囊 */
+	readonly 2017: ConfigItemData;
 	/**碎石头 */
 	readonly 3000: ConfigItemData;
 	/**重铸石 */

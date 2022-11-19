@@ -31,7 +31,7 @@ var AccouontController = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     AccouontController.prototype.register = function (data) {
-        var userData = Util_1.Util.getData(data.account, data.password);
+        var userData = Util_1.Util.getData(data.account);
         if (userData)
             this.response(data.cmd, null, 1003 /* ErrorCode.USER_EXIST */);
         else {
@@ -48,24 +48,21 @@ var AccouontController = /** @class */ (function (_super) {
         }
     };
     AccouontController.prototype.login = function (data) {
-        var userData;
-        if (this.connection.logined == false) {
-            userData = Util_1.Util.getData(data.account, data.password);
-            if (!userData)
-                return this.response(data.cmd, null, 1002 /* ErrorCode.USER_NOT_EXIST */);
-            else
-                this.connection.userLogin(userData);
-        }
-        userData = JSON.parse(JSON.stringify(this.connection.userData));
-        userData.offline = this.connection.userData.getOffline();
-        this.response(data.cmd, { syncInfo: userData });
+        if (this.connection.logined)
+            return this.response(data.cmd, null, 1008 /* ErrorCode.USER_LOGINED */);
+        var userData = Util_1.Util.getData(data.account);
+        if (!userData)
+            return this.response(data.cmd, null, 1002 /* ErrorCode.USER_NOT_EXIST */);
+        else
+            this.connection.userLogin(userData);
+        this.response(data.cmd);
     };
     AccouontController.prototype.clearAccount = function (data) {
         var userData = this.connection.userData;
         new UserData_1.UserData(userData.account, userData.password, userData.nickname).save();
-        var newData = Util_1.Util.getData(userData.account, userData.password);
+        var newData = Util_1.Util.getData(userData.account);
         this.connection.userLogin(newData);
-        this.response(data.cmd, { syncInfo: newData });
+        this.response(data.cmd);
     };
     __decorate([
         BaseController_1.AddCMD

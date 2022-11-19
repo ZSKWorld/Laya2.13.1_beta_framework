@@ -33,4 +33,14 @@ declare interface ConfigProps extends KeyMap<ConfigPropsData> {
 	readonly 2011: ConfigPropsData;
 	/**首充礼包2 */
 	readonly 2012: ConfigPropsData;
+	/**微型经验胶囊 */
+	readonly 2013: ConfigPropsData;
+	/**小型经验胶囊 */
+	readonly 2014: ConfigPropsData;
+	/**中型经验胶囊 */
+	readonly 2015: ConfigPropsData;
+	/**大型经验胶囊 */
+	readonly 2016: ConfigPropsData;
+	/**巨型经验胶囊 */
+	readonly 2017: ConfigPropsData;
 }

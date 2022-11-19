@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" overflow="hidden" designImage="ui://vith2b66sbd0i" designImageOffsetX="-766" designImageAlpha="100" designImageLayer="1" bgColorEnabled="true" bgColor="#000000">
-  <controller name="ctrlShow" pages="0,,1,,2,,3,,4," selected="0"/>
+  <controller name="ctrlShow" pages="0,历练,1,角色,2,物品,3,商城,4,洞府" selected="4"/>
   <displayList>
     <graph id="n67_7vow" name="n67" xy="10,224" size="1060,1585" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff1a1918">
       <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
@@ -32,7 +32,7 @@
     </component>
     <component id="n12_sbd0" name="BtnLiLian" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="0,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0" values="#ffffff" default="#000000"/>
-      <Button title="历练" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="0"/>
+      <Button title="历练" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="0"/>
     </component>
     <component id="n14_sbd0" name="BtnJueSe" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="180,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,1" values="#000000|#ffffff" default="#000000"/>
@@ -48,10 +48,10 @@
     </component>
     <component id="n17_sbd0" name="BtnDongFu" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="720,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,4" values="#000000|#ffffff" default="#000000"/>
-      <Button title="洞府" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="4"/>
+      <Button title="洞府" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="4"/>
     </component>
     <component id="n69_o772" name="BtnChat" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="900,1819" size="180,101" group="n71_o772">
-      <Button title="聊天" titleFontSize="55"/>
+      <Button title="好友" titleFontSize="55"/>
     </component>
     <group id="n71_o772" name="n71" xy="0,1819" size="1080,101" advanced="true" layout="hz" excludeInvisibles="true">
       <relation target="" sidePair="width-width,center-center,bottom-bottom"/>

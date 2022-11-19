@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="750,1334">
+<component size="1080,1920">
+  <controller name="state" pages="0,friend,1,msg" selected="1"/>
   <displayList>
-    <image id="n1_o772" name="n1" src="qjdo2c" fileName="Texture/Pic_GouxuanBG.png" pkg="vx9zwser" xy="0,1234" size="637,100">
-      <relation target="n0_o772" sidePair="height-height,top-top"/>
+    <image id="n1_o772" name="n1" src="qjdo2c" fileName="Texture/Pic_GouxuanBG.png" pkg="vx9zwser" xy="0,1720" size="917,200">
+      <gearDisplay controller="state" pages="1"/>
+      <relation target="" sidePair="width-width,bottom-bottom"/>
     </image>
-    <list id="n4_j0ry" name="ListMsg" xy="0,56" size="750,1169" overflow="scroll" defaultItem="ui://vith2b66j0ry2d" autoClearItems="true">
+    <list id="n4_j0ry" name="ListMsg" xy="0,112" size="1080,1596" overflow="scroll" lineGap="20" defaultItem="ui://vith2b66j0ry2d" autoClearItems="true">
+      <gearDisplay controller="state" pages="1"/>
+      <relation target="" sidePair="width-width,height-height"/>
       <item>
         <property target="text" propertyId="0" value="你好你手动阀手动手动阀手动阀手动阀手动阀阀手动阀手动阀好你好你好安抚如果都会让他个人"/>
       </item>
@@ -14,14 +18,34 @@
       <item/>
       <item/>
     </list>
-    <text id="n0_o772" name="InputMsg" xy="9,1245" size="620,80" fontSize="25" color="#ffffff" leading="0" autoSize="none" autoClearText="true" text="撒旦发射点发射点&#xA;撒旦发射点发射点&#xA;撒旦发射点发射点&#xA;撒旦发射点发射点" input="true">
-      <relation target="" sidePair="bottom-bottom"/>
+    <list id="n5_roh2" name="ListFriend" xy="0,112" size="1080,1808" overflow="scroll" lineGap="5" defaultItem="ui://vith2b66roh22e" autoClearItems="true">
+      <gearDisplay controller="state" pages="0"/>
+      <relation target="" sidePair="width-width,height-height"/>
+      <item>
+        <property target="text" propertyId="0" value="你好你手动阀手动手动阀手动阀手动阀手动阀阀手动阀手动阀好你好你好安抚如果都会让他个人"/>
+      </item>
+      <item>
+        <property target="text" propertyId="0" value="你好"/>
+      </item>
+      <item/>
+      <item/>
+    </list>
+    <text id="n0_o772" name="InputMsg" xy="9,1731" size="900,180" fontSize="40" color="#ffffff" leading="0" autoSize="none" autoClearText="true" text="撒旦发射点发射点&#xA;撒旦发射点发射点&#xA;撒旦发射点发射点&#xA;撒旦发射点发射点" input="true">
+      <gearDisplay controller="state" pages="1"/>
+      <relation target="" sidePair="width-width,bottom-bottom"/>
     </text>
-    <component id="n2_o772" name="BtnSend" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="638,1234" size="111,100" controller="ctrlBgColor,0">
-      <Button title="发送" titleFontSize="30"/>
+    <component id="n2_o772" name="BtnSend" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="918,1720" size="161,200" controller="ctrlBgColor,0">
+      <gearDisplay controller="state" pages="1"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="发&#xA;送" titleFontSize="60"/>
     </component>
-    <component id="n3_o772" name="BtnBack" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="-35,-2" size="177,50">
+    <component id="n3_o772" name="BtnBack" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="-75,0" size="333,94" aspect="true">
+      <gearDisplay controller="state" pages="0"/>
       <Button icon="ui://vx9zwserqjdo3n"/>
+    </component>
+    <component id="n6_roh2" name="n6" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="-75,0" size="333,94" aspect="true">
+      <gearDisplay controller="state" pages="1"/>
+      <Button icon="ui://vx9zwserqjdo3n" controller="state" page="0"/>
     </component>
   </displayList>
 </component>

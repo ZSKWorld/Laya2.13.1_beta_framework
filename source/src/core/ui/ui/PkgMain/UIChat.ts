@@ -2,7 +2,9 @@
 
 export default class UIChat extends fgui.GComponent {
 
+	public state:fgui.Controller;
 	public ListMsg:fgui.GList;
+	public ListFriend:fgui.GList;
 	public InputMsg:fgui.GTextInput;
 	public BtnSend:fgui.GButton;
 	public BtnBack:fgui.GButton;
@@ -13,9 +15,11 @@ export default class UIChat extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
+		this.state = this.getControllerAt(0);
 		this.ListMsg = <fgui.GList>(this.getChildAt(1));
-		this.InputMsg = <fgui.GTextInput>(this.getChildAt(2));
-		this.BtnSend = <fgui.GButton>(this.getChildAt(3));
-		this.BtnBack = <fgui.GButton>(this.getChildAt(4));
+		this.ListFriend = <fgui.GList>(this.getChildAt(2));
+		this.InputMsg = <fgui.GTextInput>(this.getChildAt(3));
+		this.BtnSend = <fgui.GButton>(this.getChildAt(4));
+		this.BtnBack = <fgui.GButton>(this.getChildAt(5));
 	}
 }

@@ -1,14 +1,5 @@
 import { EquipmentPart, ItemBagType } from "../enum/ItemEnum";
 
-export const EncodeKey: { [ key in ItemBagType ]?: string } = {
-    1: "$equipments",//ItemBagType.Equip
-    2: "$Prop",//ItemBagType.Prop
-    3: "$Gem",//ItemBagType.Gem
-    4: "$Material",//ItemBagType.Material
-    5: "$Book",//ItemBagType.Book
-    6: "$Other",//ItemBagType.Other
-};
-
 export const DressedEquipMap: { readonly [ key in EquipmentPart ]: string } = {
     1: "weapon",
     2: "helmet",

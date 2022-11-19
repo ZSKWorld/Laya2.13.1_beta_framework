@@ -54,7 +54,7 @@ export class UISectCtrl extends BaseViewCtrl<UISectView, UISectData>{
 	}
 
 	private onBtnSubmitClick(): void {
-	
+		this.removeSelf();
 	}
 
 }

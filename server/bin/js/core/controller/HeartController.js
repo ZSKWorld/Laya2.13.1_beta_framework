@@ -23,18 +23,18 @@ var HeartController = /** @class */ (function (_super) {
     function HeartController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    HeartController.prototype.onConstruct = function () {
-        var _this = this;
-        _super.prototype.onConstruct.call(this);
-        this._intervalId = setInterval(function () { return _this.heart(null); }, 10000);
-    };
     HeartController.prototype.heart = function (data) {
         if (this.connection.logined)
             this.response("heart", { timeStamp: TimeUtil_1.TimeUtil.getTimeStamp() });
     };
-    HeartController.prototype.clear = function () {
-        _super.prototype.clear.call(this);
+    HeartController.prototype.recover = function () {
+        _super.prototype.recover.call(this);
         clearInterval(this._intervalId);
+    };
+    HeartController.prototype.onCreate = function () {
+        var _this = this;
+        _super.prototype.onCreate.call(this);
+        this._intervalId = setInterval(function () { return _this.heart(null); }, 10000);
     };
     return HeartController;
 }(BaseController_1.BaseController));

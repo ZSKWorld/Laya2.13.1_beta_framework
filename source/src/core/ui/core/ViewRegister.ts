@@ -18,6 +18,7 @@ import PkgMainBinder from "../ui/PkgMain/PkgMainBinder";
 import RenderBag from "../ui/PkgMain/RenderBag";
 import RenderChatMsg from "../ui/PkgMain/RenderChatMsg";
 import RenderChooseBattle from "../ui/PkgBattle/RenderChooseBattle";
+import RenderFriend from "../ui/PkgMain/RenderFriend";
 import RenderText from "../ui/PkgMain/RenderText";
 import UIBattle from "../ui/PkgBattle/UIBattle";
 import UIChat from "../ui/PkgMain/UIChat";
@@ -72,6 +73,7 @@ import { Logger } from "../../libs/utils/Logger";
 import { RenderBagView } from "../view/PkgMain/Renders/RenderBagView";
 import { RenderChatMsgView } from "../view/PkgMain/Renders/RenderChatMsgView";
 import { RenderChooseBattleView } from "../view/PkgBattle/Renders/RenderChooseBattleView";
+import { RenderFriendView } from "../view/PkgMain/Renders/RenderFriendView";
 import { RenderTextView } from "../view/PkgMain/Renders/RenderTextView";
 import { UIBattleCtrl } from "../viewCtrl/PkgBattle/UIBattleCtrl";
 import { UIBattleNetProcessor } from "../viewNetProcessor/PkgBattle/UIBattleNetProcessor";
@@ -150,6 +152,7 @@ class ViewRegister {
 		fgui.UIObjectFactory.setExtension(RenderChooseBattle.URL, RenderChooseBattleView);
 		fgui.UIObjectFactory.setExtension(RenderBag.URL, RenderBagView);
 		fgui.UIObjectFactory.setExtension(RenderChatMsg.URL, RenderChatMsgView);
+		fgui.UIObjectFactory.setExtension(RenderFriend.URL, RenderFriendView);
 		fgui.UIObjectFactory.setExtension(RenderText.URL, RenderTextView);
 
 		//Views

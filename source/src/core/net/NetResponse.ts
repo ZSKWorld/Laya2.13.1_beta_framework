@@ -15,6 +15,9 @@ export const enum NetResponse {
 	/** 参数类型：{@link BattleOutput} */
 	Response_StartBattle = "Response_StartBattle",
 
+	/** 参数类型：{@link FriendMsgOutput} */
+	Response_FriendMsg = "Response_FriendMsg",
+
 	/** 参数类型：{@link HeartOutput} */
 	Response_Heart = "Response_Heart",
 

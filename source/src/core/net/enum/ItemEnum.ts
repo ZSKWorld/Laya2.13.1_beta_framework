@@ -4,6 +4,29 @@ export const enum DataType {
     /** 背包数据 */
     BagData,
 }
+
+/**基础物品类型 */
+export const enum BaseDataType {
+    /**金币 */
+    Coin = 1001,
+    /**元宝 */
+    Vcoin = 1002,
+    /**经验 */
+    Exp = 1003,
+    /**魔核 */
+    MoHe = 1004,
+    /**魔币 */
+    MoBi = 1005,
+    /**灵石 */
+    SpiritStones = 1006,
+    /**魂魄 */
+    Soul = 1007,
+    /**宝石积分 */
+    GemScore = 1008,
+    /**精力 */
+    Vigor = 1009,
+}
+
 /** 物品背包类型 */
 export const enum ItemBagType {
     /**藏品 */
