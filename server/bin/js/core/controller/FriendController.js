@@ -29,13 +29,24 @@ var FriendController = /** @class */ (function (_super) {
     function FriendController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    FriendController.prototype.addFriend = function (data) {
+        if (this.connection.userData.friends.includes(data.friendUid))
+            return this.response(data.cmd, null, 1029 /* ErrorCode.ALREADY_FRIEND */);
+        this.connection.userData.friends.push(data.friendUid);
+        this.response(data.cmd);
+    };
     FriendController.prototype.friendMsg = function (data) {
+        if (!this.connection.userData.friends.includes(data.friendUid))
+            return this.response(data.cmd, null, 1028 /* ErrorCode.NOT_FRIEND */);
         var friendCon = ConnectionMgr_1.connectionMgr.getConnection(data.friendUid);
         if (friendCon) {
-            friendCon.notify({ cmd: "friendMsg", data: data.chatMsg });
+            friendCon.notify({ cmd: data.cmd, data: data.chatMsg });
         }
         this.response(data.cmd);
     };
+    __decorate([
+        BaseController_1.AddCMD
+    ], FriendController.prototype, "addFriend");
     __decorate([
         BaseController_1.AddCMD
     ], FriendController.prototype, "friendMsg");

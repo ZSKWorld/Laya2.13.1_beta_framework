@@ -1,6 +1,7 @@
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { ChatMsg, RenderChatMsgView } from "../../view/PkgMain/Renders/RenderChatMsgView";
+import { RenderFriendView } from "../../view/PkgMain/Renders/RenderFriendView";
 import { UIChatMsg, UIChatView } from "../../view/PkgMain/UIChatView";
 
 export interface UIChatData {
@@ -8,14 +9,7 @@ export interface UIChatData {
 }
 
 export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
-  private _msgs: ChatMsg[] = [
-    { uid: "", text: "asdk卢卡斯京东方垃圾收到付款了阿萨" },
-    { uid: "", text: "破次数多了" },
-    { uid: "", text: "看到阿基尔访问交流奥斯陆冬季福娃欸附件，的发票未发觉囧士大夫开始。司搭街坊评委覅上岛咖啡看见你" },
-    { uid: "", text: "的时刻弗兰克喷雾剂覅位科技局马克思的佛山短发女生快递费！！！！" },
-    { uid: "", text: "撒旦发射点JFK了？" },
-    { uid: "", text: "2165大发是否sd4f64sdf1w6e4f8e" },
-  ];
+  private _msgs: ChatMsg[] = [];
 
   override onAwake(): void {
     this.addMessageListener(UIChatMsg.OnBtnSendClick, this.onBtnSendClick);
@@ -23,6 +17,7 @@ export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
   }
 
   override onEnable(): void {
+    this.refreshFriendList();
     this.refreshMsgList();
   }
 
@@ -34,12 +29,20 @@ export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
 
   }
 
-  private refreshFriendList() {
-
+  refreshFriendList() {
+    UIUtility.setList(this.view.ListFriend, this.userData.friends.length, this, this.onFriendListRenderer, this.onFriendListClick);
   }
 
-  private refreshMsgList() {
+  refreshMsgList() {
     UIUtility.setList(this.view.ListMsg, this._msgs.length, this, this.onMsgListRenderer);
+  }
+
+  private onFriendListRenderer(index: number, item: RenderFriendView) {
+    item.refresh(this.userData.friends[ index ]);
+  }
+
+  private onFriendListClick(item: RenderFriendView, _, index: number) {
+    this.view.setState(1);
   }
 
   private onMsgListRenderer(index: number, item: RenderChatMsgView) {

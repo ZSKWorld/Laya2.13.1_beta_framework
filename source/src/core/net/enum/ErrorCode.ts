@@ -56,4 +56,8 @@ export const enum ErrorCode {
     ITEM_ALREADY_COLLECTED,
     /** 物品没有收藏过 */
     ITEM_DOES_NOT_COLLECT,
+    /** 和对方还不是好友 */
+    NOT_FRIEND,
+    /** 和对方已经是好友了 */
+    ALREADY_FRIEND,
 }

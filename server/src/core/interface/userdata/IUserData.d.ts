@@ -20,6 +20,9 @@ declare interface IUserData {
     lastLoginTime: number;
     /** 最后一次在线时间 */
     lastOnlineTime: number;
+    /** 好友列表 */
+    friends: string[];
+
     /** 离线数据 */
     offline?: IOffline;
     /** 金币 */

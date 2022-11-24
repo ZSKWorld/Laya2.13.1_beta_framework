@@ -16,7 +16,7 @@
     </text>
     <component id="n6_roh2" name="BtnChat" src="fhzd5a" fileName="Component/BtnCircleIcon.xml" pkg="vx9zwser" xy="578,33">
       <relation target="" sidePair="right-right"/>
-      <Button titleFontSize="23"/>
+      <Button title="..." titleFontSize="23"/>
     </component>
   </displayList>
   <customProperty target="text" propertyId="0"/>

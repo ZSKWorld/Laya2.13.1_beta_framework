@@ -30,6 +30,7 @@ var UserData = /** @class */ (function () {
         this.registerTime = TimeUtil_1.TimeUtil.getTimeStamp();
         this.lastLoginTime = 0;
         this.lastOnlineTime = 0;
+        this.friends = [];
         /** 离线数据 */
         this.offline = null;
         /** 金币 */

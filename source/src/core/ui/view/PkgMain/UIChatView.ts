@@ -1,7 +1,7 @@
+import { ResPath } from "../../../common/ResPath";
 import { ExtensionClass } from "../../../libs/utils/Util";
 import { ViewExtension } from "../../core/Interfaces";
 import UIChat from "../../ui/PkgMain/UIChat";
-import { ResPath } from "../../../common/ResPath";
 
 export const enum UIChatMsg {
 	OnBtnSendClick = "UIChat_OnBtnSendClick",
@@ -9,12 +9,16 @@ export const enum UIChatMsg {
 }
 
 export class UIChatView extends ExtensionClass<ViewExtension, UIChat>(UIChat) {
-    static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.UIPath.PkgMain;
 
 	override onCreate(): void {
-        const { BtnSend, BtnBack } = this;
-	    BtnSend.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnSendClick ]);
-	    BtnBack.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnBackClick ]);
-    }
+		const { BtnSend, BtnBack } = this;
+		BtnSend.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnSendClick ]);
+		BtnBack.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnBackClick ]);
+	}
+
+	setState(state: number) {
+		this.state.selectedIndex = state;
+	}
 
 }

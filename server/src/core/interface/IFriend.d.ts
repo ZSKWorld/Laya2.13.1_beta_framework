@@ -1,6 +1,16 @@
 declare interface IFriend {
+    addFriend(data: AddFriendInput): void;
     friendMsg(data: FriendMsgInput): void;
 }
+
+declare interface AddFriendInput extends UserInput {
+    friendUid:string;
+}
+
+declare interface AddFriendOuput extends UserOutput {
+    
+}
+
 
 declare interface FriendMsgInput extends UserInput {
     friendUid: string;

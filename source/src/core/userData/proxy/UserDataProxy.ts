@@ -12,7 +12,7 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     private static _inst: UserDataProxy;
     static get Inst() { return this._inst || (this._inst = new UserDataProxy()) }
 
-    token:string;
+    token: string;
 
     //#region SourceProperties
     get uid(): string { return this.source.uid; }
@@ -22,6 +22,7 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     get registerTime(): number { return this.source.registerTime; }
     get lastLoginTime(): number { return this.source.lastLoginTime; }
     get lastOnlineTime(): number { return this.source.lastOnlineTime; }
+    get friends(): string[] { return this.source.friends; }
     get offline(): IOffline { return this.source.offline; }
     get coin(): number { return this.source.coin; }
     get vcoin(): number { return this.source.vcoin; }
@@ -80,6 +81,7 @@ export class UserDataProxy extends BaseProxy<IUserData> implements IUserData {
     private set registerTime(value: number) { this.source.registerTime = value; }
     private set lastLoginTime(value: number) { this.source.lastLoginTime = value; }
     private set lastOnlineTime(value: number) { this.source.lastOnlineTime = value; }
+    private set friends(value: string[]) { this.source.friends = value; }
     private set offline(value: IOffline) { this.source.offline = value; }
     private set coin(value: number) { this.source.coin = value; }
     private set vcoin(value: number) { this.source.vcoin = value; }

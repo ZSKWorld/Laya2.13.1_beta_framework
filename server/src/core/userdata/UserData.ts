@@ -29,6 +29,8 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     registerTime: number = TimeUtil.getTimeStamp();
     lastLoginTime: number = 0;
     lastOnlineTime: number = 0;
+    friends:string[] = [];
+
     /** 离线数据 */
     offline?: IOffline = null;
     /** 金币 */
