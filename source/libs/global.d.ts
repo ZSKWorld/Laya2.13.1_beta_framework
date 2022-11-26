@@ -40,6 +40,10 @@ declare namespace fgui {
         getComponent<T extends Laya.Component>(componentType: new () => T): T;
 
         getComponents<T extends Laya.Component>(componentType: new () => T): T[];
+        event(type:string,data?:any):boolean;
+        once(type:string,caller:any,listener:Function,args?:any[]):Laya.EventDispatcher;
+        offAll(type?:string):Laya.EventDispatcher;
+        offAllCaller(caller:any):Laya.EventDispatcher;
 
         /**
          * 给当前GObject添加用on注册的事件锁，为空则为全局锁。

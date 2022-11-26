@@ -34,7 +34,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 			this._listener = value;
 		}
 	}
-	get netProcessor() { return this._netProcessor; }
 	get subCtrls() { return this._subCtrls; }
 
 	/**

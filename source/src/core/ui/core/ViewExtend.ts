@@ -40,9 +40,8 @@ export class ViewExtend {
 					thisCtrl?.subCtrls.push(viewCtrl);
 				}
 			}
+			viewInst.listener = listener;
 			viewInst.userData = userData;
-			//这里不能使用传入的listener，传入的可能为空值
-			viewInst.listener = viewCtrl?.listener;
 			newComp && viewInst.onCreate?.();
 		};
 		const oldDispose = prototype.dispose;
