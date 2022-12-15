@@ -12,8 +12,8 @@ export interface UILoginMainData {
 export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainData>{
 
     override onAwake(): void {
-        this.addMessageListener(UILoginMainMsg.OnBtnLoginClick, this.onBtnLoginClick);
-        this.addMessageListener(UILoginMainMsg.OnBtnRegisterClick, this.onBtnRegisterClick);
+        this.addMessage(UILoginMainMsg.OnBtnLoginClick, this.onBtnLoginClick);
+        this.addMessage(UILoginMainMsg.OnBtnRegisterClick, this.onBtnRegisterClick);
     }
 
     override onEnable(): void {

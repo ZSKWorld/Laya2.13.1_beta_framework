@@ -40,7 +40,7 @@ export class ViewExtend {
 					thisCtrl?.subCtrls.push(viewCtrl);
 				}
 			}
-			viewInst.listener = listener;
+			viewInst.listener = viewCtrl?.listener;
 			viewInst.userData = userData;
 			newComp && viewInst.onCreate?.();
 		};

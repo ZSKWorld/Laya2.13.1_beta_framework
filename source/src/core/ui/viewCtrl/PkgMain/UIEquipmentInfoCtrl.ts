@@ -12,13 +12,13 @@ export interface UIEquipmentInfoData {
 export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEquipmentInfoData>{
 
 	override onAwake(): void {
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnBgClick, this.onBtnBgClick);
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnSellClick, this.onBtnSellClick);
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnDressClick, this.onBtnDressClick);
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnQiangHuaClick, this.onBtnQiangHuaClick);
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnXiangQianClick, this.onBtnXiangQianClick);
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnMingKeClick, this.onBtnMingKeClick);
-		this.addMessageListener(UIEquipmentInfoMsg.OnBtnShenYouClick, this.onBtnShenYouClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnBgClick, this.onBtnBgClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnSellClick, this.onBtnSellClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnDressClick, this.onBtnDressClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnQiangHuaClick, this.onBtnQiangHuaClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnXiangQianClick, this.onBtnXiangQianClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnMingKeClick, this.onBtnMingKeClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnShenYouClick, this.onBtnShenYouClick);
 	}
 
 	override onEnable(): void {

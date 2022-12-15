@@ -22,13 +22,13 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 	private _sphereDragged: boolean;
 
 	override onAwake(): void {
-		this.addMessageListener(UIMainMsg.OnBtnChatClick, this.onBtnChatClick);
-		this.addMessageListener(UIMainMsg.OnBtnInfoClick, this.onBtnInfoClick);
-		this.addMessageListener(UIMainMsg.OnBtnHeadClick, this.onBtnHeadClick);
-		this.addMessageListener(UIMainMsg.OnBtnSettingClick, this.onBtnSettingClick);
-		this.addMessageListener(UIMainMsg.OnBtnRankClick, this.onBtnRankClick);
-		this.addMessageListener(UIMainMsg.OnBtnSphereClick, this.onBtnSphereClick);
-		this.addMessageListener(UIMainMsg.OnBtnSphereDraged, this.onBtnSphereDraged);
+		this.addMessage(UIMainMsg.OnBtnChatClick, this.onBtnChatClick);
+		this.addMessage(UIMainMsg.OnBtnInfoClick, this.onBtnInfoClick);
+		this.addMessage(UIMainMsg.OnBtnHeadClick, this.onBtnHeadClick);
+		this.addMessage(UIMainMsg.OnBtnSettingClick, this.onBtnSettingClick);
+		this.addMessage(UIMainMsg.OnBtnRankClick, this.onBtnRankClick);
+		this.addMessage(UIMainMsg.OnBtnSphereClick, this.onBtnSphereClick);
+		this.addMessage(UIMainMsg.OnBtnSphereDraged, this.onBtnSphereDraged);
 
 		if (!UIMainCtrl.showFirst) {
 			UIMainCtrl.showFirst = true;

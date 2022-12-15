@@ -8,10 +8,10 @@ export interface UIBattleData {
 export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 
 	override onAwake(): void {
-		this.addMessageListener(UIBattleMsg.OnBtnOfflineClick, this.onBtnOfflineClick);
-		this.addMessageListener(UIBattleMsg.OnBtnEnemyInfoClick, this.onBtnEnemyInfoClick);
-		this.addMessageListener(UIBattleMsg.OnBtnQuitBattleClick, this.onBtnQuitBattleClick);
-		this.addMessageListener(UIBattleMsg.OnBtnCloseInfoClick, this.onBtnCloseInfoClick);
+		this.addMessage(UIBattleMsg.OnBtnOfflineClick, this.onBtnOfflineClick);
+		this.addMessage(UIBattleMsg.OnBtnEnemyInfoClick, this.onBtnEnemyInfoClick);
+		this.addMessage(UIBattleMsg.OnBtnQuitBattleClick, this.onBtnQuitBattleClick);
+		this.addMessage(UIBattleMsg.OnBtnCloseInfoClick, this.onBtnCloseInfoClick);
 	}
 
 	override onEnable(): void {

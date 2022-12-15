@@ -12,8 +12,8 @@ export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
   private _msgs: ChatMsg[] = [];
 
   override onAwake(): void {
-    this.addMessageListener(UIChatMsg.OnBtnSendClick, this.onBtnSendClick);
-    this.addMessageListener(UIChatMsg.OnBtnBackClick, this.onBtnBackClick);
+    this.addMessage(UIChatMsg.OnBtnSendClick, this.onBtnSendClick);
+    this.addMessage(UIChatMsg.OnBtnBackClick, this.onBtnBackClick);
   }
 
   override onEnable(): void {

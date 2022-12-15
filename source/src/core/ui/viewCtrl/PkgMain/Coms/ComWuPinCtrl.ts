@@ -19,20 +19,20 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 	private showType: ItemBagType = ItemBagType.Collect;
 
 	override onAwake(): void {
-		this.addMessageListener(ComWuPinMsg.OnBtnShouCangClick, this.refreshList, [ ItemBagType.Collect ]);
-		this.addMessageListener(ComWuPinMsg.OnBtnEquipClick, this.refreshList, [ ItemBagType.Equip ]);
-		this.addMessageListener(ComWuPinMsg.OnBtnPropClick, this.refreshList, [ ItemBagType.Prop ]);
-		this.addMessageListener(ComWuPinMsg.OnBtnGemClick, this.refreshList, [ ItemBagType.Gem ]);
-		this.addMessageListener(ComWuPinMsg.OnBtnMaterialClick, this.refreshList, [ ItemBagType.Material ]);
-		this.addMessageListener(ComWuPinMsg.OnBtnBookClick, this.refreshList, [ ItemBagType.Book ]);
-		this.addMessageListener(ComWuPinMsg.OnBtnOtherClick, this.refreshList, [ ItemBagType.Other ]);
+		this.addMessage(ComWuPinMsg.OnBtnShouCangClick, this.refreshList, [ ItemBagType.Collect ]);
+		this.addMessage(ComWuPinMsg.OnBtnEquipClick, this.refreshList, [ ItemBagType.Equip ]);
+		this.addMessage(ComWuPinMsg.OnBtnPropClick, this.refreshList, [ ItemBagType.Prop ]);
+		this.addMessage(ComWuPinMsg.OnBtnGemClick, this.refreshList, [ ItemBagType.Gem ]);
+		this.addMessage(ComWuPinMsg.OnBtnMaterialClick, this.refreshList, [ ItemBagType.Material ]);
+		this.addMessage(ComWuPinMsg.OnBtnBookClick, this.refreshList, [ ItemBagType.Book ]);
+		this.addMessage(ComWuPinMsg.OnBtnOtherClick, this.refreshList, [ ItemBagType.Other ]);
 
-		this.addMessageListener(ComWuPinMsg.OnBtnQualityUpClick, this.onBtnQualityUpClick);
-		this.addMessageListener(ComWuPinMsg.OnBtnQualityDownClick, this.onBtnQualityDownClick);
-		this.addMessageListener(ComWuPinMsg.OnBtnTypeUpClick, this.onBtnTypeUpClick);
-		this.addMessageListener(ComWuPinMsg.OnBtnTypeDownClick, this.onBtnTypeDownClick);
-		this.addMessageListener(ComWuPinMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
-		this.addMessageListener(ComWuPinMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
+		this.addMessage(ComWuPinMsg.OnBtnQualityUpClick, this.onBtnQualityUpClick);
+		this.addMessage(ComWuPinMsg.OnBtnQualityDownClick, this.onBtnQualityDownClick);
+		this.addMessage(ComWuPinMsg.OnBtnTypeUpClick, this.onBtnTypeUpClick);
+		this.addMessage(ComWuPinMsg.OnBtnTypeDownClick, this.onBtnTypeDownClick);
+		this.addMessage(ComWuPinMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
+		this.addMessage(ComWuPinMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
 	}
 
 	override onEnable(): void {

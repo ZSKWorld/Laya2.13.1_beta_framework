@@ -26,31 +26,31 @@ export class ComShangChengCtrl extends BaseViewCtrl<ComShangChengView, ComShangC
 	private items: ConfigShopData[];
 
 	override onAwake(): void {
-		this.addMessageListener(ComShangChengMsg.OnBtnPropClick, this.refreshList, [ SellType.Prop ]);
-		this.addMessageListener(ComShangChengMsg.OnBtnGemClick, this.refreshList, [ SellType.Gem ]);
-		this.addMessageListener(ComShangChengMsg.OnBtnMaterialClick, this.refreshList, [ SellType.Material ]);
-		this.addMessageListener(ComShangChengMsg.OnBtnMiJiClick, this.refreshList, [ SellType.MiJi ]);
-		this.addMessageListener(ComShangChengMsg.OnBtnOtherClick, this.refreshList, [ SellType.Other ]);
-		this.addMessageListener(ComShangChengMsg.OnBtnHeiShiClick, this.refreshList, [ SellType.HeiShi ]);
-		this.addMessageListener(ComShangChengMsg.OnBtnXianJieClick, this.refreshList, [ SellType.XianJie ]);
+		this.addMessage(ComShangChengMsg.OnBtnPropClick, this.refreshList, [ SellType.Prop ]);
+		this.addMessage(ComShangChengMsg.OnBtnGemClick, this.refreshList, [ SellType.Gem ]);
+		this.addMessage(ComShangChengMsg.OnBtnMaterialClick, this.refreshList, [ SellType.Material ]);
+		this.addMessage(ComShangChengMsg.OnBtnMiJiClick, this.refreshList, [ SellType.MiJi ]);
+		this.addMessage(ComShangChengMsg.OnBtnOtherClick, this.refreshList, [ SellType.Other ]);
+		this.addMessage(ComShangChengMsg.OnBtnHeiShiClick, this.refreshList, [ SellType.HeiShi ]);
+		this.addMessage(ComShangChengMsg.OnBtnXianJieClick, this.refreshList, [ SellType.XianJie ]);
 
-		this.addMessageListener(ComShangChengMsg.OnBtnZBQHClick, this.onBtnZBQHClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnBSJGClick, this.onBtnBSJGClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnJSClick, this.onBtnJSClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnTSDJClick, this.onBtnTSDJClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnGemLv1Click, this.onBtnGemLv1Click);
-		this.addMessageListener(ComShangChengMsg.OnBtnGemLv2Click, this.onBtnGemLv2Click);
-		this.addMessageListener(ComShangChengMsg.OnBtnGemLv3Click, this.onBtnGemLv3Click);
-		this.addMessageListener(ComShangChengMsg.OnBtnGemLv4Click, this.onBtnGemLv4Click);
-		this.addMessageListener(ComShangChengMsg.OnBtnSGCLClick, this.onBtnSGCLClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnTSCLClick, this.onBtnTSCLClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnZWClick, this.onBtnZWClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnQHCLClick, this.onBtnQHCLClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnTJClick, this.onBtnTJClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnXFClick, this.onBtnXFClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnJNClick, this.onBtnJNClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnQTClick, this.onBtnQTClick);
-		this.addMessageListener(ComShangChengMsg.OnBtnYRClick, this.onBtnYRClick);
+		this.addMessage(ComShangChengMsg.OnBtnZBQHClick, this.onBtnZBQHClick);
+		this.addMessage(ComShangChengMsg.OnBtnBSJGClick, this.onBtnBSJGClick);
+		this.addMessage(ComShangChengMsg.OnBtnJSClick, this.onBtnJSClick);
+		this.addMessage(ComShangChengMsg.OnBtnTSDJClick, this.onBtnTSDJClick);
+		this.addMessage(ComShangChengMsg.OnBtnGemLv1Click, this.onBtnGemLv1Click);
+		this.addMessage(ComShangChengMsg.OnBtnGemLv2Click, this.onBtnGemLv2Click);
+		this.addMessage(ComShangChengMsg.OnBtnGemLv3Click, this.onBtnGemLv3Click);
+		this.addMessage(ComShangChengMsg.OnBtnGemLv4Click, this.onBtnGemLv4Click);
+		this.addMessage(ComShangChengMsg.OnBtnSGCLClick, this.onBtnSGCLClick);
+		this.addMessage(ComShangChengMsg.OnBtnTSCLClick, this.onBtnTSCLClick);
+		this.addMessage(ComShangChengMsg.OnBtnZWClick, this.onBtnZWClick);
+		this.addMessage(ComShangChengMsg.OnBtnQHCLClick, this.onBtnQHCLClick);
+		this.addMessage(ComShangChengMsg.OnBtnTJClick, this.onBtnTJClick);
+		this.addMessage(ComShangChengMsg.OnBtnXFClick, this.onBtnXFClick);
+		this.addMessage(ComShangChengMsg.OnBtnJNClick, this.onBtnJNClick);
+		this.addMessage(ComShangChengMsg.OnBtnQTClick, this.onBtnQTClick);
+		this.addMessage(ComShangChengMsg.OnBtnYRClick, this.onBtnYRClick);
 	}
 
 	override onEnable(): void {

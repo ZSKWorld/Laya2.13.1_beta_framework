@@ -13,12 +13,12 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	private clickIndex: number;
 
 	override onAwake(): void {
-		this.addMessageListener(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
-		this.addMessageListener(UIChooseBattleMsg.OnBtnConfirmBgClick, this.onBtnConfirmBgClick);
-		this.addMessageListener(UIChooseBattleMsg.OnBtnBuyFoodClick, this.onBtnBuyFoodClick);
-		this.addMessageListener(UIChooseBattleMsg.OnBtnBuyTimesClick, this.onBtnBuyTimesClick);
-		this.addMessageListener(UIChooseBattleMsg.OnBtnSaoDangClick, this.onBtnSaoDangClick);
-		this.addMessageListener(UIChooseBattleMsg.OnBtnBattleClick, this.onBtnBattleClick);
+		this.addMessage(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
+		this.addMessage(UIChooseBattleMsg.OnBtnConfirmBgClick, this.onBtnConfirmBgClick);
+		this.addMessage(UIChooseBattleMsg.OnBtnBuyFoodClick, this.onBtnBuyFoodClick);
+		this.addMessage(UIChooseBattleMsg.OnBtnBuyTimesClick, this.onBtnBuyTimesClick);
+		this.addMessage(UIChooseBattleMsg.OnBtnSaoDangClick, this.onBtnSaoDangClick);
+		this.addMessage(UIChooseBattleMsg.OnBtnBattleClick, this.onBtnBattleClick);
 	}
 
 	override onEnable(): void {

@@ -10,12 +10,12 @@ export interface ComItemInfoData {
 export class ComItemInfoCtrl extends BaseViewCtrl<ComItemInfoView, ComItemInfoData>{
 
 	override onAwake(): void {
-		this.addMessageListener(ComItemInfoMsg.OnBtnBgClick, this.removeSelf);
-		this.addMessageListener(ComItemInfoMsg.OnBtnShouCangClick, this.onBtnShouCangClick);
-		this.addMessageListener(ComItemInfoMsg.OnBtnSellClick, this.onBtnSellClick);
-		this.addMessageListener(ComItemInfoMsg.OnBtnUseClick, this.onBtnUseClick);
-		this.addMessageListener(ComItemInfoMsg.OnBtnBuyClick, this.onBtnBuyClick);
-		this.addMessageListener(ComItemInfoMsg.OnNumInput, this.OnNumInput);
+		this.addMessage(ComItemInfoMsg.OnBtnBgClick, this.removeSelf);
+		this.addMessage(ComItemInfoMsg.OnBtnShouCangClick, this.onBtnShouCangClick);
+		this.addMessage(ComItemInfoMsg.OnBtnSellClick, this.onBtnSellClick);
+		this.addMessage(ComItemInfoMsg.OnBtnUseClick, this.onBtnUseClick);
+		this.addMessage(ComItemInfoMsg.OnBtnBuyClick, this.onBtnBuyClick);
+		this.addMessage(ComItemInfoMsg.OnNumInput, this.OnNumInput);
 	}
 
 	override onEnable(): void {

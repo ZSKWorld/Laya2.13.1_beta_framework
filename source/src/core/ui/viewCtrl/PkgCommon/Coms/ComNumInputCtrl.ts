@@ -11,8 +11,8 @@ export interface ComNumInputData {
 export class ComNumInputCtrl extends BaseViewCtrl<ComNumInputView, ComNumInputData>{
 
 	override onAwake(): void {
-		this.addMessageListener(ComNumInputMsg.OnBtnBgClick, this.onBtnBgClick);
-		this.addMessageListener(ComNumInputMsg.OnBtnSubmitClick, this.onBtnSubmitClick);
+		this.addMessage(ComNumInputMsg.OnBtnBgClick, this.onBtnBgClick);
+		this.addMessage(ComNumInputMsg.OnBtnSubmitClick, this.onBtnSubmitClick);
 	}
 
 	override onEnable(): void {
@@ -21,7 +21,7 @@ export class ComNumInputCtrl extends BaseViewCtrl<ComNumInputView, ComNumInputDa
 	}
 
 	override onDisable(): void {
-        this.doCallback(null);
+		this.doCallback(null);
 	}
 
 	override onDestroy(): void {
@@ -34,12 +34,12 @@ export class ComNumInputCtrl extends BaseViewCtrl<ComNumInputView, ComNumInputDa
 	}
 
 	private onBtnSubmitClick(): void {
-        this.doCallback(this.view.Slider.value);
-        this.removeSelf();
+		this.doCallback(this.view.Slider.value);
+		this.removeSelf();
 	}
-    private doCallback(value: number) {
-        this.data?.callback?.runWith(value);
-        this.data = null;
-    }
+	private doCallback(value: number) {
+		this.data?.callback?.runWith(value);
+		this.data = null;
+	}
 
 }

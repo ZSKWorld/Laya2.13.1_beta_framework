@@ -8,12 +8,12 @@ export interface ComDongFuData {
 export class ComDongFuCtrl extends BaseViewCtrl<ComDongFuView, ComDongFuData>{
 
     override onAwake(): void {
-		this.addMessageListener(ComDongFuMsg.OnBtnCreateClick, this.onBtnCreateClick);
-		this.addMessageListener(ComDongFuMsg.OnBtnAboutClick, this.onBtnAboutClick);
-		this.addMessageListener(ComDongFuMsg.OnBtnSettingClick, this.onBtnSettingClick);
-		this.addMessageListener(ComDongFuMsg.OnBtnMeetClick, this.onBtnMeetClick);
-		this.addMessageListener(ComDongFuMsg.OnBtnPetClick, this.onBtnPetClick);
-		this.addMessageListener(ComDongFuMsg.OnBtnRepairClick, this.onBtnRepairClick);
+		this.addMessage(ComDongFuMsg.OnBtnCreateClick, this.onBtnCreateClick);
+		this.addMessage(ComDongFuMsg.OnBtnAboutClick, this.onBtnAboutClick);
+		this.addMessage(ComDongFuMsg.OnBtnSettingClick, this.onBtnSettingClick);
+		this.addMessage(ComDongFuMsg.OnBtnMeetClick, this.onBtnMeetClick);
+		this.addMessage(ComDongFuMsg.OnBtnPetClick, this.onBtnPetClick);
+		this.addMessage(ComDongFuMsg.OnBtnRepairClick, this.onBtnRepairClick);
     }
 
     override onEnable(): void {

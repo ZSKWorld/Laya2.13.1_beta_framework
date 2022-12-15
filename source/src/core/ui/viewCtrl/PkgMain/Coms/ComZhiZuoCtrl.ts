@@ -12,15 +12,15 @@ export interface ComZhiZuoData {
 export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
 
 	override onAwake(): void {
-		this.addMessageListener(ComZhiZuoMsg.OnBtnFJZBClick, this.onBtnFJZBClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnFJBSClick, this.onBtnFJBSClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnYJHCClick, this.onBtnYJHCClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnJPYLClick, this.onBtnJPYLClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnDZZBClick, this.onBtnDZZBClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnZJZBClick, this.onBtnZJZBClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnCZZBClick, this.onBtnCZZBClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnBSHCClick, this.onBtnBSHCClick);
-		this.addMessageListener(ComZhiZuoMsg.OnBtnZZTZClick, this.onBtnZZTZClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnFJZBClick, this.onBtnFJZBClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnFJBSClick, this.onBtnFJBSClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnYJHCClick, this.onBtnYJHCClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnJPYLClick, this.onBtnJPYLClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnDZZBClick, this.onBtnDZZBClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnZJZBClick, this.onBtnZJZBClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnCZZBClick, this.onBtnCZZBClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnBSHCClick, this.onBtnBSHCClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnZZTZClick, this.onBtnZZTZClick);
 
 		const fjzbArr: string[] = [];//this._fjzbArr.map(v => GetColorStr(v, `${v}星装备`));
 		for (let i = 1, max = +tableMgr.Const[ 1010 ].Value; i <= max; i++)

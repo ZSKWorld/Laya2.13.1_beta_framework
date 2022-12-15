@@ -75,7 +75,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	 * @param args 参数
 	 * @param once 是否只执行一次，默认 false
 	 */
-	protected addMessageListener(type: string, callback: Function, args?: any[], once?: boolean) {
+	protected addMessage(type: string, callback: Function, args?: any[], once?: boolean) {
 		if (once) this._listener.once(type, this, callback, args);
 		else this._listener.on(type, this, callback, args);
 	}
@@ -103,9 +103,9 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.registerEvent(this._view);
 		eventMgr.registerEvent(this._netProcessor);
 		ViewCtrlDIExtend.registerDeviceEvent(this);
-		this.addMessageListener(ViewEvent.OnRemoved, this.__onRemoved);
-		this.addMessageListener(ViewEvent.OnForeground, this.__onForeground);
-		this.addMessageListener(ViewEvent.OnBackground, this.__onBackground);
+		this.addMessage(ViewEvent.OnRemoved, this.__onRemoved);
+		this.addMessage(ViewEvent.OnForeground, this.__onForeground);
+		this.addMessage(ViewEvent.OnBackground, this.__onBackground);
 	}
 
 	private __onForeground() {

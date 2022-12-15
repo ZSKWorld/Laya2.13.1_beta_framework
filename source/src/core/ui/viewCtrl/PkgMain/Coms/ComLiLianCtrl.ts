@@ -18,13 +18,13 @@ export interface ComLiLianData {
 export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 
 	override onAwake(): void {
-		this.addMessageListener(ComLiLianMsg.OnBtnGuanQiaClick, this.enterBattle, [ BattleType.GuanQia ]);
-		this.addMessageListener(ComLiLianMsg.OnBtnFuBenClick, this.enterBattle, [ BattleType.FuBen ]);
-		this.addMessageListener(ComLiLianMsg.OnBtnMiJingClick, this.enterBattle, [ BattleType.MiJing ]);
-		this.addMessageListener(ComLiLianMsg.OnBtnBossClick, this.enterBattle, [ BattleType.Boss ]);
-		this.addMessageListener(ComLiLianMsg.OnBtnCaiJiClick, this.enterBattle, [ BattleType.CaiJi ]);
-		this.addMessageListener(ComLiLianMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
-		this.addMessageListener(ComLiLianMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
+		this.addMessage(ComLiLianMsg.OnBtnGuanQiaClick, this.enterBattle, [ BattleType.GuanQia ]);
+		this.addMessage(ComLiLianMsg.OnBtnFuBenClick, this.enterBattle, [ BattleType.FuBen ]);
+		this.addMessage(ComLiLianMsg.OnBtnMiJingClick, this.enterBattle, [ BattleType.MiJing ]);
+		this.addMessage(ComLiLianMsg.OnBtnBossClick, this.enterBattle, [ BattleType.Boss ]);
+		this.addMessage(ComLiLianMsg.OnBtnCaiJiClick, this.enterBattle, [ BattleType.CaiJi ]);
+		this.addMessage(ComLiLianMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
+		this.addMessage(ComLiLianMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
 	}
 
 	override onEnable(): void {

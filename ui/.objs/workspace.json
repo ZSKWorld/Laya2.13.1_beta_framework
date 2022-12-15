@@ -3,6 +3,7 @@
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66sbd010",
+    "ui://vith2b66qjdo0",
     "ui://vith2b66irlv1e",
     "ui://vith2b66amcp1u",
     "ui://vith2b66sbd01",
@@ -12,7 +13,6 @@
     "ui://vx9zwsersbd05x",
     "ui://vith2b66sbd01b",
     "ui://vith2b66o7722c",
-    "ui://vith2b66roh22e",
     "ui://vith2b66j0ry2d",
     "ui://vx9zwsersbd05c",
     "ui://vith2b66e3vt1v",
@@ -36,7 +36,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vith2b66roh22e",
+  "doc.activeDoc": "ui://vith2b66qjdo0",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "va1qbl3h",
@@ -55,10 +55,11 @@
     "/Component/Render/"
   ],
   "auxline1": true,
+  "showGrid": true,
   "snapToGrid": true,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 30,
-  "gridColor": 80
+  "gridSize": 10,
+  "gridColor": 109
 }

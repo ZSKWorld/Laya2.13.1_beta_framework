@@ -13,18 +13,18 @@ export interface ComRenWuData {
 export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
 
 	override onAwake(): void {
-		this.addMessageListener(ComRenWuMsg.OnBtnWQClick, this.showEquipmentInfo, [ EquipmentPart.Weapon ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnXLClick, this.showEquipmentInfo, [ EquipmentPart.Necklace ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnJZClick, this.showEquipmentInfo, [ EquipmentPart.Ring ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnHFClick, this.showEquipmentInfo, [ EquipmentPart.Amulet ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnZQClick, this.showEquipmentInfo, [ EquipmentPart.Mount ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnAQClick, this.showEquipmentInfo, [ EquipmentPart.HiddenWeeapon ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnTKClick, this.showEquipmentInfo, [ EquipmentPart.Helmet ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnYFClick, this.showEquipmentInfo, [ EquipmentPart.Clothes ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnXZClick, this.showEquipmentInfo, [ EquipmentPart.Trousers ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnXieZClick, this.showEquipmentInfo, [ EquipmentPart.Shoes ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnSZClick, this.showEquipmentInfo, [ EquipmentPart.Fashion ]);
-		this.addMessageListener(ComRenWuMsg.OnBtnFBClick, this.showEquipmentInfo, [ EquipmentPart.MagicWeapon ]);
+		this.addMessage(ComRenWuMsg.OnBtnWQClick, this.showEquipmentInfo, [ EquipmentPart.Weapon ]);
+		this.addMessage(ComRenWuMsg.OnBtnXLClick, this.showEquipmentInfo, [ EquipmentPart.Necklace ]);
+		this.addMessage(ComRenWuMsg.OnBtnJZClick, this.showEquipmentInfo, [ EquipmentPart.Ring ]);
+		this.addMessage(ComRenWuMsg.OnBtnHFClick, this.showEquipmentInfo, [ EquipmentPart.Amulet ]);
+		this.addMessage(ComRenWuMsg.OnBtnZQClick, this.showEquipmentInfo, [ EquipmentPart.Mount ]);
+		this.addMessage(ComRenWuMsg.OnBtnAQClick, this.showEquipmentInfo, [ EquipmentPart.HiddenWeeapon ]);
+		this.addMessage(ComRenWuMsg.OnBtnTKClick, this.showEquipmentInfo, [ EquipmentPart.Helmet ]);
+		this.addMessage(ComRenWuMsg.OnBtnYFClick, this.showEquipmentInfo, [ EquipmentPart.Clothes ]);
+		this.addMessage(ComRenWuMsg.OnBtnXZClick, this.showEquipmentInfo, [ EquipmentPart.Trousers ]);
+		this.addMessage(ComRenWuMsg.OnBtnXieZClick, this.showEquipmentInfo, [ EquipmentPart.Shoes ]);
+		this.addMessage(ComRenWuMsg.OnBtnSZClick, this.showEquipmentInfo, [ EquipmentPart.Fashion ]);
+		this.addMessage(ComRenWuMsg.OnBtnFBClick, this.showEquipmentInfo, [ EquipmentPart.MagicWeapon ]);
 	}
 
 	override onEnable(): void {

@@ -7,39 +7,39 @@ export interface UIPlayerInfoData {
 
 export class UIPlayerInfoCtrl extends BaseViewCtrl<UIPlayerInfoView, UIPlayerInfoData>{
 
-    override onAwake(): void {
-		this.addMessageListener(UIPlayerInfoMsg.OnBtnExplainClick, this.onBtnExplainClick);
-		this.addMessageListener(UIPlayerInfoMsg.OnBtnBackClick, this.onBtnBackClick);
-		this.addMessageListener(UIPlayerInfoMsg.OnBtnCopyIDClick, this.onBtnCopyIDClick);
-		this.addMessageListener(UIPlayerInfoMsg.OnBtnGiftClick, this.onBtnGiftClick);
-    }
+	override onAwake(): void {
+		this.addMessage(UIPlayerInfoMsg.OnBtnExplainClick, this.onBtnExplainClick);
+		this.addMessage(UIPlayerInfoMsg.OnBtnBackClick, this.onBtnBackClick);
+		this.addMessage(UIPlayerInfoMsg.OnBtnCopyIDClick, this.onBtnCopyIDClick);
+		this.addMessage(UIPlayerInfoMsg.OnBtnGiftClick, this.onBtnGiftClick);
+	}
 
-    override onEnable(): void {
-        
-    }
+	override onEnable(): void {
 
-    override onDisable(): void {
-        
-    }
+	}
 
-    override onDestroy(): void {
-        
-    }
+	override onDisable(): void {
+
+	}
+
+	override onDestroy(): void {
+
+	}
 
 	private onBtnExplainClick(): void {
-	
+
 	}
 
 	private onBtnBackClick(): void {
-	
+
 	}
 
 	private onBtnCopyIDClick(): void {
-	
+
 	}
 
 	private onBtnGiftClick(): void {
-	
+
 	}
 
 }

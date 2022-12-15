@@ -15,8 +15,8 @@ export class UITipConfirmCtrl extends BaseViewCtrl<UITipConfirmView, UITipConfir
     private _curConfirm: UITipConfirmData;
 
     override onAwake(): void {
-        this.addMessageListener(UITipConfirmMsg.OnBtnBgClick, this.onBtnCloseClick, [ false ]);
-        this.addMessageListener(UITipConfirmMsg.OnBtnConfirmClick, this.onBtnCloseClick, [ true ]);
+        this.addMessage(UITipConfirmMsg.OnBtnBgClick, this.onBtnCloseClick, [ false ]);
+        this.addMessage(UITipConfirmMsg.OnBtnConfirmClick, this.onBtnCloseClick, [ true ]);
     }
 
     override onEnable(): void {

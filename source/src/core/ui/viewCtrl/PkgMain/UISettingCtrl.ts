@@ -9,13 +9,13 @@ export interface UISettingData {
 export class UISettingCtrl extends BaseViewCtrl<UISettingView, UISettingData>{
 
 	override onAwake(): void {
-		this.addMessageListener(UISettingMsg.OnBtnBgClick, this.onBtnBgClick);
-		this.addMessageListener(UISettingMsg.OnBtnHangUpClick, this.onBtnHangUpClick);
-		this.addMessageListener(UISettingMsg.OnBtnMuteClick, this.onBtnMuteClick);
-		this.addMessageListener(UISettingMsg.OnBtnSignInClick, this.onBtnSignInClick);
-		this.addMessageListener(UISettingMsg.OnBtnHelpClick, this.onBtnHelpClick);
-		this.addMessageListener(UISettingMsg.OnBtnClearAccountClick, this.onBtnClearAccountClick);
-		this.addMessageListener(UISettingMsg.OnBtnBackClick, this.onBtnBackClick);
+		this.addMessage(UISettingMsg.OnBtnBgClick, this.onBtnBgClick);
+		this.addMessage(UISettingMsg.OnBtnHangUpClick, this.onBtnHangUpClick);
+		this.addMessage(UISettingMsg.OnBtnMuteClick, this.onBtnMuteClick);
+		this.addMessage(UISettingMsg.OnBtnSignInClick, this.onBtnSignInClick);
+		this.addMessage(UISettingMsg.OnBtnHelpClick, this.onBtnHelpClick);
+		this.addMessage(UISettingMsg.OnBtnClearAccountClick, this.onBtnClearAccountClick);
+		this.addMessage(UISettingMsg.OnBtnBackClick, this.onBtnBackClick);
 	}
 
 	override onEnable(): void {
