@@ -27,7 +27,7 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 	static readonly PkgRes = ResPath.UIPath.PkgMain;
 
 	override onCreate(): void {
-		const { listener, ComLiLian, ComJueSe, ComWuPin, ComShangCheng, ComDongFu, BtnLiLian, BtnJueSe, BtnWuPin, BtnShangCheng, BtnDongFu, BtnChat, BtnInfo, BtnHead, BtnSetting, BtnRank, BtnSphere } = this;
+		const { ComLiLian, ComJueSe, ComWuPin, ComShangCheng, ComDongFu, BtnLiLian, BtnJueSe, BtnWuPin, BtnShangCheng, BtnDongFu, BtnChat, BtnInfo, BtnHead, BtnSetting, BtnRank, BtnSphere } = this;
 		BtnLiLian.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnLiLianClick ]);
 		BtnJueSe.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnJueSeClick ]);
 		BtnWuPin.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnWuPinClick ]);
@@ -42,11 +42,11 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 		BtnSphere.on(fgui.Events.DRAG_START, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, true ]);
 		BtnSphere.on(fgui.Events.DRAG_END, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, false ]);
 
-		this.initView(ComLiLian, listener);
-		this.initView(ComJueSe, listener);
-		this.initView(ComWuPin, listener);
-		this.initView(ComShangCheng, listener);
-		this.initView(ComDongFu, listener);
+		this.initView(ComLiLian);
+		this.initView(ComJueSe);
+		this.initView(ComWuPin);
+		this.initView(ComShangCheng);
+		this.initView(ComDongFu);
 
 		BtnSphere.draggable = true;
 	}

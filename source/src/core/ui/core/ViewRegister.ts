@@ -68,7 +68,6 @@ import { ComXinFaView } from "../view/PkgMain/Coms/ComXinFaView";
 import { ComZhiZuoCtrl } from "../viewCtrl/PkgMain/Coms/ComZhiZuoCtrl";
 import { ComZhiZuoNetProcessor } from "../viewNetProcessor/PkgMain/Coms/ComZhiZuoNetProcessor";
 import { ComZhiZuoView } from "../view/PkgMain/Coms/ComZhiZuoView";
-import { INetProcessor_Class, IViewCtrl_Class, IView_Class } from "./Interfaces";
 import { Logger } from "../../libs/utils/Logger";
 import { RenderBagView } from "../view/PkgMain/Renders/RenderBagView";
 import { RenderChatMsgView } from "../view/PkgMain/Renders/RenderChatMsgView";
@@ -111,8 +110,8 @@ import { UITipConfirmView } from "../view/PkgCommon/UITipConfirmView";
 import { UIWaitingCtrl } from "../viewCtrl/PkgCommon/UIWaitingCtrl";
 import { UIWaitingNetProcessor } from "../viewNetProcessor/PkgCommon/UIWaitingNetProcessor";
 import { UIWaitingView } from "../view/PkgCommon/UIWaitingView";
-import { ViewClass, NetProcessorClass, CtrlClass } from "./UIGlobal";
 import { ViewID } from "./ViewID";
+import { uiMgr } from "./UIManager";
 
 const logger = Logger.Create("ViewRegister", true);
 
@@ -172,7 +171,7 @@ class ViewRegister {
 
     /**页面注册 */
     private registerView() {
-		const register = this.registView;
+		const register = uiMgr.registView.bind(uiMgr);
 		//Coms
 		register(ViewID.ComNumInputView, ComNumInputView, ComNumInputCtrl, ComNumInputNetProcessor);
 		register(ViewID.ComTipInfoView, ComTipInfoView, ComTipInfoCtrl, ComTipInfoNetProcessor);
@@ -200,19 +199,6 @@ class ViewRegister {
 		register(ViewID.SectView, UISectView, UISectCtrl, UISectNetProcessor);
 		register(ViewID.SettingView, UISettingView, UISettingCtrl, UISettingNetProcessor);
 		register(ViewID.SphereToolView, UISphereToolView, UISphereToolCtrl, UISphereToolNetProcessor);
-	}
-
-	private registView(viewId: ViewID, viewCls: IView_Class, ctrlCls?: IViewCtrl_Class, netProcessorCls?: INetProcessor_Class) {
-		if (!viewCls) throw new Error("参数不能为空！");
-		if (!ViewClass[ viewId ]) {
-			viewCls.prototype.viewId = viewId;
-			ctrlCls.prototype.viewId = viewId;
-			(ViewClass as any)[ viewId ] = viewCls;
-			(CtrlClass as any)[ viewId ] = ctrlCls;
-			(NetProcessorClass as any)[ viewId ] = netProcessorCls;
-		} else {
-			logger.warn(`重复添加映射 => ${ viewId }`);
-		}
 	}
 }
 export const uiRegister = new ViewRegister();

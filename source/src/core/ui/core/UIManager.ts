@@ -1,37 +1,24 @@
-import { GameUtil } from "../../common/GameUtil";
 import { Observer } from "../../libs/event/Observer";
 import { Logger } from "../../libs/utils/Logger";
 import { Layer, layerMgr } from "./GameLayer";
-import { IView, ViewEvent } from "./Interfaces";
-import { ViewClass } from "./UIGlobal";
+import { INetProcessor_Class, IViewCtrl, IViewCtrl_Class, IView_Class, ViewEvent } from "./Interfaces";
 import { ViewID } from "./ViewID";
 
 const logger = Logger.Create("UIManager", true);
 
 /** 页面缓存管理 */
 class UICache {
-	/**销毁缓存时间，毫秒 */
-	private static readonly DestroyCacheTime = 1 * 60 * 1000;
-
-	/**销毁缓存，销毁前保留一段时间，期间不在使用就销毁 */
-	private _destroyCache = new Map<ViewID, [ IView, number ]>();
 
 	/**不会销毁的页面缓存 */
-	private _dontDestroyCache = new Map<ViewID, IView>();
-
-	constructor() { Laya.timer.loop(UICache.DestroyCacheTime, this, this.checkDestroyCache); }
-
+	private _dontDestroyCache = new Map<ViewID, IViewCtrl>();
 
 	/**
-	 * 添加待销毁页面
-	 * @param viewInst {@link IView} 页面实例
+	 * 缓存页面
+	 * @param viewInst {@link IViewCtrl} 页面实例
 	 */
-	addDestroyCache(viewInst: IView) {
+	addView(viewInst: IViewCtrl) {
 		const viewId = viewInst.viewId;
-		if (/**ViewClass[ viewId ].DontDestroy */true) {
-			this._dontDestroyCache.set(viewId, viewInst);
-		}
-		else this._destroyCache.set(viewId, [ viewInst, GameUtil.getServerTime() ]);
+		this._dontDestroyCache.set(viewId, viewInst);
 	}
 
 	/**
@@ -39,49 +26,33 @@ class UICache {
 	 * @param viewId {@link ViewID} 页面ID
 	 * @returns 
 	 */
-	getViewFromCache(viewId: ViewID) {
-		let viewInst: IView;
-		if (/**ViewClass[ viewId ].DontDestroy */true) {
-			if (this._dontDestroyCache.has(viewId)) {
-				viewInst = this._dontDestroyCache.get(viewId);
-				this._dontDestroyCache.delete(viewId);
-			}
+	getView(viewId: ViewID) {
+		let viewCtrl: IViewCtrl;
+		if (this._dontDestroyCache.has(viewId)) {
+			viewCtrl = this._dontDestroyCache.get(viewId);
+			this._dontDestroyCache.delete(viewId);
 		}
-		else if (this._destroyCache.has(viewId)) {
-			viewInst = this._destroyCache.get(viewId)[ 0 ];
-			this._destroyCache.delete(viewId);
-		}
-		return viewInst;
-	}
-
-	/** 检测销毁页面 */
-	private checkDestroyCache() {
-		if (this._destroyCache.size > 0) {
-			for (const iterator of this._destroyCache) {
-				const [ viewID, [ view, startTime ] ] = iterator;
-				if ((GameUtil.getServerTime() - startTime) >= UICache.DestroyCacheTime) {
-					// logger.warn("dispose view", view.viewId);
-					view.dispose();
-					this._destroyCache.delete(viewID);
-				}
-			}
-		}
+		return viewCtrl;
 	}
 
 }
 
 /** UI管理类 */
 class UIManager extends Observer {
-	/**待销毁缓存 */
+	private _viewClsMap: { [ key in ViewID ]?: IView_Class } = {};
+	private _ctrlClsMap: { [ key in ViewID ]?: IViewCtrl_Class } = {};
+	private _newProcessorClsMap: { [ key in ViewID ]?: INetProcessor_Class } = {};
+
+	/** 缓存池 */
 	private _cache: UICache;
 	/** 锁屏面板 */
 	private _lockPanel: fgui.GGraph;
 	/** 已打开页面 */
-	private _openedViews: IView[] = [];
+	private _openedCtrls: IViewCtrl[] = [];
 
 
 	/** 当前显示的顶层页面 */
-	private get topView() { return this._openedViews[ 0 ]; }
+	private get topCtrl() { return this._openedCtrls[ 0 ]; }
 
 	init() {
 		if (this._cache) return;
@@ -97,18 +68,32 @@ class UIManager extends Observer {
 		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(250, this, this.onResize));
 	}
 
-	/** 创建页面实例
+	registView(viewId: ViewID, viewCls: IView_Class, ctrlCls?: IViewCtrl_Class, netProcessorCls?: INetProcessor_Class) {
+		if (!viewCls) throw new Error("参数不能为空！");
+		if (!this._viewClsMap[ viewId ]) {
+			viewCls.prototype.viewId = viewId;
+			ctrlCls.prototype.viewId = viewId;
+			this._viewClsMap[ viewId ] = viewCls;
+			this._ctrlClsMap[ viewId ] = ctrlCls;
+			this._newProcessorClsMap[ viewId ] = netProcessorCls;
+		} else {
+			logger.warn(`重复添加映射 => ${ viewId }`);
+		}
+	}
+
+	getViewCtrl(viewId: ViewID) { return this._ctrlClsMap[ viewId ]; }
+
+	getNewProcessor(viewId: ViewID) { return this._newProcessorClsMap[ viewId ]; }
+
+	/** 创建页面
 	 * @param viewId {@link ViewID} 页面ID
 	 * @param fullScreen 是否全屏
-	 * @param init 是否初始化页面
-	 * @param data 页面数据
-	 * @return 页面实例
 	 */
-	createViewInstance(viewId: ViewID, fullScreen: boolean = true): IView {
-		const viewInst = ViewClass[ viewId ].createInstance();
+	createView(viewId: ViewID, fullScreen: boolean = true) {
+		const viewInst = this._viewClsMap[ viewId ].createInstance();
 		viewInst.name = viewId;
 		fullScreen && viewInst.makeFullScreen();
-		return viewInst;
+		return viewInst.initView();
 	}
 
 	/** 添加页面
@@ -118,101 +103,87 @@ class UIManager extends Observer {
 	 * @param hideTop 是否隐藏顶部页面
 	 */
 	addView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler, hideTop: boolean = true) {
-		let viewInst: IView;
+		let viewCtrl: IViewCtrl;
 		this._lockPanel.visible = true;
 		let openedIndex = this.getOpenViewIndex(viewId);
 		if (openedIndex == -1) {
-			//先尝试从待销毁缓存池中获取
-			viewInst = this._cache.getViewFromCache(viewId);
-			if (viewInst) this.addView2(viewInst, data, hideTop, callback);
+			//先尝试从缓存池中获取
+			viewCtrl = this._cache.getView(viewId);
+			if (viewCtrl) this.addView2(viewCtrl, data, hideTop, callback);
 			else {
-				fgui.UIPackage.loadPackage([ ViewClass[ viewId ].PkgRes ], Laya.Handler.create(this, (res: any[]) => {
+				fgui.UIPackage.loadPackage([ this._viewClsMap[ viewId ].PkgRes ], Laya.Handler.create(this, (res: any[]) => {
 					if (!res || !res.length) {
 						if (confirm(`界面 ${ viewId } 加载失败，是否重试?`))
 							this.addView(viewId, data, callback, hideTop);
 						else
-							this._lockPanel.visible = false;
+							this.addView2(viewCtrl, data, hideTop, callback);
 					} else {
-						viewInst = this.createViewInstance(viewId);
-						this.addView2(viewInst, data, hideTop, callback);
+						viewCtrl = this.createView(viewId);
+						this.addView2(viewCtrl, data, hideTop, callback);
 					}
 				}));
 			}
 		} else {
-			if (openedIndex == 0) {
-				this._lockPanel.visible = false;
-				logger.warn(`Error:${ viewId }已经被打开`);
-			}
-			else {
-				viewInst = this._openedViews.splice(openedIndex, 1)[ 0 ];
-				this.addView2(viewInst, data, hideTop, callback);
-			}
+			if (openedIndex == 0) logger.warn(`Error:${ viewId }已经被打开`);
+			viewCtrl = this._openedCtrls.splice(openedIndex, 1)[ 0 ];
+			this.addView2(viewCtrl, data, hideTop, callback);
 		}
 	}
 
 	/** 移除顶层页面 */
-	removeTopView() {
-		if (this.topView) {
-			this.removeView(this.topView.viewId);
-		}
-	}
+	removeTopView() { this.topCtrl && this.removeView(this.topCtrl.viewId); }
 
 	/** 移除页面
 	 * @param viewId {@link ViewID} 页面ID，为null则移除全部页面
 	 */
 	removeView(viewId: ViewID) {
-		let oldTop = this.topView;
-		const { _openedViews } = this;
-		for (let i = _openedViews.length - 1; i >= 0; i--) {
-			const viewInst = _openedViews[ i ];
+		const { _openedCtrls } = this;
+		if (!_openedCtrls.length) return;
+		for (let i = _openedCtrls.length - 1; i >= 0; i--) {
+			const viewInst = _openedCtrls[ i ];
 			if (viewId == null || viewInst.viewId == viewId) {
-				_openedViews.splice(i, 1);
-				viewInst.removeFromParent();
-				viewInst.sendMessage(ViewEvent.OnBackground);
-				viewInst.sendMessage(ViewEvent.OnRemoved);
-				this._cache.addDestroyCache(viewInst);
+				_openedCtrls.splice(i, 1);
+				viewInst.view.removeFromParent();
+				this._cache.addView(viewInst);
 				break;
 			}
 		}
-		const topView = this.topView;
-		if (topView && (oldTop != topView || !topView.parent)) {
-			!topView.parent && layerMgr.addObject(topView, topView.layer || Layer.Bottom);
-			topView.sendMessage(ViewEvent.OnForeground);
-		}
+		this.addView2(this.topCtrl, this.topCtrl?.data, false, null);
 	}
 
 	/** 移除所有页面 */
 	removeAllView() { this.removeView(null); }
 
 	private onResize() {
-		const { _openedViews, _lockPanel } = this;
-		_lockPanel.makeFullScreen();
-		for (let i = _openedViews.length - 1; i >= 0; i--) {
-			_openedViews[ i ] && _openedViews[ i ].makeFullScreen();
-		}
+		this._lockPanel.makeFullScreen();
+		this._openedCtrls.forEach(v => v.view.makeFullScreen());
 	}
 
 	/** 获取已打开的页面索引 */
 	private getOpenViewIndex(viewId: ViewID) {
-		const { _openedViews } = this;
-		for (let i = 0, n = _openedViews.length; i < n; i++) {
-			const view = _openedViews[ i ];
+		const { _openedCtrls } = this;
+		for (let i = 0, n = _openedCtrls.length; i < n; i++) {
+			const view = _openedCtrls[ i ];
 			if (view.viewId == viewId) return i;
 		}
 		return -1;
 	}
 
-	private addView2(viewInst: IView, data: any, hideTop: boolean, callback: Laya.Handler) {
-		viewInst.initView(viewInst, null, data);
-		const topView = this.topView;
-		if (viewInst != topView) {
-			this._openedViews.unshift(viewInst);
-			hideTop && topView?.removeFromParent();
-			topView?.sendMessage(ViewEvent.OnBackground);
-			layerMgr.addObject(viewInst, viewInst.layer || Layer.Bottom);
+	private addView2(viewCtrl: IViewCtrl, data: any, hideTop: boolean, callback: Laya.Handler) {
+		if (viewCtrl) {
+			viewCtrl.data = data;
+			const topCtrl = this.topCtrl;
+			if (viewCtrl != topCtrl) {
+				this._openedCtrls.unshift(viewCtrl);
+				hideTop && topCtrl?.view.removeFromParent();
+				topCtrl?.sendMessage(ViewEvent.OnBackground);
+			}
+			if (!viewCtrl.view.parent) {
+				layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
+				viewCtrl.sendMessage(ViewEvent.OnForeground);
+			}
 		}
-		viewInst.sendMessage(ViewEvent.OnForeground);
-		callback && callback.run();
+		callback?.run();
 		this._lockPanel.visible = false;
 	}
 }

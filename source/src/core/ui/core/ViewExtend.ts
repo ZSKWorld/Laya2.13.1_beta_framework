@@ -2,7 +2,6 @@ import { eventMgr } from "../../libs/event/EventMgr";
 import { userData } from "../../userData/UserData";
 import { BaseViewCtrl } from "./BaseViewCtrl";
 import { IView, IViewCtrl } from "./Interfaces";
-import { CtrlClass } from "./UIGlobal";
 import { uiMgr } from "./UIManager";
 
 /** 页面及控制器扩展 */
@@ -14,35 +13,29 @@ export class ViewExtend {
 
 	private static fguiGComponentExtend() {
 		let prototype = fgui.GComponent.prototype as IView;
-		prototype.sendMessage = function (type, data) { (<IView>this).listener?.event(type, data); };
+		prototype.sendMessage = function (type, data) { (<IView>this).listener.event(type, data); };
 		prototype.dispatch = function (type, data) { eventMgr.event(type, data); };
 		prototype.addView = function (viewId, data, callback, hideTop) { uiMgr.addView(viewId, data, callback, hideTop); };
 		prototype.removeTopView = function () { uiMgr.removeTopView(); };
 		prototype.removeAllView = function () { uiMgr.removeAllView(); };
 		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); };
 		prototype.removeSelf = function () { uiMgr.removeView((<IView>this).viewId); };
-		prototype.initView = function (viewInst, listener, data) {
-			//是否是新挂载组件，只有新挂载的组件才执行onCreate方法
-			let newComp = true;
+		prototype.initView = function (viewInst) {
+			viewInst = viewInst || this;
 			let viewCtrl: IViewCtrl;
-			const CtrlCls = CtrlClass[ viewInst.viewId ];
-			if (CtrlCls) {
-				viewCtrl = viewInst.getComponent(CtrlCls);
-				if (viewCtrl) newComp = false;
-				else viewCtrl = viewInst.addComponent(CtrlCls);
-				data != null && (viewCtrl.data = data);
-				viewCtrl.listener = listener;
-				viewCtrl.userData = userData;
-				if (viewInst !== this) {
-					const that = (this as IView);
-					const ThisCtrlCls = CtrlClass[ that.viewId ];
-					const thisCtrl = that.getComponent(ThisCtrlCls);
-					thisCtrl?.subCtrls.push(viewCtrl);
-				}
+			const CtrlCls = uiMgr.getViewCtrl(viewInst.viewId);
+			viewCtrl = viewInst.addComponent(CtrlCls);
+			viewCtrl.userData = userData;
+			if (viewInst !== this) {
+				const that = (this as IView);
+				const ThisCtrlCls = uiMgr.getViewCtrl(that.viewId);
+				const thisCtrl = that.getComponent(ThisCtrlCls);
+				thisCtrl?.addChildCtrl(viewCtrl);
 			}
-			viewInst.listener = viewCtrl?.listener;
+			viewInst.listener = viewCtrl.listener;
 			viewInst.userData = userData;
-			newComp && viewInst.onCreate?.();
+			viewInst.onCreate?.();
+			return viewCtrl;
 		};
 		const oldDispose = prototype.dispose;
 		prototype.dispose = function () {

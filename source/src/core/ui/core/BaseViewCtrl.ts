@@ -1,8 +1,9 @@
 import { eventMgr } from "../../libs/event/EventMgr";
 import { Logger } from "../../libs/utils/Logger";
 import { ExtensionClass } from "../../libs/utils/Util";
-import { INetProcessor, IView, ViewCtrlExtension, ViewEvent } from "./Interfaces";
-import { NetProcessorClass } from "./UIGlobal";
+import { INetProcessor, IView, IViewCtrl, ViewCtrlExtension, ViewEvent } from "./Interfaces";
+import { uiMgr } from "./UIManager";
+// import { NetProcessorClass } from "./UIGlobal";
 import { DIViewCtrl, ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
 
 const logger = Logger.Create("BaseViewCtrl", true);
@@ -21,20 +22,22 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	/** 处理控制器网络回包 */
 	private _netProcessor: INetProcessor;
 	/** 子页面控制器集合 */
-	private _subCtrls: BaseViewCtrl[] = [];
+	private _subCtrls = new Set<IViewCtrl>();
 
+	override get isSingleton() { return true; };
 	get view() { return this._view; }
 	get listener() { return this._listener; }
-	set listener(value: Laya.EventDispatcher) {
-		if (value && value != this._listener) {
-			if (this._listener) {
-				this._listener.offAll();
-				Laya.Pool.recoverByClass(this._listener);
-			}
-			this._listener = value;
-		}
+
+	/** 添加子页面 */
+	addChildCtrl(child: IViewCtrl) {
+		child._listener = this._listener;
+		this._subCtrls.add(child);
 	}
-	get subCtrls() { return this._subCtrls; }
+
+	/** 发送页面事件 */
+	override sendMessage(type: string, data?: any) {
+		this._listener.event(type, data);
+	}
 
 	/**
 	 * 封装一个派发全局事件的接口，避免eventMgr过度引用
@@ -47,22 +50,19 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	override onReset() {
 		const { _view, _listener, _subCtrls, _netProcessor } = this;
+		_listener?.offAll();
+		_subCtrls.clear();
+		_netProcessor.destroy();
 		this.data = null;
 		this._view = null;
 		this._listener = null;
-		_netProcessor.destroy();
 		this._netProcessor = null;
-		_subCtrls.length = 0;
-		_listener?.offAll();
 		Laya.timer.clearAll(this);
 		Laya.timer.clearAll(_view);
 		Laya.timer.clearAll(_netProcessor);
 		Laya.Tween.clearAll(this);
 		Laya.Tween.clearAll(_view);
 		Laya.Tween.clearAll(_netProcessor);
-		eventMgr.offAllCaller(this);
-		eventMgr.offAllCaller(_view);
-		eventMgr.offAllCaller(_netProcessor);
 		Laya.Pool.recoverByClass(_netProcessor);
 		Laya.Pool.recoverByClass(_listener);
 		ViewCtrlDIExtend.offDeviceEvent(this);
@@ -92,35 +92,36 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	 */
 	protected onBackground(): void { }
 
+	/** Laya.Script私有方法重写 */
 	private _onAdded() {
 		this._view = this.owner[ "$owner" ];
-		logger.assert(!this._listener, "_listener未清除");
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
-		logger.assert(!this._netProcessor, "_netProcessor未清除");
-		this._netProcessor = Laya.Pool.createByClass(NetProcessorClass[ this.viewId ]);
+		this._netProcessor = Laya.Pool.createByClass(uiMgr.getNewProcessor(this.viewId));
 		this._netProcessor.viewCtrl = this;
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
 		eventMgr.registerEvent(this._netProcessor);
 		ViewCtrlDIExtend.registerDeviceEvent(this);
-		this.addMessage(ViewEvent.OnRemoved, this.__onRemoved);
-		this.addMessage(ViewEvent.OnForeground, this.__onForeground);
-		this.addMessage(ViewEvent.OnBackground, this.__onBackground);
+		this.addMessage(ViewEvent.OnForeground, this._onForeground);
+		this.addMessage(ViewEvent.OnBackground, this._onBackground);
 	}
 
-	private __onForeground() {
+	/** Laya.Script私有方法重写 */
+	private _onDisable() {
+		eventMgr.offAllCaller(this);
+		eventMgr.offAllCaller(this._view);
+		eventMgr.offAllCaller(this._netProcessor);
+		super[ "_onDisable" ]();
+	}
+
+	private _onForeground() {
 		this.onForeground();
-		this._subCtrls.forEach(v => v.__onForeground());
+		this._subCtrls.forEach(v => v._onForeground());
 	}
 
-	private __onBackground() {
+	private _onBackground() {
 		this.onBackground();
-		this._subCtrls.forEach(v => v.__onBackground());
-	}
-
-	private __onRemoved() {
-		this._subCtrls.forEach(v => v.__onRemoved());
-		this.destroy();
+		this._subCtrls.forEach(v => v._onBackground());
 	}
 }
 windowImmit("BaseViewCtrl", BaseViewCtrl);

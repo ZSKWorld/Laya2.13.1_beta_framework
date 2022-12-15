@@ -55,7 +55,7 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
             }
             else tip.onTipChanged(false);
         }
-        Laya.Pool.recover(UIPoolKey.TipInfo, this.view);
+        Laya.Pool.recover(UIPoolKey.TipInfo, this);
     }
 
     private onTipChanged(toTop: boolean) {

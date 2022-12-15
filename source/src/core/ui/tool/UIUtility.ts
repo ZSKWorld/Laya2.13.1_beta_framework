@@ -1,5 +1,5 @@
 import { Layer, layerMgr } from "../core/GameLayer";
-import { IView } from "../core/Interfaces";
+import { IViewCtrl } from "../core/Interfaces";
 import { uiMgr } from "../core/UIManager";
 import { ViewID } from "../core/ViewID";
 import { ComNumInputData } from "../viewCtrl/PkgCommon/Coms/ComNumInputCtrl";
@@ -7,7 +7,7 @@ import { UIPoolKey } from "./UIPoolKey";
 
 class TipInfoMgr {
 	private static cache: string[];
-	private static readonly showDelay = 150;
+	private static readonly showDelay = 200;
 	private static curTime = TipInfoMgr.showDelay;
 
 	static addTip(text: string, color: string) {
@@ -18,18 +18,17 @@ class TipInfoMgr {
 		this.cache.push(text, color);
 	}
 
-
 	private static update() {
 		this.curTime += Laya.timer.delta;
 		if (this.cache.length && this.curTime >= this.showDelay) {
 			this.curTime = 0;
-			const viewInst = <IView>Laya.Pool.getItemByCreateFun(UIPoolKey.TipInfo, () => {
-				const inst = uiMgr.createViewInstance(ViewID.ComTipInfoView, false);
-				inst.touchable = false;
-				return inst;
+			const viewCtrl = <IViewCtrl>Laya.Pool.getItemByCreateFun(UIPoolKey.TipInfo, () => {
+				const viewCtrl = uiMgr.createView(ViewID.ComTipInfoView, false);
+				viewCtrl.view.touchable = false;
+				return viewCtrl;
 			});
-			viewInst.initView(viewInst, null, { text: this.cache.shift(), color: this.cache.shift() });
-			layerMgr.addObject(viewInst, Layer.Bottom);
+			viewCtrl.data = { text: this.cache.shift(), color: this.cache.shift() };
+			layerMgr.addObject(viewCtrl.view, Layer.Bottom);
 		}
 	}
 }
@@ -128,23 +127,6 @@ export class UIUtility {
 		const index = values.indexOf(defaultValue);
 		cmb.selectedIndex = index == -1 ? 0 : index;
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
-	}
-
-	/**
-	 * 从对象池中获取页面实例，没有则创建，有的话则从对象池中获取
-	 * @param key {@link UIPoolKey} 对象池标识
-	 * @param viewID {@link ViewID} 页面ID
-	 * @param layer {@link Layer} 层级
-	 * @param data 初始数据
-	 * @param fullScreen 是否全屏
-	 */
-	private static getViewFromPool(key: UIPoolKey, viewID: ViewID, layer: Layer, data: any, fullScreen: boolean = true) {
-		const viewInst = <IView>Laya.Pool.getItemByCreateFun(
-			key, () => uiMgr.createViewInstance(viewID, fullScreen)
-		);
-		viewInst.initView(viewInst, null, data);
-		layerMgr.addObject(viewInst, layer);
-		return viewInst;
 	}
 }
 windowImmit("UIUtility", UIUtility);
