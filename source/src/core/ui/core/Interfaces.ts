@@ -64,6 +64,7 @@ export interface IView_Class {
 /**页面扩展 */
 export interface ViewExtension extends IViewMethod, IViewCommon {
 	readonly layer?: Layer;
+	readonly CtrlClass: IViewCtrl_Class;
 	listener?: Laya.EventDispatcher;
 
 	/**
@@ -87,6 +88,7 @@ export type IViewCtrl_Class = Class<IViewCtrl>;
 
 /**页面控制器扩展 */
 export interface ViewCtrlExtension extends IViewMethod, IViewCommon {
+	readonly ProxyClass: IProxy_Class;
 };
 
 export type IProxy = BaseProxy;

@@ -10,7 +10,7 @@ export abstract class BaseProxy<T extends IViewCtrl = IViewCtrl> extends Notifie
     viewCtrl: T;
 
     sendMessage(type: string, data?: any): void {
-        this.viewCtrl.listener.event(type, data);
+        this.viewCtrl.sendMessage(type, data);
     }
 
     destroy() {

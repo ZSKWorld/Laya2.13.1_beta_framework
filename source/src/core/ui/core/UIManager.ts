@@ -72,7 +72,9 @@ class UIManager extends Observer {
 		if (!viewCls) throw new Error("参数不能为空！");
 		if (!this._viewClsMap[ viewId ]) {
 			viewCls.prototype.viewId = viewId;
+			viewCls.prototype.CtrlClass = ctrlCls;
 			ctrlCls.prototype.viewId = viewId;
+			ctrlCls.prototype.ProxyClass = proxyCls;
 			this._viewClsMap[ viewId ] = viewCls;
 			this._ctrlClsMap[ viewId ] = ctrlCls;
 			this._proxyClsMap[ viewId ] = proxyCls;
@@ -80,10 +82,6 @@ class UIManager extends Observer {
 			logger.warn(`重复添加映射 => ${ viewId }`);
 		}
 	}
-
-	getViewCtrl(viewId: ViewID) { return this._ctrlClsMap[ viewId ]; }
-
-	getProxy(viewId: ViewID) { return this._proxyClsMap[ viewId ]; }
 
 	/** 创建页面
 	 * @param viewId {@link ViewID} 页面ID

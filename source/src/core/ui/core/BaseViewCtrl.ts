@@ -2,7 +2,6 @@ import { eventMgr } from "../../libs/event/EventMgr";
 import { Logger } from "../../libs/utils/Logger";
 import { ExtensionClass } from "../../libs/utils/Util";
 import { IProxy, IView, IViewCtrl, ViewCtrlExtension, ViewEvent } from "./Interfaces";
-import { uiMgr } from "./UIManager";
 import { DIViewCtrl, ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
 
 const logger = Logger.Create("BaseViewCtrl", true);
@@ -16,12 +15,12 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	data: D;
 	/** 控制器挂载的ui页面 */
 	private _view: V;
-	/** 页面消息中心 */
-	private _listener: Laya.EventDispatcher;
 	/** 处理控制器网络回包代理 */
 	private _proxy: IProxy;
 	/** 子页面控制器集合 */
-	private _subCtrls = new Set<IViewCtrl>();
+	private _subCtrls: Set<IViewCtrl>;
+	/** 页面消息中心 */
+	private _listener: Laya.EventDispatcher;
 
 	override get isSingleton() { return true; };
 	get view() { return this._view; }
@@ -29,6 +28,8 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	/** 添加子页面 */
 	addChildCtrl(child: IViewCtrl) {
+		if (!this._subCtrls)
+			this._subCtrls = new Set<IViewCtrl>();
 		child._listener = this._listener;
 		this._subCtrls.add(child);
 	}
@@ -50,8 +51,8 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	override onReset() {
 		const { _view, _listener, _subCtrls, _proxy } = this;
 		_listener?.offAll();
-		_subCtrls.clear();
-		_proxy.destroy();
+		_subCtrls?.clear();
+		_proxy?.destroy();
 		this.data = null;
 		this._view = null;
 		this._listener = null;
@@ -98,7 +99,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _onAdded() {
 		this._view = this.owner[ "$owner" ];
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
-		this._proxy = Laya.Pool.createByClass(uiMgr.getProxy(this.viewId));
+		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
 		this._proxy.viewCtrl = this;
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
@@ -110,12 +111,12 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	private _onForeground() {
 		this.onForeground();
-		this._subCtrls.forEach(v => v._onForeground());
+		this._subCtrls?.forEach(v => v._onForeground());
 	}
 
 	private _onBackground() {
 		this.onBackground();
-		this._subCtrls.forEach(v => v._onBackground());
+		this._subCtrls?.forEach(v => v._onBackground());
 	}
 }
 windowImmit("BaseViewCtrl", BaseViewCtrl);

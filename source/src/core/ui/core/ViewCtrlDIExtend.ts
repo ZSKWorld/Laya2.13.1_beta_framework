@@ -103,7 +103,7 @@ export class ViewCtrlDIExtend {
 		//这里的this是BaseViewCtrl
 		const __keyEventList = (this as unknown as DIViewCtrl).__keyEventList;
 		if (!__keyEventList) return;
-		let eventList = __keyEventList[ e.type ];
+		let eventList: { [ keycode: string ]: Function[] } = __keyEventList[ e.type ];
 		if (!eventList) return;
 		let list = eventList[ e.keyCode ];
 		if (!list) return;
@@ -126,7 +126,7 @@ export class ViewCtrlDIExtend {
 		//这里的this是BaseViewCtrl
 		const __mouseEventList = (this as unknown as DIViewCtrl).__mouseEventList;
 		if (!__mouseEventList) return;
-		const list = __mouseEventList[ e.type ];
+		const list: Function[] = __mouseEventList[ e.type ];
 		if (!list) return;
 
 		let func: Function, _cfg: any, len = list.length;

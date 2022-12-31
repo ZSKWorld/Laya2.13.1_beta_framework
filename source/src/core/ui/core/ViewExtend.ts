@@ -23,13 +23,11 @@ export class ViewExtend {
 		prototype.initView = function (viewInst) {
 			viewInst = viewInst || this;
 			let viewCtrl: IViewCtrl;
-			const CtrlCls = uiMgr.getViewCtrl(viewInst.viewId);
-			viewCtrl = viewInst.addComponent(CtrlCls);
+			viewCtrl = viewInst.addComponent(viewInst.CtrlClass);
 			viewCtrl.userData = userData;
 			if (viewInst !== this) {
 				const that = (this as IView);
-				const ThisCtrlCls = uiMgr.getViewCtrl(that.viewId);
-				const thisCtrl = that.getComponent(ThisCtrlCls);
+				const thisCtrl = that.getComponent(that.CtrlClass);
 				thisCtrl?.addChildCtrl(viewCtrl);
 			}
 			viewInst.listener = viewCtrl.listener;
