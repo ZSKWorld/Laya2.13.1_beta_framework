@@ -104,9 +104,13 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
 		eventMgr.registerEvent(this._proxy);
-		ViewCtrlDIExtend.registerDeviceEvent(this);
 		this.addMessage(ViewEvent.OnForeground, this._onForeground);
 		this.addMessage(ViewEvent.OnBackground, this._onBackground);
+	}
+
+	private _onEnable() {
+		ViewCtrlDIExtend.registerDeviceEvent(this);
+		super[ "_onEnable" ]();
 	}
 
 	private _onForeground() {

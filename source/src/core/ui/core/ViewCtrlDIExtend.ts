@@ -40,6 +40,8 @@ export class ViewCtrlDIExtend {
 			__mouseEventList.stagemouseup && (viewCtrl.onStageMouseUp = func);
 			__mouseEventList.stageclick && (viewCtrl.onStageClick = func);
 		}
+
+		this.resetOnceEvent(viewCtrl);
 	}
 
 	/**
@@ -66,8 +68,6 @@ export class ViewCtrlDIExtend {
 		viewCtrl.onStageMouseMove = prototype.onStageMouseMove;
 		viewCtrl.onStageMouseUp = prototype.onStageMouseUp;
 		viewCtrl.onStageClick = prototype.onStageClick;
-
-		this.resetOnceEvent(viewCtrl);
 	}
 
 	/**重置once事件标志 */
