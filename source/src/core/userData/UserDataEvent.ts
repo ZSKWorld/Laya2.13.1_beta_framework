@@ -7,6 +7,7 @@ export const enum UserDataEvent {
 	RegisterTime_Changed = "RegisterTime_Changed",
 	LastLoginTime_Changed = "LastLoginTime_Changed",
 	LastOnlineTime_Changed = "LastOnlineTime_Changed",
+	Friends_Changed = "Friends_Changed",
 	Offline_Changed = "Offline_Changed",
 	Coin_Changed = "Coin_Changed",
 	Vcoin_Changed = "Vcoin_Changed",

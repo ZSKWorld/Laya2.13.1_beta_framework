@@ -1,3 +1,5 @@
+import { GameEvent } from "./core/common/GameEvent";
+import { eventMgr } from "./core/libs/event/EventMgr";
 import { MathUtil } from "./core/libs/math/MathUtil";
 
 /** 引擎修复 */
@@ -9,7 +11,7 @@ export class FixEngine {
 		this.GListClickItemDispatch();
 		this.AddGUIObjectEventLockable();
 		this.FixLayaPoolSign();
-		this.AddComponentNetConnect();
+		// this.AddComponentNetConnect();
 		this.ClearEventDispatcherHandler();
 		this.PlayTransitionAction();
 		this.FixGUIInputSingleLine();
@@ -162,35 +164,35 @@ export class FixEngine {
 
 	/** 添加fgui组件网络关联，网络断开连接后都不能点击*/
 	private static AddComponentNetConnect() {
-		// const prototype = fgui.GComponent.prototype;
-		// const constructFromResource = prototype[ "constructFromResource" ];
-		// prototype[ "constructFromResource" ] = function () {
-		// 	constructFromResource.call(this);
-		// 	this.on(Laya.Event.DISPLAY, this, this.$onDisplay);
-		// 	this.on(Laya.Event.UNDISPLAY, this, this.$onUndisplay);
-		// };
-		// prototype[ "$onDisplay" ] = function () {
-		// 	eventMgr.on(GameEvent.SocketOpened, this, this.$onNetChanged, [ true ]);
-		// 	eventMgr.on(GameEvent.SocketClosed, this, this.$onNetChanged, [ false ]);
-		// };
-		// prototype[ "$onUndisplay" ] = function () {
-		// 	eventMgr.off(GameEvent.SocketOpened, this, this.$onNetChanged);
-		// 	eventMgr.off(GameEvent.SocketClosed, this, this.$onNetChanged);
-		// 	this.$onNetChanged(true);
-		// };
-		// prototype[ "$onNetChanged" ] = function (value: boolean) {
-		// 	if (value) {
-		// 		if (this.oldClickLock !== void 0) {
-		// 			!this.oldClickLock && this.removeEventLock(Laya.Event.CLICK);
-		// 			this.oldClickLock = void 0;
-		// 		}
-		// 	} else {
-		// 		if (this.oldClickLock === void 0) {
-		// 			this.oldClickLock = this.hasEventLock(Laya.Event.CLICK);
-		// 			this.addEventLock(Laya.Event.CLICK);
-		// 		}
-		// 	}
-		// }
+		const prototype = fgui.GComponent.prototype;
+		const constructFromResource = prototype[ "constructFromResource" ];
+		prototype[ "constructFromResource" ] = function () {
+			constructFromResource.call(this);
+			this.on(Laya.Event.DISPLAY, this, this.$onDisplay);
+			this.on(Laya.Event.UNDISPLAY, this, this.$onUndisplay);
+		};
+		prototype[ "$onDisplay" ] = function () {
+			eventMgr.on(GameEvent.SocketOpened, this, this.$onNetChanged, [ true ]);
+			eventMgr.on(GameEvent.SocketClosed, this, this.$onNetChanged, [ false ]);
+		};
+		prototype[ "$onUndisplay" ] = function () {
+			eventMgr.off(GameEvent.SocketOpened, this, this.$onNetChanged);
+			eventMgr.off(GameEvent.SocketClosed, this, this.$onNetChanged);
+			this.$onNetChanged(true);
+		};
+		prototype[ "$onNetChanged" ] = function (value: boolean) {
+			if (value) {
+				if (this.oldClickLock !== void 0) {
+					!this.oldClickLock && this.removeEventLock(Laya.Event.CLICK);
+					this.oldClickLock = void 0;
+				}
+			} else {
+				if (this.oldClickLock === void 0) {
+					this.oldClickLock = this.hasEventLock(Laya.Event.CLICK);
+					this.addEventLock(Laya.Event.CLICK);
+				}
+			}
+		}
 	}
 
 	/** 定量清理注册事件数组中空元素 */

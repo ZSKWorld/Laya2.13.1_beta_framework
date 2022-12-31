@@ -8,6 +8,7 @@ export class ServiceObj implements IFacade {
 	login(data: LoginInput): void { throw new Error("Method not implemented."); }
 	clearAccount(data: ClearAccountInput): void { throw new Error("Method not implemented."); }
 	startBattle(data: BattleInput): void { throw new Error("Method not implemented."); }
+	addFriend(data: AddFriendInput): void { throw new Error("Method not implemented."); }
 	friendMsg(data: FriendMsgInput): void { throw new Error("Method not implemented."); }
 	heart(data: HeartInput): void { throw new Error("Method not implemented."); }
 	useItem(data: UseItemInput): void { throw new Error("Method not implemented."); }

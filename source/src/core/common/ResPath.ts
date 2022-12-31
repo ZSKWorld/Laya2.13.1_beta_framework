@@ -2,15 +2,6 @@
 export namespace ResPath {
 	export const enum UnclassifiedPath {}
 
-	// res/atlas/
-	export const enum AtlasPath {}
-
-	// res/atlas/aaa/
-	export const enum AaaPath {}
-
-	// res/dragonbones/
-	export const enum DragonbonesPath {}
-
 	// res/font/
 	export const enum FontName {
 		Font01 = "Font01",

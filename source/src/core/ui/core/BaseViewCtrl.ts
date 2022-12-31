@@ -1,9 +1,8 @@
 import { eventMgr } from "../../libs/event/EventMgr";
 import { Logger } from "../../libs/utils/Logger";
 import { ExtensionClass } from "../../libs/utils/Util";
-import { INetProcessor, IView, IViewCtrl, ViewCtrlExtension, ViewEvent } from "./Interfaces";
+import { IProxy, IView, IViewCtrl, ViewCtrlExtension, ViewEvent } from "./Interfaces";
 import { uiMgr } from "./UIManager";
-// import { NetProcessorClass } from "./UIGlobal";
 import { DIViewCtrl, ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
 
 const logger = Logger.Create("BaseViewCtrl", true);
@@ -19,8 +18,8 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _view: V;
 	/** 页面消息中心 */
 	private _listener: Laya.EventDispatcher;
-	/** 处理控制器网络回包 */
-	private _netProcessor: INetProcessor;
+	/** 处理控制器网络回包代理 */
+	private _proxy: IProxy;
 	/** 子页面控制器集合 */
 	private _subCtrls = new Set<IViewCtrl>();
 
@@ -49,21 +48,24 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	}
 
 	override onReset() {
-		const { _view, _listener, _subCtrls, _netProcessor } = this;
+		const { _view, _listener, _subCtrls, _proxy } = this;
 		_listener?.offAll();
 		_subCtrls.clear();
-		_netProcessor.destroy();
+		_proxy.destroy();
 		this.data = null;
 		this._view = null;
 		this._listener = null;
-		this._netProcessor = null;
+		this._proxy = null;
+		eventMgr.offAllCaller(this);
+		eventMgr.offAllCaller(_view);
+		eventMgr.offAllCaller(_proxy);
 		Laya.timer.clearAll(this);
 		Laya.timer.clearAll(_view);
-		Laya.timer.clearAll(_netProcessor);
+		Laya.timer.clearAll(_proxy);
 		Laya.Tween.clearAll(this);
 		Laya.Tween.clearAll(_view);
-		Laya.Tween.clearAll(_netProcessor);
-		Laya.Pool.recoverByClass(_netProcessor);
+		Laya.Tween.clearAll(_proxy);
+		Laya.Pool.recoverByClass(_proxy);
 		Laya.Pool.recoverByClass(_listener);
 		ViewCtrlDIExtend.offDeviceEvent(this);
 	}
@@ -96,22 +98,14 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _onAdded() {
 		this._view = this.owner[ "$owner" ];
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
-		this._netProcessor = Laya.Pool.createByClass(uiMgr.getNewProcessor(this.viewId));
-		this._netProcessor.viewCtrl = this;
+		this._proxy = Laya.Pool.createByClass(uiMgr.getProxy(this.viewId));
+		this._proxy.viewCtrl = this;
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
-		eventMgr.registerEvent(this._netProcessor);
+		eventMgr.registerEvent(this._proxy);
 		ViewCtrlDIExtend.registerDeviceEvent(this);
 		this.addMessage(ViewEvent.OnForeground, this._onForeground);
 		this.addMessage(ViewEvent.OnBackground, this._onBackground);
-	}
-
-	/** Laya.Script私有方法重写 */
-	private _onDisable() {
-		eventMgr.offAllCaller(this);
-		eventMgr.offAllCaller(this._view);
-		eventMgr.offAllCaller(this._netProcessor);
-		super[ "_onDisable" ]();
 	}
 
 	private _onForeground() {

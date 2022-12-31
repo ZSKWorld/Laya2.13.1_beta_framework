@@ -3,45 +3,48 @@ export const enum NetResponse {
 	/** 参数类型：{@link IUserData} */
 	Response_SyncInfo = "Response_SyncInfo",
 
-	/** 参数类型：{@link RegisterOutput} */
+	/** 参数类型：{@link RegisterOutput} & {@link  RegisterInput} */
 	Response_Register = "Response_Register",
 
-	/** 参数类型：{@link LoginOutput} */
+	/** 参数类型：{@link LoginOutput} & {@link  LoginInput} */
 	Response_Login = "Response_Login",
 
-	/** 参数类型：{@link ClearAccountOutput} */
+	/** 参数类型：{@link ClearAccountOutput} & {@link  ClearAccountInput} */
 	Response_ClearAccount = "Response_ClearAccount",
 
-	/** 参数类型：{@link BattleOutput} */
+	/** 参数类型：{@link BattleOutput} & {@link  BattleInput} */
 	Response_StartBattle = "Response_StartBattle",
 
-	/** 参数类型：{@link FriendMsgOutput} */
+	/** 参数类型：{@link AddFriendOutput} & {@link  AddFriendInput} */
+	Response_AddFriend = "Response_AddFriend",
+
+	/** 参数类型：{@link FriendMsgOutput} & {@link  FriendMsgInput} */
 	Response_FriendMsg = "Response_FriendMsg",
 
-	/** 参数类型：{@link HeartOutput} */
+	/** 参数类型：{@link HeartOutput} & {@link  HeartInput} */
 	Response_Heart = "Response_Heart",
 
-	/** 参数类型：{@link UseItemOutput} */
+	/** 参数类型：{@link UseItemOutput} & {@link  UseItemInput} */
 	Response_UseItem = "Response_UseItem",
 
-	/** 参数类型：{@link SellItemOutput} */
+	/** 参数类型：{@link SellItemOutput} & {@link  SellItemInput} */
 	Response_SellItem = "Response_SellItem",
 
-	/** 参数类型：{@link DressEquipOutput} */
+	/** 参数类型：{@link DressEquipOutput} & {@link  DressEquipInput} */
 	Response_DressEquip = "Response_DressEquip",
 
-	/** 参数类型：{@link TakeOffEquipOutput} */
+	/** 参数类型：{@link TakeOffEquipOutput} & {@link  TakeOffEquipInput} */
 	Response_TakeOffEquip = "Response_TakeOffEquip",
 
-	/** 参数类型：{@link SellEquipOutput} */
+	/** 参数类型：{@link SellEquipOutput} & {@link  SellEquipInput} */
 	Response_SellEquip = "Response_SellEquip",
 
-	/** 参数类型：{@link ChangeCollectOutput} */
+	/** 参数类型：{@link ChangeCollectOutput} & {@link  ChangeCollectInput} */
 	Response_ChangeCollect = "Response_ChangeCollect",
 
-	/** 参数类型：{@link DecomposeEquipOutput} */
+	/** 参数类型：{@link DecomposeEquipOutput} & {@link  DecomposeEquipInput} */
 	Response_DecomposeEquip = "Response_DecomposeEquip",
 
-	/** 参数类型：{@link BuyGoodsOutput} */
+	/** 参数类型：{@link BuyGoodsOutput} & {@link  BuyGoodsInput} */
 	Response_BuyGoods = "Response_BuyGoods",
 }

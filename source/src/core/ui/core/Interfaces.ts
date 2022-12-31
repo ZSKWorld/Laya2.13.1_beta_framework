@@ -1,5 +1,5 @@
 import { UserDataProxy } from "../../userData/proxy/UserDataProxy";
-import { BaseNetProcessor } from "./BaseNetProcessor";
+import { BaseProxy } from "./BaseProxy";
 import { BaseViewCtrl } from "./BaseViewCtrl";
 import { Layer } from "./GameLayer";
 import { ViewID } from "./ViewID";
@@ -89,6 +89,6 @@ export type IViewCtrl_Class = Class<IViewCtrl>;
 export interface ViewCtrlExtension extends IViewMethod, IViewCommon {
 };
 
-export type INetProcessor = BaseNetProcessor;
+export type IProxy = BaseProxy;
 
-export type INetProcessor_Class = Class<INetProcessor>;
+export type IProxy_Class = Class<IProxy>;

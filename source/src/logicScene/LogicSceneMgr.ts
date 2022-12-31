@@ -34,7 +34,6 @@ class LogicSceneMgr extends Observer {
 				this._currentScene.enter(data);
 				Laya.Resource.destroyUnusedResources();
 			}, () => {
-				//场景加载失败
 				this._enterCompleted = true;
 				if (confirm(`场景 ${ type } 加载失败，是否重试?`))
 					this.enterScene(type, data);

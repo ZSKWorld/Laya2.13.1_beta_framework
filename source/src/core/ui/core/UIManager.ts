@@ -1,7 +1,7 @@
 import { Observer } from "../../libs/event/Observer";
 import { Logger } from "../../libs/utils/Logger";
 import { Layer, layerMgr } from "./GameLayer";
-import { INetProcessor_Class, IViewCtrl, IViewCtrl_Class, IView_Class, ViewEvent } from "./Interfaces";
+import { IProxy_Class, IViewCtrl, IViewCtrl_Class, IView_Class, ViewEvent } from "./Interfaces";
 import { ViewID } from "./ViewID";
 
 const logger = Logger.Create("UIManager", true);
@@ -41,7 +41,7 @@ class UICache {
 class UIManager extends Observer {
 	private _viewClsMap: { [ key in ViewID ]?: IView_Class } = {};
 	private _ctrlClsMap: { [ key in ViewID ]?: IViewCtrl_Class } = {};
-	private _newProcessorClsMap: { [ key in ViewID ]?: INetProcessor_Class } = {};
+	private _proxyClsMap: { [ key in ViewID ]?: IProxy_Class } = {};
 
 	/** 缓存池 */
 	private _cache: UICache;
@@ -68,14 +68,14 @@ class UIManager extends Observer {
 		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(250, this, this.onResize));
 	}
 
-	registView(viewId: ViewID, viewCls: IView_Class, ctrlCls?: IViewCtrl_Class, netProcessorCls?: INetProcessor_Class) {
+	registView(viewId: ViewID, viewCls: IView_Class, ctrlCls?: IViewCtrl_Class, proxyCls?: IProxy_Class) {
 		if (!viewCls) throw new Error("参数不能为空！");
 		if (!this._viewClsMap[ viewId ]) {
 			viewCls.prototype.viewId = viewId;
 			ctrlCls.prototype.viewId = viewId;
 			this._viewClsMap[ viewId ] = viewCls;
 			this._ctrlClsMap[ viewId ] = ctrlCls;
-			this._newProcessorClsMap[ viewId ] = netProcessorCls;
+			this._proxyClsMap[ viewId ] = proxyCls;
 		} else {
 			logger.warn(`重复添加映射 => ${ viewId }`);
 		}
@@ -83,7 +83,7 @@ class UIManager extends Observer {
 
 	getViewCtrl(viewId: ViewID) { return this._ctrlClsMap[ viewId ]; }
 
-	getNewProcessor(viewId: ViewID) { return this._newProcessorClsMap[ viewId ]; }
+	getProxy(viewId: ViewID) { return this._proxyClsMap[ viewId ]; }
 
 	/** 创建页面
 	 * @param viewId {@link ViewID} 页面ID
