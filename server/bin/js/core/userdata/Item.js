@@ -30,6 +30,8 @@ var Util_1 = require("../../utils/Util");
 var TableManager_1 = require("../table/TableManager");
 var ItemBase = /** @class */ (function () {
     function ItemBase(id, count) {
+        if (id === void 0) { id = 0; }
+        if (count === void 0) { count = 0; }
         this.id = 0;
         this.count = 0;
         this.id = id;
@@ -41,6 +43,7 @@ exports.ItemBase = ItemBase;
 var Equipment = /** @class */ (function (_super) {
     __extends(Equipment, _super);
     function Equipment(id) {
+        if (id === void 0) { id = 0; }
         var _this = _super.call(this, id, 1) || this;
         _this.uid = Util_1.Util.CreateUID();
         _this.star = 0;
@@ -51,17 +54,17 @@ var Equipment = /** @class */ (function (_super) {
         _this.wuXingAttri = [];
         _this.secondAttri = [];
         _this.bodyAttri = [];
-        var equipInfo = TableManager_1.tableMgr.Equipment[id];
-        if (equipInfo) {
-            var _a = TableManager_1.tableMgr.EquipmentAddition[equipInfo.Part], Main = _a.Main, WuXing = _a.WuXing, Second = _a.Second, Body = _a.Body;
-            _this.star = MathUtil_1.MathUtil.RandomInt(1, +TableManager_1.tableMgr.Const[1010].Value);
-            Equipment.randomAttribute(__spreadArray([], Main, true), _this.mainAttri, false).sort(Equipment.sortFunc);
-            Equipment.randomAttribute(__spreadArray([], WuXing, true), _this.wuXingAttri, true).sort(Equipment.sortFunc);
-            Equipment.randomAttribute(__spreadArray([], Second, true), _this.secondAttri, true).sort(Equipment.sortFunc);
-            Equipment.randomAttribute(__spreadArray([], Body, true), _this.bodyAttri, true).sort(Equipment.sortFunc);
-        }
         return _this;
     }
+    Equipment.prototype.createAttribute = function () {
+        var equipInfo = TableManager_1.tableMgr.Equipment[this.id];
+        var _a = TableManager_1.tableMgr.EquipmentAddition[equipInfo.Part], Main = _a.Main, WuXing = _a.WuXing, Second = _a.Second, Body = _a.Body;
+        this.star = MathUtil_1.MathUtil.RandomInt(1, +TableManager_1.tableMgr.Const[1010].Value);
+        Equipment.randomAttribute(__spreadArray([], Main, true), this.mainAttri, false).sort(Equipment.sortFunc);
+        Equipment.randomAttribute(__spreadArray([], WuXing, true), this.wuXingAttri, true).sort(Equipment.sortFunc);
+        Equipment.randomAttribute(__spreadArray([], Second, true), this.secondAttri, true).sort(Equipment.sortFunc);
+        Equipment.randomAttribute(__spreadArray([], Body, true), this.bodyAttri, true).sort(Equipment.sortFunc);
+    };
     Equipment.randomAttribute = function (source, attri, randomLen) {
         attri.length = 0;
         if (source.length) {

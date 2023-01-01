@@ -1,5 +1,5 @@
 import { ItemHandleService } from "../../../net/Services";
-import { Equipment } from "../../../userData/proxy/ItemProxy";
+import { Equipment } from "../../../userData/proxy/ItemData";
 import { BaseViewCtrl, InsertKeyEvent, KeyEvent } from "../../core/BaseViewCtrl";
 import { UIEquipmentInfoMsg, UIEquipmentInfoView } from "../../view/PkgMain/UIEquipmentInfoView";
 

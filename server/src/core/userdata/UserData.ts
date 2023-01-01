@@ -7,17 +7,17 @@ import { BaseDataType, DataType, EquipmentPart, FoodRecoverType, ItemBagType } f
 import { tableMgr } from "../table/TableManager";
 import { DressedEquipMap } from "./DataConst";
 import { Formula } from "./Formula";
-import { Equipment, ItemBase } from "./Item";
+import { Equipment, ItemBase } from "./ItemData";
 import { SyncProxy } from "./ProxyMgr";
 
-const EncodeKey: { [ key in ItemBagType ]?: string } = {
-    1: "$equipments",//ItemBagType.Equip
-    2: "$Prop",//ItemBagType.Prop
-    3: "$Gem",//ItemBagType.Gem
-    4: "$Material",//ItemBagType.Material
-    5: "$Book",//ItemBagType.Book
-    6: "$Other",//ItemBagType.Other
-};
+const EncodeData: { name: string, Class: Class<ItemBase> }[] = [
+    { name: "$equipments", Class: Equipment },//ItemBagType.Equip
+    { name: "$Prop", Class: ItemBase },//ItemBagType.Prop
+    { name: "$Gem", Class: ItemBase },//ItemBagType.Gem
+    { name: "$Material", Class: ItemBase },//ItemBagType.Material
+    { name: "$Book", Class: ItemBase },//ItemBagType.Book
+    { name: "$Other", Class: ItemBase },//ItemBagType.Other
+];
 
 export class UserData implements IUserData, SyncProxy<IUserData> {
     //#region Properties
@@ -29,7 +29,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     registerTime: number = TimeUtil.getTimeStamp();
     lastLoginTime: number = 0;
     lastOnlineTime: number = 0;
-    friends:string[] = [];
+    friends: string[] = [];
 
     /** 离线数据 */
     offline?: IOffline = null;
@@ -140,9 +140,9 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
 
     login(source: IUserData) {
         const encodeDatas: any[][][] = [];
-        Object.keys(EncodeKey).forEach(key => {
-            encodeDatas.push(source[ EncodeKey[ key ] ]);
-            delete source[ EncodeKey[ key ] ];
+        EncodeData.forEach(v => {
+            encodeDatas.push(source[ v.name ]);
+            delete source[ v.name ];
         });
 
         Object.keys(source).forEach(v => this[ v ] = source[ v ]);
@@ -153,7 +153,8 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
             if (typeData) {
                 const keys = typeData.shift();
                 typeData.forEach(data => {
-                    const item = keys.reduce((pv, cv, index) => (pv[ cv ] = data[ index ], pv), {});
+                    const item = new EncodeData[ objIndex ].Class();
+                    keys.reduce((pv, cv, index) => (pv[ cv ] = data[ index ], pv), item);
                     objects[ objIndex ].push(item);
                 });
             }
@@ -168,8 +169,8 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     save() {
         this.offline = null;
 
-        const encodeKeys = [];
-        Object.keys(EncodeKey).forEach(key => encodeKeys.push(EncodeKey[ key ]));
+        const encodeKeys: string[] = [];
+        EncodeData.forEach(v => encodeKeys.push(v.name));
         const { equipment, prop, gem, material, book, other } = this;
         const objects = [ equipment, prop, gem, material, book, other ];
 
@@ -301,6 +302,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     addNewEquip(id: number, count: number) {
         for (let i = 0; i < count; i++) {
             const equip = new Equipment(id);
+            equip.createAttribute();
             this.equipment.push(equip);
         }
     }
@@ -391,7 +393,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     }
 
     /** 检查物品收藏 */
-    checkCollect(id: number, collect: boolean) {
+    checkCollect(id: number, collect: boolean): ErrorCode {
         if (GameUtil.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
         if (collect && this.isCollect(id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
         if (!collect && !this.isCollect(id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
@@ -399,7 +401,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     }
 
     /** 检查是否可以购买物品 */
-    checkBuyItem(id: number, count: number) {
+    checkBuyItem(id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
         const item = tableMgr.Shop[ id ];
         if (!item) return ErrorCode.GOODS_NOT_EXIST;
@@ -475,7 +477,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         return this.sellItem(equip.id, 1);
     }
 
-    /** 分解装备 */
+    /** 按星级分解装备 */
     decomposeEquip(star: number) {
         const equips = this.equipment;
         const equipCnt = equips.length;

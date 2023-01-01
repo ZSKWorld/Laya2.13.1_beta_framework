@@ -1,7 +1,7 @@
 import { GameUtil } from "../../../../common/GameUtil";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { tableMgr } from "../../../../table/TableManager";
-import { Equipment, ItemBase } from "../../../../userData/proxy/ItemProxy";
+import { Equipment, ItemBase } from "../../../../userData/proxy/ItemData";
 import { GComponentExtend } from "../../../core/Interfaces";
 import RenderBag from "../../../ui/PkgMain/RenderBag";
 

@@ -9,14 +9,14 @@ var TableManager_1 = require("../table/TableManager");
 var DataConst_1 = require("./DataConst");
 var Formula_1 = require("./Formula");
 var Item_1 = require("./Item");
-var EncodeKey = {
-    1: "$equipments",
-    2: "$Prop",
-    3: "$Gem",
-    4: "$Material",
-    5: "$Book",
-    6: "$Other"
-};
+var EncodeData = [
+    { name: "$equipments", Class: Item_1.Equipment },
+    { name: "$Prop", Class: Item_1.ItemBase },
+    { name: "$Gem", Class: Item_1.ItemBase },
+    { name: "$Material", Class: Item_1.ItemBase },
+    { name: "$Book", Class: Item_1.ItemBase },
+    { name: "$Other", Class: Item_1.ItemBase }, //ItemBagType.Other
+];
 var UserData = /** @class */ (function () {
     //#endregion
     //#endregion
@@ -135,9 +135,9 @@ var UserData = /** @class */ (function () {
     UserData.prototype.login = function (source) {
         var _this = this;
         var encodeDatas = [];
-        Object.keys(EncodeKey).forEach(function (key) {
-            encodeDatas.push(source[EncodeKey[key]]);
-            delete source[EncodeKey[key]];
+        EncodeData.forEach(function (v) {
+            encodeDatas.push(source[v.name]);
+            delete source[v.name];
         });
         Object.keys(source).forEach(function (v) { return _this[v] = source[v]; });
         var _a = this, equipment = _a.equipment, prop = _a.prop, gem = _a.gem, material = _a.material, book = _a.book, other = _a.other;
@@ -146,7 +146,8 @@ var UserData = /** @class */ (function () {
             if (typeData) {
                 var keys_1 = typeData.shift();
                 typeData.forEach(function (data) {
-                    var item = keys_1.reduce(function (pv, cv, index) { return (pv[cv] = data[index], pv); }, {});
+                    var item = new EncodeData[objIndex].Class();
+                    keys_1.reduce(function (pv, cv, index) { return (pv[cv] = data[index], pv); }, item);
                     objects[objIndex].push(item);
                 });
             }
@@ -160,7 +161,7 @@ var UserData = /** @class */ (function () {
         var _this = this;
         this.offline = null;
         var encodeKeys = [];
-        Object.keys(EncodeKey).forEach(function (key) { return encodeKeys.push(EncodeKey[key]); });
+        EncodeData.forEach(function (v) { return encodeKeys.push(v.name); });
         var _a = this, equipment = _a.equipment, prop = _a.prop, gem = _a.gem, material = _a.material, book = _a.book, other = _a.other;
         var objects = [equipment, prop, gem, material, book, other];
         objects.forEach(function (obj, objIndex) {
@@ -325,6 +326,7 @@ var UserData = /** @class */ (function () {
     UserData.prototype.addNewEquip = function (id, count) {
         for (var i = 0; i < count; i++) {
             var equip = new Item_1.Equipment(id);
+            equip.createAttribute();
             this.equipment.push(equip);
         }
     };

@@ -1,6 +1,6 @@
 import { InsertEvent } from "../../../../libs/event/EventMgr";
 import { ItemBagType } from "../../../../net/enum/ItemEnum";
-import { Equipment, ItemBase } from "../../../../userData/proxy/ItemProxy";
+import { Equipment, ItemBase } from "../../../../userData/proxy/ItemData";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ViewID } from "../../../core/ViewID";

@@ -1,6 +1,6 @@
 import { ResPath } from "../../../common/ResPath";
 import { ExtensionClass } from "../../../libs/utils/Util";
-import { Equipment } from "../../../userData/proxy/ItemProxy";
+import { Equipment } from "../../../userData/proxy/ItemData";
 import { ViewExtension } from "../../core/Interfaces";
 import UIEquipmentInfo from "../../ui/PkgMain/UIEquipmentInfo";
 

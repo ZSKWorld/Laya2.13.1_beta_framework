@@ -1,12 +1,11 @@
 import { GameUtil } from "../../common/GameUtil";
 import { EquipmentPart } from "../../net/enum/ItemEnum";
 import { tableMgr } from "../../table/TableManager";
-import { BaseProxy } from "./BaseProxy";
 
-export class ItemBase<T extends IItemBase = IItemBase> extends BaseProxy<T> implements IItemBase {
-    //#region SourceProperties
-    get id(): number { return this.source.id; }
-    get count(): number { return this.source.count; }
+export class ItemBase implements IItemBase {
+    //#region Properties
+    id: number;
+    count: number;
     //#endregion
 
     get name() { return tableMgr.Item[ this.id ].Name; }
@@ -17,19 +16,27 @@ export class ItemBase<T extends IItemBase = IItemBase> extends BaseProxy<T> impl
     get salable() { return tableMgr.Item[ this.id ].Salable; }
     get useRequire() { return tableMgr.Item[ this.id ].UseRequire; }
     get useRequireStr() { return GameUtil.getJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
+
+    static Decode(data: IItemBase) {
+        if (!data) return null;
+        const result = new ItemBase();
+        result.id = data.id;
+        result.count = data.count;
+        return result;
+    }
 }
 
-export class Equipment extends ItemBase<IEquipment> implements IEquipment {
-    //#region SourceProperties
-    get uid(): string { return this.source.uid; }
-    get star(): number { return this.source.star; }
-    get level(): number { return this.source.level; }
-    get mingKe(): number { return this.source.mingKe; }
-    get shenYou(): number { return this.source.shenYou; }
-    get mainAttri(): number[] { return this.source.mainAttri; }
-    get wuXingAttri(): number[] { return this.source.wuXingAttri; }
-    get secondAttri(): number[] { return this.source.secondAttri; }
-    get bodyAttri(): number[] { return this.source.bodyAttri; }
+export class Equipment extends ItemBase implements IEquipment {
+    //#region Properties
+    uid: string;
+    star: number;
+    level: number;
+    mingKe: number;
+    shenYou: number;
+    mainAttri: number[];
+    wuXingAttri: number[];
+    secondAttri: number[];
+    bodyAttri: number[];
     //#endregion
 
     get part(): EquipmentPart { return tableMgr.Equipment[ this.id ].Part; }
@@ -51,5 +58,21 @@ export class Equipment extends ItemBase<IEquipment> implements IEquipment {
         `;
     }
 
+    static override Decode(data: IEquipment) {
+        if (!data) return null;
+        const result = new Equipment();
+        result.id = data.id;
+        result.count = data.count;
+        result.uid = data.uid;
+        result.star = data.star;
+        result.level = data.level;
+        result.mingKe = data.mingKe;
+        result.shenYou = data.shenYou;
+        result.mainAttri = data.mainAttri;
+        result.wuXingAttri = data.wuXingAttri;
+        result.secondAttri = data.secondAttri;
+        result.bodyAttri = data.bodyAttri;
+        return result;
+    }
 
 }

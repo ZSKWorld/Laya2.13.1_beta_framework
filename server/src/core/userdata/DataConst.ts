@@ -1,4 +1,4 @@
-import { EquipmentPart, ItemBagType } from "../enum/ItemEnum";
+import { EquipmentPart } from "../enum/ItemEnum";
 
 export const DressedEquipMap: { readonly [ key in EquipmentPart ]: string } = {
     1: "weapon",
