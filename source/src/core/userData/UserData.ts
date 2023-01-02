@@ -4,7 +4,7 @@ import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
 import { UpperFirst } from "../libs/utils/Util";
-import { DataType, BaseDataType, EquipmentPart, ItemBagType } from "../net/enum/ItemEnum";
+import { BaseDataType, DataType, EquipmentPart, ItemBagType } from "../net/enum/ItemEnum";
 import { NetResponse } from "../net/NetResponse";
 import { tableMgr } from "../table/TableManager";
 import { Equipment, ItemBase } from "./proxy/ItemData";
@@ -143,7 +143,7 @@ class UserData extends Observer implements IUserData {
         Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
         return 1 + xinFaJLHF;
     }
-    
+
     getItemCount(id: number): number {
         const item = tableMgr.Item[ id ];
         switch (item.DataType) {
@@ -282,7 +282,7 @@ class UserData extends Observer implements IUserData {
         }
         return result;
     }
-    
+
     @InsertEvent(NetResponse.Response_SyncInfo)
     private syncInfo(data: IUserData) {
         Object.keys(data).forEach(v => {
