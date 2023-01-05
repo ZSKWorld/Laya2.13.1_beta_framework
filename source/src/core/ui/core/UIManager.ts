@@ -103,7 +103,7 @@ class UIManager extends Observer {
 	addView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler, hideTop: boolean = true) {
 		let viewCtrl: IViewCtrl;
 		this._lockPanel.visible = true;
-		let openedIndex = this.getOpenViewIndex(viewId);
+		let openedIndex = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (openedIndex == -1) {
 			//先尝试从缓存池中获取
 			viewCtrl = this._cache.getView(viewId);
@@ -157,17 +157,8 @@ class UIManager extends Observer {
 		this._openedCtrls.forEach(v => v.view.makeFullScreen());
 	}
 
-	/** 获取已打开的页面索引 */
-	private getOpenViewIndex(viewId: ViewID) {
-		const { _openedCtrls } = this;
-		for (let i = 0, n = _openedCtrls.length; i < n; i++) {
-			const view = _openedCtrls[ i ];
-			if (view.viewId == viewId) return i;
-		}
-		return -1;
-	}
-
 	private addView2(viewCtrl: IViewCtrl, data: any, hideTop: boolean, callback: Laya.Handler) {
+		//TODO 页面的 退场动画？ 入场动画？
 		if (viewCtrl) {
 			viewCtrl.data = data;
 			const topCtrl = this.topCtrl;
