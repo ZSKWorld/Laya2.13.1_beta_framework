@@ -1,34 +1,33 @@
 import { GameEvent } from "../core/common/GameEvent";
-import { InsertEvent } from "../core/libs/event/EventMgr";
+import { Event } from "../core/libs/event/EventMgr";
 import { Observer } from "../core/libs/event/Observer";
 import { Logger } from "../core/libs/utils/Logger";
 import { IScene } from "./ILogicScene";
-import { LogicSceneType } from "./LogicSceneType";
+import { LogicScene } from "./LogicSceneType";
 
 const logger = Logger.Create("LogicSceneMgr", true);
 
 /** 逻辑场景管理类 */
 class LogicSceneMgr extends Observer {
-	private _currentType: LogicSceneType;
+	private _currentType: LogicScene;
 	private _currentScene: IScene;
 	private _enterCompleted: boolean = true;
-	private _sceneMap: Map<LogicSceneType, IScene>;
+	private _sceneMap: Map<LogicScene, IScene>;
 
-	init(sceneMap: [ LogicSceneType, IScene ][]) {
+	init(sceneMap: [ LogicScene, IScene ][]) {
 		if (!this._sceneMap)
 			this._sceneMap = new Map(sceneMap);
 	}
 
-	@InsertEvent(GameEvent.EnterScene)
-	private enterScene(type: LogicSceneType, data?: any) {
+	@Event(GameEvent.EnterScene)
+	private enterScene(type: LogicScene, data?: any) {
 		if (!this._enterCompleted) return;
 		if (this._currentType != type) {
 			this._enterCompleted = false;
 			const newScene = this._sceneMap.get(type);
 			newScene.load().then(() => {
 				this._currentType = type;
-				if (this._currentScene)
-					this._currentScene.exit();
+				this._currentScene?.exit();
 				this._currentScene = newScene;
 				this._enterCompleted = true;
 				this._currentScene.enter(data);

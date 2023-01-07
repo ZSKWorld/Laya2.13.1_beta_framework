@@ -1,5 +1,5 @@
 import { GameUtil } from "../common/GameUtil";
-import { InsertEvent } from "../libs/event/EventMgr";
+import { Event } from "../libs/event/EventMgr";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
@@ -283,7 +283,7 @@ class UserData extends Observer implements IUserData {
         return result;
     }
 
-    @InsertEvent(NetResponse.Response_SyncInfo)
+    @Event(NetResponse.Response_SyncInfo)
     private syncInfo(data: IUserData) {
         Object.keys(data).forEach(v => {
             const oldValue = this[ v ];

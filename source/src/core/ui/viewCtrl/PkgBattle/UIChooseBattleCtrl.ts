@@ -1,4 +1,4 @@
-import { LogicSceneType } from "../../../../logicScene/LogicSceneType";
+import { LogicScene } from "../../../../logicScene/LogicSceneType";
 import { GameEvent } from "../../../common/GameEvent";
 import { BattleType } from "../../../net/enum/BattleEnums";
 import { BattleService } from "../../../net/Services";
@@ -84,7 +84,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private onBtnBackClick(): void {
-		this.dispatch(GameEvent.EnterScene, LogicSceneType.MainScene);
+		this.dispatch(GameEvent.EnterScene, LogicScene.MainScene);
 	}
 
 	private onBtnConfirmBgClick(): void {

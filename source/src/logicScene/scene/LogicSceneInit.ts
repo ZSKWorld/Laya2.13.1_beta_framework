@@ -1,7 +1,7 @@
 import { GameEvent } from "../../core/common/GameEvent";
 import { ResPath } from "../../core/common/ResPath";
 import { CustomSpriteManager } from "../../core/libs/customSprite/CustomSpriteManager";
-import { InsertEvent } from "../../core/libs/event/EventMgr";
+import { Event } from "../../core/libs/event/EventMgr";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { websocket } from "../../core/net/WebSocket";
 import { tableMgr } from "../../core/table/TableManager";
@@ -12,7 +12,7 @@ import { ViewID } from "../../core/ui/core/ViewID";
 import { uiRegister } from "../../core/ui/core/ViewRegister";
 import { UIUtility } from "../../core/ui/tool/UIUtility";
 import { LogicSceneBase } from "../LogicSceneBase";
-import { LogicSceneType } from "../LogicSceneType";
+import { LogicScene } from "../LogicSceneType";
 
 /** 初始化逻辑场景 */
 export class LogicSceneInit extends LogicSceneBase {
@@ -37,24 +37,24 @@ export class LogicSceneInit extends LogicSceneBase {
 			CustomSpriteManager.init();
 			LogicSceneInit.inited = true;
 		}
-		this.dispatch(GameEvent.EnterScene, LogicSceneType.LoginScene);
+		this.dispatch(GameEvent.EnterScene, LogicScene.LoginScene);
 	}
 
 	protected onExit(): void {
 	}
 
-	@InsertEvent(GameEvent.SocketOpened, false, [ true ])
-	@InsertEvent(GameEvent.SocketClosed, false, [ false ])
+	@Event(GameEvent.SocketOpened, false, [ true ])
+	@Event(GameEvent.SocketClosed, false, [ false ])
 	private socketConnectChanged(open: boolean) {
 		if (open) uiMgr.removeView(ViewID.WaitingView);
 		else uiMgr.addView(ViewID.WaitingView, "网络已断开", null, false);
 	}
 
-	@InsertEvent(GameEvent.NetMsgError)
+	@Event(GameEvent.NetMsgError)
 	private netMsgError(msg: UserOutput) {
 		UIUtility.showTipInfo(tableMgr.Error[ msg.error ].text);
 		if (msg.error == ErrorCode.NOT_LOGIN)
-			this.dispatch(GameEvent.EnterScene, LogicSceneType.LoginScene);
+			this.dispatch(GameEvent.EnterScene, LogicScene.LoginScene);
 	}
 
 }

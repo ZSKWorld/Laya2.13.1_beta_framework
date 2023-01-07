@@ -18,10 +18,6 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 
 	load() {
 		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.All);
-		// let totalProgress = 0;
-		// const progressHandler = Laya.Handler.create(this, (progress: number) => {
-		// 	totalProgress += progress;
-		// }, null, false);
 		return Promise.all([
 			loadMgr.create(notUIRes),
 			loadMgr.loadPackage(uiRes),
@@ -32,14 +28,12 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 	}
 
 	enter(data: any): void {
-		//todo
 		this.data = data;
 		uiMgr.removeAllView();
 		this.onEnter();
 	}
 
 	exit(): void {
-		//todo
 		this.onExit();
 		//卸载资源
 		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.Normal);

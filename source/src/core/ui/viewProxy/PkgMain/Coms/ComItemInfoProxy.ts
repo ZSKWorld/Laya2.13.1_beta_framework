@@ -1,6 +1,6 @@
 import { GameEvent } from "../../../../common/GameEvent";
 import { GameUtil } from "../../../../common/GameUtil";
-import { InsertEvent } from "../../../../libs/event/EventMgr";
+import { Event } from "../../../../libs/event/EventMgr";
 import { NetResponse } from "../../../../net/NetResponse";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { ViewID } from "../../../core/ViewID";
@@ -10,7 +10,7 @@ import { ComItemInfoCtrl } from "../../../viewCtrl/PkgMain/Coms/ComItemInfoCtrl"
 
 export class ComItemInfoProxy extends BaseProxy<ComItemInfoCtrl>{
 
-    @InsertEvent(NetResponse.Response_UseItem)
+    @Event(NetResponse.Response_UseItem)
     private useItemResponse(outPut: UseItemOutput & UseItemInput) {
         if (outPut.id == 2010) {
             this.viewCtrl.addView(ViewID.SectView, null, null, false);
@@ -26,19 +26,19 @@ export class ComItemInfoProxy extends BaseProxy<ComItemInfoCtrl>{
         this.viewCtrl.removeSelf();
     }
 
-    @InsertEvent(NetResponse.Response_SellItem)
+    @Event(NetResponse.Response_SellItem)
     private sellItemResponse(outPut: SellItemOutput & SellItemInput) {
         this.viewCtrl.removeSelf();
         outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
     }
 
-    @InsertEvent(NetResponse.Response_BuyGoods)
+    @Event(NetResponse.Response_BuyGoods)
     private buyGoodsResponse(outPut: BuyGoodsOutput & BuyGoodsInput) {
         this.viewCtrl.removeSelf();
         outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
     }
 
-    @InsertEvent(NetResponse.Response_ChangeCollect)
+    @Event(NetResponse.Response_ChangeCollect)
     private changeCollectResponse() {
         this.viewCtrl.refreshContent();
     }

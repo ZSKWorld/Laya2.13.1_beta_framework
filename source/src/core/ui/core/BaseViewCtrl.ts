@@ -148,14 +148,14 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 windowImmit("BaseViewCtrl", BaseViewCtrl);
 
 /** 按键事件类型 */
-export const enum KeyEvent {
+export const enum KeyEventType {
 	KeyDown = "keydown",
 	KeyPress = "keypress",
 	KeyUp = "keyup",
 }
 
 /** 鼠标事件类型 */
-export const enum MouseEvent {
+export const enum MouseEventType {
 	MouseOver = "mouseover",
 	MouseDown = "mousedown",
 	MouseMove = "mousemove",
@@ -172,12 +172,12 @@ export const enum MouseEvent {
 
 /**
  * 页面控制器键盘事件装饰器工厂
- * @param keyEventType {@link KeyEvent} 事件类型
+ * @param keyEventType {@link KeyEventType} 事件类型
  * @param key 触发事件的键值
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-export function InsertKeyEvent(keyEventType: KeyEvent, key: number, once?: boolean) {
+export function KeyEvent(keyEventType: KeyEventType, key: number, once?: boolean) {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__keyEventList) target.__keyEventList = {};
 		if (!target.__keyEventList[ keyEventType ]) target.__keyEventList[ keyEventType ] = {};
@@ -201,7 +201,7 @@ export function InsertKeyEvent(keyEventType: KeyEvent, key: number, once?: boole
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-export function InsertMouseEvent(mouseEventType: MouseEvent, once?: boolean) {
+export function MouseEvent(mouseEventType: MouseEventType, once?: boolean) {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__mouseEventList) target.__mouseEventList = {};
 		if (!target.__mouseEventList[ mouseEventType ]) target.__mouseEventList[ mouseEventType ] = [];
@@ -218,6 +218,13 @@ export function InsertMouseEvent(mouseEventType: MouseEvent, once?: boolean) {
 	}
 }
 
+/**
+ * 页面控制器消息事件装饰器工厂
+ * @param name 消息名称
+ * @param once 是否只监听一次
+ * @param args 参数
+ * @returns MethodDecorator
+ */
 export function Message(name: string, once?: boolean, args?: any[]) {
 	return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 		if (!target.__messageMap) target.__messageMap = {};

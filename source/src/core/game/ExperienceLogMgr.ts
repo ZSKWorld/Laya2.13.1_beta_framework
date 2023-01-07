@@ -1,5 +1,5 @@
 import { GameEvent } from "../common/GameEvent";
-import { InsertEvent } from "../libs/event/EventMgr";
+import { Event } from "../libs/event/EventMgr";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
@@ -22,19 +22,19 @@ class ExperienceLogMgr extends Observer {
     private _logs: string[] = [];
     get logs() { return this._logs; }
 
-    randomLog(){
+    randomLog() {
         const logs = ExperienceLogMgr.constLogs;
-        this.addLog(logs[MathUtil.RandomInt(0, logs.length - 1)]);
+        this.addLog(logs[ MathUtil.RandomInt(0, logs.length - 1) ]);
     }
 
-    @InsertEvent(GameEvent.AddExperienceLog)
+    @Event(GameEvent.AddExperienceLog)
     private addLog(log: string | string[]) {
         if (Array.isArray(log)) this._logs.push(...log);
         else this._logs.push(log);
         Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);
     }
 
-    @InsertEvent(GameEvent.ClearExperienceLog)
+    @Event(GameEvent.ClearExperienceLog)
     private clearLog() {
         this._logs.length = 0;
         Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);

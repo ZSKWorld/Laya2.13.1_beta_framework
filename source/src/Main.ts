@@ -4,7 +4,7 @@ import { Notifier } from "./core/libs/event/Notifier";
 import { FixEngine } from "./FixEngine";
 import GameConfig from "./GameConfig";
 import { logicSceneMgr } from "./logicScene/LogicSceneMgr";
-import { LogicSceneType } from "./logicScene/LogicSceneType";
+import { LogicScene } from "./logicScene/LogicSceneType";
 import { LogicSceneGame } from "./logicScene/scene/LogicSceneGame";
 import { LogicSceneInit } from "./logicScene/scene/LogicSceneInit";
 import { LogicSceneLogin } from "./logicScene/scene/LogicSceneLogin";
@@ -47,12 +47,12 @@ class Main extends Notifier {
 
 	onConfigLoaded() {
 		logicSceneMgr.init([
-			[ LogicSceneType.InitScene, new LogicSceneInit() ],
-			[ LogicSceneType.LoginScene, new LogicSceneLogin() ],
-			[ LogicSceneType.MainScene, new LogicSceneMain() ],
-			[ LogicSceneType.GameScene, new LogicSceneGame() ],
+			[ LogicScene.InitScene, new LogicSceneInit() ],
+			[ LogicScene.LoginScene, new LogicSceneLogin() ],
+			[ LogicScene.MainScene, new LogicSceneMain() ],
+			[ LogicScene.GameScene, new LogicSceneGame() ],
 		]);
-		this.dispatch(GameEvent.EnterScene, LogicSceneType.InitScene);
+		this.dispatch(GameEvent.EnterScene, LogicScene.InitScene);
 	}
 
 }

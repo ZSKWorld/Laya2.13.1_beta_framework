@@ -1,5 +1,5 @@
 import { ResPath } from "../../../../common/ResPath";
-import { InsertEvent } from "../../../../libs/event/EventMgr";
+import { Event } from "../../../../libs/event/EventMgr";
 import { MathUtil } from "../../../../libs/math/MathUtil";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { NetResponse } from "../../../../net/NetResponse";
@@ -41,7 +41,7 @@ export class ComRenWuView extends ExtensionClass<ViewExtension, ComRenWu>(ComRen
 		BtnFB.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnFBClick ]);
 	}
 
-	@InsertEvent(NetResponse.Response_SyncInfo)
+	@Event(NetResponse.Response_SyncInfo)
 	refreshEquipInfo() {
 		const { weapon, necklace, ring, amulet, helmet, clothes, trousers, shoes, mount, hiddenWeeapon, fashion, magicWeapon, vigor, maxVigro, moHe, moBi,
 			spiritStones, jingLiHuiFu, soul, gemScore, upgradeExp, } = this.userData;

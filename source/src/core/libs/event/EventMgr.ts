@@ -36,7 +36,7 @@ windowImmit("eventMgr", eventMgr)
  * @param args 参数
  * @return MethodDecorator
  */
-export function InsertEvent(eventName: string, once?: boolean, args?: any[]) {
+export function Event(eventName: string, once?: boolean, args?: any[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         if (!target.__eventMap) target.__eventMap = {};
         if (!target.__eventMap[ eventName ]) target.__eventMap[ eventName ] = [];

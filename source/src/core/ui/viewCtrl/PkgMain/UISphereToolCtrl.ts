@@ -2,7 +2,7 @@ import { GameEvent } from "../../../common/GameEvent";
 import { GameUtil } from "../../../common/GameUtil";
 import { Logger } from "../../../libs/utils/Logger";
 import { tableMgr } from "../../../table/TableManager";
-import { BaseViewCtrl, InsertKeyEvent, KeyEvent } from "../../core/BaseViewCtrl";
+import { BaseViewCtrl, KeyEvent, KeyEventType } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { UISphereToolMsg, UISphereToolView } from "../../view/PkgMain/UISphereToolView";
 
@@ -51,7 +51,7 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 
     }
 
-    @InsertKeyEvent(KeyEvent.KeyUp, Laya.Keyboard.ESCAPE)
+    @KeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ESCAPE)
     private onBtnBgClick(): void {
         this.removeTopView();
     }
@@ -64,7 +64,7 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 
     }
 
-    @InsertKeyEvent(KeyEvent.KeyUp, Laya.Keyboard.ENTER)
+    @KeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ENTER)
     private onBtnCreateClick(): void {
         const { Ipt0, Ipt1, Ipt2, Ipt3, Ipt4, Ipt5, Ipt6, Ipt7, Ipt8, Ipt9, Ipt10, Ipt11, Ipt12, Ipt13, Ipt14, Ipt15, Ipt16, Ipt17, Ipt18, Ipt19, Ipt20, Ipt21, Ipt22, Ipt23, Ipt24, Ipt25, Ipt26, Ipt27, Ipt28, Ipt31, Ipt32 } = this.view;
         const { BtnCheck0, BtnCheck1, BtnCheck2, BtnCheck3, BtnCheck4, BtnCheck5, BtnCheck6, BtnCheck7, BtnCheck8, BtnCheck9, BtnCheck10, BtnCheck11, BtnCheck12, BtnCheck13, BtnCheck14, BtnCheck15, BtnCheck16, BtnCheck17, BtnCheck18, BtnCheck19, BtnCheck20, BtnCheck21, BtnCheck22, BtnCheck23, BtnCheck24, BtnCheck25, BtnCheck26, BtnCheck27, BtnCheck28, BtnCheck31, BtnCheck32 } = this.view;

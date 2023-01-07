@@ -1,5 +1,5 @@
 /** 逻辑场景类型枚举 */
-export const enum LogicSceneType {
+export const enum LogicScene {
 	InitScene = "InitScene",
 	LoginScene = "LoginScene",
 	MainScene = "MainScene",

@@ -1,6 +1,6 @@
 import { ItemHandleService } from "../../../net/Services";
 import { Equipment } from "../../../userData/proxy/ItemData";
-import { BaseViewCtrl, InsertKeyEvent, KeyEvent } from "../../core/BaseViewCtrl";
+import { BaseViewCtrl, KeyEvent, KeyEventType } from "../../core/BaseViewCtrl";
 import { UIEquipmentInfoMsg, UIEquipmentInfoView } from "../../view/PkgMain/UIEquipmentInfoView";
 
 export interface UIEquipmentInfoData {
@@ -38,7 +38,7 @@ export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEqu
 		this.removeTopView();
 	}
 
-	@InsertKeyEvent(KeyEvent.KeyUp, Laya.Keyboard.SPACE)
+	@KeyEvent(KeyEventType.KeyUp, Laya.Keyboard.SPACE)
 	private onBtnSellClick(): void {
 		ItemHandleService.Inst.sellEquip({ uid: this.data.equip1.uid });
 	}

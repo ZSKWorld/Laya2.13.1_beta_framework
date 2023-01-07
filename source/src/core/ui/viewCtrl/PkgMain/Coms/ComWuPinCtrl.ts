@@ -1,4 +1,4 @@
-import { InsertEvent } from "../../../../libs/event/EventMgr";
+import { Event } from "../../../../libs/event/EventMgr";
 import { ItemBagType } from "../../../../net/enum/ItemEnum";
 import { Equipment, ItemBase } from "../../../../userData/proxy/ItemData";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
@@ -49,13 +49,13 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 
 	}
 
-	@InsertEvent(UserDataEvent.Collect_Changed, false, [ null ])
-	@InsertEvent(UserDataEvent.Equipment_Changed, false, [ null ])
-	@InsertEvent(UserDataEvent.Gem_Changed, false, [ null ])
-	@InsertEvent(UserDataEvent.Prop_Changed, false, [ null ])
-	@InsertEvent(UserDataEvent.Material_Changed, false, [ null ])
-	@InsertEvent(UserDataEvent.Book_Changed, false, [ null ])
-	@InsertEvent(UserDataEvent.Other_Changed, false, [ null ])
+	@Event(UserDataEvent.Collect_Changed, false, [ null ])
+	@Event(UserDataEvent.Equipment_Changed, false, [ null ])
+	@Event(UserDataEvent.Gem_Changed, false, [ null ])
+	@Event(UserDataEvent.Prop_Changed, false, [ null ])
+	@Event(UserDataEvent.Material_Changed, false, [ null ])
+	@Event(UserDataEvent.Book_Changed, false, [ null ])
+	@Event(UserDataEvent.Other_Changed, false, [ null ])
 	private refreshList(type: ItemBagType) {
 		const same = type == null || type == this.showType;
 		this.showType = type ?? this.showType;

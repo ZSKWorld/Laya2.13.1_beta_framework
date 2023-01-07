@@ -1,4 +1,4 @@
-import { LogicSceneType } from "../../logicScene/LogicSceneType";
+import { LogicScene } from "../../logicScene/LogicSceneType";
 
 export const enum GameEvent {
 	/**
@@ -13,7 +13,7 @@ export const enum GameEvent {
 
 	/**
 	 * 切换场景
-	 * @param sceneType 场景类型 {@link LogicSceneType}
+	 * @param sceneType 场景类型 {@link LogicScene}
 	 * @param data 场景数据{@link Object }
 	 */
 	EnterScene = "EnterScene",
