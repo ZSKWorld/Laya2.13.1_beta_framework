@@ -10,11 +10,13 @@ const enum ResGroupType {
 	All,
 }
 
+type LoadViewData = { updateHandler?: Laya.Handler };
+
 /** 逻辑场景基类 */
 export abstract class LogicSceneBase extends Observer implements IScene {
 	protected data: any;
 	protected loadViewId: ViewID;
-	private _loadViewData: { updateHandler?: Laya.Handler } = {};
+	private _loadViewData: LoadViewData = {};
 	private _progress1: number;
 	private _progress2: number;
 	private _loadHandler1 = Laya.Handler.create(this, this.onLoadProgress1, null, false);
@@ -30,7 +32,7 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 		if (this.loadViewId) uiMgr.addView(this.loadViewId, this._loadViewData, null, false);
 		this.updateLoadProgress();
 		return Promise.all([
-			this.loadViewId ? new Promise(resolve => Laya.timer.once(500, null, resolve)) : null,
+			this.loadViewId ? new Promise(resolve => Laya.timer.once(1000, null, resolve)) : null,
 			loadMgr.create(notUIRes, null, this._loadHandler1),
 			loadMgr.loadPackage(uiRes, null, this._loadHandler2),
 		]).then(
