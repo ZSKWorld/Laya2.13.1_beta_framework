@@ -13,22 +13,22 @@
       <relation target="" sidePair="width-width,bottomext-bottom"/>
       <relation target="n4_sbd0" sidePair="topext-bottom"/>
     </graph>
-    <component id="n1_sbd0" name="ProWave" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,230" size="1046,35" touchable="false" controller="ctrlFontSize,10">
+    <component id="n1_sbd0" name="ProWave" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,230" size="1046,35" touchable="false" controller="ctrlFontSize,5">
       <relation target="" sidePair="width-width"/>
       <relation target="n3_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="100" max="100"/>
     </component>
-    <component id="n2_sbd0" name="ProExp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,279" size="1046,35" touchable="false" controller="ctrlColor,1,ctrlFontSize,10">
+    <component id="n2_sbd0" name="ProExp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,279" size="1046,35" touchable="false" controller="ctrlColor,1,ctrlFontSize,5">
       <relation target="" sidePair="width-width"/>
       <relation target="n1_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="100" max="100"/>
     </component>
-    <component id="n4_sbd0" name="ProSelfHp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,10">
+    <component id="n4_sbd0" name="ProSelfHp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,5">
       <relation target="" sidePair="width-width%"/>
       <relation target="n7_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="134648496" max="234648496"/>
     </component>
-    <component id="n5_sbd0" name="ProEnemyHp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="577,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,10">
+    <component id="n5_sbd0" name="ProEnemyHp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="577,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,5">
       <relation target="" sidePair="width-width%,right-right"/>
       <relation target="n8_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="134648496" max="234648496"/>

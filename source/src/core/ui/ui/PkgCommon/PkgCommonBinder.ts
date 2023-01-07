@@ -2,6 +2,8 @@
 
 import WaitingItem from "./WaitingItem";
 import UIWaiting from "./UIWaiting";
+import UILoading1 from "./UILoading1";
+import UILoading2 from "./UILoading2";
 import ComTipInfo from "./ComTipInfo";
 import BtnCornerTxt from "./BtnCornerTxt";
 import UITipConfirm from "./UITipConfirm";
@@ -12,6 +14,8 @@ export default class PkgCommonBinder {
 	public static bindAll():void {
 		fgui.UIObjectFactory.setExtension(WaitingItem.URL, WaitingItem);
 		fgui.UIObjectFactory.setExtension(UIWaiting.URL, UIWaiting);
+		fgui.UIObjectFactory.setExtension(UILoading1.URL, UILoading1);
+		fgui.UIObjectFactory.setExtension(UILoading2.URL, UILoading2);
 		fgui.UIObjectFactory.setExtension(ComTipInfo.URL, ComTipInfo);
 		fgui.UIObjectFactory.setExtension(BtnCornerTxt.URL, BtnCornerTxt);
 		fgui.UIObjectFactory.setExtension(UITipConfirm.URL, UITipConfirm);

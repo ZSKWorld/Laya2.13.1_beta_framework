@@ -205,6 +205,8 @@
     <font id="kyy06f" name="Font12.ttf" path="/Font/" renderMode="" samplePointSize="16"/>
     <font id="kyy06g" name="Font13.ttf" path="/Font/" renderMode="" samplePointSize="16"/>
     <font id="kyy06h" name="Font14.ttf" path="/Font/" renderMode="" samplePointSize="16"/>
+    <component id="j8596i" name="UILoading1.xml" path="/" exported="true"/>
+    <component id="j8596j" name="UILoading2.xml" path="/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

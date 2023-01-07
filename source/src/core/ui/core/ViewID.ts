@@ -17,6 +17,8 @@ export const enum ViewID {
 	/**Views */
 	BattleView = "BattleView",
 	ChooseBattleView = "ChooseBattleView",
+	Loading1View = "Loading1View",
+	Loading2View = "Loading2View",
 	TipConfirmView = "TipConfirmView",
 	WaitingView = "WaitingView",
 	LoginMainView = "LoginMainView",

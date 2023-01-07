@@ -24,6 +24,8 @@ import UIBattle from "../ui/PkgBattle/UIBattle";
 import UIChat from "../ui/PkgMain/UIChat";
 import UIChooseBattle from "../ui/PkgBattle/UIChooseBattle";
 import UIEquipmentInfo from "../ui/PkgMain/UIEquipmentInfo";
+import UILoading1 from "../ui/PkgCommon/UILoading1";
+import UILoading2 from "../ui/PkgCommon/UILoading2";
 import UILoginMain from "../ui/PkgLogin/UILoginMain";
 import UIMain from "../ui/PkgMain/UIMain";
 import UIPlayerInfo from "../ui/PkgMain/UIPlayerInfo";
@@ -86,6 +88,12 @@ import { UIChooseBattleView } from "../view/PkgBattle/UIChooseBattleView";
 import { UIEquipmentInfoCtrl } from "../viewCtrl/PkgMain/UIEquipmentInfoCtrl";
 import { UIEquipmentInfoProxy } from "../viewProxy/PkgMain/UIEquipmentInfoProxy";
 import { UIEquipmentInfoView } from "../view/PkgMain/UIEquipmentInfoView";
+import { UILoading1Ctrl } from "../viewCtrl/PkgCommon/UILoading1Ctrl";
+import { UILoading1Proxy } from "../viewProxy/PkgCommon/UILoading1Proxy";
+import { UILoading1View } from "../view/PkgCommon/UILoading1View";
+import { UILoading2Ctrl } from "../viewCtrl/PkgCommon/UILoading2Ctrl";
+import { UILoading2Proxy } from "../viewProxy/PkgCommon/UILoading2Proxy";
+import { UILoading2View } from "../view/PkgCommon/UILoading2View";
 import { UILoginMainCtrl } from "../viewCtrl/PkgLogin/UILoginMainCtrl";
 import { UILoginMainProxy } from "../viewProxy/PkgLogin/UILoginMainProxy";
 import { UILoginMainView } from "../view/PkgLogin/UILoginMainView";
@@ -157,6 +165,8 @@ class ViewRegister {
 		//Views
 		fgui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);
 		fgui.UIObjectFactory.setExtension(UIChooseBattle.URL, UIChooseBattleView);
+		fgui.UIObjectFactory.setExtension(UILoading1.URL, UILoading1View);
+		fgui.UIObjectFactory.setExtension(UILoading2.URL, UILoading2View);
 		fgui.UIObjectFactory.setExtension(UITipConfirm.URL, UITipConfirmView);
 		fgui.UIObjectFactory.setExtension(UIWaiting.URL, UIWaitingView);
 		fgui.UIObjectFactory.setExtension(UILoginMain.URL, UILoginMainView);
@@ -189,6 +199,8 @@ class ViewRegister {
 		//Views
 		register(ViewID.BattleView, UIBattleView, UIBattleCtrl, UIBattleProxy);
 		register(ViewID.ChooseBattleView, UIChooseBattleView, UIChooseBattleCtrl, UIChooseBattleProxy);
+		register(ViewID.Loading1View, UILoading1View, UILoading1Ctrl, UILoading1Proxy);
+		register(ViewID.Loading2View, UILoading2View, UILoading2Ctrl, UILoading2Proxy);
 		register(ViewID.TipConfirmView, UITipConfirmView, UITipConfirmCtrl, UITipConfirmProxy);
 		register(ViewID.WaitingView, UIWaitingView, UIWaitingCtrl, UIWaitingProxy);
 		register(ViewID.LoginMainView, UILoginMainView, UILoginMainCtrl, UILoginMainProxy);

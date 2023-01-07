@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <graph id="n0_7vow" name="n0" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n25_j859" name="ProLoad" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" xy="85,1836" size="910,35" controller="ctrlFontSize,6,ctrlText,1">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <ProgressBar value="56" max="100"/>
+    </component>
+    <text id="n26_j859" name="TxtTip" xy="418,1765" size="244,54" fontSize="40" color="#ffffff" text="冷知识冷知识">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+    </text>
+  </displayList>
+</component>

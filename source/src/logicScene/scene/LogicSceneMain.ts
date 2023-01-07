@@ -5,6 +5,7 @@ import { LogicSceneBase } from "../LogicSceneBase";
 
 /** 主页逻辑场景 */
 export class LogicSceneMain extends LogicSceneBase {
+	protected override loadViewId = ViewID.Loading1View;
 	protected override getResArray(): string[] {
 		return [
 			ResPath.UIPath.PkgMain
