@@ -25,7 +25,9 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 		this.addMessage(ComLiLianMsg.OnBtnCaiJiClick, this.enterBattle, [ BattleType.CaiJi ]);
 		this.addMessage(ComLiLianMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
 		this.addMessage(ComLiLianMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
-	}
+		
+		UIUtility.setList(this.view.ListLog, this, this.logRenderer);
+	} 
 
 	override onEnable(): void {
 		experienceLogMgr.randomLog();
@@ -42,7 +44,7 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 	@InsertEvent(GameEvent.RefreshExperienceLog)
 	private refreshLogList() {
 		const logs = experienceLogMgr.logs;
-		UIUtility.setList(this.view.ListLog, logs.length, this, this.logRenderer);
+		this.view.ListLog.numItems = logs.length;
 		this.view.ListLog.scrollToView(logs.length - 1);
 	}
 

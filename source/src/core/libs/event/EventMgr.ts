@@ -4,7 +4,7 @@ class EventListener extends Laya.EventDispatcher {
     /**注册监听事件 */
     registerEvent(caller: any) {
         if (!caller) return;
-        const eventList = caller.__interestEventList;
+        const eventList = caller.__eventMap;
         if (eventList) {
             for (const eventName in eventList) {
                 const callbackList = eventList[ eventName ];
@@ -38,11 +38,11 @@ windowImmit("eventMgr", eventMgr)
  */
 export function InsertEvent(eventName: string, once?: boolean, args?: any[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        if (!target.__interestEventList) target.__interestEventList = {};
-        if (!target.__interestEventList[ eventName ]) target.__interestEventList[ eventName ] = [];
+        if (!target.__eventMap) target.__eventMap = {};
+        if (!target.__eventMap[ eventName ]) target.__eventMap[ eventName ] = [];
 
         const func = descriptor.value;
-        const list: Function[] = target.__interestEventList[ eventName ];
+        const list: Function[] = target.__eventMap[ eventName ];
         if (list.indexOf(func) == -1) {
             list.push(func);
             if (once) {

@@ -8,14 +8,14 @@ var Util_1 = require("../../utils/Util");
 var TableManager_1 = require("../table/TableManager");
 var DataConst_1 = require("./DataConst");
 var Formula_1 = require("./Formula");
-var Item_1 = require("./Item");
+var ItemData_1 = require("./ItemData");
 var EncodeData = [
-    { name: "$equipments", Class: Item_1.Equipment },
-    { name: "$Prop", Class: Item_1.ItemBase },
-    { name: "$Gem", Class: Item_1.ItemBase },
-    { name: "$Material", Class: Item_1.ItemBase },
-    { name: "$Book", Class: Item_1.ItemBase },
-    { name: "$Other", Class: Item_1.ItemBase }, //ItemBagType.Other
+    { name: "$equipments", Class: ItemData_1.Equipment },
+    { name: "$Prop", Class: ItemData_1.ItemBase },
+    { name: "$Gem", Class: ItemData_1.ItemBase },
+    { name: "$Material", Class: ItemData_1.ItemBase },
+    { name: "$Book", Class: ItemData_1.ItemBase },
+    { name: "$Other", Class: ItemData_1.ItemBase }, //ItemBagType.Other
 ];
 var UserData = /** @class */ (function () {
     //#endregion
@@ -260,7 +260,7 @@ var UserData = /** @class */ (function () {
                     }
                 }
                 if (count > 0)
-                    datas.push(new Item_1.ItemBase(id, count));
+                    datas.push(new ItemData_1.ItemBase(id, count));
                 break;
             default: break;
         }
@@ -325,7 +325,7 @@ var UserData = /** @class */ (function () {
     /** 添加装备 */
     UserData.prototype.addNewEquip = function (id, count) {
         for (var i = 0; i < count; i++) {
-            var equip = new Item_1.Equipment(id);
+            var equip = new ItemData_1.Equipment(id);
             equip.createAttribute();
             this.equipment.push(equip);
         }
@@ -469,12 +469,12 @@ var UserData = /** @class */ (function () {
         else if (skillBook) {
             this.changeItemCount(id, -1);
             this.skill.push(id);
-            return [new Item_1.ItemBase(skillBook.ID, 1)];
+            return [new ItemData_1.ItemBase(skillBook.ID, 1)];
         }
         else if (xinFaBook) {
             this.changeItemCount(id, -1);
             this.citta[id] = 1;
-            return [new Item_1.ItemBase(xinFaBook.ID, 1)];
+            return [new ItemData_1.ItemBase(xinFaBook.ID, 1)];
         }
         return [];
     };
@@ -485,7 +485,7 @@ var UserData = /** @class */ (function () {
         var sellRewards = TableManager_1.tableMgr.Item[id].SellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(function (v) {
-                rewards.push(new Item_1.ItemBase(v.id, v.count * count));
+                rewards.push(new ItemData_1.ItemBase(v.id, v.count * count));
                 if (GameUtil_1.GameUtil.isEquip(v.id))
                     _this.addNewEquip(v.id, v.count * count);
                 else {
@@ -520,7 +520,7 @@ var UserData = /** @class */ (function () {
         this.removeEquip(uid);
         return this.sellItem(equip.id, 1);
     };
-    /** 分解装备 */
+    /** 按星级分解装备 */
     UserData.prototype.decomposeEquip = function (star) {
         var equips = this.equipment;
         var equipCnt = equips.length;
@@ -542,7 +542,7 @@ var UserData = /** @class */ (function () {
             this.addNewEquip(item.SellID, count);
         else
             this.changeItemCount(item.SellID, count);
-        var rewards = [new Item_1.ItemBase(item.SellID, count)];
+        var rewards = [new ItemData_1.ItemBase(item.SellID, count)];
         return rewards;
     };
     /** 添加/取消 收藏 */
@@ -572,7 +572,7 @@ var UserData = /** @class */ (function () {
             default:
                 useCount = count;
                 TableManager_1.tableMgr.Props[id].Rewards.forEach(function (v) {
-                    rewards.push(new Item_1.ItemBase(v.id, v.count * count));
+                    rewards.push(new ItemData_1.ItemBase(v.id, v.count * count));
                     if (GameUtil_1.GameUtil.isEquip(v.id))
                         _this.addNewEquip(v.id, v.count * count);
                     else
@@ -611,7 +611,7 @@ var UserData = /** @class */ (function () {
             useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
         userdata.vigor = MathUtil_1.MathUtil.Clamp(userdata.vigor + singleRecover * useCount, 0, maxVigro);
         this.changeItemCount(id, -useCount);
-        return [new Item_1.ItemBase(1009 /* BaseDataType.Vigor */, subVigro)];
+        return [new ItemData_1.ItemBase(1009 /* BaseDataType.Vigor */, subVigro)];
     };
     /**升级经验 ，没有为0*/
     UserData.prototype.getUpgradeExp = function () {

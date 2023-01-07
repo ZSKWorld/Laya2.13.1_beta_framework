@@ -51,6 +51,8 @@ export class ComShangChengCtrl extends BaseViewCtrl<ComShangChengView, ComShangC
 		this.addMessage(ComShangChengMsg.OnBtnJNClick, this.onBtnJNClick);
 		this.addMessage(ComShangChengMsg.OnBtnQTClick, this.onBtnQTClick);
 		this.addMessage(ComShangChengMsg.OnBtnYRClick, this.onBtnYRClick);
+
+		UIUtility.setList(this.view.ListItem, this, this.listRenderer, this.listClick);
 	}
 
 	override onEnable(): void {
@@ -69,7 +71,7 @@ export class ComShangChengCtrl extends BaseViewCtrl<ComShangChengView, ComShangC
 		this.showFilter = filter;
 		const shop = tableMgr.Shop;
 		this.items = Object.keys(shop).filter((v) => shop[ v ].SellType == type).map((v) => shop[ v ]);
-		UIUtility.setList(this.view.ListItem, this.items.length, this, this.listRenderer, this.listClick);
+		this.view.ListItem.numItems = this.items.length;
 		this.showType != type && this.view.EffectList.play();
 		this.showType = type;
 	}

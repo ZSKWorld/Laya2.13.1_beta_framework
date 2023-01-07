@@ -6,7 +6,6 @@ import { Notifier } from "./Notifier";
  * @author wizardc
  */
 export abstract class Observer extends Notifier {
-    private __interestEventList: { [ key: string ]: Function[] };
 
     public constructor() {
         super();

@@ -33,6 +33,8 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 		this.addMessage(ComWuPinMsg.OnBtnTypeDownClick, this.onBtnTypeDownClick);
 		this.addMessage(ComWuPinMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
 		this.addMessage(ComWuPinMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
+
+		UIUtility.setList(this.view.ListItem, this, this.listRenderer, this.listClick);
 	}
 
 	override onEnable(): void {
@@ -58,7 +60,7 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 		const same = type == null || type == this.showType;
 		this.showType = type ?? this.showType;
 		this.items = this.userData.getItems(this.showType) as any;
-		UIUtility.setList(this.view.ListItem, this.items.length, this, this.listRenderer, this.listClick);
+		this.view.ListItem.numItems = this.items.length;
 		!same && this.view.EffectList.play();
 	}
 
@@ -70,7 +72,7 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 		const data = this.items[ index ];
 		if (this.showType == ItemBagType.Equip) {
 			let equip1 = <Equipment>data;
-			let equip2 = this.userData.getDressedEquip(equip1.part);
+			let equip2 = <Equipment>this.userData.getDressedEquip(equip1.part);
 			this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1, equip2, fromBag: true }, null, false);
 		} else {
 			this.addView<ComItemInfoData>(ViewID.ComItemInfoView, { id: data.id, buy: false }, null, false);

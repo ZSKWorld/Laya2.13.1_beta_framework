@@ -14,6 +14,9 @@ export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
   override onAwake(): void {
     this.addMessage(UIChatMsg.OnBtnSendClick, this.onBtnSendClick);
     this.addMessage(UIChatMsg.OnBtnBackClick, this.onBtnBackClick);
+    
+    UIUtility.setList(this.view.ListFriend, this, this.onFriendListRenderer, this.onFriendListClick);
+    UIUtility.setList(this.view.ListMsg, this, this.onMsgListRenderer);
   }
 
   override onEnable(): void {
@@ -30,11 +33,11 @@ export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
   }
 
   refreshFriendList() {
-    UIUtility.setList(this.view.ListFriend, this.userData.friends.length, this, this.onFriendListRenderer, this.onFriendListClick);
+    this.view.ListFriend.numItems = this.userData.friends.length;
   }
 
   refreshMsgList() {
-    UIUtility.setList(this.view.ListMsg, this._msgs.length, this, this.onMsgListRenderer);
+    this.view.ListMsg.numItems = this._msgs.length;
   }
 
   private onFriendListRenderer(index: number, item: RenderFriendView) {

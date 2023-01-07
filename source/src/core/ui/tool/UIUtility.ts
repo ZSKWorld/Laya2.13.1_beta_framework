@@ -88,7 +88,6 @@ export class UIUtility {
 	 */
 	static setList(
 		list: fgui.GList,
-		numItems: number,
 		caller: any,
 		renderFunc: (index?: number, item?: any) => void,
 		clickFunc?: (item?: any, evt?: Laya.Event, index?: number) => void,
@@ -98,8 +97,6 @@ export class UIUtility {
 		list.itemRenderer?.recover();
 		list.itemRenderer = Laya.Handler.create(caller, renderFunc, null, false);
 		clickFunc && list.on(fgui.Events.CLICK_ITEM, caller, clickFunc);
-		//如果设置setVirtual，numItems必须在itemRenderer之后赋值
-		list.numItems = numItems;
 	}
 
 	/**

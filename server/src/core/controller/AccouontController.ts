@@ -21,11 +21,15 @@ export class AccouontController extends BaseController implements IAccount {
 
     @AddCMD
     login(data: LoginInput): void {
-        if(this.connection.logined) return this.response(data.cmd, null, ErrorCode.USER_LOGINED);
-        let userData = Util.getData(data.account);
-        if (!userData) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
-        else this.connection.userLogin(userData);
-        this.response<LoginOutput>(data.cmd);
+        if (this.connection.logined) {
+            this.response<LoginOutput>(data.cmd);
+            // this.response(data.cmd, null, ErrorCode.USER_LOGINED);
+        } else {
+            let userData = Util.getData(data.account);
+            if (!userData) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
+            else this.connection.userLogin(userData);
+            this.response<LoginOutput>(data.cmd);
+        }
     }
 
     @AddCMD

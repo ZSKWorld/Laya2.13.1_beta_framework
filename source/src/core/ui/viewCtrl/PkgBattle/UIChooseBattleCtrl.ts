@@ -19,6 +19,8 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		this.addMessage(UIChooseBattleMsg.OnBtnBuyTimesClick, this.onBtnBuyTimesClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnSaoDangClick, this.onBtnSaoDangClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnBattleClick, this.onBtnBattleClick);
+
+		UIUtility.setList(this.view.ListBattle, this, this.battleListRender, this.battleListClick);
 	}
 
 	override onEnable(): void {
@@ -46,7 +48,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 			default: this.items ? this.items.length = 0 : this.items = []; break;
 		}
 		itemCfg && (this.items = Object.keys(itemCfg).map((v) => itemCfg[ v ]));
-		UIUtility.setList(this.view.ListBattle, this.items.length, this, this.battleListRender, this.battleListClick);
+		this.view.ListBattle.numItems = this.items.length;
 	}
 
 	private battleListRender(index: number, item: RenderChooseBattleView) {

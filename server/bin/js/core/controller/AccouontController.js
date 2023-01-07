@@ -48,14 +48,18 @@ var AccouontController = /** @class */ (function (_super) {
         }
     };
     AccouontController.prototype.login = function (data) {
-        if (this.connection.logined)
-            return this.response(data.cmd, null, 1008 /* ErrorCode.USER_LOGINED */);
-        var userData = Util_1.Util.getData(data.account);
-        if (!userData)
-            return this.response(data.cmd, null, 1002 /* ErrorCode.USER_NOT_EXIST */);
-        else
-            this.connection.userLogin(userData);
-        this.response(data.cmd);
+        if (this.connection.logined) {
+            this.response(data.cmd);
+            // this.response(data.cmd, null, ErrorCode.USER_LOGINED);
+        }
+        else {
+            var userData = Util_1.Util.getData(data.account);
+            if (!userData)
+                return this.response(data.cmd, null, 1002 /* ErrorCode.USER_NOT_EXIST */);
+            else
+                this.connection.userLogin(userData);
+            this.response(data.cmd);
+        }
     };
     AccouontController.prototype.clearAccount = function (data) {
         var userData = this.connection.userData;

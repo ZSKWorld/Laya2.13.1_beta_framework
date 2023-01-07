@@ -21,6 +21,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _subCtrls: Set<IViewCtrl>;
 	/** 页面消息中心 */
 	private _listener: Laya.EventDispatcher;
+	private __messageMap: { [ name: string ]: Function[] };
 
 	override get isSingleton() { return true; };
 	get view() { return this._view; }
@@ -101,6 +102,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
 		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
 		this._proxy.viewCtrl = this;
+		this.registerMessage();
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
 		eventMgr.registerEvent(this._proxy);
@@ -121,6 +123,26 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _onBackground() {
 		this.onBackground();
 		this._subCtrls?.forEach(v => v._onBackground());
+	}
+
+	private registerMessage() {
+		const { __messageMap: messageMap, _listener: listener } = this;
+		if (messageMap && listener) {
+			for (const messageName in messageMap) {
+				const callbackMap = messageMap[ messageName ];
+				for (const k in callbackMap) {
+					const callback: any = callbackMap[ k ];
+					const param = callback[ messageName ];
+					const once = param ? param.__once : false;
+					const args = param ? param.__args : null;
+					if (once) {
+						listener.once(messageName, this, callback, args);
+					} else {
+						listener.on(messageName, this, callback, args);
+					}
+				}
+			}
+		}
 	}
 }
 windowImmit("BaseViewCtrl", BaseViewCtrl);
@@ -194,4 +216,25 @@ export function InsertMouseEvent(mouseEventType: MouseEvent, once?: boolean) {
 			}
 		}
 	}
+}
+
+export function Message(name: string, once?: boolean, args?: any[]) {
+	return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+		if (!target.__messageMap) target.__messageMap = {};
+		if (!target.__messageMap[ name ]) target.__messageMap[ name ] = [];
+
+		const func = descriptor.value;
+		const list: Function[] = target.__messageMap[ name ];
+		if (list.indexOf(func) == -1) {
+			list.push(func);
+			if (once) {
+				func[ name ] = func[ name ] || {};
+				func[ name ].__once = once;
+			}
+			if (args) {
+				func[ name ] = func[ name ] || {};
+				func[ name ].__args = args;
+			}
+		}
+	};
 }
