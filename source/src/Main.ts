@@ -52,7 +52,7 @@ class Main extends Notifier {
 			[ LogicScene.MainScene, new LogicSceneMain() ],
 			[ LogicScene.GameScene, new LogicSceneGame() ],
 		]);
-		this.dispatch(GameEvent.EnterScene, LogicScene.InitScene);
+		logicSceneMgr.enterScene(LogicScene.InitScene);
 	}
 
 }

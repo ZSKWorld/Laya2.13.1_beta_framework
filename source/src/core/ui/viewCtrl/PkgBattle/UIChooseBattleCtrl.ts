@@ -1,3 +1,4 @@
+import { logicSceneMgr } from "../../../../logicScene/LogicSceneMgr";
 import { LogicScene } from "../../../../logicScene/LogicSceneType";
 import { GameEvent } from "../../../common/GameEvent";
 import { BattleType } from "../../../net/enum/BattleEnums";
@@ -84,7 +85,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private onBtnBackClick(): void {
-		this.dispatch(GameEvent.EnterScene, LogicScene.MainScene);
+		logicSceneMgr.enterScene(LogicScene.MainScene);
 	}
 
 	private onBtnConfirmBgClick(): void {

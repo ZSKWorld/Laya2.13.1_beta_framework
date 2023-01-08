@@ -1,3 +1,4 @@
+import { logicSceneMgr } from "../../../../../logicScene/LogicSceneMgr";
 import { LogicScene } from "../../../../../logicScene/LogicSceneType";
 import { GameEvent } from "../../../../common/GameEvent";
 import { experienceLogMgr } from "../../../../game/ExperienceLogMgr";
@@ -53,7 +54,7 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 	}
 
 	private enterBattle(battleType: BattleType): void {
-		this.dispatch(GameEvent.EnterScene, [ LogicScene.GameScene, battleType ]);
+		logicSceneMgr.enterScene(LogicScene.GameScene, battleType);
 	}
 
 	private onBtnGongLueClick(): void {

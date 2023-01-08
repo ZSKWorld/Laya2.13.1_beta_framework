@@ -1,9 +1,10 @@
 import { KeyEventType, MouseEventType } from "./BaseViewCtrl";
 import { IViewCtrl } from "./Interfaces";
 
+type KeyFunction = { [ keyCode: string ]: Function[] };
 export type DIViewCtrl = IViewCtrl & {
-	__keyEventList?: { [ key in KeyEventType ]?: { [ keyCode: string ]: Function[] } };
-	__mouseEventList?: { [ key in MouseEventType ]?: Function[] },
+	__keyEventList?: { [ key in KeyEventType ]?: KeyFunction } & { [ key: string ]: KeyFunction };
+	__mouseEventList?: { [ key in MouseEventType ]?: Function[] } & KeyFunction,
 }
 
 /** 
@@ -77,22 +78,18 @@ export class ViewCtrlDIExtend {
 		const { __keyEventList: kel, __mouseEventList: mel } = viewCtrl;
 		if (kel) {
 			for (const key in kel) {
-				const eventList: { [ keyCode: string ]: Function[] } = kel[ key ];
+				const eventList = kel[ key ];
 				for (const eventKey in eventList) {
-					if (Object.prototype.hasOwnProperty.call(eventList, eventKey)) {
-						const list: Function[] = eventList[ eventKey ];
-						list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
-					}
+					const list = eventList[ eventKey ];
+					list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
 				}
 			}
 			// Object.values(kl).forEach(v => Object.values(v).forEach(v1 => v1.forEach(v2 => Object.keys(v2).forEach(v3 => v2[v3].__done != null && (v2[v3].__done = false)))));
 		}
 		if (mel) {
 			for (const key in mel) {
-				if (Object.prototype.hasOwnProperty.call(mel, key)) {
-					const list: Function[] = mel[ key ];
-					list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
-				}
+				const list = mel[ key ];
+				list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
 			}
 			// Object.values(ml).forEach(v => v.forEach(v => Object.keys(v).forEach(v1 => v[v1].__done != null && (v[v1].__done = false))));
 		}
@@ -103,7 +100,7 @@ export class ViewCtrlDIExtend {
 		//这里的this是BaseViewCtrl
 		const __keyEventList = (this as unknown as DIViewCtrl).__keyEventList;
 		if (!__keyEventList) return;
-		let eventList: { [ keycode: string ]: Function[] } = __keyEventList[ e.type ];
+		let eventList = __keyEventList[ e.type ];
 		if (!eventList) return;
 		let list = eventList[ e.keyCode ];
 		if (!list) return;
@@ -126,7 +123,7 @@ export class ViewCtrlDIExtend {
 		//这里的this是BaseViewCtrl
 		const __mouseEventList = (this as unknown as DIViewCtrl).__mouseEventList;
 		if (!__mouseEventList) return;
-		const list: Function[] = __mouseEventList[ e.type ];
+		const list = __mouseEventList[ e.type ];
 		if (!list) return;
 
 		let func: Function, _cfg: any, len = list.length;

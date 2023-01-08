@@ -1,3 +1,4 @@
+import { logicSceneMgr } from "../../../../logicScene/LogicSceneMgr";
 import { LogicScene } from "../../../../logicScene/LogicSceneType";
 import { GameEvent } from "../../../common/GameEvent";
 import { Event } from "../../../libs/event/EventMgr";
@@ -15,7 +16,7 @@ export class UILoginMainProxy extends BaseProxy<UILoginMainCtrl>{
         const { TxtAccount, TxtPassword } = this.viewCtrl.view;
         const param = { account: TxtAccount.text, password: TxtPassword.text };
         localData.set(LocalDataKey.LastLoginAccount, param);
-        this.dispatch(GameEvent.EnterScene, LogicScene.MainScene);
+		logicSceneMgr.enterScene(LogicScene.MainScene);
     }
 
     @Event(NetResponse.Response_Register)

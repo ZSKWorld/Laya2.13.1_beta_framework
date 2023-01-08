@@ -143,7 +143,7 @@ class UIManager extends Observer {
 				_openedCtrls.splice(i, 1);
 				viewInst.view.removeFromParent();
 				this._cache.addView(viewInst);
-				break;
+				if (viewId != null) break;
 			}
 		}
 		this.addView2(this.topCtrl, this.topCtrl?.data, false, null);

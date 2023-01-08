@@ -60,29 +60,29 @@ class UserData extends Observer implements IUserData {
     /** 宝石积分 */
     gemScore: number;
     /** 武器 */
-    weapon: IEquipment;
+    weapon: Equipment;
     /** 头盔 */
-    helmet: IEquipment;
+    helmet: Equipment;
     /** 项链 */
-    necklace: IEquipment;
+    necklace: Equipment;
     /** 衣服 */
-    clothes: IEquipment;
+    clothes: Equipment;
     /** 戒指 */
-    ring: IEquipment;
+    ring: Equipment;
     /** 裤子 */
-    trousers: IEquipment;
+    trousers: Equipment;
     /** 护符 */
-    amulet: IEquipment;
+    amulet: Equipment;
     /** 鞋子 */
-    shoes: IEquipment;
+    shoes: Equipment;
     /** 坐骑 */
-    mount: IEquipment;
+    mount: Equipment;
     /** 暗器 */
-    hiddenWeeapon: IEquipment;
+    hiddenWeeapon: Equipment;
     /** 时装 */
-    fashion: IEquipment;
+    fashion: Equipment;
     /** 法宝 */
-    magicWeapon: IEquipment;
+    magicWeapon: Equipment;
     /** 武器上装备的宝石 */
     weaponGems: number[];
     /** 头盔上装备的宝石 */
@@ -116,7 +116,7 @@ class UserData extends Observer implements IUserData {
 
     //#region BagData
     collect: number[];
-    equipment: IEquipment[];
+    equipment: Equipment[];
     gem: IItemBase[];
     prop: IItemBase[];
     material: IItemBase[];

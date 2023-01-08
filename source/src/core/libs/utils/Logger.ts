@@ -7,13 +7,18 @@ const enum LogLevel {
 
 /** 日志打印工具 */
 export class Logger {
+    private static consoleMap = {
+        log:console.log,
+        warn:console.warn,
+        error:console.error,
+    };
     /** 默认日志打印器 */
     private static readonly default = new Logger("Default", true);
     private static loggerMap: { [ name: string ]: Logger } = {};
     /** 是否开启日志打印，全局开关 */
     private static enable: boolean = true;
     /** 各类型日志 字体颜色和背景色 */
-    private static Color: { [ key in LogLevel ]: [ string, string, string ] } = {
+    private static color: { [ key in LogLevel ]: [ string, string, string ] } = {
         [ LogLevel.Log ]: [ "#FFFFFF", "#00AAFF", "#FF0000" ],
         [ LogLevel.Warn ]: [ "#000080", "#FFC900", "#FF0000" ],
         [ LogLevel.Error ]: [ "#FF0000", "#FFC8C8", "#FF0000" ],
@@ -40,7 +45,7 @@ export class Logger {
     private static ProcessingLogParam(type: LogLevel, name: string, ...args: any[]) {
         const borderRadius = 7;
         name += name ? ":" : "";
-        const logParams = [ "%c" + name + type, `color:${ this.Color[ type ][ 0 ] };border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px;background:#66CCFF;padding:5px;` ];
+        const logParams = [ "%c" + name + type, `color:${ this.color[ type ][ 0 ] };border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px;background:#66CCFF;padding:5px;` ];
         const len = args.length;
         let lastIsStr = false;
         let lastStrIndex = 1;
@@ -53,7 +58,7 @@ export class Logger {
             }
             else {
                 logParams[ 0 ] += "%c" + String(msg);
-                logParams.push(`color:${ this.Color[ type ][ 0 ] };padding:5px;background:${ this.Color[ type ][ 1 ] };font-weight:bold;${ lastIsStr ? "border-left:2px solid #ffffff;border-top:1px solid #ffffff;" : "" }`);
+                logParams.push(`color:${ this.color[ type ][ 0 ] };padding:5px;background:${ this.color[ type ][ 1 ] };font-weight:bold;${ lastIsStr ? "border-left:2px solid #ffffff;border-top:1px solid #ffffff;" : "" }`);
                 lastIsStr = true;
                 lastStrIndex = logParams.length - 1;
             }
@@ -72,10 +77,10 @@ export class Logger {
         if (!this.enable) return;
         const logArr = Logger.ProcessingLogParam(type, name, ...args);
         switch (type) {
-            case LogLevel.Log: console.log(...logArr); break;
-            case LogLevel.Warn: console.warn(...logArr); break;
-            case LogLevel.Error: console.error(...logArr); break;
-            case LogLevel.Assert: console.error(...logArr); break;
+            case LogLevel.Log: this.consoleMap.log.call(console, ...logArr); break;
+            case LogLevel.Warn: this.consoleMap.warn.call(console, ...logArr);break;
+            case LogLevel.Error: this.consoleMap.error.call(console, ...logArr);break;
+            case LogLevel.Assert: this.consoleMap.error.call(console, ...logArr);break;
             default: break;
         }
     }
@@ -97,4 +102,7 @@ export class Logger {
     private setEnable(enable: boolean) { this._enable = enable; return this; }
 }
 
-windowImmit("Logger", Logger)
+windowImmit("Logger", Logger);
+console.log = null;
+console.warn = null;
+console.error = null;

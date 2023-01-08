@@ -1,10 +1,14 @@
 import { GameUtil } from "../../../../common/GameUtil";
+import { Logger } from "../../../../libs/utils/Logger";
 import { EquipmentPart } from "../../../../net/enum/ItemEnum";
+import { Equipment } from "../../../../userData/proxy/ItemData";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ViewID } from "../../../core/ViewID";
 import { UIUtility } from "../../../tool/UIUtility";
 import { ComRenWuMsg, ComRenWuView } from "../../../view/PkgMain/Coms/ComRenWuView";
 import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
+
+const logger = Logger.Create("ComRenWuCtrl", true);
 
 export interface ComRenWuData {
 
@@ -40,7 +44,7 @@ export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
 	}
 
 	private showEquipmentInfo(type: EquipmentPart) {
-		let equip1 = this.userData.getDressedEquip(type);
+		let equip1 = this.userData.getDressedEquip(type) as Equipment;
 		if (!equip1) return UIUtility.showTipInfo(GameUtil.getLang(1012));
 		this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1 });
 	}

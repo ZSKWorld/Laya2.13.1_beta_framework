@@ -17,6 +17,8 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _view: V;
 	/** 处理控制器网络回包代理 */
 	private _proxy: IProxy;
+	/** 是否正在显示 */
+	private _isShow: boolean;
 	/** 子页面控制器集合 */
 	private _subCtrls: Set<IViewCtrl>;
 	/** 页面消息中心 */
@@ -25,6 +27,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	override get isSingleton() { return true; };
 	get view() { return this._view; }
+	get isShow() { return this._isShow; }
 	get listener() { return this._listener; }
 
 	/** 添加子页面 */
@@ -61,12 +64,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.offAllCaller(this);
 		eventMgr.offAllCaller(_view);
 		eventMgr.offAllCaller(_proxy);
-		Laya.timer.clearAll(this);
-		Laya.timer.clearAll(_view);
-		Laya.timer.clearAll(_proxy);
-		Laya.Tween.clearAll(this);
-		Laya.Tween.clearAll(_view);
-		Laya.Tween.clearAll(_proxy);
 		Laya.Pool.recoverByClass(_proxy);
 		Laya.Pool.recoverByClass(_listener);
 		ViewCtrlDIExtend.offDeviceEvent(this);
@@ -102,7 +99,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
 		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
 		this._proxy.viewCtrl = this;
-		this.registerMessage();
+		this._registerMessage();
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
 		eventMgr.registerEvent(this._proxy);
@@ -110,36 +107,42 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		this.addMessage(ViewEvent.OnBackground, this._onBackground);
 	}
 
+	/** Laya.Script私有方法重写 */
 	private _onEnable() {
+		this._isShow = true;
 		ViewCtrlDIExtend.registerDeviceEvent(this);
 		super[ "_onEnable" ]();
 	}
 
+	/** Laya.Script私有方法重写 */
+	private _onDisable() {
+		this._isShow = false;
+		super[ "_onDisable" ]();
+	}
+
 	private _onForeground() {
+		if (!this._isShow) return;
 		this.onForeground();
 		this._subCtrls?.forEach(v => v._onForeground());
 	}
 
 	private _onBackground() {
+		if (!this._isShow) return;
 		this.onBackground();
 		this._subCtrls?.forEach(v => v._onBackground());
 	}
 
-	private registerMessage() {
-		const { __messageMap: messageMap, _listener: listener } = this;
-		if (messageMap && listener) {
+	private _registerMessage() {
+		const { __messageMap: messageMap } = this;
+		if (messageMap) {
 			for (const messageName in messageMap) {
 				const callbackMap = messageMap[ messageName ];
 				for (const k in callbackMap) {
-					const callback: any = callbackMap[ k ];
+					const callback = callbackMap[ k ];
 					const param = callback[ messageName ];
 					const once = param ? param.__once : false;
 					const args = param ? param.__args : null;
-					if (once) {
-						listener.once(messageName, this, callback, args);
-					} else {
-						listener.on(messageName, this, callback, args);
-					}
+					this.addMessage(messageName, callback, args, once);
 				}
 			}
 		}

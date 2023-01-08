@@ -1,8 +1,11 @@
 import { Observer } from "../core/libs/event/Observer";
 import { loadMgr } from "../core/libs/load/LoadMgr";
+import { Logger } from "../core/libs/utils/Logger";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";
 import { IScene } from "./ILogicScene";
+
+const logger = Logger.Create("LogicSceneBase", true);
 
 const enum ResGroupType {
 	Normal,
@@ -14,37 +17,54 @@ type LoadViewData = { updateHandler?: Laya.Handler };
 
 /** 逻辑场景基类 */
 export abstract class LogicSceneBase extends Observer implements IScene {
+	views = new Set<ViewID>();
+	/** 场景参数 */
 	protected data: any;
+	/** 加载时显示的load页面id */
 	protected loadViewId: ViewID;
+	/** load页面数据 */
 	private _loadViewData: LoadViewData = {};
-	private _progress1: number;
-	private _progress2: number;
-	private _loadHandler1 = Laya.Handler.create(this, this.onLoadProgress1, null, false);
-	private _loadHandler2 = Laya.Handler.create(this, this.onLoadProgress2, null, false);
+	/**
+	 * 0.非ui资源加载进度
+	 * 1.ui资源加载进度
+	 * 2.缓冲时间进度
+	 */
+	private _progresses = [ 0, 0, 0 ];
+	/** 非ui资源加载进度更新回调 */
+	private _loadHandler1 = Laya.Handler.create(this, this.onLoadProgress, [ 0 ], false);
+	/** ui资源加载进度更新回调 */
+	private _loadHandler2 = Laya.Handler.create(this, this.onLoadProgress, [ 1 ], false);
+	/** 缓冲时间进度更新回调 */
+	private _loadHandler3 = Laya.Handler.create(this, this.updateProgressLater, null, false);
 
 	/** 场景名称 */
 	get name(): string { return this[ "__proto__" ].constructor.name; }
 
 	load() {
 		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.All);
-		this._progress1 = notUIRes.length ? 0 : 1;
-		this._progress2 = uiRes.length ? 0 : 1;
+		this._progresses[ 0 ] = notUIRes.length ? 0 : 1;
+		this._progresses[ 1 ] = uiRes.length ? 0 : 1;
+		this._progresses[ 2 ] = this.loadViewId ? 0 : 1;
 		if (this.loadViewId) uiMgr.addView(this.loadViewId, this._loadViewData, null, false);
-		this.updateLoadProgress();
+		this.updateProgressLater();
 		return Promise.all([
-			this.loadViewId ? new Promise(resolve => Laya.timer.once(1000, null, resolve)) : null,
+			//加个最短时间，避免load页太快消失
+			this.loadViewId ? new Promise(resolve => Laya.Tween.to(this._progresses, { 2: 1 }, 1000, null, Laya.Handler.create(null, resolve), 0, true).update = this._loadHandler3) : null,
 			loadMgr.create(notUIRes, null, this._loadHandler1),
 			loadMgr.loadPackage(uiRes, null, this._loadHandler2),
 		]).then(
-			() => Promise.resolve(),
-			() => Promise.reject<void>(this.exit())
+			() => {
+				this._loadViewData.updateHandler = null;
+				uiMgr.removeAllView();
+			},
+			() => {
+				return Promise.reject<void>();
+			}
 		);
 	}
 
 	enter(data: any): void {
 		this.data = data;
-		this._loadViewData.updateHandler = null;
-		uiMgr.removeAllView();
 		this.onEnter();
 	}
 
@@ -57,7 +77,10 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 		//卸载资源
 		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.Normal);
 		notUIRes.forEach(v => Laya.loader.clearRes(v));
-		uiRes.forEach(v => fgui.UIPackage.getById(v).unloadAssets());
+		uiRes.forEach(v => {
+			const res = fgui.UIPackage.getById(v);
+			res?.unloadAssets();
+		});
 
 	}
 
@@ -73,20 +96,21 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 	/** 退出场景时执行 */
 	protected abstract onExit(): void;
 
-	private onLoadProgress1(progress: number) {
-		this._progress1 = progress;
-		this.updateLoadProgress();
+	private onLoadProgress(index: number, progress: number) {
+		this._progresses[ index ] = progress;
+		this.updateProgressLater();
 	}
-	private onLoadProgress2(progress: number) {
-		this._progress2 = progress;
-		this.updateLoadProgress();
+
+	private updateProgressLater() {
+		Laya.timer.callLater(this, this.updateLoadProgress);
 	}
 
 	private updateLoadProgress() {
 		if (this._loadViewData.updateHandler)
-			this._loadViewData.updateHandler.runWith((this._progress1 + this._progress2) / 2);
+			this._loadViewData.updateHandler.runWith(this._progresses.reduce((pv, cv) => pv + cv, 0) / this._progresses.length);
 	}
 
+	/** 获取资源数组 */
 	private getResGroup(groupType: ResGroupType): [ string[], string[] ] {
 		const notUIRes: string[] = [];
 		const uiRes: string[] = [];

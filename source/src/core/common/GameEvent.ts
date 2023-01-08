@@ -1,5 +1,3 @@
-import { LogicScene } from "../../logicScene/LogicSceneType";
-
 export const enum GameEvent {
 	/**
 	 * 网络消息错误
@@ -11,12 +9,6 @@ export const enum GameEvent {
 	/** socket关闭 */
 	SocketClosed = "SocketClosed",
 
-	/**
-	 * 切换场景
-	 * @param sceneType 场景类型 {@link LogicScene}
-	 * @param data 场景数据{@link Object }
-	 */
-	EnterScene = "EnterScene",
 	/**
 	 * 添加历练日志
 	 * @param log string

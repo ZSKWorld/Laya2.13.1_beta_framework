@@ -20,6 +20,13 @@ export class ViewExtend {
 		prototype.removeAllView = function () { uiMgr.removeAllView(); };
 		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); };
 		prototype.removeSelf = function () { uiMgr.removeView((<IView>this).viewId); };
+		prototype.showOpenAni = function () {
+			return new Promise(resolve => resolve());
+		};
+		prototype.showCloseAni = function () {
+			return new Promise(resolve => resolve());
+		};
+
 		prototype.initView = function (viewInst) {
 			viewInst = viewInst || this;
 			let viewCtrl: IViewCtrl;
@@ -51,5 +58,11 @@ export class ViewExtend {
 		prototype.removeAllView = function () { uiMgr.removeAllView(); };
 		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); };
 		prototype.removeSelf = function () { uiMgr.removeView((<IViewCtrl>this).view.viewId); };
+		prototype.showOpenAni = function () {
+			return new Promise(resolve => resolve());
+		};
+		prototype.showCloseAni = function () {
+			return new Promise(resolve => resolve());
+		};
 	}
 }

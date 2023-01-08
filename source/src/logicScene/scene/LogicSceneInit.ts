@@ -12,6 +12,7 @@ import { ViewID } from "../../core/ui/core/ViewID";
 import { uiRegister } from "../../core/ui/core/ViewRegister";
 import { UIUtility } from "../../core/ui/tool/UIUtility";
 import { LogicSceneBase } from "../LogicSceneBase";
+import { logicSceneMgr } from "../LogicSceneMgr";
 import { LogicScene } from "../LogicSceneType";
 
 /** 初始化逻辑场景 */
@@ -37,7 +38,7 @@ export class LogicSceneInit extends LogicSceneBase {
 			CustomSpriteManager.init();
 			LogicSceneInit.inited = true;
 		}
-		this.dispatch(GameEvent.EnterScene, LogicScene.LoginScene);
+		logicSceneMgr.enterScene(LogicScene.LoginScene);
 	}
 
 	protected onExit(): void {
@@ -54,7 +55,7 @@ export class LogicSceneInit extends LogicSceneBase {
 	private netMsgError(msg: UserOutput) {
 		UIUtility.showTipInfo(tableMgr.Error[ msg.error ].text);
 		if (msg.error == ErrorCode.NOT_LOGIN)
-			this.dispatch(GameEvent.EnterScene, LogicScene.LoginScene);
+			logicSceneMgr.enterScene(LogicScene.LoginScene);
 	}
 
 }

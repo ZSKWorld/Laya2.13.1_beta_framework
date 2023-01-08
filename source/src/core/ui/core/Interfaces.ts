@@ -40,15 +40,18 @@ export interface GComponentExtend {
 }
 
 /**开放给页面和控制器的页面方法 */
-interface IViewMethod extends GComponentExtend {
+interface IViewExtend extends GComponentExtend {
+	readonly viewId?: ViewID;
+	userData?: UserDataType;
 
 	/** 移除当前页面 */
 	removeSelf?(): void;
-}
 
-interface IViewCommon {
-	readonly viewId?: ViewID;
-	userData?: UserDataType;
+	/** 打开动画 */
+	showOpenAni?(): Promise<void>;
+
+	/** 关闭动画 */
+	showCloseAni?(): Promise<void>;
 }
 
 /**页面实例类型 */
@@ -62,7 +65,7 @@ export interface IView_Class {
 };
 
 /**页面扩展 */
-export interface ViewExtension extends IViewMethod, IViewCommon {
+export interface ViewExtension extends IViewExtend {
 	readonly layer?: Layer;
 	readonly CtrlClass?: IViewCtrl_Class;
 	listener?: Laya.EventDispatcher;
@@ -87,7 +90,7 @@ export type IViewCtrl = BaseViewCtrl & ViewCtrlExtension;
 export type IViewCtrl_Class = Class<IViewCtrl>;
 
 /**页面控制器扩展 */
-export interface ViewCtrlExtension extends IViewMethod, IViewCommon {
+export interface ViewCtrlExtension extends IViewExtend {
 	readonly ProxyClass?: IProxy_Class;
 };
 

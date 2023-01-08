@@ -1,7 +1,6 @@
-import { GameEvent } from "../core/common/GameEvent";
-import { Event } from "../core/libs/event/EventMgr";
 import { Observer } from "../core/libs/event/Observer";
 import { Logger } from "../core/libs/utils/Logger";
+import { ViewID } from "../core/ui/core/ViewID";
 import { IScene } from "./ILogicScene";
 import { LogicScene } from "./LogicSceneType";
 
@@ -11,7 +10,7 @@ const logger = Logger.Create("LogicSceneMgr", true);
 class LogicSceneMgr extends Observer {
 	private _currentType: LogicScene;
 	private _currentScene: IScene;
-	private _enterCompleted: boolean = true;
+	private _loadCompleted: boolean = true;
 	private _sceneMap: Map<LogicScene, IScene>;
 
 	init(sceneMap: [ LogicScene, IScene ][]) {
@@ -19,27 +18,33 @@ class LogicSceneMgr extends Observer {
 			this._sceneMap = new Map(sceneMap);
 	}
 
-	@Event(GameEvent.EnterScene)
-	private enterScene(type: LogicScene, data?: any) {
-		if (!this._enterCompleted) return;
+	registerSceneView(type:LogicScene, view:ViewID) {
+		const scene = this._sceneMap.get(type);
+		if (scene) scene.views.add(view);
+	}
+
+	enterScene(type: LogicScene, data?: any) {
+		if (!this._loadCompleted) return;
 		if (this._currentType != type) {
-			this._enterCompleted = false;
+			this._loadCompleted = false;
 			const newScene = this._sceneMap.get(type);
 			newScene.load().then(() => {
 				this._currentType = type;
 				this._currentScene?.exit();
 				this._currentScene = newScene;
-				this._enterCompleted = true;
+				this._loadCompleted = true;
 				this._currentScene.enter(data);
-				Laya.Resource.destroyUnusedResources();
+				// Laya.Resource.destroyUnusedResources();
 			}, () => {
-				this._enterCompleted = true;
-				if (confirm(`场景 ${ type } 加载失败，是否重试?`))
+				this._loadCompleted = true;
+				if (confirm(`${ type } 场景加载失败，是否重试?`))
 					this.enterScene(type, data);
+				else
+					newScene.exit();
 			});
 		}
 	}
 }
 
-export const logicSceneMgr = new LogicSceneMgr()
+export const logicSceneMgr = new LogicSceneMgr();
 windowImmit("logicSceneMgr", logicSceneMgr);
