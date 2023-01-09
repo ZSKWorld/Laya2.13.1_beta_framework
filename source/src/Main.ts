@@ -1,6 +1,6 @@
-import { GameEvent } from "./core/common/GameEvent";
 import { ResPath } from "./core/common/ResPath";
 import { Notifier } from "./core/libs/event/Notifier";
+import { Logger } from "./core/libs/utils/Logger";
 import { FixEngine } from "./FixEngine";
 import GameConfig from "./GameConfig";
 import { logicSceneMgr } from "./logicScene/LogicSceneMgr";
@@ -9,6 +9,8 @@ import { LogicSceneGame } from "./logicScene/scene/LogicSceneGame";
 import { LogicSceneInit } from "./logicScene/scene/LogicSceneInit";
 import { LogicSceneLogin } from "./logicScene/scene/LogicSceneLogin";
 import { LogicSceneMain } from "./logicScene/scene/LogicSceneMain";
+
+const logger = Logger.Create("Main", true);
 
 class Main extends Notifier {
 	constructor() {
@@ -59,5 +61,3 @@ class Main extends Notifier {
 
 //激活启动类
 new Main();
-
-
