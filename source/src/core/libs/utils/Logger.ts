@@ -103,6 +103,3 @@ export class Logger {
 }
 
 windowImmit("Logger", Logger);
-console.log = null;
-console.warn = null;
-console.error = null;

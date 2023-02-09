@@ -12,9 +12,9 @@ export class FixEngine {
 		this.AddGUIObjectEventLockable();
 		this.FixLayaPoolSign();
 		// this.AddComponentNetConnect();
-		this.ClearEventDispatcherHandler();
 		this.PlayTransitionAction();
 		this.FixGUIInputSingleLine();
+		this.FixGUILoadPackgeProgressError();
 	}
 
 	/**修复GUI粗体不生效 */
@@ -195,51 +195,6 @@ export class FixEngine {
 		}
 	}
 
-	/** 定量清理注册事件数组中空元素 */
-	private static ClearEventDispatcherHandler() {
-		const prototype = Laya.EventDispatcher.prototype;
-		prototype.off = function (type: string, caller: any, listener: Function, onceOnly?: boolean) {
-			if (!this._events || !this._events[ type ])
-				return this;
-			var listeners = this._events[ type ];
-			if (listeners != null) {
-				if (listeners.run) {
-					if ((!caller || listeners.caller === caller) && (listener == null || listeners.method === listener) && (!onceOnly || listeners.once)) {
-						delete this._events[ type ];
-						listeners.recover();
-					}
-				}
-				else {
-					var count = 0;
-					for (var i = 0, n = listeners.length; i < n; i++) {
-						var item = listeners[ i ];
-						if (!item) {
-							count++;
-							continue;
-						}
-						if (item && (!caller || item.caller === caller) && (listener == null || item.method === listener) && (!onceOnly || item.once)) {
-							count++;
-							listeners[ i ] = null;
-							item.recover();
-						}
-					}
-					if (count === n)
-						delete this._events[ type ];
-					else if (count > 1000) {
-						const temp = [];
-						for (var i = 0, n = listeners.length; i < n; i++) {
-							var item = listeners[ i ];
-							if (item) temp.push(item);
-						}
-						listeners.length = 0;
-						this._events[ type ] = temp;
-					}
-				}
-			}
-			return this;
-		}
-	}
-
 	/** 修改控制器动效播放机制为每次都从头播放 */
 	private static PlayTransitionAction() {
 		const prototype = fgui.PlayTransitionAction.prototype;
@@ -263,6 +218,90 @@ export class FixEngine {
 				this._input.wordWrap = !v;
 			}
 		});
+	}
+
+	private static FixGUILoadPackgeProgressError() {
+		const UIPackage:any = fgui.UIPackage;
+		UIPackage.loadPackage =  function(resKey, completeHandler, progressHandler) {
+            let loadKeyArr = [];
+            let keys = [];
+            let i;
+            if (Array.isArray(resKey)) {
+                for (i = 0; i < resKey.length; i++) {
+                    loadKeyArr.push({ url: resKey[i] + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER });
+                    keys.push(resKey[i]);
+                }
+            }
+            else {
+                loadKeyArr = [{ url: resKey + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER }];
+                keys = [resKey];
+            }
+            let pkgArr = [];
+            let pkg;
+            for (i = 0; i < loadKeyArr.length; i++) {
+                pkg = UIPackage._instById[keys[i]];
+                if (pkg) {
+                    pkgArr.push(pkg);
+                    loadKeyArr.splice(i, 1);
+                    keys.splice(i, 1);
+                    i--;
+                }
+            }
+			if (loadKeyArr.length == 0) {
+				progressHandler && progressHandler.runWith(1);
+                completeHandler.runWith([pkgArr]);
+                return;
+            }
+            var descCompleteHandler = Laya.Handler.create(this, function () {
+                let pkg;
+                let urls = [];
+                for (i = 0; i < loadKeyArr.length; i++) {
+                    let asset = fgui.AssetProxy.inst.getRes(loadKeyArr[i].url);
+                    if (asset) {
+                        pkg = new UIPackage();
+                        pkgArr.push(pkg);
+                        pkg._resKey = keys[i];
+                        pkg.loadPackage(new fgui.ByteBuffer(asset));
+                        let cnt = pkg._items.length;
+                        for (let j = 0; j < cnt; j++) {
+                            let pi = pkg._items[j];
+                            if (pi.type == fgui.PackageItemType.Atlas) {
+                                urls.push({ url: pi.file, type: Laya.Loader.IMAGE });
+                            }
+                            else if (pi.type == fgui.PackageItemType.Sound) {
+                                urls.push({ url: pi.file, type: Laya.Loader.SOUND });
+                            }
+                        }
+                    }
+                }
+                if (urls.length > 0) {
+                    fgui.AssetProxy.inst.load(urls, Laya.Handler.create(this, function () {
+                        for (i = 0; i < pkgArr.length; i++) {
+                            pkg = pkgArr[i];
+                            if (!UIPackage._instById[pkg.id]) {
+                                UIPackage._instById[pkg.id] = pkg;
+                                UIPackage._instByName[pkg.name] = pkg;
+                                UIPackage._instById[pkg._resKey] = pkg;
+                            }
+                        }
+                        completeHandler.runWith([pkgArr]);
+                    }, null, true), progressHandler);
+                }
+                else {
+                    for (i = 0; i < pkgArr.length; i++) {
+                        pkg = pkgArr[i];
+                        if (!UIPackage._instById[pkg.id]) {
+                            UIPackage._instById[pkg.id] = pkg;
+                            UIPackage._instByName[pkg.name] = pkg;
+                            UIPackage._instById[pkg._resKey] = pkg;
+                        }
+                    }
+					progressHandler && progressHandler.runWith(1);
+                    completeHandler.runWith([pkgArr]);
+                }
+            }, null, true);
+            fgui.AssetProxy.inst.load(loadKeyArr, descCompleteHandler, null, Laya.Loader.BUFFER);
+        }
 	}
 }
 

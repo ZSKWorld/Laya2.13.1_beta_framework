@@ -43,7 +43,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 			if (offline) {
 				offlineConfirmTxt.combineBreak(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`)
 					.combineBreak(`获得精力${ offline.vigor }点`);
-				UIUtility.showConfirm(offlineConfirmTxt.getStr());
+				Laya.timer.frameOnce(1, UIUtility, UIUtility.showConfirm, [ offlineConfirmTxt.getStr() ]);
 			}
 			txt.combineBreak(offlineConfirmTxt.end());
 			const battleSpeed = localData.get(LocalDataKey.BattleSpeed) || 1;

@@ -49,7 +49,7 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 		this.updateProgressLater();
 		return Promise.all([
 			//加个最短时间，避免load页太快消失
-			this.loadViewId ? new Promise(resolve => Laya.Tween.to(this._progresses, { 2: 1 }, 1000, null, Laya.Handler.create(null, resolve), 0, true).update = this._loadHandler3) : null,
+			this.loadViewId ? new Promise(resolve => Laya.Tween.to(this._progresses, { 2: 1 }, 500, null, Laya.Handler.create(null, resolve), 0, true).update = this._loadHandler3) : null,
 			loadMgr.create(notUIRes, null, this._loadHandler1),
 			loadMgr.loadPackage(uiRes, null, this._loadHandler2),
 		]).then(
@@ -106,8 +106,9 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 	}
 
 	private updateLoadProgress() {
-		if (this._loadViewData.updateHandler)
+		if (this._loadViewData.updateHandler) {
 			this._loadViewData.updateHandler.runWith(this._progresses.reduce((pv, cv) => pv + cv, 0) / this._progresses.length);
+		}
 	}
 
 	/** 获取资源数组 */

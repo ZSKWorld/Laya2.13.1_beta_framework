@@ -160,11 +160,8 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
             }
         });
         this.lastLoginTime = TimeUtil.getTimeStamp();
-        this.offline = this.getOffline();
+        this.offline = GameUtil.getOffline(this);
     }
-
-    /** 获取离线数据 */
-    getOffline(): IOffline { return GameUtil.getOffline(this); }
 
     save() {
         this.offline = null;
