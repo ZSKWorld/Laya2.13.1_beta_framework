@@ -26,14 +26,10 @@ class WebSocket extends Observer {
     }
 
     sendMsg(msg: UserInput): void {
-        if (this._current && msg.cmd == this._current.cmd) return;
-        const waitList = this._waitList;
-        if (waitList.length > 0) {
-            for (let i = waitList.length - 1; i >= 0; i--) {
-                if (waitList[ i ].cmd == msg.cmd) return;
-            }
-        }
-        this._waitList.push(msg);
+        const { _current, _waitList } = this;
+        if (_current && msg.cmd == _current.cmd) return;
+        if (_waitList.length && _waitList.find(v => v.cmd == msg.cmd)) return;
+        _waitList.push(msg);
         this.executeWaitMsg();
     }
 
@@ -45,7 +41,8 @@ class WebSocket extends Observer {
     private onSocketMessage(message: string): void {
         let msg: UserOutput = JSON.parse(message);
         if (msg && !msg.error) {
-            if (msg.syncInfo) this.dispatch(NetResponse.Response_SyncInfo, msg.syncInfo);
+            if (msg.syncInfo)
+                this.dispatch(NetResponse.Response_SyncInfo, msg.syncInfo);
             if (this._current && this._current.cmd == msg.cmd) {
                 msg = Object.assign(msg, this._current);
                 this._current = null;

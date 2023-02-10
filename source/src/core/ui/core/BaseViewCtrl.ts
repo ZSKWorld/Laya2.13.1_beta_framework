@@ -19,11 +19,14 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _proxy: IProxy;
 	/** 是否正在显示 */
 	private _isShow: boolean;
+	/** 父页面控制器 */
+	private _parent: IViewCtrl;
 	/** 子页面控制器集合 */
-	private _subCtrls: Set<IViewCtrl>;
+	private _children: Set<IViewCtrl>;
 	/** 页面消息中心 */
 	private _listener: Laya.EventDispatcher;
-	private __messageMap: { [ name: string ]: Function[] };
+	/** 页面消息映射 */
+	private __messageMap: KeyMap<Function[]>;
 
 	override get isSingleton() { return true; };
 	get view() { return this._view; }
@@ -32,10 +35,17 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	/** 添加子页面 */
 	addChildCtrl(child: IViewCtrl) {
-		if (!this._subCtrls)
-			this._subCtrls = new Set<IViewCtrl>();
-		child._listener = this._listener;
-		this._subCtrls.add(child);
+		let { _children } = this;
+		if (!_children)
+			_children = this._children = new Set<IViewCtrl>();
+		if (_children.has(child) == false) {
+			child._parent = this;
+			//TODO child的_listener重置后_onAdded里注册的message会丢失，待修复
+			if (child._listener)
+				Laya.Pool.recoverByClass(child._listener.offAll());
+			child._listener = this._listener;
+			_children.add(child);
+		}
 	}
 
 	/** 发送页面事件 */
@@ -53,14 +63,15 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	}
 
 	override onReset() {
-		const { _view, _listener, _subCtrls, _proxy } = this;
+		const { _view, _listener, _children, _proxy } = this;
 		_listener?.offAll();
-		_subCtrls?.clear();
+		_children?.clear();
 		_proxy?.destroy();
 		this.data = null;
 		this._view = null;
 		this._listener = null;
 		this._proxy = null;
+		this._parent = null;
 		eventMgr.offAllCaller(this);
 		eventMgr.offAllCaller(_view);
 		eventMgr.offAllCaller(_proxy);
@@ -123,13 +134,13 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _onForeground() {
 		if (!this._isShow) return;
 		this.onForeground();
-		this._subCtrls?.forEach(v => v._onForeground());
+		this._children?.forEach(v => v._onForeground());
 	}
 
 	private _onBackground() {
 		if (!this._isShow) return;
 		this.onBackground();
-		this._subCtrls?.forEach(v => v._onBackground());
+		this._children?.forEach(v => v._onBackground());
 	}
 
 	private _registerMessage() {
