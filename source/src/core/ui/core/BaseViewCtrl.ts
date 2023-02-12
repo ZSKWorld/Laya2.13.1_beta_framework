@@ -108,6 +108,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		this._children?.forEach(v => v._onBackground());
 	}
 
+	/** 注册装饰器页面消息 */
 	private _registerMessage() {
 		const { __messageMap: messageMap } = this;
 		if (messageMap) {
