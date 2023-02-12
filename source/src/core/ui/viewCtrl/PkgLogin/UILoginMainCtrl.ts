@@ -1,7 +1,7 @@
 import { localData } from "../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../libs/localData/LocalDataKey";
 import { AccountService } from "../../../net/Services";
-import { BaseViewCtrl, Message } from "../../core/BaseViewCtrl";
+import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UIUtility } from "../../tool/UIUtility";
 import { UILoginMainMsg, UILoginMainView } from "../../view/PkgLogin/UILoginMainView";
 

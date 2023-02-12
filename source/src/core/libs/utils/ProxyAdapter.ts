@@ -3,7 +3,7 @@
  * 模拟Proxy
  */
 type proxyHandle = { get(target: any, key: string): any };
-export function ProxyAdapter(target: { [ key: string ]: undefined }, handle: proxyHandle) {
+export function ProxyAdapter(target: KeyMap<any>, handle: proxyHandle) {
     const proxyObj: any = { ...target };
     Object.keys(proxyObj).forEach((key) => {
         Object.defineProperty(proxyObj, key, {

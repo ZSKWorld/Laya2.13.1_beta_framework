@@ -12,12 +12,6 @@ export const enum ViewEvent {
 }
 
 export interface GComponentExtend {
-
-	/**派发全局事件 */
-	dispatch?(eventName: string, data?: any): void;
-
-	/** 派发页面消息 */
-	sendMessage?(type: string, data?: any): void;
 	/**
 	 * 打开页面
 	 * @param viewId {@link ViewID} 页面id
@@ -43,6 +37,15 @@ export interface GComponentExtend {
 interface IViewExtend extends GComponentExtend {
 	readonly viewId?: ViewID;
 	userData?: UserDataType;
+
+	/**派发全局事件 */
+	dispatch?(eventName: string, data?: any): void;
+
+	/** 添加页面消息监听 */
+	addMessage?(type: string, callback: Function, args?: any[], once?: boolean): void;
+
+	/** 派发页面消息 */
+	sendMessage?(type: string, data?: any): void;
 
 	/** 移除当前页面 */
 	removeSelf?(): void;
@@ -91,7 +94,19 @@ export type IViewCtrl_Class = Class<IViewCtrl>;
 
 /**页面控制器扩展 */
 export interface ViewCtrlExtension extends IViewExtend {
-	readonly ProxyClass?: IProxy_Class;
+	readonly ProxyClass: IProxy_Class;
+
+	/** 
+	 * 每次面板前置调用该方法，onEnable之后调用。
+	 * 该方法为虚方法，使用时重写即可
+	 */
+	onForeground(): void;
+
+	/** 
+	 * 每次面板后置调用该方法，onDisable之后调用。
+	 * 该方法为虚方法，使用时重写即可
+	 */
+	onBackground(): void;
 };
 
 export type IProxy = BaseProxy;

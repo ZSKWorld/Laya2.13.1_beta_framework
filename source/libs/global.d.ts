@@ -1,3 +1,5 @@
+
+declare interface KeyMap<T> { [ key: string ]: T; }
 declare type Class<T> = new (...args: any) => T;
 
 declare type RealReadonly<T> = { readonly [ P in keyof T ]: RealReadonly<T[ P ]>; };
@@ -13,6 +15,13 @@ declare type RecycleMethod = { onRecycle?(): void, onReuse?(): void };
 declare type Recyclable<T> = T & Recycle;
 
 declare namespace Laya {
+    interface Script {
+		/**
+		 * 组件被挂载后执行，此方法只执行一次
+		 * 此方法为虚方法，使用时重写覆盖即可
+		 */
+        onAdded(): void;
+    }
     interface Vector2 {
         get length(): number;
         get lengthSquared(): number;
@@ -40,10 +49,10 @@ declare namespace fgui {
         getComponent<T extends Laya.Component>(componentType: new () => T): T;
 
         getComponents<T extends Laya.Component>(componentType: new () => T): T[];
-        event(type:string,data?:any):boolean;
-        once(type:string,caller:any,listener:Function,args?:any[]):Laya.EventDispatcher;
-        offAll(type?:string):Laya.EventDispatcher;
-        offAllCaller(caller:any):Laya.EventDispatcher;
+        event(type: string, data?: any): boolean;
+        once(type: string, caller: any, listener: Function, args?: any[]): Laya.EventDispatcher;
+        offAll(type?: string): Laya.EventDispatcher;
+        offAllCaller(caller: any): Laya.EventDispatcher;
 
         /**
          * 给当前GObject添加用on注册的事件锁，为空则为全局锁。

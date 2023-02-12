@@ -13,19 +13,24 @@ export class ViewExtend {
 
 	private static fguiGComponentExtend() {
 		let prototype = fgui.GComponent.prototype as IView;
-		prototype.sendMessage = function (type, data) { (<IView>this).listener.event(type, data); };
-		prototype.dispatch = function (type, data) { eventMgr.event(type, data); };
-		prototype.addView = function (viewId, data, callback, hideTop) { uiMgr.addView(viewId, data, callback, hideTop); };
-		prototype.removeTopView = function () { uiMgr.removeTopView(); };
-		prototype.removeAllView = function () { uiMgr.removeAllView(); };
-		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); };
-		prototype.removeSelf = function () { uiMgr.removeView((<IView>this).viewId); };
+		prototype.dispatch = function (type, data) { eventMgr.event(type, data); }
+		prototype.sendMessage = function (type, data) { (<IView>this).listener.event(type, data); }
+		prototype.addMessage = function (type: string, callback: Function, args?: any[], once?: boolean) {
+			const _this = this as IView;
+			if (once) _this.listener.once(type, _this, callback, args);
+			else _this.listener.on(type, _this, callback, args);
+		}
+		prototype.addView = function (viewId, data, callback, hideTop) { uiMgr.addView(viewId, data, callback, hideTop); }
+		prototype.removeTopView = function () { uiMgr.removeTopView(); }
+		prototype.removeAllView = function () { uiMgr.removeAllView(); }
+		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); }
+		prototype.removeSelf = function () { uiMgr.removeView((<IView>this).viewId); }
 		prototype.showOpenAni = function () {
-			return new Promise(resolve => resolve());
-		};
+			return Promise.resolve();
+		}
 		prototype.showCloseAni = function () {
-			return new Promise(resolve => resolve());
-		};
+			return Promise.resolve();
+		}
 
 		prototype.initView = function (viewInst) {
 			viewInst = viewInst || this;
@@ -41,7 +46,7 @@ export class ViewExtend {
 			viewInst.userData = userData;
 			viewInst.onCreate?.();
 			return viewCtrl;
-		};
+		}
 		const oldDispose = prototype.dispose;
 		prototype.dispose = function () {
 			oldDispose.call(this);
@@ -53,16 +58,25 @@ export class ViewExtend {
 
 	private static baseCtrlExtend() {
 		let prototype = BaseViewCtrl.prototype as IViewCtrl;
-		prototype.addView = function (viewId, data, callback, hideTop) { uiMgr.addView(viewId, data, callback, hideTop); };
-		prototype.removeTopView = function () { uiMgr.removeTopView(); };
-		prototype.removeAllView = function () { uiMgr.removeAllView(); };
-		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); };
-		prototype.removeSelf = function () { uiMgr.removeView((<IViewCtrl>this).view.viewId); };
+		prototype.dispatch = function (type, data) { eventMgr.event(type, data); }
+		prototype.addMessage = function (type: string, callback: Function, args?: any[], once?: boolean) {
+			const _this = this as IViewCtrl;
+			if (once) _this.listener.once(type, _this, callback, args);
+			else _this.listener.on(type, _this, callback, args);
+		}
+		prototype.sendMessage = function (type, data) { (<IViewCtrl>this).listener.event(type, data); }
+		prototype.onForeground = function () { }
+		prototype.onBackground = function () { }
+		prototype.addView = function (viewId, data, callback, hideTop) { uiMgr.addView(viewId, data, callback, hideTop); }
+		prototype.removeTopView = function () { uiMgr.removeTopView(); }
+		prototype.removeAllView = function () { uiMgr.removeAllView(); }
+		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); }
+		prototype.removeSelf = function () { uiMgr.removeView((<IViewCtrl>this).view.viewId); }
 		prototype.showOpenAni = function () {
-			return new Promise(resolve => resolve());
-		};
+			return Promise.resolve();
+		}
 		prototype.showCloseAni = function () {
-			return new Promise(resolve => resolve());
-		};
+			return Promise.resolve();
+		}
 	}
 }

@@ -25,41 +25,44 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _children: Set<IViewCtrl>;
 	/** 页面消息中心 */
 	private _listener: Laya.EventDispatcher;
-	/** 页面消息映射 */
+	/** 页面装饰器注册的消息映射 */
 	private __messageMap: KeyMap<Function[]>;
 
-	override get isSingleton() { return true; };
+	override get isSingleton() { return true; }
 	get view() { return this._view; }
+	get parent() { return this._parent; }
 	get isShow() { return this._isShow; }
 	get listener() { return this._listener; }
 
 	/** 添加子页面 */
 	addChildCtrl(child: IViewCtrl) {
-		let { _children } = this;
-		if (!_children)
-			_children = this._children = new Set<IViewCtrl>();
-		if (_children.has(child) == false) {
+		if (child === this) return;
+		let { _children: children } = this;
+		if (!children)
+			children = this._children = new Set<IViewCtrl>();
+		if (children.has(child) == false) {
 			child._parent = this;
-			//TODO child的_listener重置后_onAdded里注册的message会丢失，待修复
-			if (child._listener)
-				Laya.Pool.recoverByClass(child._listener.offAll());
+			if (child._listener) {
+				Laya.Pool.recoverByClass(child._listener.offAllCaller(child));
+			}
 			child._listener = this._listener;
-			_children.add(child);
+			child._registerMessage();
+			children.add(child);
 		}
 	}
 
-	/** 发送页面事件 */
-	override sendMessage(type: string, data?: any) {
-		this._listener.event(type, data);
-	}
-
-	/**
-	 * 封装一个派发全局事件的接口，避免eventMgr过度引用
-	 * @param eventName 事件名称
-	 * @param data 参数
-	 */
-	override dispatch(eventName: string, data?: any) {
-		eventMgr.event(eventName, data);
+	override onAdded() {
+		this._view = this.owner[ "$owner" ];
+		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
+		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
+		this._proxy.viewCtrl = this;
+		this._registerMessage();
+		eventMgr.registerEvent(this);
+		eventMgr.registerEvent(this._view);
+		eventMgr.registerEvent(this._proxy);
+		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
+		this.addMessage(ViewEvent.OnForeground, this._onForeground);
+		this.addMessage(ViewEvent.OnBackground, this._onBackground);
 	}
 
 	override onReset() {
@@ -78,44 +81,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		Laya.Pool.recoverByClass(_proxy);
 		Laya.Pool.recoverByClass(_listener);
 		ViewCtrlDIExtend.offDeviceEvent(this);
-	}
-
-	/**
-	 * 添加页面消息监听
-	 * @param type 消息类型
-	 * @param callback 回调函数
-	 * @param args 参数
-	 * @param once 是否只执行一次，默认 false
-	 */
-	protected addMessage(type: string, callback: Function, args?: any[], once?: boolean) {
-		if (once) this._listener.once(type, this, callback, args);
-		else this._listener.on(type, this, callback, args);
-	}
-
-	/** 
-	 * 每次面板前置调用该方法，onEnable之后调用。
-	 * 该方法为虚方法，使用时重写即可
-	 */
-	protected onForeground(): void { }
-
-	/** 
-	 * 每次面板后置调用该方法，onDisable之后调用。
-	 * 该方法为虚方法，使用时重写即可
-	 */
-	protected onBackground(): void { }
-
-	/** Laya.Script私有方法重写 */
-	private _onAdded() {
-		this._view = this.owner[ "$owner" ];
-		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
-		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
-		this._proxy.viewCtrl = this;
-		this._registerMessage();
-		eventMgr.registerEvent(this);
-		eventMgr.registerEvent(this._view);
-		eventMgr.registerEvent(this._proxy);
-		this.addMessage(ViewEvent.OnForeground, this._onForeground);
-		this.addMessage(ViewEvent.OnBackground, this._onBackground);
 	}
 
 	/** Laya.Script私有方法重写 */

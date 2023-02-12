@@ -47,7 +47,7 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 		this.initView(ComWuPin);
 		this.initView(ComShangCheng);
 		this.initView(ComDongFu);
-
+		
 		BtnSphere.draggable = true;
 	}
 
