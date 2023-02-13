@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@types/typescript": "^2.0.0",
+    "@types/websocket": "^1.0.5"
+  },
+  "dependencies": {
+    "@types/color": "^3.0.3",
+    "@types/colors": "^1.2.1",
+    "nodejs-websocket": "^1.7.2",
+    "websocket": "^1.0.34"
+  }
+}

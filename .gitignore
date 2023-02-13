@@ -3,5 +3,3 @@ layame
 js
 server/bin/js/
 node_modules
-package-lock.json
-package.json
