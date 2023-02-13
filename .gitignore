@@ -1,6 +1,5 @@
 .laya
-.rpt2_cache
-bin/js
+js
 node_modules
 package-lock.json
 package.json
