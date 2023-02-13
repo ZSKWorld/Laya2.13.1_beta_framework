@@ -7,7 +7,7 @@ declare interface AddFriendInput extends UserInput {
     friendUid:string;
 }
 
-declare interface AddFriendOuput extends UserOutput {
+declare interface AddFriendOutput extends UserOutput {
     
 }
 

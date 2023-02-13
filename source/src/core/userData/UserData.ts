@@ -5,7 +5,7 @@ import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
 import { UpperFirst } from "../libs/utils/Util";
 import { BaseDataType, DataType, EquipmentPart, ItemBagType } from "../net/enum/ItemEnum";
-import { NetResponse } from "../net/NetResponse";
+import { NetMessage } from "../net/enum/NetMessage";
 import { tableMgr } from "../table/TableManager";
 import { Equipment, ItemBase } from "./proxy/ItemData";
 
@@ -283,7 +283,7 @@ class UserData extends Observer implements IUserData {
         return result;
     }
 
-    @Event(NetResponse.Response_SyncInfo)
+    @Event(NetMessage.SyncInfo)
     private syncInfo(data: IUserData) {
         Object.keys(data).forEach(v => {
             const oldValue = this[ v ];

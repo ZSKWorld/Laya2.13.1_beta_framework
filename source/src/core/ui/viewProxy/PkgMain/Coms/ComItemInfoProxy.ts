@@ -1,7 +1,7 @@
 import { GameEvent } from "../../../../common/GameEvent";
 import { GameUtil } from "../../../../common/GameUtil";
 import { Event } from "../../../../libs/event/EventMgr";
-import { NetResponse } from "../../../../net/NetResponse";
+import { NetMessage } from "../../../../net/enum/NetMessage";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { ViewID } from "../../../core/ViewID";
 import { RichStrMgr } from "../../../tool/RichStrMgr";
@@ -10,7 +10,7 @@ import { ComItemInfoCtrl } from "../../../viewCtrl/PkgMain/Coms/ComItemInfoCtrl"
 
 export class ComItemInfoProxy extends BaseProxy<ComItemInfoCtrl>{
 
-    @Event(NetResponse.Response_UseItem)
+    @Event(NetMessage.UseItem)
     private useItemResponse(outPut: UseItemOutput & UseItemInput) {
         if (outPut.id == 2010) {
             this.viewCtrl.addView(ViewID.SectView, null, null, false);
@@ -26,19 +26,19 @@ export class ComItemInfoProxy extends BaseProxy<ComItemInfoCtrl>{
         this.viewCtrl.removeSelf();
     }
 
-    @Event(NetResponse.Response_SellItem)
+    @Event(NetMessage.SellItem)
     private sellItemResponse(outPut: SellItemOutput & SellItemInput) {
         this.viewCtrl.removeSelf();
         outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
     }
 
-    @Event(NetResponse.Response_BuyGoods)
+    @Event(NetMessage.BuyGoods)
     private buyGoodsResponse(outPut: BuyGoodsOutput & BuyGoodsInput) {
         this.viewCtrl.removeSelf();
         outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
     }
 
-    @Event(NetResponse.Response_ChangeCollect)
+    @Event(NetMessage.ChangeCollect)
     private changeCollectResponse() {
         this.viewCtrl.refreshContent();
     }

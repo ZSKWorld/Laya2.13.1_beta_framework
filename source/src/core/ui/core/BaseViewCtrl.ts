@@ -164,16 +164,16 @@ export function KeyEvent(keyEventType: KeyEventType, key: number, once?: boolean
 		if (!target.__keyEventList[ keyEventType ][ key ]) target.__keyEventList[ keyEventType ][ key ] = [];
 
 		const func = descriptor.value;
-		const list: Function[] = target.__keyEventList[ keyEventType ][ key ];
+		const list = target.__keyEventList[ keyEventType ][ key ];
 		if (list.indexOf(func) < 0) {
 			list.push(func);
 			if (once) {
-				func[ key ] = func[ key ] || {};
+				func[ key ] ||= {};
 				func[ key ].__once = true;
 			}
 		}
 	}
-}
+}                   
 
 /**
  * 页面控制器鼠标事件装饰器工厂
@@ -187,25 +187,25 @@ export function MouseEvent(mouseEventType: MouseEventType, once?: boolean) {
 		if (!target.__mouseEventList[ mouseEventType ]) target.__mouseEventList[ mouseEventType ] = [];
 
 		const func = descriptor.value;
-		const list: Function[] = target.__mouseEventList[ mouseEventType ];
+		const list = target.__mouseEventList[ mouseEventType ];
 		if (list.indexOf(func) < 0) {
 			list.push(func);
 			if (once) {
-				func[ mouseEventType ] = func[ mouseEventType ] || {};
-				func[ mouseEventType ].__once = true;
+				func[ mouseEventType ] ||= {};
+				func[ mouseEventType ].__once = once;
 			}
 		}
 	}
 }
 
 /**
- * 页面控制器消息事件装饰器工厂
+ * 页面控制器消息装饰器工厂
  * @param name 消息名称
  * @param once 是否只监听一次
- * @param args 参数
+ * @param args  参数
  * @returns MethodDecorator
  */
-export function Message(name: string, once?: boolean, args?: any[]) {
+export function ViewMessage(name: string, once?: boolean, args?: any[]) {
 	return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 		if (!target.__messageMap) target.__messageMap = {};
 		if (!target.__messageMap[ name ]) target.__messageMap[ name ] = [];
@@ -215,11 +215,11 @@ export function Message(name: string, once?: boolean, args?: any[]) {
 		if (list.indexOf(func) == -1) {
 			list.push(func);
 			if (once) {
-				func[ name ] = func[ name ] || {};
+				func[ name ] ||= {};
 				func[ name ].__once = once;
 			}
 			if (args) {
-				func[ name ] = func[ name ] || {};
+				func[ name ] ||= {};
 				func[ name ].__args = args;
 			}
 		}

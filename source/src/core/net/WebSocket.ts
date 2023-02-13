@@ -2,7 +2,7 @@ import { GameEvent } from "../common/GameEvent";
 import { Observer } from "../libs/event/Observer";
 import { Logger } from "../libs/utils/Logger";
 import { userData } from "../userData/UserData";
-import { NetResponse } from "./NetResponse";
+import { NetMessage } from "./enum/NetMessage";
 
 const logger = Logger.Create("WebSocket", true);
 
@@ -42,7 +42,7 @@ class WebSocket extends Observer {
         let msg: UserOutput = JSON.parse(message);
         if (msg && !msg.error) {
             if (msg.syncInfo)
-                this.dispatch(NetResponse.Response_SyncInfo, msg.syncInfo);
+                this.dispatch(NetMessage.SyncInfo, msg.syncInfo);
             if (this._current && this._current.cmd == msg.cmd) {
                 msg = Object.assign(msg, this._current);
                 this._current = null;
