@@ -99,13 +99,13 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _onForeground() {
 		if (!this._isShow) return;
 		this.onForeground();
-		this._children?.forEach(v => v._onForeground());
+		this._children?.forEach(v => v._isShow && v._onForeground());
 	}
 
 	private _onBackground() {
 		if (!this._isShow) return;
 		this.onBackground();
-		this._children?.forEach(v => v._onBackground());
+		this._children?.forEach(v => v._isShow && v._onBackground());
 	}
 
 	/** 注册装饰器页面消息 */
@@ -168,12 +168,12 @@ export function KeyEvent(keyEventType: KeyEventType, key: number, once?: boolean
 		if (list.indexOf(func) < 0) {
 			list.push(func);
 			if (once) {
-				func[ key ] ||= {};
+				func[ key ] = func[ key ] || {};
 				func[ key ].__once = true;
 			}
 		}
 	}
-}                   
+}
 
 /**
  * 页面控制器鼠标事件装饰器工厂
@@ -191,7 +191,7 @@ export function MouseEvent(mouseEventType: MouseEventType, once?: boolean) {
 		if (list.indexOf(func) < 0) {
 			list.push(func);
 			if (once) {
-				func[ mouseEventType ] ||= {};
+				func[ mouseEventType ] = func[ mouseEventType ] || {};
 				func[ mouseEventType ].__once = once;
 			}
 		}
@@ -215,11 +215,11 @@ export function ViewMessage(name: string, once?: boolean, args?: any[]) {
 		if (list.indexOf(func) == -1) {
 			list.push(func);
 			if (once) {
-				func[ name ] ||= {};
+				func[ name ] = func[ name ] || {};
 				func[ name ].__once = once;
 			}
 			if (args) {
-				func[ name ] ||= {};
+				func[ name ] = func[ name ] || {};
 				func[ name ].__args = args;
 			}
 		}

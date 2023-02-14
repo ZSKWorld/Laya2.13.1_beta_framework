@@ -20,7 +20,7 @@ export class UITipConfirmCtrl extends BaseViewCtrl<UITipConfirmView, UITipConfir
     }
 
     override onEnable(): void {
-        this.view.playAni();
+        
     }
 
     override onForeground(): void {
@@ -38,7 +38,7 @@ export class UITipConfirmCtrl extends BaseViewCtrl<UITipConfirmView, UITipConfir
     private showConfirm() {
         this._curConfirm = this._confirmDatas.shift();
         if (this._curConfirm) this.view.setContent(this._curConfirm.text, this._curConfirm.title);
-        else this.view.playAni(true).then(() => this.removeSelf());
+        else this.removeSelf();
     }
 
     private onBtnCloseClick(result: boolean) {

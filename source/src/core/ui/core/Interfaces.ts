@@ -17,7 +17,7 @@ export interface GComponentExtend {
 	 * @param viewId {@link ViewID} 页面id
 	 * @param data 传入参数
 	 * @param callback {@link Laya.Handler} 打开后回调
-	 * @param hideTop 是否隐藏上一页面
+	 * @param hideTop 是否隐藏上一页面, 默认true
 	 */
 	addView?<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler, hideTop?: boolean): void;
 
@@ -49,12 +49,6 @@ interface IViewExtend extends GComponentExtend {
 
 	/** 移除当前页面 */
 	removeSelf?(): void;
-
-	/** 打开动画 */
-	showOpenAni?(): Promise<void>;
-
-	/** 关闭动画 */
-	showCloseAni?(): Promise<void>;
 }
 
 /**页面实例类型 */
@@ -84,6 +78,18 @@ export interface ViewExtension extends IViewExtend {
 	 * @param viewInst {@link IView} 初始对象，没有是初始自己
 	 */
 	initView?(viewInst?: IView): IViewCtrl;
+
+	/** 
+	 * 页面打开动画
+	 * 该方法为虚方法，使用时重写即可
+	 */
+	onOpenAni?(): Promise<any>;
+
+	/**
+	 * 页面关闭动画
+	 * 该方法为虚方法，使用时重写即可
+	 */
+	onCloseAni?(): Promise<any>;
 };
 
 /**页面控制器实例类型 */

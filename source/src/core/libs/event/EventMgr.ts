@@ -46,11 +46,11 @@ export function Event(eventName: string, once?: boolean, args?: any[]) {
         if (list.indexOf(func) == -1) {
             list.push(func);
             if (once) {
-                func[ eventName ] ||= {};
+                func[ eventName ] = func[ eventName ] || {};
                 func[ eventName ].__once = once;
             }
             if (args) {
-                func[ eventName ] ||= {};
+                func[ eventName ] = func[ eventName ] || {};
                 func[ eventName ].__args = args;
             }
         }

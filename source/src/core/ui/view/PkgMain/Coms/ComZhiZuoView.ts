@@ -1,7 +1,7 @@
+import { ResPath } from "../../../../common/ResPath";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { ViewExtension } from "../../../core/Interfaces";
 import ComZhiZuo from "../../../ui/PkgMain/ComZhiZuo";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum ComZhiZuoMsg {
 	OnBtnFJZBClick = "ComZhiZuo_OnBtnFJZBClick",
@@ -16,19 +16,19 @@ export const enum ComZhiZuoMsg {
 }
 
 export class ComZhiZuoView extends ExtensionClass<ViewExtension, ComZhiZuo>(ComZhiZuo) {
-    static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.UIPath.PkgMain;
 
 	override onCreate(): void {
-        const { BtnFJZB, BtnFJBS, BtnYJHC, BtnJPYL, BtnDZZB, BtnZJZB, BtnCZZB, BtnBSHC, BtnZZTZ } = this;
-	    BtnFJZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnFJZBClick ]);
-	    BtnFJBS.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnFJBSClick ]);
-	    BtnYJHC.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnYJHCClick ]);
-	    BtnJPYL.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnJPYLClick ]);
-	    BtnDZZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnDZZBClick ]);
-	    BtnZJZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnZJZBClick ]);
-	    BtnCZZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnCZZBClick ]);
-	    BtnBSHC.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnBSHCClick ]);
-	    BtnZZTZ.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnZZTZClick ]);
-    }
+		const { BtnFJZB, BtnFJBS, BtnYJHC, BtnJPYL, BtnDZZB, BtnZJZB, BtnCZZB, BtnBSHC, BtnZZTZ } = this;
+		BtnFJZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnFJZBClick ]);
+		BtnFJBS.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnFJBSClick ]);
+		BtnYJHC.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnYJHCClick ]);
+		BtnJPYL.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnJPYLClick ]);
+		BtnDZZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnDZZBClick ]);
+		BtnZJZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnZJZBClick ]);
+		BtnCZZB.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnCZZBClick ]);
+		BtnBSHC.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnBSHCClick ]);
+		BtnZZTZ.onClick(this, this.sendMessage, [ ComZhiZuoMsg.OnBtnZZTZClick ]);
+	}
 
 }

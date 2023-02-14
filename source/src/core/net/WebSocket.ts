@@ -47,7 +47,7 @@ class WebSocket extends Observer {
                 msg = Object.assign(msg, this._current);
                 this._current = null;
             }
-            this.dispatch(`Response_${ msg.cmd[ 0 ].toUpperCase() + msg.cmd.substring(1) }`, msg);
+            this.dispatch(`NetMsg_${ msg.cmd[ 0 ].toUpperCase() + msg.cmd.substring(1) }`, msg);
         } else {
             this.dispatch(GameEvent.NetMsgError, msg);
             this._current = null;

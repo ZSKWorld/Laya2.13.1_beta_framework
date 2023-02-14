@@ -22,13 +22,17 @@ export class UITipConfirmView extends ExtensionClass<ViewExtension, UITipConfirm
 		this.TxtTitle.text = title || "提示";
 	}
 
-	playAni(close?: boolean) {
-		this.addEventLock(Laya.Event.CLICK);
-		return new Promise((resolve) => {
-			const completed = Laya.Handler.create(this, () => {
-				resolve(null);
-				this.removeEventLock(Laya.Event.CLICK);
-			});
+	override onOpenAni(): Promise<void> {
+		return this.playAni();
+	}
+
+	override onCloseAni(): Promise<void> {
+		return this.playAni(true);
+	}
+
+	private playAni(close?: boolean) {
+		return new Promise<void>((resolve) => {
+			const completed = Laya.Handler.create(null, resolve);
 			if (close) this.EffectShow.playReverse(completed);
 			else this.EffectShow.play(completed);
 		});

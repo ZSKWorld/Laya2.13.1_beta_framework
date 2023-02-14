@@ -14,11 +14,11 @@ class UICache {
 
 	/**
 	 * 缓存页面
-	 * @param viewInst {@link IViewCtrl} 页面实例
+	 * @param viewCtrl {@link IViewCtrl} 页面实例
 	 */
-	addView(viewInst: IViewCtrl) {
-		const viewId = viewInst.viewId;
-		this._dontDestroyCache.set(viewId, viewInst);
+	addView(viewCtrl: IViewCtrl) {
+		const viewId = viewCtrl.viewId;
+		this._dontDestroyCache.set(viewId, viewCtrl);
 	}
 
 	/**
@@ -132,25 +132,40 @@ class UIManager extends Observer {
 	removeTopView() { this.topCtrl && this.removeView(this.topCtrl.viewId); }
 
 	/** 移除页面
-	 * @param viewId {@link ViewID} 页面ID，为null则移除全部页面
+	 * @param viewId {@link ViewID} 页面ID
 	 */
 	removeView(viewId: ViewID) {
+		this._lockPanel.visible = true;
+		let exitAni = Promise.resolve();
 		const { _openedCtrls } = this;
 		if (!_openedCtrls.length) return;
 		for (let i = _openedCtrls.length - 1; i >= 0; i--) {
-			const viewInst = _openedCtrls[ i ];
-			if (viewId == null || viewInst.viewId == viewId) {
-				_openedCtrls.splice(i, 1);
-				viewInst.view.removeFromParent();
-				this._cache.addView(viewInst);
+			const viewCtrl = _openedCtrls[ i ];
+			if (viewId == null || viewCtrl.viewId == viewId) {
+				exitAni = viewCtrl.view.onCloseAni().then(() => {
+					_openedCtrls.splice(i, 1);
+					viewCtrl.view.removeFromParent();
+					viewCtrl.sendMessage(ViewEvent.OnBackground);
+					this._cache.addView(viewCtrl);
+				});
 				if (viewId != null) break;
 			}
 		}
-		this.addView2(this.topCtrl, this.topCtrl?.data, false, null);
+		exitAni.then(() => {
+			this.addView2(this.topCtrl, this.topCtrl?.data, false, null);
+		});
 	}
 
 	/** 移除所有页面 */
-	removeAllView() { this.removeView(null); }
+	removeAllView() {
+		// this.removeView(null);
+		this._openedCtrls.forEach(v => {
+			v.view.removeFromParent();
+			v.sendMessage(ViewEvent.OnBackground);
+			this._cache.addView(v);
+		});
+		this._openedCtrls.length = 0;
+	}
 
 	private onResize() {
 		this._lockPanel.makeFullScreen();
@@ -158,22 +173,35 @@ class UIManager extends Observer {
 	}
 
 	private addView2(viewCtrl: IViewCtrl, data: any, hideTop: boolean, callback: Laya.Handler) {
-		//TODO 页面的 退场动画？ 入场动画？
+		let exitAni = Promise.resolve();
+		let showAni = Promise.resolve();
 		if (viewCtrl) {
 			viewCtrl.data = data;
 			const topCtrl = this.topCtrl;
 			if (viewCtrl != topCtrl) {
 				this._openedCtrls.unshift(viewCtrl);
-				hideTop && topCtrl?.view.removeFromParent();
-				topCtrl?.sendMessage(ViewEvent.OnBackground);
+				if (topCtrl) {
+					if (hideTop) {
+						exitAni = topCtrl.view.onCloseAni().then(() => {
+							topCtrl.view.removeFromParent();
+							topCtrl.sendMessage(ViewEvent.OnBackground);
+						});
+					} else {
+						topCtrl.sendMessage(ViewEvent.OnBackground);
+					}
+				}
 			}
 			if (!viewCtrl.view.parent) {
 				layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
 				viewCtrl.sendMessage(ViewEvent.OnForeground);
-			}
+				showAni = viewCtrl.view.onOpenAni();
+			} else viewCtrl.sendMessage(ViewEvent.OnForeground);
 		}
 		callback?.run();
-		this._lockPanel.visible = false;
+		exitAni.then(() => showAni)
+			.then(() => {
+				this._lockPanel.visible = false;
+			});
 	}
 }
 
