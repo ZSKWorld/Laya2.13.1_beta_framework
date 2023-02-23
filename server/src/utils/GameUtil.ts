@@ -8,8 +8,8 @@ export class GameUtil {
     static isSkillBook(id: number) { return !!tableMgr.SkillBook[ id ]; }
     static isXinFaBook(id: number) { return !!tableMgr.XinFaBook[ id ]; }
 
-    /** 物品是否可以使用 */
-    static canUseItem(id: number) {
+    /** 获取可使用的物品 */
+    static getUsableItem(id: number) {
         const [ prop, food, skillBook, xinFaBook ] = [
             tableMgr.Props[ id ], tableMgr.Food[ id ], tableMgr.SkillBook[ id ], tableMgr.XinFaBook[ id ],
         ];
@@ -17,7 +17,7 @@ export class GameUtil {
     }
 
     /** 获取离线奖励 */
-    static getOffline(data: IUserData): IOffline {
+    static getOffline(data: IUser): IOffline {
         if (!data.lastOnlineTime) return null;
         const timeOffset = ((TimeUtil.getTimeStamp() - data.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5) return null;
@@ -25,7 +25,7 @@ export class GameUtil {
     }
 
     /** 获取精力回复速率 */
-    static getVigorRecoveryRate(data: IUserData) {
+    static getVigorRecoveryRate(data: IUser) {
         const citta = data.citta;
         let xinFaJLHF = 0;
         Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));

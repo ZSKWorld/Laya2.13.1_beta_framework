@@ -2,16 +2,16 @@ import * as websocket from "websocket";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
 import { connectionMgr } from "./ConnectionMgr";
-import { AccouontController } from "./controller/AccouontController";
-import { BaseController } from "./controller/BaseController";
-import { BattleController } from "./controller/BattleController";
-import { FriendController } from "./controller/FriendController";
-import { HeartController } from "./controller/HeartController";
-import { ItemHandleController } from "./controller/ItemHandleController";
-import { ShopController } from "./controller/ShopController";
+import { AccouontController } from "./controller/account/AccouontController";
+import { BaseController } from "./controller/base/BaseController";
+import { HeartController } from "./controller/base/HeartController";
+import { BattleController } from "./controller/battle/BattleController";
+import { FriendController } from "./controller/friend/FriendController";
+import { ItemHandleController } from "./controller/item/ItemHandleController";
+import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
-import { ProxyMgr } from "./userdata/ProxyMgr";
-import { UserData } from "./userdata/UserData";
+import { ProxyMgr } from "./user/ProxyMgr";
+import { User } from "./user/User";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -25,10 +25,10 @@ export class Connection {
 
     private _logined: boolean;
     private _connection: websocket.connection;
-    private _userData: Readonly<UserData>;
+    private _user: Readonly<User>;
     get logined() { return !!this._logined; }
     get listener() { return this._listener; }
-    get userData() { return this._userData; }
+    get user() { return this._user; }
 
     static startConnection(token: string, connection: websocket.connection, msg?: websocket.Message) {
         let con = connectionMgr.getClosedConnection(token);
@@ -60,17 +60,17 @@ export class Connection {
         connection.on(ConnectionEvent.Message, this._onMessage);
     }
 
-    userLogin(data: IUserData) {
+    userLogin(data: IUser) {
         this._logined = true;
-        this._userData = ProxyMgr.getTargetProxy(data.uid, null, new UserData("", "", ""));
+        this._user = ProxyMgr.getProxy(data.uid, null, new User("", "", ""));
         connectionMgr.addConnection(data.uid, this);
-        this._userData.login(data);
+        this._user.login(data);
     }
 
     response(data: UserOutput) {
         if (!this._connection) return;
-        if (data.cmd != "heart" && this._userData) {
-            const userSyncInfo = this._userData.getSyncInfo();
+        if (data.cmd != "heart" && this._user) {
+            const userSyncInfo = this._user.getSyncInfo();
             if (userSyncInfo) {
                 if (!data.syncInfo) data.syncInfo = userSyncInfo;
                 else data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
@@ -103,14 +103,14 @@ export class Connection {
 
         this._connection = null;
 
-        this._userData?.logout();
-        this._userData = null;
+        this._user?.logout();
+        this._user = null;
         Pool.recover(PoolKey.CommonConnection, this);
     }
 
     private onConnectionMessage(message: websocket.Message) {
         if (message.type === 'utf8') {
-            this._userData && this._userData.clearSyncInfo();
+            this._user && this._user.clearSyncInfo();
             const data: UserInput = JSON.parse(message.utf8Data);
             if (data.cmd != "register" && data.cmd != "login" && !this._logined)
                 return this.response({ cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
@@ -128,7 +128,7 @@ export class Connection {
     private onConnectionClose() {
         this._logined = false;
         this._connection = null;
-        this._userData?.logout();
-        connectionMgr.connectionClosed(this._userData.account, this);
+        this._user?.logout();
+        connectionMgr.connectionClosed(this._user.account, this);
     }
 }

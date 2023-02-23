@@ -153,10 +153,8 @@ var UserData = /** @class */ (function () {
             }
         });
         this.lastLoginTime = TimeUtil_1.TimeUtil.getTimeStamp();
-        this.offline = this.getOffline();
+        this.offline = GameUtil_1.GameUtil.getOffline(this);
     };
-    /** 获取离线数据 */
-    UserData.prototype.getOffline = function () { return GameUtil_1.GameUtil.getOffline(this); };
     UserData.prototype.save = function () {
         var _this = this;
         this.offline = null;
@@ -354,7 +352,6 @@ var UserData = /** @class */ (function () {
         var key = DataConst_1.DressedEquipMap[part];
         key && (this[key] = equip);
     };
-    //#region 各种检查
     /** 检查当前境界是否满足物品境界需求 */
     UserData.prototype.checkJingJieEnough = function (id) {
         var item = TableManager_1.tableMgr.Item[id];
@@ -364,6 +361,7 @@ var UserData = /** @class */ (function () {
         var _b = this, jingJie = _b.jingJie, cengJi = _b.cengJi;
         return jingJie > checkedJingJie || (jingJie == checkedJingJie && cengJi >= checkedCengJi);
     };
+    //#region 各种检查
     /** 检查是否可以使用物品 */
     UserData.prototype.checkUseItem = function (id, count) {
         if (count <= 0)
@@ -371,7 +369,7 @@ var UserData = /** @class */ (function () {
         var item = this.getItem(id);
         if (item == null)
             return 1016 /* ErrorCode.ITEM_NOT_EXIST */;
-        var typeItem = GameUtil_1.GameUtil.canUseItem(id);
+        var typeItem = GameUtil_1.GameUtil.getUsableItem(id);
         if (!typeItem)
             return 1023 /* ErrorCode.ITEM_CAN_NOT_USE */;
         else if (item.count < count)

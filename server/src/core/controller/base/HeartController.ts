@@ -1,4 +1,4 @@
-import { TimeUtil } from "../../utils/TimeUtil";
+import { TimeUtil } from "../../../utils/TimeUtil";
 import { BaseController } from "./BaseController";
 
 export class HeartController extends BaseController implements IHeart {

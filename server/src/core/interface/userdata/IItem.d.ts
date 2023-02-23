@@ -1,4 +1,4 @@
-
+/** 基础物品 */
 declare interface IItemBase {
     /** 物品id */
     id: number;
@@ -6,6 +6,7 @@ declare interface IItemBase {
     count: number;
 }
 
+/** 装备 */
 declare interface IEquipment extends IItemBase {
     /** 装备uid，用于区分同id的不同装备 */
     uid: string;
@@ -25,4 +26,7 @@ declare interface IEquipment extends IItemBase {
     secondAttri: number[];
     /** 体质属性 */
     bodyAttri: number[];
+    /** 装备部位 EquipmentPart */
+    get part(): number;
+    createAttribute(): void;
 }

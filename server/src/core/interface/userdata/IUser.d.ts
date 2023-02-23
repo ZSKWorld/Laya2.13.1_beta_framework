@@ -6,7 +6,7 @@ declare interface IOffline {
     /** 获得的精力 */
     vigor: number;
 }
-declare interface IUserData {
+declare interface IUser {
     uid: string;
     /** 昵称 */
     nickname: string;
@@ -107,14 +107,6 @@ declare interface IUserData {
     skill: number[];
     /**出战技能 */
     usingSkill: number[];
-
-    //#region 背包数据
-    collect: number[];
-    equipment: IEquipment[];
-    gem: IItemBase[];
-    prop: IItemBase[];
-    material: IItemBase[];
-    book: IItemBase[];
-    other: IItemBase[];
-    //#endregion
+    /** 背包 */
+    bag: IBag;
 }

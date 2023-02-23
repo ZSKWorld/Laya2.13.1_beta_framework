@@ -11,8 +11,8 @@ var GameUtil = /** @class */ (function () {
     GameUtil.isFood = function (id) { return !!TableManager_1.tableMgr.Food[id]; };
     GameUtil.isSkillBook = function (id) { return !!TableManager_1.tableMgr.SkillBook[id]; };
     GameUtil.isXinFaBook = function (id) { return !!TableManager_1.tableMgr.XinFaBook[id]; };
-    /** 物品是否可以使用 */
-    GameUtil.canUseItem = function (id) {
+    /** 获取可使用的物品 */
+    GameUtil.getUsableItem = function (id) {
         var _a = [
             TableManager_1.tableMgr.Props[id], TableManager_1.tableMgr.Food[id], TableManager_1.tableMgr.SkillBook[id], TableManager_1.tableMgr.XinFaBook[id],
         ], prop = _a[0], food = _a[1], skillBook = _a[2], xinFaBook = _a[3];

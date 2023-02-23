@@ -223,5 +223,5 @@ export function ViewMessage(name: string, once?: boolean, args?: any[]) {
 				func[ name ].__args = args;
 			}
 		}
-	};
+	}
 }

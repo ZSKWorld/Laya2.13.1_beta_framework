@@ -2,12 +2,12 @@ import { GameUtil } from "../../utils/GameUtil";
 import { MathUtil } from "../../utils/MathUtil";
 import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
-import { ErrorCode } from "../enum/ErrorCode";
-import { BaseDataType, DataType, EquipmentPart, FoodRecoverType, ItemBagType } from "../enum/ItemEnum";
+import { BaseDataType, DataType, EquipmentPart, FoodRecoverType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
+import { Bag } from "./Bag";
 import { DressedEquipMap } from "./DataConst";
 import { Formula } from "./Formula";
-import { Equipment, ItemBase } from "./ItemData";
+import { Equipment, ItemBase } from "./Item";
 import { SyncProxy } from "./ProxyMgr";
 
 const EncodeData: { name: string, Class: Class<ItemBase> }[] = [
@@ -19,9 +19,8 @@ const EncodeData: { name: string, Class: Class<ItemBase> }[] = [
     { name: "$Other", Class: ItemBase },//ItemBagType.Other
 ];
 
-export class UserData implements IUserData, SyncProxy<IUserData> {
+export class User implements IUser, SyncProxy<IUser> {
     //#region Properties
-    //#region BaseData
     uid: string = Util.CreateUID();
     nickname: string = "";
     account: string = "";
@@ -115,17 +114,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
-    //#endregion
-
-    //#region BagData
-    collect: number[] = [];
-    equipment: IEquipment[] = [];
-    gem: IItemBase[] = [];
-    prop: IItemBase[] = [];
-    material: IItemBase[] = [];
-    book: IItemBase[] = [];
-    other: IItemBase[] = [];
-    //#endregion
+    bag: IBag = new Bag();
     //#endregion
     constructor(account: string, password: string, nickname: string) {
         this.account = String(account);
@@ -138,16 +127,16 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     getSyncInfo(): any { }
     clearSyncInfo(): any { }
 
-    login(source: IUserData) {
+    login(source: IUser) {
         const encodeDatas: any[][][] = [];
         EncodeData.forEach(v => {
-            encodeDatas.push(source[ v.name ]);
+            encodeDatas.push(source.bag[ v.name ]);
             delete source[ v.name ];
         });
 
         Object.keys(source).forEach(v => this[ v ] = source[ v ]);
 
-        const { equipment, prop, gem, material, book, other } = this;
+        const { equipment, prop, gem, material, book, other } = this.bag;
         const objects = [ equipment, prop, gem, material, book, other ];
         encodeDatas.forEach((typeData, objIndex) => {
             if (typeData) {
@@ -168,13 +157,13 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
 
         const encodeKeys: string[] = [];
         EncodeData.forEach(v => encodeKeys.push(v.name));
-        const { equipment, prop, gem, material, book, other } = this;
+        const { equipment, prop, gem, material, book, other } = this.bag;
         const objects = [ equipment, prop, gem, material, book, other ];
 
         objects.forEach((obj, objIndex) => {
             if (obj.length) {
                 const itemKeys = Object.keys(obj[ 0 ]);
-                const items = this[ encodeKeys[ objIndex ] ] = [ itemKeys ];
+                const items = this.bag[ encodeKeys[ objIndex ] ] = [ itemKeys ];
                 obj.forEach(data => {
                     const result = [];
                     itemKeys.forEach(key => result.push(data[ key ]));
@@ -223,50 +212,9 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
                     default: throw new Error("未知基础数据类型" + id);
                 }
                 break;
-            case DataType.BagData:
-                let datas: IItemBase[];
-                switch (item.BagType) {
-                    case ItemBagType.Prop: datas = this.prop; break;
-                    case ItemBagType.Gem: datas = this.gem; break;
-                    case ItemBagType.Material: datas = this.material; break;
-                    case ItemBagType.Book: datas = this.book; break;
-                    case ItemBagType.Other: datas = this.other; break;
-                    default: throw new Error("未知背包数据类型" + id);
-                }
-                const dataLen = datas.length;
-                for (let i = 0; i < dataLen; i++) {
-                    if (datas[ i ].id == id) {
-                        datas[ i ].count += count;
-                        if (datas[ i ].count <= 0)
-                            datas.splice(i, 1);
-                        return;
-                    }
-                }
-                if (count > 0) datas.push(new ItemBase(id, count));
-                break;
+            case DataType.BagData: this.bag.changeItemCount(id, count); break;
             default: break;
         }
-    }
-
-    /** 是否收藏 */
-    isCollect(id: number) { return this.collect.includes(id); }
-
-    /** 获取背包物品 */
-    getItem(id: number) {
-        const item = tableMgr.Item[ id ];
-        if (!item) return null;
-        let datas: IItemBase[];
-        switch (item.BagType) {
-            // case ItemBagType.Collect: break;
-            // case ItemBagType.Equip: break;
-            case ItemBagType.Prop: datas = this.prop; break;
-            case ItemBagType.Gem: datas = this.gem; break;
-            case ItemBagType.Material: datas = this.material; break;
-            case ItemBagType.Book: datas = this.book; break;
-            case ItemBagType.Other: datas = this.other; break;
-        }
-        if (datas) return datas.find(v => v.id == id);
-        else return null;
     }
 
     /** 获取物品数量 */
@@ -285,34 +233,8 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
                     case BaseDataType.Vigor: return this.vigor;
                     default: throw new Error("未知基础数据类型" + id);
                 }
-            case DataType.BagData: return this.getItem(id)?.count || 0;
+            case DataType.BagData: return this.bag.getItem(id)?.count || 0;
             default: return 0;
-        }
-    }
-
-    /** 获取背包里的装备 */
-    getEquip(uid: string) {
-        return this.equipment.find(v => v.uid == uid);
-    }
-
-    /** 添加装备 */
-    addNewEquip(id: number, count: number) {
-        for (let i = 0; i < count; i++) {
-            const equip = new Equipment(id);
-            equip.createAttribute();
-            this.equipment.push(equip);
-        }
-    }
-
-    /** 移除装备 */
-    removeEquip(uid: string) {
-        const equips = this.equipment;
-        const equipCount = equips.length;
-        for (let i = 0; i < equipCount; i++) {
-            if (equips[ i ].uid == uid) {
-                equips.splice(i, 1);
-                break;
-            }
         }
     }
 
@@ -328,88 +250,6 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         const key = DressedEquipMap[ part ];
         key && (this[ key ] = equip);
     }
-
-    //#region 各种检查
-    /** 检查当前境界是否满足物品境界需求 */
-    checkJingJieEnough(id: number): boolean {
-        const item = tableMgr.Item[ id ];
-        if (!item) return false;
-        const { jingJie: checkedJingJie, cengJi: checkedCengJi } = item.UseRequire;
-        const { jingJie, cengJi } = this;
-        return jingJie > checkedJingJie || (jingJie == checkedJingJie && cengJi >= checkedCengJi);
-    }
-    /** 检查是否可以使用物品 */
-    checkUseItem(id: number, count: number): ErrorCode {
-        if (count <= 0) return ErrorCode.NUMBER_ERROR;
-        const item = this.getItem(id);
-        if (item == null) return ErrorCode.ITEM_NOT_EXIST;
-        const typeItem = GameUtil.canUseItem(id);
-        if (!typeItem) return ErrorCode.ITEM_CAN_NOT_USE;
-        else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
-        else if (this.checkJingJieEnough(id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
-        else if (GameUtil.isFood(id)) {
-            if (this.vigor >= this.getMaxVigro())
-                return ErrorCode.VIGOR_IS_FULL;
-        }
-        else if (GameUtil.isSkillBook(id)) {
-            const SectRequire = (<ConfigSkillBookData>typeItem).SectRequire;
-            if (SectRequire.length && SectRequire.indexOf(this.sect) == -1) return ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL;
-            else if (this.skill.indexOf(id) != -1) return ErrorCode.SKILL_IS_LEARNED;
-        } else if (GameUtil.isXinFaBook(id)) {
-            if (this.citta[ id ] != null) return ErrorCode.CITTA_IS_LEARNED;
-        }
-        return ErrorCode.NONE;
-    }
-    /** 检查是否可以出售物品 */
-    checkSellItem(id: number, count: number): ErrorCode {
-        if (count <= 0) return ErrorCode.NUMBER_ERROR;
-        if (!tableMgr.Item[ id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
-        const item = this.getItem(id);
-        if (item == null) return ErrorCode.ITEM_NOT_EXIST;
-        else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
-        return ErrorCode.NONE;
-    }
-    /** 检查是否可以穿戴装备 */
-    checkDressEquip(uid: string): ErrorCode {
-        const equip = this.getEquip(uid);
-        if (equip == null) return ErrorCode.ITEM_NOT_EXIST;
-        else if (this.checkJingJieEnough(equip.id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_DRESS;
-        return ErrorCode.NONE;
-    }
-    /** 检查是否可以脱下装备 */
-    checkTakeOffEquip(part: EquipmentPart): ErrorCode {
-        if (this.getDressedEquip(part) == null) return ErrorCode.PART_NOT_DRESSED_EQUIP;
-        return ErrorCode.NONE;
-    }
-    /** 检查是否可以出售装备 */
-    checkSellEquip(uid: string): ErrorCode {
-        const equip = this.getEquip(uid);
-        if (!equip) return ErrorCode.ITEM_NOT_EXIST;
-        else if (!tableMgr.Item[ equip.id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
-        return ErrorCode.NONE;
-    }
-
-    /** 检查物品收藏 */
-    checkCollect(id: number, collect: boolean): ErrorCode {
-        if (GameUtil.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
-        if (collect && this.isCollect(id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
-        if (!collect && !this.isCollect(id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
-        return ErrorCode.NONE;
-    }
-
-    /** 检查是否可以购买物品 */
-    checkBuyItem(id: number, count: number): ErrorCode {
-        if (count <= 0) return ErrorCode.NUMBER_ERROR;
-        const item = tableMgr.Shop[ id ];
-        if (!item) return ErrorCode.GOODS_NOT_EXIST;
-        for (let i = 0, n = item.SellPrice.length; i < n; i++) {
-            const element = item.SellPrice[ i ];
-            if (this.getItemCount(element.id) < element.count * count)
-                return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
-        }
-        return ErrorCode.NONE;
-    }
-    //#endregion
 
     /** 使用物品 */
     useItem(id: number, count: number) {
@@ -438,7 +278,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         if (sellRewards.length) {
             sellRewards.forEach(v => {
                 rewards.push(new ItemBase(v.id, v.count * count));
-                if (GameUtil.isEquip(v.id)) this.addNewEquip(v.id, v.count * count);
+                if (GameUtil.isEquip(v.id)) this.bag.addNewEquip(v.id, v.count * count);
                 else {
                     this.changeItemCount(v.id, v.count * count);
                 }
@@ -451,12 +291,10 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     /** 穿戴装备 */
     dressEquip(uid: string) {
         const userdata = this;
-        const equip = this.getEquip(uid);
-        const part = tableMgr.Equipment[ equip.id ].Part;
-        userdata.equipment.remove(equip);
-        const dressedEquip = this.getDressedEquip(part);
-        if (dressedEquip) userdata.equipment.push(dressedEquip);
-        this.setDressedEquip(part, equip);
+        const equip = userdata.bag.removeEquip(uid);
+        const dressedEquip = this.getDressedEquip(equip.part);
+        userdata.bag.addEquip(dressedEquip);
+        this.setDressedEquip(equip.part, equip);
     }
 
     /** 脱下装备 */
@@ -464,19 +302,19 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
         const userdata = this;
         const equip = this.getDressedEquip(part);
         this.setDressedEquip(part, null);
-        userdata.equipment.push(equip);
+        userdata.bag.addEquip(equip);
     }
 
     /** 出售装备 */
     sellEquip(uid: string) {
-        const equip = this.getEquip(uid);
-        this.removeEquip(uid);
+        const equip = this.bag.getEquip(uid);
+        this.bag.removeEquip(uid);
         return this.sellItem(equip.id, 1);
     }
 
     /** 按星级分解装备 */
     decomposeEquip(star: number) {
-        const equips = this.equipment;
+        const equips = this.bag.equipment;
         const equipCnt = equips.length;
         let rewards: ItemBase[] = [];
         for (let i = equipCnt - 1; i >= 0; i--) {
@@ -492,16 +330,10 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
     buyGoods(id: number, count: number) {
         const item = tableMgr.Shop[ id ];
         item.SellPrice.forEach(v => this.changeItemCount(v.id, -v.count * count));
-        if (GameUtil.isEquip(item.SellID)) this.addNewEquip(item.SellID, count);
+        if (GameUtil.isEquip(item.SellID)) this.bag.addNewEquip(item.SellID, count);
         else this.changeItemCount(item.SellID, count);
         const rewards: ItemBase[] = [ new ItemBase(item.SellID, count) ];
         return rewards;
-    }
-
-    /** 添加/取消 收藏 */
-    changeCollect(id: number, collect: boolean) {
-        if (collect) this.collect.push(id);
-        else this.collect.remove(id);
     }
 
     /** 使用道具 */
@@ -518,7 +350,7 @@ export class UserData implements IUserData, SyncProxy<IUserData> {
                 useCount = count;
                 tableMgr.Props[ id ].Rewards.forEach(v => {
                     rewards.push(new ItemBase(v.id, v.count * count));
-                    if (GameUtil.isEquip(v.id)) this.addNewEquip(v.id, v.count * count);
+                    if (GameUtil.isEquip(v.id)) this.bag.addNewEquip(v.id, v.count * count);
                     else this.changeItemCount(v.id, v.count * count);
                 });
                 break;

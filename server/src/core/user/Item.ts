@@ -1,5 +1,6 @@
 import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
+import { EquipmentPart } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
 export class ItemBase implements IItemBase {
     id: number = 0;
@@ -21,13 +22,15 @@ export class Equipment extends ItemBase implements IEquipment {
     wuXingAttri: number[] = [];
     secondAttri: number[] = [];
     bodyAttri: number[] = [];
+    get part(): EquipmentPart {
+        return tableMgr.Equipment[ this.id ].Part;
+    }
     constructor(id: number = 0) {
         super(id, 1);
     }
 
     createAttribute() {
-        const equipInfo = tableMgr.Equipment[ this.id ];
-        const { Main, WuXing, Second, Body } = tableMgr.EquipmentAddition[ equipInfo.Part ];
+        const { Main, WuXing, Second, Body } = tableMgr.EquipmentAddition[ this.part ];
         this.star = MathUtil.RandomInt(1, +tableMgr.Const[ 1010 ].Value);
         Equipment.randomAttribute([ ...Main ], this.mainAttri, false).sort(Equipment.sortFunc);
         Equipment.randomAttribute([ ...WuXing ], this.wuXingAttri, true).sort(Equipment.sortFunc);

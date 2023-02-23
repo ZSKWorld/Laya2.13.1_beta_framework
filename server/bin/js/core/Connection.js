@@ -4,14 +4,14 @@ exports.Connection = void 0;
 var EventDispatcher_1 = require("../libs/event/EventDispatcher");
 var Pool_1 = require("../libs/pool/Pool");
 var ConnectionMgr_1 = require("./ConnectionMgr");
-var AccouontController_1 = require("./controller/AccouontController");
-var BattleController_1 = require("./controller/BattleController");
-var FriendController_1 = require("./controller/FriendController");
-var HeartController_1 = require("./controller/HeartController");
-var ItemHandleController_1 = require("./controller/ItemHandleController");
-var ShopController_1 = require("./controller/ShopController");
-var ProxyMgr_1 = require("./userdata/ProxyMgr");
-var UserData_1 = require("./userdata/UserData");
+var AccouontController_1 = require("./controller/account/AccouontController");
+var HeartController_1 = require("./controller/base/HeartController");
+var BattleController_1 = require("./controller/battle/BattleController");
+var FriendController_1 = require("./controller/friend/FriendController");
+var ItemHandleController_1 = require("./controller/item/ItemHandleController");
+var ShopController_1 = require("./controller/shop/ShopController");
+var ProxyMgr_1 = require("./user/ProxyMgr");
+var User_1 = require("./user/User");
 var Connection = /** @class */ (function () {
     function Connection() {
         var _this = this;
@@ -29,8 +29,8 @@ var Connection = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Connection.prototype, "userData", {
-        get: function () { return this._userData; },
+    Object.defineProperty(Connection.prototype, "user", {
+        get: function () { return this._user; },
         enumerable: false,
         configurable: true
     });
@@ -59,15 +59,15 @@ var Connection = /** @class */ (function () {
     };
     Connection.prototype.userLogin = function (data) {
         this._logined = true;
-        this._userData = ProxyMgr_1.ProxyMgr.getTargetProxy(data.uid, null, new UserData_1.UserData("", "", ""));
+        this._user = ProxyMgr_1.ProxyMgr.getProxy(data.uid, null, new User_1.User("", "", ""));
         ConnectionMgr_1.connectionMgr.addConnection(data.uid, this);
-        this._userData.login(data);
+        this._user.login(data);
     };
     Connection.prototype.response = function (data) {
         if (!this._connection)
             return;
-        if (data.cmd != "heart" && this._userData) {
-            var userSyncInfo = this._userData.getSyncInfo();
+        if (data.cmd != "heart" && this._user) {
+            var userSyncInfo = this._user.getSyncInfo();
             if (userSyncInfo) {
                 if (!data.syncInfo)
                     data.syncInfo = userSyncInfo;
@@ -97,13 +97,13 @@ var Connection = /** @class */ (function () {
         this._controllers.length = 0;
         this._logined = false;
         this._connection = null;
-        (_a = this._userData) === null || _a === void 0 ? void 0 : _a.logout();
-        this._userData = null;
+        (_a = this._user) === null || _a === void 0 ? void 0 : _a.logout();
+        this._user = null;
         Pool_1.Pool.recover("CommonConnection" /* PoolKey.CommonConnection */, this);
     };
     Connection.prototype.onConnectionMessage = function (message) {
         if (message.type === 'utf8') {
-            this._userData && this._userData.clearSyncInfo();
+            this._user && this._user.clearSyncInfo();
             var data = JSON.parse(message.utf8Data);
             if (data.cmd != "register" && data.cmd != "login" && !this._logined)
                 return this.response({ cmd: data.cmd, error: 1007 /* ErrorCode.NOT_LOGIN */ });
@@ -121,8 +121,8 @@ var Connection = /** @class */ (function () {
         var _a;
         this._logined = false;
         this._connection = null;
-        (_a = this._userData) === null || _a === void 0 ? void 0 : _a.logout();
-        ConnectionMgr_1.connectionMgr.connectionClosed(this._userData.account, this);
+        (_a = this._user) === null || _a === void 0 ? void 0 : _a.logout();
+        ConnectionMgr_1.connectionMgr.connectionClosed(this._user.account, this);
     };
     return Connection;
 }());

@@ -1,14 +1,20 @@
-import { Pool } from "../../libs/pool/Pool";
-import { Connection } from "../Connection";
-import { ErrorCode } from "../enum/ErrorCode";
+import { Pool } from "../../../libs/pool/Pool";
+import { Connection } from "../../Connection";
+import { ErrorCode } from "../../enum/ErrorCode";
 
 export class BaseController {
     private _cmds: { [ key: string ]: Function };
-    protected connection: Connection;
+    private _connection: Connection;
+    get connection() {
+        return this._connection;
+    }
+    get user() {
+        return this._connection.user;
+    }
 
     static create(connection: Connection) {
         const result = Pool.get(this.prototype.constructor.name as any, this);
-        result.connection = connection;
+        result._connection = connection;
         for (let key in result._cmds) {
             connection.listener.on(key, result, result[ key ]);
         }
@@ -17,7 +23,7 @@ export class BaseController {
     }
 
     recover() {
-        this.connection = null;
+        this._connection = null;
         Pool.recover(this.constructor.name as any, this);
     }
 
