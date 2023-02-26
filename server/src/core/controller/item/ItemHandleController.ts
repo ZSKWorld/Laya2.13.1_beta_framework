@@ -1,7 +1,7 @@
 import { AddCMD, BaseController } from "../base/BaseController";
 import { ItemHandleChecker } from "./ItemHandleChecker";
 
-export class ItemHandleController extends BaseController implements IItemHandle {
+export class ItemHandleController extends BaseController implements IItemHandleCtrl {
     @AddCMD
     useItem(data: UseItemInput): void {
         const { user } = this;

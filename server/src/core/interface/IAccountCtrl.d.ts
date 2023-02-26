@@ -1,4 +1,4 @@
-declare interface IAccount {
+declare interface IAccountCtrl {
     register(data: RegisterInput): void;
     login(data: LoginInput): void;
     clearAccount(data: ClearAccountInput): void;

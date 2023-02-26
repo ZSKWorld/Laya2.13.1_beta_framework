@@ -3,7 +3,7 @@ import { ErrorCode } from "../../enum/ErrorCode";
 import { User } from "../../user/User";
 import { AddCMD, BaseController } from "../base/BaseController";
 
-export class AccouontController extends BaseController implements IAccount {
+export class AccouontController extends BaseController implements IAccountCtrl {
     @AddCMD
     register(data: RegisterInput): void {
         const user = Util.getData(data.account);

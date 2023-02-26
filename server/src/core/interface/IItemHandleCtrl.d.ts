@@ -1,5 +1,5 @@
 
-declare interface IItemHandle {
+declare interface IItemHandleCtrl {
     /** 使用物品 */
     useItem(data: UseItemInput): void;
     /** 出售物品 */

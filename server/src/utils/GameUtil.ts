@@ -18,10 +18,10 @@ export class GameUtil {
 
     /** 获取离线奖励 */
     static getOffline(data: IUser): IOffline {
-        if (!data.lastOnlineTime) return null;
-        const timeOffset = ((TimeUtil.getTimeStamp() - data.lastOnlineTime) / 1000) << 0;
+        if (!data.account.lastOnlineTime) return null;
+        const timeOffset = ((TimeUtil.getTimeStamp() - data.account.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5) return null;
-        else return { offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate(data) * timeOffset) << 0 };
+        else return this.cantSyncObj({ offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate(data) * timeOffset) << 0 });
     }
 
     /** 获取精力回复速率 */
@@ -32,11 +32,19 @@ export class GameUtil {
         return 1 + xinFaJLHF;
     }
 
+    /** 获取最大精力值 */
+    static getMaxVigro(data:IUser) {
+        const citta = data.citta;
+        let xinFaJL = 0;
+        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * tableMgr.XinFaBook[ v ].JLAdd));
+        return Math.floor(86400 + xinFaJL);
+    }
+
     /**境界转等级 */
     static jingJieToLevel(jingJie: number, cengJi: number) {
         return (jingJie - 1) * (+tableMgr.Const[ 1005 ].Value) + cengJi;
     }
-    
+
     /**等级转境界 */
     static levelToJingJie(level: number) {
         let jingJie = 0;
@@ -51,5 +59,16 @@ export class GameUtil {
             jingJie += 1;
         }
         return { jingJie, cengJi };
+    }
+
+    static cantSyncObj<T>(obj: T) {
+        if (typeof obj == "object") {
+            Object.defineProperty(obj, "CantSyncObj", {
+                configurable: false,
+                enumerable: false,
+                value: true,
+            });
+        }
+        return obj;
     }
 }

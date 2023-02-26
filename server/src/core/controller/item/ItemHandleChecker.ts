@@ -46,7 +46,7 @@ export class ItemHandleChecker {
         else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         else if (this.checkJingJieEnough(data, id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
         else if (GameUtil.isFood(id)) {
-            if (data.vigor >= data.getMaxVigro())
+            if (data.base.vigor >= data.base.getMaxVigro())
                 return ErrorCode.VIGOR_IS_FULL;
         }
         else if (GameUtil.isSkillBook(id)) {
@@ -95,7 +95,7 @@ export class ItemHandleChecker {
      * @returns 
      */
     static checkEquipTakeOff(data: Readonly<User>, part: EquipmentPart): ErrorCode {
-        if (data.getDressedEquip(part) == null) return ErrorCode.PART_NOT_DRESSED_EQUIP;
+        if (data.body.getDressedEquip(part) == null) return ErrorCode.PART_NOT_DRESSED_EQUIP;
         return ErrorCode.NONE;
     }
 

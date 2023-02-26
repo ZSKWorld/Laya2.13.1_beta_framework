@@ -1,4 +1,4 @@
-declare interface IShop {
+declare interface IShopCtrl {
     buyGoods(data: BuyGoodsInput): void;
 }
 

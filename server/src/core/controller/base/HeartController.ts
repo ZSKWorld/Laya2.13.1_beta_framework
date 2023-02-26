@@ -1,7 +1,7 @@
 import { TimeUtil } from "../../../utils/TimeUtil";
 import { BaseController } from "./BaseController";
 
-export class HeartController extends BaseController implements IHeart {
+export class HeartController extends BaseController implements IHeartCtrl {
     private _intervalId: NodeJS.Timer;
     heart(data: HeartInput) {
         if (this.connection.logined)

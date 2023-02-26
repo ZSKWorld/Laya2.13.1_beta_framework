@@ -2,15 +2,7 @@ import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
 import { EquipmentPart } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
-export class ItemBase implements IItemBase {
-    id: number = 0;
-    count: number = 0;
-
-    constructor(id: number = 0, count: number = 0) {
-        this.id = id;
-        this.count = count;
-    }
-}
+import { ItemBase } from "./ItemBase";
 
 export class Equipment extends ItemBase implements IEquipment {
     uid: string = Util.CreateUID();

@@ -1,7 +1,7 @@
 import { AddCMD, BaseController } from "../base/BaseController";
 import { ItemHandleChecker } from "../item/ItemHandleChecker";
 
-export class ShopController extends BaseController implements IShop {
+export class ShopController extends BaseController implements IShopCtrl {
     @AddCMD
     buyGoods(data: BuyGoodsInput): void {
         const { user } = this;

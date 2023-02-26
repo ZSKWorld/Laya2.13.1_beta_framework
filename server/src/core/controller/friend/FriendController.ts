@@ -2,7 +2,7 @@ import { connectionMgr } from "../../ConnectionMgr";
 import { ErrorCode } from "../../enum/ErrorCode";
 import { AddCMD, BaseController } from "../base/BaseController";
 
-export class FriendController extends BaseController implements IFriend {
+export class FriendController extends BaseController implements IFriendCtrl {
     @AddCMD
     addFriend(data: AddFriendInput): void {
         const { user } = this;

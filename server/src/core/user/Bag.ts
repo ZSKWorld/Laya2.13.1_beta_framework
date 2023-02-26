@@ -1,15 +1,16 @@
 import { DataType, ItemBagType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
-import { Equipment, ItemBase } from "./Item";
+import { Equipment } from "./Equipment";
+import { ItemBase } from "./ItemBase";
 
 export class Bag implements IBag {
-    collect: number[];
-    equipment: IEquipment[];
-    gem: IItemBase[];
-    prop: IItemBase[];
-    material: IItemBase[];
-    book: IItemBase[];
-    other: IItemBase[];
+    collect: number[] = [];
+    equipment: IEquipment[] = [];
+    gem: IItemBase[] = [];
+    prop: IItemBase[] = [];
+    material: IItemBase[] = [];
+    book: IItemBase[] = [];
+    other: IItemBase[] = [];
 
     getItem(id: number) {
         const item = tableMgr.Item[ id ];

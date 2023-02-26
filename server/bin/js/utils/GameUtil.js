@@ -20,13 +20,13 @@ var GameUtil = /** @class */ (function () {
     };
     /** 获取离线奖励 */
     GameUtil.getOffline = function (data) {
-        if (!data.lastOnlineTime)
+        if (!data.account.lastOnlineTime)
             return null;
-        var timeOffset = ((TimeUtil_1.TimeUtil.getTimeStamp() - data.lastOnlineTime) / 1000) << 0;
+        var timeOffset = ((TimeUtil_1.TimeUtil.getTimeStamp() - data.account.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5)
             return null;
         else
-            return { offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate(data) * timeOffset) << 0 };
+            return this.cantSyncObj({ offlineTime: timeOffset, vigor: (this.getVigorRecoveryRate(data) * timeOffset) << 0 });
     };
     /** 获取精力回复速率 */
     GameUtil.getVigorRecoveryRate = function (data) {
@@ -34,6 +34,13 @@ var GameUtil = /** @class */ (function () {
         var xinFaJLHF = 0;
         Object.keys(citta).forEach(function (v) { return xinFaJLHF += (citta[v] * TableManager_1.tableMgr.XinFaBook[v].JLHFAdd); });
         return 1 + xinFaJLHF;
+    };
+    /** 获取最大精力值 */
+    GameUtil.getMaxVigro = function (data) {
+        var citta = data.citta;
+        var xinFaJL = 0;
+        Object.keys(citta).forEach(function (v) { return xinFaJL += (citta[v] * TableManager_1.tableMgr.XinFaBook[v].JLAdd); });
+        return Math.floor(86400 + xinFaJL);
     };
     /**境界转等级 */
     GameUtil.jingJieToLevel = function (jingJie, cengJi) {
@@ -54,6 +61,16 @@ var GameUtil = /** @class */ (function () {
             jingJie += 1;
         }
         return { jingJie: jingJie, cengJi: cengJi };
+    };
+    GameUtil.cantSyncObj = function (obj) {
+        if (typeof obj == "object") {
+            Object.defineProperty(obj, "CantSyncObj", {
+                configurable: false,
+                enumerable: false,
+                value: true
+            });
+        }
+        return obj;
     };
     return GameUtil;
 }());

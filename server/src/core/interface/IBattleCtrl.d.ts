@@ -1,6 +1,6 @@
 declare type BattleLevel = ConfigLevelData | ConfigFuBenData | ConfigMiJingData | ConfigBossData;
 
-declare interface IBattle {
+declare interface IBattleCtrl {
     startBattle(data: BattleInput): void;
 }
 

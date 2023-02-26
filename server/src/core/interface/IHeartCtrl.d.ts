@@ -1,4 +1,4 @@
-declare interface IHeart {
+declare interface IHeartCtrl {
     heart(data: HeartInput): void;
 }
 
