@@ -1,5 +1,5 @@
 import { TimeUtil } from "../../../utils/TimeUtil";
-import { BaseController } from "./BaseController";
+import { BaseController } from "../BaseController";
 
 export class HeartController extends BaseController implements IHeartCtrl {
     private _intervalId: NodeJS.Timer;

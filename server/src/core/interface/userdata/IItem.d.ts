@@ -28,5 +28,5 @@ declare interface IEquipment extends IItemBase {
     bodyAttri: number[];
     /** 装备部位 EquipmentPart */
     get part(): number;
-    createAttribute(): void;
+    createAttribute(): IEquipment;
 }

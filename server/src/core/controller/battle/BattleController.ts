@@ -1,4 +1,4 @@
-import { AddCMD, BaseController } from "../base/BaseController";
+import { AddCMD, BaseController } from "../BaseController";
 
 export class BattleController extends BaseController implements IBattleCtrl {
 

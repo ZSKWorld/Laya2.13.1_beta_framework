@@ -1,24 +1,10 @@
-import { GameUtil } from "../../../utils/GameUtil";
 import { MathUtil } from "../../../utils/MathUtil";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
 import { tableMgr } from "../../table/TableManager";
 import { ItemBase } from "../../user/ItemBase";
+import { ItemHelper } from "./ItemHelper";
 
 export class ItemHandle {
-
-    /**
-     * 获取物品数量
-     * @param data 目标用户数据
-     * @param id 物品id
-     * @returns 物品数量
-     */
-    static getItemCount(data: IUser, id: number): number {
-        switch (tableMgr.Item[ id ].DataType) {
-            case DataType.BaseData: return data.base.getItemCount(id);
-            case DataType.BagData: return data.bag.getItem(id)?.count || 0;
-            default: return 0;
-        }
-    }
 
     /**
      * 改变物品数量
@@ -69,12 +55,12 @@ export class ItemHandle {
      * @returns 
      */
     static sellItem(data: IUser, id: number, count: number) {
-        const rewards: ItemBase[] = [];
+        const rewards: IItemBase[] = [];
         const sellRewards = tableMgr.Item[ id ].SellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(v => {
                 rewards.push(new ItemBase(v.id, v.count * count));
-                if (GameUtil.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
+                if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                 else {
                     this.changeItemCount(data, v.id, v.count * count);
                 }
@@ -93,7 +79,7 @@ export class ItemHandle {
      * @returns 使用后获得的物品
      */
     private static useProp(data: IUser, id: number, count: number) {
-        const rewards: ItemBase[] = [];
+        const rewards: IItemBase[] = [];
         let useCount = 1;
         switch (id) {
             case 2007: data.battle.copy = {}; break;
@@ -104,7 +90,7 @@ export class ItemHandle {
                 useCount = count;
                 tableMgr.Props[ id ].Rewards.forEach(v => {
                     rewards.push(new ItemBase(v.id, v.count * count));
-                    if (GameUtil.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
+                    if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                     else this.changeItemCount(data, v.id, v.count * count);
                 });
                 break;
@@ -121,13 +107,13 @@ export class ItemHandle {
      * @returns 使用后获得的物品
      */
     private static useFood(data: IUser, id: number, count: number) {
-        const maxVigro = GameUtil.getMaxVigro(data);
+        const maxVigro = data.base.getMaxVigro();
         let useCount = 0;
         const food = tableMgr.Food[ id ];
         let singleRecover = 0;
         switch (food.RecoverType) {
             case FoodRecoverType.NumberRecover: singleRecover = food.RecoverValue; break;
-            case FoodRecoverType.TimeRecover: singleRecover = food.RecoverValue * GameUtil.getVigorRecoveryRate(data); break;
+            case FoodRecoverType.TimeRecover: singleRecover = food.RecoverValue * data.base.getVigorRecoveryRate(); break;
             case FoodRecoverType.PercentRecover: singleRecover = food.RecoverValue * maxVigro; break;
             default: throw new Error("未知食物类型");
         }

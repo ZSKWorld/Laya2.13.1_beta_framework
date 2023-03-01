@@ -1,6 +1,6 @@
 import { connectionMgr } from "../../ConnectionMgr";
 import { ErrorCode } from "../../enum/ErrorCode";
-import { AddCMD, BaseController } from "../base/BaseController";
+import { AddCMD, BaseController } from "../BaseController";
 
 export class FriendController extends BaseController implements IFriendCtrl {
     @AddCMD

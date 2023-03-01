@@ -1,11 +1,12 @@
+declare interface IBattleData { }
 declare interface IBattle {
 
     /**关卡数据 */
-    level: KeyData;
+    level: IBattleData;
     /**副本数据 */
-    copy: KeyData;
+    copy: IBattleData;
     /**秘境数据 */
-    secret: KeyData;
+    secret: IBattleData;
     /**boss数据 */
-    boss: KeyData;
+    boss: IBattleData;
 }

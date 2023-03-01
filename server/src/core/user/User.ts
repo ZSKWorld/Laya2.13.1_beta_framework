@@ -1,8 +1,6 @@
 import { GameUtil } from "../../utils/GameUtil";
-import { MathUtil } from "../../utils/MathUtil";
+import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
-import { BaseDataType, DataType, EquipmentPart, FoodRecoverType } from "../enum/ItemEnum";
-import { tableMgr } from "../table/TableManager";
 import { Account } from "./Account";
 import { Bag } from "./Bag";
 import { Base } from "./Base";
@@ -37,14 +35,11 @@ export class User implements IUser {
         this.body = new Body();
         this.bag = new Bag();
         this.battle = new Battle();
-
-        this.base.vigor = GameUtil.getMaxVigro(this);
     }
 
     getSyncInfo(): Partial<IUser> { return null; }
-    clearSyncInfo(): void { }
 
-    //#region 初始化相关
+    clearSyncInfo(): void { }
 
     login(source: IUser) {
         const encodeDatas: any[][][] = [];
@@ -68,14 +63,15 @@ export class User implements IUser {
             }
         });
         this.account.login();
-        this.offline = GameUtil.getOffline(this);
+
+        this.offline = this.getOffline();
     }
 
     logout() {
         this.account.logout();
         this.save();
     }
-    
+
     save() {
         this.offline = null;
         const encodeKeys: string[] = [];
@@ -97,5 +93,11 @@ export class User implements IUser {
         });
         Util.saveData(this);
     }
-    //#endregion
+
+    private getOffline(): IOffline {
+        if (!this.account.lastOnlineTime) return null;
+        const timeOffset = ((TimeUtil.getTimeStamp() - this.account.lastOnlineTime) / 1000) << 0;
+        if (timeOffset <= 5) return null;
+        else return GameUtil.cantSyncObj({ offlineTime: timeOffset, vigor: (this.base.getVigorRecoveryRate() * timeOffset) << 0 });
+    }
 }

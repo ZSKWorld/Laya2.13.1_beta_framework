@@ -1,10 +1,9 @@
 import { DataType, ItemBagType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
-import { CantSyncObj } from "./CantSyncObj";
 import { Equipment } from "./Equipment";
 import { ItemBase } from "./ItemBase";
 
-export class Bag extends CantSyncObj implements IBag {
+export class Bag implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [];
     gem: IItemBase[] = [];
@@ -18,8 +17,6 @@ export class Bag extends CantSyncObj implements IBag {
         if (!item) return null;
         let datas: IItemBase[];
         switch (item.BagType) {
-            // case ItemBagType.Collect: break;
-            // case ItemBagType.Equip: break;
             case ItemBagType.Prop: datas = this.prop; break;
             case ItemBagType.Gem: datas = this.gem; break;
             case ItemBagType.Material: datas = this.material; break;
@@ -71,9 +68,7 @@ export class Bag extends CantSyncObj implements IBag {
 
     addNewEquip(id: number, count: number) {
         for (let i = 0; i < count; i++) {
-            const equip = new Equipment(id);
-            equip.createAttribute();
-            this.addEquip(equip);
+            this.addEquip(new Equipment(id).createAttribute());
         }
     }
 

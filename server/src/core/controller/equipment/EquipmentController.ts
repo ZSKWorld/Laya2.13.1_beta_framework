@@ -1,4 +1,4 @@
-import { AddCMD, BaseController } from "../base/BaseController";
+import { AddCMD, BaseController } from "../BaseController";
 import { EquipmentChecker } from "./EquipmentChecker";
 import { EquipmentHandle } from "./EquipmentHandle";
 

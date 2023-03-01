@@ -1,7 +1,6 @@
 import { EquipmentPart } from "../enum/ItemEnum";
-import { CantSyncObj } from "./CantSyncObj";
 
-export class Body extends CantSyncObj implements IBody {
+export class Body implements IBody {
     /** 武器 */
     weapon: IEquipment = null;
     /** 头盔 */

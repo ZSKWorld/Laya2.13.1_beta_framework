@@ -3,14 +3,14 @@ import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
 import { connectionMgr } from "./ConnectionMgr";
 import { AccouontController } from "./controller/account/AccouontController";
-import { BaseController } from "./controller/base/BaseController";
-import { HeartController } from "./controller/base/HeartController";
+import { BaseController } from "./controller/BaseController";
+import { HeartController } from "./controller/heart/HeartController";
 import { BattleController } from "./controller/battle/BattleController";
 import { FriendController } from "./controller/friend/FriendController";
 import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
-import { ProxyMgr } from "./user/ProxyMgr";
+import { ProxyMgr } from "../utils/ProxyMgr";
 import { User } from "./user/User";
 const enum ConnectionEvent {
     Message = "message",

@@ -3,7 +3,7 @@ import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
 import { tableMgr } from "./core/table/TableManager";
-import { ProxyMgr } from "./core/user/ProxyMgr";
+import { ProxyMgr } from "./utils/ProxyMgr";
 import { GameUtil } from "./utils/GameUtil";
 import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");

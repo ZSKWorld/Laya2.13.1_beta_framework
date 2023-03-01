@@ -1,7 +1,7 @@
-import { GameUtil } from "../../../utils/GameUtil";
 import { ErrorCode } from "../../enum/ErrorCode";
 import { EquipmentPart } from "../../enum/ItemEnum";
 import { tableMgr } from "../../table/TableManager";
+import { ItemHelper } from "../item/ItemHelper";
 
 export class EquipmentChecker {
 
@@ -14,7 +14,7 @@ export class EquipmentChecker {
     static checkEquipDressable(data: IUser, uid: string): ErrorCode {
         const equip = data.bag.getEquip(uid);
         if (equip == null) return ErrorCode.ITEM_NOT_EXIST;
-        else if (GameUtil.checkJingJieEnough(data, equip.id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_DRESS;
+        else if (ItemHelper.checkJingJieEnough(data, equip.id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_DRESS;
         return ErrorCode.NONE;
     }
 

@@ -1,7 +1,7 @@
 import { Util } from "../../../utils/Util";
 import { ErrorCode } from "../../enum/ErrorCode";
 import { User } from "../../user/User";
-import { AddCMD, BaseController } from "../base/BaseController";
+import { AddCMD, BaseController } from "../BaseController";
 
 export class AccouontController extends BaseController implements IAccountCtrl {
     @AddCMD

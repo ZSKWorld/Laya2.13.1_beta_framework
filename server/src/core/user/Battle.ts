@@ -1,12 +1,18 @@
-import { CantSyncObj } from "./CantSyncObj";
+import { GameUtil } from "../../utils/GameUtil";
 
-export class Battle extends CantSyncObj implements IBattle{
+class BattleData implements IBattleData {
+    constructor() {
+        GameUtil.cantSyncObj(this);
+    }
+}
+
+export class Battle implements IBattle {
     /**关卡数据 */
-    level: KeyData = {};
+    level: IBattleData = new BattleData();
     /**副本数据 */
-    copy: KeyData = {};
+    copy: IBattleData = new BattleData();
     /**秘境数据 */
-    secret: KeyData = {};
+    secret: IBattleData = new BattleData();
     /**boss数据 */
-    boss: KeyData = {};
+    boss: IBattleData = new BattleData();
 }

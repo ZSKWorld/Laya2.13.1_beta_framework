@@ -1,4 +1,4 @@
-import { AddCMD, BaseController } from "../base/BaseController";
+import { AddCMD, BaseController } from "../BaseController";
 import { ShopChecker } from "./ShopChecker";
 import { ShopHandle } from "./ShopHandle";
 

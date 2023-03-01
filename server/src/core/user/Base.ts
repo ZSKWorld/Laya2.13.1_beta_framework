@@ -1,15 +1,20 @@
+import { Formula } from "../../utils/Formula";
+import { GameUtil } from "../../utils/GameUtil";
 import { BaseDataType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
-import { CantSyncObj } from "./CantSyncObj";
-import { Formula } from "./Formula";
+class CittaData implements ICittaData {
+    constructor() {
+        GameUtil.cantSyncObj(this);
+    }
+}
 
-export class Base extends CantSyncObj implements IBase {
+export class Base implements IBase {
     /** 金币 */
     coin: number = 0;
     /** 元宝 */
     vcoin: number = 0;
     /** 精力 */
-    vigor: number = 0;
+    vigor: number = 24 * 60 * 60;
     /** 境界 */
     jingJie: number = 1;
     /** 层数 */
@@ -33,13 +38,27 @@ export class Base extends CantSyncObj implements IBase {
     /** 宝石积分 */
     gemScore: number = 0;
     /**心法数据 */
-    citta: KeyData = {};
+    citta: ICittaData = new CittaData();
     /**技能数据 */
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
-    
-    getItemCount(id: number): number{
+
+    getMaxVigro(): number {
+        const { citta } = this;
+        let xinFaJL = 0;
+        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * tableMgr.XinFaBook[ v ].JLAdd));
+        return Math.floor(86400 + xinFaJL);
+    }
+
+    getVigorRecoveryRate(): number {
+        const { citta } = this;
+        let xinFaJLHF = 0;
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
+        return 1 + xinFaJLHF;
+    }
+
+    getItemCount(id: number): number {
         switch (id) {
             case BaseDataType.Coin: return this.coin;
             case BaseDataType.Vcoin: return this.vcoin;
@@ -53,8 +72,8 @@ export class Base extends CantSyncObj implements IBase {
             default: throw new Error("未知基础数据类型" + id);
         }
     }
-    
-    changeItemCount(id: number, count: number): void{
+
+    changeItemCount(id: number, count: number): void {
         switch (id) {
             case BaseDataType.Coin: this.coin = Math.max(this.coin + count, 0); break;
             case BaseDataType.Vcoin: this.vcoin = Math.max(this.vcoin + count, 0); break;
@@ -69,7 +88,7 @@ export class Base extends CantSyncObj implements IBase {
         }
     }
 
-    getUpgradeExp(): number {
+    private getUpgradeExp(): number {
         if (!tableMgr.JingJie[ this.jingJie + 1 ]) return 0;
         else return Formula.exp(this.jingJie, this.cengJi);
     }

@@ -1,7 +1,6 @@
-import { GameUtil } from "../../../utils/GameUtil";
 import { ErrorCode } from "../../enum/ErrorCode";
 import { tableMgr } from "../../table/TableManager";
-import { ItemHandle } from "./ItemHandle";
+import { ItemHelper } from "./ItemHelper";
 
 export class ItemChecker {
 
@@ -26,19 +25,19 @@ export class ItemChecker {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
         const item = data.bag.getItem(id);
         if (item == null) return ErrorCode.ITEM_NOT_EXIST;
-        const usableItem = GameUtil.getUsableItem(id);
+        const usableItem = tableMgr.Props[ id ] || tableMgr.Food[ id ] || tableMgr.SkillBook[ id ] || tableMgr.XinFaBook[ id ];
         if (!usableItem) return ErrorCode.ITEM_CAN_NOT_USE;
         else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
-        else if (GameUtil.checkJingJieEnough(data, id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
-        else if (GameUtil.isFood(id)) {
-            if (data.base.vigor >= GameUtil.getMaxVigro(data))
+        else if (ItemHelper.checkJingJieEnough(data, id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
+        else if (ItemHelper.isFood(id)) {
+            if (data.base.vigor >= data.base.getMaxVigro())
                 return ErrorCode.VIGOR_IS_FULL;
         }
-        else if (GameUtil.isSkillBook(id)) {
+        else if (ItemHelper.isSkillBook(id)) {
             const SectRequire = (<ConfigSkillBookData>usableItem).SectRequire;
             if (SectRequire.length && SectRequire.indexOf(data.base.sect) == -1) return ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL;
             else if (data.base.skill.indexOf(id) != -1) return ErrorCode.SKILL_IS_LEARNED;
-        } else if (GameUtil.isXinFaBook(id)) {
+        } else if (ItemHelper.isXinFaBook(id)) {
             if (data.base.citta[ id ] != null) return ErrorCode.CITTA_IS_LEARNED;
         }
         return ErrorCode.NONE;
@@ -54,7 +53,7 @@ export class ItemChecker {
     static checkItemSalable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
         if (!tableMgr.Item[ id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
-        const itemCnt = ItemHandle.getItemCount(data, id);
+        const itemCnt = ItemHelper.getItemCount(data, id);
         if (itemCnt < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         return ErrorCode.NONE;
     }
@@ -68,7 +67,7 @@ export class ItemChecker {
      * @returns 
      */
     static checkCollect(data: IUser, id: number, collect: boolean): ErrorCode {
-        if (GameUtil.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
+        if (ItemHelper.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
         if (collect && this.checkItemCollected(data, id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
         if (!collect && !this.checkItemCollected(data, id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
         return ErrorCode.NONE;

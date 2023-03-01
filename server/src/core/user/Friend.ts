@@ -1,5 +1,4 @@
-import { CantSyncObj } from "./CantSyncObj";
 
-export class Friend extends CantSyncObj implements IFriend {
+export class Friend implements IFriend {
     friend: string[];
 }

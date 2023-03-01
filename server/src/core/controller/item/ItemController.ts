@@ -1,4 +1,4 @@
-import { AddCMD, BaseController } from "../base/BaseController";
+import { AddCMD, BaseController } from "../BaseController";
 import { ItemChecker } from "./ItemChecker";
 import { ItemHandle } from "./ItemHandle";
 

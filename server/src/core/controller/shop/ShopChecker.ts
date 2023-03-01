@@ -1,6 +1,6 @@
 import { ErrorCode } from "../../enum/ErrorCode";
 import { tableMgr } from "../../table/TableManager";
-import { ItemHandle } from "../item/ItemHandle";
+import { ItemHelper } from "../item/ItemHelper";
 
 export class ShopChecker {
     /**
@@ -16,7 +16,7 @@ export class ShopChecker {
         if (!item) return ErrorCode.GOODS_NOT_EXIST;
         for (let i = 0, n = item.SellPrice.length; i < n; i++) {
             const element = item.SellPrice[ i ];
-            if (ItemHandle.getItemCount(data, element.id) < element.count * count)
+            if (ItemHelper.getItemCount(data, element.id) < element.count * count)
                 return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         }
         return ErrorCode.NONE;

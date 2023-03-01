@@ -1,7 +1,6 @@
 import { TimeUtil } from "../../utils/TimeUtil";
-import { CantSyncObj } from "./CantSyncObj";
 
-export class Account extends CantSyncObj implements IAccount {
+export class Account implements IAccount {
     uid: string;
     nickname: string;
     account: string;
@@ -10,7 +9,6 @@ export class Account extends CantSyncObj implements IAccount {
     lastLoginTime: number;
     lastOnlineTime: number;
     constructor(account: string, password: string, nickname: string) {
-        super();
         this.account = account;
         this.password = password;
         this.nickname = nickname;

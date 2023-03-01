@@ -1,6 +1,6 @@
-import { Pool } from "../../../libs/pool/Pool";
-import { Connection } from "../../Connection";
-import { ErrorCode } from "../../enum/ErrorCode";
+import { Pool } from "../../libs/pool/Pool";
+import { Connection } from "../Connection";
+import { ErrorCode } from "../enum/ErrorCode";
 
 export class BaseController {
     private _cmds: { [ key: string ]: Function };

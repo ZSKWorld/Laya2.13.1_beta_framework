@@ -1,3 +1,4 @@
+declare interface ICittaData { }
 declare interface IBase {
     /** 金币 */
     coin: number;
@@ -28,15 +29,21 @@ declare interface IBase {
     /** 宝石积分 */
     gemScore: number;
     /**心法数据 */
-    citta: KeyData;
+    citta: ICittaData;
     /**技能数据 */
     skill: number[];
     /**出战技能 */
     usingSkill: number[];
+
+    /** 获取最大精力值 */
+    getMaxVigro(): number;
+
+    /** 获取精力回复速率 */
+    getVigorRecoveryRate(): number;
+
     /** 获取物品数量 */
     getItemCount(id: number): number;
+
     /** 改变物品数量 */
     changeItemCount(id: number, count: number): void;
-    /** 升级经验 ，没有为0 */
-    getUpgradeExp(): number;
 }
