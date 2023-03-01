@@ -1,9 +1,10 @@
 import { DataType, ItemBagType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
+import { CantSyncObj } from "./CantSyncObj";
 import { Equipment } from "./Equipment";
 import { ItemBase } from "./ItemBase";
 
-export class Bag implements IBag {
+export class Bag extends CantSyncObj implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [];
     gem: IItemBase[] = [];

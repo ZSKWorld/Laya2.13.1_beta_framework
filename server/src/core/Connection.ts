@@ -7,7 +7,7 @@ import { BaseController } from "./controller/base/BaseController";
 import { HeartController } from "./controller/base/HeartController";
 import { BattleController } from "./controller/battle/BattleController";
 import { FriendController } from "./controller/friend/FriendController";
-import { ItemHandleController } from "./controller/item/ItemHandleController";
+import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
 import { ProxyMgr } from "./user/ProxyMgr";
@@ -25,7 +25,7 @@ export class Connection {
 
     private _logined: boolean;
     private _connection: websocket.connection;
-    private _user: Readonly<User>;
+    private _user: IUser;
     get logined() { return !!this._logined; }
     get listener() { return this._listener; }
     get user() { return this._user; }
@@ -50,7 +50,7 @@ export class Connection {
                 AccouontController.create(this),
                 BattleController.create(this),
                 HeartController.create(this),
-                ItemHandleController.create(this),
+                ItemController.create(this),
                 ShopController.create(this),
                 FriendController.create(this),
             );
@@ -62,8 +62,8 @@ export class Connection {
 
     userLogin(data: IUser) {
         this._logined = true;
-        this._user = ProxyMgr.getProxy(data.uid, null, new User("", "", ""));
-        connectionMgr.addConnection(data.uid, this);
+        this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));
+        connectionMgr.addConnection(data.account.uid, this);
         this._user.login(data);
     }
 
@@ -129,6 +129,6 @@ export class Connection {
         this._logined = false;
         this._connection = null;
         this._user?.logout();
-        connectionMgr.connectionClosed(this._user.account, this);
+        connectionMgr.connectionClosed(this._user.account.account, this);
     }
 }

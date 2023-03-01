@@ -34,9 +34,9 @@ export class AccouontController extends BaseController implements IAccountCtrl {
 
     @AddCMD
     clearAccount(data: ClearAccountInput): void {
-        const { user } = this;
-        new User(user.account, user.password, user.nickname).save();
-        const newData = Util.getData(user.account);
+        const { account,password,nickname } = this.user.account;
+        new User(account, password, nickname).save();
+        const newData = Util.getData(account);
         this.connection.userLogin(newData);
         this.response<ClearAccountOutput>(data.cmd);
     }

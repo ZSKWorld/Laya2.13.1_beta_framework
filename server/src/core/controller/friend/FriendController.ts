@@ -6,16 +6,16 @@ export class FriendController extends BaseController implements IFriendCtrl {
     @AddCMD
     addFriend(data: AddFriendInput): void {
         const { user } = this;
-        if (user.friends.includes(data.friendUid))
+        if (user.friend.friend.includes(data.friendUid))
             return this.response(data.cmd, null, ErrorCode.ALREADY_FRIEND);
-        user.friends.push(data.friendUid);
+        user.friend.friend.push(data.friendUid);
         this.response(data.cmd);
     }
 
 
     @AddCMD
     friendMsg(data: FriendMsgInput): void {
-        if (!this.user.friends.includes(data.friendUid))
+        if (!this.user.friend.friend.includes(data.friendUid))
             return this.response(data.cmd, null, ErrorCode.NOT_FRIEND);
         const friendCon = connectionMgr.getConnection(data.friendUid);
         if (friendCon) {

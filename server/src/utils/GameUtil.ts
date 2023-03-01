@@ -8,6 +8,20 @@ export class GameUtil {
     static isSkillBook(id: number) { return !!tableMgr.SkillBook[ id ]; }
     static isXinFaBook(id: number) { return !!tableMgr.XinFaBook[ id ]; }
 
+    /**
+     * 检查当前境界是否满足物品境界需求
+     * @param data 用户数据
+     * @param id 物品id
+     * @returns 
+     */
+    static checkJingJieEnough(data: IUser, id: number): boolean {
+        const item = tableMgr.Item[ id ];
+        if (!item) return false;
+        const { jingJie: checkedJingJie, cengJi: checkedCengJi } = item.UseRequire;
+        const { jingJie, cengJi } = data.base;
+        return jingJie > checkedJingJie || (jingJie == checkedJingJie && cengJi >= checkedCengJi);
+    }
+
     /** 获取可使用的物品 */
     static getUsableItem(id: number) {
         const [ prop, food, skillBook, xinFaBook ] = [
@@ -26,7 +40,7 @@ export class GameUtil {
 
     /** 获取精力回复速率 */
     static getVigorRecoveryRate(data: IUser) {
-        const citta = data.citta;
+        const citta = data.base.citta;
         let xinFaJLHF = 0;
         Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
         return 1 + xinFaJLHF;
@@ -34,7 +48,7 @@ export class GameUtil {
 
     /** 获取最大精力值 */
     static getMaxVigro(data:IUser) {
-        const citta = data.citta;
+        const citta = data.base.citta;
         let xinFaJL = 0;
         Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * tableMgr.XinFaBook[ v ].JLAdd));
         return Math.floor(86400 + xinFaJL);

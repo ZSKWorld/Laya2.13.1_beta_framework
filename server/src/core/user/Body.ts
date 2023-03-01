@@ -1,6 +1,7 @@
 import { EquipmentPart } from "../enum/ItemEnum";
+import { CantSyncObj } from "./CantSyncObj";
 
-export class Body implements IBody {
+export class Body extends CantSyncObj implements IBody {
     /** 武器 */
     weapon: IEquipment = null;
     /** 头盔 */
@@ -41,6 +42,7 @@ export class Body implements IBody {
     amuletGems: number[] = [];
     /** 鞋子上装备的宝石 */
     shoesGems: number[] = [];
+
     getDressedEquip(part: number): IEquipment {
         switch (part) {
             case EquipmentPart.Weapon: return this.weapon;

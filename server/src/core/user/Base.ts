@@ -1,8 +1,9 @@
 import { BaseDataType } from "../enum/ItemEnum";
 import { tableMgr } from "../table/TableManager";
+import { CantSyncObj } from "./CantSyncObj";
 import { Formula } from "./Formula";
 
-export class Base implements IBase {
+export class Base extends CantSyncObj implements IBase {
     /** 金币 */
     coin: number = 0;
     /** 元宝 */
@@ -31,8 +32,12 @@ export class Base implements IBase {
     soul: number = 0;
     /** 宝石积分 */
     gemScore: number = 0;
-    constructor() {
-    }
+    /**心法数据 */
+    citta: KeyData = {};
+    /**技能数据 */
+    skill: number[] = [ 5000 ];
+    /**出战技能 */
+    usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
     
     getItemCount(id: number): number{
         switch (id) {

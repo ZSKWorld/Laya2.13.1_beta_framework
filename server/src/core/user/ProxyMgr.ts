@@ -1,13 +1,8 @@
-export type SyncProxy<T> = T & {
-    getSyncInfo(): any;
-    clearSyncInfo(): void;
-}
-
 const ProxyKey = Symbol(111);
 export class ProxyMgr {
     private static proxyMap: { [ uid: string ]: any } = {};
 
-    static getProxy<T extends object>(uid: string, dataKey: string, target: T): SyncProxy<T> {
+    static getProxy<T extends object>(uid: string, dataKey: string, target: T) {
         dataKey = dataKey || "";
         if (typeof target === "object" && target !== null && !target[ ProxyKey ]) {
             target[ ProxyKey ] = true;

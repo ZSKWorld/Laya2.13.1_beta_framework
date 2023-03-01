@@ -33,8 +33,8 @@ export class Util {
     }
 
     static saveData(data: IUser) {
-        const filePath = this.getDataPath(data.account);
-        if (!filePath) return console.log("路径不存在", data.account, filePath);
+        const filePath = this.getDataPath(data.account.account);
+        if (!filePath) return console.log("路径不存在", data.account.account, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data));
     }
 

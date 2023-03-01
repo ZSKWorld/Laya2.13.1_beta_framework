@@ -27,6 +27,12 @@ declare interface IBase {
     soul: number;
     /** 宝石积分 */
     gemScore: number;
+    /**心法数据 */
+    citta: KeyData;
+    /**技能数据 */
+    skill: number[];
+    /**出战技能 */
+    usingSkill: number[];
     /** 获取物品数量 */
     getItemCount(id: number): number;
     /** 改变物品数量 */
