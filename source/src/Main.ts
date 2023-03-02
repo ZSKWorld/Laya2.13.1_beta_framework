@@ -55,7 +55,6 @@ class Main extends Notifier {
 			[ LogicScene.GameScene, new LogicSceneGame() ],
 		]);
 		logicSceneMgr.enterScene(LogicScene.InitScene);
-		console.log("123");
 	}
 
 }
