@@ -17,8 +17,7 @@
             "label": "执行Bat",
             "type": "shell",
             "command": "../../tool/BatMain.bat",
-            "problemMatcher": [],
-            "options": {}
+            "problemMatcher": []
         },
     ]
 }
