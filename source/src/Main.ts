@@ -9,6 +9,7 @@ import { LogicSceneGame } from "./logicScene/scene/LogicSceneGame";
 import { LogicSceneInit } from "./logicScene/scene/LogicSceneInit";
 import { LogicSceneLogin } from "./logicScene/scene/LogicSceneLogin";
 import { LogicSceneMain } from "./logicScene/scene/LogicSceneMain";
+import { PlatformMgr } from "./platform/PlatformMgr";
 
 const logger = Logger.Create("Main", true);
 
@@ -34,6 +35,7 @@ class Main extends Notifier {
 		// Laya.alertGlobalError(true);
 
 		FixEngine.Fix();
+		PlatformMgr.Init();
 		Laya.Text.defaultFont = ResPath.FontName.Font03;
 		fgui.UIConfig.defaultFont = ResPath.FontName.Font03;
 		fgui.UIConfig.packageFileExtension = "zip";
