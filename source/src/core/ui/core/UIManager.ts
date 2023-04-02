@@ -65,7 +65,7 @@ class UIManager extends Observer {
 		layerMgr.addObject(this._lockPanel, Layer.Lock);
 
 		//延迟250防止频繁触发
-		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(250, this, this.onResize));
+		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(100, this, this.onResize));
 	}
 
 	registView(viewId: ViewID, viewCls: IView_Class, ctrlCls?: IViewCtrl_Class, proxyCls?: IProxy_Class) {
@@ -141,7 +141,7 @@ class UIManager extends Observer {
 		if (!_openedCtrls.length) return;
 		for (let i = _openedCtrls.length - 1; i >= 0; i--) {
 			const viewCtrl = _openedCtrls[ i ];
-			if (viewId == null || viewCtrl.viewId == viewId) {
+			if (viewCtrl.viewId == viewId) {
 				exitAni = viewCtrl.view.onCloseAni().then(() => {
 					_openedCtrls.splice(i, 1);
 					viewCtrl.view.removeFromParent();
@@ -198,10 +198,7 @@ class UIManager extends Observer {
 			} else viewCtrl.sendMessage(ViewEvent.OnForeground);
 		}
 		callback?.run();
-		exitAni.then(() => showAni)
-			.then(() => {
-				this._lockPanel.visible = false;
-			});
+		exitAni.then(() => showAni).finally(() => this._lockPanel.visible = false);
 	}
 }
 
