@@ -1,4 +1,5 @@
 export const enum GameEvent {
+	RedDotCompAwake = "RedDotCompAwake",
 	/**
 	 * 网络消息错误
 	 * @param msg {@link UserOutput} 错误消息

@@ -10,6 +10,7 @@ import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewExtend } from "../../core/ui/core/ViewExtend";
 import { ViewID } from "../../core/ui/core/ViewID";
 import { uiRegister } from "../../core/ui/core/ViewRegister";
+import { redDotMgr } from "../../core/ui/redDot/RedDotMgr";
 import { UIUtility } from "../../core/ui/tool/UIUtility";
 import { LogicSceneBase } from "../LogicSceneBase";
 import { logicSceneMgr } from "../LogicSceneMgr";
@@ -34,6 +35,7 @@ export class LogicSceneInit extends LogicSceneBase {
 			uiRegister.Init();
 			layerMgr.init();
 			uiMgr.init();
+			redDotMgr.init();
 			websocket.init();
 			CustomSpriteManager.init();
 			LogicSceneInit.inited = true;
