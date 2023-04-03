@@ -16,7 +16,6 @@ export class FixEngine {
 		this.PlayTransitionAction();
 		this.FixGUIInputSingleLine();
 		this.FixGUILoadPackgeProgressError();
-		this.FixWxAdapter();
 	}
 
 	/** Laya.Script完善 */
@@ -316,21 +315,6 @@ export class FixEngine {
 			fgui.AssetProxy.inst.load(loadKeyArr, descCompleteHandler, null, Laya.Loader.BUFFER);
 		}
 	}	
-
-	/** 修复微信版本库2.16 - 2.20屏幕显示只有四分之一的问题 */
-	private static FixWxAdapter() {
-		const MiniInput = Laya[ "MiniInput" ];
-		if (MiniInput) {
-			Laya.stage.off("resize", null, MiniInput._onStageResize);
-			MiniInput._onStageResize = function () { 
-				var ts = Laya.stage["_canvasTransform"].identity();
-				ts.scale((Laya.Browser.width / Laya.Render.canvas.width / Laya.Browser.pixelRatio), Laya.Browser.height / Laya.Render.canvas.height / Laya.Browser.pixelRatio);
-				var canvasStyle = Laya.Render.canvas.style;
-				canvasStyle.transform = canvasStyle.webkitTransform = canvasStyle.msTransform = canvasStyle.mozTransform = canvasStyle.oTransform = "";
-			}
-			Laya.stage.on("resize", null, MiniInput._onStageResize);	
-		}
-	}
 	
 }
 

@@ -1,5 +1,4 @@
-import { recyclablePoint } from "../utils/Recyclable";
-
+import Point = Laya.Point;
 /** 匀速贝塞尔曲线，文档：https://www.freesion.com/article/2280255606/ */
 export class Bezier {
     /**普通贝塞尔点 */
@@ -9,7 +8,7 @@ export class Bezier {
         const uu = u * u;
         const ut2 = u * t * 2;
 
-        const p = recyclablePoint()[ 0 ];
+        const p = Point.create();
         p.x = uu * start.x;
         p.y = uu * start.y;
 
@@ -30,7 +29,7 @@ export class Bezier {
      * @returns 
      */
     static NormalPoints(start: Point, end: Point, control: Point, pointNum: number) {
-        const points: Recyclable<Laya.Point>[] = [];
+        const points: Point[] = [];
         for (let i = 0; i <= pointNum; i++) {
             points.push(this.NormalPoint(start, end, control, i / pointNum))
         }
@@ -58,7 +57,7 @@ export class Bezier {
         //根据贝塞尔曲线函数，求得取得此时的x,y坐标
         let x = _1_t * start.x + _2_1_t * control.x + tt * end.x;
         let y = _1_t * start.y + _2_1_t * control.y + tt * end.y;
-        const point = recyclablePoint()[ 0 ];
+        const point = Point.create();
         point.setTo(x, y);
         return point;
     }
@@ -81,7 +80,7 @@ export class Bezier {
         let B = 4 * (ax * bx + ay * by);
         let C = bx * bx + by * by;
 
-        const points: Recyclable<Laya.Point>[] = [];
+        const points: Point[] = [];
         //曲线总长度
         const total_length = this.GetLength(A, B, C, 1);
         for (let i = 0; i <= pointNum; i++) {
@@ -96,7 +95,7 @@ export class Bezier {
             //根据贝塞尔曲线函数，求得取得此时的x,y坐标
             let x = _1_t * start.x + _2_1_t * control.x + tt * end.x;
             let y = _1_t * start.y + _2_1_t * control.y + tt * end.y;
-            points.push(recyclablePoint()[ 0 ].setTo(x, y));
+            points.push(Point.create().setTo(x, y));
         }
         return points;
     }

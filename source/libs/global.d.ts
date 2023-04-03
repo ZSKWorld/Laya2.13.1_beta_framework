@@ -8,12 +8,6 @@ declare type RealReadonly<T> = { readonly [ P in keyof T ]: RealReadonly<T[ P ]>
 
 declare function windowImmit(name: string, obj: any): void;
 
-declare type Point = { x: number, y: number };
-
-declare type Recycle = { recycle?(): void };
-declare type RecycleMethod = { onRecycle?(): void, onReuse?(): void };
-declare type Recyclable<T> = T & Recycle;
-
 declare namespace Laya {
     interface Script {
 		/**

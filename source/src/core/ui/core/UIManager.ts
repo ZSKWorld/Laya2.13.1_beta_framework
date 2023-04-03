@@ -148,7 +148,7 @@ class UIManager extends Observer {
 					viewCtrl.sendMessage(ViewEvent.OnBackground);
 					this._cache.addView(viewCtrl);
 				});
-				if (viewId != null) break;
+				break;
 			}
 		}
 		exitAni.then(() => {

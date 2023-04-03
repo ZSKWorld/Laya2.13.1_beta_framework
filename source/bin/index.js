@@ -6,6 +6,13 @@
  * sensor_portrait     竖屏(双方向)
  */
 window.screenOrientation = "landscape";
+//libs/domparserinone.js全局变量声明补全
+window.SaxO = {};
+window.htmlEntity = {};
+//注册window变量
+window.windowImmit = function(name, obj) {
+    window[name] = obj;
+}
 
 //-----libs-begin-----
 loadLib("libs/laya.core.js")

@@ -51,20 +51,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		}
 	}
 
-	override onAdded() {
-		this._view = this.owner[ "$owner" ];
-		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
-		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
-		this._proxy.viewCtrl = this;
-		this._registerMessage();
-		eventMgr.registerEvent(this);
-		eventMgr.registerEvent(this._view);
-		eventMgr.registerEvent(this._proxy);
-		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
-		this.addMessage(ViewEvent.OnForeground, this._onForeground);
-		this.addMessage(ViewEvent.OnBackground, this._onBackground);
-	}
-
 	override onReset() {
 		const { _view, _listener, _children, _proxy } = this;
 		_listener?.offAll();
@@ -81,6 +67,21 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		Laya.Pool.recoverByClass(_proxy);
 		Laya.Pool.recoverByClass(_listener);
 		ViewCtrlDIExtend.offDeviceEvent(this);
+	}
+
+	/** Laya.Script私有方法重写 */
+	private _onAdded() {
+		this._view = this.owner[ "$owner" ];
+		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
+		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
+		this._proxy.viewCtrl = this;
+		this._registerMessage();
+		eventMgr.registerEvent(this);
+		eventMgr.registerEvent(this._view);
+		eventMgr.registerEvent(this._proxy);
+		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
+		this.addMessage(ViewEvent.OnForeground, this._onForeground);
+		this.addMessage(ViewEvent.OnBackground, this._onBackground);
 	}
 
 	/** Laya.Script私有方法重写 */
