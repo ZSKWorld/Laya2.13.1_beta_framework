@@ -1,4 +1,4 @@
-import { Event } from "../../../libs/event/EventMgr";
+import { Event } from "../../../libs/event/EventManager";
 import { NetMessage } from "../../../net/enum/NetMessage";
 import { BaseProxy } from "../../core/BaseProxy";
 import { UISettingCtrl } from "../../viewCtrl/PkgMain/UISettingCtrl";

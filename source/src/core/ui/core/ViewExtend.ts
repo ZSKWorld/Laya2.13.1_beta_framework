@@ -1,4 +1,4 @@
-import { eventMgr } from "../../libs/event/EventMgr";
+import { eventMgr } from "../../libs/event/EventManager";
 import { userData } from "../../userData/UserData";
 import { BaseViewCtrl } from "./BaseViewCtrl";
 import { IView, IViewCtrl } from "./Interfaces";
@@ -6,12 +6,12 @@ import { uiMgr } from "./UIManager";
 
 /** 页面及控制器扩展 */
 export class ViewExtend {
-	static init() {
-		this.fguiGComponentExtend();
-		this.baseCtrlExtend();
+	static Init() {
+		this.FGUIGComponentExtend();
+		this.BaseCtrlExtend();
 	}
 
-	private static fguiGComponentExtend() {
+	private static FGUIGComponentExtend() {
 		let prototype = fgui.GComponent.prototype as IView;
 		prototype.dispatch = function (type, data) { eventMgr.event(type, data); }
 		prototype.sendMessage = function (type, data) { (<IView>this).listener.event(type, data); }
@@ -58,7 +58,7 @@ export class ViewExtend {
 		}
 	}
 
-	private static baseCtrlExtend() {
+	private static BaseCtrlExtend() {
 		let prototype = BaseViewCtrl.prototype as IViewCtrl;
 		prototype.dispatch = function (type, data) { eventMgr.event(type, data); }
 		prototype.addMessage = function (type, callback, args?, once?) {

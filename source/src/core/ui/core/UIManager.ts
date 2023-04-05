@@ -1,6 +1,6 @@
 import { Observer } from "../../libs/event/Observer";
 import { Logger } from "../../libs/utils/Logger";
-import { Layer, layerMgr } from "./GameLayer";
+import { Layer, layerMgr } from "./LayerManager";
 import { IProxy_Class, IViewCtrl, IViewCtrl_Class, IView_Class, ViewEvent } from "./Interfaces";
 import { ViewID } from "./ViewID";
 

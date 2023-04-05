@@ -1,7 +1,7 @@
 import { UserDataType } from "../../userData/UserData";
 import { BaseProxy } from "./BaseProxy";
 import { BaseViewCtrl } from "./BaseViewCtrl";
-import { Layer } from "./GameLayer";
+import { Layer } from "./LayerManager";
 import { ViewID } from "./ViewID";
 
 export const enum ViewEvent {

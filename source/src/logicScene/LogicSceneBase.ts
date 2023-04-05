@@ -1,5 +1,5 @@
 import { Observer } from "../core/libs/event/Observer";
-import { loadMgr } from "../core/libs/load/LoadMgr";
+import { loadMgr } from "../core/libs/load/LoadManager";
 import { Logger } from "../core/libs/utils/Logger";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";

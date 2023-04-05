@@ -57,11 +57,13 @@ class RichStr {
         return this._str;
     }
 }
-export class RichStrMgr {
+class RichStrManager {
 
-    static start(text: string = "") {
+    start(text: string = "") {
         const richStr = Laya.Pool.createByClass(RichStr);
         richStr.start(text);
         return richStr;
     }
 }
+
+export const richStrMgr = new RichStrManager();

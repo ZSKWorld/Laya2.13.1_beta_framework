@@ -1,4 +1,4 @@
-import { eventMgr } from "./EventMgr";
+import { eventMgr } from "./EventManager";
 import { Notifier } from "./Notifier";
 
 /**

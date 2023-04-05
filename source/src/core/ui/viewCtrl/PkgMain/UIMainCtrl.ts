@@ -5,7 +5,7 @@ import { MathUtil } from "../../../libs/math/MathUtil";
 import { Logger } from "../../../libs/utils/Logger";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { ViewID } from "../../core/ViewID";
-import { RichStrMgr } from "../../tool/RichStrMgr";
+import { richStrMgr } from "../../tool/RichStrManager";
 import { UIUtility } from "../../tool/UIUtility";
 import { UIMainMsg, UIMainView } from "../../view/PkgMain/UIMainView";
 
@@ -33,23 +33,23 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 		if (!UIMainCtrl.showFirst) {
 			UIMainCtrl.showFirst = true;
 			const { lastOnlineTime, offline } = this.userData;
-			const txt = RichStrMgr.start()
+			const txt = richStrMgr.start()
 				.combineBreak("正在构建游戏世界")
 				.combineBreak("正在计算离线收益")
 				.combineBreak("初始化完毕");
-			const offlineConfirmTxt = RichStrMgr.start()
+			const offlineConfirmTxt = richStrMgr.start()
 				.combineBreak("欢迎回来")
 				.combineBreak(`你最后一次在线时间为:${ new Date(lastOnlineTime).toLocaleString() }`);
 			if (offline) {
 				offlineConfirmTxt.combineBreak(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`)
 					.combineBreak(`获得精力${ offline.vigor }点`);
-				Laya.timer.frameOnce(1, UIUtility, UIUtility.showConfirm, [ offlineConfirmTxt.getStr() ]);
+				Laya.timer.frameOnce(1, UIUtility, UIUtility.ShowConfirm, [ offlineConfirmTxt.getStr() ]);
 			}
 			txt.combineBreak(offlineConfirmTxt.end());
 			const battleSpeed = localData.get(LocalDataKey.BattleSpeed) || 1;
 			localData.set(LocalDataKey.BattleSpeed, battleSpeed);
-			txt.combineBreak(RichStrMgr.start("放置游戏，资源全开放，所有道具货币都可获取").size(60).color("#FFFFFF").end())
-				.combineBreak(RichStrMgr.start("熬死大佬，你就是大佬!").size(60).color("#FF842E").end())
+			txt.combineBreak(richStrMgr.start("放置游戏，资源全开放，所有道具货币都可获取").size(60).color("#FFFFFF").end())
+				.combineBreak(richStrMgr.start("熬死大佬，你就是大佬!").size(60).color("#FF842E").end())
 				.combineBreak(`战斗速度调整为${ battleSpeed }倍速`, 0);
 			this.dispatch(GameEvent.AddExperienceLog, txt.end());
 		}

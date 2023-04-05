@@ -37,9 +37,9 @@ export class UILoginMainCtrl extends BaseViewCtrl<UILoginMainView, UILoginMainDa
 
     private onBtnRegisterClick(): void {
         const { TxtRegisterAccount, TxtRegisterPassword, TxtRegisterName } = this.view;
-        if (!TxtRegisterAccount.text.trim()) UIUtility.showTipInfo("请输入账号");
-        else if (!TxtRegisterPassword.text.trim()) UIUtility.showTipInfo("请输入密码");
-        else if (!TxtRegisterName.text.trim()) UIUtility.showTipInfo("请输入昵称");
+        if (!TxtRegisterAccount.text.trim()) UIUtility.ShowTipInfo("请输入账号");
+        else if (!TxtRegisterPassword.text.trim()) UIUtility.ShowTipInfo("请输入密码");
+        else if (!TxtRegisterName.text.trim()) UIUtility.ShowTipInfo("请输入昵称");
         else {
             AccountService.Inst.register({
                 account: TxtRegisterAccount.text,

@@ -58,7 +58,7 @@ export class RedDotNode {
 
     private constructor() { }
 
-    static createNode(data: IRedDotData, owner?: fgui.GComponent) {
+    static CreateNode(data: IRedDotData, owner?: fgui.GComponent) {
         const node = RedDotNode.__pool.pop() || new RedDotNode();
         node._inPool = false;
         node._enable = true;
@@ -90,7 +90,7 @@ export class RedDotNode {
         node.removeSelf();
         node._parent = this;
         this._childs.push(node);
-        Laya.timer.callLater(this, this.calculateCount, [true]);
+        Laya.timer.callLater(this, this.calculateCount, [ true ]);
     }
 
     /**
@@ -128,7 +128,7 @@ export class RedDotNode {
             if (child) break;
             child = null;
         }
-        Laya.timer.callLater(this, this.calculateCount, [true]);
+        Laya.timer.callLater(this, this.calculateCount, [ true ]);
         return child;
     }
 

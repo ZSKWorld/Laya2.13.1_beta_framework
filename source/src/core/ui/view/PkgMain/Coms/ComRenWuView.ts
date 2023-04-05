@@ -1,5 +1,5 @@
 import { ResPath } from "../../../../common/ResPath";
-import { Event } from "../../../../libs/event/EventMgr";
+import { Event } from "../../../../libs/event/EventManager";
 import { MathUtil } from "../../../../libs/math/MathUtil";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { NetMessage } from "../../../../net/enum/NetMessage";

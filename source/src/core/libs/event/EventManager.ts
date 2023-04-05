@@ -1,5 +1,5 @@
 /** 事件监听器 */
-class EventListener extends Laya.EventDispatcher {
+class EventManager extends Laya.EventDispatcher {
 
     /**注册监听事件 */
     registerEvent(caller: any) {
@@ -26,7 +26,7 @@ class EventListener extends Laya.EventDispatcher {
 }
 
 /** 全局事件中心 */
-export const eventMgr = new EventListener();
+export const eventMgr = new EventManager();
 windowImmit("eventMgr", eventMgr)
 
 /**

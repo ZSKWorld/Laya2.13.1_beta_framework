@@ -1,5 +1,5 @@
 import { GameUtil } from "../../../common/GameUtil";
-import { Event } from "../../../libs/event/EventMgr";
+import { Event } from "../../../libs/event/EventManager";
 import { NetMessage } from "../../../net/enum/NetMessage";
 import { BaseProxy } from "../../core/BaseProxy";
 import { UIUtility } from "../../tool/UIUtility";
@@ -15,6 +15,6 @@ export class UIEquipmentInfoProxy extends BaseProxy<UIEquipmentInfoCtrl>{
     @Event(NetMessage.SellEquip)
     private sellEquipResponse(outPut: SellEquipOutput & SellEquipInput) {
         this.sendMessage(UIEquipmentInfoMsg.OnBtnBgClick);
-        outPut.rewards?.forEach(v => UIUtility.showTipInfo(`恭喜获得${ GameUtil.getItemCountStr(v) }`));
+        outPut.rewards?.forEach(v => UIUtility.ShowTipInfo(`恭喜获得${ GameUtil.GetItemCountStr(v) }`));
     }
 }

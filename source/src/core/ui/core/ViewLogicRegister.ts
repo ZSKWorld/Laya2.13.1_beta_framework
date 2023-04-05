@@ -1,4 +1,4 @@
-import { logicSceneMgr } from "../../../logicScene/LogicSceneMgr";
+import { logicSceneMgr } from "../../../logicScene/LogicSceneManager";
 import { LogicScene } from "../../../logicScene/LogicSceneType";
 import { Logger } from "../../libs/utils/Logger";
 import { ViewID } from "./ViewID";
@@ -6,11 +6,11 @@ import { ViewID } from "./ViewID";
 const logger = Logger.Create("ViewLogicRegister", true);
 
 export class ViewLogicRegister {
-    static init() {
+    static Init() {
         
     }
 
-    private static register() {
+    private static Register() {
         const registerView = logicSceneMgr.registerSceneView.bind(logicSceneMgr);
         // registerView(LogicScene.InitScene)
 

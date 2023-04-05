@@ -1,4 +1,4 @@
-import { eventMgr } from "./EventMgr";
+import { eventMgr } from "./EventManager";
 
 /**
  * 简单的消息发送对象

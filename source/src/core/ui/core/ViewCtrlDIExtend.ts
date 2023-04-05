@@ -17,17 +17,17 @@ export class ViewCtrlDIExtend {
 	 * @param viewCtrl {@link DIViewCtrl} 目标控制器
 	 * @returns 
 	 */
-	static registerDeviceEvent(viewCtrl: DIViewCtrl) {
+	static RegisterDeviceEvent(viewCtrl: DIViewCtrl) {
 		if (!viewCtrl) return;
 		const { __keyEventList, __mouseEventList } = viewCtrl;
 		if (__keyEventList) {
-			const func = this.__doKeyEvent;
+			const func = this.__DoKeyEvent;
 			__keyEventList.keydown && (viewCtrl.onKeyDown = func);
 			__keyEventList.keypress && (viewCtrl.onKeyPress = func);
 			__keyEventList.keyup && (viewCtrl.onKeyUp = func);
 		}
 		if (__mouseEventList) {
-			const func = this.__doMouseEvent;
+			const func = this.__DoMouseEvent;
 			__mouseEventList.mouseover && (viewCtrl.onMouseOver = func);
 			__mouseEventList.mousedown && (viewCtrl.onMouseDown = func);
 			__mouseEventList.mousemove && (viewCtrl.onMouseMove = func);
@@ -42,7 +42,7 @@ export class ViewCtrlDIExtend {
 			__mouseEventList.stageclick && (viewCtrl.onStageClick = func);
 		}
 
-		this.resetOnceEvent(viewCtrl);
+		this.ResetOnceEvent(viewCtrl);
 	}
 
 	/**
@@ -50,7 +50,7 @@ export class ViewCtrlDIExtend {
 	 * @param viewCtrl {@link DIViewCtrl} 目标控制器
 	 * @returns 
 	 */
-	static offDeviceEvent(viewCtrl: DIViewCtrl) {
+	static OffDeviceEvent(viewCtrl: DIViewCtrl) {
 		if (!viewCtrl) return;
 		const prototype = Laya.Script.prototype;
 		viewCtrl.onKeyDown = prototype.onKeyDown;
@@ -72,7 +72,7 @@ export class ViewCtrlDIExtend {
 	}
 
 	/**重置once事件标志 */
-	private static resetOnceEvent(viewCtrl: DIViewCtrl) {
+	private static ResetOnceEvent(viewCtrl: DIViewCtrl) {
 		if (!viewCtrl) return;
 		//重置事件once标志
 		const { __keyEventList: kel, __mouseEventList: mel } = viewCtrl;
@@ -96,7 +96,7 @@ export class ViewCtrlDIExtend {
 	}
 
 	/**处理键盘事件 */
-	private static __doKeyEvent(e: Laya.Event) {
+	private static __DoKeyEvent(e: Laya.Event) {
 		//这里的this是BaseViewCtrl
 		const __keyEventList = (this as unknown as DIViewCtrl).__keyEventList;
 		if (!__keyEventList) return;
@@ -119,7 +119,7 @@ export class ViewCtrlDIExtend {
 	}
 
 	/**处理鼠标事件 */
-	private static __doMouseEvent(e: Laya.Event) {
+	private static __DoMouseEvent(e: Laya.Event) {
 		//这里的this是BaseViewCtrl
 		const __mouseEventList = (this as unknown as DIViewCtrl).__mouseEventList;
 		if (!__mouseEventList) return;

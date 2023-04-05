@@ -9,13 +9,13 @@ export class ItemBase implements IItemBase {
     //#endregion
 
     get name() { return tableMgr.Item[ this.id ].Name; }
-    get colorName() { return GameUtil.getColorStr(this.quality, this.name); }
+    get colorName() { return GameUtil.GetColorStr(this.quality, this.name); }
     get quality() { return tableMgr.Item[ this.id ].Quality; }
     get color() { return tableMgr.Color[ this.quality ].Color; }
     get description() { return tableMgr.Item[ this.id ].Description; }
     get salable() { return tableMgr.Item[ this.id ].Salable; }
     get useRequire() { return tableMgr.Item[ this.id ].UseRequire; }
-    get useRequireStr() { return GameUtil.getJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
+    get useRequireStr() { return GameUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
 
     static Decode(data: IItemBase) {
         if (!data) return null;
@@ -41,7 +41,7 @@ export class Equipment extends ItemBase implements IEquipment {
 
     get part(): EquipmentPart { return tableMgr.Equipment[ this.id ].Part; }
     get levelName() { return this.name + " +" + this.level; }
-    get colorLevelName() { return GameUtil.getColorStr(this.quality, this.levelName); }
+    get colorLevelName() { return GameUtil.GetColorStr(this.quality, this.levelName); }
     get infoStr() {
         const typeStr = [
             "", "武器[攻击]", "头盔[防御]", "项链[特殊]", "衣服[防御]", "戒指[攻击]", "裤子[防御]", "护符[攻击]", "鞋子[防御]",
@@ -51,10 +51,10 @@ export class Equipment extends ItemBase implements IEquipment {
         境界需求:${ this.useRequireStr }<br>
         铭刻:0/100<br>
         ${ this.shenYou }阶神佑加成: ${ (/**equip.shenYouAddition */0 * 100).toFixed(2) }%<br>
-        ${ this.mainAttri.map(v => GameUtil.getColorStr(this.quality, GameUtil.getAttributeName(v)) + "<br>").join("") }
-        ${ this.wuXingAttri.map(v => GameUtil.getColorStr(4, GameUtil.getAttributeName(v)) + "<br>").join("") }
-        ${ this.secondAttri.map(v => GameUtil.getColorStr(5, GameUtil.getAttributeName(v)) + "<br>").join("") }
-        ${ this.bodyAttri.map(v => GameUtil.getColorStr(8, GameUtil.getAttributeName(v)) + "<br>").join("") }
+        ${ this.mainAttri.map(v => GameUtil.GetColorStr(this.quality, GameUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.wuXingAttri.map(v => GameUtil.GetColorStr(4, GameUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.secondAttri.map(v => GameUtil.GetColorStr(5, GameUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, GameUtil.GetAttributeName(v)) + "<br>").join("") }
         `;
     }
 

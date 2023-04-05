@@ -18,7 +18,7 @@ export class RenderBagView extends ExtensionClass<GComponentExtend, RenderBag>(R
 
     refreshWuPin(data: ItemBase) {
         const { TxtName, TxtCount } = this;
-        if (GameUtil.isEquip(data.id)) {
+        if (GameUtil.IsEquip(data.id)) {
             TxtName.text = data.name + " +" + (<Equipment>data).level;
             TxtCount.text = "";
         } else {

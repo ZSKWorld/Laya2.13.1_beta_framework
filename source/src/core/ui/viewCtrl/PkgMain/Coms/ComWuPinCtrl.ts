@@ -1,4 +1,4 @@
-import { Event } from "../../../../libs/event/EventMgr";
+import { Event } from "../../../../libs/event/EventManager";
 import { ItemBagType } from "../../../../net/enum/ItemEnum";
 import { Equipment, ItemBase } from "../../../../userData/proxy/ItemData";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
@@ -34,7 +34,7 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 		this.addMessage(ComWuPinMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
 		this.addMessage(ComWuPinMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
 
-		UIUtility.setList(this.view.ListItem, this, this.listRenderer, this.listClick);
+		UIUtility.SetList(this.view.ListItem, this, this.listRenderer, this.listClick);
 	}
 
 	override onEnable(): void {

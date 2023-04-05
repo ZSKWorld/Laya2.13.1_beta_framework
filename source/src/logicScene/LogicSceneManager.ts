@@ -7,7 +7,7 @@ import { LogicScene } from "./LogicSceneType";
 const logger = Logger.Create("LogicSceneMgr", true);
 
 /** 逻辑场景管理类 */
-class LogicSceneMgr extends Observer {
+class LogicSceneManager extends Observer {
 	private _currentType: LogicScene;
 	private _currentScene: IScene;
 	private _loadCompleted: boolean = true;
@@ -46,5 +46,5 @@ class LogicSceneMgr extends Observer {
 	}
 }
 
-export const logicSceneMgr = new LogicSceneMgr();
+export const logicSceneMgr = new LogicSceneManager();
 windowImmit("logicSceneMgr", logicSceneMgr);

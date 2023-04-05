@@ -1,5 +1,5 @@
 import { GameUtil } from "../common/GameUtil";
-import { Event } from "../libs/event/EventMgr";
+import { Event } from "../libs/event/EventManager";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
@@ -126,7 +126,7 @@ class UserData extends Observer implements IUserData {
     //#endregion
 
     /** 升级经验 */
-    get upgradeExp() { return GameUtil.getUpgradExp(this.jingJie, this.cengJi); }
+    get upgradeExp() { return GameUtil.GetUpgradExp(this.jingJie, this.cengJi); }
 
     /** 获取最大精力 */
     get maxVigro() {
@@ -215,10 +215,10 @@ class UserData extends Observer implements IUserData {
                 const { Quality: quality2, Name: name2 } = gem2 ? tableItem[ gem2 ] : {} as any;
                 const { Quality: quality3, Name: name3 } = gem3 ? tableItem[ gem3 ] : {} as any;
                 str += `
-                    孔1:${ gem0 ? GameUtil.getColorStr(quality0, name0) : "空" }<br>
-                    孔2:${ gem1 ? GameUtil.getColorStr(quality1, name1) : "空" }<br>
-                    孔3:${ gem2 ? GameUtil.getColorStr(quality2, name2) : "空" }<br>
-                    孔4:${ gem3 ? GameUtil.getColorStr(quality3, name3) : "空" }<br>
+                    孔1:${ gem0 ? GameUtil.GetColorStr(quality0, name0) : "空" }<br>
+                    孔2:${ gem1 ? GameUtil.GetColorStr(quality1, name1) : "空" }<br>
+                    孔3:${ gem2 ? GameUtil.GetColorStr(quality2, name2) : "空" }<br>
+                    孔4:${ gem3 ? GameUtil.GetColorStr(quality3, name3) : "空" }<br>
                 `;
             }
             str += "评分:2.5万";
@@ -238,7 +238,7 @@ class UserData extends Observer implements IUserData {
 
     /** 获取boss剩余冷却时间 */
     getBossCoolDown(bossId: number) {
-        return Math.max(tableMgr.Boss[ bossId ].CoolTime - Math.floor(GameUtil.getServerTime() / 1000 - (this.boss[ bossId ] ?? 0)), 0);
+        return Math.max(tableMgr.Boss[ bossId ].CoolTime - Math.floor(GameUtil.GetServerTime() / 1000 - (this.boss[ bossId ] ?? 0)), 0);
     }
 
 

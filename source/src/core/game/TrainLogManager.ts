@@ -1,5 +1,5 @@
 import { GameEvent } from "../common/GameEvent";
-import { Event } from "../libs/event/EventMgr";
+import { Event } from "../libs/event/EventManager";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
@@ -7,7 +7,7 @@ import { Logger } from "../libs/utils/Logger";
 const logger = Logger.Create("ExperienceLogMgr", true);
 
 /** 历练日志管理器 */
-class ExperienceLogMgr extends Observer {
+class TrainLogManager extends Observer {
     private static constLogs = [
         "[color=#FF0000]欢迎回来~[/color]",
         "[color=#FF0000]签到送V零充满V不是梦[/color]",
@@ -23,7 +23,7 @@ class ExperienceLogMgr extends Observer {
     get logs() { return this._logs; }
 
     randomLog() {
-        const logs = ExperienceLogMgr.constLogs;
+        const logs = TrainLogManager.constLogs;
         this.addLog(logs[ MathUtil.RandomInt(0, logs.length - 1) ]);
     }
 
@@ -40,4 +40,4 @@ class ExperienceLogMgr extends Observer {
         Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);
     }
 }
-export const experienceLogMgr = new ExperienceLogMgr();
+export const trainLogMgr = new TrainLogManager();

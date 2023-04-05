@@ -1,6 +1,6 @@
-import { logicSceneMgr } from "../../../../logicScene/LogicSceneMgr";
+import { logicSceneMgr } from "../../../../logicScene/LogicSceneManager";
 import { LogicScene } from "../../../../logicScene/LogicSceneType";
-import { Event } from "../../../libs/event/EventMgr";
+import { Event } from "../../../libs/event/EventManager";
 import { localData } from "../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../libs/localData/LocalDataKey";
 import { NetMessage } from "../../../net/enum/NetMessage";

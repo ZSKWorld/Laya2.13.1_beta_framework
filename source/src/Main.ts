@@ -1,15 +1,18 @@
 import { ResPath } from "./core/common/ResPath";
 import { Notifier } from "./core/libs/event/Notifier";
 import { Logger } from "./core/libs/utils/Logger";
-import { FixEngine } from "./FixEngine";
+import { ViewExtend } from "./core/ui/core/ViewExtend";
+import { FGUIExtension } from "./engine/FGUIExtension";
+import { FGUIRepair } from "./engine/FGUIRepair";
+import { LayaExtension } from "./engine/LayaExtension";
+import { LayaRepair } from "./engine/LayaRepair";
 import GameConfig from "./GameConfig";
-import { logicSceneMgr } from "./logicScene/LogicSceneMgr";
+import { logicSceneMgr } from "./logicScene/LogicSceneManager";
 import { LogicScene } from "./logicScene/LogicSceneType";
 import { LogicSceneGame } from "./logicScene/scene/LogicSceneGame";
 import { LogicSceneInit } from "./logicScene/scene/LogicSceneInit";
 import { LogicSceneLogin } from "./logicScene/scene/LogicSceneLogin";
 import { LogicSceneMain } from "./logicScene/scene/LogicSceneMain";
-import { PlatformMgr } from "./platform/PlatformMgr";
 
 const logger = Logger.Create("Main", true);
 
@@ -34,8 +37,11 @@ class Main extends Notifier {
 		if (GameConfig.stat) Laya.Stat.show();
 		// Laya.alertGlobalError(true);
 
-		FixEngine.Fix();
-		PlatformMgr.Init();
+		LayaRepair.Fix();
+		LayaExtension.Init();
+		FGUIRepair.Fix();
+		FGUIExtension.Init();
+		ViewExtend.Init();
 		Laya.Text.defaultFont = ResPath.FontName.Font03;
 		fgui.UIConfig.defaultFont = ResPath.FontName.Font03;
 		fgui.UIConfig.packageFileExtension = "zip";

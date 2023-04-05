@@ -32,15 +32,15 @@ export class ComItemInfoView extends ExtensionClass<ViewExtension, ComItemInfo>(
 		const realID = buy ? tableMgr.Shop[ id ].SellID : id;
 		const { SellRewards, Name, Description, Quality, UseRequire, ItemType } = tableMgr.Item[ realID ];
 		if (buy) type = 2;
-		else if (GameUtil.canUseItem(realID)) type = 1;
+		else if (GameUtil.CanUseItem(realID)) type = 1;
 		this.ctrlUse.selectedIndex = type;
 		const canSell = (!buy && SellRewards) ? 1 : 0;
 		this.ctrlSell.selectedIndex = canSell ? 1 : 0;
-		const sellTxt = buy ? "" : (canSell ? `<br>出售：${ GameUtil.getItemString(SellRewards, true, true) }` : "<br>[color=#FF0000]不可出售[/color]");
-		const buyTxt = buy ? `<br>价格：${ GameUtil.getItemString(tableMgr.Shop[ id ].SellPrice) }` : "";
-		this.TxtContent.text = `${ GameUtil.getColorStr(Quality, Name + (buy ? "" : ` x${ this.userData.getItemCount(id) }`)) }
-			<br>境界需求：${ UseRequire ? GameUtil.getJingJieStr(UseRequire.jingJie, UseRequire.cengJi) : "无" }
-			<br>类别：${ GameUtil.getLang(ItemType || 1110) }
+		const sellTxt = buy ? "" : (canSell ? `<br>出售：${ GameUtil.GetItemString(SellRewards, true, true) }` : "<br>[color=#FF0000]不可出售[/color]");
+		const buyTxt = buy ? `<br>价格：${ GameUtil.GetItemString(tableMgr.Shop[ id ].SellPrice) }` : "";
+		this.TxtContent.text = `${ GameUtil.GetColorStr(Quality, Name + (buy ? "" : ` x${ this.userData.getItemCount(id) }`)) }
+			<br>境界需求：${ UseRequire ? GameUtil.GetJingJieStr(UseRequire.jingJie, UseRequire.cengJi) : "无" }
+			<br>类别：${ GameUtil.GetLang(ItemType || 1110) }
 			<br>${ Description }` + sellTxt + buyTxt;
 		this.BtnShouCang.visible = buy == false;
 		this.BtnShouCang.grayed = !this.userData.isCollect(id);

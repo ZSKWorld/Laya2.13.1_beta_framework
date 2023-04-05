@@ -1,4 +1,4 @@
-import { eventMgr } from "../../libs/event/EventMgr";
+import { eventMgr } from "../../libs/event/EventManager";
 import { Logger } from "../../libs/utils/Logger";
 import { ExtensionClass } from "../../libs/utils/Util";
 import { IProxy, IView, IViewCtrl, ViewCtrlExtension, ViewEvent } from "./Interfaces";
@@ -66,7 +66,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.offAllCaller(_proxy);
 		Laya.Pool.recoverByClass(_proxy);
 		Laya.Pool.recoverByClass(_listener);
-		ViewCtrlDIExtend.offDeviceEvent(this);
+		ViewCtrlDIExtend.OffDeviceEvent(this);
 	}
 
 	/** Laya.Script私有方法重写 */
@@ -87,7 +87,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	/** Laya.Script私有方法重写 */
 	private _onEnable() {
 		this._isShow = true;
-		ViewCtrlDIExtend.registerDeviceEvent(this);
+		ViewCtrlDIExtend.RegisterDeviceEvent(this);
 		super[ "_onEnable" ]();
 	}
 

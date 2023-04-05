@@ -1,5 +1,5 @@
-import { Layer, layerMgr } from "../core/GameLayer";
 import { IViewCtrl } from "../core/Interfaces";
+import { Layer, layerMgr } from "../core/LayerManager";
 import { uiMgr } from "../core/UIManager";
 import { ViewID } from "../core/ViewID";
 import { ComNumInputData } from "../viewCtrl/PkgCommon/Coms/ComNumInputCtrl";
@@ -10,15 +10,15 @@ class TipInfoMgr {
 	private static readonly showDelay = 200;
 	private static curTime = TipInfoMgr.showDelay;
 
-	static addTip(text: string, color: string) {
+	static AddTip(text: string, color: string) {
 		if (!this.cache) {
 			this.cache = [];
-			Laya.timer.frameLoop(1, this, this.update);
+			Laya.timer.frameLoop(1, this, this.Update);
 		}
 		this.cache.push(text, color);
 	}
 
-	private static update() {
+	private static Update() {
 		this.curTime += Laya.timer.delta;
 		if (this.cache.length && this.curTime >= this.showDelay) {
 			this.curTime = 0;
@@ -41,7 +41,7 @@ export class UIUtility {
 	 * @param name 贴图名字
 	 * @returns
 	 */
-	static getFGUITexture(pkg: string, name: string) {
+	static GetFGUITexture(pkg: string, name: string) {
 		let temp = fgui.UIPackage.getItemByURL(fgui.UIPackage.getItemURL(pkg, name)).getBranch();
 		temp = temp.getHighResolution();
 		temp.load();
@@ -53,8 +53,8 @@ export class UIUtility {
 	 * @param text 文字
 	 * @param color 文字颜色，默认："#ffffff"
 	 */
-	static showTipInfo(text: string, color?: string) {
-		TipInfoMgr.addTip(text, color);
+	static ShowTipInfo(text: string, color?: string) {
+		TipInfoMgr.AddTip(text, color);
 	}
 
 	/**
@@ -63,7 +63,7 @@ export class UIUtility {
 	 * @param title 标题，默认："提示"
 	 * @param callback {@link Laya.Handler} 回调函数
 	 */
-	static showConfirm(text: string, title?: string, callback?: Laya.Handler) {
+	static ShowConfirm(text: string, title?: string, callback?: Laya.Handler) {
 		uiMgr.addView(ViewID.TipConfirmView, { text, title, callback }, null, false);
 	}
 
@@ -74,7 +74,7 @@ export class UIUtility {
 	 * @param max 最大值
 	 * @param callback {@link Laya.Handler} 回调函数，参数为输入数字
 	 */
-	static showNumInput(title: string, min: number, max: number, callback?: Laya.Handler) {
+	static ShowNumInput(title: string, min: number, max: number, callback?: Laya.Handler) {
 		uiMgr.addView<ComNumInputData>(ViewID.ComNumInputView, { title, min, max, callback }, null, false);
 	}
 
@@ -86,7 +86,7 @@ export class UIUtility {
 	 * @param renderFunc 渲染回调
 	 * @param clickFunc 点击回调
 	 */
-	static setList(
+	static SetList(
 		list: fgui.GList,
 		caller: any,
 		renderFunc: (index?: number, item?: any) => void,
@@ -109,7 +109,7 @@ export class UIUtility {
 	 * @param defaultValue 默认值
 	 * @param showItemCount 下拉显示数量
 	 */
-	static setCombox(
+	static SetCombox(
 		cmb: fgui.GComboBox,
 		items: string[],
 		values: any[],

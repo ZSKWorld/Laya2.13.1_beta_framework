@@ -39,7 +39,7 @@ export class UISphereToolView extends ExtensionClass<ViewExtension, UISphereTool
 
 	refreshAdds(adds: { id: number, count: number }[]) {
 		let str = "";
-		adds.forEach(v => str += `${ v.id }--${ GameUtil.getColorStr(tableMgr.Item[ v.id ].Quality, tableMgr.Item[ v.id ].Name) }&nbsp;x${ v.count }<br>`);
+		adds.forEach(v => str += `${ v.id }--${ GameUtil.GetColorStr(tableMgr.Item[ v.id ].Quality, tableMgr.Item[ v.id ].Name) }&nbsp;x${ v.count }<br>`);
 		this.TxtContent.text = str;
 	}
 

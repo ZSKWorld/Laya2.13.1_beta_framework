@@ -24,8 +24,8 @@ export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
 
 		const fjzbArr: string[] = [];//this._fjzbArr.map(v => GetColorStr(v, `${v}星装备`));
 		for (let i = 1, max = +tableMgr.Const[ 1010 ].Value; i <= max; i++)
-			fjzbArr.push(GameUtil.getColorStr(i, `${ i }星装备`));
-		UIUtility.setCombox(this.view.CmbFJZBDJ, fjzbArr, fjzbArr, this, null, fjzbArr[ 0 ]);
+			fjzbArr.push(GameUtil.GetColorStr(i, `${ i }星装备`));
+		UIUtility.SetCombox(this.view.CmbFJZBDJ, fjzbArr, fjzbArr, this, null, fjzbArr[ 0 ]);
 	}
 
 	override onEnable(): void {

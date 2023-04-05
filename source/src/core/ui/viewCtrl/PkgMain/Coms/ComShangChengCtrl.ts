@@ -52,7 +52,7 @@ export class ComShangChengCtrl extends BaseViewCtrl<ComShangChengView, ComShangC
 		this.addMessage(ComShangChengMsg.OnBtnQTClick, this.onBtnQTClick);
 		this.addMessage(ComShangChengMsg.OnBtnYRClick, this.onBtnYRClick);
 
-		UIUtility.setList(this.view.ListItem, this, this.listRenderer, this.listClick);
+		UIUtility.SetList(this.view.ListItem, this, this.listRenderer, this.listClick);
 	}
 
 	override onEnable(): void {

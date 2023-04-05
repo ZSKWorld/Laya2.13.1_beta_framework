@@ -35,7 +35,7 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
         this.addMessage(UISphereToolMsg.OnBtnRemoveAllClick, this.onBtnRemoveAllClick);
         this.addMessage(UISphereToolMsg.OnIpt29Input, this.onIpt29Input);
         this.addMessage(UISphereToolMsg.OnCmbItemDropDownDisplay, this.onCmbItemDropDownDisplay);
-        UIUtility.setCombox(this.view.CmbItem, this._items.map(v => GameUtil.getColorStr(v.Quality, v.Name)), this._items, null, null, null, 25);
+        UIUtility.SetCombox(this.view.CmbItem, this._items.map(v => GameUtil.GetColorStr(v.Quality, v.Name)), this._items, null, null, null, 25);
     }
 
     override onEnable(): void {

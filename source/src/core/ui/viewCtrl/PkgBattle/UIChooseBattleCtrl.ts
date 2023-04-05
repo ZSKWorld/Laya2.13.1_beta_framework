@@ -1,6 +1,5 @@
-import { logicSceneMgr } from "../../../../logicScene/LogicSceneMgr";
+import { logicSceneMgr } from "../../../../logicScene/LogicSceneManager";
 import { LogicScene } from "../../../../logicScene/LogicSceneType";
-import { GameEvent } from "../../../common/GameEvent";
 import { BattleType } from "../../../net/enum/BattleEnums";
 import { BattleService } from "../../../net/Services";
 import { tableMgr } from "../../../table/TableManager";
@@ -21,7 +20,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		this.addMessage(UIChooseBattleMsg.OnBtnSaoDangClick, this.onBtnSaoDangClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnBattleClick, this.onBtnBattleClick);
 
-		UIUtility.setList(this.view.ListBattle, this, this.battleListRender, this.battleListClick);
+		UIUtility.SetList(this.view.ListBattle, this, this.battleListRender, this.battleListClick);
 	}
 
 	override onEnable(): void {
@@ -77,7 +76,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	private battleListClick(_, __, index: number) {
 		this.clickIndex = index;
 		if (this.data == BattleType.CaiJi) {
-			UIUtility.showNumInput("你要采集多久呢？(小时)", 1, 24, Laya.Handler.create(this, (value: number) => {
+			UIUtility.ShowNumInput("你要采集多久呢？(小时)", 1, 24, Laya.Handler.create(this, (value: number) => {
 				if (value != null) this.onBtnBattleClick(value);
 			}));
 		} else
@@ -101,7 +100,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private onBtnSaoDangClick(): void {
-		UIUtility.showNumInput("扫荡关卡", 1, 10000, Laya.Handler.create(this, (count: number) => {
+		UIUtility.ShowNumInput("扫荡关卡", 1, 10000, Laya.Handler.create(this, (count: number) => {
 
 		}));
 	}

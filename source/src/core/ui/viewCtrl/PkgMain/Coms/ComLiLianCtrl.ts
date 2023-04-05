@@ -1,8 +1,8 @@
-import { logicSceneMgr } from "../../../../../logicScene/LogicSceneMgr";
+import { logicSceneMgr } from "../../../../../logicScene/LogicSceneManager";
 import { LogicScene } from "../../../../../logicScene/LogicSceneType";
 import { GameEvent } from "../../../../common/GameEvent";
-import { experienceLogMgr } from "../../../../game/ExperienceLogMgr";
-import { Event } from "../../../../libs/event/EventMgr";
+import { trainLogMgr } from "../../../../game/TrainLogManager";
+import { Event } from "../../../../libs/event/EventManager";
 import { Logger } from "../../../../libs/utils/Logger";
 import { BattleType } from "../../../../net/enum/BattleEnums";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
@@ -27,11 +27,11 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 		this.addMessage(ComLiLianMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
 		this.addMessage(ComLiLianMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
 
-		UIUtility.setList(this.view.ListLog, this, this.logRenderer);
+		UIUtility.SetList(this.view.ListLog, this, this.logRenderer);
 	}
 
 	override onEnable(): void {
-		experienceLogMgr.randomLog();
+		trainLogMgr.randomLog();
 	}
 
 	override onDisable(): void {
@@ -44,13 +44,13 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 
 	@Event(GameEvent.RefreshExperienceLog)
 	private refreshLogList() {
-		const logs = experienceLogMgr.logs;
+		const logs = trainLogMgr.logs;
 		this.view.ListLog.numItems = logs.length;
 		this.view.ListLog.scrollToView(logs.length - 1);
 	}
 
 	private logRenderer(index: number, item: RenderTextView) {
-		item.setText(experienceLogMgr.logs[ index ]);
+		item.setText(trainLogMgr.logs[ index ]);
 	}
 
 	private enterBattle(battleType: BattleType): void {

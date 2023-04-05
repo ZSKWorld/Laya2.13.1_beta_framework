@@ -30,7 +30,7 @@ class PromiseElement {
 }
 
 /** promise管理 */
-class PromiseMgr {
+class PromiseManager {
     private _pool: PromiseElement[] = [];
 
     new<T = void>(caller: any, executor: Executor<T>) {
@@ -50,4 +50,4 @@ class PromiseMgr {
         }
     }
 }
-export const promiseMgr = new PromiseMgr();
+export const promiseMgr = new PromiseManager();

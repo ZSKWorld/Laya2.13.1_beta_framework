@@ -1,11 +1,11 @@
 import { GameEvent } from "../../common/GameEvent";
-import { eventMgr } from "../../libs/event/EventMgr";
+import { eventMgr } from "../../libs/event/EventManager";
 import { RedDotChecker } from "./RedDotChecker";
 import { IRedDotData } from "./RedDotInterface";
 import { RedDotMap } from "./RedDotMap";
 import { RedDotNode } from "./RedDotNode";
 
-class RedDotMgr extends Laya.EventDispatcher {
+class RedDotManager extends Laya.EventDispatcher {
     private _checker: RedDotChecker;
     private _root: RedDotNode;
     private _allLeftNode: RedDotNode[] = [];
@@ -26,7 +26,7 @@ class RedDotMgr extends Laya.EventDispatcher {
     }
 
     createNode(data: IRedDotData, owner?: fgui.GComponent) {
-        return RedDotNode.createNode(data, owner);
+        return RedDotNode.CreateNode(data, owner);
     }
 
     getNode(id: number) { return this._root?.getChild(id); }
@@ -43,5 +43,5 @@ class RedDotMgr extends Laya.EventDispatcher {
         }
     }
 }
-export const redDotMgr = new RedDotMgr();
+export const redDotMgr = new RedDotManager();
 windowImmit("RedDotMgr", redDotMgr);

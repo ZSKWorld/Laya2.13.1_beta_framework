@@ -1,6 +1,6 @@
 import { GameUtil } from "../../../common/GameUtil";
 import { ResPath } from "../../../common/ResPath";
-import { Event } from "../../../libs/event/EventMgr";
+import { Event } from "../../../libs/event/EventManager";
 import { MathUtil } from "../../../libs/math/MathUtil";
 import { ExtensionClass } from "../../../libs/utils/Util";
 import { tableMgr } from "../../../table/TableManager";
@@ -47,7 +47,7 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 		this.initView(ComWuPin);
 		this.initView(ComShangCheng);
 		this.initView(ComDongFu);
-		
+
 		BtnSphere.draggable = true;
 	}
 
@@ -61,8 +61,8 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 	refreshPlayerInfo() {
 		this.TxtNickName.text = this.userData.nickname;
 		const { jingJie, cengJi, exp, coin, vcoin, sect } = this.userData;
-		const nextJingJieExp = GameUtil.getUpgradExp(jingJie, cengJi);
-		this.TxtLevel.text = GameUtil.getJingJieStr(jingJie, cengJi);
+		const nextJingJieExp = GameUtil.GetUpgradExp(jingJie, cengJi);
+		this.TxtLevel.text = GameUtil.GetJingJieStr(jingJie, cengJi);
 		this.TxtExp.text = nextJingJieExp == 0 ? "(最高境界)" : (MathUtil.ToGroupNumber(exp) + "/" + MathUtil.ToGroupNumber(nextJingJieExp));
 		this.TxtJinBi.text = "金币:" + MathUtil.ToGroupNumber(coin, 4);
 		this.TxtYuanBao.text = "元宝:" + MathUtil.ToGroupNumber(vcoin, 4);

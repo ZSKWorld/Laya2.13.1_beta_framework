@@ -1,5 +1,5 @@
 /** 资源加载管理 */
-class LoadMgr {
+class LoadManager {
 	load(url: string | (string | Laya.loadItem)[], complete?: Laya.Handler | null, progress?: Laya.Handler | null, type?: string | null,
 		priority?: number, cache?: boolean, group?: string | null, ignoreCache?: boolean, useWorkerLoader?: boolean) {
 		return new Promise((resolve, reject) => {
@@ -43,4 +43,4 @@ class LoadMgr {
 	}
 }
 
-export const loadMgr = new LoadMgr();
+export const loadMgr = new LoadManager();
