@@ -5,16 +5,16 @@ import { LogicSceneBase } from "../LogicSceneBase";
 
 /** 游戏逻辑场景 */
 export class LogicSceneGame extends LogicSceneBase {
-	protected override loadViewId = ViewID.Loading1View;
+	protected override loadViewId = ViewID.UILoading1View;
 
 	protected override getResArray(): string[] {
 		return [
-			ResPath.UIPath.PkgBattle
+			ResPath.PkgPath.PkgBattle
 		];
 	}
 
 	protected onEnter(): void {
-		uiMgr.addView(ViewID.ChooseBattleView, this.data);
+		uiMgr.addView(ViewID.UIChooseBattleView, this.data);
 	}
 
 	protected onExit(): void {

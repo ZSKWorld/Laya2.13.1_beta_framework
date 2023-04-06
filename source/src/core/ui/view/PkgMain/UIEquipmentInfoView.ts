@@ -15,7 +15,7 @@ export const enum UIEquipmentInfoMsg {
 }
 
 export class UIEquipmentInfoView extends ExtensionClass<ViewExtension, UIEquipmentInfo>(UIEquipmentInfo) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
 		const { BtnBg, BtnSell, BtnDress, BtnQiangHua, BtnXiangQian, BtnMingKe, BtnShenYou } = this;

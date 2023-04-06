@@ -64,7 +64,7 @@ export class UIUtility {
 	 * @param callback {@link Laya.Handler} 回调函数
 	 */
 	static ShowConfirm(text: string, title?: string, callback?: Laya.Handler) {
-		uiMgr.addView(ViewID.TipConfirmView, { text, title, callback }, null, false);
+		uiMgr.addView(ViewID.UITipConfirmView, { text, title, callback }, null, false);
 	}
 
 	/**

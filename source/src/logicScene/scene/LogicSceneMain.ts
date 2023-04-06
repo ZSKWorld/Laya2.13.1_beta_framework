@@ -5,15 +5,15 @@ import { LogicSceneBase } from "../LogicSceneBase";
 
 /** 主页逻辑场景 */
 export class LogicSceneMain extends LogicSceneBase {
-	protected override loadViewId = ViewID.Loading1View;
+	protected override loadViewId = ViewID.UILoading1View;
 	protected override getResArray(): string[] {
 		return [
-			ResPath.UIPath.PkgMain
+			ResPath.PkgPath.PkgMain
 		];
 	}
 
 	protected onEnter(): void {
-		uiMgr.addView(ViewID.MainView);
+		uiMgr.addView(ViewID.UIMainView);
 	}
 
 	protected onExit(): void {

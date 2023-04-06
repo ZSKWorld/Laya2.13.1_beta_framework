@@ -9,7 +9,7 @@ export const enum ComNumInputMsg {
 }
 
 export class ComNumInputView extends ExtensionClass<ViewExtension, ComNumInput>(ComNumInput) {
-	static readonly PkgRes = ResPath.UIPath.PkgCommon;
+	static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
 	override onCreate(): void {
 		const { BtnBg, BtnSubmit } = this;

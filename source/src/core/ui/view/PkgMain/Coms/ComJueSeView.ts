@@ -8,14 +8,10 @@ export const enum ComJueSeMsg {
 }
 
 export class ComJueSeView extends ExtensionClass<ViewExtension, ComJueSe>(ComJueSe) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-		const { ComRenWu, ComXinFa, ComSkill } = this;
 
-		this.initView(ComRenWu);
-		this.initView(ComXinFa);
-		this.initView(ComSkill);
 	}
 
 }

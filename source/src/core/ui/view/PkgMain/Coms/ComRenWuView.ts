@@ -23,7 +23,7 @@ export const enum ComRenWuMsg {
 }
 
 export class ComRenWuView extends ExtensionClass<ViewExtension, ComRenWu>(ComRenWu) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
 		const { BtnWQ, BtnXL, BtnJZ, BtnHF, BtnZQ, BtnAQ, BtnTK, BtnYF, BtnXZ, BtnXieZ, BtnSZ, BtnFB } = this;

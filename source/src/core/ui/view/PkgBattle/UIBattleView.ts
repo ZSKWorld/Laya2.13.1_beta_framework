@@ -11,7 +11,7 @@ export const enum UIBattleMsg {
 }
 
 export class UIBattleView extends ExtensionClass<ViewExtension, UIBattle>(UIBattle) {
-	static readonly PkgRes = ResPath.UIPath.PkgBattle;
+	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate(): void {
 		const { BtnOffline, BtnEnemyInfo, BtnQuitBattle, BtnCloseInfo } = this;

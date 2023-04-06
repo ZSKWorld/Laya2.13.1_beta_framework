@@ -1,7 +1,7 @@
+import { ResPath } from "../../../common/ResPath";
 import { ExtensionClass } from "../../../libs/utils/Util";
 import { ViewExtension } from "../../core/Interfaces";
 import UISetting from "../../ui/PkgMain/UISetting";
-import { ResPath } from "../../../common/ResPath";
 
 export const enum UISettingMsg {
 	OnBtnBgClick = "UISetting_OnBtnBgClick",
@@ -14,17 +14,17 @@ export const enum UISettingMsg {
 }
 
 export class UISettingView extends ExtensionClass<ViewExtension, UISetting>(UISetting) {
-    static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-        const { BtnBg, BtnHangUp, BtnMute, BtnSignIn, BtnHelp, BtnClearAccount, BtnBack } = this;
-	    BtnBg.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnBgClick ]);
-	    BtnHangUp.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnHangUpClick ]);
-	    BtnMute.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnMuteClick ]);
-	    BtnSignIn.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnSignInClick ]);
-	    BtnHelp.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnHelpClick ]);
-	    BtnClearAccount.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnClearAccountClick ]);
-	    BtnBack.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnBackClick ]);
-    }
+		const { BtnBg, BtnHangUp, BtnMute, BtnSignIn, BtnHelp, BtnClearAccount, BtnBack } = this;
+		BtnBg.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnBgClick ]);
+		BtnHangUp.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnHangUpClick ]);
+		BtnMute.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnMuteClick ]);
+		BtnSignIn.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnSignInClick ]);
+		BtnHelp.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnHelpClick ]);
+		BtnClearAccount.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnClearAccountClick ]);
+		BtnBack.onClick(this, this.sendMessage, [ UISettingMsg.OnBtnBackClick ]);
+	}
 
 }

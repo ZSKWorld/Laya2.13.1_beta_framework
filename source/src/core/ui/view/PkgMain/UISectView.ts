@@ -1,7 +1,7 @@
+import { ResPath } from "../../../common/ResPath";
 import { ExtensionClass } from "../../../libs/utils/Util";
 import { ViewExtension } from "../../core/Interfaces";
 import UISect from "../../ui/PkgMain/UISect";
-import { ResPath } from "../../../common/ResPath";
 
 export const enum UISectMsg {
 	OnBtnSect0Click = "UISect_OnBtnSect0Click",
@@ -14,17 +14,17 @@ export const enum UISectMsg {
 }
 
 export class UISectView extends ExtensionClass<ViewExtension, UISect>(UISect) {
-    static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-        const { BtnSect0, BtnSect1, BtnSect2, BtnSect3, BtnSect4, BtnSect5, BtnSubmit } = this;
-	    BtnSect0.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect0Click ]);
-	    BtnSect1.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect1Click ]);
-	    BtnSect2.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect2Click ]);
-	    BtnSect3.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect3Click ]);
-	    BtnSect4.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect4Click ]);
-	    BtnSect5.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect5Click ]);
-	    BtnSubmit.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSubmitClick ]);
-    }
+		const { BtnSect0, BtnSect1, BtnSect2, BtnSect3, BtnSect4, BtnSect5, BtnSubmit } = this;
+		BtnSect0.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect0Click ]);
+		BtnSect1.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect1Click ]);
+		BtnSect2.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect2Click ]);
+		BtnSect3.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect3Click ]);
+		BtnSect4.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect4Click ]);
+		BtnSect5.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect5Click ]);
+		BtnSubmit.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSubmitClick ]);
+	}
 
 }

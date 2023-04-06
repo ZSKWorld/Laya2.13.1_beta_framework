@@ -43,14 +43,14 @@ export namespace ResPath {
 	}
 
 	// res/ui/
-	export const enum UIName {
+	export const enum PkgName {
 		PkgBattle = "PkgBattle",
 		PkgCommon = "PkgCommon",
 		PkgLogin = "PkgLogin",
 		PkgMain = "PkgMain",
 	}
 
-	export const enum UIPath {
+	export const enum PkgPath {
 		PkgBattle = "res/ui/PkgBattle",
 		PkgCommon = "res/ui/PkgCommon",
 		PkgLogin = "res/ui/PkgLogin",

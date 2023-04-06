@@ -46,7 +46,7 @@ export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
 	private showEquipmentInfo(type: EquipmentPart) {
 		let equip1 = this.userData.getDressedEquip(type) as Equipment;
 		if (!equip1) return UIUtility.ShowTipInfo(GameUtil.GetLang(1012));
-		this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1 });
+		this.addView<UIEquipmentInfoData>(ViewID.UIEquipmentInfoView, { equip1 });
 	}
 
 }

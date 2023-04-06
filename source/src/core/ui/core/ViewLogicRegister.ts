@@ -7,17 +7,17 @@ const logger = Logger.Create("ViewLogicRegister", true);
 
 export class ViewLogicRegister {
     static Init() {
-        
+
     }
 
     private static Register() {
         const registerView = logicSceneMgr.registerSceneView.bind(logicSceneMgr);
         // registerView(LogicScene.InitScene)
 
-        registerView(LogicScene.LoginScene, ViewID.LoginMainView)
+        registerView(LogicScene.LoginScene, ViewID.UILoginMainView)
 
         registerView(LogicScene.MainScene)
-        
+
         registerView(LogicScene.GameScene)
     }
 }

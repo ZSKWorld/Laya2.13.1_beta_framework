@@ -15,7 +15,7 @@ export const enum ComItemInfoMsg {
 }
 
 export class ComItemInfoView extends ExtensionClass<ViewExtension, ComItemInfo>(ComItemInfo) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
 		const { BtnBg, BtnShouCang, BtnSell, BtnUse, BtnBuy, TxtUseNum } = this;

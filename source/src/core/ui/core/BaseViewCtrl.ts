@@ -36,18 +36,19 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	/** 添加子页面 */
 	addChildCtrl(child: IViewCtrl) {
+		if (!child) return;
 		if (child === this) return;
-		let { _children: children } = this;
-		if (!children)
-			children = this._children = new Set<IViewCtrl>();
-		if (children.has(child) == false) {
+		if(child.parent) child.parent._children.delete(child);
+		let { _children } = this;
+		if (!_children) _children = this._children = new Set<IViewCtrl>();
+		if (_children.has(child) == false) {
 			child._parent = this;
 			if (child._listener) {
 				Laya.Pool.recoverByClass(child._listener.offAllCaller(child));
 			}
 			child._listener = this._listener;
 			child._registerMessage();
-			children.add(child);
+			_children.add(child);
 		}
 	}
 

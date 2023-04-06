@@ -24,7 +24,7 @@ export class LogicSceneInit extends LogicSceneBase {
 		return [
 			ResPath.TablePath.Config,
 			ResPath.FontPath.Font03,
-			ResPath.UIPath.PkgCommon,
+			ResPath.PkgPath.PkgCommon,
 		];
 	}
 
@@ -49,8 +49,8 @@ export class LogicSceneInit extends LogicSceneBase {
 	@Event(GameEvent.SocketOpened, false, [ true ])
 	@Event(GameEvent.SocketClosed, false, [ false ])
 	private socketConnectChanged(open: boolean) {
-		if (open) uiMgr.removeView(ViewID.WaitingView);
-		else uiMgr.addView(ViewID.WaitingView, "网络已断开", null, false);
+		if (open) uiMgr.removeView(ViewID.UIWaitingView);
+		else uiMgr.addView(ViewID.UIWaitingView, "网络已断开", null, false);
 	}
 
 	@Event(GameEvent.NetMsgError)

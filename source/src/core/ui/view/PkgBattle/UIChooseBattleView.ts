@@ -14,7 +14,7 @@ export const enum UIChooseBattleMsg {
 }
 
 export class UIChooseBattleView extends ExtensionClass<ViewExtension, UIChooseBattle>(UIChooseBattle) {
-	static readonly PkgRes = ResPath.UIPath.PkgBattle;
+	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate(): void {
 		const { BtnBack, BtnConfirmBg, BtnBuyFood, BtnBuyTimes, BtnSaoDang, BtnBattle } = this;

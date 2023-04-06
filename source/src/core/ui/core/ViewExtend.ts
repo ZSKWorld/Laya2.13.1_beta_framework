@@ -26,7 +26,11 @@ export class ViewExtend {
 		prototype.removeTopView = function () { uiMgr.removeTopView(); }
 		prototype.removeAllView = function () { uiMgr.removeAllView(); }
 		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); }
-		prototype.removeSelf = function () { uiMgr.removeView((<IView>this).viewId); }
+		prototype.removeSelf = function () {
+			const viewId = (<IView>this).viewId;
+			//只有UI界面才能移除自身
+			viewId.startsWith("UI") && uiMgr.removeView(viewId);
+		}
 		prototype.onOpenAni = function () {
 			return Promise.resolve();
 		}
@@ -34,21 +38,32 @@ export class ViewExtend {
 			return Promise.resolve();
 		}
 
-		prototype.initView = function (viewInst) {
-			viewInst = viewInst || this;
+		const initView = function (viewInst: IView, parentCtrl: IViewCtrl = null) {
 			let viewCtrl: IViewCtrl;
-			viewCtrl = viewInst.addComponent(viewInst.CtrlClass);
-			viewCtrl.userData = userData;
-			if (viewInst !== this) {
-				const that = (this as IView);
-				const thisCtrl = that.getComponent(that.CtrlClass);
-				thisCtrl?.addChildCtrl(viewCtrl);
+			if (viewInst.viewId) {
+				viewCtrl = viewInst.getComponent(viewInst.CtrlClass);
+				if (!viewCtrl) {
+					viewCtrl = viewInst.addComponent(viewInst.CtrlClass);
+					viewCtrl.userData = userData;
+					viewInst.userData = userData;
+					viewInst.listener = viewCtrl.listener;
+				}
+				if (parentCtrl && parentCtrl != viewCtrl.parent) parentCtrl.addChildCtrl(viewCtrl);
 			}
-			viewInst.listener = viewCtrl.listener;
-			viewInst.userData = userData;
+			const childCount = viewInst.numChildren || 0;
+			for (let i = 0; i < childCount; i++) {
+				const child = viewInst.getChildAt(i) as IView;
+				initView(child, viewCtrl);
+			}
 			viewInst.onCreate?.();
-			return viewCtrl;
 		}
+
+		const constructFromResource = prototype[ "constructFromResource" ];
+		prototype["constructFromResource"] = function() {
+			constructFromResource.call(this);
+			initView(this);
+		}
+
 		const oldDispose = prototype.dispose;
 		prototype.dispose = function () {
 			oldDispose.call(this);
@@ -75,6 +90,10 @@ export class ViewExtend {
 		prototype.removeTopView = function () { uiMgr.removeTopView(); }
 		prototype.removeAllView = function () { uiMgr.removeAllView(); }
 		prototype.removeView = function (viewId) { uiMgr.removeView(viewId); }
-		prototype.removeSelf = function () { uiMgr.removeView((<IViewCtrl>this).view.viewId); }
+		prototype.removeSelf = function () {
+			const viewId = (<IViewCtrl>this).view.viewId;
+			//只有UI界面才能移除自身
+			viewId.startsWith("UI") && uiMgr.removeView(viewId);
+		}
 	}
 }

@@ -13,7 +13,7 @@ export class ComItemInfoProxy extends BaseProxy<ComItemInfoCtrl>{
     @Event(NetMessage.UseItem)
     private useItemResponse(outPut: UseItemOutput & UseItemInput) {
         if (outPut.id == 2010) {
-            this.viewCtrl.addView(ViewID.SectView, null, null, false);
+            this.viewCtrl.addView(ViewID.UISectView, null, null, false);
         } else {
             let logStr = richStrMgr.start(`使用${ GameUtil.GetItemCountStr(outPut) }获得`).break();
             outPut.rewards?.forEach(v => {

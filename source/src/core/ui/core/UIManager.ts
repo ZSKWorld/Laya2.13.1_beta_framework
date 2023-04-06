@@ -91,7 +91,7 @@ class UIManager extends Observer {
 		const viewInst = this._viewClsMap[ viewId ].createInstance();
 		viewInst.name = viewId;
 		fullScreen && viewInst.makeFullScreen();
-		return viewInst.initView();
+		return viewInst.getComponent(viewInst.CtrlClass);
 	}
 
 	/** 添加页面
@@ -135,10 +135,9 @@ class UIManager extends Observer {
 	 * @param viewId {@link ViewID} 页面ID
 	 */
 	removeView(viewId: ViewID) {
-		this._lockPanel.visible = true;
-		let exitAni = Promise.resolve();
 		const { _openedCtrls } = this;
 		if (!_openedCtrls.length) return;
+		let exitAni: Promise<void>;
 		for (let i = _openedCtrls.length - 1; i >= 0; i--) {
 			const viewCtrl = _openedCtrls[ i ];
 			if (viewCtrl.viewId == viewId) {
@@ -151,7 +150,9 @@ class UIManager extends Observer {
 				break;
 			}
 		}
-		exitAni.then(() => {
+		if (!exitAni) return;
+		this._lockPanel.visible = true;
+		exitAni.finally(() => {
 			this.addView2(this.topCtrl, this.topCtrl?.data, false, null);
 		});
 	}

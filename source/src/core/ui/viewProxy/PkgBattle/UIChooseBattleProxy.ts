@@ -7,6 +7,6 @@ import { UIChooseBattleCtrl } from "../../viewCtrl/PkgBattle/UIChooseBattleCtrl"
 export class UIChooseBattleProxy extends BaseProxy<UIChooseBattleCtrl>{
     @Event(NetMessage.StartBattle)
     private startBattleResponse() {
-        this.viewCtrl.addView(ViewID.BattleView);
+        this.viewCtrl.addView(ViewID.UIBattleView);
     }
 }

@@ -73,12 +73,6 @@ export interface ViewExtension extends IViewExtend {
 	 */
 	onCreate?(): void;
 
-	/**
-	 * @description 初始化页面
-	 * @param viewInst {@link IView} 初始对象，没有是初始自己
-	 */
-	initView?(viewInst?: IView): IViewCtrl;
-
 	/** 
 	 * 页面打开动画
 	 * 该方法为虚方法，使用时重写即可

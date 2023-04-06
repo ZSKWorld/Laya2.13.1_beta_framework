@@ -1,7 +1,7 @@
+import { ResPath } from "../../../../common/ResPath";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { ViewExtension } from "../../../core/Interfaces";
 import ComShangCheng from "../../../ui/PkgMain/ComShangCheng";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum ComShangChengMsg {
 	OnBtnPropClick = "ComShangCheng_OnBtnPropClick",
@@ -31,34 +31,34 @@ export const enum ComShangChengMsg {
 }
 
 export class ComShangChengView extends ExtensionClass<ViewExtension, ComShangCheng>(ComShangCheng) {
-    static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-        const { BtnProp, BtnGem, BtnMaterial, BtnMiJi, BtnOther, BtnHeiShi, BtnXianJie, BtnZBQH, BtnBSJG, BtnJS, BtnTSDJ, BtnGemLv1, BtnGemLv2, BtnGemLv3, BtnGemLv4, BtnSGCL, BtnTSCL, BtnZW, BtnQHCL, BtnTJ, BtnXF, BtnJN, BtnQT, BtnYR } = this;
-	    BtnProp.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnPropClick ]);
-	    BtnGem.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemClick ]);
-	    BtnMaterial.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnMaterialClick ]);
-	    BtnMiJi.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnMiJiClick ]);
-	    BtnOther.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnOtherClick ]);
-	    BtnHeiShi.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnHeiShiClick ]);
-	    BtnXianJie.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnXianJieClick ]);
-	    BtnZBQH.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnZBQHClick ]);
-	    BtnBSJG.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnBSJGClick ]);
-	    BtnJS.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnJSClick ]);
-	    BtnTSDJ.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnTSDJClick ]);
-	    BtnGemLv1.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv1Click ]);
-	    BtnGemLv2.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv2Click ]);
-	    BtnGemLv3.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv3Click ]);
-	    BtnGemLv4.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv4Click ]);
-	    BtnSGCL.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnSGCLClick ]);
-	    BtnTSCL.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnTSCLClick ]);
-	    BtnZW.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnZWClick ]);
-	    BtnQHCL.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnQHCLClick ]);
-	    BtnTJ.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnTJClick ]);
-	    BtnXF.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnXFClick ]);
-	    BtnJN.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnJNClick ]);
-	    BtnQT.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnQTClick ]);
-	    BtnYR.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnYRClick ]);
-    }
+		const { BtnProp, BtnGem, BtnMaterial, BtnMiJi, BtnOther, BtnHeiShi, BtnXianJie, BtnZBQH, BtnBSJG, BtnJS, BtnTSDJ, BtnGemLv1, BtnGemLv2, BtnGemLv3, BtnGemLv4, BtnSGCL, BtnTSCL, BtnZW, BtnQHCL, BtnTJ, BtnXF, BtnJN, BtnQT, BtnYR } = this;
+		BtnProp.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnPropClick ]);
+		BtnGem.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemClick ]);
+		BtnMaterial.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnMaterialClick ]);
+		BtnMiJi.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnMiJiClick ]);
+		BtnOther.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnOtherClick ]);
+		BtnHeiShi.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnHeiShiClick ]);
+		BtnXianJie.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnXianJieClick ]);
+		BtnZBQH.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnZBQHClick ]);
+		BtnBSJG.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnBSJGClick ]);
+		BtnJS.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnJSClick ]);
+		BtnTSDJ.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnTSDJClick ]);
+		BtnGemLv1.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv1Click ]);
+		BtnGemLv2.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv2Click ]);
+		BtnGemLv3.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv3Click ]);
+		BtnGemLv4.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnGemLv4Click ]);
+		BtnSGCL.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnSGCLClick ]);
+		BtnTSCL.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnTSCLClick ]);
+		BtnZW.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnZWClick ]);
+		BtnQHCL.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnQHCLClick ]);
+		BtnTJ.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnTJClick ]);
+		BtnXF.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnXFClick ]);
+		BtnJN.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnJNClick ]);
+		BtnQT.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnQTClick ]);
+		BtnYR.onClick(this, this.sendMessage, [ ComShangChengMsg.OnBtnYRClick ]);
+	}
 
 }

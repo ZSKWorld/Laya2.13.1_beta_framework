@@ -1,7 +1,7 @@
-import { ResPath } from "../../../../common/ResPath";
 import { ExtensionClass } from "../../../../libs/utils/Util";
 import { ViewExtension } from "../../../core/Interfaces";
 import ComDongFu from "../../../ui/PkgMain/ComDongFu";
+import { ResPath } from "../../../../common/ResPath";
 
 export const enum ComDongFuMsg {
 	OnBtnCreateClick = "ComDongFu_OnBtnCreateClick",
@@ -13,18 +13,16 @@ export const enum ComDongFuMsg {
 }
 
 export class ComDongFuView extends ExtensionClass<ViewExtension, ComDongFu>(ComDongFu) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+    static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-		const { BtnCreate, BtnAbout, BtnSetting, BtnMeet, BtnPet, BtnRepair, ComZhiZuo } = this;
-		BtnCreate.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnCreateClick ]);
-		BtnAbout.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnAboutClick ]);
-		BtnSetting.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnSettingClick ]);
-		BtnMeet.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnMeetClick ]);
-		BtnPet.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnPetClick ]);
-		BtnRepair.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnRepairClick ]);
-
-		this.initView(ComZhiZuo);
-	}
+        const { BtnCreate, BtnAbout, BtnSetting, BtnMeet, BtnPet, BtnRepair } = this;
+	    BtnCreate.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnCreateClick ]);
+	    BtnAbout.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnAboutClick ]);
+	    BtnSetting.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnSettingClick ]);
+	    BtnMeet.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnMeetClick ]);
+	    BtnPet.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnPetClick ]);
+	    BtnRepair.onClick(this, this.sendMessage, [ ComDongFuMsg.OnBtnRepairClick ]);
+    }
 
 }

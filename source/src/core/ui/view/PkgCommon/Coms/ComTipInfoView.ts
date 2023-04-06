@@ -8,7 +8,7 @@ export const enum ComTipInfoMsg {
 }
 
 export class ComTipInfoView extends ExtensionClass<ViewExtension, ComTipInfo>(ComTipInfo) {
-    static readonly PkgRes = ResPath.UIPath.PkgCommon;
+    static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
     override onCreate(): void {
 

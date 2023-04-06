@@ -73,7 +73,7 @@ export class ComWuPinCtrl extends BaseViewCtrl<ComWuPinView, ComWuPinData>{
 		if (this.showType == ItemBagType.Equip) {
 			let equip1 = <Equipment>data;
 			let equip2 = <Equipment>this.userData.getDressedEquip(equip1.part);
-			this.addView<UIEquipmentInfoData>(ViewID.EquipmentInfoView, { equip1, equip2, fromBag: true }, null, false);
+			this.addView<UIEquipmentInfoData>(ViewID.UIEquipmentInfoView, { equip1, equip2, fromBag: true }, null, false);
 		} else {
 			this.addView<ComItemInfoData>(ViewID.ComItemInfoView, { id: data.id, buy: false }, null, false);
 		}

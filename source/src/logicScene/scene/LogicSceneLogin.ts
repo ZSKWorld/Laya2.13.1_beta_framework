@@ -6,11 +6,11 @@ import { LogicSceneBase } from "../LogicSceneBase";
 /** 登录逻辑场景 */
 export class LogicSceneLogin extends LogicSceneBase {
 	protected override getResArray(): string[] {
-		return [ ResPath.UIPath.PkgLogin ];
+		return [ ResPath.PkgPath.PkgLogin ];
 	}
 
 	protected onEnter(): void {
-		uiMgr.addView(ViewID.LoginMainView);
+		uiMgr.addView(ViewID.UILoginMainView);
 	}
 
 	protected onExit(): void {

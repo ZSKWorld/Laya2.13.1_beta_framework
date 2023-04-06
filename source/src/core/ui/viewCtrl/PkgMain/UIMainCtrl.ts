@@ -69,7 +69,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 	}
 
 	private onBtnChatClick(): void {
-		this.addView(ViewID.ChatView);
+		this.addView(ViewID.UIChatView);
 	}
 
 	private onBtnInfoClick(): void {
@@ -81,7 +81,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 	}
 
 	private onBtnSettingClick(): void {
-		this.addView(ViewID.SettingView);
+		this.addView(ViewID.UISettingView);
 	}
 
 	private onBtnRankClick(): void {
@@ -90,7 +90,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 
 	private onBtnSphereClick(): void {
 		if (this._sphereDragged) return;
-		this.addView(ViewID.SphereToolView, null, null, false);
+		this.addView(ViewID.UISphereToolView, null, null, false);
 	}
 
 	private onBtnSphereDraged(draged: boolean) {

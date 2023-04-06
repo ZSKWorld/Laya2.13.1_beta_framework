@@ -20,7 +20,7 @@ export const enum UISphereToolMsg {
 }
 
 export class UISphereToolView extends ExtensionClass<ViewExtension, UISphereTool>(UISphereTool) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
 		const { BtnBg, BtnClearLog, BtnHFJL, BtnCreate, BtnClear, BtnAdd, BtnSubmit, BtnRemove, BtnRemoveAll, Ipt29, CmbItem } = this;

@@ -16,7 +16,7 @@ export const enum ComZhiZuoMsg {
 }
 
 export class ComZhiZuoView extends ExtensionClass<ViewExtension, ComZhiZuo>(ComZhiZuo) {
-	static readonly PkgRes = ResPath.UIPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
 		const { BtnFJZB, BtnFJBS, BtnYJHC, BtnJPYL, BtnDZZB, BtnZJZB, BtnCZZB, BtnBSHC, BtnZZTZ } = this;
