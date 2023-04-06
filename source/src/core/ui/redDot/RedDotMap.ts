@@ -1,3 +1,4 @@
+import { ViewID } from "../core/ViewID";
 import { RedDotCheckType, RedDotDisplayType } from "./RedDotConst";
 import { IRedDotData } from "./RedDotInterface";
 import { RedDotNode } from "./RedDotNode";
@@ -59,7 +60,7 @@ export class RedDotMap {
     static readonly Lock = RedDotMap.CreateData(RedDotMap.Root, "Lock");
     //---------------Game---------------
     //---------------Bottom---------------
-    static readonly MainView = RedDotMap.CreateData(RedDotMap.Bottom, "MainView");
+    static readonly MainView = RedDotMap.CreateData(RedDotMap.Bottom, ViewID.UIMainView);
     static readonly MainView1 = RedDotMap.CreateData(RedDotMap.MainView, "btn_ShengChan", [ RedDotCheckType.Check1 ]);
     static readonly MainView2 = RedDotMap.CreateData(RedDotMap.MainView, "btn_HuoJi", [ RedDotCheckType.Check2 ], RedDotDisplayType.Number);
     static readonly MainView3 = RedDotMap.CreateData(RedDotMap.MainView, "btn_ShengJi", [ RedDotCheckType.Check3 ]);
