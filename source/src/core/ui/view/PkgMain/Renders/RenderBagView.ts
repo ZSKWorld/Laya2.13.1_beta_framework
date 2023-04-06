@@ -1,11 +1,21 @@
-import { GameUtil } from "../../../../common/GameUtil";
 import { ExtensionClass } from "../../../../libs/utils/Util";
-import { tableMgr } from "../../../../table/TableManager";
-import { Equipment, ItemBase } from "../../../../userData/proxy/ItemData";
-import { GComponentExtend } from "../../../core/Interfaces";
+import { ViewExtension } from "../../../core/Interfaces";
 import RenderBag from "../../../ui/PkgMain/RenderBag";
+import { ResPath } from "../../../../common/ResPath";
+import { GameUtil } from "../../../../common/GameUtil";
+import { tableMgr } from "../../../../table/TableManager";
+import { ItemBase, Equipment } from "../../../../userData/proxy/ItemData";
 
-export class RenderBagView extends ExtensionClass<GComponentExtend, RenderBag>(RenderBag) {
+export const enum RenderBagMsg {
+
+}
+
+export class RenderBagView extends ExtensionClass<ViewExtension, RenderBag>(RenderBag) {
+    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+
+	override onCreate(): void {
+        
+    }
 
     refreshShangCheng(id: number) {
         const { TxtName, TxtCount } = this;

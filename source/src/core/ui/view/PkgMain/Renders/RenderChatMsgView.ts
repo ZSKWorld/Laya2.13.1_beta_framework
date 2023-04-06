@@ -1,14 +1,23 @@
 import { ExtensionClass } from "../../../../libs/utils/Util";
-import { userData } from "../../../../userData/UserData";
-import { GComponentExtend } from "../../../core/Interfaces";
+import { ViewExtension } from "../../../core/Interfaces";
 import RenderChatMsg from "../../../ui/PkgMain/RenderChatMsg";
+import { ResPath } from "../../../../common/ResPath";
+
+export const enum RenderChatMsgMsg {
+
+}
 
 export interface ChatMsg{
 	uid:string,
 	text:string;
 }
 
-export class RenderChatMsgView extends ExtensionClass<GComponentExtend, RenderChatMsg>(RenderChatMsg) {
+export class RenderChatMsgView extends ExtensionClass<ViewExtension, RenderChatMsg>(RenderChatMsg) {
+    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+
+	override onCreate(): void {
+        
+    }
     refresh(data: ChatMsg) {
         this.TxtMsg.width = 2000;
         this.TxtMsg.autoSize = fgui.AutoSizeType.Both;
@@ -18,7 +27,7 @@ export class RenderChatMsgView extends ExtensionClass<GComponentExtend, RenderCh
             this.TxtMsg.width = 610;
         }
 
-        if(data.uid == userData.uid) this.TxtMsg.x = 39;
+        if(data.uid == this.userData.uid) this.TxtMsg.x = 39;
         else this.TxtMsg.x = this.width - this.TxtMsg.width - 39;
     }
 }

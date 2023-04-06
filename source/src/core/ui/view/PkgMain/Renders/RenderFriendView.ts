@@ -1,10 +1,21 @@
-import RenderFriend from "../../../ui/PkgMain/RenderFriend";
 import { ExtensionClass } from "../../../../libs/utils/Util";
-import { GComponentExtend } from "../../../core/Interfaces";
+import { ViewExtension } from "../../../core/Interfaces";
+import RenderFriend from "../../../ui/PkgMain/RenderFriend";
+import { ResPath } from "../../../../common/ResPath";
 
-export class RenderFriendView extends ExtensionClass<GComponentExtend, RenderFriend>(RenderFriend) {
+export const enum RenderFriendMsg {
+	OnBtnChatClick = "RenderFriend_OnBtnChatClick",
+}
 
-    refresh(uid:string){
+export class RenderFriendView extends ExtensionClass<ViewExtension, RenderFriend>(RenderFriend) {
+    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+
+	override onCreate(): void {
+        const { BtnChat } = this;
+	    BtnChat.onClick(this, this.sendMessage, [ RenderFriendMsg.OnBtnChatClick ]);
+    }
+    
+    refresh(uid: string) {
         this.TxtNickname.text = uid;
     }
 }

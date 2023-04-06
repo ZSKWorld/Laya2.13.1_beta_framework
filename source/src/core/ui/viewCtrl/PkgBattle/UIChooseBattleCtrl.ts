@@ -58,13 +58,13 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 				item.refreshGuanQia(<ConfigLevelData>data);
 				break;
 			case BattleType.FuBen:
-				item.refreshFuBen(<ConfigFuBenData>data, this.userData.getCopyTime(data.ID));
+				item.refreshFuBen(<ConfigFuBenData>data);
 				break;
 			case BattleType.MiJing:
-				item.refreshMiJing(<ConfigMiJingData>data, this.userData.getSecretTime(data.ID));
+				item.refreshMiJing(<ConfigMiJingData>data);
 				break;
 			case BattleType.Boss:
-				item.refreshBoss(<ConfigBossData>data, this.userData.getBossCoolDown(data.ID));
+				item.refreshBoss(<ConfigBossData>data);
 				break;
 			case BattleType.CaiJi:
 				item.refreshCaiJi(data);
