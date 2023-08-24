@@ -1,23 +1,16 @@
-import { ResPath } from "../../core/common/ResPath";
-import { uiMgr } from "../../core/ui/core/UIManager";
-import { ViewID } from "../../core/ui/core/ViewID";
 import { LogicSceneBase } from "../LogicSceneBase";
 
+export interface SceneGameData {
+
+}
+
 /** 游戏逻辑场景 */
-export class LogicSceneGame extends LogicSceneBase {
-	protected override loadViewId = ViewID.UILoading1View;
+export class LogicSceneGame extends LogicSceneBase<SceneGameData> {
 
-	protected override getResArray(): string[] {
-		return [
-			ResPath.PkgPath.PkgBattle
-		];
+	protected onEnter() {
 	}
 
-	protected onEnter(): void {
-		uiMgr.addView(ViewID.UIChooseBattleView, this.data);
-	}
-
-	protected onExit(): void {
+	protected onExit() {
 
 	}
 

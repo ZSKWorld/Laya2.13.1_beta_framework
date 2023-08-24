@@ -1,8 +1,6 @@
 import { GameUtil } from "../../../../common/GameUtil";
 import { ResPath } from "../../../../common/ResPath";
-import { ExtensionClass } from "../../../../libs/utils/Util";
 import { tableMgr } from "../../../../table/TableManager";
-import { ViewExtension } from "../../../core/Interfaces";
 import ComItemInfo from "../../../ui/PkgMain/ComItemInfo";
 
 export const enum ComItemInfoMsg {
@@ -14,7 +12,7 @@ export const enum ComItemInfoMsg {
 	OnNumInput = "ComItemInfo_OnNumInput",
 }
 
-export class ComItemInfoView extends ExtensionClass<ViewExtension, ComItemInfo>(ComItemInfo) {
+export class ComItemInfoView extends ExtensionClass<IView, ComItemInfo>(ComItemInfo) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {

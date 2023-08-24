@@ -1,10 +1,7 @@
 import { ResPath } from "../../../../common/ResPath";
-import { Event } from "../../../../libs/event/EventManager";
 import { MathUtil } from "../../../../libs/math/MathUtil";
-import { ExtensionClass } from "../../../../libs/utils/Util";
 import { NetMessage } from "../../../../net/enum/NetMessage";
 import { tableMgr } from "../../../../table/TableManager";
-import { ViewExtension } from "../../../core/Interfaces";
 import ComRenWu from "../../../ui/PkgMain/ComRenWu";
 
 export const enum ComRenWuMsg {
@@ -22,7 +19,7 @@ export const enum ComRenWuMsg {
 	OnBtnFBClick = "ComRenWu_OnBtnFBClick",
 }
 
-export class ComRenWuView extends ExtensionClass<ViewExtension, ComRenWu>(ComRenWu) {
+export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
@@ -41,7 +38,7 @@ export class ComRenWuView extends ExtensionClass<ViewExtension, ComRenWu>(ComRen
 		BtnFB.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnFBClick ]);
 	}
 
-	@Event(NetMessage.SyncInfo)
+	@RegisterEvent(NetMessage.SyncInfo)
 	refreshEquipInfo() {
 		const { weapon, necklace, ring, amulet, helmet, clothes, trousers, shoes, mount, hiddenWeeapon, fashion, magicWeapon, vigor, maxVigro, moHe, moBi,
 			spiritStones, jingLiHuiFu, soul, gemScore, upgradeExp, } = this.userData;

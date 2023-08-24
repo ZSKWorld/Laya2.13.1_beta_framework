@@ -1,6 +1,6 @@
 /** FGUI修复 */
 export class FGUIRepair{
-    static Fix(): void{
+    static Fix(){
         this.UbbTagI();
         this.PlayTransitionAction();
         this.FixGUIInputSingleLine();
@@ -127,5 +127,5 @@ export class FGUIRepair{
 			}, null, true);
 			fgui.AssetProxy.inst.load(loadKeyArr, descCompleteHandler, null, Laya.Loader.BUFFER);
 		}
-	}	
+	}
 }

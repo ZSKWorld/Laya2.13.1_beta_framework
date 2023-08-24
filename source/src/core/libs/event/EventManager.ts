@@ -1,6 +1,5 @@
 /** 事件监听器 */
 class EventManager extends Laya.EventDispatcher {
-
     /**注册监听事件 */
     registerEvent(caller: any) {
         if (!caller) return;
@@ -22,12 +21,9 @@ class EventManager extends Laya.EventDispatcher {
             }
         }
     }
-
 }
-
-/** 全局事件中心 */
 export const eventMgr = new EventManager();
-windowImmit("eventMgr", eventMgr)
+windowImmit("eventMgr", eventMgr);
 
 /**
  * @description: 添加全局事件监听
@@ -36,7 +32,7 @@ windowImmit("eventMgr", eventMgr)
  * @param args 参数
  * @return MethodDecorator
  */
-export function Event(eventName: string, once?: boolean, args?: any[]) {
+function RegisterEvent(eventName: string, once?: boolean, args?: any[]): MethodDecorator {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         if (!target.__eventMap) target.__eventMap = {};
         if (!target.__eventMap[ eventName ]) target.__eventMap[ eventName ] = [];
@@ -56,3 +52,4 @@ export function Event(eventName: string, once?: boolean, args?: any[]) {
         }
     };
 }
+windowImmit("RegisterEvent", RegisterEvent);

@@ -1,6 +1,4 @@
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
-import { ViewExtension } from "../../core/Interfaces";
 import UITipConfirm from "../../ui/PkgCommon/UITipConfirm";
 
 export const enum UITipConfirmMsg {
@@ -8,7 +6,7 @@ export const enum UITipConfirmMsg {
 	OnBtnConfirmClick = "UITipConfirm_OnBtnConfirmClick",
 }
 
-export class UITipConfirmView extends ExtensionClass<ViewExtension, UITipConfirm>(UITipConfirm) {
+export class UITipConfirmView extends ExtensionClass<IView, UITipConfirm>(UITipConfirm) {
 	static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
 	override onCreate(): void {

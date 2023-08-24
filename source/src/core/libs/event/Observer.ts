@@ -6,13 +6,14 @@ import { Notifier } from "./Notifier";
  * @author wizardc
  */
 export abstract class Observer extends Notifier {
+    protected __eventMap: KeyMap<Function[]>;
 
     public constructor() {
         super();
         eventMgr.registerEvent(this);
     }
 
-    protected removeEvent(eventName: string, caller: any, callback: Function): void {
+    protected removeEvent(eventName: string, caller: any, callback: Function) {
         eventMgr.off(eventName, caller, callback);
     }
 

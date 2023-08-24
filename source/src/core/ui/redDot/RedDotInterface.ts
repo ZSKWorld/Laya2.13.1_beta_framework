@@ -1,36 +1,30 @@
-import { RedDotCheckType, RedDotDisplayType } from "./RedDotConst";
+import { RDDisplayType, RDTriggerType } from "./RedDotConst";
 import { RedDotNode } from "./RedDotNode";
 
 export interface IRedDotData {
     readonly id: number;
+    enable: boolean;
+    readonly names: string[];
+    readonly node: RedDotNode;
+    parent: IRedDotData;
+    readonly childs: IRedDotData[];
+    readonly hasTrigger: boolean;
+    readonly triggers: RDTriggerType[];
+    readonly displayType: RDDisplayType;
+    readonly rdCount: number;
 
-    readonly name: string;
+    doTrigger(): void;
 
-    readonly parent: IRedDotData;
+    /** 计算红点数量 */
+    calculateRD(force?: boolean): void;
 
-    readonly owner: RedDotNode;
+    addChild(child: IRedDotData): void;
 
-    /**
-     * {@link RedDotCheckType }[] 检测类型，仅叶子节点有效
-     * @see 为空即为非叶子节点，否则为叶子节点
-     */
-    readonly checkType?: RedDotCheckType[];
+    getChild(id: number): IRedDotData;
 
-    /**
-     * {@link RedDotDisplayType } 红点显示类型，默认 RedDotDisplayType.RedDot
-     */
-    readonly displayType?: RedDotDisplayType;
+    removeChild(id: number): IRedDotData;
 
-    setOwner(owner: RedDotNode): void;
+    removeSelf(): void;
 
-    /**
-     * @param parent 
-     * @param name 
-     * @param checkType {@link RedDotCheckType}[]
-     * @param displayType {@link RedDotDisplayType} 默认 RedDotDisplayType.RedDot
-     */
-    setData(parent: IRedDotData, name: string, checkType?: RedDotCheckType[], displayType?: RedDotDisplayType): void;
-
-    /** 回收节点 */
     recover(): void;
 }

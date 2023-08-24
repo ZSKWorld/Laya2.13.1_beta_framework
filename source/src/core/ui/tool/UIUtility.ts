@@ -1,37 +1,3 @@
-import { IViewCtrl } from "../core/Interfaces";
-import { Layer, layerMgr } from "../core/LayerManager";
-import { uiMgr } from "../core/UIManager";
-import { ViewID } from "../core/ViewID";
-import { ComNumInputData } from "../viewCtrl/PkgCommon/Coms/ComNumInputCtrl";
-import { UIPoolKey } from "./UIPoolKey";
-
-class TipInfoMgr {
-	private static cache: string[];
-	private static readonly showDelay = 200;
-	private static curTime = TipInfoMgr.showDelay;
-
-	static AddTip(text: string, color: string) {
-		if (!this.cache) {
-			this.cache = [];
-			Laya.timer.frameLoop(1, this, this.Update);
-		}
-		this.cache.push(text, color);
-	}
-
-	private static Update() {
-		this.curTime += Laya.timer.delta;
-		if (this.cache.length && this.curTime >= this.showDelay) {
-			this.curTime = 0;
-			const viewCtrl = <IViewCtrl>Laya.Pool.getItemByCreateFun(UIPoolKey.TipInfo, () => {
-				const viewCtrl = uiMgr.createView(ViewID.ComTipInfoView, false);
-				viewCtrl.view.touchable = false;
-				return viewCtrl;
-			});
-			viewCtrl.data = { text: this.cache.shift(), color: this.cache.shift() };
-			layerMgr.addObject(viewCtrl.view, Layer.Bottom);
-		}
-	}
-}
 
 /** UI工具类 */
 export class UIUtility {
@@ -41,7 +7,7 @@ export class UIUtility {
 	 * @param name 贴图名字
 	 * @returns
 	 */
-	static GetFGUITexture(pkg: string, name: string) {
+	static GetFGUITexture(pkg: string, name: string): Laya.Texture {
 		let temp = fgui.UIPackage.getItemByURL(fgui.UIPackage.getItemURL(pkg, name)).getBranch();
 		temp = temp.getHighResolution();
 		temp.load();
@@ -49,53 +15,24 @@ export class UIUtility {
 	}
 
 	/**
-	 * 弹浮动提示
-	 * @param text 文字
-	 * @param color 文字颜色，默认："#ffffff"
-	 */
-	static ShowTipInfo(text: string, color?: string) {
-		TipInfoMgr.AddTip(text, color);
-	}
-
-	/**
-	 * 弹确认窗口
-	 * @param text 内容
-	 * @param title 标题，默认："提示"
-	 * @param callback {@link Laya.Handler} 回调函数
-	 */
-	static ShowConfirm(text: string, title?: string, callback?: Laya.Handler) {
-		uiMgr.addView(ViewID.UITipConfirmView, { text, title, callback }, null, false);
-	}
-
-	/**
-	 * 弹数量（整数）输入窗口
-	 * @param title 标题
-	 * @param min 最小值
-	 * @param max 最大值
-	 * @param callback {@link Laya.Handler} 回调函数，参数为输入数字
-	 */
-	static ShowNumInput(title: string, min: number, max: number, callback?: Laya.Handler) {
-		uiMgr.addView<ComNumInputData>(ViewID.ComNumInputView, { title, min, max, callback }, null, false);
-	}
-
-	/**
 	 * 设置list
 	 * @param list {@link fgui.GList} list组件
-	 * @param numItems 元素数量
+	 * @param virtual 虚拟列表?
 	 * @param caller 调用者
 	 * @param renderFunc 渲染回调
 	 * @param clickFunc 点击回调
 	 */
 	static SetList(
 		list: fgui.GList,
-		caller: any,
-		renderFunc: (index?: number, item?: any) => void,
-		clickFunc?: (item?: any, evt?: Laya.Event, index?: number) => void,
 		virtual: boolean = true,
-	): void {
+		caller?: any,
+		renderFunc?: (index?: number, item?: any) => void,
+		clickFunc?: (item?: any, evt?: Laya.Event, index?: number) => void,
+	) {
 		virtual && list.setVirtual();
 		list.itemRenderer?.recover();
-		list.itemRenderer = Laya.Handler.create(caller, renderFunc, null, false);
+		if (renderFunc)
+			list.itemRenderer = Laya.Handler.create(caller, renderFunc, null, false);
 		clickFunc && list.on(fgui.Events.CLICK_ITEM, caller, clickFunc);
 	}
 
@@ -126,4 +63,3 @@ export class UIUtility {
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
 	}
 }
-windowImmit("UIUtility", UIUtility);

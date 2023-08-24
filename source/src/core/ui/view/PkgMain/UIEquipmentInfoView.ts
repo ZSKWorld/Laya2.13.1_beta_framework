@@ -1,7 +1,5 @@
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
 import { Equipment } from "../../../userData/proxy/ItemData";
-import { ViewExtension } from "../../core/Interfaces";
 import UIEquipmentInfo from "../../ui/PkgMain/UIEquipmentInfo";
 
 export const enum UIEquipmentInfoMsg {
@@ -14,7 +12,7 @@ export const enum UIEquipmentInfoMsg {
 	OnBtnShenYouClick = "UIEquipmentInfo_OnBtnShenYouClick",
 }
 
-export class UIEquipmentInfoView extends ExtensionClass<ViewExtension, UIEquipmentInfo>(UIEquipmentInfo) {
+export class UIEquipmentInfoView extends ExtensionClass<IView, UIEquipmentInfo>(UIEquipmentInfo) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {

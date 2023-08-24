@@ -1,7 +1,5 @@
 import { ResPath } from "../../../../common/ResPath";
 import { MathUtil } from "../../../../libs/math/MathUtil";
-import { ExtensionClass } from "../../../../libs/utils/Util";
-import { ViewExtension } from "../../../core/Interfaces";
 import RenderChooseBattle from "../../../ui/PkgBattle/RenderChooseBattle";
 
 export const enum RenderChooseBattleMsg {
@@ -9,7 +7,7 @@ export const enum RenderChooseBattleMsg {
     OnSecondUpdate = "RenderChooseBattle_OnSecondUpdate",
 }
 
-export class RenderChooseBattleView extends ExtensionClass<ViewExtension, RenderChooseBattle>(RenderChooseBattle) {
+export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBattle>(RenderChooseBattle) {
     static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
     private _bossData: ConfigBossData;

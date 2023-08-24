@@ -1,6 +1,4 @@
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
-import { ViewExtension } from "../../core/Interfaces";
 import UILoginMain from "../../ui/PkgLogin/UILoginMain";
 
 export const enum UILoginMainMsg {
@@ -10,7 +8,7 @@ export const enum UILoginMainMsg {
 	OnBtnRegisterClick = "UILoginMain_OnBtnRegisterClick",
 }
 
-export class UILoginMainView extends ExtensionClass<ViewExtension, UILoginMain>(UILoginMain) {
+export class UILoginMainView extends ExtensionClass<IView, UILoginMain>(UILoginMain) {
 	static readonly PkgRes = ResPath.PkgPath.PkgLogin;
 
 	override onCreate(): void {

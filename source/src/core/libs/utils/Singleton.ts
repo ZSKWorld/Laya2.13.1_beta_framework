@@ -1,9 +1,11 @@
+import { Observer } from "../event/Observer";
+
 export function Singleton<T>() {
-    return class Singleton {
-        private static _inst: T;
-        static get inst() {
-            return this._inst || (this._inst = new this() as T);
+    return class ObserverSingleton extends Observer {
+        private static inst: T;
+        static get Inst() {
+            return this.inst || (this.inst = new this() as unknown as T);
         }
-        protected constructor() { }
+        protected constructor() { super(); }
     }
 }

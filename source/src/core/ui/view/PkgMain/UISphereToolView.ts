@@ -1,8 +1,6 @@
 import { GameUtil } from "../../../common/GameUtil";
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
 import { tableMgr } from "../../../table/TableManager";
-import { ViewExtension } from "../../core/Interfaces";
 import UISphereTool from "../../ui/PkgMain/UISphereTool";
 
 export const enum UISphereToolMsg {
@@ -19,7 +17,7 @@ export const enum UISphereToolMsg {
 	OnCmbItemDropDownDisplay = "UISphereTool_OnCmbItemDropDownDisplay",
 }
 
-export class UISphereToolView extends ExtensionClass<ViewExtension, UISphereTool>(UISphereTool) {
+export class UISphereToolView extends ExtensionClass<IView, UISphereTool>(UISphereTool) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {

@@ -1,47 +1,54 @@
+import { platformMgr } from "../../../platform/PlatformManager";
+import { ResPath } from "../../common/ResPath";
 import { Observer } from "../../libs/event/Observer";
-import { Logger } from "../../libs/utils/Logger";
+import { UIConfirmData } from "../view/PkgCommon/controller/UIConfirmCtrl";
 import { Layer, layerMgr } from "./LayerManager";
-import { IProxy_Class, IViewCtrl, IViewCtrl_Class, IView_Class, ViewEvent } from "./Interfaces";
+import { ViewEvent } from "./UIDefine";
 import { ViewID } from "./ViewID";
 
-const logger = Logger.Create("UIManager", true);
-
-/** 页面缓存管理 */
+/** 页面缓存 */
 class UICache {
 
 	/**不会销毁的页面缓存 */
-	private _dontDestroyCache = new Map<ViewID, IViewCtrl>();
+	private _views = new Map<string, IViewCtrl>();
 
 	/**
 	 * 缓存页面
 	 * @param viewCtrl {@link IViewCtrl} 页面实例
 	 */
-	addView(viewCtrl: IViewCtrl) {
+	cacheView(viewCtrl: IViewCtrl) {
 		const viewId = viewCtrl.viewId;
-		this._dontDestroyCache.set(viewId, viewCtrl);
+		this._views.set(viewId, viewCtrl);
 	}
 
 	/**
 	 * 从缓存中获取页面
-	 * @param viewId {@link ViewID} 页面ID
-	 * @returns 
+	 * @param viewId 页面id
+	 * @returns
 	 */
 	getView(viewId: ViewID) {
 		let viewCtrl: IViewCtrl;
-		if (this._dontDestroyCache.has(viewId)) {
-			viewCtrl = this._dontDestroyCache.get(viewId);
-			this._dontDestroyCache.delete(viewId);
+		if (this._views.has(viewId)) {
+			viewCtrl = this._views.get(viewId);
+			this._views.delete(viewId);
 		}
 		return viewCtrl;
+	}
+
+	onResize() {
+		this._views.forEach(v => v.view.makeFullScreen());
 	}
 
 }
 
 /** UI管理类 */
 class UIManager extends Observer {
-	private _viewClsMap: { [ key in ViewID ]?: IView_Class } = {};
-	private _ctrlClsMap: { [ key in ViewID ]?: IViewCtrl_Class } = {};
-	private _proxyClsMap: { [ key in ViewID ]?: IProxy_Class } = {};
+	/** 页面类映射 */
+	private _viewClsMap: { [ key: string ]: Class<IView> & { createInstance?(): IView, readonly PkgRes?: string } } = {};
+	/** 页面控制器类映射 */
+	private _ctrlClsMap: { [ key: string ]: Class<IViewCtrl> } = {};
+	/** 页面控制器网络代理类映射 */
+	private _proxyClsMap: { [ key: string ]: Class<IViewProxy> } = {};
 
 	/** 缓存池 */
 	private _cache: UICache;
@@ -50,81 +57,103 @@ class UIManager extends Observer {
 	/** 已打开页面 */
 	private _openedCtrls: IViewCtrl[] = [];
 
-
 	/** 当前显示的顶层页面 */
 	private get topCtrl() { return this._openedCtrls[ 0 ]; }
 
 	init() {
-		if (this._cache) return;
 		this._cache = new UICache();
 
 		this._lockPanel = new fgui.GGraph();
 		this._lockPanel.name = "LockPanel";
 		this._lockPanel.makeFullScreen();
 		this._lockPanel.drawRect(0, "", "#00000000");
-		layerMgr.addObject(this._lockPanel, Layer.Lock);
+		this._lockPanel.sortingOrder = 999;
+		layerMgr.addObject(this._lockPanel, Layer.Bottom);
 
-		//延迟250防止频繁触发
+		//延迟100防止频繁触发
 		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(100, this, this.onResize));
 	}
 
-	registView(viewId: ViewID, viewCls: IView_Class, ctrlCls?: IViewCtrl_Class, proxyCls?: IProxy_Class) {
+	registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>) {
 		if (!viewCls) throw new Error("参数不能为空！");
 		if (!this._viewClsMap[ viewId ]) {
-			viewCls.prototype.viewId = viewId;
-			viewCls.prototype.CtrlClass = ctrlCls;
-			ctrlCls.prototype.viewId = viewId;
-			ctrlCls.prototype.ProxyClass = proxyCls;
+			viewCls && (viewCls.prototype.viewId = viewId);
+			ctrlCls && (ctrlCls.prototype.viewId = viewId);
+			ctrlCls && (ctrlCls.prototype.ProxyClass = proxyCls);
+			proxyCls && (proxyCls.prototype.viewId = viewId);
 			this._viewClsMap[ viewId ] = viewCls;
 			this._ctrlClsMap[ viewId ] = ctrlCls;
 			this._proxyClsMap[ viewId ] = proxyCls;
-		} else {
-			logger.warn(`重复添加映射 => ${ viewId }`);
 		}
 	}
 
+	getViewClass(viewId: ViewID) { return this._viewClsMap[ viewId ]; }
+
+	getCtrlClass(viewId: ViewID) { return this._ctrlClsMap[ viewId ]; }
+
+	getProxyClass(viewId: ViewID) { return this._proxyClsMap[ viewId ]; }
+
 	/** 创建页面
-	 * @param viewId {@link ViewID} 页面ID
+	 * @param viewId 页面id
 	 * @param fullScreen 是否全屏
 	 */
-	createView(viewId: ViewID, fullScreen: boolean = true) {
+	createView(viewId: ViewID, fullScreen: boolean = false): IViewCtrl {
 		const viewInst = this._viewClsMap[ viewId ].createInstance();
 		viewInst.name = viewId;
 		fullScreen && viewInst.makeFullScreen();
-		return viewInst.getComponent(viewInst.CtrlClass);
+		return viewInst.getComponent(this.getCtrlClass(viewId));
+	}
+
+	showConfirm(title: string, msg: string): Promise<boolean> {
+		const commonPkg = fgui.UIPackage.getById(ResPath.PkgPath.PkgCommon);
+		if (!commonPkg) return platformMgr.showConfirm(title, msg);
+		return new Promise(resolve => {
+			this.showView<UIConfirmData>(
+				ViewID.UIConfirmView,
+				{
+					title,
+					content: msg,
+					onCancel: Laya.Handler.create(null, resolve, [ false ]),
+					onConfirm: Laya.Handler.create(null, resolve, [ true ]),
+				});
+		});
 	}
 
 	/** 添加页面
-	 * @param viewId {@link ViewID} 页面ID
+	 * @param viewId 页面id
 	 * @param data 页面数据
 	 * @param callback {@link Laya.Handler} 回调
-	 * @param hideTop 是否隐藏顶部页面
 	 */
-	addView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler, hideTop: boolean = true) {
+	showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler) {
 		let viewCtrl: IViewCtrl;
 		this._lockPanel.visible = true;
 		let openedIndex = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (openedIndex == -1) {
 			//先尝试从缓存池中获取
 			viewCtrl = this._cache.getView(viewId);
-			if (viewCtrl) this.addView2(viewCtrl, data, hideTop, callback);
+			if (viewCtrl) this.showView2(viewCtrl, data, callback);
 			else {
 				fgui.UIPackage.loadPackage([ this._viewClsMap[ viewId ].PkgRes ], Laya.Handler.create(this, (res: any[]) => {
 					if (!res || !res.length) {
-						if (confirm(`界面 ${ viewId } 加载失败，是否重试?`))
-							this.addView(viewId, data, callback, hideTop);
-						else
-							this.addView2(viewCtrl, data, hideTop, callback);
+						this.showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
+							if (result) this.showView(viewId, data, callback);
+							else this.showView2(viewCtrl, data, callback);
+						});
 					} else {
-						viewCtrl = this.createView(viewId);
-						this.addView2(viewCtrl, data, hideTop, callback);
+						viewCtrl = this.createView(viewId, true);
+						this.showView2(viewCtrl, data, callback);
 					}
 				}));
 			}
 		} else {
-			if (openedIndex == 0) logger.warn(`Error:${ viewId }已经被打开`);
-			viewCtrl = this._openedCtrls.splice(openedIndex, 1)[ 0 ];
-			this.addView2(viewCtrl, data, hideTop, callback);
+			if (openedIndex == 0) {
+				callback && callback.run();
+				this._lockPanel.visible = false;
+			}
+			else {
+				viewCtrl = this._openedCtrls[ openedIndex ];
+				this.showView2(viewCtrl, data, callback);
+			}
 		}
 	}
 
@@ -132,38 +161,34 @@ class UIManager extends Observer {
 	removeTopView() { this.topCtrl && this.removeView(this.topCtrl.viewId); }
 
 	/** 移除页面
-	 * @param viewId {@link ViewID} 页面ID
+	 * @param viewId 页面id
 	 */
 	removeView(viewId: ViewID) {
-		const { _openedCtrls } = this;
-		if (!_openedCtrls.length) return;
-		let exitAni: Promise<void>;
-		for (let i = _openedCtrls.length - 1; i >= 0; i--) {
-			const viewCtrl = _openedCtrls[ i ];
-			if (viewCtrl.viewId == viewId) {
-				exitAni = viewCtrl.view.onCloseAni().then(() => {
-					_openedCtrls.splice(i, 1);
-					viewCtrl.view.removeFromParent();
-					viewCtrl.sendMessage(ViewEvent.OnBackground);
-					this._cache.addView(viewCtrl);
-				});
-				break;
-			}
+		const hideView = this._openedCtrls.find(v => v.viewId == viewId);
+		if (!hideView) return;
+		if (!hideView.view.parent) {
+			this._openedCtrls.remove(hideView);
+			this._cache.cacheView(hideView);
+			return;
 		}
-		if (!exitAni) return;
 		this._lockPanel.visible = true;
-		exitAni.finally(() => {
-			this.addView2(this.topCtrl, this.topCtrl?.data, false, null);
+		hideView.onCloseAni().then(() => {
+			this._openedCtrls.remove(hideView);
+			hideView.view.removeFromParent();
+			hideView.sendMessage(ViewEvent.OnBackground);
+			this._cache.cacheView(hideView);
+			this.showView2(this.topCtrl, this.topCtrl?.data);
 		});
 	}
 
 	/** 移除所有页面 */
 	removeAllView() {
-		// this.removeView(null);
 		this._openedCtrls.forEach(v => {
-			v.view.removeFromParent();
-			v.sendMessage(ViewEvent.OnBackground);
-			this._cache.addView(v);
+			if (v.view.parent) {
+				v.view.removeFromParent();
+				v.sendMessage(ViewEvent.OnBackground);
+			}
+			this._cache.cacheView(v);
 		});
 		this._openedCtrls.length = 0;
 	}
@@ -171,37 +196,25 @@ class UIManager extends Observer {
 	private onResize() {
 		this._lockPanel.makeFullScreen();
 		this._openedCtrls.forEach(v => v.view.makeFullScreen());
+		this._cache.onResize();
 	}
 
-	private addView2(viewCtrl: IViewCtrl, data: any, hideTop: boolean, callback: Laya.Handler) {
-		let exitAni = Promise.resolve();
-		let showAni = Promise.resolve();
+	private showView2(viewCtrl: IViewCtrl, data: any, callback?: Laya.Handler) {
+		const onFinally = () => {
+			callback && callback.run();
+			this._lockPanel.visible = false;
+		};
 		if (viewCtrl) {
 			viewCtrl.data = data;
-			const topCtrl = this.topCtrl;
-			if (viewCtrl != topCtrl) {
-				this._openedCtrls.unshift(viewCtrl);
-				if (topCtrl) {
-					if (hideTop) {
-						exitAni = topCtrl.view.onCloseAni().then(() => {
-							topCtrl.view.removeFromParent();
-							topCtrl.sendMessage(ViewEvent.OnBackground);
-						});
-					} else {
-						topCtrl.sendMessage(ViewEvent.OnBackground);
-					}
-				}
-			}
-			if (!viewCtrl.view.parent) {
-				layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
-				viewCtrl.sendMessage(ViewEvent.OnForeground);
-				showAni = viewCtrl.view.onOpenAni();
-			} else viewCtrl.sendMessage(ViewEvent.OnForeground);
-		}
-		callback?.run();
-		exitAni.then(() => showAni).finally(() => this._lockPanel.visible = false);
+			const openIndex = this._openedCtrls.findIndex(v => v == viewCtrl);
+			const doOpenAni = openIndex != 0;
+			openIndex > 0 && this._openedCtrls.splice(openIndex, 1);
+			doOpenAni && this._openedCtrls.unshift(viewCtrl);
+			layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
+			viewCtrl.sendMessage(ViewEvent.OnForeground);
+			doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
+		} else onFinally();
 	}
 }
-
 export const uiMgr = new UIManager();
-windowImmit("uiMgr", uiMgr)
+windowImmit("uiMgr", uiMgr);

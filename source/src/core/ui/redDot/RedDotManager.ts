@@ -1,47 +1,41 @@
 import { GameEvent } from "../../common/GameEvent";
 import { eventMgr } from "../../libs/event/EventManager";
-import { RedDotChecker } from "./RedDotChecker";
+import { RedDotData } from "./RedDotData";
+import { RDDefineInit, RDMap } from "./RedDotDefine";
 import { IRedDotData } from "./RedDotInterface";
-import { RedDotMap } from "./RedDotMap";
-import { RedDotNode } from "./RedDotNode";
+import { RedDotTrigger } from "./RedDotTrigger";
 
 class RedDotManager extends Laya.EventDispatcher {
-    private _checker: RedDotChecker;
-    private _root: RedDotNode;
-    private _allLeftNode: RedDotNode[] = [];
+    private _trigger: RedDotTrigger;
+
     init() {
-        if (!this._root) {
-            RedDotNode.eventCenter = this;
-            this._checker = new RedDotChecker(this);
-            this._root = this.createNode(RedDotMap.Root, fgui.GRoot.inst);
-            let node: RedDotNode;
-            RedDotMap.map.forEach(v => {
-                node = this.createNode(v);
-                v.parent.owner.addChild(node);
-                if (node.isLeafNoe)
-                    this._allLeftNode.push(node);
-            });
-            eventMgr.on(GameEvent.RedDotCompAwake, this, this.onRedDotCompAwake);
-        }
+        RedDotData.eventCenter = this;
+        this._trigger = new RedDotTrigger(this);
+        RDDefineInit();
+        eventMgr.on(GameEvent.RedDotCompAwake, this, this.onRedDotCompAwake);
+        eventMgr.on(GameEvent.RedDotCompDestroy, this, this.onRedDotCompDestroy);
     }
-
-    createNode(data: IRedDotData, owner?: fgui.GComponent) {
-        return RedDotNode.CreateNode(data, owner);
-    }
-
-    getNode(id: number) { return this._root?.getChild(id); }
 
     private onRedDotCompAwake(comp: fgui.GComponent) {
-        if (!comp) return;
-        const allLeftNode = this._allLeftNode;
-        for (let i = allLeftNode.length - 1; i >= 0; i--) {
-            const node = allLeftNode[ i ];
-            if (node.comp == comp) {
-                node.triggerCheck();
-                break;
-            }
+        const data = this.getRDByComp(RDMap.Root, comp);
+        data && data.doTrigger();
+    }
+
+    private onRedDotCompDestroy(comp: fgui.GComponent) {
+        const data = this.getRDByComp(RDMap.Root, comp);
+        data && data.recover();
+    }
+
+    private getRDByComp(data: IRedDotData, comp: fgui.GComponent): IRedDotData {
+        if (!data || !comp) return null;
+        if (data.node.comp == comp) return data;
+        const childs = data.childs;
+        for (let i = 0, cnt = childs.length; i < cnt; i++) {
+            const result = this.getRDByComp(childs[ i ], comp);
+            if (result) return result;
         }
+        return null;
     }
 }
 export const redDotMgr = new RedDotManager();
-windowImmit("RedDotMgr", redDotMgr);
+windowImmit("redDotMgr", redDotMgr);

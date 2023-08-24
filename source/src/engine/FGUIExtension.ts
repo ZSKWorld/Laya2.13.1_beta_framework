@@ -1,35 +1,13 @@
-import { GameEvent } from "../core/common/GameEvent";
-import { eventMgr } from "../core/libs/event/EventManager";
 /** FGUI扩展 */
-export class FGUIExtension{
-    static Init(): void{
-        this.GObjectExtension();
-        this.GComponentExtension();
-        this.GListClickItemDispatch();
-        this.AddGUIObjectEventLockable();
-        this.AddComponentNetConnect();
-    }
+export class FGUIExtension {
+	static Init() {
+		this.GObjectExtension();
+		this.AddGUIObjectEventLockable();
+	}
 
 	/** GObject扩展 */
 	private static GObjectExtension() {
 		const prototype = fgui.GObject.prototype;
-		prototype.event = function (type: string, data?: any) {
-			return this._displayObject.event(type, data);
-		};
-		prototype.once = function (type: string, caller: any, listener: Function, args?: any[]) {
-			return this._displayObject.once(type, caller, listener, args);
-		};
-		prototype.offAll = function (type?: string) {
-			return this._displayObject.offAll(type);
-		};
-		prototype.offAllCaller = function (caller: any) {
-			return this._displayObject.offAllCaller(caller);
-		};
-	}
-
-	/** GComponent扩展 */
-	private static GComponentExtension() {
-		const prototype = fgui.GComponent.prototype;
 		prototype.addComponentIntance = function (component) {
 			return this._displayObject.addComponentIntance(component);
 		}
@@ -42,15 +20,18 @@ export class FGUIExtension{
 		prototype.getComponents = function (componentType) {
 			return this._displayObject.getComponents(componentType);
 		}
-	}
-
-	/** 扩展GList的itemclick事件参数 */
-	private static GListClickItemDispatch() {
-		const prototype = fgui.GList.prototype;
-		prototype[ "dispatchItemEvent" ] = function (item, evt) {
-			var index = this.childIndexToItemIndex(this.getChildIndex(item));
-			this.displayObject.event(fgui.Events.CLICK_ITEM, [ item, evt, index ]);
-		}
+		prototype.event = function (type: string, data?: any) {
+			return this._displayObject.event(type, data);
+		};
+		prototype.once = function (type: string, caller: any, listener: Function, args?: any[]) {
+			return this._displayObject.once(type, caller, listener, args);
+		};
+		prototype.offAll = function (type?: string) {
+			return this._displayObject.offAll(type);
+		};
+		prototype.offAllCaller = function (caller: any) {
+			return this._displayObject.offAllCaller(caller);
+		};
 	}
 
 	/**扩展添加ui节点事件锁 */
@@ -102,64 +83,32 @@ export class FGUIExtension{
 
 		const gobjProto = fgui.GObject.prototype;
 		gobjProto.addEventLock = function (type?: string, lockChild?: boolean) {
+			type = type == void 0 ? "$LockAll" : type;
+			lockChild = lockChild == void 0 ? true : lockChild;
 			if (this.isDisposed || type == "") return;
 			const eventLockMap = this.displayObject.__eventLockMap || (this.displayObject.__eventLockMap = {});
-			type = type == void 0 ? "$LockAll" : type;
 			eventLockMap[ type ] = true;
-			eventLockMap[ type + "_LockChild" ] = lockChild == void 0 ? true : lockChild;
+			eventLockMap[ type + "_LockChild" ] = lockChild;
 		}
 		gobjProto.hasEventLock = function (type?: string) {
+			type = type == void 0 ? "$LockAll" : type;
 			if (this.isDisposed || type == "") return false;
 			const eventLockMap = this.displayObject.__eventLockMap;
-			if (eventLockMap) {
-				if (type == void 0) return !!eventLockMap[ "$LockAll" ];
-				else return !!eventLockMap[ type ];
-			} else return false;
+			if (eventLockMap)
+				return !!eventLockMap[ type ];
+			return false;
 		}
 		gobjProto.removeEventLock = function (type?: string) {
+			type = type == void 0 ? "$LockAll" : type;
 			if (this.isDisposed || type == "") return;
 			const eventLockMap = this.displayObject.__eventLockMap;
 			if (eventLockMap) {
-				if (type == void 0) eventLockMap[ "$LockAll" ] = false;
-				else if (eventLockMap[ type ]) eventLockMap[ type ] = false;
+				if (eventLockMap[ type ]) eventLockMap[ type ] = false;
 			}
 		}
 		gobjProto.removeAllEventLock = function () {
 			if (this.isDisposed) return;
 			this.displayObject.__eventLockMap = null;
-		}
-	}
-
-	/** 扩展添加fgui组件网络关联，网络断开连接后都不能点击*/
-	private static AddComponentNetConnect() {
-		const prototype = fgui.GComponent.prototype;
-		const constructFromResource = prototype[ "constructFromResource" ];
-		prototype[ "constructFromResource" ] = function () {
-			constructFromResource.call(this);
-			this.on(Laya.Event.DISPLAY, this, this.$onDisplay);
-			this.on(Laya.Event.UNDISPLAY, this, this.$onUndisplay);
-		};
-		prototype[ "$onDisplay" ] = function () {
-			eventMgr.on(GameEvent.SocketOpened, this, this.$onNetChanged, [ true ]);
-			eventMgr.on(GameEvent.SocketClosed, this, this.$onNetChanged, [ false ]);
-		};
-		prototype[ "$onUndisplay" ] = function () {
-			eventMgr.off(GameEvent.SocketOpened, this, this.$onNetChanged);
-			eventMgr.off(GameEvent.SocketClosed, this, this.$onNetChanged);
-			this.$onNetChanged(true);
-		};
-		prototype[ "$onNetChanged" ] = function (value: boolean) {
-			if (value) {
-				if (this.oldClickLock !== void 0) {
-					!this.oldClickLock && this.removeEventLock(Laya.Event.CLICK);
-					this.oldClickLock = void 0;
-				}
-			} else {
-				if (this.oldClickLock === void 0) {
-					this.oldClickLock = this.hasEventLock(Laya.Event.CLICK);
-					this.addEventLock(Laya.Event.CLICK);
-				}
-			}
 		}
 	}
 }

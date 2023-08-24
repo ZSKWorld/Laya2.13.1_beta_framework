@@ -1,45 +1,44 @@
-import { KeyEventType, MouseEventType } from "./BaseViewCtrl";
-import { IViewCtrl } from "./Interfaces";
 
-type KeyFunction = KeyMap<Function[]>;
+type FuncCfg = { __once: boolean, __done: boolean, __args: any[] };
+type CfgFunction = Function & { [ key: string ]: FuncCfg; };
 export type DIViewCtrl = IViewCtrl & {
-	__keyEventList?: { [ key in KeyEventType ]?: KeyFunction } & KeyMap<KeyFunction>;
-	__mouseEventList?: { [ key in MouseEventType ]?: Function[] } & KeyFunction,
+	__keyEventList?: KeyMap<KeyMap<CfgFunction[]>>;
+	__mouseEventList?: KeyMap<CfgFunction[]>,
 }
 
-/** 
+/**
  * 页面控制器设备（鼠标、键盘）交互事件扩展 ViewCtrlDIExtend => ViewCtrlDeviceInteractionExtend的缩写
   */
 export class ViewCtrlDIExtend {
 
 	/**
 	 * 注册设备交互事件
-	 * @param viewCtrl {@link DIViewCtrl} 目标控制器
-	 * @returns 
+	 * @param viewCtrl 目标控制器
+	 * @returns
 	 */
 	static RegisterDeviceEvent(viewCtrl: DIViewCtrl) {
 		if (!viewCtrl) return;
 		const { __keyEventList, __mouseEventList } = viewCtrl;
 		if (__keyEventList) {
-			const func = this.__DoKeyEvent;
+			const func = this.DoKeyEvent;
 			__keyEventList.keydown && (viewCtrl.onKeyDown = func);
 			__keyEventList.keypress && (viewCtrl.onKeyPress = func);
 			__keyEventList.keyup && (viewCtrl.onKeyUp = func);
 		}
 		if (__mouseEventList) {
-			const func = this.__DoMouseEvent;
-			__mouseEventList.mouseover && (viewCtrl.onMouseOver = func);
-			__mouseEventList.mousedown && (viewCtrl.onMouseDown = func);
-			__mouseEventList.mousemove && (viewCtrl.onMouseMove = func);
-			__mouseEventList.mouseup && (viewCtrl.onMouseUp = func);
-			__mouseEventList.mouseout && (viewCtrl.onMouseOut = func);
-			__mouseEventList.doubleclick && (viewCtrl.onDoubleClick = func);
-			__mouseEventList.rightclick && (viewCtrl.onRightClick = func);
-			__mouseEventList.click && (viewCtrl.onClick = func);
-			__mouseEventList.stagemousedown && (viewCtrl.onStageMouseDown = func);
-			__mouseEventList.stagemousemove && (viewCtrl.onStageMouseMove = func);
-			__mouseEventList.stagemouseup && (viewCtrl.onStageMouseUp = func);
-			__mouseEventList.stageclick && (viewCtrl.onStageClick = func);
+			const { DoMouseEvent: mouseFunc, DoStageMouseEvent: stageMousFunc } = this;
+			__mouseEventList.mouseover && (viewCtrl.onMouseOver = mouseFunc);
+			__mouseEventList.mousedown && (viewCtrl.onMouseDown = mouseFunc);
+			__mouseEventList.mousemove && (viewCtrl.onMouseMove = mouseFunc);
+			__mouseEventList.mouseup && (viewCtrl.onMouseUp = mouseFunc);
+			__mouseEventList.mouseout && (viewCtrl.onMouseOut = mouseFunc);
+			__mouseEventList.doubleclick && (viewCtrl.onDoubleClick = mouseFunc);
+			__mouseEventList.rightclick && (viewCtrl.onRightClick = mouseFunc);
+			__mouseEventList.click && (viewCtrl.onClick = mouseFunc);
+			__mouseEventList.stagemousedown && (viewCtrl.onStageMouseDown = stageMousFunc);
+			__mouseEventList.stagemousemove && (viewCtrl.onStageMouseMove = stageMousFunc);
+			__mouseEventList.stagemouseup && (viewCtrl.onStageMouseUp = stageMousFunc);
+			__mouseEventList.stageclick && (viewCtrl.onStageClick = stageMousFunc);
 		}
 
 		this.ResetOnceEvent(viewCtrl);
@@ -47,8 +46,8 @@ export class ViewCtrlDIExtend {
 
 	/**
 	 * 关闭设备交互事件
-	 * @param viewCtrl {@link DIViewCtrl} 目标控制器
-	 * @returns 
+	 * @param viewCtrl 目标控制器
+	 * @returns
 	 */
 	static OffDeviceEvent(viewCtrl: DIViewCtrl) {
 		if (!viewCtrl) return;
@@ -84,19 +83,17 @@ export class ViewCtrlDIExtend {
 					list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
 				}
 			}
-			// Object.values(kl).forEach(v => Object.values(v).forEach(v1 => v1.forEach(v2 => Object.keys(v2).forEach(v3 => v2[v3].__done != null && (v2[v3].__done = false)))));
 		}
 		if (mel) {
 			for (const key in mel) {
 				const list = mel[ key ];
 				list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
 			}
-			// Object.values(ml).forEach(v => v.forEach(v => Object.keys(v).forEach(v1 => v[v1].__done != null && (v[v1].__done = false))));
 		}
 	}
 
 	/**处理键盘事件 */
-	private static __DoKeyEvent(e: Laya.Event) {
+	private static DoKeyEvent(e: Laya.Event) {
 		//这里的this是BaseViewCtrl
 		const __keyEventList = (this as unknown as DIViewCtrl).__keyEventList;
 		if (!__keyEventList) return;
@@ -104,39 +101,54 @@ export class ViewCtrlDIExtend {
 		if (!eventList) return;
 		let list = eventList[ e.keyCode ];
 		if (!list) return;
-		let func: Function, _cfg: any, len = list.length;
-		for (let i = 0; i < len; i++) {
-			func = list[ i ];
-			_cfg = func[ e.keyCode ];
-			if (_cfg && _cfg.__once) {
-				if (!_cfg.__done) {
-					_cfg.__done = true;
-					func && func.call(this, e);
+		for (let i = 0, len = list.length; i < len; i++) {
+			const func = list[ i ];
+			const cfg = func[ e.keyCode ];
+			const args = cfg && cfg.__args ? [ ...cfg.__args, e ] : [ e ];
+			if (cfg && cfg.__once) {
+				if (!cfg.__done) {
+					cfg.__done = true;
+					func && func.call(this, ...args);
 				}
-			} else
-				func && func.call(this, e);
+			} else {
+				func && func.call(this, ...args);
+			}
 		}
 	}
 
 	/**处理鼠标事件 */
-	private static __DoMouseEvent(e: Laya.Event) {
+	private static DoMouseEvent(e: Laya.Event, eventType?: string) {
+		const eType = eventType || e.type;
 		//这里的this是BaseViewCtrl
 		const __mouseEventList = (this as unknown as DIViewCtrl).__mouseEventList;
 		if (!__mouseEventList) return;
-		const list = __mouseEventList[ e.type ];
+		const list = __mouseEventList[ eType ];
 		if (!list) return;
-
-		let func: Function, _cfg: any, len = list.length;
-		for (let i = 0; i < len; i++) {
-			func = list[ i ];
-			_cfg = func[ e.type ];
-			if (_cfg && _cfg.__once) {
-				if (!_cfg.__done) {
-					_cfg.__done = true;
-					func && func.call(this, e);
+		for (let i = 0, len = list.length; i < len; i++) {
+			const func = list[ i ];
+			const cfg = func[ eType ];
+			const args = cfg && cfg.__args ? [ ...cfg.__args, e ] : [ e ];
+			if (cfg && cfg.__once) {
+				if (!cfg.__done) {
+					cfg.__done = true;
+					func && func.call(this, ...args);
 				}
-			} else
-				func && func.call(this, e);
+			} else {
+				func && func.call(this, ...args);
+			}
 		}
+	}
+
+	/**处理舞台鼠标事件 */
+	private static DoStageMouseEvent(e: Laya.Event) {
+		let eType = e.type;
+		switch (eType) {
+			case Laya.Event.CLICK: eType = MouseEventType.StageClick; break;
+			case Laya.Event.MOUSE_DOWN: eType = MouseEventType.StageMouseDown; break;
+			case Laya.Event.MOUSE_MOVE: eType = MouseEventType.StageMouseMove; break;
+			case Laya.Event.MOUSE_UP: eType = MouseEventType.StageMouseUp; break;
+			default: return;
+		}
+		ViewCtrlDIExtend.DoMouseEvent.call(this, e, eType);
 	}
 }

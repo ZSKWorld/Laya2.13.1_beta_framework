@@ -1,6 +1,5 @@
 import { MathUtil } from "../../../libs/math/MathUtil";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
-import { IView } from "../../core/Interfaces";
 import { UILoading1View } from "../../view/PkgCommon/UILoading1View";
 
 export interface UILoading1Data {

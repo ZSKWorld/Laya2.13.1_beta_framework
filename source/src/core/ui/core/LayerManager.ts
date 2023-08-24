@@ -14,7 +14,6 @@ class LayerManager {
     private _layerMap: { [ key in Layer ]: fgui.GComponent };
 
     init() {
-        if (this._layerMap) return;
         this._layerMap = {} as any;
         const gRoot = fgui.GRoot.inst;
         Laya.stage.addChild(gRoot.displayObject);
@@ -34,10 +33,10 @@ class LayerManager {
 
     /**
      * 添加对象
-     * @param obj {@link fgui.GObject} 要添加的对象
-     * @param layer {@link Layer} 目标层级
+     * @param obj 要添加的对象
+     * @param layer 目标层级
      * @param index 插入位置
-     * @returns 
+     * @returns
      */
     addObject(obj: fgui.GObject, layer: Layer, index?: number) {
         if (!obj || obj.isDisposed || !this._layerMap[ layer ]) return;
@@ -47,12 +46,12 @@ class LayerManager {
 
     /**
      * 添加Laya.Sprite对象
-     * @param obj {@link Laya.Sprite} 要添加的Laya.Sprite对象
-     * @param layer {@link Layer} 目标层级
+     * @param obj 要添加的Laya.Sprite对象
+     * @param layer 目标层级
      * @param index 插入位置
-     * @returns 
+     * @returns
      */
-    addLayaObject(obj: Laya.Sprite, layer: Layer, index?: number) {
+    addLayaObject(obj: Laya.Sprite, layer: string, index?: number) {
         if (!obj || obj.destroyed || !this._layerMap[ layer ]) return;
         index = index ?? this._layerMap[ layer ].numChildren;
         this._layerMap[ layer ].displayObject.addChildAt(obj, index);
@@ -60,3 +59,4 @@ class LayerManager {
 
 }
 export const layerMgr = new LayerManager();
+windowImmit("layerMgr", layerMgr);

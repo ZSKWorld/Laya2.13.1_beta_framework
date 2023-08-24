@@ -1,35 +1,28 @@
-import Point = Laya.Point;
 /** 匀速贝塞尔曲线，文档：https://www.freesion.com/article/2280255606/ */
 export class Bezier {
     /**普通贝塞尔点 */
-    static NormalPoint(start: Point, end: Point, control: Point, t: number) {
+    static NormalPoint(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
         const u = 1 - t;
         const tt = t * t;
         const uu = u * u;
         const ut2 = u * t * 2;
 
-        const p = Point.create();
-        p.x = uu * start.x;
-        p.y = uu * start.y;
-
-        p.x += ut2 * control.x;
-        p.y += ut2 * control.y;
-
-        p.x += tt * end.x;
-        p.y += tt * end.y;
+        const p = out || { x: 0, y: 0 };
+        p.x = uu * start.x + ut2 * control.x + tt * end.x;
+        p.y = uu * start.y + ut2 * control.y + tt * end.y;
         return p;
     }
 
     /**
      * 普通贝塞尔点集合
-     * @param start {@link Point} 起始位置
-     * @param end {@link Point} 结束位置 
-     * @param control {@link Point} 控制点位置 
+     * @param start {@link IPoint} 起始位置
+     * @param end {@link IPoint} 结束位置
+     * @param control {@link IPoint} 控制点位置
      * @param pointNum 点数量
-     * @returns 
+     * @returns
      */
-    static NormalPoints(start: Point, end: Point, control: Point, pointNum: number) {
-        const points: Point[] = [];
+    static NormalPoints(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
+        const points: IPoint[] = [];
         for (let i = 0; i <= pointNum; i++) {
             points.push(this.NormalPoint(start, end, control, i / pointNum))
         }
@@ -37,7 +30,7 @@ export class Bezier {
     }
 
     /**匀速贝塞尔点 */
-    static UniformPoint(start: Point, end: Point, control: Point, t: number) {
+    static UniformPoint(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
         let ax = start.x - 2 * control.x + end.x;
         let ay = start.y - 2 * control.y + end.y;
         let bx = 2 * control.x - 2 * start.x;
@@ -57,20 +50,21 @@ export class Bezier {
         //根据贝塞尔曲线函数，求得取得此时的x,y坐标
         let x = _1_t * start.x + _2_1_t * control.x + tt * end.x;
         let y = _1_t * start.y + _2_1_t * control.y + tt * end.y;
-        const point = Point.create();
-        point.setTo(x, y);
+        const point = out || { x: 0, y: 0 };
+        point.x = x;
+        point.y = y;
         return point;
     }
 
     /**
      * 匀速贝塞尔点集合
-     * @param start {@link Point} 起始位置
-     * @param end {@link Point} 结束位置
-     * @param control {@link Point} 控制点位置
+     * @param start {@link IPoint} 起始位置
+     * @param end {@link IPoint} 结束位置
+     * @param control {@link IPoint} 控制点位置
      * @param pointNum 点数量
-     * @returns 
+     * @returns
      */
-    static UniformPoints(start: Point, end: Point, control: Point, pointNum: number) {
+    static UniformPoints(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
         let ax = start.x - 2 * control.x + end.x;
         let ay = start.y - 2 * control.y + end.y;
         let bx = 2 * control.x - 2 * start.x;
@@ -80,7 +74,7 @@ export class Bezier {
         let B = 4 * (ax * bx + ay * by);
         let C = bx * bx + by * by;
 
-        const points: Point[] = [];
+        const points: IPoint[] = [];
         //曲线总长度
         const total_length = this.GetLength(A, B, C, 1);
         for (let i = 0; i <= pointNum; i++) {
@@ -95,7 +89,7 @@ export class Bezier {
             //根据贝塞尔曲线函数，求得取得此时的x,y坐标
             let x = _1_t * start.x + _2_1_t * control.x + tt * end.x;
             let y = _1_t * start.y + _2_1_t * control.y + tt * end.y;
-            points.push(Point.create().setTo(x, y));
+            points.push({ x, y });
         }
         return points;
     }

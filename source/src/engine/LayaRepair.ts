@@ -1,6 +1,6 @@
 /** Laya修复 */
 export class LayaRepair {
-    static Fix(): void {
+    static Fix() {
         this.FixLayaPoolSign();
         this.FixTTFLoaderCallback();
     }
@@ -23,7 +23,7 @@ export class LayaRepair {
         const ttfProto = Laya.TTFLoader.prototype;
         ttfProto[ "_loadWithFontFace" ] = function () {
             var fontFace = new window.FontFace(this.fontName, "url('" + this._url + "')");
-            document.fonts.add(fontFace);
+            document.fonts["add"](fontFace);
             var self = this;
             fontFace.loaded.then((function () {
                 self._complete();
@@ -32,7 +32,6 @@ export class LayaRepair {
         }
 
         const loaderProto = Laya.Loader.prototype;
-
         loaderProto[ "_loadTTF" ] = function (url) {
             url = Laya.URL.formatURL(url);
             var ttfLoader = new Laya.TTFLoader();

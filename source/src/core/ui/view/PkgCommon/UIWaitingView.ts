@@ -1,13 +1,11 @@
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
-import { ViewExtension } from "../../core/Interfaces";
 import UIWaiting from "../../ui/PkgCommon/UIWaiting";
 
 export const enum UIWaitingMsg {
 
 }
 
-export class UIWaitingView extends ExtensionClass<ViewExtension, UIWaiting>(UIWaiting) {
+export class UIWaitingView extends ExtensionClass<IView, UIWaiting>(UIWaiting) {
     static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
     override onCreate(): void {

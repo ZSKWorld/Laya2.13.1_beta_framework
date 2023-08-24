@@ -1,5 +1,5 @@
 class LocalData {
-    set(key: string, value: any): void {
+    set<T>(key: string, value: T) {
         Laya.LocalStorage.setJSON(key, value);
     }
 
@@ -7,11 +7,11 @@ class LocalData {
         return Laya.LocalStorage.getJSON(key);
     }
 
-    remove(key: string): void {
+    remove(key: string) {
         Laya.LocalStorage.removeItem(key);
     }
 
-    removeAll(): void {
+    removeAll() {
         Laya.LocalStorage.clear();
     }
 }

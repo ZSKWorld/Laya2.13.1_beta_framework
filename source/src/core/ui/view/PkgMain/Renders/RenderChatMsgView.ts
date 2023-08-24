@@ -1,5 +1,3 @@
-import { ExtensionClass } from "../../../../libs/utils/Util";
-import { ViewExtension } from "../../../core/Interfaces";
 import RenderChatMsg from "../../../ui/PkgMain/RenderChatMsg";
 import { ResPath } from "../../../../common/ResPath";
 
@@ -12,11 +10,11 @@ export interface ChatMsg{
 	text:string;
 }
 
-export class RenderChatMsgView extends ExtensionClass<ViewExtension, RenderChatMsg>(RenderChatMsg) {
+export class RenderChatMsgView extends ExtensionClass<IView, RenderChatMsg>(RenderChatMsg) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-        
+
     }
     refresh(data: ChatMsg) {
         this.TxtMsg.width = 2000;

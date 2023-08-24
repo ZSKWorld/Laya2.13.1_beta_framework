@@ -1,11 +1,8 @@
 import { GameUtil } from "../../../common/GameUtil";
 import { ResPath } from "../../../common/ResPath";
-import { Event } from "../../../libs/event/EventManager";
 import { MathUtil } from "../../../libs/math/MathUtil";
-import { ExtensionClass } from "../../../libs/utils/Util";
 import { tableMgr } from "../../../table/TableManager";
 import { UserDataEvent } from "../../../userData/UserDataEvent";
-import { ViewExtension } from "../../core/Interfaces";
 import UIMain from "../../ui/PkgMain/UIMain";
 
 export const enum UIMainMsg {
@@ -23,7 +20,7 @@ export const enum UIMainMsg {
 	OnBtnSphereDraged = "OnBtnSphereDraged",
 }
 
-export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
+export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
@@ -45,13 +42,13 @@ export class UIMainView extends ExtensionClass<ViewExtension, UIMain>(UIMain) {
 		BtnSphere.draggable = true;
 	}
 
-	@Event(UserDataEvent.Nickname_Changed)
-	@Event(UserDataEvent.JingJie_Changed)
-	@Event(UserDataEvent.CengJi_Changed)
-	@Event(UserDataEvent.Exp_Changed)
-	@Event(UserDataEvent.Coin_Changed)
-	@Event(UserDataEvent.Vcoin_Changed)
-	@Event(UserDataEvent.Sect_Changed)
+	@RegisterEvent(UserDataEvent.Nickname_Changed)
+	@RegisterEvent(UserDataEvent.JingJie_Changed)
+	@RegisterEvent(UserDataEvent.CengJi_Changed)
+	@RegisterEvent(UserDataEvent.Exp_Changed)
+	@RegisterEvent(UserDataEvent.Coin_Changed)
+	@RegisterEvent(UserDataEvent.Vcoin_Changed)
+	@RegisterEvent(UserDataEvent.Sect_Changed)
 	refreshPlayerInfo() {
 		this.TxtNickName.text = this.userData.nickname;
 		const { jingJie, cengJi, exp, coin, vcoin, sect } = this.userData;

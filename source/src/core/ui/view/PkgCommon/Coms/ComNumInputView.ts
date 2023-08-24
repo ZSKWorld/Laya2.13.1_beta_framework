@@ -1,6 +1,4 @@
 import { ResPath } from "../../../../common/ResPath";
-import { ExtensionClass } from "../../../../libs/utils/Util";
-import { ViewExtension } from "../../../core/Interfaces";
 import ComNumInput from "../../../ui/PkgCommon/ComNumInput";
 
 export const enum ComNumInputMsg {
@@ -8,7 +6,7 @@ export const enum ComNumInputMsg {
 	OnBtnSubmitClick = "ComNumInput_OnBtnSubmitClick",
 }
 
-export class ComNumInputView extends ExtensionClass<ViewExtension, ComNumInput>(ComNumInput) {
+export class ComNumInputView extends ExtensionClass<IView, ComNumInput>(ComNumInput) {
 	static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
 	override onCreate(): void {

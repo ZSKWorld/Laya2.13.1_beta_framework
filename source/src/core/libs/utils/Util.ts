@@ -1,15 +1,3 @@
-/** 工具方法集合 */
-
-/**
- * 扩展类字段，用于在外部定义的字段在内部可读，扩展的字段或方法不能在构造期间调用
- * @param clsT 要扩展的类
- * @returns
- */
-export function ExtensionClass<E, T>(clsT: Class<T>) {
-    return clsT as Class<T & E>;
-}
-
-
 /** 大写首字母 */
 export function UpperFirst(str: string, splits?: string[]) {
     if (!str) return str;

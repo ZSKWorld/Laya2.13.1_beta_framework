@@ -1,7 +1,5 @@
 import { GameUtil } from "../../../common/GameUtil";
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
-import { ViewExtension } from "../../core/Interfaces";
 import UIChooseBattle from "../../ui/PkgBattle/UIChooseBattle";
 
 export const enum UIChooseBattleMsg {
@@ -13,7 +11,7 @@ export const enum UIChooseBattleMsg {
 	OnBtnBattleClick = "UIChooseBattle_OnBtnBattleClick",
 }
 
-export class UIChooseBattleView extends ExtensionClass<ViewExtension, UIChooseBattle>(UIChooseBattle) {
+export class UIChooseBattleView extends ExtensionClass<IView, UIChooseBattle>(UIChooseBattle) {
 	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate(): void {
@@ -26,7 +24,7 @@ export class UIChooseBattleView extends ExtensionClass<ViewExtension, UIChooseBa
 		BtnBattle.onClick(this, this.sendMessage, [ UIChooseBattleMsg.OnBtnBattleClick ]);
 	}
 
-	showConfirm(show: boolean, data?: BattleLevel) {
+	showConfirm2(show: boolean, data?: BattleLevel) {
 		this.ctrlConfirm.selectedIndex = show ? 1 : 0;
 		if (show && data) {
 			this.TxtTitle.text = data.Name + "Lv." + data.EnemyLevel;

@@ -8,9 +8,9 @@ const enum LogLevel {
 /** 日志打印工具 */
 export class Logger {
     private static consoleMap = {
-        log:console.log,
-        warn:console.warn,
-        error:console.error,
+        log: console.log,
+        warn: console.warn,
+        error: console.error,
     };
     /** 默认日志打印器 */
     private static readonly default = new Logger("Default", true);
@@ -25,10 +25,11 @@ export class Logger {
         [ LogLevel.Assert ]: [ "#FF0000", "#FFC8C8", "#FF0000" ],
     }
 
-    /** 设置全局开关 */
-    static SetEnable(enable: boolean) { this.enable = enable; }
-
-    /** 创建日志打印器 */
+    /**
+     * 创建日志打印器
+     * @param name 名称
+     * @param enable 是否开启日志打印，默认true
+     */
     static Create(name: string, enable = true) {
         if (!this.enable) return this.default;
         let logger = Logger.loggerMap[ name ];
@@ -36,6 +37,17 @@ export class Logger {
             Logger.loggerMap[ name ] = logger = new Logger(name);
         return logger.setEnable(enable);
     }
+
+    /** 设置全局开关 */
+    static SetEnable(enable: boolean) { this.enable = enable; }
+
+    static Log(...args: any[]) { this.default.log(...args); }
+
+    static Warn(...args: any[]) { this.default.warn(...args); }
+
+    static Error(...args: any[]) { this.default.error(...args); }
+
+    static Assert(assert: boolean, tipText?: string) { this.default.assert(assert, tipText); }
 
     /** 处理日志参数
      * @param type 日志类型
@@ -78,9 +90,9 @@ export class Logger {
         const logArr = Logger.ProcessingLogParam(type, name, ...args);
         switch (type) {
             case LogLevel.Log: this.consoleMap.log.call(console, ...logArr); break;
-            case LogLevel.Warn: this.consoleMap.warn.call(console, ...logArr);break;
-            case LogLevel.Error: this.consoleMap.error.call(console, ...logArr);break;
-            case LogLevel.Assert: this.consoleMap.error.call(console, ...logArr);break;
+            case LogLevel.Warn: this.consoleMap.warn.call(console, ...logArr); break;
+            case LogLevel.Error: this.consoleMap.error.call(console, ...logArr); break;
+            case LogLevel.Assert: this.consoleMap.error.call(console, ...logArr); break;
             default: break;
         }
     }
@@ -91,11 +103,11 @@ export class Logger {
         private _enable: boolean = true,
     ) { }
 
-    log(...message: any[]) { this._enable && Logger.DoLog(LogLevel.Log, this._name, ...message); }
+    log(...args: any[]) { this._enable && Logger.DoLog(LogLevel.Log, this._name, ...args); }
 
-    warn(...message: any[]) { this._enable && Logger.DoLog(LogLevel.Warn, this._name, ...message); }
+    warn(...args: any[]) { this._enable && Logger.DoLog(LogLevel.Warn, this._name, ...args); }
 
-    error(...message: any[]) { this._enable && Logger.DoLog(LogLevel.Error, this._name, ...message); }
+    error(...args: any[]) { this._enable && Logger.DoLog(LogLevel.Error, this._name, ...args); }
 
     assert(assert: boolean, tipText?: string) { this._enable && !assert && Logger.DoLog(LogLevel.Assert, this._name, tipText || "assert failed !"); }
 

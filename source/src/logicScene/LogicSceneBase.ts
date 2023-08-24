@@ -1,11 +1,9 @@
+import { skeletonMgr } from "../core/common/SkeletonManager";
 import { Observer } from "../core/libs/event/Observer";
 import { loadMgr } from "../core/libs/load/LoadManager";
-import { Logger } from "../core/libs/utils/Logger";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";
-import { IScene } from "./ILogicScene";
-
-const logger = Logger.Create("LogicSceneBase", true);
+import { IScene } from "./LogicSceneType";
 
 const enum ResGroupType {
 	Normal,
@@ -16,76 +14,76 @@ const enum ResGroupType {
 type LoadViewData = { updateHandler?: Laya.Handler };
 
 /** 逻辑场景基类 */
-export abstract class LogicSceneBase extends Observer implements IScene {
+export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	views = new Set<ViewID>();
 	/** 场景参数 */
-	protected data: any;
+	protected data: T;
 	/** 加载时显示的load页面id */
 	protected loadViewId: ViewID;
 	/** load页面数据 */
 	private _loadViewData: LoadViewData = {};
-	/**
-	 * 0.非ui资源加载进度
-	 * 1.ui资源加载进度
-	 * 2.缓冲时间进度
-	 */
-	private _progresses = [ 0, 0, 0 ];
-	/** 非ui资源加载进度更新回调 */
-	private _loadHandler1 = Laya.Handler.create(this, this.onLoadProgress, [ 0 ], false);
-	/** ui资源加载进度更新回调 */
-	private _loadHandler2 = Laya.Handler.create(this, this.onLoadProgress, [ 1 ], false);
-	/** 缓冲时间进度更新回调 */
-	private _loadHandler3 = Laya.Handler.create(this, this.updateProgressLater, null, false);
+	/** 资源加载进度更新回调 */
+	private _progressHandlers: Laya.Handler[] = [];
+	/** 资源加载进度 */
+	private _progresses: number[] = [];
 
 	/** 场景名称 */
 	get name(): string { return this[ "__proto__" ].constructor.name; }
 
 	load() {
-		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.All);
-		this._progresses[ 0 ] = notUIRes.length ? 0 : 1;
-		this._progresses[ 1 ] = uiRes.length ? 0 : 1;
-		this._progresses[ 2 ] = this.loadViewId ? 0 : 1;
-		if (this.loadViewId) uiMgr.addView(this.loadViewId, this._loadViewData, null, false);
-		this.updateProgressLater();
+		const resArr = this.getResGroup(ResGroupType.All);
+		const [ uiRes, skeletonRes, otherRes ] = resArr;
+		let loadCount = resArr.length;
+		this.setLoadProgres(loadCount);
 		return Promise.all([
-			//加个最短时间，避免load页太快消失
-			this.loadViewId ? new Promise(resolve => Laya.Tween.to(this._progresses, { 2: 1 }, 500, null, Laya.Handler.create(null, resolve), 0, true).update = this._loadHandler3) : null,
-			loadMgr.create(notUIRes, null, this._loadHandler1),
-			loadMgr.loadPackage(uiRes, null, this._loadHandler2),
+			loadMgr.loadPackage(uiRes, null, this._progressHandlers[ --loadCount ]),
+			skeletonMgr.loadSkeleton(skeletonRes, this._progressHandlers[ --loadCount ]),
+			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCount ]),
+			//加个最短加载时间，避免loadjing页一闪而过
+			this.loadViewId ? new Promise(resolve =>
+				Laya.Tween.to(this._progresses, { 2: 1 }, 500, null, Laya.Handler.create(null, resolve), 0, true)
+					.update = this._progressHandlers[ --loadCount ]) : null,
 		]).then(
 			() => {
-				this._loadViewData.updateHandler = null;
 				uiMgr.removeAllView();
 			},
 			() => {
 				return Promise.reject<void>();
 			}
-		);
+		).finally(() => {
+			this._loadViewData.updateHandler = null;
+			this._progressHandlers.forEach(v => v.recover());
+			this._progressHandlers.length = 0;
+		});
 	}
 
-	enter(data: any): void {
+	enter(data: T) {
 		this.data = data;
 		this.onEnter();
 	}
 
-	exit(): void {
+	exit() {
 		this.onExit();
 		if (this.loadViewId) {
 			this._loadViewData.updateHandler = null;
 			uiMgr.removeView(this.loadViewId);
 		}
 		//卸载资源
-		const [ notUIRes, uiRes ] = this.getResGroup(ResGroupType.Normal);
-		notUIRes.forEach(v => Laya.loader.clearRes(v));
+		this.clearRes(ResGroupType.Normal);
+	}
+
+	protected clearRes(type: ResGroupType) {
+		const [ uiRes, skeletonRes, otherRes ] = this.getResGroup(type);
 		uiRes.forEach(v => {
 			const res = fgui.UIPackage.getById(v);
-			res?.unloadAssets();
+			res && res.dispose();
 		});
-
+		skeletonRes.forEach(v => skeletonMgr.disposeSkeleton(v));
+		otherRes.forEach(v => Laya.loader.clearRes(v));
 	}
 
 	/** 可卸载资源，场景退出时卸载 */
-	protected getResArray(): string[] { return []; };
+	protected getNormalResArray(): string[] { return []; };
 
 	/** 不可卸载资源，加载后不会卸载，只能手动卸载 */
 	protected getConstResArray(): string[] { return []; };
@@ -96,36 +94,50 @@ export abstract class LogicSceneBase extends Observer implements IScene {
 	/** 退出场景时执行 */
 	protected abstract onExit(): void;
 
-	private onLoadProgress(index: number, progress: number) {
+	private setLoadProgres(length: number) {
+		if (this.loadViewId) {
+			length++;
+			uiMgr.showView(this.loadViewId, this._loadViewData);
+		}
+		this._progresses.length = 0;
+		this._progressHandlers.forEach(v => v.recover());
+		this._progressHandlers.length = 0;
+		for (let i = 0; i < length; i++) {
+			this._progresses.push(0);
+			this._progressHandlers.push(Laya.Handler.create(this, this.onProgress, [ i ], false));
+		}
+		this.onProgress(0, 0);
+	}
+
+	private onProgress(index: number, progress: number) {
 		this._progresses[ index ] = progress;
-		this.updateProgressLater();
+		Laya.timer.callLater(this, this.updateProgres);
 	}
 
-	private updateProgressLater() {
-		Laya.timer.callLater(this, this.updateLoadProgress);
-	}
-
-	private updateLoadProgress() {
+	private updateProgres() {
 		if (this._loadViewData.updateHandler) {
-			this._loadViewData.updateHandler.runWith(this._progresses.reduce((pv, cv) => pv + cv, 0) / this._progresses.length);
+			const progress = this._progresses.reduce((pv, cv) => pv + cv, 0) / this._progresses.length;
+			this._loadViewData.updateHandler.runWith(progress);
 		}
 	}
 
 	/** 获取资源数组 */
-	private getResGroup(groupType: ResGroupType): [ string[], string[] ] {
-		const notUIRes: string[] = [];
+	private getResGroup(groupType: ResGroupType): [ string[], string[], string[] ] {
 		const uiRes: string[] = [];
+		const skeletonRes: string[] = [];
+		const otherRes: string[] = [];
 		let resArr: string[];
 		switch (groupType) {
-			case ResGroupType.Normal: resArr = this.getResArray(); break;
+			case ResGroupType.Normal: resArr = this.getNormalResArray(); break;
 			case ResGroupType.Const: resArr = this.getConstResArray(); break;
-			case ResGroupType.All: resArr = this.getResArray().concat(this.getConstResArray()); break;
-			default: return [ null, null ];
+			case ResGroupType.All: resArr = this.getNormalResArray().concat(this.getConstResArray()); break;
+			default: return [ [], [], [] ];
 		}
 		resArr.forEach(res => {
 			if (res.startsWith("res/ui/")) uiRes.push(res);
-			else notUIRes.push(res);
+			else if (res.startsWith("res/skeleton/")) skeletonRes.push(res);
+			else otherRes.push(res);
 		});
-		return [ notUIRes, uiRes ];
+		return [ uiRes, skeletonRes, otherRes ];
 	}
 }

@@ -1,6 +1,4 @@
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
-import { ViewExtension } from "../../core/Interfaces";
 import UIBattle from "../../ui/PkgBattle/UIBattle";
 
 export const enum UIBattleMsg {
@@ -10,7 +8,7 @@ export const enum UIBattleMsg {
 	OnBtnCloseInfoClick = "UIBattle_OnBtnCloseInfoClick",
 }
 
-export class UIBattleView extends ExtensionClass<ViewExtension, UIBattle>(UIBattle) {
+export class UIBattleView extends ExtensionClass<IView, UIBattle>(UIBattle) {
 	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate(): void {

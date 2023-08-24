@@ -1,10 +1,6 @@
 import { Observer } from "../core/libs/event/Observer";
-import { Logger } from "../core/libs/utils/Logger";
-import { ViewID } from "../core/ui/core/ViewID";
-import { IScene } from "./ILogicScene";
-import { LogicScene } from "./LogicSceneType";
-
-const logger = Logger.Create("LogicSceneMgr", true);
+import { uiMgr } from "../core/ui/core/UIManager";
+import { IScene, LogicScene } from "./LogicSceneType";
 
 /** 逻辑场景管理类 */
 class LogicSceneManager extends Observer {
@@ -14,11 +10,12 @@ class LogicSceneManager extends Observer {
 	private _sceneMap: Map<LogicScene, IScene>;
 
 	init(sceneMap: [ LogicScene, IScene ][]) {
-		if (!this._sceneMap)
+		if (!this._sceneMap) {
 			this._sceneMap = new Map(sceneMap);
+		}
 	}
 
-	registerSceneView(type:LogicScene, view:ViewID) {
+	registerSceneView(type: LogicScene, view: string) {
 		const scene = this._sceneMap.get(type);
 		if (scene) scene.views.add(view);
 	}
@@ -34,17 +31,15 @@ class LogicSceneManager extends Observer {
 				this._currentScene = newScene;
 				this._loadCompleted = true;
 				this._currentScene.enter(data);
-				// Laya.Resource.destroyUnusedResources();
 			}, () => {
 				this._loadCompleted = true;
-				if (confirm(`${ type } 场景加载失败，是否重试?`))
-					this.enterScene(type, data);
-				else
-					newScene.exit();
+				uiMgr.showConfirm("提示", `${ type } 场景加载失败，是否重试?`).then(result => {
+					if (result) this.enterScene(type, data);
+					else newScene.exit();
+				});
 			});
 		}
 	}
 }
-
 export const logicSceneMgr = new LogicSceneManager();
 windowImmit("logicSceneMgr", logicSceneMgr);

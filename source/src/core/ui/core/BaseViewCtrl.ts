@@ -1,72 +1,37 @@
 import { eventMgr } from "../../libs/event/EventManager";
-import { Logger } from "../../libs/utils/Logger";
-import { ExtensionClass } from "../../libs/utils/Util";
-import { IProxy, IView, IViewCtrl, ViewCtrlExtension, ViewEvent } from "./Interfaces";
+import { ViewEvent } from "./UIDefine";
 import { DIViewCtrl, ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
-
-const logger = Logger.Create("BaseViewCtrl", true);
 
 /**
  * UI控制器脚本基类，用来处理页面各种逻辑，刷新逻辑在页面View中执行，可挂在任何Laya.Node（GUI的displayObject）上。
  * 该组件为可回收组件。鼠标、键盘交互事件可使用装饰器注册 => InsertKeyEvent、InsertMouseEvent
  */
-export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends ExtensionClass<ViewCtrlExtension, Laya.Script>(Laya.Script) {
-	/** 页面数据 */
-	data: D;
+export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends ExtensionClass<IViewCtrl, Laya.Script>(Laya.Script) {
+	override data: D;
 	/** 控制器挂载的ui页面 */
 	private _view: V;
-	/** 处理控制器网络回包代理 */
-	private _proxy: IProxy;
-	/** 是否正在显示 */
-	private _isShow: boolean;
-	/** 父页面控制器 */
-	private _parent: IViewCtrl;
-	/** 子页面控制器集合 */
-	private _children: Set<IViewCtrl>;
+	/** 网络代理 */
+	private _proxy: IViewProxy;
 	/** 页面消息中心 */
 	private _listener: Laya.EventDispatcher;
 	/** 页面装饰器注册的消息映射 */
 	private __messageMap: KeyMap<Function[]>;
 
-	override get isSingleton() { return true; }
-	get view() { return this._view; }
-	get parent() { return this._parent; }
-	get isShow() { return this._isShow; }
-	get listener() { return this._listener; }
-
-	/** 添加子页面 */
-	addChildCtrl(child: IViewCtrl) {
-		if (!child) return;
-		if (child === this) return;
-		if(child.parent) child.parent._children.delete(child);
-		let { _children } = this;
-		if (!_children) _children = this._children = new Set<IViewCtrl>();
-		if (_children.has(child) == false) {
-			child._parent = this;
-			if (child._listener) {
-				Laya.Pool.recoverByClass(child._listener.offAllCaller(child));
-			}
-			child._listener = this._listener;
-			child._registerMessage();
-			_children.add(child);
-		}
-	}
+	override get isSingleton(): boolean { return true; }
+	override get name(): string { return this[ "constructor" ].name; }
+	override get view(): V { return this._view; }
+	override get listener(): Laya.EventDispatcher { return this._listener; }
 
 	override onReset() {
-		const { _view, _listener, _children, _proxy } = this;
-		_listener?.offAll();
-		_children?.clear();
+		const { _listener, _proxy } = this;
+		_listener.offAll();
 		_proxy?.destroy();
 		this.data = null;
 		this._view = null;
 		this._listener = null;
 		this._proxy = null;
-		this._parent = null;
-		eventMgr.offAllCaller(this);
-		eventMgr.offAllCaller(_view);
-		eventMgr.offAllCaller(_proxy);
-		Laya.Pool.recoverByClass(_proxy);
 		Laya.Pool.recoverByClass(_listener);
+		Laya.Pool.recoverByClass(_proxy);
 		ViewCtrlDIExtend.OffDeviceEvent(this);
 	}
 
@@ -74,48 +39,48 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private _onAdded() {
 		this._view = this.owner[ "$owner" ];
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
-		this._proxy = Laya.Pool.createByClass(this.ProxyClass);
-		this._proxy.viewCtrl = this;
+		if (this.ProxyClass) {
+			this._proxy = Laya.Pool.createByClass(this.ProxyClass);
+			this._proxy.viewCtrl = this;
+		}
 		this._registerMessage();
-		eventMgr.registerEvent(this);
-		eventMgr.registerEvent(this._view);
-		eventMgr.registerEvent(this._proxy);
+		ViewCtrlDIExtend.RegisterDeviceEvent(this);
 		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
 		this.addMessage(ViewEvent.OnForeground, this._onForeground);
 		this.addMessage(ViewEvent.OnBackground, this._onBackground);
+		super[ "_onAdded" ]();
 	}
 
 	/** Laya.Script私有方法重写 */
 	private _onEnable() {
-		this._isShow = true;
-		ViewCtrlDIExtend.RegisterDeviceEvent(this);
+		eventMgr.registerEvent(this);
+		eventMgr.registerEvent(this._view);
+		eventMgr.registerEvent(this._proxy);
 		super[ "_onEnable" ]();
 	}
 
 	/** Laya.Script私有方法重写 */
 	private _onDisable() {
-		this._isShow = false;
+		eventMgr.offAllCaller(this);
+		eventMgr.offAllCaller(this._view);
+		eventMgr.offAllCaller(this._proxy);
 		super[ "_onDisable" ]();
 	}
 
 	private _onForeground() {
-		if (!this._isShow) return;
-		this._children?.forEach(v => v._isShow && v._onForeground());
 		this.onForeground();
 	}
 
 	private _onBackground() {
-		if (!this._isShow) return;
-		this._children?.forEach(v => v._isShow && v._onBackground());
 		this.onBackground();
 	}
 
-	/** 注册装饰器页面消息 */
+	/** 注册页面消息 */
 	private _registerMessage() {
-		const { __messageMap: messageMap } = this;
-		if (messageMap) {
-			for (const messageName in messageMap) {
-				const callbackMap = messageMap[ messageName ];
+		const { __messageMap } = this;
+		if (__messageMap) {
+			for (const messageName in __messageMap) {
+				const callbackMap = __messageMap[ messageName ];
 				for (const k in callbackMap) {
 					const callback = callbackMap[ k ];
 					const param = callback[ messageName ];
@@ -127,17 +92,17 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		}
 	}
 }
-windowImmit("BaseViewCtrl", BaseViewCtrl);
 
 /** 按键事件类型 */
-export const enum KeyEventType {
+enum KeyEventType {
 	KeyDown = "keydown",
 	KeyPress = "keypress",
 	KeyUp = "keyup",
 }
+windowImmit("KeyEventType", KeyEventType);
 
 /** 鼠标事件类型 */
-export const enum MouseEventType {
+enum MouseEventType {
 	MouseOver = "mouseover",
 	MouseDown = "mousedown",
 	MouseMove = "mousemove",
@@ -151,6 +116,7 @@ export const enum MouseEventType {
 	StageMouseUp = "stagemouseup",
 	StageClick = "stageclick",
 }
+windowImmit("MouseEventType", MouseEventType);
 
 /**
  * 页面控制器键盘事件装饰器工厂
@@ -159,7 +125,7 @@ export const enum MouseEventType {
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-export function KeyEvent(keyEventType: KeyEventType, key: number, once?: boolean) {
+function CtrlKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__keyEventList) target.__keyEventList = {};
 		if (!target.__keyEventList[ keyEventType ]) target.__keyEventList[ keyEventType ] = {};
@@ -173,9 +139,14 @@ export function KeyEvent(keyEventType: KeyEventType, key: number, once?: boolean
 				func[ key ] = func[ key ] || {};
 				func[ key ].__once = true;
 			}
+			if (args) {
+				func[ key ] = func[ key ] || {};
+				func[ key ].__args = args;
+			}
 		}
 	}
 }
+windowImmit("CtrlKeyEvent", CtrlKeyEvent);
 
 /**
  * 页面控制器鼠标事件装饰器工厂
@@ -183,7 +154,7 @@ export function KeyEvent(keyEventType: KeyEventType, key: number, once?: boolean
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-export function MouseEvent(mouseEventType: MouseEventType, once?: boolean) {
+function CtrlMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__mouseEventList) target.__mouseEventList = {};
 		if (!target.__mouseEventList[ mouseEventType ]) target.__mouseEventList[ mouseEventType ] = [];
@@ -196,9 +167,14 @@ export function MouseEvent(mouseEventType: MouseEventType, once?: boolean) {
 				func[ mouseEventType ] = func[ mouseEventType ] || {};
 				func[ mouseEventType ].__once = once;
 			}
+			if (args) {
+				func[ mouseEventType ] = func[ mouseEventType ] || {};
+				func[ mouseEventType ].__args = args;
+			}
 		}
 	}
 }
+windowImmit("CtrlMouseEvent", CtrlMouseEvent);
 
 /**
  * 页面控制器消息装饰器工厂
@@ -207,7 +183,7 @@ export function MouseEvent(mouseEventType: MouseEventType, once?: boolean) {
  * @param args  参数
  * @returns MethodDecorator
  */
-export function ViewMessage(name: string, once?: boolean, args?: any[]) {
+function CtrlMessage(name: string, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 		if (!target.__messageMap) target.__messageMap = {};
 		if (!target.__messageMap[ name ]) target.__messageMap[ name ] = [];
@@ -227,3 +203,4 @@ export function ViewMessage(name: string, once?: boolean, args?: any[]) {
 		}
 	}
 }
+windowImmit("CtrlMessage", CtrlMessage);

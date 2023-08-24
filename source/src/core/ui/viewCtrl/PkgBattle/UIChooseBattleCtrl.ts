@@ -24,7 +24,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	override onEnable(): void {
-		this.view.showConfirm(false);
+		this.view.showConfirm2(false);
 		this.refreshList(this.data);
 	}
 
@@ -80,7 +80,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 				if (value != null) this.onBtnBattleClick(value);
 			}));
 		} else
-			this.view.showConfirm(true, this.items[ index ]);
+			this.view.showConfirm2(true, this.items[ index ]);
 	}
 
 	private onBtnBackClick(): void {
@@ -88,7 +88,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private onBtnConfirmBgClick(): void {
-		this.view.showConfirm(false);
+		this.view.showConfirm2(false);
 	}
 
 	private onBtnBuyFoodClick(): void {

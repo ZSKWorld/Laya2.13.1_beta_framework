@@ -1,5 +1,3 @@
-import { ExtensionClass } from "../../../../libs/utils/Util";
-import { ViewExtension } from "../../../core/Interfaces";
 import RenderBag from "../../../ui/PkgMain/RenderBag";
 import { ResPath } from "../../../../common/ResPath";
 import { GameUtil } from "../../../../common/GameUtil";
@@ -10,11 +8,11 @@ export const enum RenderBagMsg {
 
 }
 
-export class RenderBagView extends ExtensionClass<ViewExtension, RenderBag>(RenderBag) {
+export class RenderBagView extends ExtensionClass<IView, RenderBag>(RenderBag) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {
-        
+
     }
 
     refreshShangCheng(id: number) {

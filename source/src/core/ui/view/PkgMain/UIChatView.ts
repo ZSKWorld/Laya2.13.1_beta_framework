@@ -1,6 +1,4 @@
 import { ResPath } from "../../../common/ResPath";
-import { ExtensionClass } from "../../../libs/utils/Util";
-import { ViewExtension } from "../../core/Interfaces";
 import UIChat from "../../ui/PkgMain/UIChat";
 
 export const enum UIChatMsg {
@@ -8,7 +6,7 @@ export const enum UIChatMsg {
 	OnBtnBackClick = "UIChat_OnBtnBackClick",
 }
 
-export class UIChatView extends ExtensionClass<ViewExtension, UIChat>(UIChat) {
+export class UIChatView extends ExtensionClass<IView, UIChat>(UIChat) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate(): void {

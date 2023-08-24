@@ -1,6 +1,8 @@
 
 /** 数学工具类 */
 export class MathUtil {
+    //等比数列求和公式：Sn=a1(1-q^n)/(1-q)（q≠1)。等差数列求和公式：Sn=na1+n(n-1)d/2。
+    //二级等差数列第n项 => a1 + (a2 - a1) * (n - 1) + (a3 - 2 * a2 + a1) * (n - 1) * (n - 2) / 2
     static readonly Radian = Math.PI / 180;
 
     /** 角度转弧度 */
@@ -40,7 +42,47 @@ export class MathUtil {
         else return (num / 1e12).toFixed(fixed) + "万亿";
     }
 
-    /** 
+    static numToLetter(num: number, dp: number = 3) {
+        dp = dp < 0 ? 0 : dp;
+        //97-122 a-z
+        const numLetter = [];
+        if (num >= 1e6) {
+            num /= 1e6;
+            numLetter.push(97);
+            while (num >= 1e3) {
+                num /= 1e3;
+                let carry = true;
+                for (let i = numLetter.length - 1; i >= 0; i--) {
+                    if (++numLetter[ i ] > 122) {
+                        numLetter[ i ] = 97;
+                    } else {
+                        carry = false;
+                        break;
+                    }
+                }
+                if (carry) numLetter.unshift(97);
+            }
+        }
+        if (numLetter.length)
+            return num.toFixed(dp) + numLetter.map(v => String.fromCharCode(v)).join("");
+        else
+            return num.toString();
+    }
+
+    static letterToNum(str: string) {
+        const reg = /^-?\d+(\.\d+)?[a-z]*$/;
+        if (!reg.test(str)) throw Error("Invalid number string: " + str);
+        const [ num, letter ] = str.match(/[a-z]+|-?\d+(\.\d+)?/g);
+        let sign = 0;
+        if (letter) {
+            let letterNum = letter.split("").map(v => v.charCodeAt(0)).reverse();
+            letterNum.forEach((v, i) => sign += 3 * (v - 96) * (26 ** i));
+            letterNum.length > 0 && (sign += 3);
+        }
+        return parseFloat(num) * (10 ** sign);
+    }
+
+    /**
      * 返回min-max之间得随机整数
      * @param min 最小值整数(包含)
      * @param max 最大值整数(包含)
@@ -54,11 +96,22 @@ export class MathUtil {
     }
 
     /**
+     * 返回min-max之间得随机数
+     * @param min 最小值(包含)
+     * @param max 最大值(不包含)
+     * @returns
+     */
+    static RandomFloat(min: number, max: number) {
+        if (min >= max) return min;
+        return min + (max - min) * Math.random();
+    }
+
+    /**
      * 数值限制
-     * @param value 
-     * @param min 
-     * @param max 
-     * @returns 
+     * @param value
+     * @param min
+     * @param max
+     * @returns
      */
     static Clamp(value: number, min: number, max: number) {
         return Math.min(Math.max(value, min), max);
@@ -66,15 +119,15 @@ export class MathUtil {
 
     /**
      * 数值限制在0-1
-     * @param value 
-     * @returns 
+     * @param value
+     * @returns
      */
     static Clamp01(value: number) {
         return this.Clamp(value, 0, 1);
     }
 
     /** x从0平滑过渡到1 */
-    public static SmoothStep(x: number): number {
+    public static SmoothStep(x: number) {
         x = this.Clamp01(x);
         return (Math.sin(x * Math.PI - Math.PI / 2) + 1) / 2;
     }
@@ -103,8 +156,13 @@ export class MathUtil {
 
     /** 随机颜色字符串 */
     static RandomColor() {
-        return "#" + Math.floor(Math.random() * 256).toString(16).padStart(2, "0")
-            + Math.floor(Math.random() * 256).toString(16).padStart(2, "0")
-            + Math.floor(Math.random() * 256).toString(16).padStart(2, "0");
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return "#" + r.toString(16).padStart(2, "0")
+            + g.toString(16).padStart(2, "0")
+            + b.toString(16).padStart(2, "0");
     }
 }
+
+windowImmit("MathUtil", MathUtil);
