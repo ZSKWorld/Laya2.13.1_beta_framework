@@ -1,4 +1,4 @@
-declare interface IBag {
+declare interface IBag extends IDecode<IBag> {
     collect: number[];
     equipment: IEquipment[];
     gem: IItemBase[];

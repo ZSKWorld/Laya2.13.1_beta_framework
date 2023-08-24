@@ -1,5 +1,5 @@
 /** 基础物品 */
-declare interface IItemBase {
+declare interface IItemBase extends IDecode<IItemBase>{
     /** 物品id */
     id: number;
     /** 物品数量 */

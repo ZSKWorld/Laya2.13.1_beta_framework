@@ -1,7 +1,7 @@
 import { MathUtil } from "../../../utils/MathUtil";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
 import { tableMgr } from "../../table/TableManager";
-import { ItemBase } from "../../user/ItemBase";
+import { ItemBase } from "../../data/ItemBase";
 import { ItemHelper } from "./ItemHelper";
 
 export class ItemHandle {
@@ -52,7 +52,7 @@ export class ItemHandle {
      * @param data 目标用户数据
      * @param id 物品id
      * @param count 出售数量
-     * @returns 
+     * @returns
      */
     static sellItem(data: IUser, id: number, count: number) {
         const rewards: IItemBase[] = [];

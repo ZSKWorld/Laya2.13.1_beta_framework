@@ -15,4 +15,13 @@ export class Battle implements IBattle {
     secret: IBattleData = new BattleData();
     /**boss数据 */
     boss: IBattleData = new BattleData();
+    encode(): IBattle {
+        return this;
+    }
+
+    decode(data: IBattle): IBattle {
+        if (data)
+            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
+        return this;
+    }
 }

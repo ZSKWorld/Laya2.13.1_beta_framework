@@ -1,5 +1,5 @@
 declare interface IBattleData { }
-declare interface IBattle {
+declare interface IBattle extends IDecode<IBattle> {
 
     /**关卡数据 */
     level: IBattleData;

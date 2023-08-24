@@ -11,7 +11,7 @@ import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
 import { ProxyMgr } from "../utils/ProxyMgr";
-import { User } from "./user/User";
+import { User } from "./data/User";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",

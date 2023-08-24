@@ -1,6 +1,6 @@
 import { Util } from "../../../utils/Util";
 import { ErrorCode } from "../../enum/ErrorCode";
-import { User } from "../../user/User";
+import { User } from "../../data/User";
 import { AddCMD, BaseController } from "../BaseController";
 
 export class AccouontController extends BaseController implements IAccountCtrl {

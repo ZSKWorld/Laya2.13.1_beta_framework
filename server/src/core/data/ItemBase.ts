@@ -9,5 +9,13 @@ export class ItemBase implements IItemBase {
         this.id = id;
         this.count = count;
     }
+    encode(): IItemBase {
+        throw new Error("Method not implemented.");
+    }
+    decode(data: IItemBase): IItemBase {
+        if (data)
+            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
+        return this;
+    }
 }
 

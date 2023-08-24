@@ -6,8 +6,8 @@
         {
             "label": "编译",
             "type": "shell",
-            // "command": "node ./.vscode/compile.js",
-            "command": "tsc ./src/Main.ts  --outDir ./bin/js",
+            "command": "node ./.vscode/compile.js",
+            // "command": "tsc ./src/Main.ts  --outDir ./bin/js",
             "problemMatcher": []
         },
         {

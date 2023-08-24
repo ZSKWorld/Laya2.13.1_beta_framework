@@ -45,7 +45,10 @@ export class BaseController {
     }
 }
 
-export function AddCMD(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    target._cmds = target._cmds || {};
-    target._cmds[ propertyKey ] = propertyKey;
+export function AddCMD(_: any, context: ClassMethodDecoratorContext) {
+    context.addInitializer(function () {
+        const _this = this as any;
+        _this._cmds = _this._cmds || {};
+        _this._cmds[ context.name ] = context.name;
+    });
 }

@@ -3,6 +3,15 @@ import { tableMgr } from "../table/TableManager";
 import { Equipment } from "./Equipment";
 import { ItemBase } from "./ItemBase";
 
+const EncodeData: { name: string, Class: Class<ItemBase> }[] = [
+    { name: "$equipments", Class: Equipment },//ItemBagType.Equip
+    { name: "$Prop", Class: ItemBase },//ItemBagType.Prop
+    { name: "$Gem", Class: ItemBase },//ItemBagType.Gem
+    { name: "$Material", Class: ItemBase },//ItemBagType.Material
+    { name: "$Book", Class: ItemBase },//ItemBagType.Book
+    { name: "$Other", Class: ItemBase },//ItemBagType.Other
+];
+
 export class Bag implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [];
@@ -11,6 +20,52 @@ export class Bag implements IBag {
     material: IItemBase[] = [];
     book: IItemBase[] = [];
     other: IItemBase[] = [];
+    encode(): IBag {
+        const data = {} as IBag;
+        data.collect = this.collect;
+        const encodeArrData = (arr: any[]) => {
+            if (!arr || !arr.length) return arr;
+            const keys = Object.keys(arr[ 0 ]);
+            const result = [];
+            result.push(keys);
+
+            arr.forEach(v => {
+                const vData = [];
+                keys.forEach(k => vData.push(v[ k ]));
+                result.push(vData);
+            });
+            return result;
+        };
+        data.equipment = encodeArrData(this.equipment);
+        data.gem = encodeArrData(this.gem);
+        data.prop = encodeArrData(this.prop);
+        data.material = encodeArrData(this.material);
+        data.book = encodeArrData(this.book);
+        data.other = encodeArrData(this.other);
+        return data;
+    }
+
+    decode(data: IBag): IBag {
+        this.collect = data.collect;
+        const decodeArrData = (data: any[][], cls: Class<IDecode<any>>) => {
+            if (!data || !data.length) return data;
+            const keys = data.shift();
+            const result = [];
+            data.forEach(v => {
+                const temp = {};
+                keys.forEach((k, index) => temp[ k ] = v[ index ]);
+                result.push(new cls().decode(temp));
+            });
+            return result;
+        };
+        this.equipment = decodeArrData(data.equipment as any, Equipment);
+        this.gem = decodeArrData(data.gem as any, ItemBase);
+        this.prop = decodeArrData(data.prop as any, ItemBase);
+        this.material = decodeArrData(data.material as any, ItemBase);
+        this.book = decodeArrData(data.book as any, ItemBase);
+        this.other = decodeArrData(data.other as any, ItemBase);
+        return this;
+    }
 
     getItem(id: number) {
         const item = tableMgr.Item[ id ];

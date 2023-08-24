@@ -1,5 +1,5 @@
 import { tableMgr } from "../../table/TableManager";
-import { ItemBase } from "../../user/ItemBase";
+import { ItemBase } from "../../data/ItemBase";
 import { ItemHandle } from "../item/ItemHandle";
 import { ItemHelper } from "../item/ItemHelper";
 

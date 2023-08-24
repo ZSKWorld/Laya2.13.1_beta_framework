@@ -1,4 +1,5 @@
 import { EquipmentPart } from "../enum/ItemEnum";
+import { Equipment } from "./Equipment";
 
 export class Body implements IBody {
     /** 武器 */
@@ -41,6 +42,19 @@ export class Body implements IBody {
     amuletGems: number[] = [];
     /** 鞋子上装备的宝石 */
     shoesGems: number[] = [];
+    encode(): IBody {
+        return this;
+    }
+
+    decode(data: IBody): IBody {
+        if (data) {
+            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
+            const equips = [ "weapon", "helmet", "necklace", "clothes", "ring", "trousers", "amulet", "shoes", "mount",
+                "hiddenWeeapon", "fashion", "magicWeapon", ];
+            equips.forEach(v => this[ v ] && (this[ v ] = new Equipment().decode(this[ v ])));
+        }
+        return this;
+    }
 
     getDressedEquip(part: number): IEquipment {
         switch (part) {

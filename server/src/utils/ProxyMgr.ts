@@ -27,7 +27,7 @@ export class ProxyMgr {
             const result = new Proxy(target, {
                 set(target: any, p: string, value: any, receiver: any): boolean {
                     const tempKey = `${ dataKey }.${ p }`;
-                    if (typeof p === "string" && p.startsWith("$"))
+                    if (typeof p === "string")
                         target[ p ] = value;
                     else
                         target[ p ] = ProxyMgr.getProxy(uid, tempKey, value);

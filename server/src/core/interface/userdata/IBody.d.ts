@@ -1,5 +1,5 @@
-declare interface IBody{
-    
+declare interface IBody extends IDecode<IBody> {
+
     /** 武器 */
     weapon: IEquipment;
     /** 头盔 */

@@ -13,9 +13,20 @@ export class Account implements IAccount {
         this.password = password;
         this.nickname = nickname;
     }
+    encode(): IAccount {
+        return this;
+    }
+
+    decode(data: IAccount): IAccount {
+        if (data)
+            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
+        return this;
+    }
+
     login(): void {
         this.lastLoginTime = TimeUtil.getTimeStamp();
     }
+
     logout(): void {
         this.lastOnlineTime = TimeUtil.getTimeStamp();
     }

@@ -43,6 +43,15 @@ export class Base implements IBase {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
+    encode(): IBase {
+        return this;
+    }
+
+    decode(data: IBase): IBase {
+        if (data)
+            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
+        return this;
+    }
 
     getMaxVigro(): number {
         const { citta } = this;

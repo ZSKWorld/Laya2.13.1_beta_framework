@@ -1,4 +1,4 @@
-declare interface IAccount {
+declare interface IAccount extends IDecode<IAccount>{
     uid: string;
     /** 昵称 */
     nickname: string;
