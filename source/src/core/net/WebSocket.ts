@@ -7,7 +7,7 @@ import { NetMessage } from "./enum/NetMessage";
 const logger = Logger.Create("WebSocket", true);
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.0.101:8003";
+    private _url: string = "ws://192.168.71.29:8003";
     private _socket: Laya.Socket;
     private _waitList: UserInput[];
     private _current: UserInput;

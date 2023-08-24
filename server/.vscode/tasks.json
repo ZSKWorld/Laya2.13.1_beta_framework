@@ -1,13 +1,13 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
             "label": "编译",
             "type": "shell",
-            "command": "node ./.vscode/compile.js",
-            // "command": "tsc ./src/Main.ts  --outDir ./bin/js",
+            // "command": "node ./.vscode/compile.js",
+            "command": "tsc ./src/Main.ts  --outDir ./bin/js",
             "problemMatcher": []
         },
         {

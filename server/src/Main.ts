@@ -3,8 +3,6 @@ import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
 import { tableMgr } from "./core/table/TableManager";
-import { ProxyMgr } from "./utils/ProxyMgr";
-import { GameUtil } from "./utils/GameUtil";
 import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");
 
@@ -21,7 +19,7 @@ const originConOnMessage = function (conKey: string, msg: websocket.Message) {
     } else connect.close();
 }
 
-const server = http.createServer().listen({ host: "192.168.0.101", port: 8003 }, function () {
+const server = http.createServer().listen({ host: "192.168.71.29", port: 8003 }, function () {
     const { address, port } = server.address() as AddressInfo;
     Logger.log(`服务器已启动：${ address }:${ port }`, Color.green);
 });
