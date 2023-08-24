@@ -1,6 +1,6 @@
 {
-  "libview.firstColumnWidth": 283,
-  "auxline1": true,
+  "libview.firstColumnWidth": 424,
+  "gridSize": 10,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66sbd010",
@@ -51,6 +51,8 @@
     "/",
     "vx9zwser",
     "/Component/",
+    "vx9zwser",
+    "/Texture/",
     "vs9845at",
     "/",
     "vith2b66",
@@ -65,6 +67,6 @@
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 10,
+  "auxline1": true,
   "gridColor": 109
 }

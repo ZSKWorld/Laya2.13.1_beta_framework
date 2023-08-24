@@ -100,14 +100,14 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	private _onForeground() {
 		if (!this._isShow) return;
-		this.onForeground();
 		this._children?.forEach(v => v._isShow && v._onForeground());
+		this.onForeground();
 	}
 
 	private _onBackground() {
 		if (!this._isShow) return;
-		this.onBackground();
 		this._children?.forEach(v => v._isShow && v._onBackground());
+		this.onBackground();
 	}
 
 	/** 注册装饰器页面消息 */
