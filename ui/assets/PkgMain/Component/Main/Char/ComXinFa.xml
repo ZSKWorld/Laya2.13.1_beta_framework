@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1060,1493" designImage="ui://vith2b66sbd0f" designImageOffsetX="-752" designImageOffsetY="-225" designImageAlpha="100">
+  <controller name="ctrlUpgrade" pages="0,,1," selected="0"/>
+  <displayList>
+    <component id="n170_btv5" name="btn_xinFa0" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,11" size="1042,150" controller="c1,1">
+      <relation target="" sidePair="width-width"/>
+      <property target="n1" propertyId="0" value="心法·天机卷 Lv.0"/>
+    </component>
+    <component id="n171_btv5" name="btn_xinFa1" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,176" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n172_btv5" name="btn_xinFa2" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,341" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n173_btv5" name="btn_xinFa3" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,506" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n174_btv5" name="btn_xinFa4" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,671" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n175_btv5" name="btn_xinFa5" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,836" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n176_btv5" name="btn_xinFa6" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,1001" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n177_btv5" name="btn_xinFa7" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,1166" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <component id="n178_btv5" name="btn_xinFa8" src="btv51j" fileName="Component/Main/Char/Item/ItemXinFa.xml" xy="9,1331" size="1042,150">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <graph id="n179_rwel" name="graph_upgradeBg" xy="4,0" size="1052,1493" type="rect" lineSize="0" fillColor="#dd000000">
+      <gearDisplay controller="ctrlUpgrade" pages="1"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n180_rwel" name="n180" xy="80,451" size="900,727" type="rect" lineSize="3" lineColor="#ff666666" fillColor="#ff1d1d1d">
+      <gearDisplay controller="ctrlUpgrade" pages="1"/>
+      <relation target="n195_rwel" sidePair="bottomext-bottom"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </graph>
+    <text id="n183_rwel" name="txt_xinFaName" xy="378,474" size="304,66" fontSize="50" color="#ffffff" autoClearText="true" text="心法·七星卷">
+      <gearDisplay controller="ctrlUpgrade" pages="1"/>
+      <relation target="n180_rwel" sidePair="center-center,top-top"/>
+    </text>
+    <text id="n184_rwel" name="txt_xinFaDesc" xy="115,561" size="830,101" fontSize="35" color="#ff4444" leading="10" autoSize="height" autoClearText="true" text="每级减少0.2%伤害，心法等级达到350级不在增加此属性">
+      <gearDisplay controller="ctrlUpgrade" pages="1"/>
+      <relation target="n183_rwel" sidePair="top-bottom"/>
+    </text>
+    <text id="n185_rwel" name="txt_upgradeInfo" xy="115,696" size="830,154" fontSize="35" color="#ffffff" leading="10" autoSize="height" autoClearText="true" text="学习等级:15    当前等级:100    最高等级:4096&#xA;拥有经验:17.4亿    需要经验:1.2亿&#xA;拥有金币:88.7亿    需要金币:7840.7万">
+      <gearDisplay controller="ctrlUpgrade" pages="1"/>
+      <relation target="n184_rwel" sidePair="top-bottom"/>
+    </text>
+    <component id="n186_rwel" name="btn_skill0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="184,857" size="300,85" group="n195_rwel" controller="ctrlBgColor,1">
+      <Button title="鬼雾水刃" titleFontSize="35"/>
+    </component>
+    <component id="n187_rwel" name="btn_skill1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="565,856" size="300,85" group="n195_rwel" controller="ctrlBgColor,2">
+      <Button title="火蛇之舞" titleFontSize="35"/>
+    </component>
+    <component id="n188_rwel" name="btn_skill2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="184,957" size="300,85" group="n195_rwel" controller="ctrlBgColor,4">
+      <Button title="上苍之怒" titleFontSize="35"/>
+    </component>
+    <component id="n189_rwel" name="btn_skill3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="565,957" size="300,85" group="n195_rwel">
+      <Button title="土流大河" titleFontSize="35"/>
+    </component>
+    <component id="n190_rwel" name="btn_upgrade0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="143,1060" size="250,85" group="n195_rwel" controller="ctrlBgColor,5">
+      <Button title="升1级" titleColor="#000000" titleFontSize="35"/>
+    </component>
+    <component id="n191_rwel" name="btn_upgrade1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="405,1060" size="250,85" group="n195_rwel" controller="ctrlBgColor,5">
+      <Button title="升10级" titleFontSize="35"/>
+    </component>
+    <component id="n192_rwel" name="btn_upgrade2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="666,1060" size="250,85" group="n195_rwel" controller="ctrlBgColor,5">
+      <Button title="升100级" titleFontSize="35"/>
+    </component>
+    <group id="n195_rwel" name="n195" xy="143,856" size="773,289" advanced="true">
+      <gearDisplay controller="ctrlUpgrade" pages="1"/>
+      <relation target="n185_rwel" sidePair="top-bottom"/>
+    </group>
+  </displayList>
+</component>

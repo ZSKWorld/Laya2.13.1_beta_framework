@@ -13,37 +13,37 @@
       <relation target="" sidePair="width-width,bottomext-bottom"/>
       <relation target="n4_sbd0" sidePair="topext-bottom"/>
     </graph>
-    <component id="n1_sbd0" name="ProWave" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,230" size="1046,35" touchable="false" controller="ctrlFontSize,5">
+    <component id="n1_sbd0" name="pro_wave" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="17,230" size="1046,35" touchable="false" controller="ctrlFontSize,5">
       <relation target="" sidePair="width-width"/>
       <relation target="n3_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="100" max="100"/>
     </component>
-    <component id="n2_sbd0" name="ProExp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,279" size="1046,35" touchable="false" controller="ctrlColor,1,ctrlFontSize,5">
+    <component id="n2_sbd0" name="pro_exp" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="17,279" size="1046,35" touchable="false" controller="ctrlColor,1,ctrlFontSize,5">
       <relation target="" sidePair="width-width"/>
       <relation target="n1_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="100" max="100"/>
     </component>
-    <component id="n4_sbd0" name="ProSelfHp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="17,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,5">
+    <component id="n4_sbd0" name="pro_selfHp" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="17,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,5">
       <relation target="" sidePair="width-width%"/>
       <relation target="n7_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="134648496" max="234648496"/>
     </component>
-    <component id="n5_sbd0" name="ProEnemyHp" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="577,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,5">
+    <component id="n5_sbd0" name="pro_enemyHp" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="577,395" size="485,40" touchable="false" controller="ctrlColor,2,ctrlFontSize,5">
       <relation target="" sidePair="width-width%,right-right"/>
       <relation target="n8_sbd0" sidePair="top-bottom"/>
       <ProgressBar value="134648496" max="234648496"/>
     </component>
-    <text id="n7_sbd0" name="TxtSelfName" xy="17,334" size="276,48" fontSize="35" vAlign="middle" text="Lv.62 怀念[天山]">
+    <text id="n7_sbd0" name="txt_selfName" xy="17,334" size="276,48" fontSize="35" vAlign="middle" text="Lv.62 怀念[天山]">
       <relation target="n2_sbd0" sidePair="top-bottom"/>
     </text>
-    <text id="n8_sbd0" name="TxtEnemyName" xy="787,335" size="276,48" fontSize="35" align="right" vAlign="middle" text="Lv.62 怀念[天山]">
+    <text id="n8_sbd0" name="txt_enemyName" xy="787,335" size="276,48" fontSize="35" align="right" vAlign="middle" text="Lv.62 怀念[天山]">
       <relation target="" sidePair="right-right"/>
       <relation target="n2_sbd0" sidePair="top-bottom"/>
     </text>
-    <richtext id="n19_sbd0" name="TxtInfo" xy="40,69" size="1000,113" touchable="false" fontSize="40" color="#ffffff" vAlign="middle" leading="10" ubb="true" autoSize="height" text="消耗：0点精力&lt;br&gt;掉落：玄铁重剑、大魔石">
+    <richtext id="n19_sbd0" name="txt_info" xy="40,69" size="1000,113" touchable="false" fontSize="40" color="#ffffff" vAlign="middle" leading="10" ubb="true" autoSize="height" text="消耗：0点精力&lt;br&gt;掉落：玄铁重剑、大魔石">
       <relation target="" sidePair="width-width"/>
     </richtext>
-    <list id="n17_sbd0" name="ListItem" xy="16,445" size="1048,1331" overflow="scroll" defaultItem="ui://vith2b66sbd0j" autoClearItems="true">
+    <list id="n17_sbd0" name="list_log" xy="16,445" size="1048,1331" overflow="scroll" defaultItem="ui://vith2b66sbd0j" autoClearItems="true">
       <relation target="n9_sbd0" sidePair="width-width,height-height,top-top"/>
       <item>
         <property target="title" propertyId="0" value="说的都是发生的说的都是发生的说的都是发生的说的都是发生的说的都是发生的说的都是发生的"/>
@@ -98,19 +98,19 @@
       <item/>
       <item/>
     </list>
-    <component id="n10_sbd0" name="BtnOffline" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="832,1681" size="231,94" controller="ctrlBgColor,6">
+    <component id="n10_sbd0" name="btn_offline" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="832,1681" size="231,94" controller="ctrlBgColor,6">
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button title="离线挂机" titleFontSize="40"/>
     </component>
-    <component id="n14_sbd0" name="BtnEnemyInfo" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="20,1807" size="273,92" controller="ctrlBgColor,4">
+    <component id="n14_sbd0" name="btn_enemyInfo" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="20,1807" size="273,92" controller="ctrlBgColor,4">
       <relation target="" sidePair="bottom-bottom"/>
       <Button title="怪物信息" titleFontSize="40" controller="ctrlState" page="1"/>
     </component>
-    <component id="n15_sbd0" name="BtnQuitBattle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="314,1807" size="273,92" controller="ctrlBgColor,2">
+    <component id="n15_sbd0" name="btn_quitBattle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="314,1807" size="273,92" controller="ctrlBgColor,2">
       <relation target="" sidePair="bottom-bottom"/>
       <Button title="退出战斗" titleFontSize="40"/>
     </component>
-    <component id="n18_sbd0" name="CmbBeiSu" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" pkg="vith2b66" xy="787,1808" size="277,91" controller="ctrlBgColor,3">
+    <component id="n18_sbd0" name="cmb_beiSu" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" pkg="vith2b66" xy="787,1808" size="277,91" controller="ctrlBgColor,3">
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <ComboBox title="10倍速" visibleItemCount="10" direction="up">
         <item title="0.2倍速"/>
@@ -123,11 +123,11 @@
         <item title="10倍速"/>
       </ComboBox>
     </component>
-    <graph id="n20_y5eb" name="BtnCloseInfo" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
+    <graph id="n20_y5eb" name="graph_closeInfo" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
       <gearDisplay controller="ctrlState" pages="1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <text id="n21_y5eb" name="TxtEnemy" xy="50,501" size="650,918" fontSize="50" color="#ffffff" leading="10" autoSize="height" text="青铜火鸡：&#xA;掉落：小魔石&#xA;攻击：999&#xA;防御：9999&#xA;生命：99999&#xA;金攻/防：100/1000&#xA;木攻/防：200/2000&#xA;水攻/防：300/3000&#xA;火攻/防：400/4000&#xA;土攻/防：500/5000&#xA;角色命中：99%&#xA;角色暴击：99%&#xA;角色闪避：99%">
+    <text id="n21_y5eb" name="txt_enemy" xy="50,501" size="650,918" fontSize="50" color="#ffffff" leading="10" autoSize="height" text="青铜火鸡：&#xA;掉落：小魔石&#xA;攻击：999&#xA;防御：9999&#xA;生命：99999&#xA;金攻/防：100/1000&#xA;木攻/防：200/2000&#xA;水攻/防：300/3000&#xA;火攻/防：400/4000&#xA;土攻/防：500/5000&#xA;角色命中：99%&#xA;角色暴击：99%&#xA;角色闪避：99%">
       <gearDisplay controller="ctrlState" pages="1"/>
       <relation target="" sidePair="middle-middle"/>
     </text>

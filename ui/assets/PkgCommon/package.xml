@@ -184,9 +184,9 @@
     <component id="sbd05c" name="ComTipInfo.xml" path="/Component/" exported="true"/>
     <component id="sbd05i" name="BtnCornerTxt.xml" path="/Component/" exported="true"/>
     <component id="sbd05j" name="UITipConfirm.xml" path="/" exported="true"/>
-    <component id="sbd05s" name="ScrollBarVCommon.xml" path="/Component/ScrollBar/" exported="true"/>
-    <component id="sbd05t" name="ProgressBar1.xml" path="/Component/ProgressBar/" exported="true"/>
-    <component id="sbd05x" name="SliderH.xml" path="/Component/SliderBar/" exported="true"/>
+    <component id="sbd05s" name="ScrollBarV1.xml" path="/Component/ScrollBar/" exported="true"/>
+    <component id="sbd05t" name="Pro1.xml" path="/Component/ProgressBar/" exported="true"/>
+    <component id="sbd05x" name="SliderH1.xml" path="/Component/SliderBar/" exported="true"/>
     <component id="sbd05y" name="ComNumInput.xml" path="/Component/" exported="true"/>
     <component id="irlv60" name="BtnIcon.xml" path="/Component/" exported="true"/>
     <component id="7vow61" name="WaitingItem.xml" path="/Component/"/>

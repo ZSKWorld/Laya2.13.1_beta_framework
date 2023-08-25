@@ -10,25 +10,25 @@
     <graph id="n3_sbd0" name="n3" xy="20,1150" size="710,173" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff1f222a">
       <relation target="" sidePair="width-width,bottom-bottom"/>
     </graph>
-    <richtext id="n72_e3vt" name="TxtInfo1" xy="40,65" size="218,1204" touchable="false" fontSize="27" color="#ffffff" leading="20" ubb="true" text="称号：&#xA;帮会：无&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;元宝：1908150&#xA;增加命中：0.00%"/>
-    <richtext id="n73_e3vt" name="TxtInfo2" xy="375,65" size="179,1151" touchable="false" fontSize="27" color="#ffffff" leading="20" ubb="true" text="称号：&#xA;帮会：无&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;元宝：1908150"/>
-    <component id="n74_e3vt" name="CmbTitle" src="sbd013" fileName="Component/Combox/CmbPlayerInfo.xml" xy="455,57">
+    <richtext id="n72_e3vt" name="txt_info1" xy="40,65" size="218,1204" touchable="false" fontSize="27" color="#ffffff" leading="20" ubb="true" text="称号：&#xA;帮会：无&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;元宝：1908150&#xA;增加命中：0.00%"/>
+    <richtext id="n73_e3vt" name="txt_info2" xy="375,65" size="179,1151" touchable="false" fontSize="27" color="#ffffff" leading="20" ubb="true" text="称号：&#xA;帮会：无&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;命中：1.1万&#xA;元宝：1908150"/>
+    <component id="n74_e3vt" name="cmb_title" src="sbd013" fileName="Component/Combox/CmbPlayerInfo.xml" xy="455,57">
       <relation target="" sidePair="center-center"/>
       <ComboBox visibleItemCount="10">
         <item title="无名小卒"/>
         <item title="大名鼎鼎"/>
       </ComboBox>
     </component>
-    <component id="n58_sbd0" name="BtnExplain" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="31,1187" size="168,100" group="n63_sbd0" controller="ctrlBgColor,6">
+    <component id="n58_sbd0" name="btn_explain" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="31,1187" size="168,100" group="n63_sbd0" controller="ctrlBgColor,6">
       <Button title="属性说明"/>
     </component>
-    <component id="n60_sbd0" name="BtnBack" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="204,1187" size="168,100" group="n63_sbd0" controller="ctrlBgColor,2">
+    <component id="n60_sbd0" name="btn_back" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="204,1187" size="168,100" group="n63_sbd0" controller="ctrlBgColor,2">
       <Button title="返回"/>
     </component>
-    <component id="n61_sbd0" name="BtnCopyID" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="377,1187" size="168,100" group="n63_sbd0">
+    <component id="n61_sbd0" name="btn_copyID" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="377,1187" size="168,100" group="n63_sbd0">
       <Button title="复制ID"/>
     </component>
-    <component id="n62_sbd0" name="BtnGift" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="550,1187" size="168,100" group="n63_sbd0" controller="ctrlBgColor,1">
+    <component id="n62_sbd0" name="btn_gift" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="550,1187" size="168,100" group="n63_sbd0" controller="ctrlBgColor,1">
       <Button title="礼包兑换"/>
     </component>
     <group id="n63_sbd0" name="n63" xy="31,1187" size="687,100" advanced="true" layout="hz" colGap="5" excludeInvisibles="true">

@@ -5,7 +5,7 @@
     <graph id="n0_amcp" name="n0" xy="0,0" size="100,100" touchable="false" type="eclipse" lineSize="0" fillColor="#ff70767f">
       <gearColor controller="button" pages="0,1,2,3" values="#70767f|#565a60|#565a60|#565a60" tween="true"/>
     </graph>
-    <text id="n3_amcp" name="n3" xy="14,20" size="74,92" fontSize="70" color="#ffffff" text="＠"/>
+    <text id="n3_amcp" name="n3" xy="13,0" size="74,92" fontSize="70" color="#ffffff" vAlign="middle" text="＠"/>
   </displayList>
   <Button downEffect="scale" downEffectValue=".9"/>
 </component>

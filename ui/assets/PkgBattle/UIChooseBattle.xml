@@ -36,7 +36,7 @@
       <item/>
       <item/>
     </list>
-    <graph id="n5_sbd0" name="BtnConfirmBg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+    <graph id="n5_sbd0" name="graph_bg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
       <gearDisplay controller="ctrlConfirm" pages="1,6"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
@@ -47,26 +47,26 @@
     <graph id="n8_sbd0" name="n8" xy="140,1131" size="800,100" group="n15_sbd0" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
       <relation target="n6_sbd0" sidePair="width-width,bottom-bottom"/>
     </graph>
-    <richtext id="n14_sbd0" name="TxtTitle" xy="330,706" size="419,73" group="n15_sbd0" touchable="false" fontSize="55" color="#ffffff" ubb="true" singleLine="true" text="洪七公[color=#ff0000][绝对物防][/color]">
+    <richtext id="n14_sbd0" name="txt_title" xy="330,706" size="419,73" group="n15_sbd0" touchable="false" fontSize="55" color="#ffffff" ubb="true" singleLine="true" text="洪七公[color=#ff0000][绝对物防][/color]">
       <relation target="n6_sbd0" sidePair="center-center"/>
     </richtext>
-    <richtext id="n13_sbd0" name="TxtContent" xy="165,961" pivot="0,0.5" anchor="true" size="610,158" group="n15_sbd0" touchable="false" fontSize="40" color="#ffffff" ubb="true" autoSize="height" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
+    <richtext id="n13_sbd0" name="txt_content" xy="165,961" pivot="0,0.5" anchor="true" size="610,158" group="n15_sbd0" touchable="false" fontSize="40" color="#ffffff" ubb="true" autoSize="height" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
       <gearDisplay controller="ctrlConfirm" pages="1"/>
       <relation target="n6_sbd0" sidePair="middle-middle"/>
     </richtext>
-    <component id="n9_sbd0" name="BtnBuyFood" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="213,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
+    <component id="n9_sbd0" name="btn_buyFood" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="213,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
       <gearDisplay controller="ctrlOpenType" pages="0"/>
       <Button title="购买食物" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <component id="n17_btv5" name="BtnBuyTimes" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="213,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
+    <component id="n17_btv5" name="btn_buyTimes" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="213,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
       <gearDisplay controller="ctrlOpenType" pages="1"/>
       <Button title="增加次数" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <component id="n11_sbd0" name="BtnSaoDang" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="434,1146" size="211,69" group="n16_sbd0">
+    <component id="n11_sbd0" name="btn_saoDang" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="434,1146" size="211,69" group="n16_sbd0">
       <gearDisplay controller="ctrlOpenType" pages="0,1,4"/>
       <Button title="扫荡" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <component id="n12_sbd0" name="BtnBattle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="655,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,1">
+    <component id="n12_sbd0" name="btn_battle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="655,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,1">
       <gearText controller="ctrlConfirm" default="战斗"/>
       <Button title="战斗" titleColor="#000000" titleFontSize="45"/>
     </component>

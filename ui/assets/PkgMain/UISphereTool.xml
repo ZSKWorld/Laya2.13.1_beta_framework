@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" overflow="hidden" designImage="ui://vith2b66sbd0i" designImageOffsetX="-766" designImageAlpha="100" designImageLayer="1" bgColor="#000000">
-  <controller name="ctrlState" pages="0,,1,,2," selected="2"/>
-  <controller name="c1" pages="0,,1," selected="1"/>
+  <controller name="ctrlState" pages="0,,1,,2," selected="0"/>
+  <controller name="c1" pages="0,,1," selected="0"/>
   <displayList>
-    <graph id="n67_e3vt" name="BtnBg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+    <graph id="n67_e3vt" name="graph_bg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n68_e3vt" name="BtnClearLog" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,719" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
+    <component id="n68_e3vt" name="btn_clearLog" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,719" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
       <Button title="清理日志" titleColor="#ffffff" titleFontSize="50"/>
     </component>
-    <component id="n69_e3vt" name="BtnHFJL" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,842" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
+    <component id="n69_e3vt" name="btn_recoverVigor" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,842" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
       <Button title="回复精力" titleColor="#ffffff" titleFontSize="50"/>
     </component>
     <component id="n73_mz80" name="n73" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="350,965" size="380,113" group="n238_j87q" controller="ctrlBgColor,8">
@@ -29,14 +29,14 @@
       <gearDisplay controller="ctrlState" pages="1,2"/>
       <Button title="返回" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="0"/>
     </component>
-    <component id="n196_j87q" name="BtnCreate" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="860,20" size="200,70" group="n72_mz80" controller="ctrlBgColor,4">
+    <component id="n196_j87q" name="btn_create" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="860,20" size="200,70" group="n72_mz80" controller="ctrlBgColor,4">
       <Button title="生成" titleFontSize="45"/>
     </component>
-    <component id="n369_tqik" name="BtnClear" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="649,20" size="200,70" group="n72_mz80" controller="ctrlBgColor,1">
+    <component id="n369_tqik" name="btn_clear" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="649,20" size="200,70" group="n72_mz80" controller="ctrlBgColor,1">
       <Button title="清除" titleFontSize="45"/>
     </component>
-    <component id="n247_tqik" name="BtnPercent" src="j87q1w" fileName="Component/BtnCheck.xml" xy="421,32" group="n72_mz80">
-      <Button checked="true" title="带有百分制" titleFontSize="35" controller="c1" page="1"/>
+    <component id="n247_tqik" name="btn_percent" src="j87q1w" fileName="Component/BtnCheck.xml" xy="421,32" group="n72_mz80">
+      <Button title="带有百分制" titleFontSize="35" controller="c1" page="1"/>
     </component>
     <text id="n75_mz80" name="n75" xy="96,159" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="攻击"/>
     <text id="n76_j87q" name="n76" xy="96,217" size="74,48" group="n105_j87q" fontSize="35" color="#ffffff" text="防御"/>
@@ -185,91 +185,91 @@
     <text id="n190_j87q" name="Ipt27" xy="171,1722" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
     <text id="n193_j87q" name="Ipt28" xy="171,1780" size="200,48" group="n195_j87q" fontSize="35" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
     <group id="n195_j87q" name="n195" xy="171,150" size="200,1678" group="n248_tqik"/>
-    <component id="n197_j87q" name="BtnCheck0" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,156" group="n226_j87q">
+    <component id="n197_j87q" name="btn_check1" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,156" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n198_j87q" name="BtnCheck1" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,214" group="n226_j87q">
+    <component id="n198_j87q" name="btn_check2" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,214" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n199_j87q" name="BtnCheck2" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,272" group="n226_j87q">
+    <component id="n199_j87q" name="btn_check3" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,272" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n200_j87q" name="BtnCheck3" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,330" group="n226_j87q">
+    <component id="n200_j87q" name="btn_check4" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,330" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n201_j87q" name="BtnCheck4" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,388" group="n226_j87q">
+    <component id="n201_j87q" name="btn_check5" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,388" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n202_j87q" name="BtnCheck5" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,446" group="n226_j87q">
+    <component id="n202_j87q" name="btn_check6" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,446" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n203_j87q" name="BtnCheck6" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,504" group="n226_j87q">
+    <component id="n203_j87q" name="btn_check7" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,504" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n204_j87q" name="BtnCheck7" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,562" group="n226_j87q">
+    <component id="n204_j87q" name="btn_check8" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,562" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n205_j87q" name="BtnCheck8" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,620" group="n226_j87q">
+    <component id="n205_j87q" name="btn_check9" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,620" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n206_j87q" name="BtnCheck9" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,678" group="n226_j87q">
+    <component id="n206_j87q" name="btn_check10" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,678" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n207_j87q" name="BtnCheck10" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,736" group="n226_j87q">
+    <component id="n207_j87q" name="btn_check11" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,736" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n208_j87q" name="BtnCheck11" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,794" group="n226_j87q">
+    <component id="n208_j87q" name="btn_check12" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,794" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n209_j87q" name="BtnCheck12" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,852" group="n226_j87q">
+    <component id="n209_j87q" name="btn_check13" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,852" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n210_j87q" name="BtnCheck13" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,910" group="n226_j87q">
+    <component id="n210_j87q" name="btn_check14" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,910" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n211_j87q" name="BtnCheck14" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,968" group="n226_j87q">
+    <component id="n211_j87q" name="btn_check15" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,968" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n212_j87q" name="BtnCheck15" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1026" group="n226_j87q">
+    <component id="n212_j87q" name="btn_check16" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1026" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n213_j87q" name="BtnCheck16" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1084" group="n226_j87q">
+    <component id="n213_j87q" name="btn_check17" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1084" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n214_j87q" name="BtnCheck17" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1142" group="n226_j87q">
+    <component id="n214_j87q" name="btn_check18" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1142" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n215_j87q" name="BtnCheck18" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1200" group="n226_j87q">
+    <component id="n215_j87q" name="btn_check19" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1200" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n216_j87q" name="BtnCheck19" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1258" group="n226_j87q">
+    <component id="n216_j87q" name="btn_check20" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1258" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n217_j87q" name="BtnCheck20" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1316" group="n226_j87q">
+    <component id="n217_j87q" name="btn_check21" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1316" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n218_j87q" name="BtnCheck21" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1374" group="n226_j87q">
+    <component id="n218_j87q" name="btn_check22" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1374" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n219_j87q" name="BtnCheck22" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1432" group="n226_j87q">
+    <component id="n219_j87q" name="btn_check23" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1432" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n220_j87q" name="BtnCheck23" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1490" group="n226_j87q">
+    <component id="n220_j87q" name="btn_check24" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1490" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n221_j87q" name="BtnCheck24" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1548" group="n226_j87q">
+    <component id="n221_j87q" name="btn_check25" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1548" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n222_j87q" name="BtnCheck25" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1606" group="n226_j87q">
+    <component id="n222_j87q" name="btn_check26" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1606" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n223_j87q" name="BtnCheck26" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1664" group="n226_j87q">
+    <component id="n223_j87q" name="btn_check27" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1664" group="n226_j87q">
       <Button titleFontSize="35"/>
     </component>
-    <component id="n224_j87q" name="BtnCheck27" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1722" group="n226_j87q">
+    <component id="n224_j87q" name="btn_check28" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1722" group="n226_j87q">
       <Button checked="true" titleFontSize="35"/>
     </component>
-    <component id="n225_j87q" name="BtnCheck28" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1780" group="n226_j87q">
+    <component id="n225_j87q" name="btn_check0" src="j87q1w" fileName="Component/BtnCheck.xml" xy="376,1780" group="n226_j87q">
       <Button checked="true" titleFontSize="35"/>
     </component>
     <group id="n226_j87q" name="n226" xy="376,156" size="40,1664" group="n248_tqik" advanced="true" layout="vt" lineGap="18" excludeInvisibles="true">
@@ -285,13 +285,13 @@
     <graph id="n280_tqik" name="n280" xy="726,211" size="200,51" group="n337_tqik" touchable="false" type="rect" lineSize="0">
       <relation target="n309_tqik" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <text id="n308_tqik" name="Ipt31" xy="726,156" size="200,51" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
-    <text id="n309_tqik" name="Ipt32" xy="726,217" size="200,51" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n308_tqik" name="input_31" xy="726,156" size="200,51" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
+    <text id="n309_tqik" name="input_32" xy="726,217" size="200,51" group="n337_tqik" fontSize="30" autoSize="none" singleLine="true" text="" input="true" keyboardType="4"/>
     <group id="n337_tqik" name="n337" xy="726,150" size="200,118" group="n368_tqik"/>
-    <component id="n338_tqik" name="BtnCheck31" src="j87q1w" fileName="Component/BtnCheck.xml" xy="931,156" size="40,44" group="n367_tqik">
+    <component id="n338_tqik" name="btn_check31" src="j87q1w" fileName="Component/BtnCheck.xml" xy="931,156" size="40,44" group="n367_tqik">
       <Button checked="true" titleFontSize="35"/>
     </component>
-    <component id="n339_tqik" name="BtnCheck32" src="j87q1w" fileName="Component/BtnCheck.xml" xy="931,218" size="40,45" group="n367_tqik">
+    <component id="n339_tqik" name="btn_check32" src="j87q1w" fileName="Component/BtnCheck.xml" xy="931,218" size="40,45" group="n367_tqik">
       <Button checked="true" titleFontSize="35"/>
     </component>
     <group id="n367_tqik" name="n367" xy="931,156" size="40,107" group="n368_tqik" advanced="true" layout="vt" lineGap="18" excludeInvisibles="true">
@@ -301,32 +301,32 @@
     <group id="n72_mz80" name="n72" xy="26,20" size="1034,1811" advanced="true">
       <gearDisplay controller="ctrlState" pages="1"/>
     </group>
-    <component id="n227_j87q" name="BtnAdd" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="392,379" size="216,81" group="n228_j87q" controller="ctrlBgColor,4">
+    <component id="n227_j87q" name="btn_add" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="392,379" size="216,81" group="n228_j87q" controller="ctrlBgColor,4">
       <Button title="添加" titleFontSize="50"/>
     </component>
-    <component id="n246_j87q" name="BtnSubmit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="620,379" size="216,81" group="n228_j87q" controller="ctrlBgColor,0">
+    <component id="n246_j87q" name="btn_submit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="620,379" size="216,81" group="n228_j87q" controller="ctrlBgColor,0">
       <Button title="确定" titleFontSize="50"/>
     </component>
-    <component id="n236_j87q" name="BtnRemove" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="392,470" size="189,81" group="n228_j87q" controller="ctrlBgColor,1">
+    <component id="n236_j87q" name="btn_remove" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="392,470" size="189,81" group="n228_j87q" controller="ctrlBgColor,1">
       <Button title="删除" titleFontSize="50"/>
     </component>
-    <component id="n239_j87q" name="BtnRemoveAll" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="595,470" size="241,81" group="n228_j87q" controller="ctrlBgColor,1">
+    <component id="n239_j87q" name="btn_removeAll" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="595,470" size="241,81" group="n228_j87q" controller="ctrlBgColor,1">
       <Button title="删除全部" titleFontSize="50"/>
     </component>
     <text id="n232_j87q" name="n232" xy="232,163" size="104,66" group="n228_j87q" fontSize="50" color="#ffffff" text="物品"/>
     <text id="n229_j87q" name="n229" xy="232,268" size="104,66" group="n228_j87q" fontSize="50" color="#ffffff" text="数量"/>
-    <richtext id="n235_j87q" name="TxtContent" xy="231,604" size="605,258" group="n228_j87q" fontSize="50" color="#ffffff" ubb="true" autoSize="none" autoClearText="true" text="你好、&#xA;你好、&#xA;你好、&#xA;你好、"/>
+    <richtext id="n235_j87q" name="txt_content" xy="231,604" size="605,258" group="n228_j87q" fontSize="50" color="#ffffff" ubb="true" autoSize="none" autoClearText="true" text="你好、&#xA;你好、&#xA;你好、&#xA;你好、"/>
     <graph id="n233_j87q" name="n233" xy="343,259" size="495,66" group="n228_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n234_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n243_j87q" name="CmbItem" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="343,154" size="344,72" group="n228_j87q">
+    <component id="n243_j87q" name="cmb_item" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="343,154" size="344,72" group="n228_j87q">
       <ComboBox visibleItemCount="10" direction="down"/>
     </component>
-    <text id="n234_j87q" name="Ipt30" xy="343,265" size="495,66" group="n228_j87q" fontSize="50" autoSize="none" singleLine="true" text="1" input="true" restrict="0-9" keyboardType="4"/>
+    <text id="n234_j87q" name="input_30" xy="343,265" size="495,66" group="n228_j87q" fontSize="50" autoSize="none" singleLine="true" text="1" input="true" restrict="0-9" keyboardType="4"/>
     <graph id="n244_j87q" name="n244" xy="696,156" size="142,66" group="n228_j87q" touchable="false" type="rect" lineSize="0">
       <relation target="n245_j87q" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <text id="n245_j87q" name="Ipt29" xy="696,162" size="142,66" group="n228_j87q" fontSize="50" autoSize="none" singleLine="true" text="0" input="true" restrict="0-9" keyboardType="4"/>
+    <text id="n245_j87q" name="input_29" xy="696,162" size="142,66" group="n228_j87q" fontSize="50" autoSize="none" singleLine="true" text="0" input="true" restrict="0-9" keyboardType="4"/>
     <group id="n228_j87q" name="n228" xy="231,154" size="607,708" advanced="true">
       <gearDisplay controller="ctrlState" pages="2"/>
     </group>

@@ -11,14 +11,14 @@
     <graph id="n12_qjdo" name="n12" xy="457,1058" size="304,60" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
       <relation target="n3_qjdo" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n13_qjdo" name="BtnLogin" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="561,1166" size="200,75" group="n4_qjdo">
+    <component id="n13_qjdo" name="btn_login" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="561,1166" size="200,75" group="n4_qjdo">
       <Button title="登录" titleColor="#ffffff" titleFontSize="45"/>
     </component>
-    <component id="n15_sbd0" name="BtnLoginRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="317,1166" size="200,75" group="n4_qjdo">
+    <component id="n15_sbd0" name="btn_loginRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="317,1166" size="200,75" group="n4_qjdo">
       <Button title="注册" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="1"/>
     </component>
-    <text id="n2_qjdo" name="TxtAccount" xy="457,987" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
-    <text id="n3_qjdo" name="TxtPassword" xy="457,1066" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n2_qjdo" name="input_account" xy="457,987" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
+    <text id="n3_qjdo" name="input_password" xy="457,1066" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
     <text id="n5_qjdo" name="n5" xy="317,989" size="139,60" group="n4_qjdo" fontSize="45" color="#ffffff" text="账号："/>
     <text id="n6_qjdo" name="n6" xy="317,1065" size="139,60" group="n4_qjdo" fontSize="45" color="#ffffff" text="密码："/>
     <text id="n14_qjdo" name="n14" xy="238,679" pivot="0.5,0.5" size="604,254" group="n4_qjdo" scale="1.2,1.2" fontSize="200" color="#ffffff" text="修仙传"/>
@@ -35,15 +35,15 @@
     <graph id="n28_sbd0" name="n28" xy="457,1058" size="304,60" group="n24_sbd0" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
       <relation target="n22_sbd0" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n29_sbd0" name="BtnRegisterBack" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="318,1164" size="200,75" group="n24_sbd0">
+    <component id="n29_sbd0" name="btn_registerBack" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="318,1164" size="200,75" group="n24_sbd0">
       <Button title="返回" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="0"/>
     </component>
-    <component id="n25_sbd0" name="BtnRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="561,1164" size="200,75" group="n24_sbd0">
+    <component id="n25_sbd0" name="btn_register" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="561,1164" size="200,75" group="n24_sbd0">
       <Button title="注册" titleColor="#ffffff" titleFontSize="45"/>
     </component>
-    <text id="n18_sbd0" name="TxtRegisterAccount" xy="457,890" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
-    <text id="n19_sbd0" name="TxtRegisterPassword" xy="457,977" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
-    <text id="n22_sbd0" name="TxtRegisterName" xy="457,1066" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n18_sbd0" name="input_rAccount" xy="457,890" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
+    <text id="n19_sbd0" name="input_rPassword" xy="457,977" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n22_sbd0" name="input_rName" xy="457,1066" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" autoSize="none" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
     <text id="n20_sbd0" name="n20" xy="318,887" size="139,60" group="n24_sbd0" fontSize="45" color="#ffffff" text="账号："/>
     <text id="n21_sbd0" name="n21" xy="318,974" size="139,60" group="n24_sbd0" fontSize="45" color="#ffffff" text="密码："/>
     <text id="n23_sbd0" name="n23" xy="318,1063" size="139,60" group="n24_sbd0" fontSize="45" color="#ffffff" text="名字："/>

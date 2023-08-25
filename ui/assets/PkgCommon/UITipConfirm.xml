@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" designImageOffsetX="-781" designImageAlpha="100">
   <displayList>
-    <graph id="n0_sbd0" name="BtnBg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+    <graph id="n0_sbd0" name="graph_bg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <graph id="n1_sbd0" name="n1" xy="140,664" size="800,592" group="n10_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115"/>
@@ -11,14 +11,14 @@
     <graph id="n3_sbd0" name="n3" xy="140,1156" size="800,100" group="n10_sbd0" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
       <relation target="n1_sbd0" sidePair="width-width,bottom-bottom"/>
     </graph>
-    <component id="n7_sbd0" name="BtnConfirm" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="461,1172" size="157,69" group="n10_sbd0" controller="ctrlBgColor,7">
+    <component id="n7_sbd0" name="btn_confirm" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="461,1172" size="157,69" group="n10_sbd0" controller="ctrlBgColor,7">
       <relation target="n1_sbd0" sidePair="bottom-bottom"/>
       <Button title="确定" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <richtext id="n8_sbd0" name="TxtContent" xy="540,961" pivot="0.5,0.5" anchor="true" size="716,54" group="n10_sbd0" touchable="false" fontSize="40" color="#e7c235" vAlign="middle" ubb="true" autoSize="height" text="消耗">
+    <richtext id="n8_sbd0" name="txt_content" xy="540,961" pivot="0.5,0.5" anchor="true" size="716,54" group="n10_sbd0" touchable="false" fontSize="40" color="#e7c235" vAlign="middle" ubb="true" autoSize="height" text="消耗">
       <relation target="n1_sbd0" sidePair="center-center,middle-middle"/>
     </richtext>
-    <text id="n9_sbd0" name="TxtTitle" xy="483,689" size="114,73" group="n10_sbd0" fontSize="55" color="#ffffff" text="提示">
+    <text id="n9_sbd0" name="txt_title" xy="483,689" size="114,73" group="n10_sbd0" fontSize="55" color="#ffffff" text="提示">
       <relation target="n1_sbd0" sidePair="center-center"/>
     </text>
     <group id="n10_sbd0" name="n10" xy="140,664" size="800,592" advanced="true">
