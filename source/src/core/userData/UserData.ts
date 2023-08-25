@@ -1,5 +1,4 @@
 import { GameUtil } from "../common/GameUtil";
-import { Event } from "../libs/event/EventManager";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
@@ -283,7 +282,7 @@ class UserData extends Observer implements IUserData {
         return result;
     }
 
-    @Event(NetMessage.SyncInfo)
+    @RegisterEvent(NetMessage.SyncInfo)
     private syncInfo(data: IUserData) {
         Object.keys(data).forEach(v => {
             const oldValue = this[ v ];
@@ -315,6 +314,5 @@ class UserData extends Observer implements IUserData {
     }
 }
 
-export type UserDataType = UserData;
 export const userData = new UserData();
 windowImmit("userData", userData);

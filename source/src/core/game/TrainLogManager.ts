@@ -1,5 +1,4 @@
 import { GameEvent } from "../common/GameEvent";
-import { Event } from "../libs/event/EventManager";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
@@ -27,14 +26,14 @@ class TrainLogManager extends Observer {
         this.addLog(logs[ MathUtil.RandomInt(0, logs.length - 1) ]);
     }
 
-    @Event(GameEvent.AddExperienceLog)
+    @RegisterEvent(GameEvent.AddExperienceLog)
     private addLog(log: string | string[]) {
         if (Array.isArray(log)) this._logs.push(...log);
         else this._logs.push(log);
         Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);
     }
 
-    @Event(GameEvent.ClearExperienceLog)
+    @RegisterEvent(GameEvent.ClearExperienceLog)
     private clearLog() {
         this._logs.length = 0;
         Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);
