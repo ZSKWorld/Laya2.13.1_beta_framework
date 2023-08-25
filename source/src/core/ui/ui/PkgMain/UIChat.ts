@@ -1,13 +1,15 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+
 export default class UIChat extends fgui.GComponent {
 
 	public state:fgui.Controller;
-	public ListMsg:fgui.GList;
-	public ListFriend:fgui.GList;
-	public InputMsg:fgui.GTextInput;
-	public BtnSend:fgui.GButton;
-	public BtnBack:fgui.GButton;
+	public list_msg:fgui.GList;
+	public list_friend:fgui.GList;
+	public input_msg:fgui.GTextInput;
+	public btn_send:BtnCornerTxt;
+	public btn_back:fgui.GButton;
 	public static URL:string = "ui://vith2b66o7722c";
 
 	public static createInstance():UIChat {
@@ -16,10 +18,10 @@ export default class UIChat extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.state = this.getControllerAt(0);
-		this.ListMsg = <fgui.GList>(this.getChildAt(1));
-		this.ListFriend = <fgui.GList>(this.getChildAt(2));
-		this.InputMsg = <fgui.GTextInput>(this.getChildAt(3));
-		this.BtnSend = <fgui.GButton>(this.getChildAt(4));
-		this.BtnBack = <fgui.GButton>(this.getChildAt(5));
+		this.list_msg = <fgui.GList>(this.getChildAt(1));
+		this.list_friend = <fgui.GList>(this.getChildAt(2));
+		this.input_msg = <fgui.GTextInput>(this.getChildAt(3));
+		this.btn_send = <BtnCornerTxt>(this.getChildAt(4));
+		this.btn_back = <fgui.GButton>(this.getChildAt(5));
 	}
 }

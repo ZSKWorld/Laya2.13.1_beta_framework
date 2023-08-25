@@ -1,22 +1,26 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import Pro1 from "../PkgCommon/Pro1";
+import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import CmbDongFu from "../PkgMain/CmbDongFu";
+
 export default class UIBattle extends fgui.GComponent {
 
 	public ctrlState:fgui.Controller;
-	public ProWave:fgui.GProgressBar;
-	public ProExp:fgui.GProgressBar;
-	public ProSelfHp:fgui.GProgressBar;
-	public ProEnemyHp:fgui.GProgressBar;
-	public TxtSelfName:fgui.GTextField;
-	public TxtEnemyName:fgui.GTextField;
-	public TxtInfo:fgui.GRichTextField;
-	public ListItem:fgui.GList;
-	public BtnOffline:fgui.GButton;
-	public BtnEnemyInfo:fgui.GButton;
-	public BtnQuitBattle:fgui.GButton;
-	public CmbBeiSu:fgui.GComboBox;
-	public BtnCloseInfo:fgui.GGraph;
-	public TxtEnemy:fgui.GTextField;
+	public pro_wave:Pro1;
+	public pro_exp:Pro1;
+	public pro_selfHp:Pro1;
+	public pro_enemyHp:Pro1;
+	public txt_selfName:fgui.GTextField;
+	public txt_enemyName:fgui.GTextField;
+	public txt_info:fgui.GRichTextField;
+	public list_log:fgui.GList;
+	public btn_offline:BtnCornerTxt;
+	public btn_enemyInfo:BtnCornerTxt;
+	public btn_quitBattle:BtnCornerTxt;
+	public cmb_beiSu:CmbDongFu;
+	public graph_closeInfo:fgui.GGraph;
+	public txt_enemy:fgui.GTextField;
 	public static URL:string = "ui://va1qbl3hsbd00";
 
 	public static createInstance():UIBattle {
@@ -25,19 +29,19 @@ export default class UIBattle extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.ctrlState = this.getControllerAt(0);
-		this.ProWave = <fgui.GProgressBar>(this.getChildAt(3));
-		this.ProExp = <fgui.GProgressBar>(this.getChildAt(4));
-		this.ProSelfHp = <fgui.GProgressBar>(this.getChildAt(5));
-		this.ProEnemyHp = <fgui.GProgressBar>(this.getChildAt(6));
-		this.TxtSelfName = <fgui.GTextField>(this.getChildAt(7));
-		this.TxtEnemyName = <fgui.GTextField>(this.getChildAt(8));
-		this.TxtInfo = <fgui.GRichTextField>(this.getChildAt(9));
-		this.ListItem = <fgui.GList>(this.getChildAt(10));
-		this.BtnOffline = <fgui.GButton>(this.getChildAt(11));
-		this.BtnEnemyInfo = <fgui.GButton>(this.getChildAt(12));
-		this.BtnQuitBattle = <fgui.GButton>(this.getChildAt(13));
-		this.CmbBeiSu = <fgui.GComboBox>(this.getChildAt(14));
-		this.BtnCloseInfo = <fgui.GGraph>(this.getChildAt(15));
-		this.TxtEnemy = <fgui.GTextField>(this.getChildAt(16));
+		this.pro_wave = <Pro1>(this.getChildAt(3));
+		this.pro_exp = <Pro1>(this.getChildAt(4));
+		this.pro_selfHp = <Pro1>(this.getChildAt(5));
+		this.pro_enemyHp = <Pro1>(this.getChildAt(6));
+		this.txt_selfName = <fgui.GTextField>(this.getChildAt(7));
+		this.txt_enemyName = <fgui.GTextField>(this.getChildAt(8));
+		this.txt_info = <fgui.GRichTextField>(this.getChildAt(9));
+		this.list_log = <fgui.GList>(this.getChildAt(10));
+		this.btn_offline = <BtnCornerTxt>(this.getChildAt(11));
+		this.btn_enemyInfo = <BtnCornerTxt>(this.getChildAt(12));
+		this.btn_quitBattle = <BtnCornerTxt>(this.getChildAt(13));
+		this.cmb_beiSu = <CmbDongFu>(this.getChildAt(14));
+		this.graph_closeInfo = <fgui.GGraph>(this.getChildAt(15));
+		this.txt_enemy = <fgui.GTextField>(this.getChildAt(16));
 	}
 }

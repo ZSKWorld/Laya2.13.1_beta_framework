@@ -1,12 +1,14 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+
 export default class RenderChooseBattle extends fgui.GButton {
 
 	public ctrlState:fgui.Controller;
-	public TxtContent1:fgui.GRichTextField;
-	public TxtContent2:fgui.GRichTextField;
-	public TxtContent3:fgui.GTextField;
-	public BtnBreak:fgui.GButton;
+	public txt_content1:fgui.GRichTextField;
+	public txt_content2:fgui.GRichTextField;
+	public txt_content3:fgui.GTextField;
+	public btn_break:BtnCornerTxt;
 	public static URL:string = "ui://va1qbl3hsbd0u";
 
 	public static createInstance():RenderChooseBattle {
@@ -15,9 +17,9 @@ export default class RenderChooseBattle extends fgui.GButton {
 
 	protected override onConstruct():void {
 		this.ctrlState = this.getControllerAt(0);
-		this.TxtContent1 = <fgui.GRichTextField>(this.getChildAt(2));
-		this.TxtContent2 = <fgui.GRichTextField>(this.getChildAt(3));
-		this.TxtContent3 = <fgui.GTextField>(this.getChildAt(4));
-		this.BtnBreak = <fgui.GButton>(this.getChildAt(5));
+		this.txt_content1 = <fgui.GRichTextField>(this.getChildAt(2));
+		this.txt_content2 = <fgui.GRichTextField>(this.getChildAt(3));
+		this.txt_content3 = <fgui.GTextField>(this.getChildAt(4));
+		this.btn_break = <BtnCornerTxt>(this.getChildAt(5));
 	}
 }

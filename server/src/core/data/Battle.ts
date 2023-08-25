@@ -1,6 +1,6 @@
 import { GameUtil } from "../../utils/GameUtil";
 
-class BattleData implements IBattleData {
+class BattleData implements IBattleItem {
     constructor() {
         GameUtil.cantSyncObj(this);
     }
@@ -8,13 +8,13 @@ class BattleData implements IBattleData {
 
 export class Battle implements IBattle {
     /**关卡数据 */
-    level: IBattleData = new BattleData();
+    level = new BattleData();
     /**副本数据 */
-    copy: IBattleData = new BattleData();
+    copy = new BattleData();
     /**秘境数据 */
-    secret: IBattleData = new BattleData();
+    secret = new BattleData();
     /**boss数据 */
-    boss: IBattleData = new BattleData();
+    boss = new BattleData();
     encode(): IBattle {
         return this;
     }

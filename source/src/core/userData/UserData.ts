@@ -1,127 +1,22 @@
 import { GameUtil } from "../common/GameUtil";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
-import { Logger } from "../libs/utils/Logger";
 import { UpperFirst } from "../libs/utils/Util";
 import { BaseDataType, DataType, EquipmentPart, ItemBagType } from "../net/enum/ItemEnum";
 import { NetMessage } from "../net/enum/NetMessage";
-import { tableMgr } from "../table/TableManager";
-import { Equipment, ItemBase } from "./proxy/ItemData";
+import { Equipment, ItemBase } from "./ItemData";
 
-const logger = Logger.Create("UserData", true);
 
-class UserData extends Observer implements IUserData {
+export class UserData extends Observer implements IUserData {
 
     //#region Properties
-    uid: string;
-    /** 昵称 */
-    nickname: string;
-    /** 账号 */
-    account: string;
-    /** 密码 */
-    password: string;
-    /** 注册时间戳 */
-    registerTime: number;
-    /** 最后一次登录时间戳 */
-    lastLoginTime: number;
-    /** 最后一次在线时间 */
-    lastOnlineTime: number;
-    /** 好友列表 */
-    friends: string[];
-    /** 离线数据 */
-    offline?: IOffline;
-    /** 金币 */
-    coin: number;
-    /** 元宝 */
-    vcoin: number;
-    /** 精力 */
-    vigor: number;
-    /** 境界 */
-    jingJie: number;
-    /** 层数 */
-    cengJi: number;
-    /** 经验 */
-    exp: number;
-    /** 魔核 */
-    moHe: number;
-    /** 魔币 */
-    moBi: number;
-    /** 灵石 */
-    spiritStones: number;
-    /** 称号id */
-    title: number;
-    /** 帮会id */
-    society: number;
-    /** 门派id */
-    sect: number;
-    /** 魂魄 */
-    soul: number;
-    /** 宝石积分 */
-    gemScore: number;
-    /** 武器 */
-    weapon: Equipment;
-    /** 头盔 */
-    helmet: Equipment;
-    /** 项链 */
-    necklace: Equipment;
-    /** 衣服 */
-    clothes: Equipment;
-    /** 戒指 */
-    ring: Equipment;
-    /** 裤子 */
-    trousers: Equipment;
-    /** 护符 */
-    amulet: Equipment;
-    /** 鞋子 */
-    shoes: Equipment;
-    /** 坐骑 */
-    mount: Equipment;
-    /** 暗器 */
-    hiddenWeeapon: Equipment;
-    /** 时装 */
-    fashion: Equipment;
-    /** 法宝 */
-    magicWeapon: Equipment;
-    /** 武器上装备的宝石 */
-    weaponGems: number[];
-    /** 头盔上装备的宝石 */
-    helmetGems: number[];
-    /** 项链上装备的宝石 */
-    necklaceGems: number[];
-    /** 衣服上装备的宝石 */
-    clothesGems: number[];
-    /** 戒指上装备的宝石 */
-    ringGems: number[];
-    /** 裤子上装备的宝石 */
-    trousersGems: number[];
-    /** 护符上装备的宝石 */
-    amuletGems: number[];
-    /** 鞋子上装备的宝石 */
-    shoesGems: number[];
-    /**关卡数据 */
-    level: KeyData;
-    /**副本数据 */
-    copy: KeyData;
-    /**秘境数据 */
-    secret: KeyData;
-    /**boss数据 */
-    boss: KeyData;
-    /**心法数据 */
-    citta: KeyData;
-    /**技能数据 */
-    skill: number[];
-    /**出战技能 */
-    usingSkill: number[];
-
-    //#region BagData
-    collect: number[];
-    equipment: Equipment[];
-    gem: IItemBase[];
-    prop: IItemBase[];
-    material: IItemBase[];
-    book: IItemBase[];
-    other: IItemBase[];
-    //#endregion
+    account: IAccountData;
+    base: IBaseData;
+    offline?: IOfflineData;
+    friend: IFriendData;
+    bag: IBagData;
+    body: IBodyData;
+    battle: IBattleData;
     //#endregion
 
     /** 升级经验 */
@@ -131,7 +26,7 @@ class UserData extends Observer implements IUserData {
     get maxVigro() {
         let xinFaJL = 0;
         const citta = this.citta;
-        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * tableMgr.XinFaBook[ v ].JLAdd));
+        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLAdd));
         return Math.floor(86400 + xinFaJL);
     }
 
@@ -139,12 +34,12 @@ class UserData extends Observer implements IUserData {
     get jingLiHuiFu() {
         let xinFaJLHF = 0;
         const citta = this.citta;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLHFAdd));
         return 1 + xinFaJLHF;
     }
 
     getItemCount(id: number): number {
-        const item = tableMgr.Item[ id ];
+        const item = cfgMgr.Item[ id ];
         switch (item.DataType) {
             case DataType.BaseData:
                 switch (id) {
@@ -207,7 +102,7 @@ class UserData extends Observer implements IUserData {
             `;
             const gems = hasGem ? this.getEquipGems(equip.part) : null;
             if (gems) {
-                const tableItem = tableMgr.Item;
+                const tableItem = cfgMgr.Item;
                 const [ gem0, gem1, gem2, gem3 ] = gems;
                 const { Quality: quality0, Name: name0 } = gem0 ? tableItem[ gem0 ] : {} as any;
                 const { Quality: quality1, Name: name1 } = gem1 ? tableItem[ gem1 ] : {} as any;
@@ -227,26 +122,26 @@ class UserData extends Observer implements IUserData {
 
     /** 副本剩余次数 */
     getCopyTime(copyId: number) {
-        return tableMgr.FuBen[ copyId ].BattleCount - (this.copy[ copyId ] ?? 0);
+        return cfgMgr.FuBen[ copyId ].BattleCount - (this.copy[ copyId ] ?? 0);
     }
 
     /** 秘境剩余次数 */
     getSecretTime(secretId: number) {
-        return tableMgr.MiJing[ secretId ].BattleCount - (this.secret[ secretId ] ?? 0);
+        return cfgMgr.MiJing[ secretId ].BattleCount - (this.secret[ secretId ] ?? 0);
     }
 
     /** 获取boss剩余冷却时间 */
     getBossCoolDown(bossId: number) {
-        return Math.max(tableMgr.Boss[ bossId ].CoolTime - Math.floor(GameUtil.GetServerTime() / 1000 - (this.boss[ bossId ] ?? 0)), 0);
+        return Math.max(cfgMgr.Boss[ bossId ].CoolTime - Math.floor(GameUtil.GetServerTime() / 1000 - (this.boss[ bossId ] ?? 0)), 0);
     }
 
 
     isCollect(id: number) { return this.collect.includes(id); }
 
     getItem(id: number) {
-        const item = tableMgr.Item[ id ];
+        const item = cfgMgr.Item[ id ];
         if (!item) return null;
-        let datas: IItemBase[];
+        let datas: IItemBaseData[];
         switch (item.BagType) {
             case ItemBagType.Prop: datas = this.prop; break;
             case ItemBagType.Gem: datas = this.gem; break;
@@ -273,7 +168,7 @@ class UserData extends Observer implements IUserData {
 
 
     private getEquipStartStr(star: number) {
-        const maxStar = +tableMgr.Const[ 1010 ].Value;
+        const maxStar = +cfgMgr.Const[ 1010 ].Value;
         star = MathUtil.Clamp(star, 0, maxStar);
         let result = "";
         for (let i = 1; i <= maxStar; i++) {
@@ -314,5 +209,4 @@ class UserData extends Observer implements IUserData {
     }
 }
 
-export const userData = new UserData();
 windowImmit("userData", userData);

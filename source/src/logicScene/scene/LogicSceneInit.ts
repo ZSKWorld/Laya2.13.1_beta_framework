@@ -17,7 +17,6 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 
 	protected override getNormalResArray() {
 		return [
-			ResPath.PrescreenPath.Prescreen,
 		];
 	}
 

@@ -2,14 +2,11 @@ import { GameEvent } from "../../../common/GameEvent";
 import { localData } from "../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../libs/localData/LocalDataKey";
 import { MathUtil } from "../../../libs/math/MathUtil";
-import { Logger } from "../../../libs/utils/Logger";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { ViewID } from "../../core/ViewID";
 import { richStrMgr } from "../../tool/RichStrManager";
 import { UIUtility } from "../../tool/UIUtility";
 import { UIMainMsg, UIMainView } from "../../view/PkgMain/UIMainView";
-
-const logger = Logger.Create("UIMainCtrl", true);
 
 export interface UIMainData {
 

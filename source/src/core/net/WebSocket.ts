@@ -1,10 +1,6 @@
 import { GameEvent } from "../common/GameEvent";
 import { Observer } from "../libs/event/Observer";
-import { Logger } from "../libs/utils/Logger";
-import { userData } from "../userData/UserData";
 import { NetMessage } from "./enum/NetMessage";
-
-const logger = Logger.Create("WebSocket", true);
 
 class WebSocket extends Observer {
     private _url: string = "ws://192.168.71.29:8003";

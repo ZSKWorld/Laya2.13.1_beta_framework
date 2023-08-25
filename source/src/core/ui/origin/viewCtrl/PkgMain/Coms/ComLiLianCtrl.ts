@@ -9,8 +9,6 @@ import { UIUtility } from "../../../tool/UIUtility";
 import { ComLiLianMsg, ComLiLianView } from "../../../view/PkgMain/Coms/ComLiLianView";
 import { RenderTextView } from "../../../view/PkgMain/Renders/RenderTextView";
 
-const logger = Logger.Create("ComLiLianCtrl", true);
-
 export interface ComLiLianData {
 
 }

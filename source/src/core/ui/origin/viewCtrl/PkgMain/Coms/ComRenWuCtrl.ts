@@ -8,8 +8,6 @@ import { tipMgr } from "../../../tool/TipManager";
 import { ComRenWuMsg, ComRenWuView } from "../../../view/PkgMain/Coms/ComRenWuView";
 import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
 
-const logger = Logger.Create("ComRenWuCtrl", true);
-
 export interface ComRenWuData {
 
 }

@@ -3,8 +3,6 @@ import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
 import { Logger } from "../libs/utils/Logger";
 
-const logger = Logger.Create("ExperienceLogMgr", true);
-
 /** 历练日志管理器 */
 class TrainLogManager extends Observer {
     private static constLogs = [

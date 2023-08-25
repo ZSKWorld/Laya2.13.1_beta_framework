@@ -1,6 +1,11 @@
 /** This script is generated automatically, Please do not any modify! */export namespace ResPath {
 	export const enum UnclassifiedPath {}
 
+	// res/config/
+	export const enum ConfigPath {
+		Config = "res/config/Config.json",
+	}
+
 	// res/font/
 	export const enum FontName {
 		Font01 = "Font01",
@@ -34,11 +39,6 @@
 		Font12 = "res/font/Font12.ttf",
 		Font13 = "res/font/Font13.ttf",
 		Font14 = "res/font/Font14.ttf",
-	}
-
-	// res/table/
-	export const enum TablePath {
-		Config = "res/table/Config.json",
 	}
 
 	// res/ui/

@@ -2,7 +2,7 @@
 
 export default class RenderChatMsg extends fgui.GComponent {
 
-	public TxtMsg:fgui.GTextField;
+	public txt_msg:fgui.GTextField;
 	public static URL:string = "ui://vith2b66j0ry2d";
 
 	public static createInstance():RenderChatMsg {
@@ -10,6 +10,6 @@ export default class RenderChatMsg extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.TxtMsg = <fgui.GTextField>(this.getChildAt(1));
+		this.txt_msg = <fgui.GTextField>(this.getChildAt(1));
 	}
 }

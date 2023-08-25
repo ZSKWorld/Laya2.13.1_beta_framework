@@ -3,8 +3,8 @@
 export default class RenderBag extends fgui.GButton {
 
 	public bg:fgui.GGraph;
-	public TxtName:fgui.GTextField;
-	public TxtCount:fgui.GTextField;
+	public txt_name:fgui.GTextField;
+	public txt_count:fgui.GTextField;
 	public static URL:string = "ui://vith2b66sbd0z";
 
 	public static createInstance():RenderBag {
@@ -13,7 +13,7 @@ export default class RenderBag extends fgui.GButton {
 
 	protected override onConstruct():void {
 		this.bg = <fgui.GGraph>(this.getChildAt(0));
-		this.TxtName = <fgui.GTextField>(this.getChildAt(2));
-		this.TxtCount = <fgui.GTextField>(this.getChildAt(3));
+		this.txt_name = <fgui.GTextField>(this.getChildAt(2));
+		this.txt_count = <fgui.GTextField>(this.getChildAt(3));
 	}
 }

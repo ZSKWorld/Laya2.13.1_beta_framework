@@ -2,7 +2,7 @@
 
 export default class ComTipInfo extends fgui.GComponent {
 
-	public title:fgui.GRichTextField;
+	public txt_title:fgui.GRichTextField;
 	public t0:fgui.Transition;
 	public static URL:string = "ui://vx9zwsersbd05c";
 
@@ -11,7 +11,7 @@ export default class ComTipInfo extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.title = <fgui.GRichTextField>(this.getChildAt(1));
+		this.txt_title = <fgui.GRichTextField>(this.getChildAt(1));
 		this.t0 = this.getTransitionAt(0);
 	}
 }

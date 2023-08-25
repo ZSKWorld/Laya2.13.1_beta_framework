@@ -15,8 +15,6 @@ interface AddType {
     count: number;
 }
 
-const logger = Logger.Create("UISphereToolCtrl", true);
-
 export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToolData>{
 
     private _adds: AddType[] = [];

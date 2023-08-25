@@ -4,10 +4,10 @@ import BtnCornerTxt from "./BtnCornerTxt";
 
 export default class UITipConfirm extends fgui.GComponent {
 
-	public BtnBg:fgui.GGraph;
-	public BtnConfirm:BtnCornerTxt;
-	public TxtContent:fgui.GRichTextField;
-	public TxtTitle:fgui.GTextField;
+	public graph_bg:fgui.GGraph;
+	public btn_confirm:BtnCornerTxt;
+	public txt_content:fgui.GRichTextField;
+	public txt_title:fgui.GTextField;
 	public EffectShow:fgui.Transition;
 	public static URL:string = "ui://vx9zwsersbd05j";
 
@@ -16,10 +16,10 @@ export default class UITipConfirm extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.BtnBg = <fgui.GGraph>(this.getChildAt(0));
-		this.BtnConfirm = <BtnCornerTxt>(this.getChildAt(4));
-		this.TxtContent = <fgui.GRichTextField>(this.getChildAt(5));
-		this.TxtTitle = <fgui.GTextField>(this.getChildAt(6));
+		this.graph_bg = <fgui.GGraph>(this.getChildAt(0));
+		this.btn_confirm = <BtnCornerTxt>(this.getChildAt(4));
+		this.txt_content = <fgui.GRichTextField>(this.getChildAt(5));
+		this.txt_title = <fgui.GTextField>(this.getChildAt(6));
 		this.EffectShow = this.getTransitionAt(0);
 	}
 }

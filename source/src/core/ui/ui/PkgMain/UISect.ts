@@ -1,22 +1,25 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import Pro1 from "../PkgCommon/Pro1";
+
 export default class UISect extends fgui.GComponent {
 
-	public BtnSect0:fgui.GButton;
-	public BtnSect1:fgui.GButton;
-	public BtnSect2:fgui.GButton;
-	public BtnSect3:fgui.GButton;
-	public BtnSect4:fgui.GButton;
-	public BtnSect5:fgui.GButton;
-	public BtnSubmit:fgui.GButton;
-	public TxtDesc:fgui.GTextField;
-	public ProBar0:fgui.GProgressBar;
-	public ProBar1:fgui.GProgressBar;
-	public ProBar2:fgui.GProgressBar;
-	public ProBar3:fgui.GProgressBar;
-	public ProBar4:fgui.GProgressBar;
-	public ProBar5:fgui.GProgressBar;
-	public ProBar6:fgui.GProgressBar;
+	public btn_sect0:BtnCornerTxt;
+	public btn_sect1:BtnCornerTxt;
+	public btn_sect2:BtnCornerTxt;
+	public btn_sect3:BtnCornerTxt;
+	public btn_sect4:BtnCornerTxt;
+	public btn_sect5:BtnCornerTxt;
+	public btn_submit:BtnCornerTxt;
+	public txt_desc:fgui.GTextField;
+	public pro_0:Pro1;
+	public pro_1:Pro1;
+	public pro_2:Pro1;
+	public pro_3:Pro1;
+	public pro_4:Pro1;
+	public pro_5:Pro1;
+	public pro_6:Pro1;
 	public static URL:string = "ui://vith2b66btv51q";
 
 	public static createInstance():UISect {
@@ -24,20 +27,20 @@ export default class UISect extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.BtnSect0 = <fgui.GButton>(this.getChildAt(1));
-		this.BtnSect1 = <fgui.GButton>(this.getChildAt(2));
-		this.BtnSect2 = <fgui.GButton>(this.getChildAt(3));
-		this.BtnSect3 = <fgui.GButton>(this.getChildAt(4));
-		this.BtnSect4 = <fgui.GButton>(this.getChildAt(5));
-		this.BtnSect5 = <fgui.GButton>(this.getChildAt(6));
-		this.BtnSubmit = <fgui.GButton>(this.getChildAt(7));
-		this.TxtDesc = <fgui.GTextField>(this.getChildAt(8));
-		this.ProBar0 = <fgui.GProgressBar>(this.getChildAt(10));
-		this.ProBar1 = <fgui.GProgressBar>(this.getChildAt(11));
-		this.ProBar2 = <fgui.GProgressBar>(this.getChildAt(12));
-		this.ProBar3 = <fgui.GProgressBar>(this.getChildAt(13));
-		this.ProBar4 = <fgui.GProgressBar>(this.getChildAt(14));
-		this.ProBar5 = <fgui.GProgressBar>(this.getChildAt(15));
-		this.ProBar6 = <fgui.GProgressBar>(this.getChildAt(16));
+		this.btn_sect0 = <BtnCornerTxt>(this.getChildAt(1));
+		this.btn_sect1 = <BtnCornerTxt>(this.getChildAt(2));
+		this.btn_sect2 = <BtnCornerTxt>(this.getChildAt(3));
+		this.btn_sect3 = <BtnCornerTxt>(this.getChildAt(4));
+		this.btn_sect4 = <BtnCornerTxt>(this.getChildAt(5));
+		this.btn_sect5 = <BtnCornerTxt>(this.getChildAt(6));
+		this.btn_submit = <BtnCornerTxt>(this.getChildAt(7));
+		this.txt_desc = <fgui.GTextField>(this.getChildAt(8));
+		this.pro_0 = <Pro1>(this.getChildAt(10));
+		this.pro_1 = <Pro1>(this.getChildAt(11));
+		this.pro_2 = <Pro1>(this.getChildAt(12));
+		this.pro_3 = <Pro1>(this.getChildAt(13));
+		this.pro_4 = <Pro1>(this.getChildAt(14));
+		this.pro_5 = <Pro1>(this.getChildAt(15));
+		this.pro_6 = <Pro1>(this.getChildAt(16));
 	}
 }

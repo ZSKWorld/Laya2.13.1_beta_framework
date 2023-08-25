@@ -1,4 +1,3 @@
-import { Logger } from "../../../libs/utils/Logger";
 import { BaseViewCtrl } from "../../core/BaseViewCtrl";
 import { UITipConfirmMsg, UITipConfirmView } from "../../view/PkgCommon/UITipConfirmView";
 
@@ -7,8 +6,6 @@ export interface UITipConfirmData {
     title?: string;
     callback?: Laya.Handler;
 }
-
-const logger = Logger.Create("UITipConfirmCtrl", true);
 
 export class UITipConfirmCtrl extends BaseViewCtrl<UITipConfirmView, UITipConfirmData>{
     private _confirmDatas: UITipConfirmData[] = [];

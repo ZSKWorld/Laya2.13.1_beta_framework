@@ -1,5 +1,4 @@
 import { ResPath } from "../../core/common/ResPath";
-import { CfgManager } from "../../core/config/CfgManager";
 import { layerMgr, Layer } from "../../core/ui/core/LayerManager";
 import { UserData } from "../../core/userData/UserData";
 import { platformMgr } from "../../platform/PlatformManager";
@@ -13,7 +12,7 @@ export interface ScenePreScreenData {
 
 /** 首屏逻辑场景 */
 export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
-	private _prescreen: fgui.GLoader;
+	// private _prescreen: fgui.GLoader;
 
     protected override getConstResArray() {
         const resArray: string[] = [
@@ -32,22 +31,22 @@ export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
     }
 
     protected onExit() {
-        if (this._prescreen) {
-            this._prescreen.dispose();
-            this._prescreen = null;
-        }
+        // if (this._prescreen) {
+        //     this._prescreen.dispose();
+        //     this._prescreen = null;
+        // }
     }
 
 	private showPreScreen() {
-		if (!this._prescreen) {
-			const groot = fgui.GRoot.inst;
-			const pscreen = this._prescreen = new fgui.GLoader();
-			pscreen.url = ResPath.PrescreenPath.Prescreen;
-			pscreen.setSize(groot.width, groot.height);
-			pscreen.addRelation(groot, fgui.RelationType.Size);
-			pscreen.fill = fgui.LoaderFillType.ScaleFree;
-			layerMgr.addObject(this._prescreen, Layer.Bottom);
-		}
+		// if (!this._prescreen) {
+		// 	const groot = fgui.GRoot.inst;
+		// 	const pscreen = this._prescreen = new fgui.GLoader();
+		// 	pscreen.url = ResPath.PrescreenPath.Prescreen;
+		// 	pscreen.setSize(groot.width, groot.height);
+		// 	pscreen.addRelation(groot, fgui.RelationType.Size);
+		// 	pscreen.fill = fgui.LoaderFillType.ScaleFree;
+		// 	layerMgr.addObject(this._prescreen, Layer.Bottom);
+		// }
 	}
 
 }

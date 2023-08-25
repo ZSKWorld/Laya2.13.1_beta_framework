@@ -1,6 +1,6 @@
 import { MathUtil } from "../libs/math/MathUtil";
 import { AttributeEnum } from "../net/enum/AttributeEnum";
-import { tableMgr } from "../table/TableManager";
+import { tableMgr } from "../config/TableManager";
 import { richStrMgr } from "../ui/tool/RichStrManager";
 /** 玩家数值计算公式 */
 export class UserDataFormula {
