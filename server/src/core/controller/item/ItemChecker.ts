@@ -1,5 +1,4 @@
 import { ErrorCode } from "../../enum/ErrorCode";
-import { tableMgr } from "../../config/TableManager";
 import { ItemHelper } from "./ItemHelper";
 
 export class ItemChecker {
@@ -25,7 +24,7 @@ export class ItemChecker {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
         const item = data.bag.getItem(id);
         if (item == null) return ErrorCode.ITEM_NOT_EXIST;
-        const usableItem = tableMgr.Props[ id ] || tableMgr.Food[ id ] || tableMgr.SkillBook[ id ] || tableMgr.XinFaBook[ id ];
+        const usableItem = cfgMgr.Props[ id ] || cfgMgr.Food[ id ] || cfgMgr.SkillBook[ id ] || cfgMgr.XinFaBook[ id ];
         if (!usableItem) return ErrorCode.ITEM_CAN_NOT_USE;
         else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         else if (ItemHelper.checkJingJieEnough(data, id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
@@ -34,7 +33,7 @@ export class ItemChecker {
                 return ErrorCode.VIGOR_IS_FULL;
         }
         else if (ItemHelper.isSkillBook(id)) {
-            const SectRequire = (<ConfigSkillBookData>usableItem).SectRequire;
+            const SectRequire = (<CfgSkillBookData>usableItem).SectRequire;
             if (SectRequire.length && SectRequire.indexOf(data.base.sect) == -1) return ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL;
             else if (data.base.skill.indexOf(id) != -1) return ErrorCode.SKILL_IS_LEARNED;
         } else if (ItemHelper.isXinFaBook(id)) {
@@ -52,7 +51,7 @@ export class ItemChecker {
      */
     static checkItemSalable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
-        if (!tableMgr.Item[ id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
+        if (!cfgMgr.Item[ id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
         const itemCnt = ItemHelper.getItemCount(data, id);
         if (itemCnt < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         return ErrorCode.NONE;

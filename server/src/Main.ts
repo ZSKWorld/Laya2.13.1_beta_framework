@@ -2,13 +2,12 @@ import * as http from "http";
 import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
-import { tableMgr } from "./core/config/TableManager";
 import { Color, Logger } from "./utils/Logger";
+import { CfgManager } from "./core/config/CfgManager";
 require("../libs/extends.js");
 
 Logger.setEnable(true);
-tableMgr.loadTable();
-
+window[ "cfgMgr" ] = new CfgManager();
 const originConnection: { [ key: string ]: websocket.connection } = {};
 const originConOnMessage = function (conKey: string, msg: websocket.Message) {
     const connect = originConnection[ conKey ];

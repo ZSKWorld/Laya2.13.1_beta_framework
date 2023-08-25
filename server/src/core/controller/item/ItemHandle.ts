@@ -1,6 +1,5 @@
 import { MathUtil } from "../../../utils/MathUtil";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
-import { tableMgr } from "../../config/TableManager";
 import { ItemBase } from "../../data/ItemBase";
 import { ItemHelper } from "./ItemHelper";
 
@@ -13,7 +12,7 @@ export class ItemHandle {
      * @param count 加|减 数量
      */
     static changeItemCount(data: IUser, id: number, count: number) {
-        const item = tableMgr.Item[ id ];
+        const item = cfgMgr.Item[ id ];
         switch (item.DataType) {
             case DataType.BaseData: data.base.changeItemCount(id, count); break;
             case DataType.BagData: data.bag.changeItemCount(id, count); break;
@@ -30,7 +29,7 @@ export class ItemHandle {
      */
     static useItem(data: IUser, id: number, count: number) {
         const [ prop, food, skillBook, xinFaBook ] = [
-            tableMgr.Props[ id ], tableMgr.Food[ id ], tableMgr.SkillBook[ id ], tableMgr.XinFaBook[ id ],
+            cfgMgr.Props[ id ], cfgMgr.Food[ id ], cfgMgr.SkillBook[ id ], cfgMgr.XinFaBook[ id ],
         ];
         if (prop) return this.useProp(data, id, count);
         else if (food) return this.useFood(data, id, count);
@@ -56,7 +55,7 @@ export class ItemHandle {
      */
     static sellItem(data: IUser, id: number, count: number) {
         const rewards: IItemBase[] = [];
-        const sellRewards = tableMgr.Item[ id ].SellRewards;
+        const sellRewards = cfgMgr.Item[ id ].SellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(v => {
                 rewards.push(new ItemBase(v.id, v.count * count));
@@ -88,7 +87,7 @@ export class ItemHandle {
             case 2010: break;
             default:
                 useCount = count;
-                tableMgr.Props[ id ].Rewards.forEach(v => {
+                cfgMgr.Props[ id ].Rewards.forEach(v => {
                     rewards.push(new ItemBase(v.id, v.count * count));
                     if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                     else this.changeItemCount(data, v.id, v.count * count);
@@ -109,7 +108,7 @@ export class ItemHandle {
     private static useFood(data: IUser, id: number, count: number) {
         const maxVigro = data.base.getMaxVigro();
         let useCount = 0;
-        const food = tableMgr.Food[ id ];
+        const food = cfgMgr.Food[ id ];
         let singleRecover = 0;
         switch (food.RecoverType) {
             case FoodRecoverType.NumberRecover: singleRecover = food.RecoverValue; break;

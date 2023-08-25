@@ -1,5 +1,3 @@
-import { tableMgr } from "../../config/TableManager";
-
 export class BaseHelper {
 
     /**
@@ -9,7 +7,7 @@ export class BaseHelper {
      * @returns 等级
      */
     static jingJieToLevel(jingJie: number, cengJi: number) {
-        return (jingJie - 1) * (+tableMgr.Const[ 1005 ].Value) + cengJi;
+        return (jingJie - 1) * (+cfgMgr.Const[ 1005 ].Value) + cengJi;
     }
 
     /**
@@ -20,7 +18,7 @@ export class BaseHelper {
     static levelToJingJie(level: number) {
         let jingJie = 0;
         let cengJi = 0;
-        const maxCengJie = +tableMgr.Const[ 1005 ].Value;
+        const maxCengJie = +cfgMgr.Const[ 1005 ].Value;
         if (level % maxCengJie == 0) {
             jingJie = level / maxCengJie;
             cengJi = maxCengJie;

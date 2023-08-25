@@ -1,4 +1,3 @@
-import { tableMgr } from "../core/config/TableManager";
 
 export class GameUtil {
 

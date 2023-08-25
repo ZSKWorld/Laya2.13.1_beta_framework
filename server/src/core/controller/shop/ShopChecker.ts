@@ -1,5 +1,4 @@
 import { ErrorCode } from "../../enum/ErrorCode";
-import { tableMgr } from "../../config/TableManager";
 import { ItemHelper } from "../item/ItemHelper";
 
 export class ShopChecker {
@@ -12,7 +11,7 @@ export class ShopChecker {
      */
     static checkItemPurchasable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
-        const item = tableMgr.Shop[ id ];
+        const item = cfgMgr.Shop[ id ];
         if (!item) return ErrorCode.GOODS_NOT_EXIST;
         for (let i = 0, n = item.SellPrice.length; i < n; i++) {
             const element = item.SellPrice[ i ];

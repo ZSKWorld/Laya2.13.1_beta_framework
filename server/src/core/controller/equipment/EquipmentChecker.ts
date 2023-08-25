@@ -1,6 +1,5 @@
 import { ErrorCode } from "../../enum/ErrorCode";
 import { EquipmentPart } from "../../enum/ItemEnum";
-import { tableMgr } from "../../config/TableManager";
 import { ItemHelper } from "../item/ItemHelper";
 
 export class EquipmentChecker {
@@ -38,7 +37,7 @@ export class EquipmentChecker {
     static checkEquipSalable(data: IUser, uid: string): ErrorCode {
         const equip = data.bag.getEquip(uid);
         if (!equip) return ErrorCode.ITEM_NOT_EXIST;
-        else if (!tableMgr.Item[ equip.id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
+        else if (!cfgMgr.Item[ equip.id ].Salable) return ErrorCode.ITEM_CAN_NOT_SELL;
         return ErrorCode.NONE;
     }
 }

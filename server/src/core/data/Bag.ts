@@ -1,5 +1,4 @@
 import { DataType, ItemBagType } from "../enum/ItemEnum";
-import { tableMgr } from "../config/TableManager";
 import { Equipment } from "./Equipment";
 import { ItemBase } from "./ItemBase";
 
@@ -68,7 +67,7 @@ export class Bag implements IBag {
     }
 
     getItem(id: number) {
-        const item = tableMgr.Item[ id ];
+        const item = cfgMgr.Item[ id ];
         if (!item) return null;
         let datas: IItemBase[];
         switch (item.BagType) {
@@ -87,7 +86,7 @@ export class Bag implements IBag {
     }
 
     changeItemCount(id: number, count: number) {
-        const item = tableMgr.Item[ id ];
+        const item = cfgMgr.Item[ id ];
         if (item.DataType == DataType.BagData) {
             let datas: IItemBase[];
             switch (item.BagType) {

@@ -1,7 +1,6 @@
 import { Formula } from "../../utils/Formula";
 import { GameUtil } from "../../utils/GameUtil";
 import { BaseDataType } from "../enum/ItemEnum";
-import { tableMgr } from "../config/TableManager";
 class CittaData implements ICittaData {
     constructor() {
         GameUtil.cantSyncObj(this);
@@ -56,14 +55,14 @@ export class Base implements IBase {
     getMaxVigro(): number {
         const { citta } = this;
         let xinFaJL = 0;
-        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * tableMgr.XinFaBook[ v ].JLAdd));
+        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLAdd));
         return Math.floor(86400 + xinFaJL);
     }
 
     getVigorRecoveryRate(): number {
         const { citta } = this;
         let xinFaJLHF = 0;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * tableMgr.XinFaBook[ v ].JLHFAdd));
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLHFAdd));
         return 1 + xinFaJLHF;
     }
 
@@ -98,7 +97,7 @@ export class Base implements IBase {
     }
 
     private getUpgradeExp(): number {
-        if (!tableMgr.JingJie[ this.jingJie + 1 ]) return 0;
+        if (!cfgMgr.JingJie[ this.jingJie + 1 ]) return 0;
         else return Formula.exp(this.jingJie, this.cengJi);
     }
 
@@ -111,8 +110,8 @@ export class Base implements IBase {
                 this.exp -= this.getUpgradeExp();
                 this.cengJi++;
             };
-            const maxCengji = +tableMgr.Const[ 1005 ].Value;
-            if (tableMgr.JingJie[ this.jingJie + 1 ]) {
+            const maxCengji = +cfgMgr.Const[ 1005 ].Value;
+            if (cfgMgr.JingJie[ this.jingJie + 1 ]) {
                 //升境界
                 if (this.cengJi > maxCengji) {
                     this.cengJi -= maxCengji;
