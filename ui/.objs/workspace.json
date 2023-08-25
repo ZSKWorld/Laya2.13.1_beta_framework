@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "gridSize": 10,
+  "snapToGrid": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66sbd010",
@@ -30,6 +30,7 @@
     "ui://vx9zwserirlv60",
     "ui://vx9zwserqjdo1",
     "ui://vith2b66sbd03",
+    "ui://vith2b66qjdo0",
     "ui://vith2b66sbd0z",
     "ui://vith2b66sbd02",
     "ui://vith2b66btv51j",
@@ -44,7 +45,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vith2b66sbd03",
+  "doc.activeDoc": "ui://vith2b66qjdo0",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "vx9zwser",
@@ -63,7 +64,7 @@
     "/Component/Combox/"
   ],
   "showGrid": false,
-  "snapToGrid": true,
+  "gridSize": 10,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
