@@ -3,7 +3,7 @@ import { Observer } from "../libs/event/Observer";
 import { NetMessage } from "./enum/NetMessage";
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.71.29:8003";
+    private _url: string = "ws://192.168.71.29:8007";
     private _socket: Laya.Socket;
     private _waitList: UserInput[];
     private _current: UserInput;
@@ -35,17 +35,17 @@ class WebSocket extends Observer {
     }
 
     private onSocketMessage(message: string): void {
-        let msg: UserOutput = JSON.parse(message);
-        if (msg && !msg.error) {
-            if (msg.syncInfo)
-                this.dispatch(NetMessage.SyncInfo, msg.syncInfo);
-            if (this._current && this._current.cmd == msg.cmd) {
-                msg = Object.assign(msg, this._current);
+        const output: UserOutput = JSON.parse(message);
+        if (output && !output.error) {
+            if (output.syncInfo)
+                this.dispatch(NetMessage.SyncInfo, output.syncInfo);
+            const input = this._current;
+            if (this._current && this._current.cmd == output.cmd) {
                 this._current = null;
             }
-            this.dispatch(`NetMsg_${ msg.cmd[ 0 ].toUpperCase() + msg.cmd.substring(1) }`, msg);
+            this.dispatch(`NetMsg_${ output.cmd[ 0 ].toUpperCase() + output.cmd.substring(1) }`, [output, input]);
         } else {
-            this.dispatch(GameEvent.NetMsgError, msg);
+            this.dispatch(GameEvent.NetMsgError, output);
             this._current = null;
         }
 

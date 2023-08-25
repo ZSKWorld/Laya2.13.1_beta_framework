@@ -27,7 +27,9 @@ declare interface SellItemInput extends UserInput {
     count: number;
 }
 
-declare interface SellItemOutput extends UseItemOutput {
+declare interface SellItemOutput extends UserOutput {
+    /** 获得的奖励 */
+    rewards: IItemBaseData[];
 }
 
 declare interface ChangeCollectInput extends UserInput {

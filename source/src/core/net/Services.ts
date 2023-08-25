@@ -25,9 +25,10 @@ function ServiceInst<T>() {
     }
 }
 
-export const AccountService = ServiceInst<IAccount>();
-export const BattleService = ServiceInst<IBattle>();
-export const FriendService = ServiceInst<IFriend>();
-export const HeartService = ServiceInst<IHeart>();
-export const ItemHandleService = ServiceInst<IItemHandle>();
-export const ShopService = ServiceInst<IShop>();
+export const AccountService = ServiceInst<IAccountCtrl>();
+export const BattleService = ServiceInst<IBattleCtrl>();
+export const EquipmentService = ServiceInst<IEquipmentCtrl>();
+export const FriendService = ServiceInst<IFriendCtrl>();
+export const HeartService = ServiceInst<IHeartCtrl>();
+export const ItemHandleService = ServiceInst<IItemHandleCtrl>();
+export const ShopService = ServiceInst<IShopCtrl>();

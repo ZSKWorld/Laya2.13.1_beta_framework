@@ -31,14 +31,17 @@ declare interface SellEquipInput extends UserInput {
     uid: string;
 }
 
-declare interface SellEquipOutput extends UseItemOutput {
+declare interface SellEquipOutput extends UserOutput {
+    /** 获得的奖励 */
+    rewards: IItemBaseData[];
 }
 
 declare interface DecomposeEquipInput extends UserInput {
     star: number;
 }
 
-declare interface DecomposeEquipOutput extends UseItemOutput {
-
+declare interface DecomposeEquipOutput extends UserOutput {
+    /** 获得的奖励 */
+    rewards: IItemBaseData[];
 }
 
