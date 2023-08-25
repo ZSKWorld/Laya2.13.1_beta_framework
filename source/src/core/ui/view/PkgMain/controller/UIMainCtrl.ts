@@ -8,48 +8,38 @@ export interface UIMainData {
 export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 
     override onAdded() {
-		this.addMessage(UIMainMsg.OnBtnLiLianClick, this.onBtnLiLianClick);
-		this.addMessage(UIMainMsg.OnBtnJueSeClick, this.onBtnJueSeClick);
-		this.addMessage(UIMainMsg.OnBtnWuPinClick, this.onBtnWuPinClick);
-		this.addMessage(UIMainMsg.OnBtnShangChengClick, this.onBtnShangChengClick);
-		this.addMessage(UIMainMsg.OnBtnDongFuClick, this.onBtnDongFuClick);
+		this.addMessage(UIMainMsg.OnBtnTrainClick, this.onBtnTrainClick);
+		this.addMessage(UIMainMsg.OnBtnCharClick, this.onBtnCharClick);
+		this.addMessage(UIMainMsg.OnBtnGoodsClick, this.onBtnGoodsClick);
+		this.addMessage(UIMainMsg.OnBtnShopClick, this.onBtnShopClick);
+		this.addMessage(UIMainMsg.OnBtnAbodeClick, this.onBtnAbodeClick);
 		this.addMessage(UIMainMsg.OnBtnChatClick, this.onBtnChatClick);
-		this.addMessage(UIMainMsg.OnBtnInfoClick, this.onBtnInfoClick);
-		this.addMessage(UIMainMsg.OnBtnHeadClick, this.onBtnHeadClick);
 		this.addMessage(UIMainMsg.OnBtnSettingClick, this.onBtnSettingClick);
 		this.addMessage(UIMainMsg.OnBtnRankClick, this.onBtnRankClick);
 		this.addMessage(UIMainMsg.OnBtnSphereClick, this.onBtnSphereClick);
     }
 
-	private onBtnLiLianClick() {
+	private onBtnTrainClick() {
 	
 	}
 
-	private onBtnJueSeClick() {
+	private onBtnCharClick() {
 	
 	}
 
-	private onBtnWuPinClick() {
+	private onBtnGoodsClick() {
 	
 	}
 
-	private onBtnShangChengClick() {
+	private onBtnShopClick() {
 	
 	}
 
-	private onBtnDongFuClick() {
+	private onBtnAbodeClick() {
 	
 	}
 
 	private onBtnChatClick() {
-	
-	}
-
-	private onBtnInfoClick() {
-	
-	}
-
-	private onBtnHeadClick() {
 	
 	}
 

@@ -18,17 +18,17 @@ export class ComSkillView extends ExtensionClass<IView, ComSkill>(ComSkill) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnNormal0, BtnNormal1, BtnNormal2, BtnNormal3, BtnNormal4, BtnXian0, BtnXian1, BtnXian2, BtnXian3, BtnXian4 } = this;
-		BtnNormal0.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal0Click ]);
-		BtnNormal1.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal1Click ]);
-		BtnNormal2.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal2Click ]);
-		BtnNormal3.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal3Click ]);
-		BtnNormal4.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal4Click ]);
-		BtnXian0.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian0Click ]);
-		BtnXian1.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian1Click ]);
-		BtnXian2.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian2Click ]);
-		BtnXian3.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian3Click ]);
-		BtnXian4.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian4Click ]);
+        const { btn_normal0, btn_normal1, btn_normal2, btn_normal3, btn_normal4, btn_xian0, btn_xian1, btn_xian2, btn_xian3, btn_xian4 } = this;
+		btn_normal0.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal0Click ]);
+		btn_normal1.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal1Click ]);
+		btn_normal2.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal2Click ]);
+		btn_normal3.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal3Click ]);
+		btn_normal4.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnNormal4Click ]);
+		btn_xian0.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian0Click ]);
+		btn_xian1.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian1Click ]);
+		btn_xian2.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian2Click ]);
+		btn_xian3.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian3Click ]);
+		btn_xian4.onClick(this, this.sendMessage, [ ComSkillMsg.OnBtnXian4Click ]);
     }
 
 }

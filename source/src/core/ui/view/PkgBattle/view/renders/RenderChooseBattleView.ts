@@ -9,8 +9,8 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
     static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate() {
-        const { BtnBreak } = this;
-		BtnBreak.onClick(this, this.sendMessage, [ RenderChooseBattleMsg.OnBtnBreakClick ]);
+        const { btn_break } = this;
+		btn_break.onClick(this, this.sendMessage, [ RenderChooseBattleMsg.OnBtnBreakClick ]);
     }
 
 }

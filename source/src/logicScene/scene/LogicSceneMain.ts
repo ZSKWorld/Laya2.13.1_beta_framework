@@ -13,8 +13,6 @@ export class LogicSceneMain extends LogicSceneBase<SceneMainData> {
 	protected override getNormalResArray() {
 		return [
 			ResPath.PkgPath.PkgMain,
-			ResPath.SkeletonPath.Spine_106_01,
-			ResPath.SkeletonPath.Spine_141_01,
 		];
 	}
 

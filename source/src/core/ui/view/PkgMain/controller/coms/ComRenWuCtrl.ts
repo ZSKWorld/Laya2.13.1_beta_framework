@@ -8,65 +8,65 @@ export interface ComRenWuData {
 export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
 
     override onAdded() {
-		this.addMessage(ComRenWuMsg.OnBtnWQClick, this.onBtnWQClick);
-		this.addMessage(ComRenWuMsg.OnBtnXLClick, this.onBtnXLClick);
-		this.addMessage(ComRenWuMsg.OnBtnJZClick, this.onBtnJZClick);
-		this.addMessage(ComRenWuMsg.OnBtnHFClick, this.onBtnHFClick);
-		this.addMessage(ComRenWuMsg.OnBtnZQClick, this.onBtnZQClick);
-		this.addMessage(ComRenWuMsg.OnBtnAQClick, this.onBtnAQClick);
-		this.addMessage(ComRenWuMsg.OnBtnTKClick, this.onBtnTKClick);
-		this.addMessage(ComRenWuMsg.OnBtnYFClick, this.onBtnYFClick);
-		this.addMessage(ComRenWuMsg.OnBtnXZClick, this.onBtnXZClick);
-		this.addMessage(ComRenWuMsg.OnBtnXieZClick, this.onBtnXieZClick);
-		this.addMessage(ComRenWuMsg.OnBtnSZClick, this.onBtnSZClick);
-		this.addMessage(ComRenWuMsg.OnBtnFBClick, this.onBtnFBClick);
+		this.addMessage(ComRenWuMsg.OnBtnWuQiClick, this.onBtnWuQiClick);
+		this.addMessage(ComRenWuMsg.OnBtnXiangLianClick, this.onBtnXiangLianClick);
+		this.addMessage(ComRenWuMsg.OnBtnJieZhiClick, this.onBtnJieZhiClick);
+		this.addMessage(ComRenWuMsg.OnBtnHuFuClick, this.onBtnHuFuClick);
+		this.addMessage(ComRenWuMsg.OnBtnZuoQiClick, this.onBtnZuoQiClick);
+		this.addMessage(ComRenWuMsg.OnBtnAnQiClick, this.onBtnAnQiClick);
+		this.addMessage(ComRenWuMsg.OnBtnTouKuiClick, this.onBtnTouKuiClick);
+		this.addMessage(ComRenWuMsg.OnBtnYiFuClick, this.onBtnYiFuClick);
+		this.addMessage(ComRenWuMsg.OnBtnXiaZhuangClick, this.onBtnXiaZhuangClick);
+		this.addMessage(ComRenWuMsg.OnBtnXieZiClick, this.onBtnXieZiClick);
+		this.addMessage(ComRenWuMsg.OnBtnShiZhuangClick, this.onBtnShiZhuangClick);
+		this.addMessage(ComRenWuMsg.OnBtnFaBaoClick, this.onBtnFaBaoClick);
     }
 
-	private onBtnWQClick() {
+	private onBtnWuQiClick() {
 	
 	}
 
-	private onBtnXLClick() {
+	private onBtnXiangLianClick() {
 	
 	}
 
-	private onBtnJZClick() {
+	private onBtnJieZhiClick() {
 	
 	}
 
-	private onBtnHFClick() {
+	private onBtnHuFuClick() {
 	
 	}
 
-	private onBtnZQClick() {
+	private onBtnZuoQiClick() {
 	
 	}
 
-	private onBtnAQClick() {
+	private onBtnAnQiClick() {
 	
 	}
 
-	private onBtnTKClick() {
+	private onBtnTouKuiClick() {
 	
 	}
 
-	private onBtnYFClick() {
+	private onBtnYiFuClick() {
 	
 	}
 
-	private onBtnXZClick() {
+	private onBtnXiaZhuangClick() {
 	
 	}
 
-	private onBtnXieZClick() {
+	private onBtnXieZiClick() {
 	
 	}
 
-	private onBtnSZClick() {
+	private onBtnShiZhuangClick() {
 	
 	}
 
-	private onBtnFBClick() {
+	private onBtnFaBaoClick() {
 	
 	}
 

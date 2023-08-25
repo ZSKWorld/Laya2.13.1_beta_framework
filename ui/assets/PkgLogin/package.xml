@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="vs9845at">
   <resources>
-    <component id="qjdo0" name="UILoginMain.xml" path="/" exported="true"/>
+    <component id="qjdo0" name="UILogin.xml" path="/" exported="true"/>
     <component id="whk31" name="Color.xml" path="/"/>
   </resources>
   <publish name="" genCode="true"/>

@@ -1,4 +1,3 @@
-import { ResPath } from "../../core/common/ResPath";
 import { websocket } from "../../core/net/WebSocket";
 import { layerMgr } from "../../core/ui/core/LayerManager";
 import { uiMgr } from "../../core/ui/core/UIManager";
@@ -16,8 +15,7 @@ export interface SceneInitData {
 export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 
 	protected override getNormalResArray() {
-		return [
-		];
+		return [];
 	}
 
 	protected onEnter() {

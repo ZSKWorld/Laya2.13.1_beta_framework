@@ -28,23 +28,6 @@ export class PlatformWeb extends PlatformBase {
         return new Promise<boolean>(resolve => resolve(confirm(msg)));
     }
 
-    login(account?: string, password?: string) {
-        return new Promise<string>(resolve => {
-            account = account.trim();
-            if (!account) return resolve("账号不能为空");
-            if (!/^\d+$/.test(account)) return resolve("账号只能为纯数字");
-            let data = localData.get<PartialAll<IUserData>>(account);
-            if (data && password != data.base.password)
-                return resolve("密码错误");
-            localData.set<LoginInput>(LocalDataKey.LastLoginAccount, { account, password });
-            if (!data) {
-                data = { base: { account, password } }
-            }
-            delete data[ "$_GID" ];
-            userData.decode(data);
-            resolve(null);
-        });
-    }
     protected onFix() {
 
     }
@@ -63,8 +46,8 @@ export class PlatformWeb extends PlatformBase {
         Laya.stage.screenMode = Laya.Stage.SCREEN_NONE;
         // Laya.Text.defaultFont = ResPath.FontName.Font15;
         // fgui.UIConfig.defaultFont = ResPath.FontName.Font15;
-		Laya.Text.defaultFont = "SimHei";
-		fgui.UIConfig.defaultFont = "SimHei";
+        Laya.Text.defaultFont = "SimHei";
+        fgui.UIConfig.defaultFont = "SimHei";
         Laya.stage.on(Laya.Event.VISIBILITY_CHANGE, this, () => {
             if (Laya.stage.isVisibility) this.dispatch(GameEvent.OnGameShow);
             else this.dispatch(GameEvent.OnGameHide);

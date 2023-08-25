@@ -10,9 +10,9 @@ export class UIChatView extends ExtensionClass<IView, UIChat>(UIChat) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnSend, BtnBack } = this;
-		BtnSend.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnSendClick ]);
-		BtnBack.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnBackClick ]);
+        const { btn_send, btn_back } = this;
+		btn_send.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnSendClick ]);
+		btn_back.onClick(this, this.sendMessage, [ UIChatMsg.OnBtnBackClick ]);
     }
 
 }

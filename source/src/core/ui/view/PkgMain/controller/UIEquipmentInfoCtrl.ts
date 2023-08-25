@@ -8,18 +8,13 @@ export interface UIEquipmentInfoData {
 export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEquipmentInfoData>{
 
     override onAdded() {
-		this.addMessage(UIEquipmentInfoMsg.OnBtnBgClick, this.onBtnBgClick);
 		this.addMessage(UIEquipmentInfoMsg.OnBtnSellClick, this.onBtnSellClick);
 		this.addMessage(UIEquipmentInfoMsg.OnBtnDressClick, this.onBtnDressClick);
-		this.addMessage(UIEquipmentInfoMsg.OnBtnQiangHuaClick, this.onBtnQiangHuaClick);
-		this.addMessage(UIEquipmentInfoMsg.OnBtnXiangQianClick, this.onBtnXiangQianClick);
-		this.addMessage(UIEquipmentInfoMsg.OnBtnMingKeClick, this.onBtnMingKeClick);
-		this.addMessage(UIEquipmentInfoMsg.OnBtnShenYouClick, this.onBtnShenYouClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnIntensifyClick, this.onBtnIntensifyClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnInlayClick, this.onBtnInlayClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnEngraveClick, this.onBtnEngraveClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnBlessClick, this.onBtnBlessClick);
     }
-
-	private onBtnBgClick() {
-	
-	}
 
 	private onBtnSellClick() {
 	
@@ -29,19 +24,19 @@ export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEqu
 	
 	}
 
-	private onBtnQiangHuaClick() {
+	private onBtnIntensifyClick() {
 	
 	}
 
-	private onBtnXiangQianClick() {
+	private onBtnInlayClick() {
 	
 	}
 
-	private onBtnMingKeClick() {
+	private onBtnEngraveClick() {
 	
 	}
 
-	private onBtnShenYouClick() {
+	private onBtnBlessClick() {
 	
 	}
 

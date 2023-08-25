@@ -15,14 +15,14 @@ export class UISectView extends ExtensionClass<IView, UISect>(UISect) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnSect0, BtnSect1, BtnSect2, BtnSect3, BtnSect4, BtnSect5, BtnSubmit } = this;
-		BtnSect0.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect0Click ]);
-		BtnSect1.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect1Click ]);
-		BtnSect2.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect2Click ]);
-		BtnSect3.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect3Click ]);
-		BtnSect4.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect4Click ]);
-		BtnSect5.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect5Click ]);
-		BtnSubmit.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSubmitClick ]);
+        const { btn_sect0, btn_sect1, btn_sect2, btn_sect3, btn_sect4, btn_sect5, btn_submit } = this;
+		btn_sect0.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect0Click ]);
+		btn_sect1.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect1Click ]);
+		btn_sect2.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect2Click ]);
+		btn_sect3.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect3Click ]);
+		btn_sect4.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect4Click ]);
+		btn_sect5.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSect5Click ]);
+		btn_submit.onClick(this, this.sendMessage, [ UISectMsg.OnBtnSubmitClick ]);
     }
 
 }

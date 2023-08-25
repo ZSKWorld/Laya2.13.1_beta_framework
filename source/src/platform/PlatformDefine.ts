@@ -27,5 +27,4 @@ export interface IPlatform {
     get menuBtnArea(): IArea;
     init(): void;
     showConfirm(title: string, msg: string): Promise<boolean>;
-    login(account?: string, password?: string): Promise<string>;
 }

@@ -51,7 +51,7 @@ export class CfgManager {
 	readonly Error: CfgError;
 
     constructor() {
-		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/table/Config.json")).toString());
+		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/config/Config.json")).toString());
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;
 			delete cfgData.keyMap;

@@ -9,7 +9,6 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, UIChoos
 
     override onAdded() {
 		this.addMessage(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
-		this.addMessage(UIChooseBattleMsg.OnBtnConfirmBgClick, this.onBtnConfirmBgClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnBuyFoodClick, this.onBtnBuyFoodClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnBuyTimesClick, this.onBtnBuyTimesClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnSaoDangClick, this.onBtnSaoDangClick);
@@ -17,10 +16,6 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, UIChoos
     }
 
 	private onBtnBackClick() {
-	
-	}
-
-	private onBtnConfirmBgClick() {
 	
 	}
 

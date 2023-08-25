@@ -31,7 +31,7 @@ export const enum ViewID {
 	UILoading2View = "UILoading2View",
 	UITipConfirmView = "UITipConfirmView",
 	UIWaitingView = "UIWaitingView",
-	UILoginMainView = "UILoginMainView",
+	UILoginView = "UILoginView",
 	UIChatView = "UIChatView",
 	UIEquipmentInfoView = "UIEquipmentInfoView",
 	UIItemInfoView = "UIItemInfoView",

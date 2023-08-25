@@ -17,7 +17,6 @@ export class ComXinFaCtrl extends BaseViewCtrl<ComXinFaView, ComXinFaData>{
 		this.addMessage(ComXinFaMsg.OnBtnXinFa6Click, this.onBtnXinFa6Click);
 		this.addMessage(ComXinFaMsg.OnBtnXinFa7Click, this.onBtnXinFa7Click);
 		this.addMessage(ComXinFaMsg.OnBtnXinFa8Click, this.onBtnXinFa8Click);
-		this.addMessage(ComXinFaMsg.OnBtnUpgradeBgClick, this.onBtnUpgradeBgClick);
 		this.addMessage(ComXinFaMsg.OnBtnSkill0Click, this.onBtnSkill0Click);
 		this.addMessage(ComXinFaMsg.OnBtnSkill1Click, this.onBtnSkill1Click);
 		this.addMessage(ComXinFaMsg.OnBtnSkill2Click, this.onBtnSkill2Click);
@@ -60,10 +59,6 @@ export class ComXinFaCtrl extends BaseViewCtrl<ComXinFaView, ComXinFaData>{
 	}
 
 	private onBtnXinFa8Click() {
-	
-	}
-
-	private onBtnUpgradeBgClick() {
 	
 	}
 

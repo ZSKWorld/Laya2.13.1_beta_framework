@@ -11,7 +11,6 @@ export const enum ComXinFaMsg {
 	OnBtnXinFa6Click = "ComXinFa_OnBtnXinFa6Click",
 	OnBtnXinFa7Click = "ComXinFa_OnBtnXinFa7Click",
 	OnBtnXinFa8Click = "ComXinFa_OnBtnXinFa8Click",
-	OnBtnUpgradeBgClick = "ComXinFa_OnBtnUpgradeBgClick",
 	OnBtnSkill0Click = "ComXinFa_OnBtnSkill0Click",
 	OnBtnSkill1Click = "ComXinFa_OnBtnSkill1Click",
 	OnBtnSkill2Click = "ComXinFa_OnBtnSkill2Click",
@@ -25,24 +24,23 @@ export class ComXinFaView extends ExtensionClass<IView, ComXinFa>(ComXinFa) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnXinFa0, BtnXinFa1, BtnXinFa2, BtnXinFa3, BtnXinFa4, BtnXinFa5, BtnXinFa6, BtnXinFa7, BtnXinFa8, BtnUpgradeBg, BtnSkill0, BtnSkill1, BtnSkill2, BtnSkill3, BtnUpgrade0, BtnUpgrade1, BtnUpgrade2 } = this;
-		BtnXinFa0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa0Click ]);
-		BtnXinFa1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa1Click ]);
-		BtnXinFa2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa2Click ]);
-		BtnXinFa3.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa3Click ]);
-		BtnXinFa4.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa4Click ]);
-		BtnXinFa5.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa5Click ]);
-		BtnXinFa6.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa6Click ]);
-		BtnXinFa7.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa7Click ]);
-		BtnXinFa8.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa8Click ]);
-		BtnUpgradeBg.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgradeBgClick ]);
-		BtnSkill0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill0Click ]);
-		BtnSkill1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill1Click ]);
-		BtnSkill2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill2Click ]);
-		BtnSkill3.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill3Click ]);
-		BtnUpgrade0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade0Click ]);
-		BtnUpgrade1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade1Click ]);
-		BtnUpgrade2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade2Click ]);
+        const { btn_xinFa0, btn_xinFa1, btn_xinFa2, btn_xinFa3, btn_xinFa4, btn_xinFa5, btn_xinFa6, btn_xinFa7, btn_xinFa8, btn_skill0, btn_skill1, btn_skill2, btn_skill3, btn_upgrade0, btn_upgrade1, btn_upgrade2 } = this;
+		btn_xinFa0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa0Click ]);
+		btn_xinFa1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa1Click ]);
+		btn_xinFa2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa2Click ]);
+		btn_xinFa3.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa3Click ]);
+		btn_xinFa4.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa4Click ]);
+		btn_xinFa5.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa5Click ]);
+		btn_xinFa6.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa6Click ]);
+		btn_xinFa7.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa7Click ]);
+		btn_xinFa8.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnXinFa8Click ]);
+		btn_skill0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill0Click ]);
+		btn_skill1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill1Click ]);
+		btn_skill2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill2Click ]);
+		btn_skill3.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnSkill3Click ]);
+		btn_upgrade0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade0Click ]);
+		btn_upgrade1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade1Click ]);
+		btn_upgrade2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade2Click ]);
     }
 
 }

@@ -22,6 +22,7 @@
 		Font12 = "Font12",
 		Font13 = "Font13",
 		Font14 = "Font14",
+		Font15 = "Font15",
 	}
 
 	export const enum FontPath {
@@ -39,6 +40,7 @@
 		Font12 = "res/font/Font12.ttf",
 		Font13 = "res/font/Font13.ttf",
 		Font14 = "res/font/Font14.ttf",
+		Font15 = "res/font/Font15.ttf",
 	}
 
 	// res/ui/

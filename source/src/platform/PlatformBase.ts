@@ -18,8 +18,6 @@ export abstract class PlatformBase extends Observer implements IPlatform {
 
     abstract showConfirm(title: string, msg: string): Promise<boolean>;
 
-    abstract login(): Promise<string>;
-
     /** 引擎修复 */
     protected abstract onFix(): void;
 

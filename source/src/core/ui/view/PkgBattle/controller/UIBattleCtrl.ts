@@ -11,7 +11,6 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 		this.addMessage(UIBattleMsg.OnBtnOfflineClick, this.onBtnOfflineClick);
 		this.addMessage(UIBattleMsg.OnBtnEnemyInfoClick, this.onBtnEnemyInfoClick);
 		this.addMessage(UIBattleMsg.OnBtnQuitBattleClick, this.onBtnQuitBattleClick);
-		this.addMessage(UIBattleMsg.OnBtnCloseInfoClick, this.onBtnCloseInfoClick);
     }
 
 	private onBtnOfflineClick() {
@@ -23,10 +22,6 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 	}
 
 	private onBtnQuitBattleClick() {
-	
-	}
-
-	private onBtnCloseInfoClick() {
 	
 	}
 

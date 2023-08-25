@@ -4,19 +4,32 @@ import { MathUtil } from "../libs/math/MathUtil";
 import { UpperFirst } from "../libs/utils/Util";
 import { BaseDataType, DataType, EquipmentPart, ItemBagType } from "../net/enum/ItemEnum";
 import { NetMessage } from "../net/enum/NetMessage";
-import { Equipment, ItemBase } from "./ItemData";
+import { AccountData } from "./AccountData";
+import { BagData } from "./BagData";
+import { BaseData } from "./BaseData";
+import { BattleData } from "./BattleData";
+import { BodyData } from "./BodyData";
+import { DecodeData } from "./DecodeData";
+import { FriendData } from "./FriendData";
+import { Equipment } from "./ItemData";
+
+class OfflineData extends DecodeData<IOffline> implements IOffline {
+    private static readonly ClassName = "OfflineData";
+    offlineTime: number;
+    vigor: number;
+}
 
 
-export class UserData extends Observer implements IUserData {
+export class UserData extends DecodeData<IUserData> implements IUserData {
 
     //#region Properties
-    account: IAccountData;
-    base: IBaseData;
-    offline?: IOfflineData;
-    friend: IFriendData;
-    bag: IBagData;
-    body: IBodyData;
-    battle: IBattleData;
+    account = new AccountData();
+    base = new BaseData();
+    offline?= new OfflineData();
+    friend = new FriendData();
+    bag = new BagData();
+    body = new BodyData();
+    battle = new BattleData();
     //#endregion
 
     /** 升级经验 */
@@ -180,33 +193,8 @@ export class UserData extends Observer implements IUserData {
     @RegisterEvent(NetMessage.SyncInfo)
     private syncInfo(data: IUserData) {
         Object.keys(data).forEach(v => {
-            const oldValue = this[ v ];
-            switch (v) {
-                case "weapon":
-                case "helmet":
-                case "necklace":
-                case "clothes":
-                case "ring":
-                case "trousers":
-                case "amulet":
-                case "shoes":
-                case "mount":
-                case "hiddenWeeapon":
-                case "fashion":
-                case "magicWeapon": this[ v ] = Equipment.Decode(data[ v ]); break;
-
-                case "equipment": this[ v ] = data[ v ].reduce((pv, cv, index) => (pv.push(Equipment.Decode(cv)), pv), []); break;
-                case "gem":
-                case "prop":
-                case "material":
-                case "book":
-                case "other": this[ v ] = data[ v ].reduce((pv, cv, index) => (pv.push(ItemBase.Decode(cv)), pv), []); break;
-
-                default: this[ v ] = data[ v ]; break;
-            }
+            (<IDecode<any>>this[ v ]).decode(data[ v ]);
             this.dispatch(`${ UpperFirst(v) }_Changed`, [ oldValue, data[ v ] ]);
         });
     }
 }
-
-windowImmit("userData", userData);

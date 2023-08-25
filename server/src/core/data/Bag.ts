@@ -13,7 +13,9 @@ const EncodeData: { name: string, Class: Class<ItemBase> }[] = [
 
 export class Bag implements IBag {
     collect: number[] = [];
-    equipment: IEquipment[] = [];
+    equipment: IEquipment[] = [
+        new Equipment(10101)
+    ];
     gem: IItemBase[] = [];
     prop: IItemBase[] = [];
     material: IItemBase[] = [];

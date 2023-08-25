@@ -8,7 +8,6 @@ export interface UISettingData {
 export class UISettingCtrl extends BaseViewCtrl<UISettingView, UISettingData>{
 
     override onAdded() {
-		this.addMessage(UISettingMsg.OnBtnBgClick, this.onBtnBgClick);
 		this.addMessage(UISettingMsg.OnBtnHangUpClick, this.onBtnHangUpClick);
 		this.addMessage(UISettingMsg.OnBtnMuteClick, this.onBtnMuteClick);
 		this.addMessage(UISettingMsg.OnBtnSignInClick, this.onBtnSignInClick);
@@ -16,10 +15,6 @@ export class UISettingCtrl extends BaseViewCtrl<UISettingView, UISettingData>{
 		this.addMessage(UISettingMsg.OnBtnClearAccountClick, this.onBtnClearAccountClick);
 		this.addMessage(UISettingMsg.OnBtnBackClick, this.onBtnBackClick);
     }
-
-	private onBtnBgClick() {
-	
-	}
 
 	private onBtnHangUpClick() {
 	

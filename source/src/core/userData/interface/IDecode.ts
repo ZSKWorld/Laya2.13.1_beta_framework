@@ -1,3 +1,3 @@
 declare interface IDecode<T>{
-    decode(data:T): T;
+    decode(data:PartialAll<T>): T;
 }

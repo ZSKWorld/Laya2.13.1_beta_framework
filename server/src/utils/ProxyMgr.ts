@@ -6,15 +6,28 @@ export class ProxyMgr {
         dataKey = dataKey || "";
         if (typeof target === "object" && target !== null && !target[ ProxyKey ]) {
             target[ ProxyKey ] = true;
-            Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }.${ key }`, target[ key ]));
+            Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }${ dataKey ? "." : "" }${ key }`, target[ key ]));
             Object.defineProperty(target, "getSyncInfo", {
                 value: function () {
+                    const result = {};
                     const keyMap = ProxyMgr.proxyMap[ uid ];
                     ProxyMgr.proxyMap[ uid ] = null;
                     if (keyMap) {
-                        Object.keys(keyMap).forEach(key => keyMap[ key ] = this[ key ]);
+                        Object.keys(keyMap).forEach(keyStr => {
+                            let tempThis = this;
+                            let tempResult = result;
+                            const properties = keyStr.split(".");
+                            properties.forEach((key, index) => {
+                                if (index = properties.length - 1) {
+                                    tempResult[ key ] = tempThis[ key ];
+                                } else {
+                                    tempThis = tempThis[ key ];
+                                    tempResult = tempResult[ key ] = {};
+                                }
+                            });
+                        });
                     }
-                    return keyMap;
+                    return result;
                 },
                 enumerable: false,
                 configurable: false,

@@ -2,37 +2,37 @@ import ComRenWu from "../../../../ui/PkgMain/ComRenWu";
 import { ResPath } from "../../../../../common/ResPath";
 
 export const enum ComRenWuMsg {
-	OnBtnWQClick = "ComRenWu_OnBtnWQClick",
-	OnBtnXLClick = "ComRenWu_OnBtnXLClick",
-	OnBtnJZClick = "ComRenWu_OnBtnJZClick",
-	OnBtnHFClick = "ComRenWu_OnBtnHFClick",
-	OnBtnZQClick = "ComRenWu_OnBtnZQClick",
-	OnBtnAQClick = "ComRenWu_OnBtnAQClick",
-	OnBtnTKClick = "ComRenWu_OnBtnTKClick",
-	OnBtnYFClick = "ComRenWu_OnBtnYFClick",
-	OnBtnXZClick = "ComRenWu_OnBtnXZClick",
-	OnBtnXieZClick = "ComRenWu_OnBtnXieZClick",
-	OnBtnSZClick = "ComRenWu_OnBtnSZClick",
-	OnBtnFBClick = "ComRenWu_OnBtnFBClick",
+	OnBtnWuQiClick = "ComRenWu_OnBtnWuQiClick",
+	OnBtnXiangLianClick = "ComRenWu_OnBtnXiangLianClick",
+	OnBtnJieZhiClick = "ComRenWu_OnBtnJieZhiClick",
+	OnBtnHuFuClick = "ComRenWu_OnBtnHuFuClick",
+	OnBtnZuoQiClick = "ComRenWu_OnBtnZuoQiClick",
+	OnBtnAnQiClick = "ComRenWu_OnBtnAnQiClick",
+	OnBtnTouKuiClick = "ComRenWu_OnBtnTouKuiClick",
+	OnBtnYiFuClick = "ComRenWu_OnBtnYiFuClick",
+	OnBtnXiaZhuangClick = "ComRenWu_OnBtnXiaZhuangClick",
+	OnBtnXieZiClick = "ComRenWu_OnBtnXieZiClick",
+	OnBtnShiZhuangClick = "ComRenWu_OnBtnShiZhuangClick",
+	OnBtnFaBaoClick = "ComRenWu_OnBtnFaBaoClick",
 }
 
 export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnWQ, BtnXL, BtnJZ, BtnHF, BtnZQ, BtnAQ, BtnTK, BtnYF, BtnXZ, BtnXieZ, BtnSZ, BtnFB } = this;
-		BtnWQ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnWQClick ]);
-		BtnXL.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXLClick ]);
-		BtnJZ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnJZClick ]);
-		BtnHF.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnHFClick ]);
-		BtnZQ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnZQClick ]);
-		BtnAQ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnAQClick ]);
-		BtnTK.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnTKClick ]);
-		BtnYF.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnYFClick ]);
-		BtnXZ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXZClick ]);
-		BtnXieZ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXieZClick ]);
-		BtnSZ.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnSZClick ]);
-		BtnFB.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnFBClick ]);
+        const { btn_wuQi, btn_xiangLian, btn_jieZhi, btn_huFu, btn_zuoQi, btn_anQi, btn_touKui, btn_yiFu, btn_xiaZhuang, btn_xieZi, btn_shiZhuang, btn_faBao } = this;
+		btn_wuQi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnWuQiClick ]);
+		btn_xiangLian.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXiangLianClick ]);
+		btn_jieZhi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnJieZhiClick ]);
+		btn_huFu.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnHuFuClick ]);
+		btn_zuoQi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnZuoQiClick ]);
+		btn_anQi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnAnQiClick ]);
+		btn_touKui.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnTouKuiClick ]);
+		btn_yiFu.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnYiFuClick ]);
+		btn_xiaZhuang.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXiaZhuangClick ]);
+		btn_xieZi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXieZiClick ]);
+		btn_shiZhuang.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnShiZhuangClick ]);
+		btn_faBao.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnFaBaoClick ]);
     }
 
 }

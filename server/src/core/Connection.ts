@@ -76,6 +76,7 @@ export class Connection {
                 else data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
             }
         }
+        console.log(data);
         data.type = "response";
         this._connection.sendUTF(JSON.stringify(data));
     }

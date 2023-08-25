@@ -2,27 +2,25 @@ import UIEquipmentInfo from "../../../ui/PkgMain/UIEquipmentInfo";
 import { ResPath } from "../../../../common/ResPath";
 
 export const enum UIEquipmentInfoMsg {
-	OnBtnBgClick = "UIEquipmentInfo_OnBtnBgClick",
 	OnBtnSellClick = "UIEquipmentInfo_OnBtnSellClick",
 	OnBtnDressClick = "UIEquipmentInfo_OnBtnDressClick",
-	OnBtnQiangHuaClick = "UIEquipmentInfo_OnBtnQiangHuaClick",
-	OnBtnXiangQianClick = "UIEquipmentInfo_OnBtnXiangQianClick",
-	OnBtnMingKeClick = "UIEquipmentInfo_OnBtnMingKeClick",
-	OnBtnShenYouClick = "UIEquipmentInfo_OnBtnShenYouClick",
+	OnBtnIntensifyClick = "UIEquipmentInfo_OnBtnIntensifyClick",
+	OnBtnInlayClick = "UIEquipmentInfo_OnBtnInlayClick",
+	OnBtnEngraveClick = "UIEquipmentInfo_OnBtnEngraveClick",
+	OnBtnBlessClick = "UIEquipmentInfo_OnBtnBlessClick",
 }
 
 export class UIEquipmentInfoView extends ExtensionClass<IView, UIEquipmentInfo>(UIEquipmentInfo) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnBg, BtnSell, BtnDress, BtnQiangHua, BtnXiangQian, BtnMingKe, BtnShenYou } = this;
-		BtnBg.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnBgClick ]);
-		BtnSell.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnSellClick ]);
-		BtnDress.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnDressClick ]);
-		BtnQiangHua.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnQiangHuaClick ]);
-		BtnXiangQian.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnXiangQianClick ]);
-		BtnMingKe.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnMingKeClick ]);
-		BtnShenYou.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnShenYouClick ]);
+        const { btn_sell, btn_dress, btn_intensify, btn_inlay, btn_engrave, btn_bless } = this;
+		btn_sell.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnSellClick ]);
+		btn_dress.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnDressClick ]);
+		btn_intensify.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnIntensifyClick ]);
+		btn_inlay.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnInlayClick ]);
+		btn_engrave.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnEngraveClick ]);
+		btn_bless.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnBlessClick ]);
     }
 
 }

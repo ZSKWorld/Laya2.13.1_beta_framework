@@ -8,50 +8,50 @@ export interface ComZhiZuoData {
 export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
 
     override onAdded() {
-		this.addMessage(ComZhiZuoMsg.OnBtnJPYLClick, this.onBtnJPYLClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnDZZBClick, this.onBtnDZZBClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnZJZBClick, this.onBtnZJZBClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnCZZBClick, this.onBtnCZZBClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnBSHCClick, this.onBtnBSHCClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnZZTZClick, this.onBtnZZTZClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnFJZBClick, this.onBtnFJZBClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnFJBSClick, this.onBtnFJBSClick);
-		this.addMessage(ComZhiZuoMsg.OnBtnYJHCClick, this.onBtnYJHCClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnJpylClick, this.onBtnJpylClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnDzzbClick, this.onBtnDzzbClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnZjzbClick, this.onBtnZjzbClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnCzzbClick, this.onBtnCzzbClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnBshcClick, this.onBtnBshcClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnZztzClick, this.onBtnZztzClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnFjzbClick, this.onBtnFjzbClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnFjbsClick, this.onBtnFjbsClick);
+		this.addMessage(ComZhiZuoMsg.OnBtnYjhcClick, this.onBtnYjhcClick);
     }
 
-	private onBtnJPYLClick() {
+	private onBtnJpylClick() {
 	
 	}
 
-	private onBtnDZZBClick() {
+	private onBtnDzzbClick() {
 	
 	}
 
-	private onBtnZJZBClick() {
+	private onBtnZjzbClick() {
 	
 	}
 
-	private onBtnCZZBClick() {
+	private onBtnCzzbClick() {
 	
 	}
 
-	private onBtnBSHCClick() {
+	private onBtnBshcClick() {
 	
 	}
 
-	private onBtnZZTZClick() {
+	private onBtnZztzClick() {
 	
 	}
 
-	private onBtnFJZBClick() {
+	private onBtnFjzbClick() {
 	
 	}
 
-	private onBtnFJBSClick() {
+	private onBtnFjbsClick() {
 	
 	}
 
-	private onBtnYJHCClick() {
+	private onBtnYjhcClick() {
 	
 	}
 

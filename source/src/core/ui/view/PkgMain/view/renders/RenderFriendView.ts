@@ -9,8 +9,8 @@ export class RenderFriendView extends ExtensionClass<IView, RenderFriend>(Render
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnChat } = this;
-		BtnChat.onClick(this, this.sendMessage, [ RenderFriendMsg.OnBtnChatClick ]);
+        const { btn_chat } = this;
+		btn_chat.onClick(this, this.sendMessage, [ RenderFriendMsg.OnBtnChatClick ]);
     }
 
 }

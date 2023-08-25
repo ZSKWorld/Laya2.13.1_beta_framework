@@ -1,6 +1,5 @@
 import { MathUtil } from "../libs/math/MathUtil";
 import { AttributeEnum } from "../net/enum/AttributeEnum";
-import { tableMgr } from "../config/TableManager";
 import { richStrMgr } from "../ui/tool/RichStrManager";
 /** 玩家数值计算公式 */
 export class UserDataFormula {
@@ -40,14 +39,14 @@ export class GameUtil {
         return uuid;
     }
 
-    static GetLang(id: number) { return tableMgr.Lang[ id ].Text; }
+    static GetLang(id: number) { return cfgMgr.Lang[ id ].Text; }
 
     static GetColorStr(id: number, text: string) {
-        return richStrMgr.start(text).color(tableMgr.Color[ id ].Color).end();
+        return richStrMgr.start(text).color(cfgMgr.Color[ id ].Color).end();
     }
 
-    static GetItemCountStr(item: IItemBase) {
-        const { Name, Quality } = tableMgr.Item[ item.id ];
+    static GetItemCountStr(item: IItemBaseData) {
+        const { Name, Quality } = cfgMgr.Item[ item.id ];
         const color = GameUtil.GetColorStr(Quality, Name);
         return richStrMgr.start().space().combineSpace(`${ color } x${ item.count }`).space().end();
     }
@@ -63,21 +62,21 @@ export class GameUtil {
     /**获取多个物品字符串 */
     static GetItemString(items: { id: number, count: number }[], hasCount = true, color = false) {
         let str = "";
-        items.forEach((v, index) => str += (color ? this.GetColorStr(tableMgr.Item[ v.id ].Quality, tableMgr.Item[ v.id ].Name) : tableMgr.Item[ v.id ].Name)
+        items.forEach((v, index) => str += (color ? this.GetColorStr(cfgMgr.Item[ v.id ].Quality, cfgMgr.Item[ v.id ].Name) : cfgMgr.Item[ v.id ].Name)
             + (hasCount ? `x${ v.count }` : "") + (index == items.length - 1 ? "" : "、"));
         return str;
     }
 
     /** 境界转等级 */
     static JingJieToLevel(jingJie: number, cengJi: number) {
-        return (jingJie - 1) * (+tableMgr.Const[ 1005 ].Value) + cengJi;
+        return (jingJie - 1) * (+cfgMgr.Const[ 1005 ].Value) + cengJi;
     }
 
     /** 等级转境界 */
     static LevelToJingJie(level: number) {
         let jingJie = 0;
         let cengJi = 0;
-        const maxCengJie = +tableMgr.Const[ 1005 ].Value;
+        const maxCengJie = +cfgMgr.Const[ 1005 ].Value;
         if (level % maxCengJie == 0) {
             jingJie = level / maxCengJie;
             cengJi = maxCengJie;
@@ -91,21 +90,41 @@ export class GameUtil {
 
     /** 获取升级经验 */
     static GetUpgradExp(jingJie: number, cengJi: number) {
-        if (!tableMgr.JingJie[ jingJie + 1 ]) return 0;
+        if (!cfgMgr.JingJie[ jingJie + 1 ]) return 0;
         else return UserDataFormula.Exp(this.JingJieToLevel(jingJie, cengJi));
     }
 
     /** 获取境界字符串 */
     static GetJingJieStr(jingJie: number, cengJi: number) {
-        return tableMgr.JingJie[ jingJie ].Name + (cengJi ? (MathUtil.ToChineseNum(cengJi) + "层") : "");
+        return cfgMgr.JingJie[ jingJie ].Name + (cengJi ? (MathUtil.ToChineseNum(cengJi) + "层") : "");
     }
 
     static IsEquip(id: number) {
-        return !!tableMgr.Equipment[ id ];
+        return !!cfgMgr.Equipment[ id ];
     }
 
     static CanUseItem(id: number) {
-        return !!(tableMgr.Props[ id ] || tableMgr.Food[ id ] || tableMgr.SkillBook[ id ] || tableMgr.XinFaBook[ id ]);
+        return !!(cfgMgr.Props[ id ] || cfgMgr.Food[ id ] || cfgMgr.SkillBook[ id ] || cfgMgr.XinFaBook[ id ]);
+    }
+
+    /** 物理分辨率x坐标转逻辑分辨率x坐标 */
+    static PRX2LRX(x: number) {
+        return Math.round(x * Laya.stage.width / Laya.Browser.clientWidth);
+    }
+
+    /** 物理分辨率y坐标转逻辑分辨率y坐标 */
+    static PRY2LRY(y: number) {
+        return Math.round(y * Laya.stage.height / Laya.Browser.clientHeight);
+    }
+
+    /** 逻辑分辨率x坐标转物理分辨率x坐标 */
+    static LRX2PRX(x: number) {
+        return Math.round(x / (Laya.stage.width / Laya.Browser.clientWidth));
+    }
+
+    /** 逻辑分辨率y坐标转物理分辨率y坐标 */
+    static LRY2PRY(y: number) {
+        return Math.round(y / (Laya.stage.height / Laya.Browser.clientHeight));
     }
 }
 windowImmit("GameUtil", GameUtil);

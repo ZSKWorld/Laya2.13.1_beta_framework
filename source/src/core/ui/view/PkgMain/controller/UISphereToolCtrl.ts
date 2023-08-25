@@ -8,13 +8,11 @@ export interface UISphereToolData {
 export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToolData>{
 
     override onAdded() {
-		this.addMessage(UISphereToolMsg.OnBtnBgClick, this.onBtnBgClick);
 		this.addMessage(UISphereToolMsg.OnBtnClearLogClick, this.onBtnClearLogClick);
-		this.addMessage(UISphereToolMsg.OnBtnHFJLClick, this.onBtnHFJLClick);
+		this.addMessage(UISphereToolMsg.OnBtnRecoverVigorClick, this.onBtnRecoverVigorClick);
 		this.addMessage(UISphereToolMsg.OnBtnCreateClick, this.onBtnCreateClick);
 		this.addMessage(UISphereToolMsg.OnBtnClearClick, this.onBtnClearClick);
 		this.addMessage(UISphereToolMsg.OnBtnPercentClick, this.onBtnPercentClick);
-		this.addMessage(UISphereToolMsg.OnBtnCheck0Click, this.onBtnCheck0Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck1Click, this.onBtnCheck1Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck2Click, this.onBtnCheck2Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck3Click, this.onBtnCheck3Click);
@@ -43,6 +41,7 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 		this.addMessage(UISphereToolMsg.OnBtnCheck26Click, this.onBtnCheck26Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck27Click, this.onBtnCheck27Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck28Click, this.onBtnCheck28Click);
+		this.addMessage(UISphereToolMsg.OnBtnCheck0Click, this.onBtnCheck0Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck31Click, this.onBtnCheck31Click);
 		this.addMessage(UISphereToolMsg.OnBtnCheck32Click, this.onBtnCheck32Click);
 		this.addMessage(UISphereToolMsg.OnBtnAddClick, this.onBtnAddClick);
@@ -51,15 +50,11 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 		this.addMessage(UISphereToolMsg.OnBtnRemoveAllClick, this.onBtnRemoveAllClick);
     }
 
-	private onBtnBgClick() {
-	
-	}
-
 	private onBtnClearLogClick() {
 	
 	}
 
-	private onBtnHFJLClick() {
+	private onBtnRecoverVigorClick() {
 	
 	}
 
@@ -72,10 +67,6 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 	}
 
 	private onBtnPercentClick() {
-	
-	}
-
-	private onBtnCheck0Click() {
 	
 	}
 
@@ -188,6 +179,10 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 	}
 
 	private onBtnCheck28Click() {
+	
+	}
+
+	private onBtnCheck0Click() {
 	
 	}
 

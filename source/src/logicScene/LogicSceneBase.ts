@@ -1,4 +1,3 @@
-import { skeletonMgr } from "../core/common/SkeletonManager";
 import { Observer } from "../core/libs/event/Observer";
 import { loadMgr } from "../core/libs/load/LoadManager";
 import { uiMgr } from "../core/ui/core/UIManager";
@@ -32,12 +31,11 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 
 	load() {
 		const resArr = this.getResGroup(ResGroupType.All);
-		const [ uiRes, skeletonRes, otherRes ] = resArr;
+		const [ uiRes, otherRes ] = resArr;
 		let loadCount = resArr.length;
 		this.setLoadProgres(loadCount);
 		return Promise.all([
 			loadMgr.loadPackage(uiRes, null, this._progressHandlers[ --loadCount ]),
-			skeletonMgr.loadSkeleton(skeletonRes, this._progressHandlers[ --loadCount ]),
 			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCount ]),
 			//加个最短加载时间，避免loadjing页一闪而过
 			this.loadViewId ? new Promise(resolve =>
@@ -73,12 +71,11 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	protected clearRes(type: ResGroupType) {
-		const [ uiRes, skeletonRes, otherRes ] = this.getResGroup(type);
+		const [ uiRes, otherRes ] = this.getResGroup(type);
 		uiRes.forEach(v => {
 			const res = fgui.UIPackage.getById(v);
 			res && res.dispose();
 		});
-		skeletonRes.forEach(v => skeletonMgr.disposeSkeleton(v));
 		otherRes.forEach(v => Laya.loader.clearRes(v));
 	}
 
@@ -122,22 +119,20 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	/** 获取资源数组 */
-	private getResGroup(groupType: ResGroupType): [ string[], string[], string[] ] {
+	private getResGroup(groupType: ResGroupType): [ string[], string[] ] {
 		const uiRes: string[] = [];
-		const skeletonRes: string[] = [];
 		const otherRes: string[] = [];
 		let resArr: string[];
 		switch (groupType) {
 			case ResGroupType.Normal: resArr = this.getNormalResArray(); break;
 			case ResGroupType.Const: resArr = this.getConstResArray(); break;
 			case ResGroupType.All: resArr = this.getNormalResArray().concat(this.getConstResArray()); break;
-			default: return [ [], [], [] ];
+			default: return [ [], [] ];
 		}
 		resArr.forEach(res => {
 			if (res.startsWith("res/ui/")) uiRes.push(res);
-			else if (res.startsWith("res/skeleton/")) skeletonRes.push(res);
 			else otherRes.push(res);
 		});
-		return [ uiRes, skeletonRes, otherRes ];
+		return [ uiRes, otherRes ];
 	}
 }

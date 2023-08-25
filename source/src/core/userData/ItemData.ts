@@ -1,7 +1,9 @@
 import { GameUtil } from "../common/GameUtil";
 import { EquipmentPart } from "../net/enum/ItemEnum";
+import { DecodeData } from "./DecodeData";
 
-export class ItemBase implements IItemBaseData {
+export class ItemBase<T extends IItemBase = IItemBase> extends DecodeData<T> implements IItemBase {
+    protected static readonly ClassName: string = "ItemBase";
     //#region Properties
     id: number;
     count: number;
@@ -16,20 +18,10 @@ export class ItemBase implements IItemBaseData {
     get useRequire() { return cfgMgr.Item[ this.id ].UseRequire; }
     get useRequireStr() { return GameUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
 
-    decode(data: IItemBaseData) {
-        return this;
-    }
-
-    static Decode(data: IItemBaseData) {
-        if (!data) return null;
-        const result = new ItemBase();
-        result.id = data.id;
-        result.count = data.count;
-        return result;
-    }
 }
 
-export class Equipment extends ItemBase implements IEquipmentData {
+export class Equipment extends ItemBase<IEquipment> implements IEquipment {
+    protected static override readonly ClassName = "Equipment";
     //#region Properties
     uid: string;
     star: number;
@@ -60,26 +52,4 @@ export class Equipment extends ItemBase implements IEquipmentData {
         ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, GameUtil.GetAttributeName(v)) + "<br>").join("") }
         `;
     }
-
-    override decode(data: IEquipmentData) {
-        return this;
-    }
-
-    static override Decode(data: IEquipmentData) {
-        if (!data) return null;
-        const result = new Equipment();
-        result.id = data.id;
-        result.count = data.count;
-        result.uid = data.uid;
-        result.star = data.star;
-        result.level = data.level;
-        result.mingKe = data.mingKe;
-        result.shenYou = data.shenYou;
-        result.mainAttri = data.mainAttri;
-        result.wuXingAttri = data.wuXingAttri;
-        result.secondAttri = data.secondAttri;
-        result.bodyAttri = data.bodyAttri;
-        return result;
-    }
-
 }

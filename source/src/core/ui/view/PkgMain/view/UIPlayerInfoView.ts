@@ -12,11 +12,11 @@ export class UIPlayerInfoView extends ExtensionClass<IView, UIPlayerInfo>(UIPlay
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { BtnExplain, BtnBack, BtnCopyID, BtnGift } = this;
-		BtnExplain.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnExplainClick ]);
-		BtnBack.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnBackClick ]);
-		BtnCopyID.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnCopyIDClick ]);
-		BtnGift.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnGiftClick ]);
+        const { btn_explain, btn_back, btn_copyID, btn_gift } = this;
+		btn_explain.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnExplainClick ]);
+		btn_back.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnBackClick ]);
+		btn_copyID.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnCopyIDClick ]);
+		btn_gift.onClick(this, this.sendMessage, [ UIPlayerInfoMsg.OnBtnGiftClick ]);
     }
 
 }

@@ -1,4 +1,5 @@
 import { ResPath } from "../../core/common/ResPath";
+import { CfgManager } from "../../core/config/CfgManager";
 import { layerMgr, Layer } from "../../core/ui/core/LayerManager";
 import { UserData } from "../../core/userData/UserData";
 import { platformMgr } from "../../platform/PlatformManager";
