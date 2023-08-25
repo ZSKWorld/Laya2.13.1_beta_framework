@@ -19,7 +19,7 @@
         {
             "label": "执行Bat",
             "type": "shell",
-            "command": "../../tool/bats/BatMain.bat",
+            "command": "../../tool/BatMain.bat",
             "problemMatcher": []
         },
     ]

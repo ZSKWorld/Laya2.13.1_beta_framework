@@ -1,14 +1,14 @@
 import { ErrorCode } from "../../enum/ErrorCode";
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 import { ItemHelper } from "./ItemHelper";
 
 export class ItemChecker {
 
     /**
      * 检查物品是否被收藏
-     * @param data 
-     * @param id 
-     * @returns 
+     * @param data
+     * @param id
+     * @returns
      */
     static checkItemCollected(data: IUser, id: number): boolean {
         return data.bag.collect.includes(id);
@@ -19,7 +19,7 @@ export class ItemChecker {
      * @param data 用户数据
      * @param id 物品id
      * @param count 使用数量
-     * @returns 
+     * @returns
      */
     static checkItemUsable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
@@ -48,7 +48,7 @@ export class ItemChecker {
      * @param data 用户数据
      * @param id 物品id
      * @param count 物品数量
-     * @returns 
+     * @returns
      */
     static checkItemSalable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
@@ -64,7 +64,7 @@ export class ItemChecker {
      * @param data 用户数据
      * @param id 物品id
      * @param collect 是否收藏
-     * @returns 
+     * @returns
      */
     static checkCollect(data: IUser, id: number, collect: boolean): ErrorCode {
         if (ItemHelper.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;

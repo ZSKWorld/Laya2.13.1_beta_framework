@@ -1,5 +1,5 @@
 import { DataType } from "../../enum/ItemEnum";
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 
 export class ItemHelper {
     static isEquip(id: number) { return !!tableMgr.Equipment[ id ]; }
@@ -21,12 +21,12 @@ export class ItemHelper {
             default: return 0;
         }
     }
-    
+
     /**
      * 检查当前境界是否满足物品境界需求
      * @param data 用户数据
      * @param id 物品id
-     * @returns 
+     * @returns
      */
      static checkJingJieEnough(data: IUser, id: number): boolean {
         const item = tableMgr.Item[ id ];

@@ -1,5 +1,5 @@
 import { DataType, ItemBagType } from "../enum/ItemEnum";
-import { tableMgr } from "../table/TableManager";
+import { tableMgr } from "../config/TableManager";
 import { Equipment } from "./Equipment";
 import { ItemBase } from "./ItemBase";
 

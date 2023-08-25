@@ -1,7 +1,7 @@
 import { Formula } from "../../utils/Formula";
 import { GameUtil } from "../../utils/GameUtil";
 import { BaseDataType } from "../enum/ItemEnum";
-import { tableMgr } from "../table/TableManager";
+import { tableMgr } from "../config/TableManager";
 class CittaData implements ICittaData {
     constructor() {
         GameUtil.cantSyncObj(this);

@@ -7,7 +7,7 @@ declare interface UserOutput {
     type?: string;
     cmd?: string;
     error?: number;
-    syncInfo?: Partial<IUser>;
+    syncInfo?: Partial<IUserData>;
 }
 
 declare interface UserNotify extends UserOutput {

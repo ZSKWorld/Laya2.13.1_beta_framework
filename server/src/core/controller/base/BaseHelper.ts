@@ -1,4 +1,4 @@
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 
 export class BaseHelper {
 

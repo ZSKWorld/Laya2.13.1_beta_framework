@@ -1,5 +1,5 @@
 import { ErrorCode } from "../../enum/ErrorCode";
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 import { ItemHelper } from "../item/ItemHelper";
 
 export class ShopChecker {
@@ -8,7 +8,7 @@ export class ShopChecker {
      * @param data 用户数据
      * @param id 物品id
      * @param count 物品数量
-     * @returns 
+     * @returns
      */
     static checkItemPurchasable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;

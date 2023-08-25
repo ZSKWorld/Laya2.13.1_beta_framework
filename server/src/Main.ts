@@ -2,7 +2,7 @@ import * as http from "http";
 import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
-import { tableMgr } from "./core/table/TableManager";
+import { tableMgr } from "./core/config/TableManager";
 import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");
 

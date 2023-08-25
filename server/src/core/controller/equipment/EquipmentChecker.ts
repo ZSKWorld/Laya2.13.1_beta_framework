@@ -1,6 +1,6 @@
 import { ErrorCode } from "../../enum/ErrorCode";
 import { EquipmentPart } from "../../enum/ItemEnum";
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 import { ItemHelper } from "../item/ItemHelper";
 
 export class EquipmentChecker {
@@ -9,7 +9,7 @@ export class EquipmentChecker {
      * 检查装备是否可穿戴
      * @param data 用户数据
      * @param uid 装备uid
-     * @returns 
+     * @returns
      */
     static checkEquipDressable(data: IUser, uid: string): ErrorCode {
         const equip = data.bag.getEquip(uid);
@@ -22,7 +22,7 @@ export class EquipmentChecker {
      * 检查装备是否可脱下
      * @param data 用户数据
      * @param part 装备部位
-     * @returns 
+     * @returns
      */
     static checkEquipTakeOff(data: IUser, part: EquipmentPart): ErrorCode {
         if (data.body.getDressedEquip(part) == null) return ErrorCode.PART_NOT_DRESSED_EQUIP;
@@ -33,7 +33,7 @@ export class EquipmentChecker {
      * 检查装备是否可出售
      * @param data 用户数据
      * @param uid 装备uid
-     * @returns 
+     * @returns
      */
     static checkEquipSalable(data: IUser, uid: string): ErrorCode {
         const equip = data.bag.getEquip(uid);

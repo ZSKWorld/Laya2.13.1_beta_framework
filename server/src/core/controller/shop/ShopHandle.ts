@@ -1,4 +1,4 @@
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 import { ItemBase } from "../../data/ItemBase";
 import { ItemHandle } from "../item/ItemHandle";
 import { ItemHelper } from "../item/ItemHelper";

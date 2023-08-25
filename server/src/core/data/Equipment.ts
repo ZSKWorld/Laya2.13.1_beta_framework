@@ -1,7 +1,7 @@
 import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
 import { EquipmentPart } from "../enum/ItemEnum";
-import { tableMgr } from "../table/TableManager";
+import { tableMgr } from "../config/TableManager";
 import { ItemBase } from "./ItemBase";
 
 export class Equipment extends ItemBase implements IEquipment {

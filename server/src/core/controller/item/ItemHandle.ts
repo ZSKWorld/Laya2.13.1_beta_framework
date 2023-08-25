@@ -1,6 +1,6 @@
 import { MathUtil } from "../../../utils/MathUtil";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
-import { tableMgr } from "../../table/TableManager";
+import { tableMgr } from "../../config/TableManager";
 import { ItemBase } from "../../data/ItemBase";
 import { ItemHelper } from "./ItemHelper";
 
