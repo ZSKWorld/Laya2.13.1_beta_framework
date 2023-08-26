@@ -1,69 +1,23 @@
+import { cfgMgr } from "../config/CfgManager";
 import { DataType, ItemBagType } from "../enum/ItemEnum";
+import { Decode } from "./Decode";
 import { Equipment } from "./Equipment";
-import { IGoods } from "./Goods";
+import { Goods } from "./Goods";
 
-export class Bag implements IBag {
+export class Bag extends Decode<IBagData, IBag> implements IBag {
     collect: number[] = [];
-    equipment: IEquipment[] = [
-        new Equipment(10101)
-    ];
-    gem: IGoods[] = [];
-    prop: IGoods[] = [];
-    material: IGoods[] = [];
-    book: IGoods[] = [];
-    other: IGoods[] = [];
-    encode(): IBag {
-        const data = {} as IBag;
-        data.collect = this.collect;
-        const encodeArrData = (arr: any[]) => {
-            if (!arr || !arr.length) return arr;
-            const keys = Object.keys(arr[ 0 ]);
-            const result = [];
-            result.push(keys);
-
-            arr.forEach(v => {
-                const vData = [];
-                keys.forEach(k => vData.push(v[ k ]));
-                result.push(vData);
-            });
-            return result;
-        };
-        data.equipment = encodeArrData(this.equipment);
-        data.gem = encodeArrData(this.gem);
-        data.prop = encodeArrData(this.prop);
-        data.material = encodeArrData(this.material);
-        data.book = encodeArrData(this.book);
-        data.other = encodeArrData(this.other);
-        return data;
-    }
-
-    decode(data: IBag): IBag {
-        this.collect = data.collect;
-        const decodeArrData = (data: any[][], cls: Class<IDecode<any, any>>) => {
-            if (!data || !data.length) return data;
-            const keys = data.shift();
-            const result = [];
-            data.forEach(v => {
-                const temp = {};
-                keys.forEach((k, index) => temp[ k ] = v[ index ]);
-                result.push(new cls().decode(temp));
-            });
-            return result;
-        };
-        this.equipment = decodeArrData(data.equipment as any, Equipment);
-        this.gem = decodeArrData(data.gem as any, IGoods);
-        this.prop = decodeArrData(data.prop as any, IGoods);
-        this.material = decodeArrData(data.material as any, IGoods);
-        this.book = decodeArrData(data.book as any, IGoods);
-        this.other = decodeArrData(data.other as any, IGoods);
-        return this;
-    }
+    equipment: IEquipment[] = [];
+    gem: Goods[] = [];
+    prop: Goods[] = [];
+    material: Goods[] = [];
+    book: Goods[] = [];
+    other: Goods[] = [];
 
     getItem(id: number) {
         const item = cfgMgr.Item[ id ];
         if (!item) return null;
-        let datas: IGoods[];
-        switch (item.BagType) {
+        let datas: Goods[];
+        switch (item.bagType) {
             case ItemBagType.Prop: datas = this.prop; break;
             case ItemBagType.Gem: datas = this.gem; break;
             case ItemBagType.Material: datas = this.material; break;
@@ -80,9 +34,9 @@ export class Bag implements IBag {
 
     changeItemCount(id: number, count: number) {
         const item = cfgMgr.Item[ id ];
-        if (item.DataType == DataType.BagData) {
-            let datas: IGoods[];
-            switch (item.BagType) {
+        if (item.dataType == DataType.BagData) {
+            let datas: Goods[];
+            switch (item.bagType) {
                 case ItemBagType.Prop: datas = this.prop; break;
                 case ItemBagType.Gem: datas = this.gem; break;
                 case ItemBagType.Material: datas = this.material; break;
@@ -99,7 +53,7 @@ export class Bag implements IBag {
                     return;
                 }
             }
-            if (count > 0) datas.push(new IGoods(id, count));
+            if (count > 0) datas.push(new Goods(id, count));
         }
     }
 
@@ -127,5 +81,39 @@ export class Bag implements IBag {
             }
         }
         return null;
+    }
+
+    protected override onEncode(key: keyof this) {
+        const arr = this[ key ] as any[];
+        if (key == "collect") return arr;
+        const result = [];
+        if (arr && arr.length) {
+            const keys = Object.keys(arr[ 0 ]);
+            result.push(keys);
+
+            arr.forEach(v => {
+                const vData = [];
+                keys.forEach(k => vData.push(v[ k ]));
+                result.push(vData);
+            });
+        }
+        return result;
+    }
+
+    protected override onDecode(data: IBagData, key: keyof IBagData) {
+        switch (key) {
+            case "collect": return data[ key ];
+            default:
+                const value = data[ key ] as unknown as any[][];
+                const keys = value.shift();
+                const result = [];
+                const cls = key == "equipment" ? Equipment : Goods;
+                value.forEach(v => {
+                    const temp = {} as any;
+                    keys.forEach((k, index) => temp[ k ] = v[ index ]);
+                    result.push(new cls().decode(temp));
+                });
+                return result;
+        }
     }
 }

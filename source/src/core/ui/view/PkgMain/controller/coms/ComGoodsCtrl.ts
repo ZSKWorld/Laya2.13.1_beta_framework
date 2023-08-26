@@ -1,78 +1,126 @@
+import { ItemBagType } from "../../../../../net/enum/ItemEnum";
+import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
+import { ViewID } from "../../../../core/ViewID";
+import { UIUtility } from "../../../../tool/UIUtility";
 import { ComGoodsMsg, ComGoodsView } from "../../view/coms/ComGoodsView";
+import { RenderBagView } from "../../view/renders/RenderBagView";
+import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
+import { UIGoodsInfoData } from "../UIGoodsInfoCtrl";
 
 export interface ComGoodsData {
 
 }
 
 export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
+	private items: IGoods[] | IEquipment[];
+	private showType: ItemBagType = ItemBagType.Collect;
 
-    override onAdded() {
-		this.addMessage(ComGoodsMsg.OnBtnShouCangClick, this.onBtnShouCangClick);
-		this.addMessage(ComGoodsMsg.OnBtnEquipClick, this.onBtnEquipClick);
-		this.addMessage(ComGoodsMsg.OnBtnPropClick, this.onBtnPropClick);
-		this.addMessage(ComGoodsMsg.OnBtnGemClick, this.onBtnGemClick);
-		this.addMessage(ComGoodsMsg.OnBtnMaterialClick, this.onBtnMaterialClick);
-		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.onBtnBookClick);
-		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.onBtnOtherClick);
+	override onAdded() {
+		this.addMessage(ComGoodsMsg.OnBtnShouCangClick, this.refreshListByType, [ ItemBagType.Collect ]);
+		this.addMessage(ComGoodsMsg.OnBtnEquipClick, this.refreshListByType, [ ItemBagType.Equip ]);
+		this.addMessage(ComGoodsMsg.OnBtnPropClick, this.refreshListByType, [ ItemBagType.Prop ]);
+		this.addMessage(ComGoodsMsg.OnBtnGemClick, this.refreshListByType, [ ItemBagType.Gem ]);
+		this.addMessage(ComGoodsMsg.OnBtnMaterialClick, this.refreshListByType, [ ItemBagType.Material ]);
+		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.refreshListByType, [ ItemBagType.Book ]);
+		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.refreshListByType, [ ItemBagType.Other ]);
+
 		this.addMessage(ComGoodsMsg.OnBtnQualityUpClick, this.onBtnQualityUpClick);
 		this.addMessage(ComGoodsMsg.OnBtnQualityDownClick, this.onBtnQualityDownClick);
 		this.addMessage(ComGoodsMsg.OnBtnTypeUpClick, this.onBtnTypeUpClick);
 		this.addMessage(ComGoodsMsg.OnBtnTypeDownClick, this.onBtnTypeDownClick);
 		this.addMessage(ComGoodsMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
 		this.addMessage(ComGoodsMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
-    }
+
+		UIUtility.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
+	}
+
+	override onEnable(): void {
+		this.refreshListByType(this.showType);
+	}
+
+	@RegisterEvent(UserDataEvent.BagData_Collect_Changed)
+	@RegisterEvent(UserDataEvent.BagData_Equipment_Changed)
+	@RegisterEvent(UserDataEvent.BagData_Gem_Changed)
+	@RegisterEvent(UserDataEvent.BagData_Prop_Changed)
+	@RegisterEvent(UserDataEvent.BagData_Material_Changed)
+	@RegisterEvent(UserDataEvent.BagData_Book_Changed)
+	@RegisterEvent(UserDataEvent.BagData_Other_Changed)
+	private refreshListByType(type: ItemBagType) {
+		const same = type == null || type == this.showType;
+		this.showType = type ?? this.showType;
+		this.items = userData.bag.getItems(this.showType) as any;
+		this.view.list_item.numItems = this.items.length;
+		!same && this.view.trans_list.play();
+	}
+
+	private onListRenderer(index: number, item: RenderBagView) {
+		item.refreshGoods(this.items[ index ]);
+	}
+
+	private onListClick(item: any) {
+		const list = this.view.list_item;
+		const index = list.childIndexToItemIndex(list.getChildIndex(item));
+		const data = this.items[ index ];
+		if (this.showType == ItemBagType.Equip) {
+			let equip1 = <IEquipment>data;
+			let equip2 = <IEquipment>userData.body.getDressedEquip(equip1.part);
+			this.showView<UIEquipmentInfoData>(ViewID.UIEquipmentInfoView, { equip1, equip2, fromBag: true });
+		} else {
+			this.showView<UIGoodsInfoData>(ViewID.UIGoodsInfoView, { id: data.id, buy: false });
+		}
+	}
 
 	private onBtnShouCangClick() {
-	
+
 	}
 
 	private onBtnEquipClick() {
-	
+
 	}
 
 	private onBtnPropClick() {
-	
+
 	}
 
 	private onBtnGemClick() {
-	
+
 	}
 
 	private onBtnMaterialClick() {
-	
+
 	}
 
 	private onBtnBookClick() {
-	
+
 	}
 
 	private onBtnOtherClick() {
-	
+
 	}
 
 	private onBtnQualityUpClick() {
-	
+
 	}
 
 	private onBtnQualityDownClick() {
-	
+
 	}
 
 	private onBtnTypeUpClick() {
-	
+
 	}
 
 	private onBtnTypeDownClick() {
-	
+
 	}
 
 	private onBtnScoreUpClick() {
-	
+
 	}
 
 	private onBtnScoreDownClick() {
-	
+
 	}
 
 }

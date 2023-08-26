@@ -1,13 +1,15 @@
 import { Formula } from "../../utils/Formula";
 import { GameUtil } from "../../utils/GameUtil";
+import { cfgMgr } from "../config/CfgManager";
 import { BaseDataType } from "../enum/ItemEnum";
+import { Decode } from "./Decode";
 class CittaData implements ICittaData {
     constructor() {
         GameUtil.cantSyncObj(this);
     }
 }
 
-export class Base implements IBase {
+export class Base extends Decode<IBaseData, IBase> implements IBase {
     /** 金币 */
     coin: number = 0;
     /** 元宝 */
@@ -42,28 +44,18 @@ export class Base implements IBase {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
-    
-    encode() {
-        return this;
-    }
-
-    decode(data: IBaseData): IBase {
-        if (data)
-            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
-        return this;
-    }
 
     getMaxVigro(): number {
         const { citta } = this;
         let xinFaJL = 0;
-        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLAdd));
+        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorAddition));
         return Math.floor(86400 + xinFaJL);
     }
 
     getVigorRecoveryRate(): number {
         const { citta } = this;
         let xinFaJLHF = 0;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLHFAdd));
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorRecoverAddition));
         return 1 + xinFaJLHF;
     }
 
@@ -111,7 +103,7 @@ export class Base implements IBase {
                 this.exp -= this.getUpgradeExp();
                 this.cengJi++;
             };
-            const maxCengji = +cfgMgr.Const[ 1005 ].Value;
+            const maxCengji = +cfgMgr.Const[ 1005 ].value;
             if (cfgMgr.JingJie[ this.jingJie + 1 ]) {
                 //升境界
                 if (this.cengJi > maxCengji) {

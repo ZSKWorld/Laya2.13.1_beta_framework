@@ -1,5 +1,9 @@
 import UIMain from "../../../ui/PkgMain/UIMain";
 import { ResPath } from "../../../../common/ResPath";
+import { UserDataEvent } from "../../../../userData/UserDataEvent";
+import { GameUtil } from "../../../../common/GameUtil";
+import { MathUtil } from "../../../../libs/math/MathUtil";
+import { UserUtil } from "../../../../userData/UserUtil";
 
 export const enum UIMainMsg {
 	OnBtnTrainClick = "UIMain_OnBtnTrainClick",
@@ -11,6 +15,7 @@ export const enum UIMainMsg {
 	OnBtnSettingClick = "UIMain_OnBtnSettingClick",
 	OnBtnRankClick = "UIMain_OnBtnRankClick",
 	OnBtnSphereClick = "UIMain_OnBtnSphereClick",
+	OnBtnSphereDraged = "OnBtnSphereDraged",
 }
 
 export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
@@ -27,6 +32,29 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		btn_setting.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnSettingClick ]);
 		btn_rank.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnRankClick ]);
 		btn_sphere.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnSphereClick ]);
+		btn_sphere.on(fgui.Events.DRAG_START, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, true ]);
+		btn_sphere.on(fgui.Events.DRAG_END, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, false ]);
+		
+		btn_sphere.draggable = true;
     }
+
+	@RegisterEvent(UserDataEvent.AccountData_Nickname_Changed)
+	@RegisterEvent(UserDataEvent.BaseData_JingJie_Changed)
+	@RegisterEvent(UserDataEvent.BaseData_CengJi_Changed)
+	@RegisterEvent(UserDataEvent.BaseData_Exp_Changed)
+	@RegisterEvent(UserDataEvent.BaseData_Coin_Changed)
+	@RegisterEvent(UserDataEvent.BaseData_Vcoin_Changed)
+	@RegisterEvent(UserDataEvent.BaseData_Sect_Changed)
+	refreshPlayerInfo() {
+		this.txt_nickname.text = userData.account.nickname;
+		const { jingJie, cengJi, exp, coin, vcoin, sect } = userData.base;
+
+		const nextJingJieExp = UserUtil.GetUpgradExp(jingJie, cengJi);
+		this.txt_level.text = UserUtil.GetJingJieStr(jingJie, cengJi);
+		this.txt_exp.text = nextJingJieExp == 0 ? "(最高境界)" : (MathUtil.ToGroupNumber(exp) + "/" + MathUtil.ToGroupNumber(nextJingJieExp));
+		this.txt_coin.text = "金币:" + MathUtil.ToGroupNumber(coin, 4);
+		this.txt_ingot.text = "元宝:" + MathUtil.ToGroupNumber(vcoin, 4);
+		this.txt_sect.text = "门派：" + (cfgMgr.Sect[ sect ]?.name || "无");
+	}
 
 }

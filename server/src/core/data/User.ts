@@ -6,9 +6,10 @@ import { Bag } from "./Bag";
 import { Base } from "./Base";
 import { Battle } from "./Battle";
 import { Body } from "./Body";
+import { Decode } from "./Decode";
 import { Friend } from "./Friend";
 
-export class User implements IUser {
+export class User extends Decode<IUserData, IUser> implements IUser {
     account: IAccount;
     base: IBase;
     offline?: IOffline;
@@ -18,6 +19,7 @@ export class User implements IUser {
     battle: IBattle;
 
     constructor(account: string, password: string, nickname: string) {
+        super();
         this.account = new Account(account, password, nickname);
         this.base = new Base();
         this.friend = new Friend();
@@ -30,39 +32,20 @@ export class User implements IUser {
 
     clearSyncInfo(): void { }
 
-    login(source: IUser) {
-        this.account.decode(source.account);
-        this.base.decode(source.base);
-        this.friend.decode(source.friend);
-        this.body.decode(source.body);
-        this.bag.decode(source.bag);
-        this.battle.decode(source.battle);
-        this.offline = this.getOffline();
-        this.account.login();
-    }
-
-    logout() {
-        this.account.logout();
-        this.save();
-    }
-
     save() {
         Util.saveData(this.encode());
     }
 
-    encode() {
-        const result = {} as IUserData;
-        result.account = this.account.encode();
-        result.base = this.base.encode();
-        result.friend = this.friend.encode();
-        result.body = this.body.encode();
-        result.bag = this.bag.encode();
-        result.battle = this.battle.encode();
-        return result;
+    protected override onEncode(key: keyof this) {
+        if (key == "offline") return null;
+        else return (<IDecode<any, any>>this[ key ]).encode();
     }
 
-    decode(data: IUserData) {
-        return this;
+    protected override onDecode(data: IUserData, key: keyof IUserData) {
+        switch (key) {
+            case "offline": return this.getOffline();
+            default: return this[ key ].decode(data[ key ] as any);
+        }
     }
 
     private getOffline(): IOffline {

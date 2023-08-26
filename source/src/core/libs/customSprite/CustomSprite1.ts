@@ -71,7 +71,6 @@ export class CustomSprite1 extends BaseCustomSprite<DissValue2D> {
 //                 return;
 //             }
 //             this._value = MathUtil.Clamp01(this._value);
-//             console.log(this._value);
 //             spe.setDissolveThreshold(this._value);
 //         });
 //     }));

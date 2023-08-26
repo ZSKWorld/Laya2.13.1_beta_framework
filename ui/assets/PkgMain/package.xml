@@ -17,7 +17,7 @@
     <component id="sbd013" name="CmbPlayerInfo.xml" path="/Component/Combox/"/>
     <component id="sbd01b" name="UIEquipmentInfo.xml" path="/" exported="true"/>
     <component id="whk31d" name="ComRenWu.xml" path="/Component/Main/Char/"/>
-    <component id="irlv1e" name="UIItemInfo.xml" path="/" exported="true"/>
+    <component id="irlv1e" name="UIGoodsInfo.xml" path="/" exported="true"/>
     <component id="9f1k1h" name="ComZhiZuo.xml" path="/Component/Main/Abode/"/>
     <component id="btv51i" name="ComXinFa.xml" path="/Component/Main/Char/"/>
     <component id="btv51j" name="ItemXinFa.xml" path="/Component/Main/Char/Item/"/>

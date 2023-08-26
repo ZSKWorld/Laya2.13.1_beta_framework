@@ -1,3 +1,4 @@
+import { cfgMgr } from "../../config/CfgManager";
 import { DataType } from "../../enum/ItemEnum";
 
 export class ItemHelper {
@@ -14,7 +15,7 @@ export class ItemHelper {
      * @returns 物品数量
      */
     static getItemCount(data: IUser, id: number): number {
-        switch (cfgMgr.Item[ id ].DataType) {
+        switch (cfgMgr.Item[ id ].dataType) {
             case DataType.BaseData: return data.base.getItemCount(id);
             case DataType.BagData: return data.bag.getItem(id)?.count || 0;
             default: return 0;
@@ -30,7 +31,7 @@ export class ItemHelper {
      static checkJingJieEnough(data: IUser, id: number): boolean {
         const item = cfgMgr.Item[ id ];
         if (!item) return false;
-        const { jingJie: checkedJingJie, cengJi: checkedCengJi } = item.UseRequire;
+        const { jingJie: checkedJingJie, cengJi: checkedCengJi } = item.useRequire;
         const { jingJie, cengJi } = data.base;
         return jingJie > checkedJingJie || (jingJie == checkedJingJie && cengJi >= checkedCengJi);
     }

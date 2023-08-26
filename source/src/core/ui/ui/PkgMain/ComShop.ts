@@ -30,8 +30,8 @@ export default class ComShop extends fgui.GComponent {
 	public btn_qt:BtnCornerTxt;
 	public btn_yr:BtnCornerTxt;
 	public list_item:fgui.GList;
-	public EffectShow:fgui.Transition;
-	public EffectList:fgui.Transition;
+	public trans_show:fgui.Transition;
+	public trans_list:fgui.Transition;
 	public static URL:string = "ui://vith2b66sbd03";
 
 	public static createInstance():ComShop {
@@ -65,7 +65,7 @@ export default class ComShop extends fgui.GComponent {
 		this.btn_qt = <BtnCornerTxt>(this.getChildAt(27));
 		this.btn_yr = <BtnCornerTxt>(this.getChildAt(28));
 		this.list_item = <fgui.GList>(this.getChildAt(30));
-		this.EffectShow = this.getTransitionAt(0);
-		this.EffectList = this.getTransitionAt(1);
+		this.trans_show = this.getTransitionAt(0);
+		this.trans_list = this.getTransitionAt(1);
 	}
 }

@@ -1,5 +1,7 @@
 import { MathUtil } from "../../../utils/MathUtil";
-import { IGoods } from "../../data/Goods";
+import { ProxyMgr } from "../../../utils/ProxyMgr";
+import { cfgMgr } from "../../config/CfgManager";
+import { Goods } from "../../data/Goods";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
 import { ItemHelper } from "./ItemHelper";
 
@@ -13,9 +15,11 @@ export class ItemHandle {
      */
     static changeItemCount(data: IUser, id: number, count: number) {
         const item = cfgMgr.Item[ id ];
-        switch (item.DataType) {
+        switch (item.dataType) {
             case DataType.BaseData: data.base.changeItemCount(id, count); break;
-            case DataType.BagData: data.bag.changeItemCount(id, count); break;
+            case DataType.BagData:
+                data.bag.changeItemCount(id, count);
+                break;
             default: break;
         }
     }
@@ -36,12 +40,12 @@ export class ItemHandle {
         else if (skillBook) {
             this.changeItemCount(data, id, -1);
             data.base.skill.push(id);
-            return [ new IGoods(skillBook.ID, 1) ];
+            return [ new Goods(skillBook.id, 1) ];
         }
         else if (xinFaBook) {
             this.changeItemCount(data, id, -1);
             data.base.citta[ id ] = 1;
-            return [ new IGoods(xinFaBook.ID, 1) ];
+            return [ new Goods(xinFaBook.id, 1) ];
         }
         return [];
     }
@@ -54,11 +58,11 @@ export class ItemHandle {
      * @returns
      */
     static sellItem(data: IUser, id: number, count: number) {
-        const rewards: IGoods[] = [];
-        const sellRewards = cfgMgr.Item[ id ].SellRewards;
+        const rewards: Goods[] = [];
+        const sellRewards = cfgMgr.Item[ id ].sellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(v => {
-                rewards.push(new IGoods(v.id, v.count * count));
+                rewards.push(new Goods(v.id, v.count * count));
                 if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                 else {
                     this.changeItemCount(data, v.id, v.count * count);
@@ -78,7 +82,7 @@ export class ItemHandle {
      * @returns 使用后获得的物品
      */
     private static useProp(data: IUser, id: number, count: number) {
-        const rewards: IGoods[] = [];
+        const rewards: Goods[] = [];
         let useCount = 1;
         switch (id) {
             case 2007: data.battle.copy = {}; break;
@@ -87,8 +91,8 @@ export class ItemHandle {
             case 2010: break;
             default:
                 useCount = count;
-                cfgMgr.Props[ id ].Rewards.forEach(v => {
-                    rewards.push(new IGoods(v.id, v.count * count));
+                cfgMgr.Props[ id ].rewards.forEach(v => {
+                    rewards.push(new Goods(v.id, v.count * count));
                     if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                     else this.changeItemCount(data, v.id, v.count * count);
                 });
@@ -110,10 +114,10 @@ export class ItemHandle {
         let useCount = 0;
         const food = cfgMgr.Food[ id ];
         let singleRecover = 0;
-        switch (food.RecoverType) {
-            case FoodRecoverType.NumberRecover: singleRecover = food.RecoverValue; break;
-            case FoodRecoverType.TimeRecover: singleRecover = food.RecoverValue * data.base.getVigorRecoveryRate(); break;
-            case FoodRecoverType.PercentRecover: singleRecover = food.RecoverValue * maxVigro; break;
+        switch (food.recoverType) {
+            case FoodRecoverType.NumberRecover: singleRecover = food.recoverValue; break;
+            case FoodRecoverType.TimeRecover: singleRecover = food.recoverValue * data.base.getVigorRecoveryRate(); break;
+            case FoodRecoverType.PercentRecover: singleRecover = food.recoverValue * maxVigro; break;
             default: throw new Error("未知食物类型");
         }
         const subVigro = maxVigro - data.base.vigor;
@@ -122,6 +126,6 @@ export class ItemHandle {
         else useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
         data.base.vigor = MathUtil.Clamp(data.base.vigor + singleRecover * useCount, 0, maxVigro);
         this.changeItemCount(data, id, -useCount);
-        return [ new IGoods(BaseDataType.Vigor, subVigro) ];
+        return [ new Goods(BaseDataType.Vigor, subVigro) ];
     }
 }

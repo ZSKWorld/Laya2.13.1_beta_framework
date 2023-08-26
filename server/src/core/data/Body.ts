@@ -1,7 +1,8 @@
 import { EquipmentPart } from "../enum/ItemEnum";
+import { Decode } from "./Decode";
 import { Equipment } from "./Equipment";
 
-export class Body implements IBody {
+export class Body extends Decode<IBodyData, IBody> implements IBody {
     /** 武器 */
     weapon: IEquipment = null;
     /** 头盔 */
@@ -42,19 +43,6 @@ export class Body implements IBody {
     amuletGems: number[] = [];
     /** 鞋子上装备的宝石 */
     shoesGems: number[] = [];
-    encode(): IBody {
-        return this;
-    }
-
-    decode(data: IBody): IBody {
-        if (data) {
-            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
-            const equips = [ "weapon", "helmet", "necklace", "clothes", "ring", "trousers", "amulet", "shoes", "mount",
-                "hiddenWeeapon", "fashion", "magicWeapon", ];
-            equips.forEach(v => this[ v ] && (this[ v ] = new Equipment().decode(this[ v ])));
-        }
-        return this;
-    }
 
     getDressedEquip(part: number): IEquipment {
         switch (part) {
@@ -89,5 +77,12 @@ export class Body implements IBody {
             case EquipmentPart.MagicWeapon: this.magicWeapon = equip;
             default: return null;
         }
+    }
+
+    protected override onDecode(data: IBodyData, key: keyof IBodyData) {
+        const equips = [ "weapon", "helmet", "necklace", "clothes", "ring", "trousers", "amulet", "shoes", "mount",
+            "hiddenWeeapon", "fashion", "magicWeapon", ];
+        if (equips.includes(key)) return data[ key ] ? new Equipment().decode(data[ key ] as IEquipmentData) : null;
+        else return data[ key ];
     }
 }

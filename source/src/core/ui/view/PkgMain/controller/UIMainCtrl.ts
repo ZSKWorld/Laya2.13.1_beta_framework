@@ -3,8 +3,8 @@ import { localData } from "../../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { MathUtil } from "../../../../libs/math/MathUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
+import { ViewID } from "../../../core/ViewID";
 import { richStrMgr } from "../../../tool/RichStrManager";
-import { UIUtility } from "../../../tool/UIUtility";
 import { UIMainMsg, UIMainView } from "../view/UIMainView";
 
 export interface UIMainData {
@@ -12,17 +12,20 @@ export interface UIMainData {
 }
 
 export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
+	/** 悬浮球拖拽中 */
+	private _sphereDragged: boolean;
 
-    override onAdded() {
+	override onAdded() {
 		this.addMessage(UIMainMsg.OnBtnTrainClick, this.onBtnTrainClick);
 		this.addMessage(UIMainMsg.OnBtnCharClick, this.onBtnCharClick);
 		this.addMessage(UIMainMsg.OnBtnGoodsClick, this.onBtnGoodsClick);
 		this.addMessage(UIMainMsg.OnBtnShopClick, this.onBtnShopClick);
 		this.addMessage(UIMainMsg.OnBtnAbodeClick, this.onBtnAbodeClick);
-		this.addMessage(UIMainMsg.OnBtnChatClick, this.onBtnChatClick);
-		this.addMessage(UIMainMsg.OnBtnSettingClick, this.onBtnSettingClick);
+		this.addMessage(UIMainMsg.OnBtnChatClick, this.showView, [ ViewID.UIChatView ]);
+		this.addMessage(UIMainMsg.OnBtnSettingClick, this.showView, [ ViewID.UISettingView ]);
 		this.addMessage(UIMainMsg.OnBtnRankClick, this.onBtnRankClick);
 		this.addMessage(UIMainMsg.OnBtnSphereClick, this.onBtnSphereClick);
+		this.addMessage(UIMainMsg.OnBtnSphereDraged, this.onBtnSphereDraged);
 
 		const { offline, account } = userData;
 		const txt = richStrMgr.start()
@@ -44,7 +47,12 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 			.combineBreak(richStrMgr.start("熬死大佬，你就是大佬!").size(60).color("#FF842E").end())
 			.combineBreak(`战斗速度调整为${ battleSpeed }倍速`, 0);
 		this.dispatch(GameEvent.AddExperienceLog, txt.end());
-    }
+	}
+
+	override onEnable(): void {
+		this._sphereDragged = false;
+		this.view.refreshPlayerInfo();
+	}
 
 	private onBtnTrainClick() {
 
@@ -66,20 +74,22 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 
 	}
 
-	private onBtnChatClick() {
-
-	}
-
-	private onBtnSettingClick() {
-
-	}
-
 	private onBtnRankClick() {
 
 	}
 
 	private onBtnSphereClick() {
+		if (this._sphereDragged) return;
+		this.showView(ViewID.UISphereToolView);
+	}
 
+	private onBtnSphereDraged(draged: boolean) {
+		if (!!draged) this.setSphereDraged(true);
+		else Laya.timer.frameOnce(1, this, this.setSphereDraged, [ false ]);
+	}
+
+	private setSphereDraged(value: boolean) {
+		this._sphereDragged = value;
 	}
 
 }

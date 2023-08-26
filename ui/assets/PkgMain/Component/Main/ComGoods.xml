@@ -84,7 +84,7 @@
       <item/>
     </list>
   </displayList>
-  <transition name="EffectShow" autoPlay="true">
+  <transition name="trans_show" autoPlay="true">
     <item time="0" type="Alpha" target="n37_9f1k" value="0"/>
     <item time="0" type="XY" target="n19_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
     <item time="0" type="XY" target="n20_sbd0" value="-,-66"/>
@@ -101,7 +101,7 @@
     <item time="6" type="XY" target="n25_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
     <item time="8" type="Alpha" target="n37_9f1k" tween="true" startValue="0" endValue="1" duration="3"/>
   </transition>
-  <transition name="EffectList" autoPlay="true">
+  <transition name="trans_list" autoPlay="true">
     <item time="0" type="Size" target="n36_sbd0" tween="true" startValue="-,0" endValue="-,1463" duration="15"/>
   </transition>
 </component>

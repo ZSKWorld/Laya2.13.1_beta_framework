@@ -1,4 +1,4 @@
-const ProxyKey = Symbol(111);
+export const ProxyKey = Symbol(111);
 export class ProxyMgr {
     private static proxyMap: { [ uid: string ]: any } = {};
 
@@ -6,7 +6,7 @@ export class ProxyMgr {
         dataKey = dataKey || "";
         if (typeof target === "object" && target !== null && !target[ ProxyKey ]) {
             target[ ProxyKey ] = true;
-            Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }${ dataKey ? "." : "" }${ key }`, target[ key ]));
+            Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }.${ key }`, target[ key ]));
             Object.defineProperty(target, "getSyncInfo", {
                 value: function () {
                     const result = {};
@@ -18,6 +18,7 @@ export class ProxyMgr {
                             let tempResult = result;
                             const properties = keyStr.split(".");
                             properties.forEach((key, index) => {
+                                if (!key) return;
                                 if (index = properties.length - 1) {
                                     tempResult[ key ] = tempThis[ key ];
                                 } else {
@@ -54,6 +55,6 @@ export class ProxyMgr {
             });
             return result;
         } else
-            return target as any;
+            return target;
     }
 }

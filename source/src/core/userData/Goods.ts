@@ -1,17 +1,18 @@
 import { GameUtil } from "../common/GameUtil";
 import { EquipmentPart } from "../net/enum/ItemEnum";
 import { Decode } from "./Decode";
+import { UserUtil } from "./UserUtil";
 class Item<T> extends Decode<T>{
     id: number;
 
-    get name() { return cfgMgr.Item[ this.id ].Name; }
+    get name() { return cfgMgr.Item[ this.id ].name; }
     get colorName() { return GameUtil.GetColorStr(this.quality, this.name); }
-    get quality() { return cfgMgr.Item[ this.id ].Quality; }
-    get color() { return cfgMgr.Color[ this.quality ].Color; }
-    get description() { return cfgMgr.Item[ this.id ].Description; }
-    get salable() { return cfgMgr.Item[ this.id ].Salable; }
-    get useRequire() { return cfgMgr.Item[ this.id ].UseRequire; }
-    get useRequireStr() { return GameUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
+    get quality() { return cfgMgr.Item[ this.id ].quality; }
+    get color() { return cfgMgr.Color[ this.quality ].color; }
+    get description() { return cfgMgr.Item[ this.id ].desc; }
+    get salable() { return cfgMgr.Item[ this.id ].salable; }
+    get useRequire() { return cfgMgr.Item[ this.id ].useRequire; }
+    get useRequireStr() { return UserUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
 }
 
 export class Goods extends Item<IGoods> implements IGoods {
@@ -35,7 +36,7 @@ export class Equipment extends Item<IEquipment> implements IEquipment {
     bodyAttri: number[];
     //#endregion
 
-    get part(): EquipmentPart { return cfgMgr.Equipment[ this.id ].Part; }
+    get part(): EquipmentPart { return cfgMgr.Equipment[ this.id ].part; }
     get levelName() { return this.name + " +" + this.level; }
     get colorLevelName() { return GameUtil.GetColorStr(this.quality, this.levelName); }
     get infoStr() {
@@ -47,10 +48,10 @@ export class Equipment extends Item<IEquipment> implements IEquipment {
         境界需求:${ this.useRequireStr }<br>
         铭刻:0/100<br>
         ${ this.shenYou }阶神佑加成: ${ (/**equip.shenYouAddition */0 * 100).toFixed(2) }%<br>
-        ${ this.mainAttri.map(v => GameUtil.GetColorStr(this.quality, GameUtil.GetAttributeName(v)) + "<br>").join("") }
-        ${ this.wuXingAttri.map(v => GameUtil.GetColorStr(4, GameUtil.GetAttributeName(v)) + "<br>").join("") }
-        ${ this.secondAttri.map(v => GameUtil.GetColorStr(5, GameUtil.GetAttributeName(v)) + "<br>").join("") }
-        ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, GameUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.mainAttri.map(v => GameUtil.GetColorStr(this.quality, UserUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.wuXingAttri.map(v => GameUtil.GetColorStr(4, UserUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.secondAttri.map(v => GameUtil.GetColorStr(5, UserUtil.GetAttributeName(v)) + "<br>").join("") }
+        ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, UserUtil.GetAttributeName(v)) + "<br>").join("") }
         `;
     }
 }

@@ -19,15 +19,6 @@ declare interface IUser extends IUserData, IDecode<IUserData, IUser> {
     getSyncInfo(): Partial<IUser>;
     clearSyncInfo(): void;
 
-    /**
-     * 登录
-     * @param source 元数据
-     */
-    login(source: IUserData): void;
-
-    /** 登出 */
-    logout(): void;
-
     /** 保存数据 */
     save(): void;
 }

@@ -1,4 +1,5 @@
 import { GameUtil } from "../../utils/GameUtil";
+import { Decode } from "./Decode";
 
 class BattleData implements IBattleItem {
     constructor() {
@@ -6,7 +7,7 @@ class BattleData implements IBattleItem {
     }
 }
 
-export class Battle implements IBattle {
+export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
     /**关卡数据 */
     level = new BattleData();
     /**副本数据 */
@@ -15,13 +16,4 @@ export class Battle implements IBattle {
     secret = new BattleData();
     /**boss数据 */
     boss = new BattleData();
-    encode(): IBattle {
-        return this;
-    }
-
-    decode(data: IBattle): IBattle {
-        if (data)
-            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
-        return this;
-    }
 }

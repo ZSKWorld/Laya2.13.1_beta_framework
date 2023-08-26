@@ -9,7 +9,11 @@ export class UIWaitingView extends ExtensionClass<IView, UIWaiting>(UIWaiting) {
     static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
 	override onCreate() {
-        
+
+    }
+
+    refreshText(text: string) {
+        this.txt_info.text = text;
     }
 
 }

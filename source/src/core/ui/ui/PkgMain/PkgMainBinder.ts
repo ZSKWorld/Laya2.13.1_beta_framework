@@ -5,7 +5,7 @@ import ComXinFa from "./ComXinFa";
 import ItemXinFa from "./ItemXinFa";
 import UISect from "./UISect";
 import UISphereTool from "./UISphereTool";
-import UIItemInfo from "./UIItemInfo";
+import UIGoodsInfo from "./UIGoodsInfo";
 import RenderChatMsg from "./RenderChatMsg";
 import BtnCheck from "./BtnCheck";
 import UIChat from "./UIChat";
@@ -34,7 +34,7 @@ export default class PkgMainBinder {
 		fgui.UIObjectFactory.setExtension(ItemXinFa.URL, ItemXinFa);
 		fgui.UIObjectFactory.setExtension(UISect.URL, UISect);
 		fgui.UIObjectFactory.setExtension(UISphereTool.URL, UISphereTool);
-		fgui.UIObjectFactory.setExtension(UIItemInfo.URL, UIItemInfo);
+		fgui.UIObjectFactory.setExtension(UIGoodsInfo.URL, UIGoodsInfo);
 		fgui.UIObjectFactory.setExtension(RenderChatMsg.URL, RenderChatMsg);
 		fgui.UIObjectFactory.setExtension(BtnCheck.URL, BtnCheck);
 		fgui.UIObjectFactory.setExtension(UIChat.URL, UIChat);

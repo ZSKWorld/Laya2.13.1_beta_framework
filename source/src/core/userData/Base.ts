@@ -1,6 +1,7 @@
 import { GameUtil } from "../common/GameUtil";
 import { BaseDataType, DataType } from "../net/enum/ItemEnum";
 import { Decode } from "./Decode";
+import { UserUtil } from "./UserUtil";
 
 export class Base extends Decode<IBase> implements IBase {
     private static readonly ClassName = "BaseData";
@@ -24,19 +25,19 @@ export class Base extends Decode<IBase> implements IBase {
     usingSkill: number[];
     //#endregion
 
-    get upgradeExp() { return GameUtil.GetUpgradExp(this.jingJie, this.cengJi); }
+    get upgradeExp() { return UserUtil.GetUpgradExp(this.jingJie, this.cengJi); }
 
     get maxVigro() {
         let xinFaJL = 0;
         const citta = this.citta;
-        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLAdd));
+        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorAddition));
         return Math.floor(86400 + xinFaJL);
     }
 
     get vigorRecover() {
         let xinFaJLHF = 0;
         const citta = this.citta;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].JLHFAdd));
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorRecoverAddition));
         return 1 + xinFaJLHF;
     }
 

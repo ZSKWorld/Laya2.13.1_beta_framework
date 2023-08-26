@@ -3,9 +3,9 @@ import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
 import { Color, Logger } from "./utils/Logger";
-import { CfgManager } from "./core/config/CfgManager";
+import { cfgMgr } from "./core/config/CfgManager";
 require("../libs/extends.js");
-const cfgMgr = new CfgManager();
+cfgMgr.load();
 Logger.setEnable(true);
 const originConnection: { [ key: string ]: websocket.connection } = {};
 const originConOnMessage = function (conKey: string, msg: websocket.Message) {

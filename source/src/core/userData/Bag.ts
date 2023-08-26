@@ -25,7 +25,7 @@ export class Bag extends Decode<IBag> implements IBag {
         const item = cfgMgr.Item[ id ];
         if (!item) return null;
         let datas: IGoods[];
-        switch (item.BagType) {
+        switch (item.bagType) {
             case ItemBagType.Prop: datas = this.prop; break;
             case ItemBagType.Gem: datas = this.gem; break;
             case ItemBagType.Material: datas = this.material; break;

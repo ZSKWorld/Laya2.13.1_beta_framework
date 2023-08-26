@@ -1,8 +1,10 @@
 import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
+import { cfgMgr } from "../config/CfgManager";
 import { EquipmentPart } from "../enum/ItemEnum";
+import { Decode } from "./Decode";
 
-export class Equipment implements IEquipment {
+export class Equipment extends Decode<IEquipmentData, IEquipment> implements IEquipment {
     id: number;
     count: number;
     uid: string = Util.CreateUID();
@@ -15,25 +17,20 @@ export class Equipment implements IEquipment {
     secondAttri: number[] = [];
     bodyAttri: number[] = [];
     get part(): EquipmentPart {
-        return cfgMgr.Equipment[ this.id ].Part;
+        return cfgMgr.Equipment[ this.id ].part;
     }
     constructor(id: number = 0) {
+        super();
         this.id = id;
-    }
-    encode(): IEquipmentData {
-        throw new Error("Method not implemented.");
-    }
-    decode(data: IEquipmentData): IEquipment {
-        throw new Error("Method not implemented.");
     }
 
     createAttribute(): IEquipment {
-        const { Main, WuXing, Second, Body } = cfgMgr.EquipmentAddition[ this.part ];
-        this.star = MathUtil.RandomInt(1, +cfgMgr.Const[ 1010 ].Value);
-        Equipment.randomAttribute([ ...Main ], this.mainAttri, false).sort(Equipment.sortFunc);
-        Equipment.randomAttribute([ ...WuXing ], this.wuXingAttri, true).sort(Equipment.sortFunc);
-        Equipment.randomAttribute([ ...Second ], this.secondAttri, true).sort(Equipment.sortFunc);
-        Equipment.randomAttribute([ ...Body ], this.bodyAttri, true).sort(Equipment.sortFunc);
+        const { main, wuXing, second, body } = cfgMgr.EquipmentAddition[ this.part ];
+        this.star = MathUtil.RandomInt(1, +cfgMgr.Const[ 1010 ].value);
+        Equipment.randomAttribute([ ...main ], this.mainAttri, false).sort(Equipment.sortFunc);
+        Equipment.randomAttribute([ ...wuXing ], this.wuXingAttri, true).sort(Equipment.sortFunc);
+        Equipment.randomAttribute([ ...second ], this.secondAttri, true).sort(Equipment.sortFunc);
+        Equipment.randomAttribute([ ...body ], this.bodyAttri, true).sort(Equipment.sortFunc);
         return this;
     }
 

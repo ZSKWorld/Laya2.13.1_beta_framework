@@ -2,7 +2,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-export class CfgManager {
+class CfgManager {
 	/** 关卡 */
 	readonly Level: CfgLevel;
 	/** 副本 */
@@ -50,7 +50,7 @@ export class CfgManager {
 	/** 错误码 */
 	readonly Error: CfgError;
 
-    constructor() {
+    load() {
 		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/config/Config.json")).toString());
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;
@@ -96,3 +96,4 @@ export class CfgManager {
 		};
 	}
 }
+export const cfgMgr = new CfgManager();

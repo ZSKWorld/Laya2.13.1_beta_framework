@@ -49,7 +49,7 @@ export class CfgManager {
 	/** 错误码 */
 	readonly Error: CfgError;
 
-	constructor() {
+    constructor() {
 		let cfgData = Laya.loader.getRes(ResPath.ConfigPath.Config);
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;

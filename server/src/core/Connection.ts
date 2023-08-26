@@ -66,7 +66,7 @@ export class Connection {
         this._logined = true;
         this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));
         connectionMgr.addConnection(data.account.uid, this);
-        this._user.login(data);
+        this._user.decode(data);
     }
 
     response(data: UserOutput) {
@@ -105,7 +105,7 @@ export class Connection {
 
         this._connection = null;
 
-        this._user?.logout();
+        this._user?.save();
         this._user = null;
         Pool.recover(PoolKey.CommonConnection, this);
     }
@@ -130,7 +130,8 @@ export class Connection {
     private onConnectionClose() {
         this._logined = false;
         this._connection = null;
-        this._user?.logout();
+        this._user?.save();
+        this._user = null;
         connectionMgr.connectionClosed(this._token, this);
     }
 }

@@ -1,3 +1,4 @@
+import { cfgMgr } from "../../config/CfgManager";
 import { ErrorCode } from "../../enum/ErrorCode";
 import { ItemHelper } from "./ItemHelper";
 
@@ -33,7 +34,7 @@ export class ItemChecker {
                 return ErrorCode.VIGOR_IS_FULL;
         }
         else if (ItemHelper.isSkillBook(id)) {
-            const SectRequire = (<CfgSkillBookData>usableItem).SectRequire;
+            const SectRequire = (<CfgSkillBookData>usableItem).sectRequire;
             if (SectRequire.length && SectRequire.indexOf(data.base.sect) == -1) return ErrorCode.CAN_NOT_STUDY_OTHER_SECT_SKILL;
             else if (data.base.skill.indexOf(id) != -1) return ErrorCode.SKILL_IS_LEARNED;
         } else if (ItemHelper.isXinFaBook(id)) {

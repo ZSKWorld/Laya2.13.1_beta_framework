@@ -1,4 +1,5 @@
-import { IGoods } from "../../data/Goods";
+import { cfgMgr } from "../../config/CfgManager";
+import { Goods } from "../../data/Goods";
 import { ItemHandle } from "../item/ItemHandle";
 import { ItemHelper } from "../item/ItemHelper";
 
@@ -7,9 +8,9 @@ export class ShopHandle {
     /** 购买物品 */
     static buyGoods(data: IUser, id: number, count: number) {
         const item = cfgMgr.Shop[ id ];
-        item.SellPrice.forEach(v => ItemHandle.changeItemCount(data, v.id, -v.count * count));
-        if (ItemHelper.isEquip(item.SellID)) data.bag.addNewEquip(item.SellID, count);
-        else ItemHandle.changeItemCount(data, item.SellID, count);
-        return [ new IGoods(item.SellID, count) ];
+        item.sellPrice.forEach(v => ItemHandle.changeItemCount(data, v.id, -v.count * count));
+        if (ItemHelper.isEquip(item.sellID)) data.bag.addNewEquip(item.sellID, count);
+        else ItemHandle.changeItemCount(data, item.sellID, count);
+        return [ new Goods(item.sellID, count) ];
     }
 }

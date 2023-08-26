@@ -27,7 +27,7 @@ export class UIUtility {
 		virtual: boolean = true,
 		caller?: any,
 		renderFunc?: (index?: number, item?: any) => void,
-		clickFunc?: (item?: any, evt?: Laya.Event, index?: number) => void,
+		clickFunc?: (item?: any, evt?: Laya.Event) => void,
 	) {
 		virtual && list.setVirtual();
 		list.itemRenderer?.recover();
