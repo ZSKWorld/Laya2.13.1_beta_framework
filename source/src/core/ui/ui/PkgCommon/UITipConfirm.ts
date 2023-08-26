@@ -8,7 +8,7 @@ export default class UITipConfirm extends fgui.GComponent {
 	public btn_confirm:BtnCornerTxt;
 	public txt_content:fgui.GRichTextField;
 	public txt_title:fgui.GTextField;
-	public EffectShow:fgui.Transition;
+	public trans_show:fgui.Transition;
 	public static URL:string = "ui://vx9zwsersbd05j";
 
 	public static createInstance():UITipConfirm {
@@ -20,6 +20,6 @@ export default class UITipConfirm extends fgui.GComponent {
 		this.btn_confirm = <BtnCornerTxt>(this.getChildAt(4));
 		this.txt_content = <fgui.GRichTextField>(this.getChildAt(5));
 		this.txt_title = <fgui.GTextField>(this.getChildAt(6));
-		this.EffectShow = this.getTransitionAt(0);
+		this.trans_show = this.getTransitionAt(0);
 	}
 }

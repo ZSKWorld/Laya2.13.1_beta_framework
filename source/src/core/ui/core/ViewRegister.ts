@@ -3,6 +3,7 @@ import BtnCheck from "../ui/PkgMain/BtnCheck";
 import BtnCornerTxt from "../ui/PkgCommon/BtnCornerTxt";
 import ComAbode from "../ui/PkgMain/ComAbode";
 import ComChar from "../ui/PkgMain/ComChar";
+import ComConfirm from "../ui/PkgCommon/ComConfirm";
 import ComGoods from "../ui/PkgMain/ComGoods";
 import ComNumInput from "../ui/PkgCommon/ComNumInput";
 import ComRenWu from "../ui/PkgMain/ComRenWu";
@@ -24,6 +25,7 @@ import RenderText from "../ui/PkgMain/RenderText";
 import UIBattle from "../ui/PkgBattle/UIBattle";
 import UIChat from "../ui/PkgMain/UIChat";
 import UIChooseBattle from "../ui/PkgBattle/UIChooseBattle";
+import UIConfirm from "../ui/PkgCommon/UIConfirm";
 import UIEquipmentInfo from "../ui/PkgMain/UIEquipmentInfo";
 import UIItemInfo from "../ui/PkgMain/UIItemInfo";
 import UILoading1 from "../ui/PkgCommon/UILoading1";
@@ -44,6 +46,8 @@ import { ComAbodeCtrl } from "../view/PkgMain/controller/coms/ComAbodeCtrl";
 import { ComAbodeView } from "../view/PkgMain/view/coms/ComAbodeView";
 import { ComCharCtrl } from "../view/PkgMain/controller/coms/ComCharCtrl";
 import { ComCharView } from "../view/PkgMain/view/coms/ComCharView";
+import { ComConfirmCtrl } from "../view/PkgCommon/controller/coms/ComConfirmCtrl";
+import { ComConfirmView } from "../view/PkgCommon/view/coms/ComConfirmView";
 import { ComGoodsCtrl } from "../view/PkgMain/controller/coms/ComGoodsCtrl";
 import { ComGoodsView } from "../view/PkgMain/view/coms/ComGoodsView";
 import { ComNumInputCtrl } from "../view/PkgCommon/controller/coms/ComNumInputCtrl";
@@ -81,6 +85,9 @@ import { UIChatView } from "../view/PkgMain/view/UIChatView";
 import { UIChooseBattleCtrl } from "../view/PkgBattle/controller/UIChooseBattleCtrl";
 import { UIChooseBattleProxy } from "../view/PkgBattle/proxy/UIChooseBattleProxy";
 import { UIChooseBattleView } from "../view/PkgBattle/view/UIChooseBattleView";
+import { UIConfirmCtrl } from "../view/PkgCommon/controller/UIConfirmCtrl";
+import { UIConfirmProxy } from "../view/PkgCommon/proxy/UIConfirmProxy";
+import { UIConfirmView } from "../view/PkgCommon/view/UIConfirmView";
 import { UIEquipmentInfoCtrl } from "../view/PkgMain/controller/UIEquipmentInfoCtrl";
 import { UIEquipmentInfoProxy } from "../view/PkgMain/proxy/UIEquipmentInfoProxy";
 import { UIEquipmentInfoView } from "../view/PkgMain/view/UIEquipmentInfoView";
@@ -151,6 +158,7 @@ class ViewRegister {
 		fgui.UIObjectFactory.setExtension(RenderText.URL, RenderTextView);
 
 		//Coms
+		fgui.UIObjectFactory.setExtension(ComConfirm.URL, ComConfirmView);
 		fgui.UIObjectFactory.setExtension(ComNumInput.URL, ComNumInputView);
 		fgui.UIObjectFactory.setExtension(ComTipInfo.URL, ComTipInfoView);
 		fgui.UIObjectFactory.setExtension(ComAbode.URL, ComAbodeView);
@@ -166,6 +174,7 @@ class ViewRegister {
 		//UIs
 		fgui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);
 		fgui.UIObjectFactory.setExtension(UIChooseBattle.URL, UIChooseBattleView);
+		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirmView);
 		fgui.UIObjectFactory.setExtension(UILoading1.URL, UILoading1View);
 		fgui.UIObjectFactory.setExtension(UILoading2.URL, UILoading2View);
 		fgui.UIObjectFactory.setExtension(UITipConfirm.URL, UITipConfirmView);
@@ -196,6 +205,7 @@ class ViewRegister {
 		register(ViewID.RenderTextView, RenderTextView, RenderTextCtrl);
 
 		//Coms
+		register(ViewID.ComConfirmView, ComConfirmView, ComConfirmCtrl);
 		register(ViewID.ComNumInputView, ComNumInputView, ComNumInputCtrl);
 		register(ViewID.ComTipInfoView, ComTipInfoView, ComTipInfoCtrl);
 		register(ViewID.ComAbodeView, ComAbodeView, ComAbodeCtrl);
@@ -211,6 +221,7 @@ class ViewRegister {
 		//UIs
 		register(ViewID.UIBattleView, UIBattleView, UIBattleCtrl, UIBattleProxy);
 		register(ViewID.UIChooseBattleView, UIChooseBattleView, UIChooseBattleCtrl, UIChooseBattleProxy);
+		register(ViewID.UIConfirmView, UIConfirmView, UIConfirmCtrl, UIConfirmProxy);
 		register(ViewID.UILoading1View, UILoading1View, UILoading1Ctrl, UILoading1Proxy);
 		register(ViewID.UILoading2View, UILoading2View, UILoading2Ctrl, UILoading2Proxy);
 		register(ViewID.UITipConfirmView, UITipConfirmView, UITipConfirmCtrl, UITipConfirmProxy);

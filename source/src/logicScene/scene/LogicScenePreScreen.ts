@@ -1,7 +1,6 @@
 import { ResPath } from "../../core/common/ResPath";
 import { CfgManager } from "../../core/config/CfgManager";
-import { layerMgr, Layer } from "../../core/ui/core/LayerManager";
-import { UserData } from "../../core/userData/UserData";
+import { User } from "../../core/userData/User";
 import { platformMgr } from "../../platform/PlatformManager";
 import { LogicSceneBase } from "../LogicSceneBase";
 import { logicSceneMgr } from "../LogicSceneManager";
@@ -13,7 +12,7 @@ export interface ScenePreScreenData {
 
 /** 首屏逻辑场景 */
 export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
-	// private _prescreen: fgui.GLoader;
+    // private _prescreen: fgui.GLoader;
 
     protected override getConstResArray() {
         const resArray: string[] = [
@@ -26,9 +25,9 @@ export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
 
     protected onEnter() {
         windowImmit("cfgMgr", new CfgManager());
-        windowImmit("userData", new UserData());
+        windowImmit("userData", new User());
         this.showPreScreen();
-		Laya.timer.once(100, this, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
+        Laya.timer.once(100, this, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
     }
 
     protected onExit() {
@@ -38,16 +37,16 @@ export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
         // }
     }
 
-	private showPreScreen() {
-		// if (!this._prescreen) {
-		// 	const groot = fgui.GRoot.inst;
-		// 	const pscreen = this._prescreen = new fgui.GLoader();
-		// 	pscreen.url = ResPath.PrescreenPath.Prescreen;
-		// 	pscreen.setSize(groot.width, groot.height);
-		// 	pscreen.addRelation(groot, fgui.RelationType.Size);
-		// 	pscreen.fill = fgui.LoaderFillType.ScaleFree;
-		// 	layerMgr.addObject(this._prescreen, Layer.Bottom);
-		// }
-	}
+    private showPreScreen() {
+        // if (!this._prescreen) {
+        // 	const groot = fgui.GRoot.inst;
+        // 	const pscreen = this._prescreen = new fgui.GLoader();
+        // 	pscreen.url = ResPath.PrescreenPath.Prescreen;
+        // 	pscreen.setSize(groot.width, groot.height);
+        // 	pscreen.addRelation(groot, fgui.RelationType.Size);
+        // 	pscreen.fill = fgui.LoaderFillType.ScaleFree;
+        // 	layerMgr.addObject(this._prescreen, Layer.Bottom);
+        // }
+    }
 
 }

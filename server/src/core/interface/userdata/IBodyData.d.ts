@@ -1,4 +1,4 @@
-declare interface IBodyData extends IDecode<IBodyData> {
+declare interface IBodyData {
 
     /** 武器 */
     weapon: IEquipment;

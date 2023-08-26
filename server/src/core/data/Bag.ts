@@ -1,26 +1,17 @@
 import { DataType, ItemBagType } from "../enum/ItemEnum";
 import { Equipment } from "./Equipment";
-import { ItemBase } from "./ItemBase";
-
-const EncodeData: { name: string, Class: Class<ItemBase> }[] = [
-    { name: "$equipments", Class: Equipment },//ItemBagType.Equip
-    { name: "$Prop", Class: ItemBase },//ItemBagType.Prop
-    { name: "$Gem", Class: ItemBase },//ItemBagType.Gem
-    { name: "$Material", Class: ItemBase },//ItemBagType.Material
-    { name: "$Book", Class: ItemBase },//ItemBagType.Book
-    { name: "$Other", Class: ItemBase },//ItemBagType.Other
-];
+import { IGoods } from "./Goods";
 
 export class Bag implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [
         new Equipment(10101)
     ];
-    gem: IItemBase[] = [];
-    prop: IItemBase[] = [];
-    material: IItemBase[] = [];
-    book: IItemBase[] = [];
-    other: IItemBase[] = [];
+    gem: IGoods[] = [];
+    prop: IGoods[] = [];
+    material: IGoods[] = [];
+    book: IGoods[] = [];
+    other: IGoods[] = [];
     encode(): IBag {
         const data = {} as IBag;
         data.collect = this.collect;
@@ -48,7 +39,7 @@ export class Bag implements IBag {
 
     decode(data: IBag): IBag {
         this.collect = data.collect;
-        const decodeArrData = (data: any[][], cls: Class<IDecode<any>>) => {
+        const decodeArrData = (data: any[][], cls: Class<IDecode<any, any>>) => {
             if (!data || !data.length) return data;
             const keys = data.shift();
             const result = [];
@@ -60,18 +51,18 @@ export class Bag implements IBag {
             return result;
         };
         this.equipment = decodeArrData(data.equipment as any, Equipment);
-        this.gem = decodeArrData(data.gem as any, ItemBase);
-        this.prop = decodeArrData(data.prop as any, ItemBase);
-        this.material = decodeArrData(data.material as any, ItemBase);
-        this.book = decodeArrData(data.book as any, ItemBase);
-        this.other = decodeArrData(data.other as any, ItemBase);
+        this.gem = decodeArrData(data.gem as any, IGoods);
+        this.prop = decodeArrData(data.prop as any, IGoods);
+        this.material = decodeArrData(data.material as any, IGoods);
+        this.book = decodeArrData(data.book as any, IGoods);
+        this.other = decodeArrData(data.other as any, IGoods);
         return this;
     }
 
     getItem(id: number) {
         const item = cfgMgr.Item[ id ];
         if (!item) return null;
-        let datas: IItemBase[];
+        let datas: IGoods[];
         switch (item.BagType) {
             case ItemBagType.Prop: datas = this.prop; break;
             case ItemBagType.Gem: datas = this.gem; break;
@@ -90,7 +81,7 @@ export class Bag implements IBag {
     changeItemCount(id: number, count: number) {
         const item = cfgMgr.Item[ id ];
         if (item.DataType == DataType.BagData) {
-            let datas: IItemBase[];
+            let datas: IGoods[];
             switch (item.BagType) {
                 case ItemBagType.Prop: datas = this.prop; break;
                 case ItemBagType.Gem: datas = this.gem; break;
@@ -108,7 +99,7 @@ export class Bag implements IBag {
                     return;
                 }
             }
-            if (count > 0) datas.push(new ItemBase(id, count));
+            if (count > 0) datas.push(new IGoods(id, count));
         }
     }
 

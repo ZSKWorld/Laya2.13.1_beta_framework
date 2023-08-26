@@ -32,7 +32,7 @@ export class EquipmentHandle {
     static decomposeEquipByStar(data: IUser, star: number) {
         const equips = data.bag.equipment;
         const equipCnt = equips.length;
-        let rewards: IItemBase[] = [];
+        let rewards: IGoods[] = [];
         for (let i = equipCnt - 1; i >= 0; i--) {
             if (equips[ i ].star == star) {
                 rewards = rewards.concat(ItemHandle.sellItem(data, equips[ i ].id, 1));

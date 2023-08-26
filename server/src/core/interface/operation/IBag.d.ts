@@ -1,10 +1,10 @@
-declare interface IBag extends IBagData {
+declare interface IBag extends IBagData, IDecode<IBagData, IBag> {
 
     /**
      * 获取非装备物品
      * @param id 物品id
      */
-    getItem(id: number): IItemBase;
+    getItem(id: number): IGoods;
 
     /**
      * 获取装备

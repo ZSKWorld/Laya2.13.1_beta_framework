@@ -1,6 +1,6 @@
 import { MathUtil } from "../../../utils/MathUtil";
+import { IGoods } from "../../data/Goods";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
-import { ItemBase } from "../../data/ItemBase";
 import { ItemHelper } from "./ItemHelper";
 
 export class ItemHandle {
@@ -36,12 +36,12 @@ export class ItemHandle {
         else if (skillBook) {
             this.changeItemCount(data, id, -1);
             data.base.skill.push(id);
-            return [ new ItemBase(skillBook.ID, 1) ];
+            return [ new IGoods(skillBook.ID, 1) ];
         }
         else if (xinFaBook) {
             this.changeItemCount(data, id, -1);
             data.base.citta[ id ] = 1;
-            return [ new ItemBase(xinFaBook.ID, 1) ];
+            return [ new IGoods(xinFaBook.ID, 1) ];
         }
         return [];
     }
@@ -54,11 +54,11 @@ export class ItemHandle {
      * @returns
      */
     static sellItem(data: IUser, id: number, count: number) {
-        const rewards: IItemBase[] = [];
+        const rewards: IGoods[] = [];
         const sellRewards = cfgMgr.Item[ id ].SellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(v => {
-                rewards.push(new ItemBase(v.id, v.count * count));
+                rewards.push(new IGoods(v.id, v.count * count));
                 if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                 else {
                     this.changeItemCount(data, v.id, v.count * count);
@@ -78,7 +78,7 @@ export class ItemHandle {
      * @returns 使用后获得的物品
      */
     private static useProp(data: IUser, id: number, count: number) {
-        const rewards: IItemBase[] = [];
+        const rewards: IGoods[] = [];
         let useCount = 1;
         switch (id) {
             case 2007: data.battle.copy = {}; break;
@@ -88,7 +88,7 @@ export class ItemHandle {
             default:
                 useCount = count;
                 cfgMgr.Props[ id ].Rewards.forEach(v => {
-                    rewards.push(new ItemBase(v.id, v.count * count));
+                    rewards.push(new IGoods(v.id, v.count * count));
                     if (ItemHelper.isEquip(v.id)) data.bag.addNewEquip(v.id, v.count * count);
                     else this.changeItemCount(data, v.id, v.count * count);
                 });
@@ -122,6 +122,6 @@ export class ItemHandle {
         else useCount = Math.min(Math.floor(subVigro / singleRecover) + 1, count);
         data.base.vigor = MathUtil.Clamp(data.base.vigor + singleRecover * useCount, 0, maxVigro);
         this.changeItemCount(data, id, -useCount);
-        return [ new ItemBase(BaseDataType.Vigor, subVigro) ];
+        return [ new IGoods(BaseDataType.Vigor, subVigro) ];
     }
 }

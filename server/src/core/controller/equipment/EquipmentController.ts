@@ -1,8 +1,8 @@
-import { AddCMD, BaseController } from "../BaseController";
+import { AddCMD, Controller } from "../Controller";
 import { EquipmentChecker } from "./EquipmentChecker";
 import { EquipmentHandle } from "./EquipmentHandle";
 
-export class EquipmentController extends BaseController implements IEquipmentCtrl {
+export class EquipmentController extends Controller implements IEquipmentCtrl {
 
     @AddCMD
     dressEquip(data: DressEquipInput): void {

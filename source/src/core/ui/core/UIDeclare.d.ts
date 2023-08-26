@@ -73,8 +73,6 @@ declare interface IViewExtend {
      */
     createView(viewId: ViewID, fullScreen?: boolean): IViewCtrl;
 
-    showConfirm(title: string, msg: string): Promise<boolean>;
-
     /**
      * 打开页面
      * @param viewId 页面id

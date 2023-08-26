@@ -1,9 +1,10 @@
 import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
 import { EquipmentPart } from "../enum/ItemEnum";
-import { ItemBase } from "./ItemBase";
 
-export class Equipment extends ItemBase implements IEquipment {
+export class Equipment implements IEquipment {
+    id: number;
+    count: number;
     uid: string = Util.CreateUID();
     star: number = 0;
     level: number = 0;
@@ -17,10 +18,16 @@ export class Equipment extends ItemBase implements IEquipment {
         return cfgMgr.Equipment[ this.id ].Part;
     }
     constructor(id: number = 0) {
-        super(id, 1);
+        this.id = id;
+    }
+    encode(): IEquipmentData {
+        throw new Error("Method not implemented.");
+    }
+    decode(data: IEquipmentData): IEquipment {
+        throw new Error("Method not implemented.");
     }
 
-    createAttribute():IEquipment {
+    createAttribute(): IEquipment {
         const { Main, WuXing, Second, Body } = cfgMgr.EquipmentAddition[ this.part ];
         this.star = MathUtil.RandomInt(1, +cfgMgr.Const[ 1010 ].Value);
         Equipment.randomAttribute([ ...Main ], this.mainAttri, false).sort(Equipment.sortFunc);

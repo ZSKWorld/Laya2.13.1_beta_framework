@@ -46,13 +46,13 @@ class ConnectionMgr {
 
     private clearClosedConnection() {
         const time = Date.now();
-        const { closedConnection: closedCons, ClosedConExistTime: existTime } = this;
-        Object.keys(closedCons).forEach(v => {
-            const con = closedCons[ v ];
-            if (time - con.time > existTime) {
+        const { closedConnection, ClosedConExistTime } = this;
+        Object.keys(closedConnection).forEach(v => {
+            const con = closedConnection[ v ];
+            if (time - con.time > ClosedConExistTime) {
                 con.connection.clear();
                 Pool.recover(PoolKey.ClosedConnection, con);
-                delete closedCons[ v ];
+                delete closedConnection[ v ];
             }
         });
     }

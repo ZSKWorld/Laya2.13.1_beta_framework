@@ -25,7 +25,7 @@
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
   </displayList>
-  <transition name="EffectShow">
+  <transition name="trans_show">
     <item time="0" type="Alpha" target="n0_sbd0" tween="true" startValue="0" endValue="0.7" duration="6"/>
     <item time="0" type="XY" target="n10_sbd0" tween="true" startValue="-,-616" endValue="-,664" duration="6"/>
   </transition>

@@ -1,6 +1,6 @@
 import { GameUtil } from "../../utils/GameUtil";
 
-export class ItemBase implements IItemBase {
+export class IGoods implements IGoods {
     id: number = 0;
     count: number = 0;
 
@@ -9,10 +9,12 @@ export class ItemBase implements IItemBase {
         this.id = id;
         this.count = count;
     }
-    encode(): IItemBase {
-        throw new Error("Method not implemented.");
+
+    encode(): IGoodsData {
+        return this;
     }
-    decode(data: IItemBase): IItemBase {
+
+    decode(data: IGoodsData): IGoods {
         if (data)
             Object.keys(data).forEach(v => this[ v ] = data[ v ]);
         return this;

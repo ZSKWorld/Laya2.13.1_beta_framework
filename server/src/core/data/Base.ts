@@ -42,11 +42,12 @@ export class Base implements IBase {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
-    encode(): IBase {
+    
+    encode() {
         return this;
     }
 
-    decode(data: IBase): IBase {
+    decode(data: IBaseData): IBase {
         if (data)
             Object.keys(data).forEach(v => this[ v ] = data[ v ]);
         return this;

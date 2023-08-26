@@ -21,7 +21,7 @@ export class Util {
         return uuid;
     }
 
-    static getData(account: string): IUser {
+    static getData(account: string): IUserData {
         const filePath = this.getDataPath(account);
         if (fs.existsSync(filePath) == false) return null;
         const conent = fs.readFileSync(filePath).toString();
@@ -32,7 +32,7 @@ export class Util {
         }
     }
 
-    static saveData(data: IUser) {
+    static saveData(data: IUserData) {
         const filePath = this.getDataPath(data.account.account);
         if (!filePath) return console.log("路径不存在", data.account.account, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data));

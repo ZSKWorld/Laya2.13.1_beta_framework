@@ -1,29 +1,29 @@
-declare interface IBodyData extends IDecode<IBodyData> {
+declare interface IBodyData {
 
     /** 武器 */
-    weapon: IEquipmentData;
+    weapon: IEquipment;
     /** 头盔 */
-    helmet: IEquipmentData;
+    helmet: IEquipment;
     /** 项链 */
-    necklace: IEquipmentData;
+    necklace: IEquipment;
     /** 衣服 */
-    clothes: IEquipmentData;
+    clothes: IEquipment;
     /** 戒指 */
-    ring: IEquipmentData;
+    ring: IEquipment;
     /** 裤子 */
-    trousers: IEquipmentData;
+    trousers: IEquipment;
     /** 护符 */
-    amulet: IEquipmentData;
+    amulet: IEquipment;
     /** 鞋子 */
-    shoes: IEquipmentData;
+    shoes: IEquipment;
     /** 坐骑 */
-    mount: IEquipmentData;
+    mount: IEquipment;
     /** 暗器 */
-    hiddenWeeapon: IEquipmentData;
+    hiddenWeeapon: IEquipment;
     /** 时装 */
-    fashion: IEquipmentData;
+    fashion: IEquipment;
     /** 法宝 */
-    magicWeapon: IEquipmentData;
+    magicWeapon: IEquipment;
     /** 武器上装备的宝石 */
     weaponGems: number[];
     /** 头盔上装备的宝石 */

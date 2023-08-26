@@ -9,11 +9,13 @@ export const enum ErrorCode {
     /** 用户已存在 */
     USER_EXIST,
     /** 账号为空 */
-    ACCOUNT_IS_EMPTY,
+    ACCOUNT_EMPTY,
     /** 密码为空 */
-    PASSWORD_IS_EMPTY,
+    PASSWORD_EMPTY,
     /** 昵称为空 */
-    NICKNAME_IS_EMPTY,
+    NICKNAME_EMPTY,
+    /** 密码错误 */
+    PASSWORD_ERROR,
     /** 用户未登录 */
     NOT_LOGIN,
     /** 账号已登陆 */

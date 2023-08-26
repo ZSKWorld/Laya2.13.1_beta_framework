@@ -35,7 +35,6 @@ class WebSocket extends Observer {
     }
 
     private onSocketMessage(message: string): void {
-        console.error(message);
         const output: UserOutput = JSON.parse(message);
         if (output && !output.error) {
             if (output.syncInfo)

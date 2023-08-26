@@ -1,3 +1,3 @@
-declare interface IBattle extends IBattleData {
+declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
 
 }

@@ -1,4 +1,4 @@
-declare interface IBase extends IBaseData {
+declare interface IBase extends IBaseData, IDecode<IBaseData, IBase> {
 
     /** 获取最大精力值 */
     getMaxVigro(): number;

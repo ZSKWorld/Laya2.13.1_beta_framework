@@ -207,6 +207,8 @@
     <font id="kyy06h" name="Font14.ttf" path="/Font/" renderMode="" samplePointSize="16"/>
     <component id="j8596i" name="UILoading1.xml" path="/" exported="true"/>
     <component id="j8596j" name="UILoading2.xml" path="/" exported="true"/>
+    <component id="shjv6k" name="UIConfirm.xml" path="/" exported="true"/>
+    <component id="shjv6l" name="ComConfirm.xml" path="/Component/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

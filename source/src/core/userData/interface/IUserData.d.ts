@@ -1,10 +1,10 @@
-declare interface IOfflineData extends IDecode<IOfflineData> {
+declare interface IOfflineData {
     /** 离线时长 */
     offlineTime: number;
     /** 获得的精力 */
     vigor: number;
 }
-declare interface IUserData  extends IDecode<IUserData>{
+declare interface IUserData {
     account: IAccountData;
     base: IBaseData;
     /** 离线数据 */

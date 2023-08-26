@@ -27,7 +27,6 @@ export class ViewExtend {
 				_this.controller.listener.off(type, _this, listener, onceOnly);
 		}
 		prototype.createView = function (...args) { return uiMgr.createView(...args); }
-		prototype.showConfirm = function (...args) { return uiMgr.showConfirm(...args); }
 		prototype.showView = function (...args) { uiMgr.showView(...args); }
 		prototype.removeTopView = function () { uiMgr.removeTopView(); }
 		prototype.removeAllView = function () { uiMgr.removeAllView(); }
@@ -78,7 +77,6 @@ export class ViewExtend {
 		prototype.onForeground = function () { }
 		prototype.onBackground = function () { }
 		prototype.createView = function (...args) { return uiMgr.createView(...args); }
-		prototype.showConfirm = function (...args) { return uiMgr.showConfirm(...args); }
 		prototype.showView = function (...args) { uiMgr.showView(...args); }
 		prototype.removeTopView = function () { uiMgr.removeTopView(); }
 		prototype.removeAllView = function () { uiMgr.removeAllView(); }

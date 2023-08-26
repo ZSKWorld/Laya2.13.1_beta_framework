@@ -1,9 +1,9 @@
-declare interface IBagData extends IDecode<IBagData> {
+declare interface IBagData {
     collect: number[];
     equipment: IEquipment[];
-    gem: IItemBase[];
-    prop: IItemBase[];
-    material: IItemBase[];
-    book: IItemBase[];
-    other: IItemBase[];
+    gem: IGoods[];
+    prop: IGoods[];
+    material: IGoods[];
+    book: IGoods[];
+    other: IGoods[];
 }

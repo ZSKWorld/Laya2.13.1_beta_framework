@@ -4,7 +4,8 @@ export class FGUIRepair{
         this.UbbTagI();
         this.PlayTransitionAction();
         this.FixGUIInputSingleLine();
-        this.FixGUILoadPackgeProgressError();
+		this.FixGUILoadPackgeProgressError();
+		this.FixGUIRichTextAlignError();
     }
 
 	/**修复GUI粗体不生效 */
@@ -127,5 +128,55 @@ export class FGUIRepair{
 			}, null, true);
 			fgui.AssetProxy.inst.load(loadKeyArr, descCompleteHandler, null, Laya.Loader.BUFFER);
 		}
+	}
+
+	private static FixGUIRichTextAlignError() {
+		const prototype = fgui.GRichTextField.prototype;
+		prototype[ "correctDivXY" ] = function () {
+			if (!this._div) return;
+			if (!this.parent) return;
+			if (this.align != "center") return;
+			if (this.__originDivX == null) this.__originDivX = this._div.x;
+			var x = Math.max((this.parent._width - this._div.width) / 2, this.__originDivX);
+			this._div.x = x;
+		};
+		Object.defineProperty(prototype, "text", {
+			set(value) {
+				this._text = value;
+				var text2 = this._text;
+				if (this._templateVars)
+					text2 = this.parseTemplate(text2);
+				try {
+					this._div.size(this._width, this._height);
+					if (this._ubbEnabled)
+						this._div.innerHTML = fgui.UBBParser.inst.parse(text2);
+					else
+						this._div.innerHTML = text2;
+					if (this._widthAutoSize || this._heightAutoSize) {
+						var w, h = 0;
+						if (this._widthAutoSize) {
+							w = this._div.contextWidth;
+							if (w > 0)
+								w += 8;
+						}
+						else
+							w = this._width;
+						if (this._heightAutoSize)
+							h = this._div.contextHeight;
+						else
+							h = this._height;
+						this._updatingSize = true;
+						this.setSize(w, h);
+						this._updatingSize = false;
+					}
+					if (!this._widthAutoSize && this._heightAutoSize) {
+						Laya.timer.callLater(this, this.correctDivXY);
+					}
+				}
+				catch (err) {
+					console.log("laya reports html error:" + err);
+				}
+			},
+		})
 	}
 }

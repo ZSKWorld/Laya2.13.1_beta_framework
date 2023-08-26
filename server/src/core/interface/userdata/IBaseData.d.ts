@@ -1,5 +1,5 @@
 declare interface ICittaData { }
-declare interface IBaseData extends IDecode<IBaseData> {
+declare interface IBaseData {
     /** 金币 */
     coin: number;
     /** 元宝 */

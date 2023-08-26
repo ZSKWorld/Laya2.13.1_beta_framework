@@ -1,8 +1,8 @@
-import { AddCMD, BaseController } from "../BaseController";
+import { AddCMD, Controller } from "../Controller";
 import { ShopChecker } from "./ShopChecker";
 import { ShopHandle } from "./ShopHandle";
 
-export class ShopController extends BaseController implements IShopCtrl {
+export class ShopController extends Controller implements IShopCtrl {
     @AddCMD
     buyGoods(data: BuyGoodsInput): void {
         const { user } = this;

@@ -13,14 +13,15 @@ export class Account implements IAccount {
         this.password = password;
         this.nickname = nickname;
     }
-    encode(): IAccount {
+
+    encode(): IAccountData {
         return this;
     }
 
-    decode(data: IAccount): IAccount {
-        if (data)
-            Object.keys(data).forEach(v => this[ v ] = data[ v ]);
-        return this;
+    decode(data: IAccountData): IAccount {
+            if (data)
+                Object.keys(data).forEach(v => this[ v ] = data[ v ]);
+            return this;
     }
 
     login(): void {

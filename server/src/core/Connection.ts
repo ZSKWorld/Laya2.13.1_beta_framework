@@ -1,17 +1,17 @@
 import * as websocket from "websocket";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
+import { ProxyMgr } from "../utils/ProxyMgr";
 import { connectionMgr } from "./ConnectionMgr";
+import { Controller } from "./controller/Controller";
 import { AccouontController } from "./controller/account/AccouontController";
-import { BaseController } from "./controller/BaseController";
-import { HeartController } from "./controller/heart/HeartController";
 import { BattleController } from "./controller/battle/BattleController";
 import { FriendController } from "./controller/friend/FriendController";
+import { HeartController } from "./controller/heart/HeartController";
 import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
-import { ErrorCode } from "./enum/ErrorCode";
-import { ProxyMgr } from "../utils/ProxyMgr";
 import { User } from "./data/User";
+import { ErrorCode } from "./enum/ErrorCode";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -20,8 +20,9 @@ export class Connection {
     private _onClose = () => this.onConnectionClose();
     private _onMessage = (message) => this.onConnectionMessage(message);
 
+    private _token: string;
     private _listener: EventDispatcher;
-    private _controllers: BaseController[] = [];
+    private _controllers: Controller[] = [];
 
     private _logined: boolean;
     private _connection: websocket.connection;
@@ -33,6 +34,7 @@ export class Connection {
     static startConnection(token: string, connection: websocket.connection, msg?: websocket.Message) {
         let con = connectionMgr.getClosedConnection(token);
         if (!con) con = Pool.get(PoolKey.CommonConnection, Connection);
+        con._token = token;
         con.setConnection(connection);
         con.onConnectionMessage(msg);
     }
@@ -60,7 +62,7 @@ export class Connection {
         connection.on(ConnectionEvent.Message, this._onMessage);
     }
 
-    userLogin(data: IUser) {
+    userLogin(data: IUserData) {
         this._logined = true;
         this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));
         connectionMgr.addConnection(data.account.uid, this);
@@ -76,7 +78,6 @@ export class Connection {
                 else data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
             }
         }
-        console.log(data);
         data.type = "response";
         this._connection.sendUTF(JSON.stringify(data));
     }
@@ -130,6 +131,6 @@ export class Connection {
         this._logined = false;
         this._connection = null;
         this._user?.logout();
-        connectionMgr.connectionClosed(this._user.account.account, this);
+        connectionMgr.connectionClosed(this._token, this);
     }
 }

@@ -135,7 +135,7 @@ class UIManager extends Observer {
 			else {
 				fgui.UIPackage.loadPackage([ this._viewClsMap[ viewId ].PkgRes ], Laya.Handler.create(this, (res: any[]) => {
 					if (!res || !res.length) {
-						this.showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
+						showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
 							if (result) this.showView(viewId, data, callback);
 							else this.showView2(viewCtrl, data, callback);
 						});

@@ -1,13 +1,8 @@
 import { GameUtil } from "../common/GameUtil";
 import { EquipmentPart } from "../net/enum/ItemEnum";
-import { DecodeData } from "./DecodeData";
-
-export class ItemBase<T extends IItemBase = IItemBase> extends DecodeData<T> implements IItemBase {
-    protected static readonly ClassName: string = "ItemBase";
-    //#region Properties
+import { Decode } from "./Decode";
+class Item<T> extends Decode<T>{
     id: number;
-    count: number;
-    //#endregion
 
     get name() { return cfgMgr.Item[ this.id ].Name; }
     get colorName() { return GameUtil.GetColorStr(this.quality, this.name); }
@@ -17,12 +12,18 @@ export class ItemBase<T extends IItemBase = IItemBase> extends DecodeData<T> imp
     get salable() { return cfgMgr.Item[ this.id ].Salable; }
     get useRequire() { return cfgMgr.Item[ this.id ].UseRequire; }
     get useRequireStr() { return GameUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
+}
+
+export class Goods extends Item<IGoods> implements IGoods {
+    protected static readonly ClassName: string = "ItemBase";
+    protected static readonly DontDispatch = true;
+    count: number;
 
 }
 
-export class Equipment extends ItemBase<IEquipment> implements IEquipment {
-    protected static override readonly ClassName = "Equipment";
-    //#region Properties
+export class Equipment extends Item<IEquipment> implements IEquipment {
+    protected static readonly ClassName = "Equipment";
+    //#region 字段
     uid: string;
     star: number;
     level: number;

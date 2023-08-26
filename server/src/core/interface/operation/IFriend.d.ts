@@ -1,3 +1,3 @@
-declare interface IFriend extends IFriendData {
-    
+declare interface IFriend extends IFriendData, IDecode<IFriendData, IFriend> {
+
 }

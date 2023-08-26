@@ -1,5 +1,5 @@
-/** 基础物品 */
-declare interface IItemBaseData extends IDecode<IItemBaseData>{
+/** 物品 */
+declare interface IGoodsData {
     /** 物品id */
     id: number;
     /** 物品数量 */
@@ -7,9 +7,11 @@ declare interface IItemBaseData extends IDecode<IItemBaseData>{
 }
 
 /** 装备 */
-declare interface IEquipmentData extends IItemBaseData {
+declare interface IEquipmentData {
     /** 装备uid，用于区分同id的不同装备 */
     uid: string;
+    /** 装备id */
+    id: number;
     /** 装备星级 */
     star: number;
     /** 强化等级 */

@@ -1,2 +1,2 @@
-declare interface IAccount extends IAccountData{
+declare interface IAccount extends IAccountData, IDecode<IAccountData, IAccount> {
 }

@@ -33,7 +33,7 @@ declare interface SellEquipInput extends UserInput {
 
 declare interface SellEquipOutput extends UserOutput {
     /** 获得的奖励 */
-    rewards: IItemBaseData[];
+    rewards: IGoodsData[];
 }
 
 declare interface DecomposeEquipInput extends UserInput {
@@ -42,6 +42,6 @@ declare interface DecomposeEquipInput extends UserInput {
 
 declare interface DecomposeEquipOutput extends UserOutput {
     /** 获得的奖励 */
-    rewards: IItemBaseData[];
+    rewards: IGoodsData[];
 }
 

@@ -9,6 +9,8 @@ import BtnCornerTxt from "./BtnCornerTxt";
 import UITipConfirm from "./UITipConfirm";
 import Pro1 from "./Pro1";
 import ComNumInput from "./ComNumInput";
+import UIConfirm from "./UIConfirm";
+import ComConfirm from "./ComConfirm";
 
 export default class PkgCommonBinder {
 	public static bindAll():void {
@@ -21,5 +23,7 @@ export default class PkgCommonBinder {
 		fgui.UIObjectFactory.setExtension(UITipConfirm.URL, UITipConfirm);
 		fgui.UIObjectFactory.setExtension(Pro1.URL, Pro1);
 		fgui.UIObjectFactory.setExtension(ComNumInput.URL, ComNumInput);
+		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirm);
+		fgui.UIObjectFactory.setExtension(ComConfirm.URL, ComConfirm);
 	}
 }

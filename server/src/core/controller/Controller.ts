@@ -2,7 +2,7 @@ import { Pool } from "../../libs/pool/Pool";
 import { Connection } from "../Connection";
 import { ErrorCode } from "../enum/ErrorCode";
 
-export class BaseController {
+export class Controller {
     private _cmds: { [ key: string ]: Function };
     private _connection: Connection;
     get connection() {

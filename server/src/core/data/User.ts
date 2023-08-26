@@ -47,14 +47,22 @@ export class User implements IUser {
     }
 
     save() {
-        const result = {} as IUser;
+        Util.saveData(this.encode());
+    }
+
+    encode() {
+        const result = {} as IUserData;
         result.account = this.account.encode();
         result.base = this.base.encode();
         result.friend = this.friend.encode();
         result.body = this.body.encode();
         result.bag = this.bag.encode();
         result.battle = this.battle.encode();
-        Util.saveData(result);
+        return result;
+    }
+
+    decode(data: IUserData) {
+        return this;
     }
 
     private getOffline(): IOffline {

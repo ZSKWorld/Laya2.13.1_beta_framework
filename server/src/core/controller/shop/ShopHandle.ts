@@ -1,4 +1,4 @@
-import { ItemBase } from "../../data/ItemBase";
+import { IGoods } from "../../data/Goods";
 import { ItemHandle } from "../item/ItemHandle";
 import { ItemHelper } from "../item/ItemHelper";
 
@@ -10,6 +10,6 @@ export class ShopHandle {
         item.SellPrice.forEach(v => ItemHandle.changeItemCount(data, v.id, -v.count * count));
         if (ItemHelper.isEquip(item.SellID)) data.bag.addNewEquip(item.SellID, count);
         else ItemHandle.changeItemCount(data, item.SellID, count);
-        return [ new ItemBase(item.SellID, count) ];
+        return [ new IGoods(item.SellID, count) ];
     }
 }

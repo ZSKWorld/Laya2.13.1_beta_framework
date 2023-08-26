@@ -2,17 +2,56 @@ import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UITipConfirmMsg, UITipConfirmView } from "../view/UITipConfirmView";
 
 export interface UITipConfirmData {
-
+	text: string;
+	title?: string;
+	callback?: Laya.Handler;
 }
 
 export class UITipConfirmCtrl extends BaseViewCtrl<UITipConfirmView, UITipConfirmData>{
+	private _confirmDatas: UITipConfirmData[] = [];
+	private _curConfirm: UITipConfirmData;
 
-    override onAdded() {
-		this.addMessage(UITipConfirmMsg.OnBtnConfirmClick, this.onBtnConfirmClick);
-    }
+	override onAwake(): void {
+		this.addMessage(UITipConfirmMsg.OnGraphBgClick, this.onBtnCloseClick, [ false ]);
+		this.addMessage(UITipConfirmMsg.OnBtnConfirmClick, this.onBtnCloseClick, [ true ]);
+	}
 
-	private onBtnConfirmClick() {
-	
+	override onEnable(): void {
+
+	}
+
+	override onForeground(): void {
+		if (this._curConfirm) this._confirmDatas.unshift(this._curConfirm);
+		this._confirmDatas.unshift(this.data);
+		this.data = null;
+		this.refreshContent();
+	}
+
+	override onDisable(): void {
+		this._curConfirm?.callback?.recover();
+		this._confirmDatas.forEach(v => v.callback?.recover());
+		this._curConfirm = null;
+		this._confirmDatas.length = 0;
+	}
+
+	override onOpenAni(): Promise<void> {
+		return new Promise<void>(resolve => this.view.trans_show.play(Laya.Handler.create(null, resolve)));
+	}
+
+	override onCloseAni(): Promise<void> {
+		return new Promise<void>(resolve => this.view.trans_show.playReverse(Laya.Handler.create(null, resolve)));
+	}
+
+	private refreshContent() {
+		this._curConfirm = this._confirmDatas.shift();
+		if (this._curConfirm) this.view.refreshContent(this._curConfirm.text, this._curConfirm.title);
+		else this.removeSelf();
+	}
+
+	private onBtnCloseClick(result: boolean) {
+		this._curConfirm.callback?.runWith(result);
+		this._curConfirm = null;
+		this.refreshContent();
 	}
 
 }

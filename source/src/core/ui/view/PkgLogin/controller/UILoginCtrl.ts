@@ -1,3 +1,5 @@
+import { localData } from "../../../../libs/localData/LocalData";
+import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { AccountService } from "../../../../net/Services";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { tipMgr } from "../../../tool/TipManager";
@@ -14,6 +16,11 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
 		this.addMessage(UILoginMsg.OnBtnLoginRegisterClick, this.onBtnLoginRegisterClick);
 		this.addMessage(UILoginMsg.OnBtnRegisterBackClick, this.onBtnRegisterBackClick);
 		this.addMessage(UILoginMsg.OnBtnRegisterClick, this.onBtnRegisterClick);
+    }
+
+    override onEnable(): void {
+        const data = localData.get<LoginInput>(LocalDataKey.LastLoginAccount);
+        data && this.view.setLoginInfo(data.account, data.password);
     }
 
 	private onBtnLoginClick() {

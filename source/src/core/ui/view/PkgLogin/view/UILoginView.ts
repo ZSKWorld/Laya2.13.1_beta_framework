@@ -19,4 +19,9 @@ export class UILoginView extends ExtensionClass<IView, UILogin>(UILogin) {
 		btn_register.onClick(this, this.sendMessage, [ UILoginMsg.OnBtnRegisterClick ]);
     }
 
+	setLoginInfo(account: string, password: string) {
+		this.input_account.text = account;
+		this.input_password.text = password;
+	}
+
 }

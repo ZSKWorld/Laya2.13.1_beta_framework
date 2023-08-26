@@ -1,4 +1,4 @@
-declare interface IFriendData extends IDecode<IFriendData> {
+declare interface IFriendData {
     /** 好友列表 */
     friend: string[];
 }

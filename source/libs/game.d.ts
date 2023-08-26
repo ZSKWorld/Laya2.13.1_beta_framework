@@ -2,12 +2,14 @@ declare type PartialAll<T> = { [ P in keyof T ]?: Partial<T[ P ]>; };
 declare interface KeyMap<T> { [ key: string ]: T; }
 declare type Class<T> = new (...args: any) => T;
 
-declare const userData: IUserData;
+declare const userData: IUser;
 
 declare const cfgMgr: ICfgManager;
 
 /** 注入全局变量 */
 declare function windowImmit(name: string, obj: any): void;
+/** 确认弹窗 */
+declare function showConfirm(title: string, msg: string): Promise<boolean>;
 
 /**
  * 扩展类字段，用于在外部定义的字段在内部可读，扩展的字段或方法不能在构造期间调用

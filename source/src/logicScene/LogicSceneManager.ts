@@ -1,5 +1,4 @@
 import { Observer } from "../core/libs/event/Observer";
-import { uiMgr } from "../core/ui/core/UIManager";
 import { IScene, LogicScene } from "./LogicSceneType";
 
 /** 逻辑场景管理类 */
@@ -33,7 +32,7 @@ class LogicSceneManager extends Observer {
 				this._currentScene.enter(data);
 			}, () => {
 				this._loadCompleted = true;
-				uiMgr.showConfirm("提示", `${ type } 场景加载失败，是否重试?`).then(result => {
+				showConfirm("提示", `${ type } 场景加载失败，是否重试?`).then(result => {
 					if (result) this.enterScene(type, data);
 					else newScene.exit();
 				});

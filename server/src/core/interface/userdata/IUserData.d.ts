@@ -1,20 +1,20 @@
-declare interface IOfflineData extends IDecode<IOfflineData> {
+declare interface IOfflineData {
     /** 离线时长 */
     offlineTime: number;
     /** 获得的精力 */
     vigor: number;
 }
-declare interface IUserData   extends IDecode<IUserData>{
-    account: IAccount;
-    base: IBase;
+declare interface IUserData {
+    account: IAccountData;
+    base: IBaseData;
     /** 离线数据 */
-    offline?: IOffline;
+    offline?: IOfflineData;
     /** 好友 */
-    friend: IFriend;
+    friend: IFriendData;
     /** 背包 */
-    bag: IBag;
+    bag: IBagData;
     /** 身上物品 */
-    body: IBody;
+    body: IBodyData;
     /** 战斗 */
-    battle: IBattle;
+    battle: IBattleData;
 }
