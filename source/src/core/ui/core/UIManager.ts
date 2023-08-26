@@ -70,8 +70,7 @@ class UIManager extends Observer {
 		this._lockPanel.sortingOrder = 999;
 		layerMgr.addObject(this._lockPanel, Layer.Bottom);
 
-		//延迟100防止频繁触发
-		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.once(100, this, this.onResize));
+		Laya.stage.on(Laya.Event.RESIZE, this, this.onResize);
 	}
 
 	registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>) {
@@ -193,12 +192,6 @@ class UIManager extends Observer {
 		this._openedCtrls.length = 0;
 	}
 
-	private onResize() {
-		this._lockPanel.makeFullScreen();
-		this._openedCtrls.forEach(v => v.view.makeFullScreen());
-		this._cache.onResize();
-	}
-
 	private showView2(viewCtrl: IViewCtrl, data: any, callback?: Laya.Handler) {
 		const onFinally = () => {
 			callback && callback.run();
@@ -214,6 +207,12 @@ class UIManager extends Observer {
 			viewCtrl.sendMessage(ViewEvent.OnForeground);
 			doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
 		} else onFinally();
+	}
+
+	private onResize() {
+		this._lockPanel.makeFullScreen();
+		this._openedCtrls.forEach(v => v.view.makeFullScreen());
+		this._cache.onResize();
 	}
 }
 export const uiMgr = new UIManager();

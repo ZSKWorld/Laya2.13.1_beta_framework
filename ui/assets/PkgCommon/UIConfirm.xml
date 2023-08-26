@@ -4,7 +4,9 @@
     <graph id="n1_shjv" name="graph_bg" xy="0,0" size="1080,1920" alpha="0.8" type="rect" lineSize="0" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n0_shjv" name="com_panel" src="shjv6l" fileName="Component/ComConfirm.xml" xy="540,959" pivot="0.5,0.5" anchor="true"/>
+    <component id="n0_shjv" name="com_panel" src="shjv6l" fileName="Component/ComConfirm.xml" xy="540,960" pivot="0.5,0.5" anchor="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
   </displayList>
   <transition name="trans_show" options="2" frameRate="60">
     <item time="0" type="Alpha" target="n0_shjv" tween="true" startValue="0" endValue="1" duration="15"/>
