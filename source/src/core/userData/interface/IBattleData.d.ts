@@ -3,7 +3,6 @@ declare interface IBattleItemData {
 }
 
 declare interface IBattleData {
-
     /**关卡数据 */
     level: IBattleItemData;
     /**副本数据 */

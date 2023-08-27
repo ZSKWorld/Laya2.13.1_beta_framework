@@ -20,7 +20,6 @@ declare interface IEquipment extends IEquipmentData, IDecode<IEquipmentData, IEq
     get salable(): number;
     get useRequire(): CfgItemData2;
     get useRequireStr(): string;
-
     get part(): EquipmentPart;
     get levelName(): string;
     get colorLevelName(): string;

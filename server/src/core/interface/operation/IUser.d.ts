@@ -17,8 +17,8 @@ declare interface IUser extends IUserData, IDecode<IUserData, IUser> {
     battle: IBattle;
 
     getSyncInfo(): Partial<IUser>;
-    clearSyncInfo(): void;
 
-    /** 保存数据 */
+    clearSyncInfo(): void;
+    
     save(): void;
 }

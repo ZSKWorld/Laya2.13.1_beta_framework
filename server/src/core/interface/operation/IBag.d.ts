@@ -1,4 +1,10 @@
 declare interface IBag extends IBagData, IDecode<IBagData, IBag> {
+    equipment: IEquipment[];
+    gem: IGoods[];
+    prop: IGoods[];
+    material: IGoods[];
+    book: IGoods[];
+    other: IGoods[];
 
     /**
      * 获取非装备物品

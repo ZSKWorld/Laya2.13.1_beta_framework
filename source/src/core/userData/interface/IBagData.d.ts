@@ -1,9 +1,9 @@
 declare interface IBagData {
     collect: number[];
-    equipment: IEquipment[];
-    gem: IGoods[];
-    prop: IGoods[];
-    material: IGoods[];
-    book: IGoods[];
-    other: IGoods[];
+    equipment: IEquipmentData[];
+    gem: IGoodsData[];
+    prop: IGoodsData[];
+    material: IGoodsData[];
+    book: IGoodsData[];
+    other: IGoodsData[];
 }

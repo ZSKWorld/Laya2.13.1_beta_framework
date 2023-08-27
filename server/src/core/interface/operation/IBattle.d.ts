@@ -3,7 +3,6 @@ declare interface IBattleItem extends IBattleItemData, IDecode<IBattleItemData, 
 }
 
 declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
-
     /**关卡数据 */
     level: IBattleItem;
     /**副本数据 */
