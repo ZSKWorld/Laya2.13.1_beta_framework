@@ -1,6 +1,5 @@
 import { ResPath } from "../../../../../common/ResPath";
 import { MathUtil } from "../../../../../libs/math/MathUtil";
-import { NetMessage } from "../../../../../net/enum/NetMessage";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import ComRenWu from "../../../../ui/PkgMain/ComRenWu";
 
@@ -45,9 +44,9 @@ export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 		const { account, base, friend, bag, body, battle } = userData;
 		const { weapon, helmet, necklace, clothes, ring, trousers, amulet, shoes, mount, hiddenWeeapon, fashion, magicWeapon } = body;
 		const { vigor, maxVigro, moHe, moBi, spiritStones, vigorRecover, soul, gemScore, upgradeExp } = base;
-		const { btn_wuQi,btn_xiangLian,btn_jieZhi,btn_huFu,btn_zuoQi,btn_anQi,btn_touKui,btn_yiFu,btn_xiaZhuang,btn_xieZi,btn_shiZhuang,
+		const { btn_wuQi, btn_xiangLian, btn_jieZhi, btn_huFu, btn_zuoQi, btn_anQi, btn_touKui, btn_yiFu, btn_xiaZhuang, btn_xieZi, btn_shiZhuang,
 			btn_faBao, txt_jingLi, txt_jinAtk, txt_muAtk, txt_shuiAtk, txt_huoAtk, txt_tuAtk, txt_moHe, txt_moBi, txt_lingShi, txt_jingLiHF, txt_jinDef,
-		txt_muDef,txt_shuiDef,txt_huoDef,txt_tuDef,txt_hunPo,txt_gemScore,txt_exp} = this;
+			txt_muDef, txt_shuiDef, txt_huoDef, txt_tuDef, txt_hunPo, txt_gemScore, txt_exp } = this;
 
 		btn_wuQi.text = weapon ? (weapon.name + " +" + weapon.level) : "无";
 		btn_xiangLian.text = necklace ? (necklace.name + " +" + necklace.level) : "无";
