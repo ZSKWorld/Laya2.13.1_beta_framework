@@ -4,7 +4,7 @@ export class ProxyMgr {
 
     static getProxy<T extends object>(uid: string, dataKey: string, target: T) {
         dataKey = dataKey || "";
-        if (typeof target === "object" && target !== null && !target[ ProxyKey ]) {
+        if (target != null && typeof target === "object" && !target[ ProxyKey ] && !target[ "cantSyncObj" ]) {
             target[ ProxyKey ] = true;
             Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }.${ key }`, target[ key ]));
             Object.defineProperty(target, "getSyncInfo", {
@@ -19,7 +19,7 @@ export class ProxyMgr {
                             const properties = keyStr.split(".");
                             properties.forEach((key, index) => {
                                 if (!key) return;
-                                if (index = properties.length - 1) {
+                                if (index == properties.length - 1) {
                                     tempResult[ key ] = tempThis[ key ];
                                 } else {
                                     tempThis = tempThis[ key ];

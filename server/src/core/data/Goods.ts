@@ -12,4 +12,3 @@ export class Goods extends Decode<IGoodsData, IGoods> implements IGoods {
         this.count = count;
     }
 }
-

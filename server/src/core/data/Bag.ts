@@ -7,16 +7,16 @@ import { Goods } from "./Goods";
 export class Bag extends Decode<IBagData, IBag> implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [];
-    gem: Goods[] = [];
-    prop: Goods[] = [];
-    material: Goods[] = [];
-    book: Goods[] = [];
-    other: Goods[] = [];
+    gem: IGoods[] = [];
+    prop: IGoods[] = [];
+    material: IGoods[] = [];
+    book: IGoods[] = [];
+    other: IGoods[] = [];
 
     getItem(id: number) {
         const item = cfgMgr.Item[ id ];
         if (!item) return null;
-        let datas: Goods[];
+        let datas: IGoods[];
         switch (item.bagType) {
             case ItemBagType.Prop: datas = this.prop; break;
             case ItemBagType.Gem: datas = this.gem; break;
@@ -35,7 +35,7 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
     changeItemCount(id: number, count: number) {
         const item = cfgMgr.Item[ id ];
         if (item.dataType == DataType.BagData) {
-            let datas: Goods[];
+            let datas: IGoods[];
             switch (item.bagType) {
                 case ItemBagType.Prop: datas = this.prop; break;
                 case ItemBagType.Gem: datas = this.gem; break;
@@ -50,6 +50,8 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
                     datas[ i ].count += count;
                     if (datas[ i ].count <= 0)
                         datas.splice(i, 1);
+                    else
+                        datas.splice(i, 0, datas.splice(i, 1)[ 0 ]);
                     return;
                 }
             }
@@ -106,7 +108,8 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
             default:
                 const value = data[ key ] as unknown as any[][];
                 const keys = value.shift();
-                const result = [];
+                const result = this[ key ] as any[];
+                result.length = 0;
                 const cls = key == "equipment" ? Equipment : Goods;
                 value.forEach(v => {
                     const temp = {} as any;

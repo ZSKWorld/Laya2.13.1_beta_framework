@@ -16,4 +16,12 @@ export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
     secret = new BattleData();
     /**boss数据 */
     boss = new BattleData();
+
+    protected override onDecode(data: IBattleData, key: keyof IBattleData) {
+        const value = this[ key ];
+        Object.keys(data[ key ]).forEach(v => {
+            value[ key ] = data[ key ];
+        });
+        return value;
+    }
 }

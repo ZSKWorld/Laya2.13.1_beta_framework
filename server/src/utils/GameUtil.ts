@@ -2,8 +2,8 @@
 export class GameUtil {
 
     static cantSyncObj<T>(obj: T) {
-        if (typeof obj == "object") {
-            Object.defineProperty(obj, "CantSyncObj", {
+        if (obj != null && typeof obj == "object") {
+            Object.defineProperty(obj, "cantSyncObj", {
                 configurable: false,
                 enumerable: false,
                 value: true,

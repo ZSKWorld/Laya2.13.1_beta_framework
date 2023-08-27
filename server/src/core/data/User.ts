@@ -22,6 +22,7 @@ export class User extends Decode<IUserData, IUser> implements IUser {
         super();
         this.account = new Account(account, password, nickname);
         this.base = new Base();
+        this.offline = null;
         this.friend = new Friend();
         this.body = new Body();
         this.bag = new Bag();

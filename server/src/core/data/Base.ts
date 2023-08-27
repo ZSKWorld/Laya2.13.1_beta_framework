@@ -89,6 +89,25 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
         }
     }
 
+    protected override onDecode(data: IBaseData, key: keyof IBaseData) {
+        switch (key) {
+            case "citta":
+                const citta = this[ key ];
+                Object.keys(data[ key ]).forEach(v => {
+                    citta[ v ] = data[ key ][ v ];
+                });
+                return citta;
+            case "skill":
+            case "usingSkill":
+                const value = this[ key ];
+                value.length = 0;
+                value.push(...data[ key ]);
+                return value;
+
+            default: return data[ key ];
+        }
+    }
+
     private getUpgradeExp(): number {
         if (!cfgMgr.JingJie[ this.jingJie + 1 ]) return 0;
         else return Formula.exp(this.jingJie, this.cengJi);

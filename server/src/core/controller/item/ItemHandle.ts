@@ -1,5 +1,4 @@
 import { MathUtil } from "../../../utils/MathUtil";
-import { ProxyMgr } from "../../../utils/ProxyMgr";
 import { cfgMgr } from "../../config/CfgManager";
 import { Goods } from "../../data/Goods";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
@@ -17,9 +16,7 @@ export class ItemHandle {
         const item = cfgMgr.Item[ id ];
         switch (item.dataType) {
             case DataType.BaseData: data.base.changeItemCount(id, count); break;
-            case DataType.BagData:
-                data.bag.changeItemCount(id, count);
-                break;
+            case DataType.BagData: data.bag.changeItemCount(id, count); break;
             default: break;
         }
     }
@@ -58,7 +55,7 @@ export class ItemHandle {
      * @returns
      */
     static sellItem(data: IUser, id: number, count: number) {
-        const rewards: Goods[] = [];
+        const rewards: IGoods[] = [];
         const sellRewards = cfgMgr.Item[ id ].sellRewards;
         if (sellRewards.length) {
             sellRewards.forEach(v => {
@@ -82,7 +79,7 @@ export class ItemHandle {
      * @returns 使用后获得的物品
      */
     private static useProp(data: IUser, id: number, count: number) {
-        const rewards: Goods[] = [];
+        const rewards: IGoods[] = [];
         let useCount = 1;
         switch (id) {
             case 2007: data.battle.copy = {}; break;
