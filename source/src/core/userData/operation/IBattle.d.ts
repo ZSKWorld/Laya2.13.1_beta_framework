@@ -1,6 +1,7 @@
 declare interface IBattleItem extends IBattleItemData, IDecode<IBattleItemData, IBattleItem> {
 
 }
+
 declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
     /** 副本剩余次数 */
     getCopyTime(copyId: number): number;

@@ -1,6 +1,7 @@
 declare interface IBattleItemData {
 
 }
+
 declare interface IBattleData {
 
     /**关卡数据 */

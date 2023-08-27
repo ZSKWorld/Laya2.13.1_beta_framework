@@ -1,4 +1,3 @@
-/** 物品 */
 declare interface IGoodsData {
     /** 物品id */
     id: number;
@@ -6,7 +5,6 @@ declare interface IGoodsData {
     count: number;
 }
 
-/** 装备 */
 declare interface IEquipmentData {
     /** 装备uid，用于区分同id的不同装备 */
     uid: string;

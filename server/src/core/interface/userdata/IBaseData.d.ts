@@ -1,4 +1,7 @@
-declare interface ICittaData { }
+declare interface ICittaData {
+
+}
+
 declare interface IBaseData {
     /** 金币 */
     coin: number;

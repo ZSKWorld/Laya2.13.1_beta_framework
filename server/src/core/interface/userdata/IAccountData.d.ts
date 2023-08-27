@@ -1,4 +1,4 @@
-declare interface IAccountData{
+declare interface IAccountData {
     uid: string;
     /** 昵称 */
     nickname: string;

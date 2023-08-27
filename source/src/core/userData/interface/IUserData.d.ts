@@ -4,6 +4,7 @@ declare interface IOfflineData {
     /** 获得的精力 */
     vigor: number;
 }
+
 declare interface IUserData {
     account: IAccountData;
     base: IBaseData;

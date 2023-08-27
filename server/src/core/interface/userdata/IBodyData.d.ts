@@ -1,5 +1,4 @@
 declare interface IBodyData {
-
     /** 武器 */
     weapon: IEquipment;
     /** 头盔 */
