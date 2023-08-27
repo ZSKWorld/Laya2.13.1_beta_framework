@@ -49,7 +49,7 @@ export class CfgManager {
 	/** 错误码 */
 	readonly Error: CfgError;
 
-    constructor() {
+	constructor() {
 		let cfgData = Laya.loader.getRes(ResPath.ConfigPath.Config);
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;
@@ -84,15 +84,27 @@ export class CfgManager {
 	}
 
 	private cfgExtension(cfg: ICfgExtension<any>) {
-		cfg[ "$data" ] = Object.keys(cfg).map(v => cfg[ v ]);
-		cfg.forEach = function (callbackfn: (value: any, index: number, array: any[]) => void) {
-			this.$data.forEach(callbackfn);
-		};
-		cfg.filter = function (predicate: (value: any, index: number, array: any[]) => unknown) {
-			return this.$data.filter(predicate);
-		};
-		cfg.find = function (predicate: (value: any, index: number, obj: any[]) => unknown) {
-			return this.$data.find(predicate);
-		};
+		Object.defineProperty(cfg, "$data", {
+			value: Object.keys(cfg).map(v => cfg[ v ]),
+			enumerable: false,
+		});
+		Object.defineProperty(cfg, "forEach", {
+			value: function (callbackfn: (value: any, index: number, array: any[]) => void) {
+				this.$data.forEach(callbackfn);
+			},
+			enumerable: false,
+		});
+		Object.defineProperty(cfg, "filter", {
+			value: function (predicate: (value: any, index: number, array: any[]) => unknown) {
+				return this.$data.filter(predicate);
+			},
+			enumerable: false,
+		});
+		Object.defineProperty(cfg, "find", {
+			value: function (predicate: (value: any, index: number, obj: any[]) => unknown) {
+				return this.$data.find(predicate);
+			},
+			enumerable: false,
+		});
 	}
 }

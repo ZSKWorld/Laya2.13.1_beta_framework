@@ -62,4 +62,8 @@ export const enum ErrorCode {
     NOT_FRIEND,
     /** 和对方已经是好友了 */
     ALREADY_FRIEND,
+    /** 未知的战斗类型 */
+    UNKNOWN_BATTLE_TYPE = 2000,
+    /** 未知的战斗关卡 */
+    UNKNOWN_BATTLE_LEVEL,
 }

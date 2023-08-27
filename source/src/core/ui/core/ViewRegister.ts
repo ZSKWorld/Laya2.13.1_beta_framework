@@ -5,7 +5,6 @@ import ComAbode from "../ui/PkgMain/ComAbode";
 import ComChar from "../ui/PkgMain/ComChar";
 import ComConfirm from "../ui/PkgCommon/ComConfirm";
 import ComGoods from "../ui/PkgMain/ComGoods";
-import ComNumInput from "../ui/PkgCommon/ComNumInput";
 import ComRenWu from "../ui/PkgMain/ComRenWu";
 import ComShop from "../ui/PkgMain/ComShop";
 import ComSkill from "../ui/PkgMain/ComSkill";
@@ -25,6 +24,7 @@ import RenderText from "../ui/PkgMain/RenderText";
 import UIBattle from "../ui/PkgBattle/UIBattle";
 import UIChat from "../ui/PkgMain/UIChat";
 import UIChooseBattle from "../ui/PkgBattle/UIChooseBattle";
+import UIChooseNum from "../ui/PkgCommon/UIChooseNum";
 import UIConfirm from "../ui/PkgCommon/UIConfirm";
 import UIEquipmentInfo from "../ui/PkgMain/UIEquipmentInfo";
 import UIGoodsInfo from "../ui/PkgMain/UIGoodsInfo";
@@ -50,8 +50,6 @@ import { ComConfirmCtrl } from "../view/PkgCommon/controller/coms/ComConfirmCtrl
 import { ComConfirmView } from "../view/PkgCommon/view/coms/ComConfirmView";
 import { ComGoodsCtrl } from "../view/PkgMain/controller/coms/ComGoodsCtrl";
 import { ComGoodsView } from "../view/PkgMain/view/coms/ComGoodsView";
-import { ComNumInputCtrl } from "../view/PkgCommon/controller/coms/ComNumInputCtrl";
-import { ComNumInputView } from "../view/PkgCommon/view/coms/ComNumInputView";
 import { ComRenWuCtrl } from "../view/PkgMain/controller/coms/ComRenWuCtrl";
 import { ComRenWuView } from "../view/PkgMain/view/coms/ComRenWuView";
 import { ComShopCtrl } from "../view/PkgMain/controller/coms/ComShopCtrl";
@@ -85,6 +83,9 @@ import { UIChatView } from "../view/PkgMain/view/UIChatView";
 import { UIChooseBattleCtrl } from "../view/PkgBattle/controller/UIChooseBattleCtrl";
 import { UIChooseBattleProxy } from "../view/PkgBattle/proxy/UIChooseBattleProxy";
 import { UIChooseBattleView } from "../view/PkgBattle/view/UIChooseBattleView";
+import { UIChooseNumCtrl } from "../view/PkgCommon/controller/UIChooseNumCtrl";
+import { UIChooseNumProxy } from "../view/PkgCommon/proxy/UIChooseNumProxy";
+import { UIChooseNumView } from "../view/PkgCommon/view/UIChooseNumView";
 import { UIConfirmCtrl } from "../view/PkgCommon/controller/UIConfirmCtrl";
 import { UIConfirmProxy } from "../view/PkgCommon/proxy/UIConfirmProxy";
 import { UIConfirmView } from "../view/PkgCommon/view/UIConfirmView";
@@ -159,7 +160,6 @@ class ViewRegister {
 
 		//Coms
 		fgui.UIObjectFactory.setExtension(ComConfirm.URL, ComConfirmView);
-		fgui.UIObjectFactory.setExtension(ComNumInput.URL, ComNumInputView);
 		fgui.UIObjectFactory.setExtension(ComTipInfo.URL, ComTipInfoView);
 		fgui.UIObjectFactory.setExtension(ComAbode.URL, ComAbodeView);
 		fgui.UIObjectFactory.setExtension(ComChar.URL, ComCharView);
@@ -174,6 +174,7 @@ class ViewRegister {
 		//UIs
 		fgui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);
 		fgui.UIObjectFactory.setExtension(UIChooseBattle.URL, UIChooseBattleView);
+		fgui.UIObjectFactory.setExtension(UIChooseNum.URL, UIChooseNumView);
 		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirmView);
 		fgui.UIObjectFactory.setExtension(UILoading1.URL, UILoading1View);
 		fgui.UIObjectFactory.setExtension(UILoading2.URL, UILoading2View);
@@ -206,7 +207,6 @@ class ViewRegister {
 
 		//Coms
 		register(ViewID.ComConfirmView, ComConfirmView, ComConfirmCtrl);
-		register(ViewID.ComNumInputView, ComNumInputView, ComNumInputCtrl);
 		register(ViewID.ComTipInfoView, ComTipInfoView, ComTipInfoCtrl);
 		register(ViewID.ComAbodeView, ComAbodeView, ComAbodeCtrl);
 		register(ViewID.ComCharView, ComCharView, ComCharCtrl);
@@ -221,6 +221,7 @@ class ViewRegister {
 		//UIs
 		register(ViewID.UIBattleView, UIBattleView, UIBattleCtrl, UIBattleProxy);
 		register(ViewID.UIChooseBattleView, UIChooseBattleView, UIChooseBattleCtrl, UIChooseBattleProxy);
+		register(ViewID.UIChooseNumView, UIChooseNumView, UIChooseNumCtrl, UIChooseNumProxy);
 		register(ViewID.UIConfirmView, UIConfirmView, UIConfirmCtrl, UIConfirmProxy);
 		register(ViewID.UILoading1View, UILoading1View, UILoading1Ctrl, UILoading1Proxy);
 		register(ViewID.UILoading2View, UILoading2View, UILoading2Ctrl, UILoading2Proxy);

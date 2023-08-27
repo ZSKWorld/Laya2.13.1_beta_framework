@@ -10,6 +10,7 @@ export interface SceneMainData{
 
 /** 主页逻辑场景 */
 export class LogicSceneMain extends LogicSceneBase<SceneMainData> {
+	protected override loadViewId = ViewID.UILoading1View;
 	protected override getNormalResArray() {
 		return [
 			ResPath.PkgPath.PkgMain,

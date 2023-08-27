@@ -13,7 +13,6 @@ export const enum ViewID {
 
 	/**Coms */
 	ComConfirmView = "ComConfirmView",
-	ComNumInputView = "ComNumInputView",
 	ComTipInfoView = "ComTipInfoView",
 	ComAbodeView = "ComAbodeView",
 	ComCharView = "ComCharView",
@@ -28,6 +27,7 @@ export const enum ViewID {
 	/**UIs */
 	UIBattleView = "UIBattleView",
 	UIChooseBattleView = "UIChooseBattleView",
+	UIChooseNumView = "UIChooseNumView",
 	UIConfirmView = "UIConfirmView",
 	UILoading1View = "UILoading1View",
 	UILoading2View = "UILoading2View",

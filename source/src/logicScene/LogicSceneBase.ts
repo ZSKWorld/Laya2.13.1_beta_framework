@@ -32,15 +32,15 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	load() {
 		const resArr = this.getResGroup(ResGroupType.All);
 		const [ uiRes, otherRes ] = resArr;
-		let loadCount = resArr.length;
-		this.setLoadProgres(loadCount);
+		let loadCnt = this.setLoadProgres(resArr.length);
 		return Promise.all([
-			loadMgr.loadPackage(uiRes, null, this._progressHandlers[ --loadCount ]),
-			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCount ]),
+			loadMgr.loadPackage(uiRes, null, this._progressHandlers[ --loadCnt ]),
+			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCnt ]),
 			//加个最短加载时间，避免loadjing页一闪而过
-			this.loadViewId ? new Promise(resolve =>
-				Laya.Tween.to(this._progresses, { 2: 1 }, 500, null, Laya.Handler.create(null, resolve), 0, true)
-					.update = this._progressHandlers[ --loadCount ]) : null,
+			this.loadViewId ? new Promise(resolve => {
+				const tween = Laya.Tween.to(this._progresses, { [ --loadCnt ]: 1 }, 250, null, Laya.Handler.create(null, resolve), 0, true);
+				tween.update = this._progressHandlers[ loadCnt ];
+			}) : null,
 		]).then(
 			() => {
 				uiMgr.removeAllView();
@@ -91,23 +91,24 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	/** 退出场景时执行 */
 	protected abstract onExit(): void;
 
-	private setLoadProgres(length: number) {
+	private setLoadProgres(count: number) {
 		if (this.loadViewId) {
-			length++;
+			count++;
 			uiMgr.showView(this.loadViewId, this._loadViewData);
 		}
 		this._progresses.length = 0;
 		this._progressHandlers.forEach(v => v.recover());
 		this._progressHandlers.length = 0;
-		for (let i = 0; i < length; i++) {
+		for (let i = 0; i < count; i++) {
 			this._progresses.push(0);
 			this._progressHandlers.push(Laya.Handler.create(this, this.onProgress, [ i ], false));
 		}
 		this.onProgress(0, 0);
+		return count;
 	}
 
 	private onProgress(index: number, progress: number) {
-		this._progresses[ index ] = progress;
+		progress != null && (this._progresses[ index ] = progress);
 		Laya.timer.callLater(this, this.updateProgres);
 	}
 

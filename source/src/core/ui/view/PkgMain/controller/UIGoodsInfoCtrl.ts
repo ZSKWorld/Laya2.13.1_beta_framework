@@ -10,7 +10,7 @@ export interface UIGoodsInfoData {
 
 export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoData>{
 
-    override onAdded() {
+	override onAdded() {
 		this.addMessage(UIGoodsInfoMsg.OnBtnCollectClick, this.onBtnCollectClick);
 		this.addMessage(UIGoodsInfoMsg.OnBtnSellClick, this.onBtnSellClick);
 		this.addMessage(UIGoodsInfoMsg.OnBtnUseClick, this.onBtnUseClick);
@@ -23,7 +23,7 @@ export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoDa
 	}
 
 	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
-	private refreshContent() {
+	refreshContent() {
 		this.view.setContent(this.data.id, this.data.buy);
 	}
 

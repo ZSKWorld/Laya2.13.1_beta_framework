@@ -1,3 +1,6 @@
+import { uiMgr } from "../core/UIManager";
+import { ViewID } from "../core/ViewID";
+import { UIChooseNumData } from "../view/PkgCommon/controller/UIChooseNumCtrl";
 
 /** UI工具类 */
 export class UIUtility {
@@ -61,5 +64,16 @@ export class UIUtility {
 		const index = values.indexOf(defaultValue);
 		cmb.selectedIndex = index == -1 ? 0 : index;
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
+	}
+
+	/**
+	 * 弹数量（整数）输入窗口
+	 * @param title 标题
+	 * @param min 最小值
+	 * @param max 最大值
+	 * @param callback {@link Laya.Handler} 回调函数，参数为输入数字
+	 */
+	static ShowChooseNum(title: string, min: number, max: number, callback?: Laya.Handler) {
+		uiMgr.showView<UIChooseNumData>(ViewID.UIChooseNumView, { title, min, max, callback });
 	}
 }

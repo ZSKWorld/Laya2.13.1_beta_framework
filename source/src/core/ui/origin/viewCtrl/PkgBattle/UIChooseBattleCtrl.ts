@@ -52,6 +52,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private battleListRender(index: number, item: RenderChooseBattleView) {
+
 		const data = this.items[ index ];
 		switch (this.data) {
 			case BattleType.GuanQia:

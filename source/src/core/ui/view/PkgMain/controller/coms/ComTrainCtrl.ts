@@ -42,7 +42,7 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 	}
 
 	private enterBattle(battleType: BattleType): void {
-		logicSceneMgr.enterScene(LogicScene.GameScene, battleType);
+		logicSceneMgr.enterScene(LogicScene.GameScene, { battleType });
 	}
 
 	private onBtnGongLueClick(): void {

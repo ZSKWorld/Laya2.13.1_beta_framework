@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" overflow="hidden" designImage="ui://vith2b66sbd0r" designImageOffsetX="-787" designImageAlpha="100" designImageLayer="1">
-  <controller name="ctrlOpenType" pages="0,关卡,1,副本,4,秘境,2,boss,3,采集" selected="0">
+  <controller name="ctrl_openType" pages="0,关卡,1,副本,4,秘境,2,boss,3,采集" selected="3">
     <action type="change_page" fromPage="" toPage="0" objectId="n2_sbd0" controller="ctrlBgColor" targetPage="7"/>
     <action type="change_page" fromPage="" toPage="1" objectId="n2_sbd0" controller="ctrlBgColor" targetPage="1"/>
     <action type="change_page" fromPage="" toPage="2" objectId="n2_sbd0" controller="ctrlBgColor" targetPage="1"/>
     <action type="change_page" fromPage="" toPage="3" objectId="n2_sbd0" controller="ctrlBgColor" targetPage="1"/>
   </controller>
-  <controller name="ctrlConfirm" pages="0,关闭,1,战斗" selected="0"/>
+  <controller name="ctrl_confirm" pages="0,关闭,1,战斗" selected="1"/>
   <displayList>
     <graph id="n0_sbd0" name="n0" xy="0,0" size="1080,1920" touchable="false" type="rect" lineSize="0" fillColor="#ff232a33">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n1_sbd0" name="n1" xy="20,128" size="1040,1772" touchable="false" type="rect" lineSize="0" fillColor="#ff677760"/>
-    <component id="n2_sbd0" name="BtnBack" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="833,28" size="227,80">
+    <graph id="n1_sbd0" name="n1" xy="20,128" size="1040,1772" touchable="false" type="rect" lineSize="0" fillColor="#ff677760">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n2_sbd0" name="btn_back" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="833,28" size="227,80">
       <relation target="" sidePair="right-right"/>
       <Button title="返回" titleFontSize="45"/>
     </component>
     <component id="n3_sbd0" name="n3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="20,28" size="227,80" controller="ctrlBgColor,2">
-      <gearDisplay controller="ctrlOpenType" pages="1,2"/>
+      <gearDisplay controller="ctrl_openType" pages="1,2"/>
       <Button title="一键扫荡" titleFontSize="45"/>
     </component>
-    <list id="n4_sbd0" name="ListBattle" xy="30,138" size="1020,1752" layout="flow_hz" overflow="scroll" lineGap="6" lineItemCount="1" defaultItem="ui://va1qbl3hsbd0u" autoItemSize="true">
+    <list id="n4_sbd0" name="liast_battle" xy="30,138" size="1020,1752" layout="flow_hz" overflow="scroll" lineGap="6" lineItemCount="1" defaultItem="ui://va1qbl3hsbd0u" autoItemSize="true">
+      <relation target="" sidePair="width-width,height-height"/>
       <item controllers="ctrlState,0"/>
       <item controllers="state,2"/>
       <item controllers="ctrlState,2"/>
@@ -36,8 +39,8 @@
       <item/>
       <item/>
     </list>
-    <graph id="n5_sbd0" name="graph_bg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
-      <gearDisplay controller="ctrlConfirm" pages="1,6"/>
+    <graph id="n5_sbd0" name="graph_confirmBg" xy="1,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+      <gearDisplay controller="ctrl_confirm" pages="1,6"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <graph id="n6_sbd0" name="n6" xy="140,688" size="800,543" group="n15_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115"/>
@@ -47,39 +50,33 @@
     <graph id="n8_sbd0" name="n8" xy="140,1131" size="800,100" group="n15_sbd0" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
       <relation target="n6_sbd0" sidePair="width-width,bottom-bottom"/>
     </graph>
-    <richtext id="n14_sbd0" name="txt_title" xy="330,706" size="419,73" group="n15_sbd0" touchable="false" fontSize="55" color="#ffffff" ubb="true" singleLine="true" text="洪七公[color=#ff0000][绝对物防][/color]">
-      <relation target="n6_sbd0" sidePair="center-center"/>
-    </richtext>
+    <richtext id="n14_sbd0" name="txt_title" xy="539,739" pivot="0.5,0.5" anchor="true" size="445,73" group="n15_sbd0" touchable="false" font="SimHei" fontSize="55" color="#ffffff" vAlign="middle" leading="0" ubb="true" singleLine="true" text="洪七公[color=#ff0000][绝对物防][/color]"/>
     <richtext id="n13_sbd0" name="txt_content" xy="165,961" pivot="0,0.5" anchor="true" size="610,158" group="n15_sbd0" touchable="false" fontSize="40" color="#ffffff" ubb="true" autoSize="height" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
-      <gearDisplay controller="ctrlConfirm" pages="1"/>
+      <gearDisplay controller="ctrl_confirm" pages="1"/>
       <relation target="n6_sbd0" sidePair="middle-middle"/>
     </richtext>
-    <component id="n9_sbd0" name="btn_buyFood" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="213,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
-      <gearDisplay controller="ctrlOpenType" pages="0"/>
+    <component id="n9_sbd0" name="btn_buyFood" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="434,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
+      <gearDisplay controller="ctrl_openType" pages="0"/>
       <Button title="购买食物" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <component id="n17_btv5" name="btn_buyTimes" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="213,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
-      <gearDisplay controller="ctrlOpenType" pages="1"/>
+    <component id="n17_btv5" name="btn_buyTimes" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="434,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,4">
+      <gearDisplay controller="ctrl_openType" pages="1"/>
       <Button title="增加次数" titleColor="#000000" titleFontSize="45"/>
     </component>
     <component id="n11_sbd0" name="btn_saoDang" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="434,1146" size="211,69" group="n16_sbd0">
-      <gearDisplay controller="ctrlOpenType" pages="0,1,4"/>
+      <gearDisplay controller="ctrl_openType" pages="0,1,4"/>
       <Button title="扫荡" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <component id="n12_sbd0" name="btn_battle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="655,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,1">
-      <gearText controller="ctrlConfirm" default="战斗"/>
+    <component id="n12_sbd0" name="btn_battle" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="434,1146" size="211,69" group="n16_sbd0" controller="ctrlBgColor,1">
+      <gearText controller="ctrl_confirm" default="战斗"/>
       <Button title="战斗" titleColor="#000000" titleFontSize="45"/>
     </component>
-    <group id="n16_sbd0" name="n16" xy="213,1146" size="653,69" group="n15_sbd0" advanced="true" layout="hz" colGap="10" excludeInvisibles="true">
-      <relation target="" sidePair="center-center,bottom-bottom"/>
+    <group id="n16_sbd0" name="n16" xy="434,1146" size="211,69" group="n15_sbd0" advanced="true" layout="hz" colGap="10" excludeInvisibles="true">
+      <relation target="n7_sbd0" sidePair="center-center"/>
     </group>
     <group id="n15_sbd0" name="n15" xy="140,688" size="800,543" advanced="true">
-      <gearDisplay controller="ctrlConfirm" pages="1,6"/>
+      <gearDisplay controller="ctrl_confirm" pages="1,6"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
   </displayList>
-  <transition name="EffectShow" autoPlay="true" frameRate="60">
-    <item time="0" type="Size" target="n1_sbd0" tween="true" startValue="-,0" endValue="-,1772" duration="30"/>
-    <item time="0" type="Size" target="n4_sbd0" tween="true" startValue="-,0" endValue="-,1752" duration="30"/>
-  </transition>
 </component>

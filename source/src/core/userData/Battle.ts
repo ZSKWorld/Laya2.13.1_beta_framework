@@ -9,14 +9,17 @@ export class Battle extends Decode<IBattle> implements IBattle {
     boss: IBattleItem;
 
     getCopyTime(copyId: number) {
+        if (!this.copy[ copyId ]) return cfgMgr.FuBen[ copyId ].battleCount;
         return cfgMgr.FuBen[ copyId ].battleCount - (this.copy[ copyId ] ?? 0);
     }
 
     getSecretTime(secretId: number) {
+        if (!this.secret[ secretId ]) return cfgMgr.MiJing[ secretId ].battleCount;
         return cfgMgr.MiJing[ secretId ].battleCount - (this.secret[ secretId ] ?? 0);
     }
 
     getBossCoolDown(bossId: number) {
+        if (!this.boss[ bossId ]) return 0;
         return Math.max(cfgMgr.Boss[ bossId ].coolTime - Math.floor(GameUtil.GetServerTime() / 1000 - (this.boss[ bossId ] ?? 0)), 0);
     }
 

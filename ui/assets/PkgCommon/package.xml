@@ -94,7 +94,7 @@
     <image id="qjdo2u" name="Frame_Biaotiwenshi.png" path="/Texture/"/>
     <image id="qjdo2v" name="Frame_ChuyiBG.png" path="/Texture/"/>
     <image id="qjdo2w" name="Frame_Copyright.png" path="/Texture/"/>
-    <image id="qjdo2x" name="Frame_DialogCompletePV01.png" path="/Texture/" scale="9grid" scale9grid="100,7,128,2"/>
+    <image id="qjdo2x" name="Frame_DialogCompletePV01.png" path="/Texture/" scale="9grid" scale9grid="160,7,8,2"/>
     <image id="qjdo2y" name="Frame_ErJiKuang.png" path="/Texture/"/>
     <image id="qjdo2z" name="Frame_ItemBG01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="41,42,82,84"/>
     <image id="qjdo30" name="Frame_ItemBG02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="41,42,82,84"/>
@@ -187,7 +187,7 @@
     <component id="sbd05s" name="ScrollBarV1.xml" path="/Component/ScrollBar/" exported="true"/>
     <component id="sbd05t" name="Pro1.xml" path="/Component/ProgressBar/" exported="true"/>
     <component id="sbd05x" name="SliderH1.xml" path="/Component/SliderBar/" exported="true"/>
-    <component id="sbd05y" name="ComNumInput.xml" path="/Component/" exported="true"/>
+    <component id="sbd05y" name="UIChooseNum.xml" path="/" exported="true"/>
     <component id="irlv60" name="BtnIcon.xml" path="/Component/" exported="true"/>
     <component id="7vow61" name="WaitingItem.xml" path="/Component/"/>
     <component id="7vow63" name="UIWaiting.xml" path="/" exported="true"/>

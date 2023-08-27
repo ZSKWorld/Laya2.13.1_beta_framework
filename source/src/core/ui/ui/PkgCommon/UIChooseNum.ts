@@ -2,7 +2,7 @@
 
 import BtnCornerTxt from "./BtnCornerTxt";
 
-export default class ComNumInput extends fgui.GComponent {
+export default class UIChooseNum extends fgui.GComponent {
 
 	public graph_bg:fgui.GGraph;
 	public slider_num:fgui.GSlider;
@@ -10,8 +10,8 @@ export default class ComNumInput extends fgui.GComponent {
 	public btn_submit:BtnCornerTxt;
 	public static URL:string = "ui://vx9zwsersbd05y";
 
-	public static createInstance():ComNumInput {
-		return <ComNumInput>(fgui.UIPackage.createObject("PkgCommon", "ComNumInput"));
+	public static createInstance():UIChooseNum {
+		return <UIChooseNum>(fgui.UIPackage.createObject("PkgCommon", "UIChooseNum"));
 	}
 
 	protected override onConstruct():void {

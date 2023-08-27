@@ -104,21 +104,6 @@ class UIManager extends Observer {
 		return viewInst.getComponent(this.getCtrlClass(viewId));
 	}
 
-	showConfirm(title: string, msg: string): Promise<boolean> {
-		const commonPkg = fgui.UIPackage.getById(ResPath.PkgPath.PkgCommon);
-		if (!commonPkg) return platformMgr.showConfirm(title, msg);
-		return new Promise(resolve => {
-			this.showView<UIConfirmData>(
-				ViewID.UIConfirmView,
-				{
-					title,
-					content: msg,
-					onCancel: Laya.Handler.create(null, resolve, [ false ]),
-					onConfirm: Laya.Handler.create(null, resolve, [ true ]),
-				});
-		});
-	}
-
 	/** 添加页面
 	 * @param viewId 页面id
 	 * @param data 页面数据
@@ -199,7 +184,7 @@ class UIManager extends Observer {
 			this._lockPanel.visible = false;
 		};
 		if (viewCtrl) {
-			viewCtrl.data = data;
+			viewCtrl.data = data || viewCtrl.data;
 			const openIndex = this._openedCtrls.findIndex(v => v == viewCtrl);
 			const doOpenAni = openIndex != 0;
 			openIndex > 0 && this._openedCtrls.splice(openIndex, 1);

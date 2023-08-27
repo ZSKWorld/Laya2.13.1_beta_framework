@@ -11,4 +11,7 @@ declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
     secret: IBattleItem;
     /**boss数据 */
     boss: IBattleItem;
+
+    /** 获取剩余战斗次数，不包括采集 */
+    getLeftCount(type: BattleType, id: number): number;
 }

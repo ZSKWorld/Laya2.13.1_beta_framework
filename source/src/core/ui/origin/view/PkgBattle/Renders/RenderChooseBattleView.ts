@@ -12,6 +12,7 @@ export const enum RenderChooseBattleMsg {
 export class RenderChooseBattleView extends ExtensionClass<ViewExtension, RenderChooseBattle>(RenderChooseBattle) {
     static readonly PkgRes = ResPath.PkgPath.PkgBattle;
 
+
     private _bossData: ConfigBossData;
 
     override onCreate(): void {

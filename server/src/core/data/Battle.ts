@@ -1,7 +1,9 @@
 import { GameUtil } from "../../utils/GameUtil";
+import { BattleType } from "../enum/BattleEnums";
 import { Decode } from "./Decode";
 
 class BattleData extends Decode<IBattleItemData, IBattleItem> implements IBattleItem {
+    
     constructor() {
         super();
         GameUtil.cantSyncObj(this);
@@ -18,7 +20,16 @@ export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
     /**boss数据 */
     boss = new BattleData();
 
+    getLeftCount(type: BattleType, id: number) {
+        switch (type) {
+            case BattleType.GuanQia: return this._guanQiaData.getLeftCount(id);
+            case BattleType.FuBen: return this._fuBenData.getLeftCount(id);
+            case BattleType.MiJing: return this._miJingData.getLeftCount(id);
+            case BattleType.Boss: return this._bossData.getLeftCount(id);
+            default: return 0;
+        }
+    }
     protected override onDecode(data: IBattleData, key: keyof IBattleData) {
-        return this[key].decode(data[key]);
+        return this[ key ].decode(data[ key ]);
     }
 }
