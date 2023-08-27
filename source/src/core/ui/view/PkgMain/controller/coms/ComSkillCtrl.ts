@@ -18,46 +18,47 @@ export class ComSkillCtrl extends BaseViewCtrl<ComSkillView, ComSkillData>{
 		this.addMessage(ComSkillMsg.OnBtnXian2Click, this.onBtnXian2Click);
 		this.addMessage(ComSkillMsg.OnBtnXian3Click, this.onBtnXian3Click);
 		this.addMessage(ComSkillMsg.OnBtnXian4Click, this.onBtnXian4Click);
+
     }
 
 	private onBtnNormal0Click() {
-	
+
 	}
 
 	private onBtnNormal1Click() {
-	
+
 	}
 
 	private onBtnNormal2Click() {
-	
+
 	}
 
 	private onBtnNormal3Click() {
-	
+
 	}
 
 	private onBtnNormal4Click() {
-	
+
 	}
 
 	private onBtnXian0Click() {
-	
+
 	}
 
 	private onBtnXian1Click() {
-	
+
 	}
 
 	private onBtnXian2Click() {
-	
+
 	}
 
 	private onBtnXian3Click() {
-	
+
 	}
 
 	private onBtnXian4Click() {
-	
+
 	}
 
 }

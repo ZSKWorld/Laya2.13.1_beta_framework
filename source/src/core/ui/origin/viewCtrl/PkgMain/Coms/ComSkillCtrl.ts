@@ -8,6 +8,7 @@ export interface ComSkillData {
 export class ComSkillCtrl extends BaseViewCtrl<ComSkillView, ComSkillData>{
 
 	override onAwake(): void {
+
 		this.addMessage(ComSkillMsg.OnBtnNormal0Click, this.onBtnNormal0Click);
 		this.addMessage(ComSkillMsg.OnBtnNormal1Click, this.onBtnNormal1Click);
 		this.addMessage(ComSkillMsg.OnBtnNormal2Click, this.onBtnNormal2Click);

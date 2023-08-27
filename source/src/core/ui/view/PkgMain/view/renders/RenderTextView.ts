@@ -7,9 +7,12 @@ export const enum RenderTextMsg {
 
 export class RenderTextView extends ExtensionClass<IView, RenderText>(RenderText) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	override onCreate(): void {
+        this.touchable = false;
+    }
 
-	override onCreate() {
-        
+    setText(text: string) {
+        this.title.text = text;
     }
 
 }

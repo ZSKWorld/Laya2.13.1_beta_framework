@@ -25,6 +25,7 @@ export class ComXinFaCtrl extends BaseViewCtrl<ComXinFaView, ComXinFaData>{
 		this.addMessage(ComXinFaMsg.OnBtnUpgrade0Click, this.onBtnUpgrade0Click);
 		this.addMessage(ComXinFaMsg.OnBtnUpgrade1Click, this.onBtnUpgrade1Click);
 		this.addMessage(ComXinFaMsg.OnBtnUpgrade2Click, this.onBtnUpgrade2Click);
+		
 	}
 
 	override onEnable(): void {

@@ -24,70 +24,71 @@ export class ComXinFaCtrl extends BaseViewCtrl<ComXinFaView, ComXinFaData>{
 		this.addMessage(ComXinFaMsg.OnBtnUpgrade0Click, this.onBtnUpgrade0Click);
 		this.addMessage(ComXinFaMsg.OnBtnUpgrade1Click, this.onBtnUpgrade1Click);
 		this.addMessage(ComXinFaMsg.OnBtnUpgrade2Click, this.onBtnUpgrade2Click);
+		
     }
 
 	private onBtnXinFa0Click() {
-	
+
 	}
 
 	private onBtnXinFa1Click() {
-	
+
 	}
 
 	private onBtnXinFa2Click() {
-	
+
 	}
 
 	private onBtnXinFa3Click() {
-	
+
 	}
 
 	private onBtnXinFa4Click() {
-	
+
 	}
 
 	private onBtnXinFa5Click() {
-	
+
 	}
 
 	private onBtnXinFa6Click() {
-	
+
 	}
 
 	private onBtnXinFa7Click() {
-	
+
 	}
 
 	private onBtnXinFa8Click() {
-	
+
 	}
 
 	private onBtnSkill0Click() {
-	
+
 	}
 
 	private onBtnSkill1Click() {
-	
+
 	}
 
 	private onBtnSkill2Click() {
-	
+
 	}
 
 	private onBtnSkill3Click() {
-	
+
 	}
 
 	private onBtnUpgrade0Click() {
-	
+
 	}
 
 	private onBtnUpgrade1Click() {
-	
+
 	}
 
 	private onBtnUpgrade2Click() {
-	
+
 	}
 
 }

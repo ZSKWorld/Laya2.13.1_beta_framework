@@ -50,7 +50,7 @@ export class ComLiLianCtrl extends BaseViewCtrl<ComLiLianView, ComLiLianData>{
 	}
 
 	private logRenderer(index: number, item: RenderTextView) {
-		item.setText(trainLogMgr.logs[ index ]);
+		item.setText(trainLogMgr.logs[ index ]); 
 	}
 
 	private enterBattle(battleType: BattleType): void {

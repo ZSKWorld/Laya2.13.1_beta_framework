@@ -41,6 +41,7 @@ export class ComXinFaView extends ExtensionClass<IView, ComXinFa>(ComXinFa) {
 		btn_upgrade0.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade0Click ]);
 		btn_upgrade1.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade1Click ]);
 		btn_upgrade2.onClick(this, this.sendMessage, [ ComXinFaMsg.OnBtnUpgrade2Click ]);
+		
     }
 
 }
