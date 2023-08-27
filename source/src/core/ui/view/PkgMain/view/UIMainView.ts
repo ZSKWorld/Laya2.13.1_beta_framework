@@ -34,17 +34,12 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		btn_sphere.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnSphereClick ]);
 		btn_sphere.on(fgui.Events.DRAG_START, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, true ]);
 		btn_sphere.on(fgui.Events.DRAG_END, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, false ]);
-		
+
 		btn_sphere.draggable = true;
     }
 
 	@RegisterEvent(UserDataEvent.AccountData_Nickname_Changed)
-	@RegisterEvent(UserDataEvent.BaseData_JingJie_Changed)
-	@RegisterEvent(UserDataEvent.BaseData_CengJi_Changed)
-	@RegisterEvent(UserDataEvent.BaseData_Exp_Changed)
-	@RegisterEvent(UserDataEvent.BaseData_Coin_Changed)
-	@RegisterEvent(UserDataEvent.BaseData_Vcoin_Changed)
-	@RegisterEvent(UserDataEvent.BaseData_Sect_Changed)
+	@RegisterEvent(UserDataEvent.UserData_Base_Changed)
 	refreshPlayerInfo() {
 		this.txt_nickname.text = userData.account.nickname;
 		const { jingJie, cengJi, exp, coin, vcoin, sect } = userData.base;

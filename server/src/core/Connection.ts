@@ -12,6 +12,7 @@ import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
 import { User } from "./data/User";
 import { ErrorCode } from "./enum/ErrorCode";
+import { EquipmentController } from "./controller/equipment/EquipmentController";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -51,10 +52,11 @@ export class Connection {
             this._controllers.push(
                 AccouontController.create(this),
                 BattleController.create(this),
+                EquipmentController.create(this),
+                FriendController.create(this),
                 HeartController.create(this),
                 ItemController.create(this),
                 ShopController.create(this),
-                FriendController.create(this),
             );
         }
 

@@ -1,4 +1,5 @@
 import { ItemHandleService, ShopService } from "../../../../net/Services";
+import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIGoodsInfoMsg, UIGoodsInfoView } from "../view/UIGoodsInfoView";
 
@@ -18,6 +19,11 @@ export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoDa
 	}
 
 	override onEnable() {
+		this.refreshContent();
+	}
+
+	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
+	private refreshContent() {
 		this.view.setContent(this.data.id, this.data.buy);
 	}
 

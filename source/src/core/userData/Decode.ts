@@ -26,7 +26,9 @@ export abstract class Decode<D> extends Observer implements IDecode<D, any> {
     protected afterDecode() { }
 
     private static dispatchEvent() {
-        this.dispatchArr.forEach(v =>this.dispatch(v));
+        this.dispatchArr.forEach(v => {
+            this.dispatch(v);
+        });
         this.dispatchArr.clear();
     }
 }

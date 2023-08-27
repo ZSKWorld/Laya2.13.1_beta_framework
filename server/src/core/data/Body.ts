@@ -63,18 +63,18 @@ export class Body extends Decode<IBodyData, IBody> implements IBody {
     }
     setDressedEquip(part: number, equip: IEquipment): void {
         switch (part) {
-            case EquipmentPart.Weapon: this.weapon = equip;
-            case EquipmentPart.Helmet: this.helmet = equip;
-            case EquipmentPart.Necklace: this.necklace = equip;
-            case EquipmentPart.Clothes: this.clothes = equip;
-            case EquipmentPart.Ring: this.ring = equip;
-            case EquipmentPart.Trousers: this.trousers = equip;
-            case EquipmentPart.Amulet: this.amulet = equip;
-            case EquipmentPart.Shoes: this.shoes = equip;
-            case EquipmentPart.Mount: this.mount = equip;
-            case EquipmentPart.Fashion: this.fashion = equip;
-            case EquipmentPart.HiddenWeeapon: this.hiddenWeeapon = equip;
-            case EquipmentPart.MagicWeapon: this.magicWeapon = equip;
+            case EquipmentPart.Weapon: this.weapon = equip;break;
+            case EquipmentPart.Helmet: this.helmet = equip;break;
+            case EquipmentPart.Necklace: this.necklace = equip;break;
+            case EquipmentPart.Clothes: this.clothes = equip;break;
+            case EquipmentPart.Ring: this.ring = equip;break;
+            case EquipmentPart.Trousers: this.trousers = equip;break;
+            case EquipmentPart.Amulet: this.amulet = equip;break;
+            case EquipmentPart.Shoes: this.shoes = equip;break;
+            case EquipmentPart.Mount: this.mount = equip;break;
+            case EquipmentPart.Fashion: this.fashion = equip;break;
+            case EquipmentPart.HiddenWeeapon: this.hiddenWeeapon = equip;break;
+            case EquipmentPart.MagicWeapon: this.magicWeapon = equip;break;
             default: return null;
         }
     }
@@ -83,6 +83,11 @@ export class Body extends Decode<IBodyData, IBody> implements IBody {
         const equips = [ "weapon", "helmet", "necklace", "clothes", "ring", "trousers", "amulet", "shoes", "mount",
             "hiddenWeeapon", "fashion", "magicWeapon", ];
         if (equips.includes(key)) return data[ key ] ? new Equipment().decode(data[ key ] as IEquipmentData) : null;
-        else return data[ key ];
+        else {
+            const arr = this[ key ] as number[];
+            arr.length = 0;
+            arr.push(...(data[ key ] as number[]));
+            return arr;
+        }
     }
 }

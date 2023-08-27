@@ -98,7 +98,49 @@
       <gearDisplay controller="ctrlSelectType" pages="4"/>
       <relation target="" sidePair="middle-middle,right-right"/>
     </group>
-    <list id="n40_sbd0" name="list_item" xy="19,102" size="840,1463" layout="flow_hz" overflow="scroll" lineGap="15" colGap="15" lineItemCount="3" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
+    <list id="n40_sbd0" name="list_item" xy="19,102" size="840,1463" layout="flow_hz" overflow="scroll" lineGap="15" colGap="15" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
       <item/>
       <item/>
       <item/>
@@ -148,8 +190,5 @@
     <item time="5" type="XY" target="n8_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
     <item time="6" type="XY" target="n9_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
     <item time="8" type="Alpha" target="n41_9f1k" tween="true" startValue="0" endValue="1" duration="3"/>
-  </transition>
-  <transition name="trans_list" autoPlay="true">
-    <item time="0" type="Size" target="n40_sbd0" tween="true" startValue="-,0" endValue="-,1463" duration="15"/>
   </transition>
 </component>

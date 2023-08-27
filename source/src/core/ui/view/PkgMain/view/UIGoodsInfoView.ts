@@ -27,11 +27,11 @@ export class UIGoodsInfoView extends ExtensionClass<IView, UIGoodsInfo>(UIGoodsI
 	setContent(id: number, buy: boolean) {
 		let type = 0;
 		const realID = buy ? cfgMgr.Shop[ id ].sellID : id;
-		const { sellRewards, name, desc, quality, useRequire, itemType } = cfgMgr.Item[ realID ];
+		const { sellRewards, name, desc, quality, useRequire, itemType, salable } = cfgMgr.Item[ realID ];
 		if (buy) type = 2;
 		else if (UserUtil.CanUseItem(realID)) type = 1;
 		this.ctrlUse.selectedIndex = type;
-		const canSell = (!buy && sellRewards) ? 1 : 0;
+		const canSell = (!buy && salable) ? 1 : 0;
 		this.ctrlSell.selectedIndex = canSell ? 1 : 0;
 		const sellTxt = buy ? "" : (canSell ? `<br>出售：${ GameUtil.GetItemString(sellRewards, true, true) }` : "<br>[color=#FF0000]不可出售[/color]");
 		const buyTxt = buy ? `<br>价格：${ GameUtil.GetItemString(cfgMgr.Shop[ id ].sellPrice) }` : "";

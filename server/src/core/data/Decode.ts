@@ -1,10 +1,10 @@
 export abstract class Decode<D, O> implements IDecode<D, O> {
     encode?(): D {
+        this.beginEncode();
         const result = {} as D;
         Object.keys(this).forEach(key => {
             result[ key ] = this.onEncode(key as any);
         });
-        this.afterDecode();
         return result;
     }
 
@@ -17,15 +17,15 @@ export abstract class Decode<D, O> implements IDecode<D, O> {
         return this as unknown as O;
     }
 
-    protected onEncode(key: keyof this): any {
-        return this[ key ];
+    protected onEncode(key: keyof D): any {
+        return this[ key as string ];
     }
 
     protected onDecode(data: D, key: keyof D): any {
         return data[ key ];
     }
 
-    protected afterEncode() {
+    protected beginEncode() {
 
     }
 

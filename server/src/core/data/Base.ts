@@ -3,8 +3,9 @@ import { GameUtil } from "../../utils/GameUtil";
 import { cfgMgr } from "../config/CfgManager";
 import { BaseDataType } from "../enum/ItemEnum";
 import { Decode } from "./Decode";
-class CittaData implements ICittaData {
+class Citta extends Decode<ICittaData, ICitta> implements ICitta {
     constructor() {
+        super();
         GameUtil.cantSyncObj(this);
     }
 }
@@ -39,7 +40,7 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
     /** 宝石积分 */
     gemScore: number = 0;
     /**心法数据 */
-    citta: ICittaData = new CittaData();
+    citta: ICitta = new Citta();
     /**技能数据 */
     skill: number[] = [ 5000 ];
     /**出战技能 */
@@ -91,18 +92,13 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
 
     protected override onDecode(data: IBaseData, key: keyof IBaseData) {
         switch (key) {
-            case "citta":
-                const citta = this[ key ];
-                Object.keys(data[ key ]).forEach(v => {
-                    citta[ v ] = data[ key ][ v ];
-                });
-                return citta;
+            case "citta": return this[ key ].decode(data[ key ]);;
             case "skill":
             case "usingSkill":
-                const value = this[ key ];
-                value.length = 0;
-                value.push(...data[ key ]);
-                return value;
+                const skillArr = this[ key ];
+                skillArr.length = 0;
+                skillArr.push(...data[ key ]);
+                return skillArr;
 
             default: return data[ key ];
         }

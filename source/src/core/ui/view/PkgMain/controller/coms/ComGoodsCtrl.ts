@@ -39,19 +39,11 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 		this.refreshListByType(this.showType);
 	}
 
-	@RegisterEvent(UserDataEvent.BagData_Collect_Changed)
-	@RegisterEvent(UserDataEvent.BagData_Equipment_Changed)
-	@RegisterEvent(UserDataEvent.BagData_Gem_Changed)
-	@RegisterEvent(UserDataEvent.BagData_Prop_Changed)
-	@RegisterEvent(UserDataEvent.BagData_Material_Changed)
-	@RegisterEvent(UserDataEvent.BagData_Book_Changed)
-	@RegisterEvent(UserDataEvent.BagData_Other_Changed)
+	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
 	private refreshListByType(type: ItemBagType) {
-		const same = type == null || type == this.showType;
 		this.showType = type ?? this.showType;
 		this.items = userData.bag.getItems(this.showType) as any;
 		this.view.list_item.numItems = this.items.length;
-		!same && this.view.trans_list.play();
 	}
 
 	private onListRenderer(index: number, item: RenderBagView) {

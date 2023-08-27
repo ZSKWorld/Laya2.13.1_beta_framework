@@ -1,5 +1,7 @@
+declare interface ICitta extends ICittaData, IDecode<ICittaData, ICitta> { }
 declare interface IBase extends IBaseData, IDecode<IBaseData, IBase> {
-
+    citta: ICitta;
+    
     /** 获取最大精力值 */
     getMaxVigro(): number;
 

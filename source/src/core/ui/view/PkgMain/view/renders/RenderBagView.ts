@@ -31,7 +31,7 @@ export class RenderBagView extends ExtensionClass<IView, RenderBag>(RenderBag) {
         } else {
             data = <IGoods>data;
             txt_name.text = data.name;
-            txt_count.text = data.count.toString();
+            txt_count.text = "x" + data.count;
         }
         txt_name.color = data.color;
         txt_count.color = data.color;

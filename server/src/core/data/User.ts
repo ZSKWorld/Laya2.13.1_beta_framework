@@ -10,19 +10,18 @@ import { Decode } from "./Decode";
 import { Friend } from "./Friend";
 
 export class User extends Decode<IUserData, IUser> implements IUser {
-    account: IAccount;
-    base: IBase;
-    offline?: IOffline;
-    friend: IFriend;
-    body: IBody;
-    bag: IBag;
-    battle: IBattle;
+    account: IAccount = null;
+    base: IBase = null;
+    offline?: IOffline = null;
+    friend: IFriend = null;
+    body: IBody = null;
+    bag: IBag = null;
+    battle: IBattle = null;
 
     constructor(account: string, password: string, nickname: string) {
         super();
         this.account = new Account(account, password, nickname);
         this.base = new Base();
-        this.offline = null;
         this.friend = new Friend();
         this.body = new Body();
         this.bag = new Bag();
@@ -37,9 +36,9 @@ export class User extends Decode<IUserData, IUser> implements IUser {
         Util.saveData(this.encode());
     }
 
-    protected override onEncode(key: keyof this) {
+    protected override onEncode(key: keyof IUserData) {
         if (key == "offline") return null;
-        else return (<IDecode<any, any>>this[ key ]).encode();
+        else return this[ key ].encode();
     }
 
     protected override onDecode(data: IUserData, key: keyof IUserData) {

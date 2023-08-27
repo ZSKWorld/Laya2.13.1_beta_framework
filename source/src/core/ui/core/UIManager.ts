@@ -70,7 +70,8 @@ class UIManager extends Observer {
 		this._lockPanel.sortingOrder = 999;
 		layerMgr.addObject(this._lockPanel, Layer.Bottom);
 
-		Laya.stage.on(Laya.Event.RESIZE, this, this.onResize);
+		//延迟100防止频繁触发
+		Laya.stage.on(Laya.Event.RESIZE,  this, this.onResize);
 	}
 
 	registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>) {

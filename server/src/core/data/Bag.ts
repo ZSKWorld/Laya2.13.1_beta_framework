@@ -85,8 +85,8 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
         return null;
     }
 
-    protected override onEncode(key: keyof this) {
-        const arr = this[ key ] as any[];
+    protected override onEncode(key: keyof IBagData) {
+        const arr = this[ key ];
         if (key == "collect") return arr;
         const result = [];
         if (arr && arr.length) {
@@ -103,13 +103,13 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
     }
 
     protected override onDecode(data: IBagData, key: keyof IBagData) {
+        const result = this[ key ] as any[];
+        result.length = 0;
         switch (key) {
-            case "collect": return data[ key ];
+            case "collect": result.push(...data[ key ]); return result;
             default:
                 const value = data[ key ] as unknown as any[][];
                 const keys = value.shift();
-                const result = this[ key ] as any[];
-                result.length = 0;
                 const cls = key == "equipment" ? Equipment : Goods;
                 value.forEach(v => {
                     const temp = {} as any;

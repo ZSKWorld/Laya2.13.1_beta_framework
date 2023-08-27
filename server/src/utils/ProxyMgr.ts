@@ -17,15 +17,20 @@ export class ProxyMgr {
                             let tempThis = this;
                             let tempResult = result;
                             const properties = keyStr.split(".");
-                            properties.forEach((key, index) => {
-                                if (!key) return;
-                                if (index == properties.length - 1) {
+                            for (let i = 0, n = properties.length - 1; i <= n; i++) {
+                                const key = properties[ i ];
+                                if (!key) continue;
+                                if (i == n) {
                                     tempResult[ key ] = tempThis[ key ];
                                 } else {
                                     tempThis = tempThis[ key ];
-                                    tempResult = tempResult[ key ] = {};
+                                    if (Array.isArray(tempThis)) {
+                                        tempResult[ key ] = tempThis;
+                                        break;
+                                    }
+                                    tempResult = tempResult[ key ] = tempResult[ key ] || {};
                                 }
-                            });
+                            }
                         });
                     }
                     return result;

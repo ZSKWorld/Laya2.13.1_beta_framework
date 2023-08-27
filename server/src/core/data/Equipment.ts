@@ -1,3 +1,4 @@
+import { GameUtil } from "../../utils/GameUtil";
 import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
 import { cfgMgr } from "../config/CfgManager";
@@ -22,15 +23,16 @@ export class Equipment extends Decode<IEquipmentData, IEquipment> implements IEq
     constructor(id: number = 0) {
         super();
         this.id = id;
+        GameUtil.cantSyncObj(this);
     }
 
     createAttribute(): IEquipment {
         const { main, wuXing, second, body } = cfgMgr.EquipmentAddition[ this.part ];
         this.star = MathUtil.RandomInt(1, +cfgMgr.Const[ 1010 ].value);
-        Equipment.randomAttribute([ ...main ], this.mainAttri, false).sort(Equipment.sortFunc);
-        Equipment.randomAttribute([ ...wuXing ], this.wuXingAttri, true).sort(Equipment.sortFunc);
-        Equipment.randomAttribute([ ...second ], this.secondAttri, true).sort(Equipment.sortFunc);
-        Equipment.randomAttribute([ ...body ], this.bodyAttri, true).sort(Equipment.sortFunc);
+        main && Equipment.randomAttribute([ ...main ], this.mainAttri, false).sort(Equipment.sortFunc);
+        wuXing && Equipment.randomAttribute([ ...wuXing ], this.wuXingAttri, true).sort(Equipment.sortFunc);
+        second && Equipment.randomAttribute([ ...second ], this.secondAttri, true).sort(Equipment.sortFunc);
+        body && Equipment.randomAttribute([ ...body ], this.bodyAttri, true).sort(Equipment.sortFunc);
         return this;
     }
 

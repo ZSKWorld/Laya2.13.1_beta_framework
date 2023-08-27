@@ -62,7 +62,6 @@ export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData>{
 		const shop = cfgMgr.Shop;
 		this.items = Object.keys(shop).filter((v) => shop[ v ].sellType == type).map((v) => shop[ v ]);
 		this.view.list_item.numItems = this.items.length;
-		this.showType != type && this.view.trans_list.play();
 		this.showType = type;
 	}
 	private onListRenderer(index: number, item: RenderBagView) {

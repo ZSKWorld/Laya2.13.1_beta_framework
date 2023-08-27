@@ -1,8 +1,9 @@
 import { GameUtil } from "../../utils/GameUtil";
 import { Decode } from "./Decode";
 
-class BattleData implements IBattleItem {
+class BattleData extends Decode<IBattleItemData, IBattleItem> implements IBattleItem {
     constructor() {
+        super();
         GameUtil.cantSyncObj(this);
     }
 }
@@ -18,10 +19,6 @@ export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
     boss = new BattleData();
 
     protected override onDecode(data: IBattleData, key: keyof IBattleData) {
-        const value = this[ key ];
-        Object.keys(data[ key ]).forEach(v => {
-            value[ key ] = data[ key ];
-        });
-        return value;
+        return this[key].decode(data[key]);
     }
 }
