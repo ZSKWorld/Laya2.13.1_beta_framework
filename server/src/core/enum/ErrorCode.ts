@@ -66,4 +66,8 @@ export const enum ErrorCode {
     UNKNOWN_BATTLE_TYPE = 2000,
     /** 未知的战斗关卡 */
     UNKNOWN_BATTLE_LEVEL,
+    /** 挑战次数不足 */
+    CHALLENGE_COUNT_NOT_ENOUGH,
+    /** 冷却未完成 */
+    COOLDOWN_NOT_COMPLETE,
 }

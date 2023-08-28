@@ -1,5 +1,5 @@
 declare type PartialAll<T> = { [ P in keyof T ]?: Partial<T[ P ]>; };
-declare interface KeyMap<T> { [ key: string ]: T; }
+declare interface KeyMap<T> { [ key: string ]: T; };
 declare type Class<T> = new (...args: any) => T;
 
 declare const userData: IUser;

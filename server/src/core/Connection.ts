@@ -6,13 +6,13 @@ import { connectionMgr } from "./ConnectionMgr";
 import { Controller } from "./controller/Controller";
 import { AccouontController } from "./controller/account/AccouontController";
 import { BattleController } from "./controller/battle/BattleController";
+import { EquipmentController } from "./controller/equipment/EquipmentController";
 import { FriendController } from "./controller/friend/FriendController";
 import { HeartController } from "./controller/heart/HeartController";
 import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
-import { User } from "./data/User";
 import { ErrorCode } from "./enum/ErrorCode";
-import { EquipmentController } from "./controller/equipment/EquipmentController";
+import { User } from "./userdata/User";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",

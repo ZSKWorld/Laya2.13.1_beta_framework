@@ -10,10 +10,10 @@ export class CfgManager {
 	readonly MiJing: CfgMiJing;
 	/** Boss */
 	readonly Boss: CfgBoss;
-	/** 怪物 */
-	readonly Enemy: CfgEnemy;
 	/** 采集 */
 	readonly CaiJi: CfgCaiJi;
+	/** 怪物 */
+	readonly Enemy: CfgEnemy;
 	/** 装备 */
 	readonly Equipment: CfgEquipment;
 	/** 装备加成 */
@@ -49,7 +49,7 @@ export class CfgManager {
 	/** 错误码 */
 	readonly Error: CfgError;
 
-	constructor() {
+    constructor() {
 		let cfgData = Laya.loader.getRes(ResPath.ConfigPath.Config);
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;

@@ -1,6 +1,6 @@
 import { EquipmentPart } from "../enum/ItemEnum";
 import { Decode } from "./Decode";
-import { Equipment } from "./Equipment";
+import { Equipment } from "./Goods";
 
 export class Body extends Decode<IBodyData, IBody> implements IBody {
     /** 武器 */

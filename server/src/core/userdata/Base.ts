@@ -1,13 +1,10 @@
 import { Formula } from "../../utils/Formula";
-import { GameUtil } from "../../utils/GameUtil";
 import { cfgMgr } from "../config/CfgManager";
 import { BaseDataType } from "../enum/ItemEnum";
+import { CantSyncObject } from "./CantSyncObject";
 import { Decode } from "./Decode";
-class Citta extends Decode<ICittaData, ICitta> implements ICitta {
-    constructor() {
-        super();
-        GameUtil.cantSyncObj(this);
-    }
+class Citta extends CantSyncObject<ICittaData, ICitta> implements ICitta {
+
 }
 
 export class Base extends Decode<IBaseData, IBase> implements IBase {

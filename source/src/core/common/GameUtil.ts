@@ -2,8 +2,12 @@ import { richStrMgr } from "../ui/tool/RichStrManager";
 
 
 export class GameUtil {
-    static GetServerTime() {
+    static GetTimeStamp() {
         return Date.now();
+    }
+
+    static GetSecondStamp() {
+        return Math.floor(Date.now() / 1000);
     }
 
     static GenerateUUID() {

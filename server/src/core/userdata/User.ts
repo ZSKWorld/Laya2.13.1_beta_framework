@@ -52,6 +52,6 @@ export class User extends Decode<IUserData, IUser> implements IUser {
         if (!this.account.lastOnlineTime) return null;
         const timeOffset = ((TimeUtil.getTimeStamp() - this.account.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5) return null;
-        else return GameUtil.cantSyncObj({ offlineTime: timeOffset, vigor: (this.base.getVigorRecoveryRate() * timeOffset) << 0 });
+        else return { offlineTime: timeOffset, vigor: (this.base.getVigorRecoveryRate() * timeOffset) << 0 };
     }
 }

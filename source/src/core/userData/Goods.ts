@@ -15,14 +15,14 @@ class Item<T> extends Decode<T>{
     get useRequireStr() { return UserUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
 }
 
-export class Goods extends Item<IGoods> implements IGoods {
+export class Goods extends Item<IGoodsData> implements IGoods {
     protected static readonly ClassName: string = "ItemBase";
     protected static readonly DontDispatch = true;
     count: number;
 
 }
 
-export class Equipment extends Item<IEquipment> implements IEquipment {
+export class Equipment extends Item<IEquipmentData> implements IEquipment {
     protected static readonly ClassName = "Equipment";
     //#region 字段
     uid: string;

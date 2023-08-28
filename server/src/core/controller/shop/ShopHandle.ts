@@ -1,5 +1,5 @@
 import { cfgMgr } from "../../config/CfgManager";
-import { Goods } from "../../data/Goods";
+import { Goods } from "../../userdata/Goods";
 import { ItemHandle } from "../item/ItemHandle";
 import { ItemHelper } from "../item/ItemHelper";
 

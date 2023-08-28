@@ -1,5 +1,5 @@
 export abstract class Decode<D, O> implements IDecode<D, O> {
-    encode?(): D {
+    encode?() {
         this.beginEncode();
         const result = {} as D;
         Object.keys(this).forEach(key => {
@@ -8,7 +8,7 @@ export abstract class Decode<D, O> implements IDecode<D, O> {
         return result;
     }
 
-    decode(data: D): O {
+    decode?(data: D) {
         if (!data) return this as unknown as O;
         Object.keys(data).forEach((key) => {
             this[ key ] = this.onDecode(data, key as any);
@@ -17,11 +17,11 @@ export abstract class Decode<D, O> implements IDecode<D, O> {
         return this as unknown as O;
     }
 
-    protected onEncode(key: keyof D): any {
-        return this[ key as string ];
+    protected onEncode(key: keyof D) {
+        return (<D><unknown>this)[ key ];
     }
 
-    protected onDecode(data: D, key: keyof D): any {
+    protected onDecode(data: D, key: keyof D) {
         return data[ key ];
     }
 

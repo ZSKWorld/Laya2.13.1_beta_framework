@@ -86,7 +86,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	private onBtnBattleClick(hour: number): void {
 		hour = typeof hour == "number" ? hour : 0;
 		const [ battleType, cfg ] = [ this.data, this.items[ this.clickIndex ] ];
-		BattleService.Inst.startBattle({ type: battleType, id: cfg.ID, hour });
+		BattleService.Inst.startBattle({ type: battleType, id: cfg.id, hour });
 	}
 
 }

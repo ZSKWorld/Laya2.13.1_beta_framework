@@ -2,7 +2,7 @@ import { DataType, ItemBagType } from "../net/enum/ItemEnum";
 import { Decode } from "./Decode";
 import { Equipment, Goods } from "./Goods";
 
-export class Bag extends Decode<IBag> implements IBag {
+export class Bag extends Decode<IBagData> implements IBag {
     private static readonly ClassName = "BagData";
     collect: number[];
     equipment: IEquipment[];
@@ -49,7 +49,7 @@ export class Bag extends Decode<IBag> implements IBag {
         }
     }
 
-    protected override onDecode(data: PartialAll<IBag>, key: keyof IBag) {
+    protected override onDecode(data: IBagData, key: keyof IBagData) {
         switch (key) {
             case "equipment": return data[ key ].map(v => v instanceof Equipment ? v : new Equipment().decode(v));
             case "gem":

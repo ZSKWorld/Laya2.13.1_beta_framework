@@ -4,8 +4,8 @@ import { Observer } from "../libs/event/Observer";
 export abstract class Decode<D> extends Observer implements IDecode<D, any> {
     private static dispatchArr: Set<string> = new Set();
 
-    decode(data: PartialAll<D>): D {
-        if (!data) return this as unknown as D;
+    decode(data: D) {
+        if (!data) return this;
         Object.keys(data).forEach((key) => {
             //规定__开头的私有变量不进行decode
             if (key.startsWith("__")) return;
@@ -16,10 +16,10 @@ export abstract class Decode<D> extends Observer implements IDecode<D, any> {
         });
         Laya.timer.callLater(Decode, Decode.dispatchEvent);
         this.afterDecode();
-        return this as unknown as D;
+        return this;
     }
 
-    protected onDecode(data: PartialAll<D>, key: keyof D): any {
+    protected onDecode(data: D, key: keyof D) {
         return data[ key ];
     }
 

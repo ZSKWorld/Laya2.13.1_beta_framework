@@ -1,8 +1,7 @@
 import { cfgMgr } from "../config/CfgManager";
 import { DataType, ItemBagType } from "../enum/ItemEnum";
 import { Decode } from "./Decode";
-import { Equipment } from "./Equipment";
-import { Goods } from "./Goods";
+import { Equipment, Goods } from "./Goods";
 
 export class Bag extends Decode<IBagData, IBag> implements IBag {
     collect: number[] = [];

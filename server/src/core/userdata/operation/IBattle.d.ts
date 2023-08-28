@@ -1,31 +1,36 @@
 declare interface ILevel extends ILevelData, IDecode<ILevelData, ILevel> {
-
+    /** 开始战斗 */
+    startBattle(id: number): void;
 }
 
 declare interface ICopy extends ICopyData, IDecode<ICopyData, ICopy> {
     /** 获取副本剩余次数 */
     getLastCount(id: number): number;
+    /** 开始战斗 */
+    startBattle(id: number): void;
 }
 
 declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
     /** 获取秘境剩余次数 */
     getLastCount(id: number): number;
+    /** 开始战斗 */
+    startBattle(id: number): void;
 }
 
 declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
-    /** 获取剩余冷却时间 */
-    lastCooldownTime(id: number): number;
-    /** 获取boss是否冷却完毕 */
-    isCooldown(id: number): boolean;
+    /** 剩余冷却时间 */
+    lastCoolTime(id: number): number;
+    /** 开始战斗 */
+    startBattle(id: number): void;
 }
 
 declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
     /** 获取采集剩余次数 */
     getLastCount(id: number): number;
-    /** 是否正在采集中 */
-    isGathering(id: number): boolean;
     /** 剩余采集时间 */
     lastGatherTime(id: number): number;
+    /** 开始采集 */
+    startBattle(id: number): void;
 }
 
 declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
@@ -39,4 +44,13 @@ declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
     boss: IBoss;
     /** 采集数据 */
     gather: IGather;
+
+    /** 获取配置表 */
+    getConfig(type: BattleType, id: number): BattleLevel | CfgCaiJiData;
+    /** 获取剩余次数，不包括采集 */
+    getLastCount(type: BattleType, id: number): number;
+    /** 是否冷却完毕 */
+    getIsCooldown(type: BattleType, id: number): boolean;
+    /** 获取精力消耗 */
+    getVigorCost(type: BattleType, id: number): number;
 }

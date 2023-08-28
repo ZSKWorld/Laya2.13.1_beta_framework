@@ -11,10 +11,10 @@ class CfgManager {
 	readonly MiJing: CfgMiJing;
 	/** Boss */
 	readonly Boss: CfgBoss;
-	/** 怪物 */
-	readonly Enemy: CfgEnemy;
 	/** 采集 */
 	readonly CaiJi: CfgCaiJi;
+	/** 怪物 */
+	readonly Enemy: CfgEnemy;
 	/** 装备 */
 	readonly Equipment: CfgEquipment;
 	/** 装备加成 */

@@ -2,7 +2,7 @@ import { EquipmentPart } from "../net/enum/ItemEnum";
 import { Decode } from "./Decode";
 import { Equipment } from "./Goods";
 
-export class Body extends Decode<IBody> implements IBody {
+export class Body extends Decode<IBodyData> implements IBody {
     private static readonly ClassName = "BodyData";
     //#region 字段
     weapon: IEquipment;
@@ -59,7 +59,7 @@ export class Body extends Decode<IBody> implements IBody {
         }
     }
 
-    protected override onDecode(data: PartialAll<IBody>, key: keyof IBody) {
+    protected override onDecode(data: IBodyData, key: keyof IBodyData) {
         switch (key) {
             case "weapon":
             case "helmet":

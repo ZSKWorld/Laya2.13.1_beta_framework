@@ -1,13 +1,22 @@
-import { GameUtil } from "../../utils/GameUtil";
 import { MathUtil } from "../../utils/MathUtil";
 import { Util } from "../../utils/Util";
 import { cfgMgr } from "../config/CfgManager";
 import { EquipmentPart } from "../enum/ItemEnum";
-import { Decode } from "./Decode";
+import { CantSyncObject } from "./CantSyncObject";
 
-export class Equipment extends Decode<IEquipmentData, IEquipment> implements IEquipment {
+export class Goods extends CantSyncObject<IGoodsData, IGoods> implements IGoods {
+    id: number = 0;
+    count: number = 0;
+
+    constructor(id: number = 0, count: number = 0) {
+        super();
+        this.id = id;
+        this.count = count;
+    }
+}
+
+export class Equipment extends CantSyncObject<IEquipmentData, IEquipment> implements IEquipment {
     id: number;
-    count: number;
     uid: string = Util.CreateUID();
     star: number = 0;
     level: number = 0;
@@ -20,10 +29,10 @@ export class Equipment extends Decode<IEquipmentData, IEquipment> implements IEq
     get part(): EquipmentPart {
         return cfgMgr.Equipment[ this.id ].part;
     }
+
     constructor(id: number = 0) {
         super();
         this.id = id;
-        GameUtil.cantSyncObj(this);
     }
 
     createAttribute(): IEquipment {

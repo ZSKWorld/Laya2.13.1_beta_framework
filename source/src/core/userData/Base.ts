@@ -1,9 +1,8 @@
-import { GameUtil } from "../common/GameUtil";
 import { BaseDataType, DataType } from "../net/enum/ItemEnum";
 import { Decode } from "./Decode";
 import { UserUtil } from "./UserUtil";
 
-export class Base extends Decode<IBase> implements IBase {
+export class Base extends Decode<IBaseData> implements IBase {
     private static readonly ClassName = "BaseData";
     //#region 字段
     coin: number;
@@ -20,7 +19,7 @@ export class Base extends Decode<IBase> implements IBase {
     sect: number;
     soul: number;
     gemScore: number;
-    citta: ICittaData;
+    citta: ICitta;
     skill: number[];
     usingSkill: number[];
     //#endregion
