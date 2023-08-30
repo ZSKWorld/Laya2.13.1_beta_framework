@@ -43,14 +43,14 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
 
-    getMaxVigro(): number {
+    get maxVigro(): number {
         const { citta } = this;
         let xinFaJL = 0;
         Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorAddition));
         return Math.floor(86400 + xinFaJL);
     }
 
-    getVigorRecoveryRate(): number {
+    get vigorRecover(): number {
         const { citta } = this;
         let xinFaJLHF = 0;
         Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorRecoverAddition));

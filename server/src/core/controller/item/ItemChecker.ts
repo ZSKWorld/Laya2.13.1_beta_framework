@@ -30,7 +30,7 @@ export class ItemChecker {
         else if (item.count < count) return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         else if (ItemHelper.checkJingJieEnough(data, id) == false) return ErrorCode.JINGJIE_NOT_ENOUGH_USE;
         else if (ItemHelper.isFood(id)) {
-            if (data.base.vigor >= data.base.getMaxVigro())
+            if (data.base.vigor >= data.base.maxVigro)
                 return ErrorCode.VIGOR_IS_FULL;
         }
         else if (ItemHelper.isSkillBook(id)) {

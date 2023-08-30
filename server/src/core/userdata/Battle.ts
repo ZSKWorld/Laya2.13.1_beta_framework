@@ -22,6 +22,10 @@ class Copy extends Decode<ICopyData, ICopy> implements ICopy {
         usedMap[ id ] = oldCnt + 1;
         this.usedMap = usedMap;
     }
+
+    reset(): void {
+        this.usedMap = {};
+    }
 }
 
 class Secret extends Decode<ISecretData, ISecret> implements ISecret {
@@ -38,6 +42,10 @@ class Secret extends Decode<ISecretData, ISecret> implements ISecret {
         const oldCnt = usedMap[ id ] || 0;
         usedMap[ id ] = oldCnt + 1;
         this.usedMap = usedMap;
+    }
+
+    reset(): void {
+        this.usedMap = {};
     }
 }
 
@@ -56,6 +64,10 @@ class Boss extends Decode<IBossData, IBoss> implements IBoss {
         const lastChallengeTime = this.lastChallengeTime || {};
         lastChallengeTime[ id ] = TimeUtil.getSecondStamp();
         this.lastChallengeTime = lastChallengeTime;
+    }
+
+    reset(): void {
+        this.lastChallengeTime = {};
     }
 }
 
@@ -86,6 +98,10 @@ class Gather extends Decode<IGatherData, IGather> implements IGather {
         const startTimeMap = this.startTimeMap || {};
         startTimeMap[ id ] = TimeUtil.getSecondStamp();
         this.startTimeMap = startTimeMap;
+    }
+
+    reset(): void {
+        this.usedMap = {};
     }
 }
 

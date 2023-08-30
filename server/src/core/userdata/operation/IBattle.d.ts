@@ -8,6 +8,7 @@ declare interface ICopy extends ICopyData, IDecode<ICopyData, ICopy> {
     getLastCount(id: number): number;
     /** 开始战斗 */
     startBattle(id: number): void;
+    reset(): void;
 }
 
 declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
@@ -15,6 +16,7 @@ declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
     getLastCount(id: number): number;
     /** 开始战斗 */
     startBattle(id: number): void;
+    reset(): void;
 }
 
 declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
@@ -22,6 +24,7 @@ declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
     lastCoolTime(id: number): number;
     /** 开始战斗 */
     startBattle(id: number): void;
+    reset(): void;
 }
 
 declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
@@ -31,6 +34,7 @@ declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
     lastGatherTime(id: number): number;
     /** 开始采集 */
     startBattle(id: number): void;
+    reset(): void;
 }
 
 declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {

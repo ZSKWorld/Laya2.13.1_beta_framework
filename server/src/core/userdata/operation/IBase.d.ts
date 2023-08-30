@@ -6,10 +6,10 @@ declare interface IBase extends IBaseData, IDecode<IBaseData, IBase> {
     citta: ICitta;
 
     /** 获取最大精力值 */
-    getMaxVigro(): number;
+    get maxVigro(): number;
 
     /** 获取精力回复速率 */
-    getVigorRecoveryRate(): number;
+    get vigorRecover(): number;
 
     /** 获取物品数量 */
     getItemCount(id: number): number;

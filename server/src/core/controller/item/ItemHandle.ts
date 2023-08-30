@@ -1,7 +1,7 @@
 import { MathUtil } from "../../../utils/MathUtil";
 import { cfgMgr } from "../../config/CfgManager";
-import { Goods } from "../../data/Goods";
 import { BaseDataType, DataType, FoodRecoverType } from "../../enum/ItemEnum";
+import { Goods } from "../../userdata/Goods";
 import { ItemHelper } from "./ItemHelper";
 
 export class ItemHandle {
@@ -82,9 +82,9 @@ export class ItemHandle {
         const rewards: IGoods[] = [];
         let useCount = 1;
         switch (id) {
-            case 2007: data.battle.copy = {}; break;
-            case 2008: data.battle.secret = {}; break;
-            case 2009: data.battle.boss = {}; break;
+            case 2007: data.battle.copy.reset(); break;
+            case 2008: data.battle.secret.reset(); break;
+            case 2009: data.battle.boss.reset(); break;
             case 2010: break;
             default:
                 useCount = count;
@@ -107,13 +107,13 @@ export class ItemHandle {
      * @returns 使用后获得的物品
      */
     private static useFood(data: IUser, id: number, count: number) {
-        const maxVigro = data.base.getMaxVigro();
+        const maxVigro = data.base.maxVigro;
         let useCount = 0;
         const food = cfgMgr.Food[ id ];
         let singleRecover = 0;
         switch (food.recoverType) {
             case FoodRecoverType.NumberRecover: singleRecover = food.recoverValue; break;
-            case FoodRecoverType.TimeRecover: singleRecover = food.recoverValue * data.base.getVigorRecoveryRate(); break;
+            case FoodRecoverType.TimeRecover: singleRecover = food.recoverValue * data.base.vigorRecover; break;
             case FoodRecoverType.PercentRecover: singleRecover = food.recoverValue * maxVigro; break;
             default: throw new Error("未知食物类型");
         }
