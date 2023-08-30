@@ -2,11 +2,11 @@
 <component size="270,100" pivot="0.5,0.5" extention="Button" designImageOffsetX="-631" designImageOffsetY="-335" designImageAlpha="100">
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <displayList>
-    <graph id="n5_pogd" name="bg" xy="0,0" size="270,100" touchable="false" type="rect" lineSize="0" fillColor="#ff272b37" corner="10">
+    <graph id="n5_pogd" name="bg" xy="0,0" size="270,100" touchable="false" type="rect" lineSize="0" fillColor="#ff171921" corner="10">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n3_mz80" name="n3" xy="2,2" size="266,96" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00272b37" corner="8">
-      <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true"/>
+    <graph id="n3_mz80" name="n3" xy="0,0" size="270,100" alpha="0" touchable="false" type="rect" lineSize="0" lineColor="#ffffffff" fillColor="#ff4f5672" corner="8">
+      <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true" duration=".5"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <text id="n1_sbd0" name="txt_name" xy="135,46" pivot="0.5,0.5" anchor="true" size="244,54" fontSize="40" color="#ffffff" vAlign="middle" leading="1" text="五级体力宝石">

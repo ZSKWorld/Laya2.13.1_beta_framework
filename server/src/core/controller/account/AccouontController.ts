@@ -1,6 +1,6 @@
 import { Util } from "../../../utils/Util";
-import { User } from "../../data/User";
 import { ErrorCode } from "../../enum/ErrorCode";
+import { User } from "../../userdata/User";
 import { AddCMD, Controller } from "../Controller";
 
 export class AccouontController extends Controller implements IAccountCtrl {
@@ -22,14 +22,15 @@ export class AccouontController extends Controller implements IAccountCtrl {
     @AddCMD
     login(data: LoginInput): void {
         if (this.connection.logined) {
-            this.response<LoginOutput>(data.cmd);
-            // this.response(data.cmd, null, ErrorCode.USER_LOGINED);
+            const syncInfo = { ...this.user };
+            syncInfo.offline = this.user.getOffline();
+            this.response<LoginOutput>(data.cmd, { syncInfo });
         } else {
             let user = Util.getData(data.account);
             if (!user) return this.response(data.cmd, null, ErrorCode.USER_NOT_EXIST);
             else if (user.account.password != data.password) return this.response(data.cmd, null, ErrorCode.PASSWORD_ERROR);
             else this.connection.userLogin(user);
-            this.response<LoginOutput>(data.cmd);
+            this.response<LoginOutput>(data.cmd, { syncInfo: { offline: this.user.getOffline() } });
         }
     }
 

@@ -13,6 +13,7 @@ import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
 import { User } from "./userdata/User";
+import { TimeUtil } from "../utils/TimeUtil";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -23,13 +24,14 @@ export class Connection {
 
     private _token: string;
     private _listener: EventDispatcher;
-    private _controllers: Controller[] = [];
+    private _controllers: Controller[];
+    private _intervalId: NodeJS.Timer;
 
     private _logined: boolean;
-    private _connection: websocket.connection;
     private _user: IUser;
-    get logined() { return !!this._logined; }
+    private _connection: websocket.connection;
     get listener() { return this._listener; }
+    get logined() { return !!this._logined; }
     get user() { return this._user; }
 
     static startConnection(token: string, connection: websocket.connection, msg?: websocket.Message) {
@@ -65,10 +67,20 @@ export class Connection {
     }
 
     userLogin(data: IUserData) {
-        this._logined = true;
-        this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));
-        connectionMgr.addConnection(data.account.uid, this);
-        this._user.decode(data);
+        if (!this._logined) {
+            this._logined = true;
+            this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));
+            connectionMgr.addConnection(data.account.uid, this);
+            this._user.decode(data);
+            clearInterval(this._intervalId);
+            let startTime = TimeUtil.getTimeStamp();
+            this._intervalId = setInterval(() => {
+                const time = TimeUtil.getTimeStamp();
+                const delta = time - startTime;
+                startTime = time;
+                this._controllers.forEach(v => v.update(delta));
+            }, 16);
+        }
     }
 
     response(data: UserOutput) {
@@ -91,21 +103,25 @@ export class Connection {
     }
 
     clear() {
+        clearInterval(this._intervalId);
+        this._intervalId = null;
+        this._logined = false;
         if (this._connection) {
             this._connection.off(ConnectionEvent.Close, this._onClose);
             this._connection.off(ConnectionEvent.Message, this._onMessage);
         }
 
+        this._connection = null;
+
         this._listener.offAll();
         Pool.recover(PoolKey.EventDispatcher, this._listener);
         this._listener = null;
 
-        this._controllers.forEach(v => v.recover());
-        this._controllers.length = 0;
-
-        this._logined = false;
-
-        this._connection = null;
+        if (this._controllers) {
+            this._controllers.forEach(v => v.recover());
+            this._controllers.length = 0;
+        }
+        this._controllers = null;
 
         this._user?.save();
         this._user = null;
@@ -130,10 +146,12 @@ export class Connection {
     }
 
     private onConnectionClose() {
-        this._logined = false;
+        if (this._connection) {
+            this._connection.off(ConnectionEvent.Close, this._onClose);
+            this._connection.off(ConnectionEvent.Message, this._onMessage);
+        }
         this._connection = null;
         this._user?.save();
-        this._user = null;
         connectionMgr.connectionClosed(this._token, this);
     }
 }

@@ -19,6 +19,8 @@ declare interface IUser extends IUserData, IDecode<IUserData, IUser> {
     getSyncInfo(): Partial<IUser>;
 
     clearSyncInfo(): void;
-    
+
+    getOffline(): IOffline;
+
     save(): void;
 }

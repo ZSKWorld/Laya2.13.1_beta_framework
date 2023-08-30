@@ -10,7 +10,7 @@ import { UILoginCtrl } from "../controller/UILoginCtrl";
 export class UILoginProxy extends BaseProxy<UILoginCtrl>{
 
     @RegisterEvent(NetMessage.Login)
-    private loginResponse(output:LoginOutput, input:LoginInput) {
+    private loginResponse(output: LoginOutput, input: LoginInput) {
         const param = { account: input.account, password: input.password };
         localData.set(LocalDataKey.LastLoginAccount, param);
         logicSceneMgr.enterScene(LogicScene.MainScene);

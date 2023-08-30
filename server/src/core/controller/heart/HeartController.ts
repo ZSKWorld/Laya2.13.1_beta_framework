@@ -2,18 +2,16 @@ import { TimeUtil } from "../../../utils/TimeUtil";
 import { Controller } from "../Controller";
 
 export class HeartController extends Controller implements IHeartCtrl {
-    private _intervalId: NodeJS.Timer;
+    private _delta: number = 0;
     heart(data: HeartInput) {
-        if (this.connection.logined)
-            this.response("heart", { timeStamp: TimeUtil.getTimeStamp() });
     }
 
-    override recover() {
-        super.recover();
-        clearInterval(this._intervalId);
-    }
-    protected override onCreate() {
-        super.onCreate();
-        this._intervalId = setInterval(() => this.heart(null), 10000);
+    override update(delta: number) {
+        this._delta += delta;
+        if (this._delta >= 10000) {
+            this._delta = 0;
+            if (this.connection.logined)
+                this.response("heart", { timeStamp: TimeUtil.getTimeStamp() });
+        }
     }
 }

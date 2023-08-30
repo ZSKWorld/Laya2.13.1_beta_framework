@@ -5,7 +5,6 @@ import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
 export default class UISetting extends fgui.GComponent {
 
 	public graph_bg:fgui.GGraph;
-	public btn_hangUp:BtnCornerTxt;
 	public btn_mute:BtnCornerTxt;
 	public btn_signIn:BtnCornerTxt;
 	public btn_help:BtnCornerTxt;
@@ -19,11 +18,10 @@ export default class UISetting extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.graph_bg = <fgui.GGraph>(this.getChildAt(0));
-		this.btn_hangUp = <BtnCornerTxt>(this.getChildAt(3));
-		this.btn_mute = <BtnCornerTxt>(this.getChildAt(4));
-		this.btn_signIn = <BtnCornerTxt>(this.getChildAt(5));
-		this.btn_help = <BtnCornerTxt>(this.getChildAt(6));
-		this.btn_clearAccount = <BtnCornerTxt>(this.getChildAt(7));
-		this.btn_back = <BtnCornerTxt>(this.getChildAt(10));
+		this.btn_mute = <BtnCornerTxt>(this.getChildAt(2));
+		this.btn_signIn = <BtnCornerTxt>(this.getChildAt(3));
+		this.btn_help = <BtnCornerTxt>(this.getChildAt(4));
+		this.btn_clearAccount = <BtnCornerTxt>(this.getChildAt(5));
+		this.btn_back = <BtnCornerTxt>(this.getChildAt(6));
 	}
 }

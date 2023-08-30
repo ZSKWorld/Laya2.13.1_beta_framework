@@ -1,4 +1,15 @@
 {
+  "objectStatus": {
+    "n161_kyy0": {
+      "collapsed": true
+    },
+    "n52_sbd0": {
+      "collapsed": true
+    },
+    "n34_sbd0": {
+      "collapsed": true
+    }
+  },
   "adaptiveTest": true,
   "fitScreen": "FitSize"
 }

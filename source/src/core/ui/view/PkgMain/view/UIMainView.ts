@@ -47,8 +47,8 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		const nextJingJieExp = UserUtil.GetUpgradExp(jingJie, cengJi);
 		this.txt_level.text = UserUtil.GetJingJieStr(jingJie, cengJi);
 		this.txt_exp.text = nextJingJieExp == 0 ? "(最高境界)" : (MathUtil.ToGroupNumber(exp) + "/" + MathUtil.ToGroupNumber(nextJingJieExp));
-		this.txt_coin.text = "金币:" + MathUtil.ToGroupNumber(coin, 4);
-		this.txt_ingot.text = "元宝:" + MathUtil.ToGroupNumber(vcoin, 4);
+		this.txt_coin.text = "金币:" + MathUtil.ToGroupNumber(coin);
+		this.txt_ingot.text = "元宝:" + MathUtil.ToGroupNumber(vcoin);
 		this.txt_sect.text = "门派：" + (cfgMgr.Sect[ sect ]?.name || "无");
 	}
 

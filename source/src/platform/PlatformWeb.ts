@@ -1,7 +1,5 @@
 import { GameEvent } from "../core/common/GameEvent";
 import { ResPath } from "../core/common/ResPath";
-import { localData } from "../core/libs/localData/LocalData";
-import { LocalDataKey } from "../core/libs/localData/LocalDataKey";
 import GameConfig from "../GameConfig";
 import { PlatformBase } from "./PlatformBase";
 import { PlatformType } from "./PlatformDefine";
@@ -38,11 +36,11 @@ export class PlatformWeb extends PlatformBase {
         //打开调试面板（通过IDE设置调试模式，或者url地址增加debug=true参数，均可打开调试面板）
         if (GameConfig.debug || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();
         if (GameConfig.physicsDebug && Laya[ "PhysicsDebugDraw" ]) Laya[ "PhysicsDebugDraw" ].enable();
-        // if (GameConfig.stat) Laya.Stat.show(0, 200);
+        if (GameConfig.stat) Laya.Stat.show();
         // Laya.alertGlobalError(true);
 
-        // Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
-        Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_WIDTH;
+        Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+        // Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_WIDTH;
         Laya.stage.screenMode = Laya.Stage.SCREEN_NONE;
         // Laya.Text.defaultFont = ResPath.FontName.Font15;
         // fgui.UIConfig.defaultFont = ResPath.FontName.Font15;

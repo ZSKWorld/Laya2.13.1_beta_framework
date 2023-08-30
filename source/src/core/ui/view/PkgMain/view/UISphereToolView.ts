@@ -1,5 +1,5 @@
-import UISphereTool from "../../../ui/PkgMain/UISphereTool";
 import { ResPath } from "../../../../common/ResPath";
+import UISphereTool from "../../../ui/PkgMain/UISphereTool";
 
 export const enum UISphereToolMsg {
 	OnBtnClearLogClick = "UISphereTool_OnBtnClearLogClick",
@@ -45,10 +45,15 @@ export const enum UISphereToolMsg {
 }
 
 export class UISphereToolView extends ExtensionClass<IView, UISphereTool>(UISphereTool) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { btn_clearLog, btn_recoverVigor, btn_create, btn_clear, btn_percent, btn_check1, btn_check2, btn_check3, btn_check4, btn_check5, btn_check6, btn_check7, btn_check8, btn_check9, btn_check10, btn_check11, btn_check12, btn_check13, btn_check14, btn_check15, btn_check16, btn_check17, btn_check18, btn_check19, btn_check20, btn_check21, btn_check22, btn_check23, btn_check24, btn_check25, btn_check26, btn_check27, btn_check28, btn_check0, btn_check31, btn_check32, btn_add, btn_submit, btn_remove, btn_removeAll } = this;
+		const { graph_bg, btn_clearLog, btn_recoverVigor, btn_create, btn_clear, btn_percent, btn_check1, btn_check2,
+			btn_check3, btn_check4, btn_check5, btn_check6, btn_check7, btn_check8, btn_check9, btn_check10,
+			btn_check11, btn_check12, btn_check13, btn_check14, btn_check15, btn_check16, btn_check17, btn_check18,
+			btn_check19, btn_check20, btn_check21, btn_check22, btn_check23, btn_check24, btn_check25, btn_check26,
+			btn_check27, btn_check28, btn_check0, btn_check31, btn_check32, btn_add, btn_submit, btn_remove, btn_removeAll } = this;
+		graph_bg.onClick(this, this.removeSelf);
 		btn_clearLog.onClick(this, this.sendMessage, [ UISphereToolMsg.OnBtnClearLogClick ]);
 		btn_recoverVigor.onClick(this, this.sendMessage, [ UISphereToolMsg.OnBtnRecoverVigorClick ]);
 		btn_create.onClick(this, this.sendMessage, [ UISphereToolMsg.OnBtnCreateClick ]);
@@ -89,6 +94,6 @@ export class UISphereToolView extends ExtensionClass<IView, UISphereTool>(UISphe
 		btn_submit.onClick(this, this.sendMessage, [ UISphereToolMsg.OnBtnSubmitClick ]);
 		btn_remove.onClick(this, this.sendMessage, [ UISphereToolMsg.OnBtnRemoveClick ]);
 		btn_removeAll.onClick(this, this.sendMessage, [ UISphereToolMsg.OnBtnRemoveAllClick ]);
-    }
+	}
 
 }

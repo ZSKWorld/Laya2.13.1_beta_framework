@@ -21,6 +21,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
     override onEnable(): void {
         const data = localData.get<LoginInput>(LocalDataKey.LastLoginAccount);
         data && this.view.setLoginInfo(data.account, data.password);
+        data && Laya.timer.once(1000, this, this.onBtnLoginClick);
     }
 
 	private onBtnLoginClick() {

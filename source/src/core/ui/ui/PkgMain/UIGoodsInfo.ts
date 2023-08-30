@@ -13,6 +13,7 @@ export default class UIGoodsInfo extends fgui.GComponent {
 	public btn_sell:BtnCornerTxt;
 	public btn_use:BtnCornerTxt;
 	public btn_buy:BtnCornerTxt;
+	public trans_show:fgui.Transition;
 	public static URL:string = "ui://vith2b66irlv1e";
 
 	public static createInstance():UIGoodsInfo {
@@ -29,5 +30,6 @@ export default class UIGoodsInfo extends fgui.GComponent {
 		this.btn_sell = <BtnCornerTxt>(this.getChildAt(9));
 		this.btn_use = <BtnCornerTxt>(this.getChildAt(10));
 		this.btn_buy = <BtnCornerTxt>(this.getChildAt(11));
+		this.trans_show = this.getTransitionAt(0);
 	}
 }

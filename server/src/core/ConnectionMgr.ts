@@ -12,6 +12,7 @@ class ConnectionMgr {
     constructor() {
         setInterval(() => this.clearClosedConnection(), 1000);
     }
+
     addConnection(uid: string, connection: Connection) {
         this.connectionUidMap[ uid ] = connection;
     }
@@ -25,9 +26,7 @@ class ConnectionMgr {
         const closedCon = Pool.get(PoolKey.ClosedConnection, ClosedConnection);
         closedCon.time = Date.now();
         closedCon.connection = connection;
-
         this.closedConnection[ token ] = closedCon;
-
         delete this.connectionUidMap[ token ];
     }
 

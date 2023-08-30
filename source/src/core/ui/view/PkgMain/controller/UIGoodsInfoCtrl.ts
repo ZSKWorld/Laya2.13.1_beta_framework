@@ -27,6 +27,14 @@ export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoDa
 		this.view.setContent(this.data.id, this.data.buy);
 	}
 
+	override onOpenAni() {
+		return new Promise<void>(resolve => this.view.trans_show.play(Laya.Handler.create(null, resolve)));
+	}
+
+	override onCloseAni() {
+		return new Promise<void>(resolve => this.view.trans_show.playReverse(Laya.Handler.create(null, resolve)));
+	}
+
 	private onBtnCollectClick() {
 		const isCollect = userData.bag.isCollect(this.data.id);
 		ItemHandleService.Inst.changeCollect({ id: this.data.id, collect: !isCollect });

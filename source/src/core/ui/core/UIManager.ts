@@ -1,7 +1,4 @@
-import { platformMgr } from "../../../platform/PlatformManager";
-import { ResPath } from "../../common/ResPath";
 import { Observer } from "../../libs/event/Observer";
-import { UIConfirmData } from "../view/PkgCommon/controller/UIConfirmCtrl";
 import { Layer, layerMgr } from "./LayerManager";
 import { ViewEvent } from "./UIDefine";
 import { ViewID } from "./ViewID";
@@ -71,7 +68,7 @@ class UIManager extends Observer {
 		layerMgr.addObject(this._lockPanel, Layer.Bottom);
 
 		//延迟100防止频繁触发
-		Laya.stage.on(Laya.Event.RESIZE,  this, this.onResize);
+		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.callLater(this, this.onResize));
 	}
 
 	registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>) {
@@ -131,14 +128,16 @@ class UIManager extends Observer {
 				}));
 			}
 		} else {
-			if (openedIndex == 0) {
-				callback && callback.run();
-				this._lockPanel.visible = false;
-			}
-			else {
-				viewCtrl = this._openedCtrls[ openedIndex ];
-				this.showView2(viewCtrl, data, callback);
-			}
+			viewCtrl = this._openedCtrls[ openedIndex ];
+			this.showView2(viewCtrl, data, callback);
+			// if (openedIndex == 0) {
+			// 	callback && callback.run();
+			// 	this._lockPanel.visible = false;
+			// }
+			// else {
+			// 	viewCtrl = this._openedCtrls[ openedIndex ];
+			// 	this.showView2(viewCtrl, data, callback);
+			// }
 		}
 	}
 
@@ -189,7 +188,7 @@ class UIManager extends Observer {
 			const doOpenAni = openIndex != 0;
 			openIndex > 0 && this._openedCtrls.splice(openIndex, 1);
 			doOpenAni && this._openedCtrls.unshift(viewCtrl);
-			layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
+			doOpenAni && layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
 			viewCtrl.sendMessage(ViewEvent.OnForeground);
 			doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
 		} else onFinally();

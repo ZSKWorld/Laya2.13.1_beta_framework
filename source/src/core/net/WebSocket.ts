@@ -3,7 +3,7 @@ import { Observer } from "../libs/event/Observer";
 import { NetMessage } from "./enum/NetMessage";
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.71.71:8007";
+    private _url: string = "ws://192.168.71.46:8007";
     private _socket: Laya.Socket;
     private _waitList: UserInput[];
     private _current: UserInput;

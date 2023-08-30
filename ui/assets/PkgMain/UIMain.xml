@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" overflow="hidden" designImage="ui://vith2b66sbd0i" designImageOffsetX="-766" designImageAlpha="100" designImageLayer="1" bgColorEnabled="true" bgColor="#000000">
-  <controller name="ctrlShow" pages="0,历练,1,角色,2,物品,3,商城,4,洞府" selected="0"/>
+  <controller name="ctrlShow" pages="0,历练,1,角色,2,物品,3,商城,4,洞府" selected="2"/>
   <displayList>
-    <graph id="n67_7vow" name="n67" xy="10,224" size="1060,1585" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff1a1918">
+    <graph id="n67_7vow" name="n67" xy="10,224" size="1060,1585" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff000000">
       <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n68_7vow" name="n68" xy="10,224" size="1060,87" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+    <graph id="n68_7vow" name="n68" xy="10,224" size="1060,87" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff242424">
       <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <component id="n60_sbd0" name="com_train" src="sbd01" fileName="Component/ComLiLian.xml" xy="10,224" size="1060,1585">
+    <component id="n60_sbd0" name="com_train" src="sbd01" fileName="Component/Main/ComTrain.xml" xy="10,224" size="1060,1585">
       <gearDisplay controller="ctrlShow" pages="0"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n61_sbd0" name="com_char" src="sbd04" fileName="Component/ComJueSe.xml" xy="10,224" size="1060,1585">
+    <component id="n61_sbd0" name="com_char" src="sbd04" fileName="Component/Main/Char/ComChar.xml" xy="10,224" size="1060,1585">
       <gearDisplay controller="ctrlShow" pages="1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n62_sbd0" name="com_goods" src="sbd02" fileName="Component/ComGoods.xml" xy="10,224" size="1060,1585">
+    <component id="n62_sbd0" name="com_goods" src="sbd02" fileName="Component/Main/ComGoods.xml" xy="10,224" size="1060,1585">
       <gearDisplay controller="ctrlShow" pages="2"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n63_sbd0" name="com_shop" src="sbd03" fileName="Component/ComShangCheng.xml" xy="10,224" size="1060,1585">
+    <component id="n63_sbd0" name="com_shop" src="sbd03" fileName="Component/Main/ComShop.xml" xy="10,224" size="1060,1585">
       <gearDisplay controller="ctrlShow" pages="3"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n65_sbd0" name="com_abode" src="sbd05" fileName="Component/ComDongFu.xml" xy="10,224" size="1060,1585">
+    <component id="n65_sbd0" name="com_abode" src="sbd05" fileName="Component/Main/Abode/ComAbode.xml" xy="10,224" size="1060,1585">
       <gearDisplay controller="ctrlShow" pages="4"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <component id="n12_sbd0" name="btn_train" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="0,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0" values="#ffffff" default="#000000"/>
-      <Button title="历练" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="0"/>
+      <Button title="历练" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="0"/>
     </component>
     <component id="n14_sbd0" name="btn_char" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="180,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,1" values="#000000|#ffffff" default="#000000"/>
@@ -40,7 +40,7 @@
     </component>
     <component id="n15_sbd0" name="btn_goods" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="360,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,2" values="#000000|#ffffff" default="#000000"/>
-      <Button title="物品" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="2"/>
+      <Button title="物品" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="2"/>
     </component>
     <component id="n16_sbd0" name="btn_shop" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="540,1819" size="180,101" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,3" values="#000000|#ffffff" default="#000000"/>

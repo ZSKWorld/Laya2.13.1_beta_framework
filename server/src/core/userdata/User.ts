@@ -32,6 +32,13 @@ export class User extends Decode<IUserData, IUser> implements IUser {
 
     clearSyncInfo(): void { }
 
+    getOffline() {
+        if (!this.account.lastOnlineTime) return null;
+        const timeOffset = ((TimeUtil.getTimeStamp() - this.account.lastOnlineTime) / 1000) << 0;
+        if (timeOffset <= 5) return null;
+        else return { offlineTime: timeOffset, vigor: (this.base.getVigorRecoveryRate() * timeOffset) << 0 };
+    }
+
     save() {
         Util.saveData(this.encode());
     }
@@ -43,15 +50,8 @@ export class User extends Decode<IUserData, IUser> implements IUser {
 
     protected override onDecode(data: IUserData, key: keyof IUserData) {
         switch (key) {
-            case "offline": return this.getOffline();
+            case "offline": return null;
             default: return this[ key ].decode(data[ key ] as any);
         }
-    }
-
-    private getOffline(): IOffline {
-        if (!this.account.lastOnlineTime) return null;
-        const timeOffset = ((TimeUtil.getTimeStamp() - this.account.lastOnlineTime) / 1000) << 0;
-        if (timeOffset <= 5) return null;
-        else return { offlineTime: timeOffset, vigor: (this.base.getVigorRecoveryRate() * timeOffset) << 0 };
     }
 }

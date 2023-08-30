@@ -22,6 +22,10 @@ export class Controller {
         return result;
     }
 
+    update(delta:number) {
+
+    }
+
     recover() {
         this._connection = null;
         Pool.recover(this.constructor.name as any, this);
