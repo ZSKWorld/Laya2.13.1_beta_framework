@@ -1,6 +1,7 @@
 import { BagService, ShopService } from "../../../../../net/Services";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
+import { ViewID } from "../../../../core/ViewID";
 import { ComGoodsInfoMsg, ComGoodsInfoView } from "../../view/coms/ComGoodsInfoView";
 
 export interface ComGoodsInfoData {
@@ -20,12 +21,17 @@ export class ComGoodsInfoCtrl extends BaseViewCtrl<ComGoodsInfoView, ComGoodsInf
 
 	override onEnable() {
 		this.refreshContent();
-		this.checkNumInput();
 	}
 
 	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
 	refreshContent() {
-		this.view.setContent(this.data.id, this.data.buy);
+		const { id, buy } = this.data;
+		const haveCnt = buy ? 1 : userData.bag.getItemCount(id);
+		if (haveCnt <= 0) this.removeView(ViewID.UIGoodsInfoView);
+		else {
+			this.view.setContent(id, buy);
+			this.checkNumInput();
+		}
 	}
 
 	private onBtnCollectClick() {
