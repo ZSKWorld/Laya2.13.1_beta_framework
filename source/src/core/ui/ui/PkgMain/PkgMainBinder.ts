@@ -25,7 +25,7 @@ import CmbDongFu_item from "./CmbDongFu_item";
 import CmbDongFu_popup from "./CmbDongFu_popup";
 import CmbDongFu from "./CmbDongFu";
 import UISetting from "./UISetting";
-import RenderBag from "./RenderBag";
+import RenderGoods from "./RenderGoods";
 import ComRenWu from "./ComRenWu";
 
 export default class PkgMainBinder {
@@ -55,7 +55,7 @@ export default class PkgMainBinder {
 		fgui.UIObjectFactory.setExtension(CmbDongFu_popup.URL, CmbDongFu_popup);
 		fgui.UIObjectFactory.setExtension(CmbDongFu.URL, CmbDongFu);
 		fgui.UIObjectFactory.setExtension(UISetting.URL, UISetting);
-		fgui.UIObjectFactory.setExtension(RenderBag.URL, RenderBag);
+		fgui.UIObjectFactory.setExtension(RenderGoods.URL, RenderGoods);
 		fgui.UIObjectFactory.setExtension(ComRenWu.URL, ComRenWu);
 	}
 }

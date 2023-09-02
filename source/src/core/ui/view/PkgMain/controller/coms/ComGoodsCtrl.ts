@@ -4,7 +4,7 @@ import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ViewID } from "../../../../core/ViewID";
 import { UIUtility } from "../../../../tool/UIUtility";
 import { ComGoodsMsg, ComGoodsView } from "../../view/coms/ComGoodsView";
-import { RenderBagView } from "../../view/renders/RenderBagView";
+import { RenderGoodsView } from "../../view/renders/RenderGoodsView";
 import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
 import { UIGoodsInfoData } from "../UIGoodsInfoCtrl";
 
@@ -40,7 +40,7 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 		this.view.list_item.numItems = this.items.length;
 	}
 
-	private onListRenderer(index: number, item: RenderBagView) {
+	private onListRenderer(index: number, item: RenderGoodsView) {
 		item.refreshGoods(this.items[ index ]);
 	}
 

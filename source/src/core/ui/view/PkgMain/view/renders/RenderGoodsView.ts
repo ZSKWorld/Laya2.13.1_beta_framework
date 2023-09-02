@@ -1,12 +1,12 @@
 import { ResPath } from "../../../../../common/ResPath";
 import { UserUtil } from "../../../../../userData/UserUtil";
-import RenderBag from "../../../../ui/PkgMain/RenderBag";
+import RenderGoods from "../../../../ui/PkgMain/RenderGoods";
 
-export const enum RenderBagMsg {
+export const enum RenderGoodsMsg {
 
 }
 
-export class RenderBagView extends ExtensionClass<IView, RenderBag>(RenderBag) {
+export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGoods) {
     static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
     override onCreate() {

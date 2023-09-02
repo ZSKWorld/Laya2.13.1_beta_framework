@@ -4,7 +4,7 @@
     <graph id="n0_sbd0" name="graph_bg" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff111318">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n1_sbd0" name="n1" xy="20,27" size="1040,1877" touchable="false" type="rect" lineSize="3" lineColor="#ff6d6e71" fillColor="#ff111318">
+    <graph id="n1_sbd0" name="n1" xy="20,27" size="1040,1877" touchable="false" type="rect" lineSize="3" lineColor="#ff6d6e71" fillColor="#00111318">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <component id="n5_sbd0" name="btn_mute" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="340,620" size="400,120" group="n12_sbd0" controller="ctrlBgColor,9">

@@ -130,14 +130,6 @@ class UIManager extends Observer {
 		} else {
 			viewCtrl = this._openedCtrls[ openedIndex ];
 			this.showView2(viewCtrl, data, callback);
-			// if (openedIndex == 0) {
-			// 	callback && callback.run();
-			// 	this._lockPanel.visible = false;
-			// }
-			// else {
-			// 	viewCtrl = this._openedCtrls[ openedIndex ];
-			// 	this.showView2(viewCtrl, data, callback);
-			// }
 		}
 	}
 

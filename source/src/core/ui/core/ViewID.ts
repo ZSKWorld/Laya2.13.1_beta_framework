@@ -6,7 +6,7 @@ export const enum ViewID {
 
 	/**Renders */
 	RenderChooseBattleView = "RenderChooseBattleView",
-	RenderBagView = "RenderBagView",
+	RenderGoodsView = "RenderGoodsView",
 	RenderChatMsgView = "RenderChatMsgView",
 	RenderFriendView = "RenderFriendView",
 	RenderTextView = "RenderTextView",
