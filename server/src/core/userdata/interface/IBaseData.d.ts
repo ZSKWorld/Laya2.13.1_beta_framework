@@ -3,6 +3,8 @@ declare interface ICittaData {
 }
 
 declare interface IBaseData {
+    /**签到时间 */
+    signedInTime: number;
     /** 金币 */
     coin: number;
     /** 元宝 */

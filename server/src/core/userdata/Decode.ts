@@ -1,15 +1,20 @@
 export abstract class Decode<D, O> implements IDecode<D, O> {
+
     encode?() {
         this.beginEncode();
         const result = {} as D;
         Object.keys(this).forEach(key => {
+            //私有字段不保存
+            if (key.startsWith("_")) return;
             result[ key ] = this.onEncode(key as any);
         });
+        this.afterEncode();
         return result;
     }
 
     decode?(data: D) {
         if (!data) return this as unknown as O;
+        this.beginDecode();
         Object.keys(data).forEach((key) => {
             this[ key ] = this.onDecode(data, key as any);
         });
@@ -25,12 +30,12 @@ export abstract class Decode<D, O> implements IDecode<D, O> {
         return data[ key ];
     }
 
-    protected beginEncode() {
+    protected beginEncode() { }
 
-    }
+    protected afterEncode() { }
 
-    protected afterDecode() {
+    protected beginDecode() { }
 
-    }
+    protected afterDecode() { }
 
 }

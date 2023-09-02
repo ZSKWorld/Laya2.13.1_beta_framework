@@ -36,6 +36,8 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
         if (item.dataType == DataType.BagData) {
             let datas: IGoods[];
             switch (item.bagType) {
+                case ItemBagType.Collect:
+                case ItemBagType.Equip: return;
                 case ItemBagType.Prop: datas = this.prop; break;
                 case ItemBagType.Gem: datas = this.gem; break;
                 case ItemBagType.Material: datas = this.material; break;

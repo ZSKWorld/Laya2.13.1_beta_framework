@@ -16,7 +16,7 @@ export class Goods extends CantSyncObject<IGoodsData, IGoods> implements IGoods 
 }
 
 export class Equipment extends CantSyncObject<IEquipmentData, IEquipment> implements IEquipment {
-    id: number;
+    id: number = 0;
     uid: string = Util.CreateUID();
     star: number = 0;
     level: number = 0;

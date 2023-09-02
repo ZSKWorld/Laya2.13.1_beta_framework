@@ -9,10 +9,11 @@ export class ProxyMgr {
             Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }.${ key }`, target[ key ]));
             Object.defineProperty(target, "getSyncInfo", {
                 value: function () {
-                    const result = {};
+                    let result:object;
                     const keyMap = ProxyMgr.proxyMap[ uid ];
                     ProxyMgr.proxyMap[ uid ] = null;
                     if (keyMap) {
+                        result = {};
                         Object.keys(keyMap).forEach(keyStr => {
                             let tempThis = this;
                             let tempResult = result;

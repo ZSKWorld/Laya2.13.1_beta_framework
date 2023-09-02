@@ -32,6 +32,7 @@
     <component id="o7722c" name="UIChat.xml" path="/" exported="true"/>
     <component id="j0ry2d" name="RenderChatMsg.xml" path="/Component/Render/"/>
     <component id="roh22e" name="RenderFriend.xml" path="/Component/Render/"/>
+    <component id="awbv2f" name="ComGoodsInfo.xml" path="/Component/GoodsInfo/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

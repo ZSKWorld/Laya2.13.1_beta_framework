@@ -22,6 +22,8 @@ export const enum ErrorCode {
     USER_LOGINED,
     /** 异地登陆 */
     LOGIN_OTHER_PLACE,
+    /** 今日已签过到 */
+    HadSignedIn,
     /** 精力不足 */
     VIGOR_NOT_ENOUGH,
     /** 精力已满 */
@@ -62,4 +64,12 @@ export const enum ErrorCode {
     NOT_FRIEND,
     /** 和对方已经是好友了 */
     ALREADY_FRIEND,
+    /** 未知的战斗类型 */
+    UNKNOWN_BATTLE_TYPE = 2000,
+    /** 未知的战斗关卡 */
+    UNKNOWN_BATTLE_LEVEL,
+    /** 挑战次数不足 */
+    CHALLENGE_COUNT_NOT_ENOUGH,
+    /** 冷却未完成 */
+    COOLDOWN_NOT_COMPLETE,
 }

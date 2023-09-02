@@ -7,6 +7,7 @@ declare interface IOfflineData {
 
 declare interface IUserData {
     account: IAccountData;
+    /** 基础数据 */
     base: IBaseData;
     /** 离线数据 */
     offline?: IOfflineData;

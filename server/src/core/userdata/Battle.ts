@@ -24,7 +24,7 @@ class Copy extends Decode<ICopyData, ICopy> implements ICopy {
     }
 
     reset(): void {
-        this.usedMap = {};
+        this.usedMap = null;
     }
 }
 
@@ -45,7 +45,7 @@ class Secret extends Decode<ISecretData, ISecret> implements ISecret {
     }
 
     reset(): void {
-        this.usedMap = {};
+        this.usedMap = null;
     }
 }
 
@@ -67,7 +67,7 @@ class Boss extends Decode<IBossData, IBoss> implements IBoss {
     }
 
     reset(): void {
-        this.lastChallengeTime = {};
+        this.lastChallengeTime = null;
     }
 }
 
@@ -101,7 +101,7 @@ class Gather extends Decode<IGatherData, IGather> implements IGather {
     }
 
     reset(): void {
-        this.usedMap = {};
+        this.usedMap = null;
     }
 }
 
@@ -152,6 +152,12 @@ export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
             case BattleType.CaiJi: return 0;
             default: return this.getConfig(type, id).vigorCost;
         }
+    }
+
+    resetData() {
+        this.copy.reset();
+        this.secret.reset();
+        this.gather.reset();
     }
 
     protected override onDecode(data: IBattleData, key: keyof IBattleData) {

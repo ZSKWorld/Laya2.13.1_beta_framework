@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920">
-  <controller name="ctrlState" pages="0,登录,1,注册" selected="1"/>
+  <controller name="ctrlState" pages="0,登录,1,注册,2,登陆中" selected="2"/>
   <displayList>
     <graph id="n0_qjdo" name="n0" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff555555">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n10_qjdo" name="n10" xy="457,989" size="304,60" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+    <text id="n14_qjdo" name="n14" xy="540,732" pivot="0.5,0.5" anchor="true" size="604,254" scale="1.2,1.2" fontSize="200" color="#ffffff" text="修仙传">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <graph id="n10_qjdo" name="n10" xy="458,887" size="304,60" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
       <relation target="n2_qjdo" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <graph id="n12_qjdo" name="n12" xy="457,1064" size="304,60" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+    <graph id="n12_qjdo" name="n12" xy="458,962" size="304,60" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
       <relation target="n3_qjdo" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n13_qjdo" name="btn_login" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="561,1166" size="200,75" group="n4_qjdo">
+    <component id="n13_qjdo" name="btn_login" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="562,1064" size="200,75" group="n4_qjdo">
       <Button title="登录" titleColor="#ffffff" titleFontSize="45"/>
     </component>
-    <component id="n15_sbd0" name="btn_loginRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="317,1166" size="200,75" group="n4_qjdo">
+    <component id="n15_sbd0" name="btn_loginRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="318,1064" size="200,75" group="n4_qjdo">
       <Button title="注册" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="1"/>
     </component>
-    <text id="n2_qjdo" name="input_account" xy="457,989" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
-    <text id="n3_qjdo" name="input_password" xy="457,1065" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
-    <text id="n5_qjdo" name="n5" xy="317,989" size="139,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" text="账号："/>
-    <text id="n6_qjdo" name="n6" xy="317,1065" size="139,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" text="密码："/>
-    <text id="n14_qjdo" name="n14" xy="238,679" pivot="0.5,0.5" size="604,254" group="n4_qjdo" scale="1.2,1.2" fontSize="200" color="#ffffff" text="修仙传"/>
-    <group id="n4_qjdo" name="n4" xy="238,679" size="604,562" advanced="true">
+    <text id="n2_qjdo" name="input_account" xy="458,887" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
+    <text id="n3_qjdo" name="input_password" xy="458,963" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n5_qjdo" name="n5" xy="318,887" size="139,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" text="账号："/>
+    <text id="n6_qjdo" name="n6" xy="318,963" size="139,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" text="密码："/>
+    <group id="n4_qjdo" name="n4" xy="318,887" size="444,252" advanced="true">
       <gearDisplay controller="ctrlState" pages="0"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
@@ -51,11 +53,26 @@
       <gearDisplay controller="ctrlState" pages="1"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
+    <component id="n30_sott" name="btn_cancel" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="440,1018" size="200,75" group="n32_sott">
+      <Button title="取消" titleColor="#ffffff" titleFontSize="45"/>
+    </component>
+    <text id="n31_sott" name="n31" xy="539,952" pivot="0.5,0.5" anchor="true" size="311,66" group="n32_sott" fontSize="50" color="#ffffff" align="center" vAlign="middle" autoSize="none" singleLine="true" text="登陆中..."/>
+    <group id="n32_sott" name="n32" xy="384,919" size="311,174" advanced="true">
+      <gearDisplay controller="ctrlState" pages="2"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
   </displayList>
-  <transition name="t0" autoPlay="true">
-    <item time="0" type="Alpha" target="n14_qjdo" value="0"/>
-    <item time="0" type="Skew" target="n14_qjdo" value="0,0"/>
-    <item time="4" type="Alpha" target="n14_qjdo" tween="true" startValue="0" endValue="1" duration="40" ease="Linear"/>
-    <item time="4" type="Skew" target="n14_qjdo" tween="true" startValue="0,0" endValue="0,360" duration="40"/>
+  <transition name="t0" options="2" autoPlay="true" frameRate="60">
+    <item time="0" type="Alpha" target="n14_qjdo" tween="true" startValue="0" endValue="1" duration="30" ease="Linear"/>
+    <item time="0" type="XY" target="n14_qjdo" tween="true" startValue="500,-,0.463,0.354" endValue="540,-,0.5,0.354" duration="30"/>
+  </transition>
+  <transition name="t1" options="2" autoPlay="true" autoPlayRepeat="-1" frameRate="30">
+    <item time="0" type="Text" target="n31_sott" value="登"/>
+    <item time="6" type="Text" target="n31_sott" value="登陆"/>
+    <item time="12" type="Text" target="n31_sott" value="登陆中"/>
+    <item time="18" type="Text" target="n31_sott" value="登陆中."/>
+    <item time="24" type="Text" target="n31_sott" value="登陆中.."/>
+    <item time="30" type="Text" target="n31_sott" value="登陆中..."/>
+    <item time="36" type="Text" target="n31_sott" value="登陆中..."/>
   </transition>
 </component>

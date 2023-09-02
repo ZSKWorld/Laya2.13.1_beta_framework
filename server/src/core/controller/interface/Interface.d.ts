@@ -9,7 +9,3 @@ declare interface UserOutput {
     error?: number;
     syncInfo?: Partial<IUserData>;
 }
-
-declare interface UserNotify extends UserOutput {
-    data: string;
-}

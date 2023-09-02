@@ -1,6 +1,7 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
 import ComZhiZuo from "./ComZhiZuo";
+import ComGoodsInfo from "./ComGoodsInfo";
 import ComXinFa from "./ComXinFa";
 import ItemXinFa from "./ItemXinFa";
 import UISect from "./UISect";
@@ -30,6 +31,7 @@ import ComRenWu from "./ComRenWu";
 export default class PkgMainBinder {
 	public static bindAll():void {
 		fgui.UIObjectFactory.setExtension(ComZhiZuo.URL, ComZhiZuo);
+		fgui.UIObjectFactory.setExtension(ComGoodsInfo.URL, ComGoodsInfo);
 		fgui.UIObjectFactory.setExtension(ComXinFa.URL, ComXinFa);
 		fgui.UIObjectFactory.setExtension(ItemXinFa.URL, ItemXinFa);
 		fgui.UIObjectFactory.setExtension(UISect.URL, UISect);

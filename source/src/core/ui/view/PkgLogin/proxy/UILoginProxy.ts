@@ -3,7 +3,6 @@ import { LogicScene } from "../../../../../logicScene/LogicSceneType";
 import { localData } from "../../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { NetMessage } from "../../../../net/enum/NetMessage";
-import { AccountService } from "../../../../net/Services";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { UILoginCtrl } from "../controller/UILoginCtrl";
 
@@ -16,8 +15,13 @@ export class UILoginProxy extends BaseProxy<UILoginCtrl>{
         logicSceneMgr.enterScene(LogicScene.MainScene);
     }
 
+    @RegisterEvent(NetMessage.LoginError)
+    private loginResponseError(output: LoginOutput, input: LoginInput) {
+        this.viewCtrl.onLoginError();
+    }
+
     @RegisterEvent(NetMessage.Register)
-    private registerResponse(_, input: RegisterInput) {
-        AccountService.Inst.login({ account: input.account, password: input.password });
+    private registerResponse(output: RegisterOutput, input: RegisterInput) {
+        this.viewCtrl.toLogin(input);
     }
 }

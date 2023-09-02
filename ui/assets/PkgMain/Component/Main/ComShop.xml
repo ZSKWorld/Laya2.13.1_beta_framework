@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1060,1585" overflow="hidden" designImage="ui://vith2b66sbd0h" designImageOffsetX="-781" designImageAlpha="100">
-  <controller name="ctrlSelectType" pages="0,,1,,2,,3,,4,,5,,6," selected="0"/>
+  <controller name="ctrlSelectType" pages="0,,1,,2,,3,,4,,5,,6," selected="4"/>
   <displayList>
     <component id="n3_sbd0" name="btn_prop" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="19,12" size="110,65">
       <Button title="道具" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="0"/>
@@ -23,82 +23,11 @@
     <component id="n9_sbd0" name="btn_xianJie" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="739,12" size="110,65">
       <Button title="仙界" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="6"/>
     </component>
-    <graph id="n41_9f1k" name="n41" xy="19,12" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
+    <graph id="n41_9f1k" name="n41" xy="499,12" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
       <gearXY controller="ctrlSelectType" pages="0,1,2,3,4,5,6" values="19,12|139,12|259,12|379,12|499,12|619,12|739,12" tween="true" duration=".2"/>
       <relation target="n3_sbd0" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n11_sbd0" name="btn_zbqh" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,617" size="170,80" group="n15_sbd0" controller="ctrlBgColor,1">
-      <Button title="装备强化" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n12_sbd0" name="btn_bsjg" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,707" size="170,80" group="n15_sbd0" controller="ctrlBgColor,2">
-      <Button title="宝石加工" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n13_sbd0" name="btn_js" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,797" size="170,80" group="n15_sbd0">
-      <Button title="加速" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n14_sbd0" name="btn_tsdj" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,887" size="170,80" group="n15_sbd0" controller="ctrlBgColor,4">
-      <Button title="特殊道具" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <group id="n15_sbd0" name="n15" xy="875,617" size="170,350" advanced="true" layout="vt" lineGap="10">
-      <gearDisplay controller="ctrlSelectType" pages="0"/>
-      <relation target="" sidePair="middle-middle,right-right"/>
-    </group>
-    <component id="n20_sbd0" name="btn_gemLv1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,617" size="170,80" group="n24_sbd0" controller="ctrlBgColor,1">
-      <Button title="三级宝石" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n21_sbd0" name="btn_gemLv2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,707" size="170,80" group="n24_sbd0" controller="ctrlBgColor,2">
-      <Button title="四级宝石" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n22_sbd0" name="btn_gemLv3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,797" size="170,80" group="n24_sbd0">
-      <Button title="五级宝石" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n23_sbd0" name="btn_gemLv4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,887" size="170,80" group="n24_sbd0" controller="ctrlBgColor,4">
-      <Button title="六级宝石" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <group id="n24_sbd0" name="n24" xy="875,617" size="170,350" advanced="true" layout="vt" lineGap="10">
-      <gearDisplay controller="ctrlSelectType" pages="1"/>
-      <relation target="" sidePair="middle-middle,right-right"/>
-    </group>
-    <component id="n25_sbd0" name="btn_sgcl" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,617" size="170,80" group="n29_sbd0" controller="ctrlBgColor,1">
-      <Button title="手工材料" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n26_sbd0" name="btn_tscl" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,707" size="170,80" group="n29_sbd0" controller="ctrlBgColor,2">
-      <Button title="特殊材料" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n27_sbd0" name="btn_zw" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,797" size="170,80" group="n29_sbd0">
-      <Button title="杂物" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n28_sbd0" name="btn_qhcl" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,887" size="170,80" group="n29_sbd0" controller="ctrlBgColor,4">
-      <Button title="强化材料" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <group id="n29_sbd0" name="n29" xy="875,617" size="170,350" advanced="true" layout="vt" lineGap="10">
-      <gearDisplay controller="ctrlSelectType" pages="2"/>
-      <relation target="" sidePair="middle-middle,right-right"/>
-    </group>
-    <component id="n30_sbd0" name="btn_tj" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,617" size="170,80" group="n34_sbd0" controller="ctrlBgColor,1">
-      <Button title="图鉴" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n31_sbd0" name="btn_xf" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,707" size="170,80" group="n34_sbd0" controller="ctrlBgColor,2">
-      <Button title="心法" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n32_sbd0" name="btn_jn" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,797" size="170,80" group="n34_sbd0">
-      <Button title="技能" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <group id="n34_sbd0" name="n34" xy="875,617" size="170,260" advanced="true" layout="vt" lineGap="10">
-      <gearDisplay controller="ctrlSelectType" pages="3"/>
-      <relation target="" sidePair="middle-middle,right-right"/>
-    </group>
-    <component id="n35_sbd0" name="btn_qt" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,617" size="170,80" group="n39_sbd0" controller="ctrlBgColor,1">
-      <Button title="其他" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <component id="n36_sbd0" name="btn_yr" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,707" size="170,80" group="n39_sbd0" controller="ctrlBgColor,2">
-      <Button title="易容-男" titleColor="#000000" titleFontSize="35"/>
-    </component>
-    <group id="n39_sbd0" name="n39" xy="875,617" size="170,170" visible="false" advanced="true" layout="vt" lineGap="10">
-      <gearDisplay controller="ctrlSelectType" pages="4"/>
-      <relation target="" sidePair="middle-middle,right-right"/>
-    </group>
-    <list id="n40_sbd0" name="list_item" xy="19,102" size="840,1463" layout="flow_hz" overflow="scroll" lineGap="15" colGap="15" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
+    <list id="n40_sbd0" name="list_item" xy="19,102" size="1020,1463" layout="flow_hz" overflow="scroll" lineGap="12" colGap="12" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
       <relation target="" sidePair="width-width,height-height"/>
       <item/>
       <item/>

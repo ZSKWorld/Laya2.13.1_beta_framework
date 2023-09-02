@@ -1,9 +1,23 @@
 import { Util } from "../../../utils/Util";
 import { ErrorCode } from "../../enum/ErrorCode";
+import { NotifyType } from "../../enum/NotifyType";
 import { User } from "../../userdata/User";
 import { AddCMD, Controller } from "../Controller";
 
 export class AccouontController extends Controller implements IAccountCtrl {
+    private _delta: number = 0;
+
+    override update(delta: number) {
+        this._delta += delta;
+        if (this._delta >= 60000) {
+            this._delta = 0;
+            if (this.connection.logined) {
+                if (this.user.checkOnlineNextDay())
+                    this.notify(NotifyType.OnlineNextDay);
+            }
+        }
+    }
+
     @AddCMD
     register(data: RegisterInput): void {
         const user = Util.getData(data.account);
@@ -22,6 +36,7 @@ export class AccouontController extends Controller implements IAccountCtrl {
     @AddCMD
     login(data: LoginInput): void {
         if (this.connection.logined) {
+            if (this.user.account.password != data.password) return this.response(data.cmd, null, ErrorCode.PASSWORD_ERROR);
             const syncInfo = { ...this.user };
             syncInfo.offline = this.user.getOffline();
             this.response<LoginOutput>(data.cmd, { syncInfo });
@@ -32,6 +47,11 @@ export class AccouontController extends Controller implements IAccountCtrl {
             else this.connection.userLogin(user);
             this.response<LoginOutput>(data.cmd, { syncInfo: { offline: this.user.getOffline() } });
         }
+    }
+
+    signIn(data: SignInInput): void {
+        if (this.user.base.signedIn) return this.response(data.cmd, null, ErrorCode.HadSignedIn);
+        this.response(data.cmd);
     }
 
     @AddCMD

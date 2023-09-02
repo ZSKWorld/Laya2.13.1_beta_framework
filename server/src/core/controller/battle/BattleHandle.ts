@@ -2,7 +2,7 @@ import { BattleType } from "../../enum/BattleEnums";
 import { BaseDataType } from "../../enum/ItemEnum";
 
 export class BattleHandle {
-    static startBattle(user: IUser, data: BattleInput) {
+    static startBattle(user: IUser, data: StartBattleInput) {
         switch (data.type) {
             case BattleType.GuanQia: user.battle.level.startBattle(data.id); break;
             case BattleType.FuBen: user.battle.copy.startBattle(data.id); break;

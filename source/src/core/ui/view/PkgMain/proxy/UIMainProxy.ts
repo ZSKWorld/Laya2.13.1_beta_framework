@@ -1,6 +1,35 @@
+import { GameEvent } from "../../../../common/GameEvent";
+import { GameUtil } from "../../../../common/GameUtil";
+import { NetMessage } from "../../../../net/enum/NetMessage";
 import { BaseProxy } from "../../../core/BaseProxy";
+import { richStrMgr } from "../../../tool/RichStrManager";
+import { tipMgr } from "../../../tool/TipManager";
 import { UIMainCtrl } from "../controller/UIMainCtrl";
 
 export class UIMainProxy extends BaseProxy<UIMainCtrl>{
-    
+    @RegisterEvent(NetMessage.DecomposeGem)
+    decomposeGem(output: DecomposeGemOutput, input: DecomposeGemInput) {
+        if (output.rewards?.length) {
+            let logStr = richStrMgr.start(`分解${ input.level }级宝石获得`).break();
+            output.rewards.forEach(v => {
+                const str = GameUtil.GetItemCountStr(v.id, v.count);
+                tipMgr.showTip(`恭喜获得${ str }`);
+                logStr.combineBreak(str);
+            });
+            this.dispatch(GameEvent.AddExperienceLog, logStr.end());
+        }
+    }
+
+    @RegisterEvent(NetMessage.DecomposeEquip)
+    decomposeEquip(output: DecomposeEquipOutput, input: DecomposeEquipInput) {
+        if (output.rewards?.length) {
+            let logStr = richStrMgr.start(`分解${ input.star }星装备获得`).break();
+            output.rewards?.forEach(v => {
+                const str = GameUtil.GetItemCountStr(v.id, v.count);
+                tipMgr.showTip(`恭喜获得${ str }`);
+                logStr.combineBreak(str);
+            });
+            this.dispatch(GameEvent.AddExperienceLog, logStr.end());
+        }
+    }
 }

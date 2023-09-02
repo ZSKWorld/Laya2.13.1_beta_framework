@@ -16,11 +16,13 @@ declare interface IUser extends IUserData, IDecode<IUserData, IUser> {
     /** 战斗 */
     battle: IBattle;
 
-    getSyncInfo(): Partial<IUser>;
+    getSyncInfo?(): Partial<IUser>;
 
-    clearSyncInfo(): void;
+    clearSyncInfo?(): void;
 
     getOffline(): IOffline;
+
+    checkOnlineNextDay(): boolean;
 
     save(): void;
 }

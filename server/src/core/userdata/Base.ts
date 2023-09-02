@@ -1,4 +1,5 @@
 import { Formula } from "../../utils/Formula";
+import { TimeUtil } from "../../utils/TimeUtil";
 import { cfgMgr } from "../config/CfgManager";
 import { BaseDataType } from "../enum/ItemEnum";
 import { CantSyncObject } from "./CantSyncObject";
@@ -8,6 +9,8 @@ class Citta extends CantSyncObject<ICittaData, ICitta> implements ICitta {
 }
 
 export class Base extends Decode<IBaseData, IBase> implements IBase {
+    /**签到时间 */
+    signedInTime: number = 0;
     /** 金币 */
     coin: number = 0;
     /** 元宝 */
@@ -42,6 +45,10 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
     skill: number[] = [ 5000 ];
     /**出战技能 */
     usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
+
+    get signedIn() {
+        return TimeUtil.checkNetDay(this.signedInTime, TimeUtil.getTimeStamp());
+    }
 
     get maxVigro(): number {
         const { citta } = this;

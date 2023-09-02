@@ -1,60 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" designImage="ui://vith2b66irlv1f" designImageOffsetX="-750" designImageAlpha="97">
-  <controller name="ctrlUse" pages="0,无,1,使用,2,购买" selected="0"/>
-  <controller name="ctrlSell" pages="0,不可售出,2,可售出" selected="0"/>
+  <controller name="ctrlState" pages="0,无,1,使用,3,使用出售,2,购买" selected="2"/>
   <displayList>
     <graph id="n0_irlv" name="graph_bg" xy="0,0" size="1080,1920" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n1_irlv" name="n1" xy="138,704" size="803,512" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115">
-      <relation target="n5_irlv" sidePair="height-height"/>
+    <component id="n1_irlv" name="com_panel" src="awbv2f" fileName="Component/GoodsInfo/ComGoodsInfo.xml" xy="539,960" pivot="0.5,0.5" anchor="true">
       <relation target="" sidePair="center-center,middle-middle"/>
-    </graph>
-    <graph id="n2_irlv" name="n2" xy="138,704" size="803,110" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
-      <relation target="n1_irlv" sidePair="width-width,left-left,top-top"/>
-    </graph>
-    <graph id="n3_irlv" name="n3" xy="138,1106" size="803,110" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
-      <relation target="n1_irlv" sidePair="width-width,left-left,bottom-bottom"/>
-    </graph>
-    <graph id="n10_irlv" name="n10" xy="156,1130" size="756,60" touchable="false" type="rect">
-      <gearDisplay controller="ctrlUse" pages="1,2"/>
-      <gearDisplay2 controller="ctrlSell" pages="2" condition="1"/>
-      <relation target="n9_irlv" sidePair="width-width,height-height,left-left,bottom-bottom"/>
-    </graph>
-    <richtext id="n5_irlv" name="txt_content" xy="169,961" pivot="0,0.5" anchor="true" size="743,164" touchable="false" fontSize="35" color="#e7c235" vAlign="middle" leading="15" ubb="true" autoSize="height" autoClearText="true" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
-      <relation target="n1_irlv" sidePair="center-center,middle-middle"/>
-    </richtext>
-    <text id="n6_irlv" name="n6" xy="162,726" size="124,79" fontSize="60" color="#ffffff" text="提示">
-      <relation target="n1_irlv" sidePair="left-left,top-top"/>
-    </text>
-    <text id="n9_irlv" name="txt_userNum" xy="156,1131" size="756,60" fontSize="45" autoSize="none" singleLine="true" text="1" input="true" restrict="[0-9]">
-      <gearDisplay controller="ctrlUse" pages="1,2"/>
-      <gearDisplay2 controller="ctrlSell" pages="2" condition="1"/>
-      <relation target="n1_irlv" sidePair="left-left,bottom-bottom"/>
-      <relation target="n17_btv5" sidePair="rightext-left"/>
-    </text>
-    <component id="n15_irlv" name="btn_collect" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="830,712" size="100,100" scale="1.5,1.5">
-      <relation target="n1_irlv" sidePair="right-right,top-top"/>
-      <Button icon="ui://vx9zwserqjdob"/>
     </component>
-    <component id="n16_ictn" name="btn_sell" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="925,1190" size="157,60" group="n17_btv5" controller="ctrlBgColor,10">
-      <gearDisplay controller="ctrlSell" pages="1,2"/>
-      <gearDisplay2 controller="ctrlUse" pages="0,1" condition="0"/>
-      <Button title="出售" titleColor="#ffffff" titleFontSize="40"/>
-    </component>
-    <component id="n8_irlv" name="btn_use" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="925,1190" size="157,60" group="n17_btv5" controller="ctrlBgColor,10">
-      <gearDisplay controller="ctrlUse" pages="1"/>
-      <Button title="使用" titleColor="#ffffff" titleFontSize="40"/>
-    </component>
-    <component id="n13_irlv" name="btn_buy" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="925,1190" size="157,60" group="n17_btv5" controller="ctrlBgColor,10">
-      <gearDisplay controller="ctrlUse" pages="2"/>
-      <Button title="购买" titleColor="#ffffff" titleFontSize="40"/>
-    </component>
-    <group id="n17_btv5" name="n17" xy="925,1190" size="0,0" advanced="true" layout="hz" colGap="10" excludeInvisibles="true">
-      <relation target="n1_irlv" sidePair="right-right,bottom-bottom"/>
-    </group>
   </displayList>
   <transition name="trans_show" options="2" frameRate="60">
-    <item time="0" type="Alpha" tween="true" startValue="0" endValue="1" duration="18"/>
+    <item time="0" type="Alpha" target="n0_irlv" tween="true" startValue="0" endValue="0.8" duration="15"/>
+    <item time="0" type="Alpha" target="n1_irlv" tween="true" startValue="0" endValue="1" duration="15"/>
+    <item time="0" type="Scale" target="n1_irlv" tween="true" startValue="0,0" endValue="1,1" duration="15" ease="Back.Out"/>
+  </transition>
+  <transition name="trans_close" options="2" frameRate="60">
+    <item time="0" type="Scale" target="n1_irlv" tween="true" startValue="1,1" endValue="0,0" duration="15" ease="Back.In"/>
+    <item time="9" type="Alpha" target="n0_irlv" tween="true" startValue="0.8" endValue="0" duration="6" ease="Linear"/>
   </transition>
 </component>

@@ -1,6 +1,7 @@
 import { Pool } from "../../libs/pool/Pool";
 import { Connection } from "../Connection";
 import { ErrorCode } from "../enum/ErrorCode";
+import { MessageType } from "../enum/MessageType";
 
 export class Controller {
     private _cmds: { [ key: string ]: Function };
@@ -22,7 +23,7 @@ export class Controller {
         return result;
     }
 
-    update(delta:number) {
+    update(delta: number) {
 
     }
 
@@ -33,18 +34,19 @@ export class Controller {
 
     protected onCreate() { }
 
-    protected response<T>(cmd: string, data: T = null, error: number = ErrorCode.NONE) {
+    protected response<T>(cmd: string, data?: T, error: number = ErrorCode.NONE) {
         if (this.connection) {
-            let args: UserOutput = { cmd, error, };
+            let args: UserOutput = { cmd, error };
             if (data) Object.assign(args, data);
-            this.connection.response(args);
+            this.connection.sendMessage(MessageType.Response, args);
         }
     }
 
-    protected notify(cmd: string, data: string) {
+    protected notify<T>(cmd: string, data?: T) {
         if (this.connection) {
-            let args: UserNotify = { cmd, data };
-            this.connection.notify(args);
+            let args: UserNotify = { cmd };
+            if (data) Object.assign(args, data);
+            this.connection.sendMessage(MessageType.Notify, args);
         }
     }
 }

@@ -2,18 +2,19 @@ import * as websocket from "websocket";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
 import { ProxyMgr } from "../utils/ProxyMgr";
+import { TimeUtil } from "../utils/TimeUtil";
 import { connectionMgr } from "./ConnectionMgr";
 import { Controller } from "./controller/Controller";
 import { AccouontController } from "./controller/account/AccouontController";
+import { BagController } from "./controller/bag/BagController";
 import { BattleController } from "./controller/battle/BattleController";
-import { EquipmentController } from "./controller/equipment/EquipmentController";
 import { FriendController } from "./controller/friend/FriendController";
 import { HeartController } from "./controller/heart/HeartController";
-import { ItemController } from "./controller/item/ItemController";
 import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
+import { MessageType } from "./enum/MessageType";
 import { User } from "./userdata/User";
-import { TimeUtil } from "../utils/TimeUtil";
+import { BaseController } from "./controller/base/BaseController";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -53,11 +54,11 @@ export class Connection {
             this._controllers = this._controllers || [];
             this._controllers.push(
                 AccouontController.create(this),
+                BagController.create(this),
+                BaseController.create(this),
                 BattleController.create(this),
-                EquipmentController.create(this),
                 FriendController.create(this),
                 HeartController.create(this),
-                ItemController.create(this),
                 ShopController.create(this),
             );
         }
@@ -83,22 +84,16 @@ export class Connection {
         }
     }
 
-    response(data: UserOutput) {
+    sendMessage(type: MessageType, data: UserOutput) {
         if (!this._connection) return;
-        if (data.cmd != "heart" && this._user) {
+        if (this._user) {
             const userSyncInfo = this._user.getSyncInfo();
             if (userSyncInfo) {
                 if (!data.syncInfo) data.syncInfo = userSyncInfo;
                 else data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
             }
         }
-        data.type = "response";
-        this._connection.sendUTF(JSON.stringify(data));
-    }
-
-    notify(data: UserNotify) {
-        if (!this._connection) return;
-        data.type = "notify ";
+        data.type = type;
         this._connection.sendUTF(JSON.stringify(data));
     }
 
@@ -133,15 +128,15 @@ export class Connection {
             this._user && this._user.clearSyncInfo();
             const data: UserInput = JSON.parse(message.utf8Data);
             if (data.cmd != "register" && data.cmd != "login" && !this._logined)
-                return this.response({ cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
+                return this.sendMessage(MessageType.Response, { cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
             if (this._listener.hasListener(data.cmd)) {
                 this._listener.event(data.cmd, data);
             }
             else
-                this.response({ cmd: data.cmd, error: ErrorCode.UNKNOWN_CMD });
+                this.sendMessage(MessageType.Response, { cmd: data.cmd, error: ErrorCode.UNKNOWN_CMD });
         }
         else {
-            this.response({ cmd: "", error: ErrorCode.UNKNOWN_DATA_TYPE });
+            this.sendMessage(MessageType.Response, { cmd: "", error: ErrorCode.UNKNOWN_DATA_TYPE });
         }
     }
 

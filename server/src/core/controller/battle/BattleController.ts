@@ -5,7 +5,7 @@ import { BattleHandle } from "./BattleHandle";
 export class BattleController extends Controller implements IBattleCtrl {
 
     @AddCMD
-    startBattle(data: BattleInput): void {
+    startBattle(data: StartBattleInput): void {
         const { user } = this;
         const errorCode = BattleChecker.checkStartBattle(user, data);
         if (errorCode) this.response(data.cmd, null, errorCode);

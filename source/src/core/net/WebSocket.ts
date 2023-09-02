@@ -1,5 +1,6 @@
 import { GameEvent } from "../common/GameEvent";
 import { Observer } from "../libs/event/Observer";
+import { MessageType } from "./enum/MessageType";
 import { NetMessage } from "./enum/NetMessage";
 
 class WebSocket extends Observer {
@@ -35,22 +36,38 @@ class WebSocket extends Observer {
     }
 
     private onSocketMessage(message: string): void {
-        const output: UserOutput = JSON.parse(message);
-        if (output && !output.error) {
+        const output: UserOutput | UserNotify = JSON.parse(message);
+        switch (output.type) {
+            case MessageType.Response: this.dealResponse(output); break;
+            case MessageType.Notify: this.dealNotify(output); break;
+        }
+    }
+
+    private dealResponse(output: UserOutput) {
+        const input: UserInput = this._current;
+        let netMsg = `NetMsg_${ output.cmd[ 0 ].toUpperCase() + output.cmd.substring(1) }`;
+        if (!output.error) {
+            if (input && input.cmd != output.cmd) {
+                console.error("message error", input, output);
+                throw new Error();
+            }
             if (output.syncInfo)
                 this.dispatch(NetMessage.SyncInfo, output.syncInfo);
-            const input = this._current;
-            if (this._current && this._current.cmd == output.cmd) {
-                this._current = null;
-            }
-            this.dispatch(`NetMsg_${ output.cmd[ 0 ].toUpperCase() + output.cmd.substring(1) }`, [output, input]);
         } else {
             this.dispatch(GameEvent.NetMsgError, output);
-            this._current = null;
+            netMsg += `_Error`;
         }
-
+        this.dispatch(netMsg, [ output, input ]);
         this._socket.input.clear();
+        this._current = null;
         this.executeWaitMsg();
+    }
+
+    private dealNotify(output: UserNotify) {
+        if (output && output.syncInfo)
+            this.dispatch(NetMessage.SyncInfo, output.syncInfo);
+        this.dispatch(output.cmd, output);
+        this._socket.input.clear();
     }
 
     private onSocketError(e): void { }
@@ -65,7 +82,7 @@ class WebSocket extends Observer {
     private executeWaitMsg(): void {
         if (this.connected && !this._current && this._waitList.length > 0) {
             this._current = this._waitList.shift();
-            this._current.token = this._current["account"] || userData.account;
+            this._current.token = this._current[ "account" ] || userData.account;
             this._socket.send(JSON.stringify(this._current));
         }
     }

@@ -1,4 +1,4 @@
-import { EquipmentService } from "../../../../net/Services";
+import { BagService } from "../../../../net/Services";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIEquipmentInfoMsg, UIEquipmentInfoView } from "../view/UIEquipmentInfoView";
 
@@ -25,11 +25,12 @@ export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEqu
 	}
 
 	private onBtnSellClick() {
-		EquipmentService.Inst.sellEquip({ uid: this.data.equip1.uid });
+		const equip = this.data.equip1;
+		BagService.Inst.sellEquip({ id: equip.id, uid: equip.uid });
 	}
 
 	private onBtnDressClick() {
-		EquipmentService.Inst.dressEquip({ uid: this.data.equip1.uid });
+		BagService.Inst.dressEquip({ uid: this.data.equip1.uid });
 	}
 
 	private onBtnIntensifyClick() {

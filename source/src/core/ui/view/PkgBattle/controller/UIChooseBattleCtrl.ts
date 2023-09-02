@@ -2,36 +2,34 @@ import { logicSceneMgr } from "../../../../../logicScene/LogicSceneManager";
 import { LogicScene } from "../../../../../logicScene/LogicSceneType";
 import { BattleType } from "../../../../net/enum/BattleEnums";
 import { BattleService } from "../../../../net/Services";
+import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
+import { ViewID } from "../../../core/ViewID";
 import { UIUtility } from "../../../tool/UIUtility";
 import { RenderChooseBattleView } from "../view/renders/RenderChooseBattleView";
 import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleView";
 import { RenderChooseBattleCtrl } from "./renders/RenderChooseBattleCtrl";
+import { UIBattleConfirmData } from "./UIBattleConfirmCtrl";
 
 export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType>{
 	private items: BattleLevel[];
 	private clickIndex: number;
 
 	override onAdded() {
-		this.addMessage(UIChooseBattleMsg.OnGraphConfirmBg, this.onGraphConfirmBgClick);
 		this.addMessage(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
-		this.addMessage(UIChooseBattleMsg.OnBtnBuyFoodClick, this.onBtnBuyFoodClick);
-		this.addMessage(UIChooseBattleMsg.OnBtnBuyTimesClick, this.onBtnBuyTimesClick);
-		this.addMessage(UIChooseBattleMsg.OnBtnSaoDangClick, this.onBtnSaoDangClick);
-		this.addMessage(UIChooseBattleMsg.OnBtnBattleClick, this.onBtnBattleClick);
 
-		UIUtility.SetList(this.view.liast_battle, true, this, this.battleListRender, this.battleListClick);
+		UIUtility.SetList(this.view.list_battle, true, this, this.onListBattleRender, this.onListBattleClick);
 	}
 
 	override onEnable(): void {
-		this.view.showConfirm(false);
-		this.refreshList(this.data);
+		this.refreshList();
 	}
 
-	private refreshList(type: BattleType) {
-		this.view.setBattleType(type - 1);
+	@RegisterEvent(UserDataEvent.UserData_Battle_Changed)
+	private refreshList() {
+		this.view.setBattleType(this.data - 1);
 		let itemCfg;
-		switch (type) {
+		switch (this.data) {
 			case BattleType.GuanQia: itemCfg = cfgMgr.Level; break;
 			case BattleType.FuBen: itemCfg = cfgMgr.FuBen; break;
 			case BattleType.MiJing: itemCfg = cfgMgr.MiJing; break;
@@ -40,10 +38,10 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 			default: this.items ? this.items.length = 0 : this.items = []; break;
 		}
 		itemCfg && (this.items = Object.keys(itemCfg).map((v) => itemCfg[ v ]));
-		this.view.liast_battle.numItems = this.items.length;
+		this.view.list_battle.numItems = this.items.length;
 	}
 
-	private battleListRender(index: number, item: RenderChooseBattleView) {
+	private onListBattleRender(index: number, item: RenderChooseBattleView) {
 		const data = this.items[ index ];
 		item.refreshByType(this.data, data);
 		const itemCtrl = item.controller as RenderChooseBattleCtrl;
@@ -51,8 +49,8 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		itemCtrl.cfgData = data;
 	}
 
-	private battleListClick(item: RenderChooseBattleView) {
-		const list = this.view.liast_battle;
+	private onListBattleClick(item: RenderChooseBattleView) {
+		const list = this.view.list_battle;
 		const index = list.childIndexToItemIndex(list.getChildIndex(item));
 		this.clickIndex = index;
 		if (this.data == BattleType.CaiJi) {
@@ -60,27 +58,11 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 				if (value) this.onBtnBattleClick(value);
 			}));
 		} else
-			this.view.showConfirm(true, this.items[ index ]);
-	}
-
-	private onGraphConfirmBgClick() {
-		this.view.showConfirm(false);
+			this.showView<UIBattleConfirmData>(ViewID.UIBattleConfirmView, { type: this.data, data: this.items[ index ] });
 	}
 
 	private onBtnBackClick() {
 		logicSceneMgr.enterScene(LogicScene.MainScene);
-	}
-
-	private onBtnBuyFoodClick() {
-
-	}
-
-	private onBtnBuyTimesClick() {
-
-	}
-
-	private onBtnSaoDangClick() {
-
 	}
 
 	private onBtnBattleClick(hour: number): void {

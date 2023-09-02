@@ -1,4 +1,7 @@
+import { eventMgr } from "../libs/event/EventManager";
 import { richStrMgr } from "../ui/tool/RichStrManager";
+import { tipMgr } from "../ui/tool/TipManager";
+import { GameEvent } from "./GameEvent";
 
 
 export class GameUtil {
@@ -28,11 +31,22 @@ export class GameUtil {
         return richStrMgr.start(text).color(cfgMgr.Color[ id ].color).end();
     }
 
+    static ShowRewardsTip(title: string, rewards: IGoodsData[]) {
+        let logStr = richStrMgr.start(title);
+        title && logStr.break();
+        rewards.forEach(v => {
+            const str = GameUtil.GetItemCountStr(v.id, v.count);
+            tipMgr.showTip(`恭喜获得${ str }`);
+            logStr.combineBreak(str);
+        });
+        eventMgr.event(GameEvent.AddExperienceLog, logStr.end());
+    }
+
     /** 获取物品数量字符串 */
-    static GetItemCountStr(item: IGoodsData) {
-        const { name, quality } = cfgMgr.Item[ item.id ];
+    static GetItemCountStr(id: number, count?: number) {
+        const { name, quality } = cfgMgr.Item[ id ];
         const color = GameUtil.GetColorStr(quality, name);
-        return richStrMgr.start().space().combineSpace(`${ color } x${ item.count }`).space().end();
+        return richStrMgr.start().space().combineSpace(`${ color }${ count != null ? " x" + count : "" }`).space().end();
     }
 
     /**获取多个物品字符串 */

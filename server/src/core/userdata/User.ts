@@ -1,6 +1,6 @@
-import { GameUtil } from "../../utils/GameUtil";
 import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
+import { BaseDataType } from "../enum/ItemEnum";
 import { Account } from "./Account";
 import { Bag } from "./Bag";
 import { Base } from "./Base";
@@ -28,15 +28,23 @@ export class User extends Decode<IUserData, IUser> implements IUser {
         this.battle = new Battle();
     }
 
-    getSyncInfo(): Partial<IUser> { return null; }
-
-    clearSyncInfo(): void { }
-
     getOffline() {
         if (!this.account.lastOnlineTime) return null;
         const timeOffset = ((TimeUtil.getTimeStamp() - this.account.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5) return null;
-        else return { offlineTime: timeOffset, vigor: (this.base.vigorRecover * timeOffset) << 0 };
+        else {
+            const { base } = this;
+            const recover = (base.vigorRecover * timeOffset) << 0;
+            base.changeItemCount(BaseDataType.Vigor, Math.min(recover, base.maxVigro - base.vigor));
+            return { offlineTime: timeOffset, vigor: recover };
+        }
+    }
+
+    checkOnlineNextDay() {
+        if (!this.account.onlineNextDay)
+            return false;
+        this.resetData();
+        return true;
     }
 
     save() {
@@ -53,5 +61,13 @@ export class User extends Decode<IUserData, IUser> implements IUser {
             case "offline": return null;
             default: return this[ key ].decode(data[ key ] as any);
         }
+    }
+
+    protected override afterDecode() {
+        this.account.loginNextDay && this.resetData();
+    }
+
+    private resetData() {
+        this.battle.resetData();
     }
 }

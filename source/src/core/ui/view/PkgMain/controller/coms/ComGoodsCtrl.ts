@@ -13,7 +13,7 @@ export interface ComGoodsData {
 }
 
 export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
-	private items: IGoods[] | IEquipment[];
+	private items: (IGoods | IEquipment)[];
 	private showType: ItemBagType = ItemBagType.Collect;
 
 	override onAdded() {
@@ -25,13 +25,6 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.refreshListByType, [ ItemBagType.Book ]);
 		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.refreshListByType, [ ItemBagType.Other ]);
 
-		this.addMessage(ComGoodsMsg.OnBtnQualityUpClick, this.onBtnQualityUpClick);
-		this.addMessage(ComGoodsMsg.OnBtnQualityDownClick, this.onBtnQualityDownClick);
-		this.addMessage(ComGoodsMsg.OnBtnTypeUpClick, this.onBtnTypeUpClick);
-		this.addMessage(ComGoodsMsg.OnBtnTypeDownClick, this.onBtnTypeDownClick);
-		this.addMessage(ComGoodsMsg.OnBtnScoreUpClick, this.onBtnScoreUpClick);
-		this.addMessage(ComGoodsMsg.OnBtnScoreDownClick, this.onBtnScoreDownClick);
-
 		UIUtility.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
 
@@ -42,7 +35,8 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
 	private refreshListByType(type: ItemBagType) {
 		this.showType = type ?? this.showType;
-		this.items = userData.bag.getItems(this.showType) as any;
+		this.items = userData.bag.getItems(this.showType);
+		this.items.sort((a, b) => a.quality - b.quality);
 		this.view.list_item.numItems = this.items.length;
 	}
 
@@ -61,58 +55,6 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 		} else {
 			this.showView<UIGoodsInfoData>(ViewID.UIGoodsInfoView, { id: data.id, buy: false });
 		}
-	}
-
-	private onBtnShouCangClick() {
-
-	}
-
-	private onBtnEquipClick() {
-
-	}
-
-	private onBtnPropClick() {
-
-	}
-
-	private onBtnGemClick() {
-
-	}
-
-	private onBtnMaterialClick() {
-
-	}
-
-	private onBtnBookClick() {
-
-	}
-
-	private onBtnOtherClick() {
-
-	}
-
-	private onBtnQualityUpClick() {
-
-	}
-
-	private onBtnQualityDownClick() {
-
-	}
-
-	private onBtnTypeUpClick() {
-
-	}
-
-	private onBtnTypeDownClick() {
-
-	}
-
-	private onBtnScoreUpClick() {
-
-	}
-
-	private onBtnScoreDownClick() {
-
 	}
 
 }

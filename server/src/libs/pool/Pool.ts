@@ -1,4 +1,5 @@
 export const enum PoolKey {
+    Date = "Date",
     EventDispatcher = "EventDispatcher",
     ClosedConnection = "ClosedConnection",
     CommonConnection = "CommonConnection",

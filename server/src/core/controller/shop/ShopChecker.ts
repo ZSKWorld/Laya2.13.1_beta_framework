@@ -1,6 +1,6 @@
 import { cfgMgr } from "../../config/CfgManager";
 import { ErrorCode } from "../../enum/ErrorCode";
-import { ItemHelper } from "../item/ItemHelper";
+import { BagHelper } from "../bag/BagHelper";
 
 export class ShopChecker {
     /**
@@ -16,7 +16,7 @@ export class ShopChecker {
         if (!item) return ErrorCode.GOODS_NOT_EXIST;
         for (let i = 0, n = item.sellPrice.length; i < n; i++) {
             const element = item.sellPrice[ i ];
-            if (ItemHelper.getItemCount(data, element.id) < element.count * count)
+            if (BagHelper.getItemCount(data, element.id) < element.count * count)
                 return ErrorCode.ITEM_COUNT_NOT_ENOUGH;
         }
         return ErrorCode.NONE;

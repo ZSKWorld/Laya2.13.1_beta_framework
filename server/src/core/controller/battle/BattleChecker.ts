@@ -1,7 +1,7 @@
 import { ErrorCode } from "../../enum/ErrorCode";
 
 export class BattleChecker {
-    static checkStartBattle(user: IUser, data: BattleInput) {
+    static checkStartBattle(user: IUser, data: StartBattleInput) {
         const battle = user.battle;
         if (!battle.getConfig(data.type, data.id)) return ErrorCode.UNKNOWN_BATTLE_LEVEL;
         if (battle.getLastCount(data.type, data.id) <= 0) return ErrorCode.CHALLENGE_COUNT_NOT_ENOUGH;

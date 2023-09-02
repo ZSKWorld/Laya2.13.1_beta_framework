@@ -2,9 +2,11 @@
 import BtnCheck from "../ui/PkgMain/BtnCheck";
 import BtnCornerTxt from "../ui/PkgCommon/BtnCornerTxt";
 import ComAbode from "../ui/PkgMain/ComAbode";
+import ComBattleConfirm from "../ui/PkgBattle/ComBattleConfirm";
 import ComChar from "../ui/PkgMain/ComChar";
 import ComConfirm from "../ui/PkgCommon/ComConfirm";
 import ComGoods from "../ui/PkgMain/ComGoods";
+import ComGoodsInfo from "../ui/PkgMain/ComGoodsInfo";
 import ComRenWu from "../ui/PkgMain/ComRenWu";
 import ComShop from "../ui/PkgMain/ComShop";
 import ComSkill from "../ui/PkgMain/ComSkill";
@@ -22,6 +24,7 @@ import RenderChooseBattle from "../ui/PkgBattle/RenderChooseBattle";
 import RenderFriend from "../ui/PkgMain/RenderFriend";
 import RenderText from "../ui/PkgMain/RenderText";
 import UIBattle from "../ui/PkgBattle/UIBattle";
+import UIBattleConfirm from "../ui/PkgBattle/UIBattleConfirm";
 import UIChat from "../ui/PkgMain/UIChat";
 import UIChooseBattle from "../ui/PkgBattle/UIChooseBattle";
 import UIChooseNum from "../ui/PkgCommon/UIChooseNum";
@@ -44,11 +47,15 @@ import { BtnCornerTxtCtrl } from "../view/PkgCommon/controller/btns/BtnCornerTxt
 import { BtnCornerTxtView } from "../view/PkgCommon/view/btns/BtnCornerTxtView";
 import { ComAbodeCtrl } from "../view/PkgMain/controller/coms/ComAbodeCtrl";
 import { ComAbodeView } from "../view/PkgMain/view/coms/ComAbodeView";
+import { ComBattleConfirmCtrl } from "../view/PkgBattle/controller/coms/ComBattleConfirmCtrl";
+import { ComBattleConfirmView } from "../view/PkgBattle/view/coms/ComBattleConfirmView";
 import { ComCharCtrl } from "../view/PkgMain/controller/coms/ComCharCtrl";
 import { ComCharView } from "../view/PkgMain/view/coms/ComCharView";
 import { ComConfirmCtrl } from "../view/PkgCommon/controller/coms/ComConfirmCtrl";
 import { ComConfirmView } from "../view/PkgCommon/view/coms/ComConfirmView";
 import { ComGoodsCtrl } from "../view/PkgMain/controller/coms/ComGoodsCtrl";
+import { ComGoodsInfoCtrl } from "../view/PkgMain/controller/coms/ComGoodsInfoCtrl";
+import { ComGoodsInfoView } from "../view/PkgMain/view/coms/ComGoodsInfoView";
 import { ComGoodsView } from "../view/PkgMain/view/coms/ComGoodsView";
 import { ComRenWuCtrl } from "../view/PkgMain/controller/coms/ComRenWuCtrl";
 import { ComRenWuView } from "../view/PkgMain/view/coms/ComRenWuView";
@@ -74,6 +81,9 @@ import { RenderFriendCtrl } from "../view/PkgMain/controller/renders/RenderFrien
 import { RenderFriendView } from "../view/PkgMain/view/renders/RenderFriendView";
 import { RenderTextCtrl } from "../view/PkgMain/controller/renders/RenderTextCtrl";
 import { RenderTextView } from "../view/PkgMain/view/renders/RenderTextView";
+import { UIBattleConfirmCtrl } from "../view/PkgBattle/controller/UIBattleConfirmCtrl";
+import { UIBattleConfirmProxy } from "../view/PkgBattle/proxy/UIBattleConfirmProxy";
+import { UIBattleConfirmView } from "../view/PkgBattle/view/UIBattleConfirmView";
 import { UIBattleCtrl } from "../view/PkgBattle/controller/UIBattleCtrl";
 import { UIBattleProxy } from "../view/PkgBattle/proxy/UIBattleProxy";
 import { UIBattleView } from "../view/PkgBattle/view/UIBattleView";
@@ -159,11 +169,13 @@ class ViewRegister {
 		fgui.UIObjectFactory.setExtension(RenderText.URL, RenderTextView);
 
 		//Coms
+		fgui.UIObjectFactory.setExtension(ComBattleConfirm.URL, ComBattleConfirmView);
 		fgui.UIObjectFactory.setExtension(ComConfirm.URL, ComConfirmView);
 		fgui.UIObjectFactory.setExtension(ComTipInfo.URL, ComTipInfoView);
 		fgui.UIObjectFactory.setExtension(ComAbode.URL, ComAbodeView);
 		fgui.UIObjectFactory.setExtension(ComChar.URL, ComCharView);
 		fgui.UIObjectFactory.setExtension(ComGoods.URL, ComGoodsView);
+		fgui.UIObjectFactory.setExtension(ComGoodsInfo.URL, ComGoodsInfoView);
 		fgui.UIObjectFactory.setExtension(ComRenWu.URL, ComRenWuView);
 		fgui.UIObjectFactory.setExtension(ComShop.URL, ComShopView);
 		fgui.UIObjectFactory.setExtension(ComSkill.URL, ComSkillView);
@@ -173,6 +185,7 @@ class ViewRegister {
 
 		//UIs
 		fgui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);
+		fgui.UIObjectFactory.setExtension(UIBattleConfirm.URL, UIBattleConfirmView);
 		fgui.UIObjectFactory.setExtension(UIChooseBattle.URL, UIChooseBattleView);
 		fgui.UIObjectFactory.setExtension(UIChooseNum.URL, UIChooseNumView);
 		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirmView);
@@ -206,11 +219,13 @@ class ViewRegister {
 		register(ViewID.RenderTextView, RenderTextView, RenderTextCtrl);
 
 		//Coms
+		register(ViewID.ComBattleConfirmView, ComBattleConfirmView, ComBattleConfirmCtrl);
 		register(ViewID.ComConfirmView, ComConfirmView, ComConfirmCtrl);
 		register(ViewID.ComTipInfoView, ComTipInfoView, ComTipInfoCtrl);
 		register(ViewID.ComAbodeView, ComAbodeView, ComAbodeCtrl);
 		register(ViewID.ComCharView, ComCharView, ComCharCtrl);
 		register(ViewID.ComGoodsView, ComGoodsView, ComGoodsCtrl);
+		register(ViewID.ComGoodsInfoView, ComGoodsInfoView, ComGoodsInfoCtrl);
 		register(ViewID.ComRenWuView, ComRenWuView, ComRenWuCtrl);
 		register(ViewID.ComShopView, ComShopView, ComShopCtrl);
 		register(ViewID.ComSkillView, ComSkillView, ComSkillCtrl);
@@ -220,6 +235,7 @@ class ViewRegister {
 
 		//UIs
 		register(ViewID.UIBattleView, UIBattleView, UIBattleCtrl, UIBattleProxy);
+		register(ViewID.UIBattleConfirmView, UIBattleConfirmView, UIBattleConfirmCtrl, UIBattleConfirmProxy);
 		register(ViewID.UIChooseBattleView, UIChooseBattleView, UIChooseBattleCtrl, UIChooseBattleProxy);
 		register(ViewID.UIChooseNumView, UIChooseNumView, UIChooseNumCtrl, UIChooseNumProxy);
 		register(ViewID.UIConfirmView, UIConfirmView, UIConfirmCtrl, UIConfirmProxy);

@@ -26,34 +26,7 @@
     <graph id="n37_9f1k" name="n37" xy="19,12" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
       <gearXY controller="ctrlSelectType" pages="0,1,2,3,4,5,6" values="19,12|139,12|259,12|379,12|499,12|619,12|739,12" tween="true" duration=".2"/>
     </graph>
-    <component id="n27_sbd0" name="btn_qualityUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,523" size="170,80" group="n31_sbd0" controller="ctrlBgColor,1">
-      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
-      <Button title="品质升序" titleColor="#000000" titleFontSize="30"/>
-    </component>
-    <component id="n28_sbd0" name="btn_qualityDown" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,613" size="170,80" group="n31_sbd0" controller="ctrlBgColor,2">
-      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
-      <Button title="品质降序" titleColor="#000000" titleFontSize="30"/>
-    </component>
-    <component id="n29_sbd0" name="btn_typeUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,703" size="170,80" group="n31_sbd0">
-      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
-      <Button title="类型升序" titleColor="#000000" titleFontSize="30"/>
-    </component>
-    <component id="n30_sbd0" name="btn_typeDown" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,793" size="170,80" group="n31_sbd0" controller="ctrlBgColor,4">
-      <gearDisplay controller="ctrlSelectType" pages="0,1,2,3,4,5,6"/>
-      <Button title="类型降序" titleColor="#000000" titleFontSize="30"/>
-    </component>
-    <component id="n32_sbd0" name="btn_scoreUp" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,883" size="170,80" group="n31_sbd0" controller="ctrlBgColor,6">
-      <gearDisplay controller="ctrlSelectType" pages="1"/>
-      <Button title="评分升序" titleColor="#000000" titleFontSize="30"/>
-    </component>
-    <component id="n33_sbd0" name="btn_scoreDown" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="875,973" size="170,80" group="n31_sbd0" controller="ctrlBgColor,7">
-      <gearDisplay controller="ctrlSelectType" pages="1"/>
-      <Button title="评分降序" titleColor="#000000" titleFontSize="30"/>
-    </component>
-    <group id="n31_sbd0" name="n31" xy="875,523" size="170,530" advanced="true" layout="vt" lineGap="10">
-      <relation target="" sidePair="middle-middle,right-right"/>
-    </group>
-    <list id="n36_sbd0" name="list_item" xy="19,102" size="840,1463" layout="flow_hz" overflow="scroll" lineGap="15" colGap="15" lineItemCount="3" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
+    <list id="n36_sbd0" name="list_item" xy="20,102" size="1020,1463" layout="flow_hz" overflow="scroll" lineGap="12" colGap="12" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
       <relation target="" sidePair="width-width,height-height"/>
       <item/>
       <item/>

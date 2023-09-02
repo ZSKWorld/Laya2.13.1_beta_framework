@@ -25,6 +25,6 @@ declare interface IBody extends IBodyData, IDecode<IBodyData, IBody> {
     magicWeapon: IEquipment;
 
     getDressedEquip(part: EquipmentPart): IEquipment;
-    
+
     getEquipGems(part: EquipmentPart): number[];
 }

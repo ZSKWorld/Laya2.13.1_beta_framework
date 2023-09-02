@@ -19,7 +19,7 @@ export class FriendController extends Controller implements IFriendCtrl {
             return this.response(data.cmd, null, ErrorCode.NOT_FRIEND);
         const friendCon = connectionMgr.getConnection(data.friendUid);
         if (friendCon) {
-            friendCon.notify({ cmd: data.cmd, data: data.chatMsg });
+            // friendCon.notify({ cmd: data.cmd, data: data.chatMsg });
         }
         this.response(data.cmd);
     }

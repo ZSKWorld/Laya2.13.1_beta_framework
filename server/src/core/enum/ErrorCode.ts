@@ -22,6 +22,8 @@ export const enum ErrorCode {
     USER_LOGINED,
     /** 异地登陆 */
     LOGIN_OTHER_PLACE,
+    /** 今日已签过到 */
+    HadSignedIn,
     /** 精力不足 */
     VIGOR_NOT_ENOUGH,
     /** 精力已满 */

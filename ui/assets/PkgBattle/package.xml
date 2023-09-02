@@ -4,6 +4,8 @@
     <component id="sbd0u" name="RenderChooseBattle.xml" path="/Component/Render/"/>
     <component id="sbd0s" name="UIChooseBattle.xml" path="/" exported="true"/>
     <component id="sbd00" name="UIBattle.xml" path="/" exported="true"/>
+    <component id="awbvv" name="UIBattleConfirm.xml" path="/" exported="true"/>
+    <component id="awbvw" name="ComBattleConfirm.xml" path="/Component/BattleConfirm/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

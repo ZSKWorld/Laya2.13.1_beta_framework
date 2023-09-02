@@ -5,6 +5,7 @@ import { UserUtil } from "./UserUtil";
 export class Base extends Decode<IBaseData> implements IBase {
     private static readonly ClassName = "BaseData";
     //#region 字段
+    signedInTime: number;
     coin: number;
     vcoin: number;
     vigor: number;

@@ -15,7 +15,7 @@ export class UISettingCtrl extends BaseViewCtrl<UISettingView, UISettingData>{
     }
 
 	private onBtnMuteClick() {
-
+		
 	}
 
 	private onBtnSignInClick() {

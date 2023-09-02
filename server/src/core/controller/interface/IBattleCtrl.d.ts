@@ -1,10 +1,10 @@
 declare type BattleLevel = CfgLevelData | CfgFuBenData | CfgMiJingData | CfgBossData;
 
 declare interface IBattleCtrl {
-    startBattle(data: BattleInput): void;
+    startBattle(data: StartBattleInput): void;
 }
 
-declare interface BattleInput extends UserInput {
+declare interface StartBattleInput extends UserInput {
     /** 战斗类型 */
     type: number;
     /** 关卡id */
@@ -13,5 +13,5 @@ declare interface BattleInput extends UserInput {
     hour?: number;
 }
 
-declare interface BattleOutput extends UserOutput {
+declare interface StartBattleOutput extends UserOutput {
 }

@@ -57,4 +57,5 @@ declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
     getIsCooldown(type: BattleType, id: number): boolean;
     /** 获取精力消耗 */
     getVigorCost(type: BattleType, id: number): number;
+    resetData(): void;
 }

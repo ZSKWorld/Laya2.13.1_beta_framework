@@ -12,12 +12,6 @@ export default class ComGoods extends fgui.GComponent {
 	public btn_material:BtnCornerTxt;
 	public btn_book:BtnCornerTxt;
 	public btn_other:BtnCornerTxt;
-	public btn_qualityUp:BtnCornerTxt;
-	public btn_qualityDown:BtnCornerTxt;
-	public btn_typeUp:BtnCornerTxt;
-	public btn_typeDown:BtnCornerTxt;
-	public btn_scoreUp:BtnCornerTxt;
-	public btn_scoreDown:BtnCornerTxt;
 	public list_item:fgui.GList;
 	public trans_show:fgui.Transition;
 	public static URL:string = "ui://vith2b66sbd02";
@@ -35,13 +29,7 @@ export default class ComGoods extends fgui.GComponent {
 		this.btn_material = <BtnCornerTxt>(this.getChildAt(4));
 		this.btn_book = <BtnCornerTxt>(this.getChildAt(5));
 		this.btn_other = <BtnCornerTxt>(this.getChildAt(6));
-		this.btn_qualityUp = <BtnCornerTxt>(this.getChildAt(8));
-		this.btn_qualityDown = <BtnCornerTxt>(this.getChildAt(9));
-		this.btn_typeUp = <BtnCornerTxt>(this.getChildAt(10));
-		this.btn_typeDown = <BtnCornerTxt>(this.getChildAt(11));
-		this.btn_scoreUp = <BtnCornerTxt>(this.getChildAt(12));
-		this.btn_scoreDown = <BtnCornerTxt>(this.getChildAt(13));
-		this.list_item = <fgui.GList>(this.getChildAt(15));
+		this.list_item = <fgui.GList>(this.getChildAt(8));
 		this.trans_show = this.getTransitionAt(0);
 	}
 }

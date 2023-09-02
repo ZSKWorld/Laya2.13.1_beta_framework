@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="803,512">
+  <controller name="ctrlState" pages="0,无,1,使用,3,使用出售,2,购买" selected="0"/>
+  <displayList>
+    <graph id="n1_irlv" name="n1" xy="0,0" size="803,512" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115">
+      <relation target="n5_irlv" sidePair="height-height"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </graph>
+    <graph id="n2_irlv" name="n2" xy="0,0" size="803,110" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <relation target="n1_irlv" sidePair="width-width,left-left,top-top"/>
+    </graph>
+    <graph id="n3_irlv" name="n3" xy="0,402" size="803,110" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <relation target="n1_irlv" sidePair="width-width,left-left,bottom-bottom"/>
+    </graph>
+    <graph id="n10_irlv" name="n10" xy="18,426" size="425,60" touchable="false" type="rect">
+      <gearDisplay controller="ctrlState" pages="1,3,2"/>
+      <relation target="n9_irlv" sidePair="width-width,height-height,left-left,bottom-bottom"/>
+    </graph>
+    <richtext id="n5_irlv" name="txt_content" xy="31,257" pivot="0,0.5" anchor="true" size="743,164" touchable="false" fontSize="35" color="#e7c235" vAlign="middle" leading="15" ubb="true" autoSize="height" autoClearText="true" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
+      <relation target="n1_irlv" sidePair="center-center,middle-middle"/>
+    </richtext>
+    <text id="n6_irlv" name="n6" xy="24,22" size="124,79" fontSize="60" color="#ffffff" text="提示">
+      <relation target="n1_irlv" sidePair="left-left,top-top"/>
+    </text>
+    <text id="n9_irlv" name="input_num" xy="18,427" size="425,60" fontSize="45" vAlign="middle" autoSize="none" singleLine="true" text="1" input="true" restrict="[0-9]">
+      <gearDisplay controller="ctrlState" pages="1,3,2"/>
+      <gearSize controller="ctrlState" pages="1,2" values="600,60,1,1|600,60,1,1" default="425,60,1,1"/>
+      <relation target="n1_irlv" sidePair="left-left,bottom-bottom"/>
+    </text>
+    <component id="n15_irlv" name="btn_collect" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="692,8" size="100,100" scale="1.5,1.5">
+      <relation target="n1_irlv" sidePair="right-right,top-top"/>
+      <Button icon="ui://vx9zwserqjdob"/>
+    </component>
+    <component id="n8_irlv" name="btn_use" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="630,426" size="157,60" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlState" pages="1,3"/>
+      <relation target="n1_irlv" sidePair="right-right,bottom-bottom"/>
+      <Button title="使用" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n16_ictn" name="btn_sell" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="458,426" size="157,60" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlState" pages="3"/>
+      <relation target="n1_irlv" sidePair="right-right,bottom-bottom"/>
+      <Button title="出售" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n13_irlv" name="btn_buy" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="630,426" size="157,60" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlState" pages="2"/>
+      <relation target="n1_irlv" sidePair="right-right,bottom-bottom"/>
+      <Button title="购买" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+  </displayList>
+</component>
