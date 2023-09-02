@@ -15,10 +15,11 @@ export class ComConfirmView extends ExtensionClass<IView, ComConfirm>(ComConfirm
 		btn_confirm.onClick(this, this.sendMessage, [ ComConfirmMsg.OnBtnConfirmClick ]);
 	}
 
-	refreshContent(title: string, content: string) {
-		const { txt_title, txt_content } = this;
+	refreshContent(title: string, content: string, cancel:boolean) {
+		const { txt_title, txt_content ,btn_cancel} = this;
 		txt_title.text = title;
 		txt_content.text = content;
+		btn_cancel.visible = cancel;
 	}
 
 }

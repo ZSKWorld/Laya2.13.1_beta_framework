@@ -8,15 +8,16 @@
       <relation target="n9_izot" sidePair="height-height"/>
     </graph>
     <text id="n8_izot" name="txt_title" xy="322,14" pivot="0.5,0.5" size="106,66" fontSize="50" bold="true" text="提示"/>
-    <richtext id="n9_izot" name="txt_content" xy="40,122" size="669,48" fontSize="35" ubb="true" autoSize="height" text="场景资源加载失败，是否重试？"/>
-    <component id="n1_aqq0" name="btn_cancel" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="121,220" size="204,60" controller="ctrlBgColor,3">
-      <relation target="n9_izot" sidePair="bottom-bottom"/>
+    <richtext id="n9_izot" name="txt_content" xy="40,122" size="669,48" fontSize="35" ubb="true" autoSize="height" autoClearText="true" text="场景资源加载失败，是否重试？"/>
+    <component id="n1_aqq0" name="btn_cancel" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="121,220" size="204,60" group="n11_dnfc" controller="ctrlBgColor,3">
       <Button title="取消" titleColor="#ffffff" titleFontSize="35" icon="ui://vx9zwser10au31s"/>
     </component>
-    <component id="n6_izot" name="btn_confirm" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="425,220" size="204,60" controller="ctrlBgColor,4">
-      <relation target="n9_izot" sidePair="bottom-bottom"/>
+    <component id="n6_izot" name="btn_confirm" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="425,220" size="204,60" group="n11_dnfc" controller="ctrlBgColor,4">
       <Button title="确认" titleColor="#ffffff" titleFontSize="35" icon="ui://vx9zwser10au31r"/>
     </component>
+    <group id="n11_dnfc" name="n11" xy="121,220" size="508,60" advanced="true" layout="hz" colGap="100" excludeInvisibles="true">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+    </group>
   </displayList>
   <relation target="n2_aqq0" sidePair="height-height"/>
 </component>

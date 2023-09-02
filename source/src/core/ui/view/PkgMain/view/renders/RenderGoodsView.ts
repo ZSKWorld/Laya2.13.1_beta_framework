@@ -23,7 +23,7 @@ export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGo
     }
 
     refreshGoods(data: IGoods | IEquipment) {
-        const { txt_name, txt_count } = this;
+        const { txt_name, txt_count, img_collect } = this;
         if (UserUtil.IsEquip(data.id)) {
             data = <IEquipment>data;
             txt_name.text = data.name + " +" + data.level;
@@ -33,6 +33,7 @@ export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGo
             txt_name.text = data.name;
             txt_count.text = "x" + data.count;
         }
+        img_collect.visible = userData.bag.isCollect(data.id);
         txt_name.color = data.color;
         txt_count.color = data.color;
     }

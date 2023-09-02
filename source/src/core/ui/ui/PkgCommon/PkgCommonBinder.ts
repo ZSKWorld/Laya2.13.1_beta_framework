@@ -6,7 +6,6 @@ import UILoading1 from "./UILoading1";
 import UILoading2 from "./UILoading2";
 import ComTipInfo from "./ComTipInfo";
 import BtnCornerTxt from "./BtnCornerTxt";
-import UITipConfirm from "./UITipConfirm";
 import Pro1 from "./Pro1";
 import UIChooseNum from "./UIChooseNum";
 import UIConfirm from "./UIConfirm";
@@ -20,7 +19,6 @@ export default class PkgCommonBinder {
 		fgui.UIObjectFactory.setExtension(UILoading2.URL, UILoading2);
 		fgui.UIObjectFactory.setExtension(ComTipInfo.URL, ComTipInfo);
 		fgui.UIObjectFactory.setExtension(BtnCornerTxt.URL, BtnCornerTxt);
-		fgui.UIObjectFactory.setExtension(UITipConfirm.URL, UITipConfirm);
 		fgui.UIObjectFactory.setExtension(Pro1.URL, Pro1);
 		fgui.UIObjectFactory.setExtension(UIChooseNum.URL, UIChooseNum);
 		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirm);

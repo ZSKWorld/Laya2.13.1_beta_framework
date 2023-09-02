@@ -9,6 +9,9 @@
       <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true" duration=".5"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
+    <image id="n6_dnfc" name="img_collect" src="qjdob" fileName="Texture/Bg_XingXing01.png" pkg="vx9zwser" xy="204,-3" size="45,44" aspect="true" visible="false">
+      <relation target="" sidePair="right-right"/>
+    </image>
     <text id="n1_sbd0" name="txt_name" xy="123,46" pivot="0.5,0.5" anchor="true" size="214,48" fontSize="35" color="#ffffff" vAlign="middle" leading="1" text="五级体力宝石">
       <relation target="" sidePair="center-center,middle-middle"/>
     </text>

@@ -5,6 +5,7 @@ import { ComConfirmCtrl } from "./coms/ComConfirmCtrl";
 export interface UIConfirmData {
 	title: string,
 	content: string,
+	cancel: boolean,
 	onCancel?: Laya.Handler;
 	onConfirm?: Laya.Handler;
 }

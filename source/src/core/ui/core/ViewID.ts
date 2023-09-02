@@ -6,9 +6,9 @@ export const enum ViewID {
 
 	/**Renders */
 	RenderChooseBattleView = "RenderChooseBattleView",
-	RenderGoodsView = "RenderGoodsView",
 	RenderChatMsgView = "RenderChatMsgView",
 	RenderFriendView = "RenderFriendView",
+	RenderGoodsView = "RenderGoodsView",
 	RenderTextView = "RenderTextView",
 
 	/**Coms */
@@ -34,7 +34,6 @@ export const enum ViewID {
 	UIConfirmView = "UIConfirmView",
 	UILoading1View = "UILoading1View",
 	UILoading2View = "UILoading2View",
-	UITipConfirmView = "UITipConfirmView",
 	UIWaitingView = "UIWaitingView",
 	UILoginView = "UILoginView",
 	UIChatView = "UIChatView",

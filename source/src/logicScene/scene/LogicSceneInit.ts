@@ -50,7 +50,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 			logicSceneMgr.enterScene(LogicScene.LoginScene);
 	}
 
-	private showConfirm(title: string, msg: string) {
+	private showConfirm(title: string, msg: string, cancel:boolean = true) {
 		const commonPkg = fgui.UIPackage.getById(ResPath.PkgPath.PkgCommon);
 		if (!commonPkg) return platformMgr.showConfirm(title, msg);
 		return new Promise<boolean>(resolve => {
@@ -59,7 +59,8 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 				{
 					title,
 					content: msg,
-					onCancel: Laya.Handler.create(null, resolve, [ false ]),
+					cancel:cancel,
+					onCancel: cancel ? Laya.Handler.create(null, resolve, [ false ]) : null,
 					onConfirm: Laya.Handler.create(null, resolve, [ true ]),
 				});
 		});

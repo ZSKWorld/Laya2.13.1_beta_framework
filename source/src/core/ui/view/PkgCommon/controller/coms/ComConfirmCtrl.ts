@@ -5,6 +5,7 @@ import { ComConfirmMsg, ComConfirmView } from "../../view/coms/ComConfirmView";
 export interface ComConfirmData {
 	title: string,
 	content: string,
+	cancel: boolean;
 	onCancel?: Laya.Handler;
 	onConfirm?: Laya.Handler;
 }
@@ -17,8 +18,8 @@ export class ComConfirmCtrl extends BaseViewCtrl<ComConfirmView, ComConfirmData>
 	}
 
 	override onForeground() {
-		const { title, content } = this.data;
-		this.view.refreshContent(title, content);
+		const { title, content, cancel } = this.data;
+		this.view.refreshContent(title, content, cancel);
 	}
 
 	private onBtnCancelClick() {
