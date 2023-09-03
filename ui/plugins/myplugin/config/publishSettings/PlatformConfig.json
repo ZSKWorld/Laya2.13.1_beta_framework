@@ -2,8 +2,7 @@
     "Layabox": {
         "enable": true,
         "configFiles": [
-            "Layabox_Framework",
-            "Layabox_XiaoYanDemo"
+            "Layabox"
         ]
     },
     "Unity": {
