@@ -39,10 +39,10 @@ export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData>{
 	}
 
 	private refreshListByType(type: SellType): void {
+		this.showType = type;
 		this.items = cfgMgr.Shop.filter(v => v.sellType == type);
 		this.items.sort((a, b) => cfgMgr.Item[ a.sellID ].quality - cfgMgr.Item[ b.sellID ].quality);
 		this.view.list_item.numItems = this.items.length;
-		this.showType = type;
 	}
 	private onListRenderer(index: number, item: RenderGoodsView) {
 		item.refreshShop(this.items[ index ].sellID);

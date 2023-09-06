@@ -30,11 +30,11 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		this.view.setBattleType(this.data - 1);
 		let itemCfg;
 		switch (this.data) {
-			case BattleType.GuanQia: itemCfg = cfgMgr.Level; break;
-			case BattleType.FuBen: itemCfg = cfgMgr.FuBen; break;
-			case BattleType.MiJing: itemCfg = cfgMgr.MiJing; break;
+			case BattleType.Level: itemCfg = cfgMgr.Level; break;
+			case BattleType.Copy: itemCfg = cfgMgr.Copy; break;
+			case BattleType.Secret: itemCfg = cfgMgr.Secret; break;
 			case BattleType.Boss: itemCfg = cfgMgr.Boss; break;
-			case BattleType.CaiJi: itemCfg = cfgMgr.CaiJi; break;
+			case BattleType.Gather: itemCfg = cfgMgr.Gather; break;
 			default: this.items ? this.items.length = 0 : this.items = []; break;
 		}
 		itemCfg && (this.items = Object.keys(itemCfg).map((v) => itemCfg[ v ]));
@@ -53,12 +53,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		const list = this.view.list_battle;
 		const index = list.childIndexToItemIndex(list.getChildIndex(item));
 		this.clickIndex = index;
-		if (this.data == BattleType.CaiJi) {
-			UIUtility.ShowChooseNum("你要采集多久呢？(小时)", 1, 24, Laya.Handler.create(this, (value: number) => {
-				if (value) this.onBtnBattleClick(value);
-			}));
-		} else
-			this.showView<UIBattleConfirmData>(ViewID.UIBattleConfirmView, { type: this.data, data: this.items[ index ] });
+		this.showView<UIBattleConfirmData>(ViewID.UIBattleConfirmView, { type: this.data, data: this.items[ index ] });
 	}
 
 	private onBtnBackClick() {

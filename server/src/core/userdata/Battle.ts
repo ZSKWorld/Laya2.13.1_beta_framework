@@ -11,7 +11,7 @@ class Copy extends Decode<ICopyData, ICopy> implements ICopy {
     usedMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
-        const cfg = cfgMgr.FuBen[ id ];
+        const cfg = cfgMgr.Copy[ id ];
         if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[ id ] || 0);
     }
@@ -32,7 +32,7 @@ class Secret extends Decode<ISecretData, ISecret> implements ISecret {
     usedMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
-        const cfg = cfgMgr.MiJing[ id ];
+        const cfg = cfgMgr.Secret[ id ];
         if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[ id ] || 0);
     }
@@ -76,7 +76,7 @@ class Gather extends Decode<IGatherData, IGather> implements IGather {
     startTimeMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
-        const cfg = cfgMgr.CaiJi[ id ];
+        const cfg = cfgMgr.Gather[ id ];
         if (!this.usedMap) return cfg.gatherCount;
         return cfg.gatherCount - (this.usedMap[ id ] || 0);
     }
@@ -85,7 +85,7 @@ class Gather extends Decode<IGatherData, IGather> implements IGather {
         if (!this.startTimeMap) return 0;
         const startTime = this.startTimeMap[ id ];
         if (!startTime) return 0;
-        const cfg = cfgMgr.CaiJi[ id ];
+        const cfg = cfgMgr.Gather[ id ];
         return Math.max(cfg.gatherTime - (TimeUtil.getSecondStamp() - startTime), 0);
     }
 
@@ -119,22 +119,22 @@ export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
 
     getConfig(type: BattleType, id: number) {
         switch (type) {
-            case BattleType.GuanQia: return cfgMgr.Level[ id ];
-            case BattleType.FuBen: return cfgMgr.FuBen[ id ];
-            case BattleType.MiJing: return cfgMgr.MiJing[ id ];
+            case BattleType.Level: return cfgMgr.Level[ id ];
+            case BattleType.Copy: return cfgMgr.Copy[ id ];
+            case BattleType.Secret: return cfgMgr.Secret[ id ];
             case BattleType.Boss: return cfgMgr.Boss[ id ];
-            case BattleType.CaiJi: return cfgMgr.CaiJi[ id ];
+            case BattleType.Gather: return cfgMgr.Gather[ id ];
             default: return null;
         }
     }
 
     getLastCount(type: BattleType, id: number) {
         switch (type) {
-            case BattleType.GuanQia: return Number.MAX_SAFE_INTEGER;
-            case BattleType.FuBen: return this.copy.getLastCount(id);
-            case BattleType.MiJing: return this.secret.getLastCount(id);
+            case BattleType.Level: return Number.MAX_SAFE_INTEGER;
+            case BattleType.Copy: return this.copy.getLastCount(id);
+            case BattleType.Secret: return this.secret.getLastCount(id);
             case BattleType.Boss: return Number.MAX_SAFE_INTEGER;
-            case BattleType.CaiJi: return this.gather.getLastCount(id);
+            case BattleType.Gather: return this.gather.getLastCount(id);
             default: return 0;
         }
     }
@@ -142,14 +142,14 @@ export class Battle extends Decode<IBattleData, IBattle> implements IBattle {
     getIsCooldown(type: BattleType, id: number) {
         switch (type) {
             case BattleType.Boss: return this.boss.lastCoolTime(id) <= 0;
-            case BattleType.CaiJi: return this.gather.lastGatherTime(id) <= 0;
+            case BattleType.Gather: return this.gather.lastGatherTime(id) <= 0;
             default: return true;
         }
     }
 
     getVigorCost(type: BattleType, id: number) {
         switch (type) {
-            case BattleType.CaiJi: return 0;
+            case BattleType.Gather: return 0;
             default: return this.getConfig(type, id).vigorCost;
         }
     }

@@ -7,23 +7,8 @@
     <graph id="n1_sbd0" name="n1" xy="20,27" size="1040,1877" touchable="false" type="rect" lineSize="3" lineColor="#ff6d6e71" fillColor="#00111318">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n5_sbd0" name="btn_mute" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="340,620" size="400,120" group="n12_sbd0" controller="ctrlBgColor,9">
-      <Button title="静音" titleColor="#ffffff" titleFontSize="60"/>
-    </component>
-    <component id="n6_sbd0" name="btn_signIn" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="340,760" size="400,120" group="n12_sbd0" controller="ctrlBgColor,9">
-      <Button title="签到" titleColor="#ffffff" titleFontSize="60"/>
-    </component>
-    <component id="n7_sbd0" name="btn_help" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="340,900" size="400,120" group="n12_sbd0" controller="ctrlBgColor,9">
-      <Button title="帮助" titleColor="#ffffff" titleFontSize="60"/>
-    </component>
-    <component id="n8_sbd0" name="btn_clearAccount" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="340,1040" size="400,120" group="n12_sbd0" controller="ctrlBgColor,9">
-      <Button title="清号重来" titleColor="#ffffff" titleFontSize="60"/>
-    </component>
-    <component id="n11_sbd0" name="btn_back" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="340,1180" size="400,120" group="n12_sbd0" controller="ctrlBgColor,9">
-      <Button title="返回" titleColor="#ffffff" titleFontSize="60"/>
-    </component>
-    <group id="n12_sbd0" name="n12" xy="340,620" size="400,680" advanced="true" layout="vt" lineGap="20" excludeInvisibles="true">
+    <component id="n5_sbd0" name="com_panel" src="g59f2g" fileName="Component/Setting/ComSetting.xml" xy="340,620">
       <relation target="" sidePair="center-center,middle-middle"/>
-    </group>
+    </component>
   </displayList>
 </component>

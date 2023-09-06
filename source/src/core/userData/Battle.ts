@@ -9,7 +9,7 @@ class Copy extends Decode<ICopyData> implements ICopy {
     usedMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
-        const cfg = cfgMgr.FuBen[ id ];
+        const cfg = cfgMgr.Copy[ id ];
         if (!cfg) return 0;
         if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[ id ] || 0);
@@ -20,7 +20,7 @@ class Secret extends Decode<ISecretData> implements ISecret {
     usedMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
-        const cfg = cfgMgr.MiJing[ id ];
+        const cfg = cfgMgr.Secret[ id ];
         if (!cfg) return 0;
         if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[ id ] || 0);
@@ -55,7 +55,7 @@ class Gather extends Decode<IGatherData> implements IGather {
     startTimeMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
-        const cfg = cfgMgr.CaiJi[ id ];
+        const cfg = cfgMgr.Gather[ id ];
         if (!this.usedMap) return cfg.gatherCount;
         return cfg.gatherCount - (this.usedMap[ id ] || 0);
     }
@@ -69,7 +69,7 @@ class Gather extends Decode<IGatherData> implements IGather {
         if (!this.startTimeMap) return 0;
         const startTime = this.startTimeMap[ id ];
         if (!startTime) return 0;
-        const cfg = cfgMgr.CaiJi[ id ];
+        const cfg = cfgMgr.Gather[ id ];
         return Math.max(cfg.gatherTime - (GameUtil.GetSecondStamp() - startTime), 0);
     }
 }

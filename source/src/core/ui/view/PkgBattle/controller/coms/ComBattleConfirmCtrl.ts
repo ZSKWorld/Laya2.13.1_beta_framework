@@ -17,7 +17,7 @@ export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, Com
 	}
 
 	override onEnable() {
-		this.view.refreshContent(this.data.data);
+		this.view.refreshContent(this.data.type, this.data.data);
 	}
 
 	private onBtnBuyFoodClick() {
@@ -34,7 +34,7 @@ export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, Com
 
 	private onBtnBattleClick() {
 		const { data, type } = this.data;
-		BattleService.Inst.startBattle({ type: type, id: data.id, hour: 0 });
+		BattleService.Inst.startBattle({ type: type, id: data.id, hour: this.view.slider_num.value });
 	}
 
 }

@@ -3,13 +3,13 @@ declare interface ICfgManager {
 	/** 关卡 */
 	readonly Level: CfgLevel;
 	/** 副本 */
-	readonly FuBen: CfgFuBen;
+	readonly Copy: CfgCopy;
 	/** 秘境 */
-	readonly MiJing: CfgMiJing;
+	readonly Secret: CfgSecret;
 	/** Boss */
 	readonly Boss: CfgBoss;
 	/** 采集 */
-	readonly CaiJi: CfgCaiJi;
+	readonly Gather: CfgGather;
 	/** 怪物 */
 	readonly Enemy: CfgEnemy;
 	/** 装备 */

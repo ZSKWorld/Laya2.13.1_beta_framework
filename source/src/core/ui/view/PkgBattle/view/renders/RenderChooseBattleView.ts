@@ -21,13 +21,14 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
         this.touchable = true;
         this.grayed = false;
         switch (type) {
-            case BattleType.GuanQia: this.txt_content3.text = "怪物等级：" + data.enemyLevel; break;
-            case BattleType.FuBen: this.txt_content3.text = `剩余次数：${ userData.battle.copy.getLastCount(data.id) }`; break;
-            case BattleType.MiJing: this.txt_content3.text = `剩余次数：${ userData.battle.secret.getLastCount(data.id) }`; break;
+            case BattleType.Level: this.txt_content3.text = "怪物等级：" + data.enemyLevel; break;
+            case BattleType.Copy: this.txt_content3.text = `剩余次数：${ userData.battle.copy.getLastCount(data.id) }`; break;
+            case BattleType.Secret: this.txt_content3.text = `剩余次数：${ userData.battle.secret.getLastCount(data.id) }`; break;
             case BattleType.Boss:
                 this.refreshBossCool(data as CfgBossData);
                 break;
-            case BattleType.CaiJi:
+            case BattleType.Gather:
+                // this.refreshGatherCool(data as CfgGatherData);
                 this.txt_content2.text = data.name;
                 this.btn_break.visible = false;
                 break;
@@ -41,4 +42,7 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
         this.grayed = coolTime > 0;
     }
 
+    refreshGatherCool(data: CfgGatherData) {
+
+    }
 }

@@ -8,26 +8,14 @@ export interface UISettingData {
 export class UISettingCtrl extends BaseViewCtrl<UISettingView, UISettingData>{
 
     override onAdded() {
-		this.addMessage(UISettingMsg.OnBtnMuteClick, this.onBtnMuteClick);
-		this.addMessage(UISettingMsg.OnBtnSignInClick, this.onBtnSignInClick);
-		this.addMessage(UISettingMsg.OnBtnHelpClick, this.onBtnHelpClick);
-		this.addMessage(UISettingMsg.OnBtnClearAccountClick, this.onBtnClearAccountClick);
     }
 
-	private onBtnMuteClick() {
-		
+	override onOpenAni() {
+		return new Promise<void>(resolve => this.view.com_panel.trans_show.play(Laya.Handler.create(null, resolve)));
 	}
 
-	private onBtnSignInClick() {
-
-	}
-
-	private onBtnHelpClick() {
-
-	}
-
-	private onBtnClearAccountClick() {
-
+	override onCloseAni() {
+		return new Promise<void>(resolve => this.view.com_panel.trans_show.playReverse(Laya.Handler.create(null, resolve)));
 	}
 
 }

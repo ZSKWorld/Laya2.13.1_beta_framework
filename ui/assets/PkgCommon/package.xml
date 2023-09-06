@@ -186,9 +186,8 @@
     <component id="sbd05s" name="ScrollBarV1.xml" path="/Component/ScrollBar/" exported="true"/>
     <component id="sbd05t" name="Pro1.xml" path="/Component/ProgressBar/" exported="true"/>
     <component id="sbd05x" name="SliderH1.xml" path="/Component/SliderBar/" exported="true"/>
-    <component id="sbd05y" name="UIChooseNum.xml" path="/" exported="true"/>
     <component id="irlv60" name="BtnIcon.xml" path="/Component/" exported="true"/>
-    <component id="7vow61" name="WaitingItem.xml" path="/Component/"/>
+    <component id="7vow61" name="ComWaiting.xml" path="/Component/UIWaiting/"/>
     <component id="7vow63" name="UIWaiting.xml" path="/" exported="true"/>
     <font id="kyy064" name="Font01.ttf" path="/Font/" renderMode="" samplePointSize="16"/>
     <font id="kyy065" name="Font02.ttf" path="/Font/" renderMode="" samplePointSize="16"/>
@@ -207,7 +206,7 @@
     <component id="j8596i" name="UILoading1.xml" path="/" exported="true"/>
     <component id="j8596j" name="UILoading2.xml" path="/" exported="true"/>
     <component id="shjv6k" name="UIConfirm.xml" path="/" exported="true"/>
-    <component id="shjv6l" name="ComConfirm.xml" path="/Component/"/>
+    <component id="shjv6l" name="ComConfirm.xml" path="/Component/UIConfirm/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

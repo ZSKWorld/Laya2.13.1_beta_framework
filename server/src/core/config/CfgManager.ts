@@ -6,13 +6,13 @@ class CfgManager {
 	/** 关卡 */
 	readonly Level: CfgLevel;
 	/** 副本 */
-	readonly FuBen: CfgFuBen;
+	readonly Copy: CfgCopy;
 	/** 秘境 */
-	readonly MiJing: CfgMiJing;
+	readonly Secret: CfgSecret;
 	/** Boss */
 	readonly Boss: CfgBoss;
 	/** 采集 */
-	readonly CaiJi: CfgCaiJi;
+	readonly Gather: CfgGather;
 	/** 怪物 */
 	readonly Enemy: CfgEnemy;
 	/** 装备 */
@@ -50,7 +50,7 @@ class CfgManager {
 	/** 错误码 */
 	readonly Error: CfgError;
 
-    load() {
+	load() {
 		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/config/Config.json")).toString());
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;

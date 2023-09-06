@@ -15,11 +15,11 @@ export interface ComTrainData {
 export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 
 	override onAdded() {
-		this.addMessage(ComTrainMsg.OnBtnLevelClick, this.enterBattle, [ BattleType.GuanQia ]);
-		this.addMessage(ComTrainMsg.OnBtnFuBenClick, this.enterBattle, [ BattleType.FuBen ]);
-		this.addMessage(ComTrainMsg.OnBtnMiJingClick, this.enterBattle, [ BattleType.MiJing ]);
+		this.addMessage(ComTrainMsg.OnBtnLevelClick, this.enterBattle, [ BattleType.Level ]);
+		this.addMessage(ComTrainMsg.OnBtnCopyClick, this.enterBattle, [ BattleType.Copy ]);
+		this.addMessage(ComTrainMsg.OnBtnSecretClick, this.enterBattle, [ BattleType.Secret ]);
 		this.addMessage(ComTrainMsg.OnBtnBossClick, this.enterBattle, [ BattleType.Boss ]);
-		this.addMessage(ComTrainMsg.OnBtnCaiJiClick, this.enterBattle, [ BattleType.CaiJi ]);
+		this.addMessage(ComTrainMsg.OnBtnGatherClick, this.enterBattle, [ BattleType.Gather ]);
 		this.addMessage(ComTrainMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
 		this.addMessage(ComTrainMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
 

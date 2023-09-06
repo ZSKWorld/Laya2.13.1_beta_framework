@@ -2,37 +2,38 @@
 <packageDescription id="vith2b66">
   <resources>
     <component id="qjdo0" name="UIMain.xml" path="/" exported="true"/>
-    <component id="sbd01" name="ComTrain.xml" path="/Component/Main/Train/"/>
-    <component id="sbd02" name="ComGoods.xml" path="/Component/Main/Goods/"/>
-    <component id="sbd03" name="ComShop.xml" path="/Component/Main/Shop/"/>
-    <component id="sbd04" name="ComChar.xml" path="/Component/Main/Char/"/>
-    <component id="sbd05" name="ComAbode.xml" path="/Component/Main/Abode/"/>
-    <component id="sbd0j" name="RenderText.xml" path="/Component/Main/Train/"/>
+    <component id="sbd01" name="ComTrain.xml" path="/Component/UIMain/Train/"/>
+    <component id="sbd02" name="ComGoods.xml" path="/Component/UIMain/Goods/"/>
+    <component id="sbd03" name="ComShop.xml" path="/Component/UIMain/Shop/"/>
+    <component id="sbd04" name="ComChar.xml" path="/Component/UIMain/Char/"/>
+    <component id="sbd05" name="ComAbode.xml" path="/Component/UIMain/Abode/"/>
+    <component id="sbd0j" name="RenderText.xml" path="/Component/UIMain/Train/"/>
     <component id="sbd0l" name="CmbDongFu_item.xml" path="/Component/Combox/"/>
     <component id="sbd0m" name="CmbDongFu_popup.xml" path="/Component/Combox/"/>
     <component id="sbd0n" name="CmbDongFu.xml" path="/Component/Combox/" exported="true"/>
     <component id="sbd0x" name="UISetting.xml" path="/" exported="true"/>
-    <component id="sbd0z" name="RenderGoods.xml" path="/Component/Main/Goods/"/>
+    <component id="sbd0z" name="RenderGoods.xml" path="/Component/UIMain/Goods/"/>
     <component id="sbd010" name="UIPlayerInfo.xml" path="/" exported="true"/>
     <component id="sbd013" name="CmbPlayerInfo.xml" path="/Component/Combox/"/>
     <component id="sbd01b" name="UIEquipmentInfo.xml" path="/" exported="true"/>
-    <component id="whk31d" name="ComRenWu.xml" path="/Component/Main/Char/"/>
+    <component id="whk31d" name="ComRenWu.xml" path="/Component/UIMain/Char/"/>
     <component id="irlv1e" name="UIGoodsInfo.xml" path="/" exported="true"/>
-    <component id="9f1k1h" name="ComZhiZuo.xml" path="/Component/Main/Abode/"/>
-    <component id="btv51i" name="ComXinFa.xml" path="/Component/Main/Char/"/>
-    <component id="btv51j" name="ItemXinFa.xml" path="/Component/Main/Char/"/>
+    <component id="9f1k1h" name="ComZhiZuo.xml" path="/Component/UIMain/Abode/"/>
+    <component id="btv51i" name="ComXinFa.xml" path="/Component/UIMain/Char/"/>
+    <component id="btv51j" name="ItemXinFa.xml" path="/Component/UIMain/Char/"/>
     <component id="btv51q" name="UISect.xml" path="/" exported="true"/>
-    <component id="rwel1r" name="ComSkill.xml" path="/Component/Main/Char/"/>
-    <component id="amcp1u" name="BtnSphere.xml" path="/Component/Main/"/>
+    <component id="rwel1r" name="ComSkill.xml" path="/Component/UIMain/Char/"/>
+    <component id="amcp1u" name="BtnSphere.xml" path="/Component/UIMain/"/>
     <component id="e3vt1v" name="UISphereTool.xml" path="/" exported="true"/>
-    <component id="j87q1w" name="BtnCheck.xml" path="/Component/SphereTool/"/>
+    <component id="j87q1w" name="BtnCheck.xml" path="/Component/UISphereTool/"/>
     <image id="sbd0c" name="IconGear.png" path="/Texture/" exported="true"/>
     <image id="sbd0d" name="IconRank.png" path="/Texture/" exported="true"/>
     <image id="qjdo2b" name="Pic_Gouxuan.png" path="/Texture/" exported="true"/>
     <component id="o7722c" name="UIChat.xml" path="/" exported="true"/>
-    <component id="j0ry2d" name="RenderChatMsg.xml" path="/Component/Chat/"/>
-    <component id="roh22e" name="RenderFriend.xml" path="/Component/Chat/"/>
-    <component id="awbv2f" name="ComGoodsInfo.xml" path="/Component/GoodsInfo/"/>
+    <component id="j0ry2d" name="RenderChatMsg.xml" path="/Component/UIChat/"/>
+    <component id="roh22e" name="RenderFriend.xml" path="/Component/UIChat/"/>
+    <component id="awbv2f" name="ComGoodsInfo.xml" path="/Component/UIGoodsInfo/"/>
+    <component id="g59f2g" name="ComSetting.xml" path="/Component/UISetting/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

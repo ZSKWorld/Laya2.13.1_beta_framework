@@ -1,3 +1,4 @@
+import { GameEvent } from "../../../../common/GameEvent";
 import { localData } from "../../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { AccountService } from "../../../../net/Services";
@@ -28,6 +29,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
         this.onBtnLoginClick();
     }
 
+    @RegisterEvent(GameEvent.SocketClosed)
     onLoginError() {
         this.view.refreshStatus(0);
         Laya.timer.clearAll(this);
@@ -39,7 +41,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
         else if (!input_password.text.trim()) tipMgr.showTip("请输入密码");
         else {
             this.view.refreshStatus(2);
-            Laya.timer.once(2000, this, () => {
+            Laya.timer.once(1000, this, () => {
                 const param = { account: input_account.text, password: input_password.text };
                 AccountService.Inst.login(param);
             });

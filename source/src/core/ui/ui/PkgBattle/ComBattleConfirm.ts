@@ -7,6 +7,7 @@ export default class ComBattleConfirm extends fgui.GComponent {
 	public ctrl_openType:fgui.Controller;
 	public txt_title:fgui.GRichTextField;
 	public txt_content:fgui.GRichTextField;
+	public slider_num:fgui.GSlider;
 	public btn_buyFood:BtnCornerTxt;
 	public btn_buyTimes:BtnCornerTxt;
 	public btn_saoDang:BtnCornerTxt;
@@ -22,10 +23,11 @@ export default class ComBattleConfirm extends fgui.GComponent {
 		this.ctrl_openType = this.getControllerAt(0);
 		this.txt_title = <fgui.GRichTextField>(this.getChildAt(3));
 		this.txt_content = <fgui.GRichTextField>(this.getChildAt(4));
-		this.btn_buyFood = <BtnCornerTxt>(this.getChildAt(5));
-		this.btn_buyTimes = <BtnCornerTxt>(this.getChildAt(6));
-		this.btn_saoDang = <BtnCornerTxt>(this.getChildAt(7));
-		this.btn_battle = <BtnCornerTxt>(this.getChildAt(8));
-		this.group_btns = <fgui.GGroup>(this.getChildAt(9));
+		this.slider_num = <fgui.GSlider>(this.getChildAt(5));
+		this.btn_buyFood = <BtnCornerTxt>(this.getChildAt(6));
+		this.btn_buyTimes = <BtnCornerTxt>(this.getChildAt(7));
+		this.btn_saoDang = <BtnCornerTxt>(this.getChildAt(8));
+		this.btn_battle = <BtnCornerTxt>(this.getChildAt(9));
+		this.group_btns = <fgui.GGroup>(this.getChildAt(10));
 	}
 }

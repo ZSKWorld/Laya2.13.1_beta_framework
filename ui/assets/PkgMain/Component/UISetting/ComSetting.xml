@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,680">
+  <displayList>
+    <component id="n5_sbd0" name="btn_mute" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="0,0" size="400,120" controller="ctrlBgColor,9">
+      <Button title="静音" titleColor="#ffffff" titleFontSize="60"/>
+    </component>
+    <component id="n6_sbd0" name="btn_signIn" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="0,140" size="400,120" controller="ctrlBgColor,9">
+      <Button title="签到" titleColor="#ffffff" titleFontSize="60"/>
+    </component>
+    <component id="n7_sbd0" name="btn_help" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="0,280" size="400,120" controller="ctrlBgColor,9">
+      <Button title="帮助" titleColor="#ffffff" titleFontSize="60"/>
+    </component>
+    <component id="n8_sbd0" name="btn_clearAccount" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="0,420" size="400,120" controller="ctrlBgColor,9">
+      <Button title="清号重来" titleColor="#ffffff" titleFontSize="60"/>
+    </component>
+    <component id="n11_sbd0" name="btn_back" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="0,560" size="400,120" controller="ctrlBgColor,9">
+      <Button title="返回" titleColor="#ffffff" titleFontSize="60"/>
+    </component>
+  </displayList>
+  <transition name="trans_show" autoPlay="true" frameRate="60">
+    <item time="0" type="Alpha" target="n11_sbd0" tween="true" startValue="0" endValue="1" duration="6"/>
+    <item time="0" type="Alpha" target="n5_sbd0" value="0"/>
+    <item time="0" type="Alpha" target="n6_sbd0" value="0"/>
+    <item time="0" type="Alpha" target="n7_sbd0" value="0"/>
+    <item time="0" type="Alpha" target="n8_sbd0" value="0"/>
+    <item time="0" type="XY" target="n11_sbd0" tween="true" startValue="-,460" endValue="-,560" duration="6"/>
+    <item time="3" type="Alpha" target="n8_sbd0" tween="true" startValue="0" endValue="1" duration="6"/>
+    <item time="3" type="XY" target="n8_sbd0" tween="true" startValue="-,320" endValue="-,420" duration="6"/>
+    <item time="6" type="Alpha" target="n7_sbd0" tween="true" startValue="0" endValue="1" duration="6"/>
+    <item time="6" type="XY" target="n7_sbd0" tween="true" startValue="-,180" endValue="-,280" duration="6"/>
+    <item time="9" type="Alpha" target="n6_sbd0" tween="true" startValue="0" endValue="1" duration="6"/>
+    <item time="9" type="XY" target="n6_sbd0" tween="true" startValue="-,40" endValue="-,140" duration="6"/>
+    <item time="12" type="Alpha" target="n5_sbd0" tween="true" startValue="0" endValue="1" duration="6"/>
+    <item time="12" type="XY" target="n5_sbd0" tween="true" startValue="-,-100" endValue="-,0" duration="6"/>
+  </transition>
+</component>
