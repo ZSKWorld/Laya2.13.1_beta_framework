@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="692,170" extention="Button" designImage="ui://vith2b66sbd0t" designImageOffsetX="-664" designImageOffsetY="-137" designImageAlpha="64">
-  <controller name="ctrlState" exported="true" pages="0,关卡,3,副本,4,秘境,5,boss,2,采集" selected="3"/>
+<component size="692,300" extention="Button" designImage="ui://vith2b66sbd0t" designImageOffsetX="-664" designImageOffsetY="-137" designImageAlpha="64">
+  <controller name="ctrlState" exported="true" pages="0,关卡,3,副本,4,秘境,5,boss,2,采集" selected="4"/>
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <displayList>
-    <graph id="n0_sbd0" name="n0" xy="0,0" size="692,170" touchable="false" type="rect" lineSize="0" fillColor="#ff272b37" corner="15">
+    <graph id="n8_aa0z" name="graph_touch" xy="0,0" size="692,300" type="rect" lineSize="0" fillColor="#ff272b37">
       <gearSize controller="ctrlState" pages="0,3,4,5,2" values="692,170,1,1|692,170,1,1|692,170,1,1|692,170,1,1|692,300,1,1"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <graph id="n5_mz80" name="n5" xy="2,2" size="688,166" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00272b37" corner="13">
-      <gearLook controller="button" pages="1,2,3" values="1,0,0,0|1,0,0,0|1,0,0,0" default="0,0,0,0" tween="true"/>
+    <graph id="n5_mz80" name="graph_light" xy="2,2" size="688,296" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00272b37">
+      <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <richtext id="n1_sbd0" name="txt_content1" xy="20,50" size="292,73" fontSize="55" color="#d5c187" ubb="true" text="Lv.10 墓穴">
+    <richtext id="n1_sbd0" name="txt_content1" xy="20,115" size="292,73" touchable="false" fontSize="55" color="#d5c187" ubb="true" text="Lv.10 墓穴">
       <gearDisplay controller="ctrlState" pages="0,3,4,5"/>
       <relation target="" sidePair="middle-middle"/>
     </richtext>
-    <richtext id="n3_sbd0" name="txt_content2" xy="93,20" size="528,129" fontSize="100" color="#d5c187" text="Lv.10 墓穴">
+    <richtext id="n3_sbd0" name="txt_content2" xy="93,85" size="528,129" touchable="false" fontSize="100" color="#d5c187" text="Lv.10 墓穴">
       <gearDisplay controller="ctrlState" pages="2"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </richtext>
-    <text id="n2_sbd0" name="txt_content3" xy="453,103" size="224,54" fontSize="40" color="#77f7d1" text="剩余次数：3">
-      <gearDisplay controller="ctrlState" pages="0,3,4"/>
+    <text id="n2_sbd0" name="txt_content3" xy="453,233" size="224,54" fontSize="40" color="#77f7d1" text="剩余次数：3">
+      <gearDisplay controller="ctrlState" pages="0,3,4,2"/>
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </text>
-    <component id="n4_sbd0" name="btn_break" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="502,80" size="175,75">
+    <text id="n11_aa0z" name="txt_content4" xy="13,233" size="164,54" fontSize="40" color="#ffffff" text="00:00:46">
+      <gearDisplay controller="ctrlState" pages="2"/>
+      <relation target="" sidePair="bottom-bottom"/>
+    </text>
+    <text id="n12_aa0z" name="txt_content5" xy="515,123" size="164,54" fontSize="40" color="#ffffff" vAlign="middle" text="00:00:56">
+      <gearDisplay controller="ctrlState" pages="5"/>
+      <relation target="" sidePair="middle-middle,right-right"/>
+    </text>
+    <component id="n4_sbd0" name="btn_break" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="502,210" size="175,75">
       <gearDisplay controller="ctrlState" pages="2"/>
       <relation target="" sidePair="right-right,bottom-bottom"/>
-      <Button title="中断" titleFontSize="45"/>
+      <Button title="中断" titleColor="#ff0000" titleFontSize="45"/>
     </component>
   </displayList>
   <Button/>
-  <relation target="n0_sbd0" sidePair="height-height"/>
+  <relation target="n8_aa0z" sidePair="height-height"/>
 </component>

@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1060,1493" designImage="ui://vith2b66sbd0f" designImageOffsetX="-752" designImageOffsetY="-225" designImageAlpha="100" bgColorEnabled="true" bgColor="#000000">
+<component size="1060,1296" designImage="ui://vith2b66sbd0f" designImageOffsetX="-752" designImageOffsetY="-225" designImageAlpha="100" bgColorEnabled="true" bgColor="#000000">
   <controller name="ctrlState" pages="0,,1," selected="0"/>
   <displayList>
-    <component id="n179_rwel" name="n179" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="146,198" size="308,106" group="n200_kyy0" touchable="false" controller="ctrlBgColor,3">
+    <component id="n179_rwel" name="n179" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="146,165" size="308,106" group="n200_kyy0" touchable="false" controller="ctrlBgColor,3">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <component id="n180_rwel" name="btn_normal0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,334" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
+    <component id="n180_rwel" name="btn_normal0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,301" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50" controller="ctrlState" page="1"/>
     </component>
-    <component id="n181_rwel" name="btn_normal1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,529" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
+    <component id="n181_rwel" name="btn_normal1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,496" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50" controller="ctrlState" page="1"/>
     </component>
-    <component id="n182_rwel" name="btn_normal2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,724" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
+    <component id="n182_rwel" name="btn_normal2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,691" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50" controller="ctrlState" page="1"/>
     </component>
-    <component id="n183_rwel" name="btn_normal3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,919" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
+    <component id="n183_rwel" name="btn_normal3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,886" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50" controller="ctrlState" page="1"/>
     </component>
-    <component id="n184_rwel" name="btn_normal4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,1114" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
+    <component id="n184_rwel" name="btn_normal4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="100,1081" size="400,180" group="n200_kyy0" controller="ctrlBgColor,3">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50" controller="ctrlState" page="1"/>
     </component>
-    <group id="n200_kyy0" name="n200" xy="100,198" size="400,1096" group="n196_pogd"/>
-    <component id="n192_rwel" name="n192" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="606,198" size="308,106" group="n201_kyy0" touchable="false" controller="ctrlBgColor,5">
+    <group id="n200_kyy0" name="n200" xy="100,165" size="400,1096" group="n196_pogd"/>
+    <component id="n192_rwel" name="n192" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="606,165" size="308,106" group="n201_kyy0" touchable="false" controller="ctrlBgColor,5">
       <Button title="仙界技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <component id="n186_rwel" name="btn_xian0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,334" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
+    <component id="n186_rwel" name="btn_xian0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,301" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <component id="n187_rwel" name="btn_xian1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,529" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
+    <component id="n187_rwel" name="btn_xian1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,496" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <component id="n188_rwel" name="btn_xian2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,724" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
+    <component id="n188_rwel" name="btn_xian2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,691" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <component id="n189_rwel" name="btn_xian3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,919" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
+    <component id="n189_rwel" name="btn_xian3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,886" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <component id="n190_rwel" name="btn_xian4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,1114" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
+    <component id="n190_rwel" name="btn_xian4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="560,1081" size="400,180" group="n201_kyy0" controller="ctrlBgColor,5">
       <Button title="普通技能" titleColor="#e55f00" titleFontSize="50"/>
     </component>
-    <group id="n201_kyy0" name="n201" xy="560,198" size="400,1096" group="n196_pogd"/>
-    <group id="n196_pogd" name="n196" xy="100,198" size="860,1096" advanced="true">
+    <group id="n201_kyy0" name="n201" xy="560,165" size="400,1096" group="n196_pogd"/>
+    <group id="n196_pogd" name="n196" xy="100,165" size="860,1096" advanced="true">
       <gearDisplay controller="ctrlState" pages="0"/>
     </group>
     <list id="n193_pogd" name="list_skill" xy="10,10" size="1040,1383" group="n195_pogd" layout="flow_hz" overflow="scroll" scrollBarFlags="128" lineGap="10" colGap="10" lineItemCount="4" defaultItem="ui://vith2b66sbd0z" autoItemSize="true">

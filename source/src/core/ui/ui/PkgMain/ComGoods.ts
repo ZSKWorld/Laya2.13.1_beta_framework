@@ -13,7 +13,6 @@ export default class ComGoods extends fgui.GComponent {
 	public btn_book:BtnCornerTxt;
 	public btn_other:BtnCornerTxt;
 	public list_item:fgui.GList;
-	public trans_show:fgui.Transition;
 	public static URL:string = "ui://vith2b66sbd02";
 
 	public static createInstance():ComGoods {
@@ -30,6 +29,5 @@ export default class ComGoods extends fgui.GComponent {
 		this.btn_book = <BtnCornerTxt>(this.getChildAt(5));
 		this.btn_other = <BtnCornerTxt>(this.getChildAt(6));
 		this.list_item = <fgui.GList>(this.getChildAt(8));
-		this.trans_show = this.getTransitionAt(0);
 	}
 }

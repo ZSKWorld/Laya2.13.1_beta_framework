@@ -13,7 +13,6 @@ export default class ComShop extends fgui.GComponent {
 	public btn_heiShi:BtnCornerTxt;
 	public btn_xianJie:BtnCornerTxt;
 	public list_item:fgui.GList;
-	public trans_show:fgui.Transition;
 	public static URL:string = "ui://vith2b66sbd03";
 
 	public static createInstance():ComShop {
@@ -30,6 +29,5 @@ export default class ComShop extends fgui.GComponent {
 		this.btn_heiShi = <BtnCornerTxt>(this.getChildAt(5));
 		this.btn_xianJie = <BtnCornerTxt>(this.getChildAt(6));
 		this.list_item = <fgui.GList>(this.getChildAt(8));
-		this.trans_show = this.getTransitionAt(0);
 	}
 }

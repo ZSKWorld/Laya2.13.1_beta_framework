@@ -21,7 +21,7 @@
       <gearDisplay controller="ctrl_openType" pages="1,2"/>
       <Button title="一键扫荡" titleFontSize="45"/>
     </component>
-    <list id="n4_sbd0" name="list_battle" xy="30,138" size="1020,1752" layout="flow_hz" overflow="scroll" lineGap="6" lineItemCount="1" defaultItem="ui://va1qbl3hsbd0u" autoItemSize="true">
+    <list id="n4_sbd0" name="list_battle" xy="30,138" size="1020,1752" layout="flow_hz" overflow="scroll" lineGap="6" lineItemCount="1" defaultItem="ui://va1qbl3hsbd0u" autoItemSize="true" autoClearItems="true">
       <relation target="" sidePair="width-width,height-height"/>
       <item controllers="ctrlState,0"/>
       <item controllers="state,2"/>

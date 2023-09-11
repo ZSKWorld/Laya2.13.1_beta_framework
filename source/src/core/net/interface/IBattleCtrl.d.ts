@@ -1,4 +1,4 @@
-declare type BattleLevel = CfgLevelData | CfgCopyData | CfgSecretData | CfgBossData;
+declare type BattleLevel = CfgLevelData | CfgCopyData | CfgSecretData | CfgBossData | CfgGatherData;
 
 declare interface IBattleCtrl {
     startBattle(data: StartBattleInput): void;

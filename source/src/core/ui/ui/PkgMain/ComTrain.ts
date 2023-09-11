@@ -12,7 +12,6 @@ export default class ComTrain extends fgui.GComponent {
 	public btn_gongLue:BtnCornerTxt;
 	public btn_waiYu:BtnCornerTxt;
 	public list_log:fgui.GList;
-	public EffectShow:fgui.Transition;
 	public static URL:string = "ui://vith2b66sbd01";
 
 	public static createInstance():ComTrain {
@@ -28,6 +27,5 @@ export default class ComTrain extends fgui.GComponent {
 		this.btn_gongLue = <BtnCornerTxt>(this.getChildAt(6));
 		this.btn_waiYu = <BtnCornerTxt>(this.getChildAt(7));
 		this.list_log = <fgui.GList>(this.getChildAt(8));
-		this.EffectShow = this.getTransitionAt(0);
 	}
 }

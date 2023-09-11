@@ -1,12 +1,27 @@
 {
   "objectStatus": {
+    "n52_sbd0": {
+      "collapsed": true
+    },
+    "n160_kyy0": {
+      "collapsed": true
+    },
     "n161_kyy0": {
       "collapsed": true
     },
-    "n52_sbd0": {
+    "n159_kyy0": {
+      "collapsed": true
+    },
+    "n34_sbd0": {
+      "collapsed": true
+    },
+    "n162_kyy0": {
       "collapsed": true
     }
   },
   "adaptiveTest": true,
+  "designImages": [
+    "ui://n809nszxaa0zf"
+  ],
   "fitScreen": "FitSize"
 }

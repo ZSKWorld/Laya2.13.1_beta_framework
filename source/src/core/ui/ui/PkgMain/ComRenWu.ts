@@ -59,17 +59,17 @@ export default class ComRenWu extends fgui.GComponent {
 		this.txt_hunPo = <fgui.GRichTextField>(this.getChildAt(17));
 		this.txt_gemScore = <fgui.GRichTextField>(this.getChildAt(18));
 		this.txt_exp = <fgui.GRichTextField>(this.getChildAt(19));
-		this.btn_wuQi = <BtnCornerTxt>(this.getChildAt(26));
-		this.btn_xiangLian = <BtnCornerTxt>(this.getChildAt(27));
-		this.btn_jieZhi = <BtnCornerTxt>(this.getChildAt(28));
-		this.btn_huFu = <BtnCornerTxt>(this.getChildAt(29));
-		this.btn_zuoQi = <BtnCornerTxt>(this.getChildAt(30));
-		this.btn_anQi = <BtnCornerTxt>(this.getChildAt(31));
-		this.btn_touKui = <BtnCornerTxt>(this.getChildAt(40));
-		this.btn_yiFu = <BtnCornerTxt>(this.getChildAt(41));
-		this.btn_xiaZhuang = <BtnCornerTxt>(this.getChildAt(42));
-		this.btn_xieZi = <BtnCornerTxt>(this.getChildAt(43));
-		this.btn_shiZhuang = <BtnCornerTxt>(this.getChildAt(44));
-		this.btn_faBao = <BtnCornerTxt>(this.getChildAt(45));
+		this.btn_wuQi = <BtnCornerTxt>(this.getChildAt(32));
+		this.btn_xiangLian = <BtnCornerTxt>(this.getChildAt(33));
+		this.btn_jieZhi = <BtnCornerTxt>(this.getChildAt(34));
+		this.btn_huFu = <BtnCornerTxt>(this.getChildAt(35));
+		this.btn_zuoQi = <BtnCornerTxt>(this.getChildAt(36));
+		this.btn_anQi = <BtnCornerTxt>(this.getChildAt(37));
+		this.btn_touKui = <BtnCornerTxt>(this.getChildAt(38));
+		this.btn_yiFu = <BtnCornerTxt>(this.getChildAt(39));
+		this.btn_xiaZhuang = <BtnCornerTxt>(this.getChildAt(40));
+		this.btn_xieZi = <BtnCornerTxt>(this.getChildAt(41));
+		this.btn_shiZhuang = <BtnCornerTxt>(this.getChildAt(42));
+		this.btn_faBao = <BtnCornerTxt>(this.getChildAt(43));
 	}
 }

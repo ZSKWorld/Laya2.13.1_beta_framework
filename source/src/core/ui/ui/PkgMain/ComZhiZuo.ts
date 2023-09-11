@@ -19,7 +19,6 @@ export default class ComZhiZuo extends fgui.GComponent {
 	public cmb_detail:CmbDongFu;
 	public cmb_fjzbdj:CmbDongFu;
 	public cmb_fjbsdj:CmbDongFu;
-	public EffectShow:fgui.Transition;
 	public static URL:string = "ui://vith2b669f1k1h";
 
 	public static createInstance():ComZhiZuo {
@@ -33,14 +32,13 @@ export default class ComZhiZuo extends fgui.GComponent {
 		this.btn_czzb = <BtnCornerTxt>(this.getChildAt(9));
 		this.btn_bshc = <BtnCornerTxt>(this.getChildAt(10));
 		this.btn_zztz = <BtnCornerTxt>(this.getChildAt(11));
-		this.btn_fjzb = <BtnCornerTxt>(this.getChildAt(12));
-		this.btn_fjbs = <BtnCornerTxt>(this.getChildAt(13));
-		this.btn_yjhc = <BtnCornerTxt>(this.getChildAt(14));
-		this.cmb_level = <CmbDongFu>(this.getChildAt(15));
-		this.cmb_type = <CmbDongFu>(this.getChildAt(16));
-		this.cmb_detail = <CmbDongFu>(this.getChildAt(17));
-		this.cmb_fjzbdj = <CmbDongFu>(this.getChildAt(18));
-		this.cmb_fjbsdj = <CmbDongFu>(this.getChildAt(19));
-		this.EffectShow = this.getTransitionAt(0);
+		this.btn_fjzb = <BtnCornerTxt>(this.getChildAt(13));
+		this.btn_fjbs = <BtnCornerTxt>(this.getChildAt(14));
+		this.btn_yjhc = <BtnCornerTxt>(this.getChildAt(15));
+		this.cmb_level = <CmbDongFu>(this.getChildAt(16));
+		this.cmb_type = <CmbDongFu>(this.getChildAt(17));
+		this.cmb_detail = <CmbDongFu>(this.getChildAt(18));
+		this.cmb_fjzbdj = <CmbDongFu>(this.getChildAt(19));
+		this.cmb_fjbsdj = <CmbDongFu>(this.getChildAt(20));
 	}
 }

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1060,1585" overflow="hidden" designImage="ui://vith2b66sbd0e" designImageOffsetX="-722" designImageOffsetY="-225" designImageAlpha="100">
+<component size="1060,1410" overflow="hidden" designImage="ui://n809nszxaa0z0" designImageOffsetX="-1080" designImageOffsetY="-345" designImageAlpha="100">
   <displayList>
-    <graph id="n16_sbd0" name="n16" xy="19,104" size="1022,1461" type="rect" lineSize="0" fillColor="#fff1dabc" corner="5">
+    <graph id="n16_sbd0" name="n16" xy="19,144" size="1022,1246" type="rect" lineSize="0" fillColor="#fff1dabc" corner="5">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n6_sbd0" name="btn_level" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="19,12" size="110,65">
+    <component id="n6_sbd0" name="btn_level" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,25" size="121,76">
       <Button title="关卡" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n7_sbd0" name="btn_copy" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="139,12" size="110,65">
+    <component id="n7_sbd0" name="btn_copy" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="152,25" size="121,76">
       <Button title="副本" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n8_sbd0" name="btn_secret" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="259,12" size="110,65">
+    <component id="n8_sbd0" name="btn_secret" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="283,25" size="121,76">
       <Button title="秘境" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n9_sbd0" name="btn_boss" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="379,12" size="110,65">
+    <component id="n9_sbd0" name="btn_boss" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="414,25" size="121,76">
       <Button title="BOSS" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n10_sbd0" name="btn_gather" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="499,12" size="110,65">
+    <component id="n10_sbd0" name="btn_gather" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="545,25" size="121,76">
       <Button title="采集" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n11_sbd0" name="btn_gongLue" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="619,12" size="110,65" controller="ctrlBgColor,1">
+    <component id="n11_sbd0" name="btn_gongLue" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="676,25" size="121,76" controller="ctrlBgColor,1">
       <Button title="攻略" titleColor="#ffffff" titleFontSize="40"/>
     </component>
-    <component id="n12_sbd0" name="btn_waiYu" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="739,12" size="110,65">
+    <component id="n12_sbd0" name="btn_waiYu" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="807,25" size="121,76">
       <Button title="外域" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <list id="n15_sbd0" name="list_log" xy="19,104" size="1022,1461" overflow="scroll" scrollBarFlags="1028" scrollBar="auto" scrollBarRes="ui://vx9zwsersbd05s," defaultItem="ui://vith2b66sbd0j" autoClearItems="true">
-      <relation target="" sidePair="width-width,height-height"/>
+    <list id="n15_sbd0" name="list_log" xy="19,154" size="1022,1226" overflow="scroll" scrollBarFlags="1028" scrollBar="auto" scrollBarRes="ui://vx9zwsersbd05s," defaultItem="ui://vith2b66sbd0j" autoClearItems="true">
+      <relation target="n16_sbd0" sidePair="height-height,left-left,top-top"/>
       <item title="sdfsdf">
         <property target="title" propertyId="0" value="[size=40]士大夫撒士大夫撒大苏打给 的分公司的大苏打给 的分公司的[/size]"/>
       </item>
@@ -82,19 +82,4 @@
       <item/>
     </list>
   </displayList>
-  <transition name="EffectShow" autoPlay="true">
-    <item time="0" type="XY" target="n10_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n11_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n12_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n6_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="0" type="XY" target="n7_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n8_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n9_sbd0" value="-,-66"/>
-    <item time="1" type="XY" target="n7_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="2" type="XY" target="n8_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="3" type="XY" target="n9_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="4" type="XY" target="n10_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="5" type="XY" target="n11_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="6" type="XY" target="n12_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-  </transition>
 </component>

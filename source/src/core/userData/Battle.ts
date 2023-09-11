@@ -10,7 +10,6 @@ class Copy extends Decode<ICopyData> implements ICopy {
 
     getLastCount(id: number): number {
         const cfg = cfgMgr.Copy[ id ];
-        if (!cfg) return 0;
         if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[ id ] || 0);
     }
@@ -21,32 +20,20 @@ class Secret extends Decode<ISecretData> implements ISecret {
 
     getLastCount(id: number): number {
         const cfg = cfgMgr.Secret[ id ];
-        if (!cfg) return 0;
         if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[ id ] || 0);
     }
 }
 
 class Boss extends Decode<IBossData> implements IBoss {
-    usedMap: KeyMap<number> = null;
     lastChallengeTime: KeyMap<number> = null;
 
     lastCooldownTime(id: number): number {
-        const cfg = cfgMgr.Boss[ id ];
-        if (!cfg) return Number.MAX_SAFE_INTEGER;
         if (!this.lastChallengeTime) return 0;
         const lastTime = this.lastChallengeTime[ id ];
         if (!lastTime) return 0;
-        return cfg.coolTime - (GameUtil.GetSecondStamp() - lastTime);
-    }
-
-    isCooldown(id: number): boolean {
         const cfg = cfgMgr.Boss[ id ];
-        if (!cfg) return false;
-        if (!this.lastChallengeTime) return true;
-        const lastTime = this.lastChallengeTime[ id ];
-        if (!lastTime) return true;
-        return (GameUtil.GetSecondStamp() - lastTime) >= cfg.coolTime;
+        return Math.max(cfg.coolTime - (GameUtil.GetSecondStamp() - lastTime), 0);
     }
 }
 
@@ -58,11 +45,6 @@ class Gather extends Decode<IGatherData> implements IGather {
         const cfg = cfgMgr.Gather[ id ];
         if (!this.usedMap) return cfg.gatherCount;
         return cfg.gatherCount - (this.usedMap[ id ] || 0);
-    }
-
-    isGathering(id: number) {
-        if (!this.startTimeMap) return false;
-        return this.startTimeMap[ id ] != null;
     }
 
     lastGatherTime(id: number) {

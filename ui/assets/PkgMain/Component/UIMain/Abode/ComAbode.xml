@@ -1,47 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1060,1585" overflow="hidden" designImage="ui://vith2b66sbd018" designImageOffsetX="-753" designImageAlpha="100">
-  <controller name="c1" pages="0,制作,1,关于,2,设置,3,奇遇,4,宠物,5,修复" selected="0"/>
+<component size="1060,1410" overflow="hidden" designImage="ui://n809nszxaa0zd" designImageOffsetX="-1080" designImageOffsetY="-345" designImageAlpha="100">
+  <controller name="c1" pages="0,制作,1,关于,2,设置,3,奇遇,4,宠物,5,修复" selected="5"/>
   <displayList>
-    <component id="n3_sbd0" name="btn_create" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="19,12" size="110,65">
+    <component id="n3_sbd0" name="btn_create" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="13,25" size="121,76">
       <Button title="制作" titleColor="#000000" titleFontSize="40" controller="c1" page="0"/>
     </component>
-    <component id="n4_sbd0" name="btn_about" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="139,12" size="110,65">
+    <component id="n4_sbd0" name="btn_about" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="144,25" size="121,76">
       <Button title="关于" titleColor="#000000" titleFontSize="40" controller="c1" page="1"/>
     </component>
-    <component id="n5_sbd0" name="btn_setting" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="259,12" size="110,65">
+    <component id="n5_sbd0" name="btn_setting" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="275,25" size="121,76">
       <Button title="设置" titleColor="#000000" titleFontSize="40" controller="c1" page="2"/>
     </component>
-    <component id="n6_sbd0" name="btn_meet" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="379,12" size="110,65">
+    <component id="n6_sbd0" name="btn_meet" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="406,25" size="121,76">
       <Button title="奇遇" titleColor="#000000" titleFontSize="40" controller="c1" page="3"/>
     </component>
-    <component id="n7_sbd0" name="btn_pet" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="499,12" size="110,65">
+    <component id="n7_sbd0" name="btn_pet" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="537,25" size="121,76">
       <Button title="宠物" titleColor="#000000" titleFontSize="40" controller="c1" page="4"/>
     </component>
-    <component id="n8_sbd0" name="btn_repair" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="619,12" size="110,65">
+    <component id="n8_sbd0" name="btn_repair" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="668,25" size="121,76">
       <Button title="修复" titleColor="#000000" titleFontSize="40" controller="c1" page="5"/>
     </component>
-    <graph id="n35_9f1k" name="n35" xy="19,12" pivot="0.5,0.5" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
-      <gearXY controller="c1" pages="0,1,2,3,4,5" values="19,12|139,12|259,12|379,12|499,12|619,12" tween="true" duration=".2"/>
+    <graph id="n35_9f1k" name="n35" xy="667,25" pivot="0.5,0.5" size="121,76" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff">
+      <gearXY controller="c1" pages="0,1,2,3,4,5" values="11,25|143,25|274,25|405,25|536,25|667,25" tween="true" duration=".2"/>
       <relation target="n3_sbd0" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n33_9f1k" name="com_zhiZuo" src="9f1k1h" fileName="Component/Main/Abode/ComZhiZuo.xml" xy="0,87" size="1060,1498">
+    <component id="n33_9f1k" name="com_zhiZuo" src="9f1k1h" fileName="Component/UIMain/Abode/ComZhiZuo.xml" xy="0,120" size="1060,1290">
       <gearDisplay controller="c1" pages="0"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
   </displayList>
-  <transition name="t0" autoPlay="true">
-    <item time="0" type="Alpha" target="n35_9f1k" value="0"/>
-    <item time="0" type="XY" target="n3_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="0" type="XY" target="n4_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n5_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n6_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n7_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n8_sbd0" value="-,-66"/>
-    <item time="1" type="XY" target="n4_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="2" type="XY" target="n5_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="3" type="XY" target="n6_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="4" type="XY" target="n7_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="5" type="XY" target="n8_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="7" type="Alpha" target="n35_9f1k" tween="true" startValue="0" endValue="1" duration="3"/>
-  </transition>
 </component>

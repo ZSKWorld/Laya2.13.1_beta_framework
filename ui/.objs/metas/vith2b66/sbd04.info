@@ -1,6 +1,8 @@
 {
+  "fitScreen": "FitSize",
   "designImages": [
-    "ui://vith2b66sbd0f"
-  ],
-  "fitScreen": "FitSize"
+    "ui://vith2b66sbd0f",
+    "ui://n809nszxaa0z0",
+    "ui://n809nszxaa0zf"
+  ]
 }

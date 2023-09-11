@@ -1,4 +1,7 @@
 {
+  "designImages": [
+    "ui://n809nszxaa0zf"
+  ],
   "adaptiveTest": true,
   "fitScreen": "FitSize"
 }

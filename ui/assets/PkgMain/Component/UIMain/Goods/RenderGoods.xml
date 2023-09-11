@@ -2,10 +2,10 @@
 <component size="246,100" pivot="0.5,0.5" extention="Button" designImageOffsetX="-631" designImageOffsetY="-335" designImageAlpha="100">
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <displayList>
-    <graph id="n5_pogd" name="bg" xy="0,0" size="246,100" touchable="false" type="rect" lineSize="0" fillColor="#ff171921" corner="10">
+    <graph id="n5_pogd" name="bg" xy="0,0" size="246,100" touchable="false" type="rect" lineSize="0" fillColor="#ff171921">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n3_mz80" name="n3" xy="0,0" size="246,100" alpha="0" touchable="false" type="rect" lineSize="0" lineColor="#ffffffff" fillColor="#ff4f5672" corner="8">
+    <graph id="n3_mz80" name="n3" xy="0,0" size="246,100" alpha="0" touchable="false" type="rect" lineSize="0" lineColor="#ffffffff" fillColor="#ff4f5672">
       <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true" duration=".5"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>

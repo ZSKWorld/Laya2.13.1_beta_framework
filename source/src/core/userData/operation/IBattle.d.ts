@@ -15,15 +15,11 @@ declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
 declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
     /** 获取剩余冷却时间 */
     lastCooldownTime(id: number): number;
-    /** 获取boss是否冷却完毕 */
-    isCooldown(id: number): boolean;
 }
 
 declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
     /** 获取采集剩余次数 */
     getLastCount(id: number): number;
-    /** 是否正在采集中 */
-    isGathering(id: number): boolean;
     /** 剩余采集时间 */
     lastGatherTime(id: number): number;
 }

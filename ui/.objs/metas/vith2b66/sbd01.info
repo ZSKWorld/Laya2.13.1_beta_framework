@@ -1,7 +1,8 @@
 {
   "adaptiveTest": true,
   "designImages": [
-    "ui://vith2b66sbd0e"
+    "ui://vith2b66sbd0e",
+    "ui://n809nszxaa0z0"
   ],
   "fitScreen": "FitSize"
 }

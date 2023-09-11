@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1060,1585" overflow="hidden" designImage="ui://vith2b66sbd0h" designImageOffsetX="-781" designImageAlpha="100">
-  <controller name="ctrlSelectType" pages="0,,1,,2,,3,,4,,5,,6," selected="4"/>
+<component size="1060,1410" overflow="hidden" designImage="ui://n809nszxaa0ze" designImageOffsetX="-1080" designImageOffsetY="-345" designImageAlpha="100">
+  <controller name="ctrlSelectType" pages="0,,1,,2,,3,,4,,5,,6," selected="6"/>
   <displayList>
-    <component id="n3_sbd0" name="btn_prop" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="19,12" size="110,65">
+    <component id="n3_sbd0" name="btn_prop" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,25" size="121,76">
       <Button title="道具" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="0"/>
     </component>
-    <component id="n4_sbd0" name="btn_gem" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="139,12" size="110,65">
+    <component id="n4_sbd0" name="btn_gem" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="152,25" size="121,76">
       <Button title="宝石" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="1"/>
     </component>
-    <component id="n5_sbd0" name="btn_material" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="259,12" size="110,65">
+    <component id="n5_sbd0" name="btn_material" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="283,25" size="121,76">
       <Button title="材料" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="2"/>
     </component>
-    <component id="n6_sbd0" name="btn_miJi" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="379,12" size="110,65">
+    <component id="n6_sbd0" name="btn_miJi" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="414,25" size="121,76">
       <Button title="秘籍" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="3"/>
     </component>
-    <component id="n7_sbd0" name="btn_other" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="499,12" size="110,65">
+    <component id="n7_sbd0" name="btn_other" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="545,25" size="121,76">
       <Button title="其他" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="4"/>
     </component>
-    <component id="n8_sbd0" name="btn_heiShi" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="619,12" size="110,65">
+    <component id="n8_sbd0" name="btn_heiShi" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="676,25" size="121,76">
       <Button title="黑市" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="5"/>
     </component>
-    <component id="n9_sbd0" name="btn_xianJie" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="739,12" size="110,65">
+    <component id="n9_sbd0" name="btn_xianJie" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="807,25" size="121,76">
       <Button title="仙界" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="6"/>
     </component>
-    <graph id="n41_9f1k" name="n41" xy="499,12" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
-      <gearXY controller="ctrlSelectType" pages="0,1,2,3,4,5,6" values="19,12|139,12|259,12|379,12|499,12|619,12|739,12" tween="true" duration=".2"/>
+    <graph id="n41_9f1k" name="n41" xy="806,25" size="121,76" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff">
+      <gearXY controller="ctrlSelectType" pages="0,1,2,3,4,5,6" values="20,25|152,25|282,25|414,25|544,25|676,25|806,25" tween="true" duration=".2"/>
       <relation target="n3_sbd0" sidePair="width-width,height-height"/>
     </graph>
-    <list id="n40_sbd0" name="list_item" xy="19,102" size="1020,1463" layout="flow_hz" overflow="scroll" lineGap="12" colGap="12" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
+    <list id="n40_sbd0" name="list_item" xy="19,130" size="1020,1272" layout="flow_hz" overflow="scroll" lineGap="12" colGap="12" defaultItem="ui://vith2b66sbd0z" autoClearItems="true">
       <relation target="" sidePair="width-width,height-height"/>
       <item/>
       <item/>
@@ -103,21 +103,4 @@
       <item/>
     </list>
   </displayList>
-  <transition name="trans_show" autoPlay="true">
-    <item time="0" type="Alpha" target="n41_9f1k" value="0"/>
-    <item time="0" type="XY" target="n3_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="0" type="XY" target="n4_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n5_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n6_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n7_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n8_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n9_sbd0" value="-,-66"/>
-    <item time="1" type="XY" target="n4_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="2" type="XY" target="n5_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="3" type="XY" target="n6_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="4" type="XY" target="n7_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="5" type="XY" target="n8_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="6" type="XY" target="n9_sbd0" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="8" type="Alpha" target="n41_9f1k" tween="true" startValue="0" endValue="1" duration="3"/>
-  </transition>
 </component>

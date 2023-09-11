@@ -13,7 +13,6 @@ export default class ComAbode extends fgui.GComponent {
 	public btn_pet:BtnCornerTxt;
 	public btn_repair:BtnCornerTxt;
 	public com_zhiZuo:ComZhiZuo;
-	public t0:fgui.Transition;
 	public static URL:string = "ui://vith2b66sbd05";
 
 	public static createInstance():ComAbode {
@@ -29,6 +28,5 @@ export default class ComAbode extends fgui.GComponent {
 		this.btn_pet = <BtnCornerTxt>(this.getChildAt(4));
 		this.btn_repair = <BtnCornerTxt>(this.getChildAt(5));
 		this.com_zhiZuo = <ComZhiZuo>(this.getChildAt(7));
-		this.t0 = this.getTransitionAt(0);
 	}
 }

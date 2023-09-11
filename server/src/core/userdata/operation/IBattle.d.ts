@@ -50,7 +50,7 @@ declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
     gather: IGather;
 
     /** 获取配置表 */
-    getConfig(type: BattleType, id: number): BattleLevel | CfgGatherData;
+    getConfig(type: BattleType, id: number): BattleLevel;
     /** 获取剩余次数，不包括采集 */
     getLastCount(type: BattleType, id: number): number;
     /** 是否冷却完毕 */

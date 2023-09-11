@@ -10,7 +10,6 @@ export default class ComChar extends fgui.GComponent {
 	public com_renWu:ComRenWu;
 	public com_xinFa:ComXinFa;
 	public com_skill:ComSkill;
-	public t0:fgui.Transition;
 	public RenWuIn:fgui.Transition;
 	public RenWuOut:fgui.Transition;
 	public XinFaIn:fgui.Transition;
@@ -28,12 +27,11 @@ export default class ComChar extends fgui.GComponent {
 		this.com_renWu = <ComRenWu>(this.getChildAt(9));
 		this.com_xinFa = <ComXinFa>(this.getChildAt(10));
 		this.com_skill = <ComSkill>(this.getChildAt(11));
-		this.t0 = this.getTransitionAt(0);
-		this.RenWuIn = this.getTransitionAt(1);
-		this.RenWuOut = this.getTransitionAt(2);
-		this.XinFaIn = this.getTransitionAt(3);
-		this.XinFaOut = this.getTransitionAt(4);
-		this.SkillIn = this.getTransitionAt(5);
-		this.SkillOut = this.getTransitionAt(6);
+		this.RenWuIn = this.getTransitionAt(0);
+		this.RenWuOut = this.getTransitionAt(1);
+		this.XinFaIn = this.getTransitionAt(2);
+		this.XinFaOut = this.getTransitionAt(3);
+		this.SkillIn = this.getTransitionAt(4);
+		this.SkillOut = this.getTransitionAt(5);
 	}
 }

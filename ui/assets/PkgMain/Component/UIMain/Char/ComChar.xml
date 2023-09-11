@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1060,1585" overflow="hidden" designImage="ui://vith2b66sbd0f" designImageOffsetX="-752" designImageOffsetY="-225" designImageAlpha="100">
+<component size="1060,1410" overflow="hidden" designImage="ui://n809nszxaa0zf" designImageOffsetX="-1080" designImageOffsetY="-345" designImageAlpha="100">
   <controller name="c1" pages="0,人物,1,心法,2,技能,3,祝福,4,经脉,5,帮会,6,活动,7,帮助" selected="0">
     <action type="play_transition" fromPage="" toPage="0" transition="RenWuIn" stopOnExit="true"/>
     <action type="play_transition" fromPage="0" toPage="" transition="RenWuOut"/>
@@ -9,85 +9,66 @@
     <action type="play_transition" fromPage="2" toPage="" transition="SkillOut"/>
   </controller>
   <displayList>
-    <component id="n159_whk3" name="n159" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="19,12" size="110,65">
+    <component id="n159_whk3" name="n159" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,25" size="121,76">
       <Button title="人物" titleFontSize="40" controller="c1" page="0"/>
     </component>
-    <component id="n4_sbd0" name="n4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="139,12" size="110,65">
+    <component id="n4_sbd0" name="n4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="149,25" size="121,76">
       <Button title="心法" titleFontSize="40" controller="c1" page="1"/>
     </component>
-    <component id="n5_sbd0" name="n5" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="259,12" size="110,65">
+    <component id="n5_sbd0" name="n5" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="277,25" size="121,76">
       <Button title="技能" titleFontSize="40" controller="c1" page="2"/>
     </component>
-    <component id="n6_sbd0" name="n6" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="379,12" size="110,65">
+    <component id="n6_sbd0" name="n6" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="405,25" size="121,76">
       <Button title="祝福" titleFontSize="40" controller="c1" page="3"/>
     </component>
-    <component id="n7_sbd0" name="n7" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="499,12" size="110,65">
+    <component id="n7_sbd0" name="n7" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="533,25" size="121,76">
       <Button title="经脉" titleFontSize="40" controller="c1" page="4"/>
     </component>
-    <component id="n8_sbd0" name="n8" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="619,12" size="110,65">
+    <component id="n8_sbd0" name="n8" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="661,25" size="121,76">
       <Button title="帮会" titleFontSize="40" controller="c1" page="5"/>
     </component>
-    <component id="n9_sbd0" name="n9" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="739,12" size="110,65" controller="ctrlBgColor,2">
+    <component id="n9_sbd0" name="n9" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="789,25" size="121,76" controller="ctrlBgColor,2">
       <Button title="活动" titleColor="#ffffff" titleFontSize="40" controller="c1" page="6"/>
     </component>
-    <component id="n10_sbd0" name="n10" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="859,12" size="110,65" controller="ctrlBgColor,1">
+    <component id="n10_sbd0" name="n10" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="917,25" size="121,76" controller="ctrlBgColor,1">
       <Button title="帮助" titleColor="#ffffff" titleFontSize="40" controller="c1" page="7"/>
     </component>
-    <graph id="n162_9f1k" name="n162" xy="19,12" size="110,65" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff" corner="10">
-      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="19,12|139,12|259,12|379,12|499,12|619,12|739,12|859,12" tween="true" duration=".2"/>
+    <graph id="n162_9f1k" name="n162" xy="20,25" size="121,76" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff">
+      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="20,25|148,25|276,25|404,25|532,25|660,25|788,25|916,25" tween="true" duration=".2"/>
       <relation target="n159_whk3" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n160_whk3" name="com_renWu" src="whk31d" fileName="Component/Main/Char/ComRenWu.xml" xy="0,88" size="1060,1493">
+    <component id="n160_whk3" name="com_renWu" src="whk31d" fileName="Component/UIMain/Char/ComRenWu.xml" xy="0,114" size="1060,1296">
       <gearDisplay controller="c1" pages="0"/>
-      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="0,88|-1080,88|-1080,88|-1080,88|-1080,88|-1080,88|-1080,88|-1080,88" tween="true" duration=".42"/>
+      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="0,114|-1080,114|-1080,114|-1080,114|-1080,114|-1080,114|-1080,114|-1080,114" tween="true" duration=".25"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n163_btv5" name="com_xinFa" src="btv51i" fileName="Component/Main/Char/ComXinFa.xml" xy="-1080,88" size="1060,1493">
+    <component id="n163_btv5" name="com_xinFa" src="btv51i" fileName="Component/UIMain/Char/ComXinFa.xml" xy="-1080,114" size="1060,1296">
       <gearDisplay controller="c1" pages="1"/>
-      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="-1080,88|0,88|-1080,88|-1080,88|-1080,88|-1080,88|-1080,88|-1080,88" tween="true" duration=".42"/>
+      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="-1080,114|0,114|-1080,114|-1080,114|-1080,114|-1080,114|-1080,114|-1080,114" tween="true" duration=".25"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n164_rwel" name="com_skill" src="rwel1r" fileName="Component/Main/Char/ComSkill.xml" xy="-1080,88" size="1060,1493">
+    <component id="n164_rwel" name="com_skill" src="rwel1r" fileName="Component/UIMain/Char/ComSkill.xml" xy="-1080,114" size="1060,1296">
       <gearDisplay controller="c1" pages="2"/>
-      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="-1080,88|-1080,88|0,88|-1080,88|-1080,88|-1080,88|-1080,88|-1080,88" tween="true" duration=".42"/>
+      <gearXY controller="c1" pages="0,1,2,3,4,5,6,7" values="-1080,114|-1080,114|0,114|-1080,114|-1080,114|-1080,114|-1080,114|-1080,114" tween="true" duration=".25"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
   </displayList>
-  <transition name="t0" autoPlay="true">
-    <item time="0" type="Alpha" target="n162_9f1k" value="0"/>
-    <item time="0" type="XY" target="n10_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n159_whk3" tween="true" startValue="-,-66" endValue="-,12" duration="2"/>
-    <item time="0" type="XY" target="n4_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n5_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n6_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n7_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n8_sbd0" value="-,-66"/>
-    <item time="0" type="XY" target="n9_sbd0" value="-,-66"/>
-    <item time="1" type="XY" target="n4_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="2" type="XY" target="n5_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="3" type="XY" target="n6_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="4" type="XY" target="n7_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="5" type="XY" target="n8_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="6" type="XY" target="n9_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="7" type="XY" target="n10_sbd0" tween="true" startValue="-,-60" endValue="-,12" duration="2"/>
-    <item time="9" type="Alpha" target="n162_9f1k" tween="true" startValue="0" endValue="1" duration="3"/>
-  </transition>
   <transition name="RenWuIn">
-    <item time="0" type="XY" target="n160_whk3" tween="true" startValue="1080,-" endValue="0,-" duration="10"/>
+    <item time="0" type="XY" target="n160_whk3" tween="true" startValue="1080,-" endValue="0,-" duration="6"/>
   </transition>
   <transition name="RenWuOut">
-    <item time="0" type="XY" target="n160_whk3" tween="true" startValue="0,-" endValue="-1080,-" duration="10"/>
+    <item time="0" type="XY" target="n160_whk3" tween="true" startValue="0,-" endValue="-1080,-" duration="6"/>
   </transition>
   <transition name="XinFaIn">
-    <item time="0" type="XY" target="n163_btv5" tween="true" startValue="1080,-" endValue="0,-" duration="10"/>
+    <item time="0" type="XY" target="n163_btv5" tween="true" startValue="1080,-" endValue="0,-" duration="6"/>
   </transition>
   <transition name="XinFaOut">
-    <item time="0" type="XY" target="n163_btv5" tween="true" startValue="0,-" endValue="-1080,88" duration="10"/>
+    <item time="0" type="XY" target="n163_btv5" tween="true" startValue="0,-" endValue="-1080,-" duration="6"/>
   </transition>
   <transition name="SkillIn">
-    <item time="0" type="XY" target="n164_rwel" tween="true" startValue="1080,-" endValue="0,-" duration="10"/>
+    <item time="0" type="XY" target="n164_rwel" tween="true" startValue="1080,-" endValue="0,-" duration="6"/>
   </transition>
   <transition name="SkillOut">
-    <item time="0" type="XY" target="n164_rwel" tween="true" startValue="0,-" endValue="-1080,-" duration="10"/>
+    <item time="0" type="XY" target="n164_rwel" tween="true" startValue="0,-" endValue="-1080,-" duration="6"/>
   </transition>
 </component>

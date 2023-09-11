@@ -50,7 +50,7 @@ class CfgManager {
 	/** 错误码 */
 	readonly Error: CfgError;
 
-	load() {
+    load() {
 		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/config/Config.json")).toString());
 		if (cfgData) {
 			const keyMap = cfgData.keyMap;

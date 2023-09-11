@@ -2,7 +2,9 @@
   "adaptiveTest": true,
   "designImages": [
     "ui://vith2b66sbd0g",
-    "ui://vith2b66sbd0y"
+    "ui://vith2b66sbd0y",
+    "ui://n809nszxaa0z0",
+    "ui://n809nszxaa0ze"
   ],
   "fitScreen": "FitSize"
 }

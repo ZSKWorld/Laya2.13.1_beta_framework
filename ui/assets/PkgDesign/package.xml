@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="n809nszx">
+  <resources>
+    <image id="aa0z0" name="无标题.png" path="/"/>
+    <image id="aa0z1" name="无标题16.png" path="/"/>
+    <image id="aa0z2" name="无标题15.png" path="/"/>
+    <image id="aa0z3" name="无标题14.png" path="/"/>
+    <image id="aa0z4" name="无标题13.png" path="/"/>
+    <image id="aa0z5" name="无标题12.png" path="/"/>
+    <image id="aa0z6" name="无标题11.png" path="/"/>
+    <image id="aa0z7" name="无标题10.png" path="/"/>
+    <image id="aa0z8" name="无标题9.png" path="/"/>
+    <image id="aa0z9" name="无标题8.png" path="/"/>
+    <image id="aa0za" name="无标题7.png" path="/"/>
+    <image id="aa0zb" name="无标题6.png" path="/"/>
+    <image id="aa0zc" name="无标题5.png" path="/"/>
+    <image id="aa0zd" name="无标题4.png" path="/"/>
+    <image id="aa0ze" name="无标题3.png" path="/"/>
+    <image id="aa0zf" name="无标题2.png" path="/"/>
+    <image id="aa0zg" name="无标题17.png" path="/"/>
+    <image id="aa0zh" name="无标题18.png" path="/"/>
+  </resources>
+  <publish name=""/>
+</packageDescription>

@@ -27,11 +27,9 @@ export class ComGoodsInfoCtrl extends BaseViewCtrl<ComGoodsInfoView, ComGoodsInf
 	refreshContent() {
 		const { id, buy } = this.data;
 		const haveCnt = buy ? 1 : userData.bag.getItemCount(id);
-		if (haveCnt <= 0) this.removeView(ViewID.UIGoodsInfoView);
-		else {
-			this.view.setContent(id, buy);
-			this.checkNumInput();
-		}
+		this.view.setContent(id, buy);
+		this.checkNumInput();
+		haveCnt <= 0 && this.removeView(ViewID.UIGoodsInfoView);
 	}
 
 	private onBtnCollectClick() {

@@ -1,9 +1,8 @@
-import UIMain from "../../../ui/PkgMain/UIMain";
 import { ResPath } from "../../../../common/ResPath";
-import { UserDataEvent } from "../../../../userData/UserDataEvent";
-import { GameUtil } from "../../../../common/GameUtil";
 import { MathUtil } from "../../../../libs/math/MathUtil";
+import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { UserUtil } from "../../../../userData/UserUtil";
+import UIMain from "../../../ui/PkgMain/UIMain";
 
 export const enum UIMainMsg {
 	OnBtnTrainClick = "UIMain_OnBtnTrainClick",
@@ -19,10 +18,10 @@ export const enum UIMainMsg {
 }
 
 export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { btn_train, btn_char, btn_goods, btn_shop, btn_abode, btn_chat, btn_setting, btn_rank, btn_sphere } = this;
+		const { btn_train, btn_char, btn_goods, btn_shop, btn_abode, btn_chat, btn_setting, btn_rank, btn_sphere } = this;
 		btn_train.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnTrainClick ]);
 		btn_char.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnCharClick ]);
 		btn_goods.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnGoodsClick ]);
@@ -36,7 +35,7 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		btn_sphere.on(fgui.Events.DRAG_END, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, false ]);
 
 		btn_sphere.draggable = true;
-    }
+	}
 
 	@RegisterEvent(UserDataEvent.AccountData_Nickname_Changed)
 	@RegisterEvent(UserDataEvent.UserData_Base_Changed)

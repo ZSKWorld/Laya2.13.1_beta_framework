@@ -3,11 +3,11 @@
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <controller name="ctrlBgColor" exported="true" pages="0,蓝,1,红,2,黄,4,绿,12,黑,3,黑灰,5,金黄,6,橙色,7,白色,8,粉色,9,灰色1,10,蓝绿" selected="0"/>
   <displayList>
-    <graph id="n0_qjdo" name="n0" xy="0,0" size="154,53" touchable="false" type="rect" lineSize="0" fillColor="#ff53bede" corner="10">
+    <graph id="n0_qjdo" name="n0" xy="0,0" size="154,53" touchable="false" type="rect" lineSize="0" fillColor="#ff53bede">
       <gearColor controller="ctrlBgColor" pages="0,2,4,12,3,5,6,7,8,9,10" values="#53bede|#e7c235|#54b554|#000000|#343844|#fcc254|#e38153|#ffffff|#eb90a0|#393939|#31aa8f" default="#d64a46"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n4_mz80" name="n4" xy="0,0" size="154,53" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00000000" corner="10">
+    <graph id="n4_mz80" name="n4" xy="0,0" size="154,53" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00000000">
       <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
