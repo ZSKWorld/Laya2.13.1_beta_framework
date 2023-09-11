@@ -2,17 +2,17 @@
 
 import BtnCheck from "./BtnCheck";
 import CmbDongFu from "./CmbDongFu";
-import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import BtnTxt from "../PkgCommon/BtnTxt";
 
 export default class UISphereTool extends fgui.GComponent {
 
 	public ctrlState:fgui.Controller;
 	public c1:fgui.Controller;
 	public graph_bg:fgui.GGraph;
-	public btn_clearLog:BtnCornerTxt;
-	public btn_recoverVigor:BtnCornerTxt;
-	public btn_create:BtnCornerTxt;
-	public btn_clear:BtnCornerTxt;
+	public btn_clearLog:BtnTxt;
+	public btn_recoverVigor:BtnTxt;
+	public btn_create:BtnTxt;
+	public btn_clear:BtnTxt;
 	public btn_percent:BtnCheck;
 	public Ipt0:fgui.GTextInput;
 	public Ipt1:fgui.GTextInput;
@@ -76,10 +76,10 @@ export default class UISphereTool extends fgui.GComponent {
 	public input_32:fgui.GTextInput;
 	public btn_check31:BtnCheck;
 	public btn_check32:BtnCheck;
-	public btn_add:BtnCornerTxt;
-	public btn_submit:BtnCornerTxt;
-	public btn_remove:BtnCornerTxt;
-	public btn_removeAll:BtnCornerTxt;
+	public btn_add:BtnTxt;
+	public btn_submit:BtnTxt;
+	public btn_remove:BtnTxt;
+	public btn_removeAll:BtnTxt;
 	public txt_content:fgui.GRichTextField;
 	public cmb_item:CmbDongFu;
 	public input_30:fgui.GTextInput;
@@ -94,10 +94,10 @@ export default class UISphereTool extends fgui.GComponent {
 		this.ctrlState = this.getControllerAt(0);
 		this.c1 = this.getControllerAt(1);
 		this.graph_bg = <fgui.GGraph>(this.getChildAt(0));
-		this.btn_clearLog = <BtnCornerTxt>(this.getChildAt(1));
-		this.btn_recoverVigor = <BtnCornerTxt>(this.getChildAt(2));
-		this.btn_create = <BtnCornerTxt>(this.getChildAt(8));
-		this.btn_clear = <BtnCornerTxt>(this.getChildAt(9));
+		this.btn_clearLog = <BtnTxt>(this.getChildAt(1));
+		this.btn_recoverVigor = <BtnTxt>(this.getChildAt(2));
+		this.btn_create = <BtnTxt>(this.getChildAt(8));
+		this.btn_clear = <BtnTxt>(this.getChildAt(9));
 		this.btn_percent = <BtnCheck>(this.getChildAt(10));
 		this.Ipt0 = <fgui.GTextInput>(this.getChildAt(69));
 		this.Ipt1 = <fgui.GTextInput>(this.getChildAt(70));
@@ -161,10 +161,10 @@ export default class UISphereTool extends fgui.GComponent {
 		this.input_32 = <fgui.GTextInput>(this.getChildAt(133));
 		this.btn_check31 = <BtnCheck>(this.getChildAt(134));
 		this.btn_check32 = <BtnCheck>(this.getChildAt(135));
-		this.btn_add = <BtnCornerTxt>(this.getChildAt(138));
-		this.btn_submit = <BtnCornerTxt>(this.getChildAt(139));
-		this.btn_remove = <BtnCornerTxt>(this.getChildAt(140));
-		this.btn_removeAll = <BtnCornerTxt>(this.getChildAt(141));
+		this.btn_add = <BtnTxt>(this.getChildAt(138));
+		this.btn_submit = <BtnTxt>(this.getChildAt(139));
+		this.btn_remove = <BtnTxt>(this.getChildAt(140));
+		this.btn_removeAll = <BtnTxt>(this.getChildAt(141));
 		this.txt_content = <fgui.GRichTextField>(this.getChildAt(144));
 		this.cmb_item = <CmbDongFu>(this.getChildAt(146));
 		this.input_30 = <fgui.GTextInput>(this.getChildAt(147));

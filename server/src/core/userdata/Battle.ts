@@ -3,7 +3,7 @@ import { cfgMgr } from "../config/CfgManager";
 import { BattleType } from "../enum/BattleEnums";
 import { Decode } from "./Decode";
 class Level extends Decode<ILevelData, ILevel> implements ILevel {
-    startBattle(id: number): void {
+    enterBattle(id: number): void {
     }
 }
 
@@ -16,7 +16,7 @@ class Copy extends Decode<ICopyData, ICopy> implements ICopy {
         return cfg.battleCount - (this.usedMap[ id ] || 0);
     }
 
-    startBattle(id: number) {
+    enterBattle(id: number) {
         const usedMap = this.usedMap || {};
         const oldCnt = usedMap[ id ] || 0;
         usedMap[ id ] = oldCnt + 1;
@@ -37,7 +37,7 @@ class Secret extends Decode<ISecretData, ISecret> implements ISecret {
         return cfg.battleCount - (this.usedMap[ id ] || 0);
     }
 
-    startBattle(id: number) {
+    enterBattle(id: number) {
         const usedMap = this.usedMap || {};
         const oldCnt = usedMap[ id ] || 0;
         usedMap[ id ] = oldCnt + 1;
@@ -60,7 +60,7 @@ class Boss extends Decode<IBossData, IBoss> implements IBoss {
         return Math.max(cfg.coolTime - (TimeUtil.getSecondStamp() - lastTime), 0);
     }
 
-    startBattle(id: number) {
+    enterBattle(id: number) {
         const lastChallengeTime = this.lastChallengeTime || {};
         lastChallengeTime[ id ] = TimeUtil.getSecondStamp();
         this.lastChallengeTime = lastChallengeTime;
@@ -89,7 +89,7 @@ class Gather extends Decode<IGatherData, IGather> implements IGather {
         return Math.max(cfg.gatherTime - (TimeUtil.getSecondStamp() - startTime), 0);
     }
 
-    startBattle(id: number) {
+    enterBattle(id: number) {
         const usedMap = this.usedMap || {};
         const oldCnt = usedMap[ id ] || 0;
         usedMap[ id ] = oldCnt + 1;

@@ -1,6 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import BtnTxt from "../PkgCommon/BtnTxt";
 
 export default class RenderChooseBattle extends fgui.GButton {
 
@@ -12,7 +12,7 @@ export default class RenderChooseBattle extends fgui.GButton {
 	public txt_content3:fgui.GTextField;
 	public txt_content4:fgui.GTextField;
 	public txt_content5:fgui.GTextField;
-	public btn_break:BtnCornerTxt;
+	public btn_break:BtnTxt;
 	public static URL:string = "ui://va1qbl3hsbd0u";
 
 	public static createInstance():RenderChooseBattle {
@@ -28,6 +28,6 @@ export default class RenderChooseBattle extends fgui.GButton {
 		this.txt_content3 = <fgui.GTextField>(this.getChildAt(4));
 		this.txt_content4 = <fgui.GTextField>(this.getChildAt(5));
 		this.txt_content5 = <fgui.GTextField>(this.getChildAt(6));
-		this.btn_break = <BtnCornerTxt>(this.getChildAt(7));
+		this.btn_break = <BtnTxt>(this.getChildAt(7));
 	}
 }

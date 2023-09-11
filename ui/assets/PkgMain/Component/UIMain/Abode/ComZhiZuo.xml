@@ -71,7 +71,7 @@
         <item title="棉布5级兑换玄星石"/>
       </ComboBox>
     </component>
-    <component id="n24_sbd0" name="cmb_fjzbdj" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="387,1036" size="204,100" controller="ctrlBgColor,1">
+    <component id="n24_sbd0" name="cmb_fjzbdj" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="387,1037" size="204,100" controller="ctrlBgColor,1">
       <ComboBox visibleItemCount="10" direction="up">
         <item title="[color=#ff0000]1星装备[/color]"/>
         <item title="2星装备"/>

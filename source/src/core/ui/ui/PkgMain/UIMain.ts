@@ -5,6 +5,7 @@ import ComChar from "./ComChar";
 import ComGoods from "./ComGoods";
 import ComShop from "./ComShop";
 import ComAbode from "./ComAbode";
+import BtnTxt from "../PkgCommon/BtnTxt";
 
 export default class UIMain extends fgui.GComponent {
 
@@ -14,12 +15,12 @@ export default class UIMain extends fgui.GComponent {
 	public com_goods:ComGoods;
 	public com_shop:ComShop;
 	public com_abode:ComAbode;
-	public btn_train:fgui.GButton;
-	public btn_char:fgui.GButton;
-	public btn_goods:fgui.GButton;
-	public btn_shop:fgui.GButton;
-	public btn_abode:fgui.GButton;
-	public btn_chat:fgui.GButton;
+	public btn_train:BtnTxt;
+	public btn_char:BtnTxt;
+	public btn_goods:BtnTxt;
+	public btn_shop:BtnTxt;
+	public btn_abode:BtnTxt;
+	public btn_chat:BtnTxt;
 	public graph_info:fgui.GGraph;
 	public txt_nickname:fgui.GTextField;
 	public txt_level:fgui.GTextField;
@@ -44,12 +45,12 @@ export default class UIMain extends fgui.GComponent {
 		this.com_goods = <ComGoods>(this.getChildAt(4));
 		this.com_shop = <ComShop>(this.getChildAt(5));
 		this.com_abode = <ComAbode>(this.getChildAt(6));
-		this.btn_train = <fgui.GButton>(this.getChildAt(7));
-		this.btn_char = <fgui.GButton>(this.getChildAt(8));
-		this.btn_goods = <fgui.GButton>(this.getChildAt(9));
-		this.btn_shop = <fgui.GButton>(this.getChildAt(10));
-		this.btn_abode = <fgui.GButton>(this.getChildAt(11));
-		this.btn_chat = <fgui.GButton>(this.getChildAt(12));
+		this.btn_train = <BtnTxt>(this.getChildAt(7));
+		this.btn_char = <BtnTxt>(this.getChildAt(8));
+		this.btn_goods = <BtnTxt>(this.getChildAt(9));
+		this.btn_shop = <BtnTxt>(this.getChildAt(10));
+		this.btn_abode = <BtnTxt>(this.getChildAt(11));
+		this.btn_chat = <BtnTxt>(this.getChildAt(12));
 		this.graph_info = <fgui.GGraph>(this.getChildAt(14));
 		this.txt_nickname = <fgui.GTextField>(this.getChildAt(17));
 		this.txt_level = <fgui.GTextField>(this.getChildAt(19));

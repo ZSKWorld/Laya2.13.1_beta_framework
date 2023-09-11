@@ -6,17 +6,17 @@ import { UIChooseBattleCtrl } from "../controller/UIChooseBattleCtrl";
 
 export class UIChooseBattleProxy extends BaseProxy<UIChooseBattleCtrl>{
 
-    @RegisterEvent(NetMessage.StartBattle)
-    private startBattle(output: StartBattleOutput, input: StartBattleInput) {
+    @RegisterEvent(NetMessage.EnterBattle)
+    private enterBattle(output: EnterBattleOutput, input: EnterBattleInput) {
+        this.viewCtrl.removeView(ViewID.UIBattleConfirmView);
         if (input.type != BattleType.Gather) {
             this.viewCtrl.removeSelf();
             this.viewCtrl.showView(ViewID.UIBattleView);
         }
-        this.viewCtrl.removeView(ViewID.UIBattleConfirmView);
     }
 
-    @RegisterEvent(NetMessage.StartBattleError)
-    private startBattleError(output:StartBattleOutput, input:StartBattleInput){
+    @RegisterEvent(NetMessage.EnterBattleError)
+    private enterBattleError(output: EnterBattleOutput, input: EnterBattleInput) {
 
     }
 }

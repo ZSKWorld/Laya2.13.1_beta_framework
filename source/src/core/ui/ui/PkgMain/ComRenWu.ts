@@ -1,6 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import BtnTxt from "../PkgCommon/BtnTxt";
 
 export default class ComRenWu extends fgui.GComponent {
 
@@ -22,18 +22,18 @@ export default class ComRenWu extends fgui.GComponent {
 	public txt_hunPo:fgui.GRichTextField;
 	public txt_gemScore:fgui.GRichTextField;
 	public txt_exp:fgui.GRichTextField;
-	public btn_wuQi:BtnCornerTxt;
-	public btn_xiangLian:BtnCornerTxt;
-	public btn_jieZhi:BtnCornerTxt;
-	public btn_huFu:BtnCornerTxt;
-	public btn_zuoQi:BtnCornerTxt;
-	public btn_anQi:BtnCornerTxt;
-	public btn_touKui:BtnCornerTxt;
-	public btn_yiFu:BtnCornerTxt;
-	public btn_xiaZhuang:BtnCornerTxt;
-	public btn_xieZi:BtnCornerTxt;
-	public btn_shiZhuang:BtnCornerTxt;
-	public btn_faBao:BtnCornerTxt;
+	public btn_wuQi:BtnTxt;
+	public btn_xiangLian:BtnTxt;
+	public btn_jieZhi:BtnTxt;
+	public btn_huFu:BtnTxt;
+	public btn_zuoQi:BtnTxt;
+	public btn_anQi:BtnTxt;
+	public btn_touKui:BtnTxt;
+	public btn_yiFu:BtnTxt;
+	public btn_xiaZhuang:BtnTxt;
+	public btn_xieZi:BtnTxt;
+	public btn_shiZhuang:BtnTxt;
+	public btn_faBao:BtnTxt;
 	public static URL:string = "ui://vith2b66whk31d";
 
 	public static createInstance():ComRenWu {
@@ -59,17 +59,17 @@ export default class ComRenWu extends fgui.GComponent {
 		this.txt_hunPo = <fgui.GRichTextField>(this.getChildAt(17));
 		this.txt_gemScore = <fgui.GRichTextField>(this.getChildAt(18));
 		this.txt_exp = <fgui.GRichTextField>(this.getChildAt(19));
-		this.btn_wuQi = <BtnCornerTxt>(this.getChildAt(32));
-		this.btn_xiangLian = <BtnCornerTxt>(this.getChildAt(33));
-		this.btn_jieZhi = <BtnCornerTxt>(this.getChildAt(34));
-		this.btn_huFu = <BtnCornerTxt>(this.getChildAt(35));
-		this.btn_zuoQi = <BtnCornerTxt>(this.getChildAt(36));
-		this.btn_anQi = <BtnCornerTxt>(this.getChildAt(37));
-		this.btn_touKui = <BtnCornerTxt>(this.getChildAt(38));
-		this.btn_yiFu = <BtnCornerTxt>(this.getChildAt(39));
-		this.btn_xiaZhuang = <BtnCornerTxt>(this.getChildAt(40));
-		this.btn_xieZi = <BtnCornerTxt>(this.getChildAt(41));
-		this.btn_shiZhuang = <BtnCornerTxt>(this.getChildAt(42));
-		this.btn_faBao = <BtnCornerTxt>(this.getChildAt(43));
+		this.btn_wuQi = <BtnTxt>(this.getChildAt(32));
+		this.btn_xiangLian = <BtnTxt>(this.getChildAt(33));
+		this.btn_jieZhi = <BtnTxt>(this.getChildAt(34));
+		this.btn_huFu = <BtnTxt>(this.getChildAt(35));
+		this.btn_zuoQi = <BtnTxt>(this.getChildAt(36));
+		this.btn_anQi = <BtnTxt>(this.getChildAt(37));
+		this.btn_touKui = <BtnTxt>(this.getChildAt(38));
+		this.btn_yiFu = <BtnTxt>(this.getChildAt(39));
+		this.btn_xiaZhuang = <BtnTxt>(this.getChildAt(40));
+		this.btn_xieZi = <BtnTxt>(this.getChildAt(41));
+		this.btn_shiZhuang = <BtnTxt>(this.getChildAt(42));
+		this.btn_faBao = <BtnTxt>(this.getChildAt(43));
 	}
 }

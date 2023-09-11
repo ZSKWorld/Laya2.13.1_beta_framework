@@ -5,14 +5,24 @@ import { BattleHandle } from "./BattleHandle";
 export class BattleController extends Controller implements IBattleCtrl {
 
     @AddCMD
-    startBattle(data: StartBattleInput): void {
+    enterBattle(data: EnterBattleInput): void {
         const { user } = this;
-        const errorCode = BattleChecker.checkStartBattle(user, data);
+        const errorCode = BattleChecker.checkEnterBattle(user, data);
         if (errorCode) this.response(data.cmd, null, errorCode);
         else {
-            BattleHandle.startBattle(user, data);
+            BattleHandle.enterBattle(user, data);
             this.response(data.cmd);
         }
+    }
+
+    @AddCMD
+    requestBattle(data: RequestBattleInput): void {
+        this.response(data.cmd);
+    }
+
+    @AddCMD
+    existBattle(data: ExistBattleInput): void {
+        this.response(data.cmd);
     }
 
 }

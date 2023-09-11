@@ -150,16 +150,40 @@ export const enum NetMessage {
 	DecomposeEquipError = "NetMsg_DecomposeEquip_Error",
 
 	/**
-	 * @param output {@link StartBattleOutput}
-	 * @param input {@link StartBattleInput}
+	 * @param output {@link EnterBattleOutput}
+	 * @param input {@link EnterBattleInput}
 	 */
-	StartBattle = "NetMsg_StartBattle",
+	EnterBattle = "NetMsg_EnterBattle",
 
 	/**
-	 * @param output {@link StartBattleOutput}
-	 * @param input {@link StartBattleInput}
+	 * @param output {@link EnterBattleOutput}
+	 * @param input {@link EnterBattleInput}
 	 */
-	StartBattleError = "NetMsg_StartBattle_Error",
+	EnterBattleError = "NetMsg_EnterBattle_Error",
+
+	/**
+	 * @param output {@link RequestBattleOutput}
+	 * @param input {@link RequestBattleInput}
+	 */
+	RequestBattle = "NetMsg_RequestBattle",
+
+	/**
+	 * @param output {@link RequestBattleOutput}
+	 * @param input {@link RequestBattleInput}
+	 */
+	RequestBattleError = "NetMsg_RequestBattle_Error",
+
+	/**
+	 * @param output {@link ExistBattleOutput}
+	 * @param input {@link ExistBattleInput}
+	 */
+	ExistBattle = "NetMsg_ExistBattle",
+
+	/**
+	 * @param output {@link ExistBattleOutput}
+	 * @param input {@link ExistBattleInput}
+	 */
+	ExistBattleError = "NetMsg_ExistBattle_Error",
 
 	/**
 	 * @param output {@link AddFriendOutput}

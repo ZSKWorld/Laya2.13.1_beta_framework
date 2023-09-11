@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="154,53" pivot="0.5,0.5" extention="Button">
+<component size="154,53" pivot="0.5,0.5" extention="Button" designImageAlpha="97">
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <controller name="ctrlBgColor" exported="true" pages="0,蓝,1,红,2,黄,4,绿,12,黑,3,黑灰,5,金黄,6,橙色,7,白色,8,粉色,9,灰色1,10,蓝绿,13,灰色2" selected="12"/>
   <displayList>
-    <graph id="n0_qjdo" name="n0" xy="0,0" size="154,53" touchable="false" type="rect" lineSize="2" fillColor="#ff7e7e7e">
+    <graph id="n0_qjdo" name="n0" xy="0,0" size="154,53" touchable="false" type="rect" lineSize="0" fillColor="#ff666666">
+      <gearColor controller="ctrlBgColor" pages="0,2,4,12,3,5,6,7,8,9,10,13" values="#53bede|#e7c235|#54b554|#000000|#343844|#fcc254|#e38153|#ffffff|#eb90a0|#393939|#31aa8f|#666666" default="#d64a46"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <text id="n3_qjdo" name="title" xy="46,5" size="64,42" fontSize="30" vAlign="middle" autoClearText="true" text="登录">
+    <text id="n3_qjdo" name="title" xy="46,5" size="64,42" font="SimHei" fontSize="30" vAlign="middle" leading="0" bold="true" singleLine="true" text="登录">
       <relation target="" sidePair="center-center,middle-middle"/>
     </text>
   </displayList>

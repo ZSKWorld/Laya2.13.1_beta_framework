@@ -1,12 +1,12 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-export default class BtnCornerTxt extends fgui.GButton {
+export default class BtnTxt extends fgui.GButton {
 
 	public ctrlBgColor:fgui.Controller;
 	public static URL:string = "ui://vx9zwsersbd05i";
 
-	public static createInstance():BtnCornerTxt {
-		return <BtnCornerTxt>(fgui.UIPackage.createObject("PkgCommon", "BtnCornerTxt"));
+	public static createInstance():BtnTxt {
+		return <BtnTxt>(fgui.UIPackage.createObject("PkgCommon", "BtnTxt"));
 	}
 
 	protected override onConstruct():void {

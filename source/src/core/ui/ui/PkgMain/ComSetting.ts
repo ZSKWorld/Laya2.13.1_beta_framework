@@ -1,14 +1,14 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import BtnTxt from "../PkgCommon/BtnTxt";
 
 export default class ComSetting extends fgui.GComponent {
 
-	public btn_mute:BtnCornerTxt;
-	public btn_signIn:BtnCornerTxt;
-	public btn_help:BtnCornerTxt;
-	public btn_clearAccount:BtnCornerTxt;
-	public btn_back:BtnCornerTxt;
+	public btn_mute:BtnTxt;
+	public btn_signIn:BtnTxt;
+	public btn_help:BtnTxt;
+	public btn_clearAccount:BtnTxt;
+	public btn_back:BtnTxt;
 	public trans_show:fgui.Transition;
 	public static URL:string = "ui://vith2b66g59f2g";
 
@@ -17,11 +17,11 @@ export default class ComSetting extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.btn_mute = <BtnCornerTxt>(this.getChildAt(0));
-		this.btn_signIn = <BtnCornerTxt>(this.getChildAt(1));
-		this.btn_help = <BtnCornerTxt>(this.getChildAt(2));
-		this.btn_clearAccount = <BtnCornerTxt>(this.getChildAt(3));
-		this.btn_back = <BtnCornerTxt>(this.getChildAt(4));
+		this.btn_mute = <BtnTxt>(this.getChildAt(0));
+		this.btn_signIn = <BtnTxt>(this.getChildAt(1));
+		this.btn_help = <BtnTxt>(this.getChildAt(2));
+		this.btn_clearAccount = <BtnTxt>(this.getChildAt(3));
+		this.btn_back = <BtnTxt>(this.getChildAt(4));
 		this.trans_show = this.getTransitionAt(0);
 	}
 }

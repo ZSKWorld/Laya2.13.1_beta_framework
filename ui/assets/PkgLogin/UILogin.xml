@@ -14,10 +14,10 @@
     <graph id="n12_qjdo" name="n12" xy="458,962" size="304,60" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
       <relation target="n3_qjdo" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n13_qjdo" name="btn_login" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="562,1064" size="200,75" group="n4_qjdo">
+    <component id="n13_qjdo" name="btn_login" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="562,1064" size="200,75" group="n4_qjdo" controller="ctrlBgColor,9">
       <Button title="登录" titleColor="#ffffff" titleFontSize="45"/>
     </component>
-    <component id="n15_sbd0" name="btn_loginRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="318,1064" size="200,75" group="n4_qjdo">
+    <component id="n15_sbd0" name="btn_loginRegister" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="318,1064" size="200,75" group="n4_qjdo" controller="ctrlBgColor,9">
       <Button title="注册" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="1"/>
     </component>
     <text id="n2_qjdo" name="input_account" xy="458,887" size="304,60" group="n4_qjdo" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
@@ -37,10 +37,10 @@
     <graph id="n28_sbd0" name="n28" xy="457,1065" size="304,60" group="n24_sbd0" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
       <relation target="n22_sbd0" sidePair="width-width,height-height,left-left,top-top"/>
     </graph>
-    <component id="n29_sbd0" name="btn_registerBack" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="318,1166" size="200,75" group="n24_sbd0">
+    <component id="n29_sbd0" name="btn_registerBack" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="318,1166" size="200,75" group="n24_sbd0" controller="ctrlBgColor,9">
       <Button title="返回" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="0"/>
     </component>
-    <component id="n25_sbd0" name="btn_register" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="561,1166" size="200,75" group="n24_sbd0">
+    <component id="n25_sbd0" name="btn_register" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="561,1166" size="200,75" group="n24_sbd0" controller="ctrlBgColor,9">
       <Button title="注册" titleColor="#ffffff" titleFontSize="45"/>
     </component>
     <text id="n18_sbd0" name="input_rAccount" xy="457,889" size="304,60" group="n24_sbd0" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
@@ -53,11 +53,11 @@
       <gearDisplay controller="ctrlState" pages="1"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
-    <component id="n30_sott" name="btn_cancel" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="440,1018" size="200,75" group="n32_sott">
+    <component id="n30_sott" name="btn_cancel" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="440,1018" size="200,75" group="n32_sott" controller="ctrlBgColor,1">
       <Button title="取消" titleColor="#ffffff" titleFontSize="45"/>
     </component>
     <text id="n31_sott" name="n31" xy="539,952" pivot="0.5,0.5" anchor="true" size="311,66" group="n32_sott" fontSize="50" color="#ffffff" align="center" vAlign="middle" autoSize="none" singleLine="true" text="登陆中..."/>
-    <group id="n32_sott" name="n32" xy="384,919" size="311,174" advanced="true">
+    <group id="n32_sott" name="n32" xy="383,919" size="311,174" advanced="true">
       <gearDisplay controller="ctrlState" pages="2"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>

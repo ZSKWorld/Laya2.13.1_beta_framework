@@ -1,6 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnCornerTxt from "../PkgCommon/BtnCornerTxt";
+import BtnTxt from "../PkgCommon/BtnTxt";
 
 export default class UIChat extends fgui.GComponent {
 
@@ -8,7 +8,7 @@ export default class UIChat extends fgui.GComponent {
 	public list_msg:fgui.GList;
 	public list_friend:fgui.GList;
 	public input_msg:fgui.GTextInput;
-	public btn_send:BtnCornerTxt;
+	public btn_send:BtnTxt;
 	public btn_back:fgui.GButton;
 	public static URL:string = "ui://vith2b66o7722c";
 
@@ -21,7 +21,7 @@ export default class UIChat extends fgui.GComponent {
 		this.list_msg = <fgui.GList>(this.getChildAt(1));
 		this.list_friend = <fgui.GList>(this.getChildAt(2));
 		this.input_msg = <fgui.GTextInput>(this.getChildAt(3));
-		this.btn_send = <BtnCornerTxt>(this.getChildAt(4));
+		this.btn_send = <BtnTxt>(this.getChildAt(4));
 		this.btn_back = <fgui.GButton>(this.getChildAt(5));
 	}
 }

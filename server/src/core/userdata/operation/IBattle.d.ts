@@ -1,13 +1,13 @@
 declare interface ILevel extends ILevelData, IDecode<ILevelData, ILevel> {
     /** 开始战斗 */
-    startBattle(id: number): void;
+    enterBattle(id: number): void;
 }
 
 declare interface ICopy extends ICopyData, IDecode<ICopyData, ICopy> {
     /** 获取副本剩余次数 */
     getLastCount(id: number): number;
     /** 开始战斗 */
-    startBattle(id: number): void;
+    enterBattle(id: number): void;
     reset(): void;
 }
 
@@ -15,7 +15,7 @@ declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
     /** 获取秘境剩余次数 */
     getLastCount(id: number): number;
     /** 开始战斗 */
-    startBattle(id: number): void;
+    enterBattle(id: number): void;
     reset(): void;
 }
 
@@ -23,7 +23,7 @@ declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
     /** 剩余冷却时间 */
     lastCoolTime(id: number): number;
     /** 开始战斗 */
-    startBattle(id: number): void;
+    enterBattle(id: number): void;
     reset(): void;
 }
 
@@ -33,7 +33,7 @@ declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
     /** 剩余采集时间 */
     lastGatherTime(id: number): number;
     /** 开始采集 */
-    startBattle(id: number): void;
+    enterBattle(id: number): void;
     reset(): void;
 }
 

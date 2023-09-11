@@ -3,11 +3,11 @@
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <controller name="ctrlBgColor" exported="true" pages="0,白色,1,橙色,3,红色" selected="0"/>
   <displayList>
-    <graph id="n0_sbd0" name="n0" xy="0,0" size="231,40" touchable="false" type="rect" lineSize="0" fillColor="#fff0f0f0" corner="10">
+    <graph id="n0_sbd0" name="n0" xy="0,0" size="231,40" touchable="false" type="rect" lineSize="0" fillColor="#fff0f0f0">
       <gearColor controller="ctrlBgColor" pages="1,3" values="#ff915d|#db3333" default="#f0f0f0"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <richtext id="n3_sbd0" name="title" xy="71,-3" size="84,54" fontSize="40" vAlign="middle" ubb="true" strokeColor="#333333" singleLine="true" text="50级">
+    <richtext id="n3_sbd0" name="title" xy="71,-7" size="84,54" fontSize="40" vAlign="middle" ubb="true" strokeColor="#333333" singleLine="true" text="50级">
       <relation target="" sidePair="center-center,middle-middle"/>
     </richtext>
   </displayList>
