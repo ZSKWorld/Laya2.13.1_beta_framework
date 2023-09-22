@@ -48,7 +48,7 @@ class WebSocket extends Observer {
         let netMsg = `NetMsg_${ output.cmd[ 0 ].toUpperCase() + output.cmd.substring(1) }`;
         if (!output.error) {
             if (input && input.cmd != output.cmd) {
-                console.error("message error", input, output);
+                Logger.Error("message error", input, output);
                 throw new Error();
             }
             if (output.syncInfo)
@@ -82,7 +82,7 @@ class WebSocket extends Observer {
     private executeWaitMsg(): void {
         if (this.connected && !this._current && this._waitList.length > 0) {
             this._current = this._waitList.shift();
-            this._current.token = this._current[ "account" ] || userData.account;
+            this._current.token = this._current.token || userData.account.account;
             this._socket.send(JSON.stringify(this._current));
         }
     }

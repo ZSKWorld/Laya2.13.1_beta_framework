@@ -15,12 +15,12 @@ export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl>{
     }
 
     @RegisterEvent(NetMessage.SellItem)
-    private sellItemResponse(output: SellItemOutput, input: SellItemInput) {
+    private sellItem(output: SellItemOutput, input: SellItemInput) {
         GameUtil.ShowRewardsTip(`出售${ GameUtil.GetItemCountStr(input.id, input.count) }获得`, output.rewards);
     }
 
     @RegisterEvent(NetMessage.BuyGoods)
-    private buyGoodsResponse(output: BuyGoodsOutput, input: BuyGoodsInput) {
+    private buyGoods(output: BuyGoodsOutput, input: BuyGoodsInput) {
         let titleStr = richStrMgr.start("消耗");
         const item = cfgMgr.Shop[ input.id ];
         item.sellPrice.forEach(v => titleStr.combineSpace(GameUtil.GetItemCountStr(v.id, v.count * input.count)));
@@ -29,7 +29,7 @@ export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl>{
     }
 
     @RegisterEvent(NetMessage.ChangeCollect)
-    private changeCollectResponse() {
+    private changeCollect() {
         this.viewCtrl.refreshContent();
     }
 }

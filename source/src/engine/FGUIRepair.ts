@@ -174,7 +174,7 @@ export class FGUIRepair{
 					}
 				}
 				catch (err) {
-					console.log("laya reports html error:" + err);
+					Logger.Log("laya reports html error:" + err);
 				}
 			},
 		})

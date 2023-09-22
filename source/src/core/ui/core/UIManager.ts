@@ -49,6 +49,8 @@ class UIManager extends Observer {
 
 	/** 缓存池 */
 	private _cache: UICache;
+	/** 锁屏计数标识 */
+	private _lockMark: number = 0;
 	/** 锁屏面板 */
 	private _lockPanel: fgui.GGraph;
 	/** 已打开页面 */
@@ -56,6 +58,11 @@ class UIManager extends Observer {
 
 	/** 当前显示的顶层页面 */
 	private get topCtrl() { return this._openedCtrls[ 0 ]; }
+	private get lockMark() { return this._lockMark; }
+	private set lockMark(value: number) {
+		this._lockMark = value;
+		this._lockPanel.visible = value != 0;
+	}
 
 	init() {
 		this._cache = new UICache();
@@ -107,8 +114,8 @@ class UIManager extends Observer {
 	 * @param callback {@link Laya.Handler} 回调
 	 */
 	showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler) {
+		this.lockMark++;
 		let viewCtrl: IViewCtrl;
-		this._lockPanel.visible = true;
 		let openedIndex = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (openedIndex == -1) {
 			//先尝试从缓存池中获取
@@ -147,9 +154,9 @@ class UIManager extends Observer {
 			this._cache.cacheView(hideView);
 			return;
 		}
-		this._lockPanel.visible = true;
+		this.lockMark++;
+		this._openedCtrls.remove(hideView);
 		hideView.onCloseAni().then(() => {
-			this._openedCtrls.remove(hideView);
 			hideView.view.removeFromParent();
 			hideView.sendMessage(ViewEvent.OnBackground);
 			this._cache.cacheView(hideView);
@@ -172,7 +179,7 @@ class UIManager extends Observer {
 	private showView2(viewCtrl: IViewCtrl, data: any, callback?: Laya.Handler) {
 		const onFinally = () => {
 			callback && callback.run();
-			this._lockPanel.visible = false;
+			this.lockMark--;
 		};
 		if (viewCtrl) {
 			viewCtrl.data = data || viewCtrl.data;

@@ -2,8 +2,8 @@ declare type BattleLevel = CfgLevelData | CfgCopyData | CfgSecretData | CfgBossD
 
 declare interface IBattleCtrl {
     enterBattle(data: EnterBattleInput): void;
-    requestBattle(data:RequestBattleInput): void;
-    existBattle(data: ExistBattleInput): void;
+    requestBattle(data: RequestBattleInput): void;
+    exitBattle(data: ExitBattleInput): void;
 }
 
 declare interface EnterBattleInput extends UserInput {
@@ -24,8 +24,8 @@ declare interface RequestBattleInput extends UserInput {
 declare interface RequestBattleOutput extends UserOutput {
 }
 
-declare interface ExistBattleInput extends UserInput {
+declare interface ExitBattleInput extends UserInput {
 }
 
-declare interface ExistBattleOutput extends UserOutput {
+declare interface ExitBattleOutput extends UserOutput {
 }

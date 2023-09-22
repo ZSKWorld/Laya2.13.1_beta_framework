@@ -22,16 +22,34 @@ export class ComConfirmCtrl extends BaseViewCtrl<ComConfirmView, ComConfirmData>
 		this.view.refreshContent(title, content, cancel);
 	}
 
+	override onDisable() {
+		const { onCancel, onConfirm } = this.data;
+		if (onCancel) {
+			this.data.onCancel = null;
+			onCancel.recover();
+		}
+		if (onConfirm) {
+			this.data.onConfirm = null;
+			onConfirm.recover();
+		}
+	}
+
 	private onBtnCancelClick() {
 		this.removeView(ViewID.UIConfirmView);
-		if (this.data.onCancel)
-			this.data.onCancel.run();
+		const onCancel = this.data.onCancel;
+		if (onCancel) {
+			this.data.onCancel = null;
+			onCancel.run();
+		}
 	}
 
 	private onBtnConfirmClick() {
 		this.removeView(ViewID.UIConfirmView);
-		if (this.data.onConfirm)
-			this.data.onConfirm.run();
+		const onConfirm = this.data.onConfirm;
+		if (onConfirm) {
+			this.data.onConfirm = null;
+			onConfirm.run();
+		}
 	}
 
 }

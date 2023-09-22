@@ -1,4 +1,5 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
+import { UIUtility } from "../../../tool/UIUtility";
 import { UIGoodsInfoView } from "../view/UIGoodsInfoView";
 import { ComGoodsInfoCtrl } from "./coms/ComGoodsInfoCtrl";
 
@@ -23,11 +24,13 @@ export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoDa
 	}
 
 	override onOpenAni() {
-		return new Promise<void>(resolve => this.view.trans_show.play(Laya.Handler.create(null, resolve)));
+		const { graph_bg, com_panel } = this.view;
+		return UIUtility.AnimAlphaIn(graph_bg, com_panel);
 	}
 
 	override onCloseAni() {
-		return new Promise<void>(resolve => this.view.trans_close.play(Laya.Handler.create(null, resolve)));
+		const { graph_bg, com_panel } = this.view;
+		return UIUtility.AnimAlphaOut(graph_bg, com_panel);
 	}
 
 }

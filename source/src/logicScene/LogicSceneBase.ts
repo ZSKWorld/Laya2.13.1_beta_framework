@@ -38,7 +38,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCnt ]),
 			//加个最短加载时间，避免loadjing页一闪而过
 			this.loadViewId ? new Promise(resolve => {
-				const tween = Laya.Tween.to(this._progresses, { [ --loadCnt ]: 1 }, 250, null, Laya.Handler.create(null, resolve), 0, true);
+				const tween = Laya.Tween.to(this._progresses, { [ --loadCnt ]: 1 }, 100, null, Laya.Handler.create(null, resolve), 0, true);
 				tween.update = this._progressHandlers[ loadCnt ];
 			}) : null,
 		]).then(

@@ -1,6 +1,7 @@
 import { BattleType } from "../../../../net/enum/BattleEnums";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { UIBattleConfirmMsg, UIBattleConfirmView } from "../view/UIBattleConfirmView";
+import { UIUtility } from "../../../tool/UIUtility";
+import { UIBattleConfirmView } from "../view/UIBattleConfirmView";
 import { ComBattleConfirmCtrl } from "./coms/ComBattleConfirmCtrl";
 export interface UIBattleConfirmData {
     type: BattleType;
@@ -19,10 +20,12 @@ export class UIBattleConfirmCtrl extends BaseViewCtrl<UIBattleConfirmView, UIBat
     }
 
     override onOpenAni() {
-        return new Promise<void>(resolve => this.view.trans_show.play(Laya.Handler.create(null, resolve)));
+        const { graph_bg, com_panel } = this.view;
+        return UIUtility.AnimAlphaIn(graph_bg, com_panel);
     }
 
     override onCloseAni() {
-        return new Promise<void>(resolve => this.view.trans_close.play(Laya.Handler.create(null, resolve)));
+        const { graph_bg, com_panel } = this.view;
+        return UIUtility.AnimAlphaOut(graph_bg, com_panel);
     }
 }

@@ -1,4 +1,5 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
+import { UIUtility } from "../../../tool/UIUtility";
 import { UIConfirmView } from "../view/UIConfirmView";
 import { ComConfirmCtrl } from "./coms/ComConfirmCtrl";
 
@@ -22,18 +23,14 @@ export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData>{
 		this._comPanelCtrl.onForeground();
 	}
 
-	override onOpenAni(): Promise<void> {
-		return new Promise(resolve => { this.view.trans_show.play(Laya.Handler.create(null, resolve)); });
+	override onOpenAni() {
+		const { graph_bg, com_panel } = this.view;
+		return UIUtility.AnimAlphaIn(graph_bg, com_panel);
 	}
 
-	override onCloseAni(): Promise<void> {
-		return new Promise(resolve => { this.view.trans_close.play(Laya.Handler.create(null, resolve)); });
-	}
-
-	override onDisable() {
-		const { onCancel, onConfirm } = this.data;
-		if (onCancel) onCancel.recover();
-		if (onConfirm) onConfirm.recover();
+	override onCloseAni() {
+		const { graph_bg, com_panel } = this.view;
+		return UIUtility.AnimAlphaOut(graph_bg, com_panel);
 	}
 
 }

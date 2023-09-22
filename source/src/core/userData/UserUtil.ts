@@ -41,7 +41,7 @@ export class UserUtil {
             jingJie += 1;
         }
         return { jingJie, cengJi };
-    }
+    } 
 
     /** 获取升级经验 */
     static GetUpgradExp(jingJie: number, cengJi: number) {
@@ -105,7 +105,7 @@ export class UserUtil {
         star = MathUtil.Clamp(star, 0, maxStar);
         let result = "";
         for (let i = 1; i <= maxStar; i++) {
-            result += (star >= i ? "✭" : "✩");
+            result += (star >= i ? "★" : "☆");
         }
         return result;
     }

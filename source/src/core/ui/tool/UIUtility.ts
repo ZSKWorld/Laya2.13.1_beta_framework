@@ -62,4 +62,25 @@ export class UIUtility {
 		cmb.selectedIndex = index == -1 ? 0 : index;
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
 	}
+
+	static AnimAlphaIn(bg: fairygui.GObject, panel: fairygui.GObject) {
+		return new Promise<void>(resolve => {
+			bg.alpha = panel.alpha = 0;
+			panel.setScale(0, 0);
+			Laya.Tween.to(bg, { alpha: 0.8 }, 250, Laya.Ease.quadOut);
+			Laya.Tween.to(panel, { alpha: 1 }, 250, Laya.Ease.quadOut);
+			Laya.Tween.to(panel, { scaleX: 1, scaleY: 1 }, 250, Laya.Ease.backOut, Laya.Handler.create(null, resolve), 0, false);
+		});
+	}
+
+	static AnimAlphaOut(bg: fairygui.GObject, panel: fairygui.GObject) {
+		return new Promise<void>(resolve => {
+			bg.alpha = 0.8;
+			panel.alpha = 1;
+			panel.setScale(1, 1);
+			Laya.Tween.to(bg, { alpha: 0 }, 100, Laya.Ease.linearNone, null, 150);
+			Laya.Tween.to(panel, { alpha: 0.4 }, 150, Laya.Ease.linearNone, null, 100);
+			Laya.Tween.to(panel, { scaleX: 0, scaleY: 0 }, 250, Laya.Ease.backIn, Laya.Handler.create(null, resolve), 0, false);
+		});
+	}
 }

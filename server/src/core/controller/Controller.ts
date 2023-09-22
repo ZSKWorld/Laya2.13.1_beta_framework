@@ -6,12 +6,8 @@ import { MessageType } from "../enum/MessageType";
 export class Controller {
     private _cmds: { [ key: string ]: Function };
     private _connection: Connection;
-    get connection() {
-        return this._connection;
-    }
-    get user() {
-        return this._connection.user;
-    }
+    get connection() { return this._connection; }
+    get user() { return this._connection.user; }
 
     static create(connection: Connection) {
         const result = Pool.get(this.prototype.constructor.name as any, this);

@@ -9,19 +9,19 @@ import { UILoginCtrl } from "../controller/UILoginCtrl";
 export class UILoginProxy extends BaseProxy<UILoginCtrl>{
 
     @RegisterEvent(NetMessage.Login)
-    private loginResponse(output: LoginOutput, input: LoginInput) {
+    private login(output: LoginOutput, input: LoginInput) {
         const param = { account: input.account, password: input.password };
         localData.set(LocalDataKey.LastLoginAccount, param);
         logicSceneMgr.enterScene(LogicScene.MainScene);
     }
 
     @RegisterEvent(NetMessage.LoginError)
-    private loginResponseError(output: LoginOutput, input: LoginInput) {
+    private loginError(output: LoginOutput, input: LoginInput) {
         this.viewCtrl.onLoginError();
     }
 
     @RegisterEvent(NetMessage.Register)
-    private registerResponse(output: RegisterOutput, input: RegisterInput) {
+    private register(output: RegisterOutput, input: RegisterInput) {
         this.viewCtrl.toLogin(input);
     }
 }

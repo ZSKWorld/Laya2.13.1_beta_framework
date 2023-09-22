@@ -7,10 +7,8 @@ export class ShopController extends Controller implements IShopCtrl {
     buyGoods(data: BuyGoodsInput): void {
         const { user } = this;
         const errorCode = ShopChecker.checkItemPurchasable(user, data.id, data.count);
-        if (errorCode) this.response(data.cmd, null, errorCode);
-        else {
-            const rewards = ShopHandle.buyGoods(user, data.id, data.count);
-            this.response<BuyGoodsOutput>(data.cmd, { rewards });
-        }
+        if (errorCode) return this.response(data.cmd, null, errorCode);
+        const rewards = ShopHandle.buyGoods(user, data.id, data.count);
+        this.response<BuyGoodsOutput>(data.cmd, { rewards });
     }
 }

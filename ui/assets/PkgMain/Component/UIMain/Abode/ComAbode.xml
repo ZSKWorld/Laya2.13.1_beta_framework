@@ -2,26 +2,26 @@
 <component size="1060,1410" overflow="hidden" designImage="ui://n809nszxaa0zd" designImageOffsetX="-1080" designImageOffsetY="-345" designImageAlpha="100">
   <controller name="c1" pages="0,制作,1,关于,2,设置,3,奇遇,4,宠物,5,修复" selected="5"/>
   <displayList>
-    <component id="n3_sbd0" name="btn_create" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="13,25" size="121,76">
+    <component id="n3_sbd0" name="btn_create" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="20,25" size="121,76">
       <Button title="制作" titleColor="#000000" titleFontSize="40" controller="c1" page="0"/>
     </component>
-    <component id="n4_sbd0" name="btn_about" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="144,25" size="121,76">
+    <component id="n4_sbd0" name="btn_about" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="151,25" size="121,76">
       <Button title="关于" titleColor="#000000" titleFontSize="40" controller="c1" page="1"/>
     </component>
-    <component id="n5_sbd0" name="btn_setting" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="275,25" size="121,76">
+    <component id="n5_sbd0" name="btn_setting" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="282,25" size="121,76">
       <Button title="设置" titleColor="#000000" titleFontSize="40" controller="c1" page="2"/>
     </component>
-    <component id="n6_sbd0" name="btn_meet" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="406,25" size="121,76">
+    <component id="n6_sbd0" name="btn_meet" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="413,25" size="121,76">
       <Button title="奇遇" titleColor="#000000" titleFontSize="40" controller="c1" page="3"/>
     </component>
-    <component id="n7_sbd0" name="btn_pet" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="537,25" size="121,76">
+    <component id="n7_sbd0" name="btn_pet" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="544,25" size="121,76">
       <Button title="宠物" titleColor="#000000" titleFontSize="40" controller="c1" page="4"/>
     </component>
-    <component id="n8_sbd0" name="btn_repair" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="668,25" size="121,76">
+    <component id="n8_sbd0" name="btn_repair" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="675,25" size="121,76">
       <Button title="修复" titleColor="#000000" titleFontSize="40" controller="c1" page="5"/>
     </component>
-    <graph id="n35_9f1k" name="n35" xy="667,25" pivot="0.5,0.5" size="121,76" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff">
-      <gearXY controller="c1" pages="0,1,2,3,4,5" values="11,25|143,25|274,25|405,25|536,25|667,25" tween="true" duration=".2"/>
+    <graph id="n35_9f1k" name="n35" xy="674,25" pivot="0.5,0.5" size="121,76" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff">
+      <gearXY controller="c1" pages="0,1,2,3,4,5" values="20,25|150,25|282,25|412,25|544,25|674,25" tween="true" duration=".2"/>
       <relation target="n3_sbd0" sidePair="width-width,height-height"/>
     </graph>
     <component id="n33_9f1k" name="com_zhiZuo" src="9f1k1h" fileName="Component/UIMain/Abode/ComZhiZuo.xml" xy="0,120" size="1060,1290">

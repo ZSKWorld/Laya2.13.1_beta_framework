@@ -55,6 +55,7 @@ export class Logger {
      * @param args 参数
      */
     private static ProcessingLogParam(type: LogLevel, name: string, ...args: any[]) {
+        return args;
         const borderRadius = 7;
         name += name ? ":" : "";
         const logParams = [ "%c" + name + type, `color:${ this.color[ type ][ 0 ] };border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px;background:#66CCFF;padding:5px;` ];
