@@ -8,7 +8,7 @@ export class BattleHandle {
             case BattleType.Copy: user.battle.copy.enterBattle(data.id); break;
             case BattleType.Secret: user.battle.secret.enterBattle(data.id); break;
             case BattleType.Boss: user.battle.boss.enterBattle(data.id); break;
-            case BattleType.Gather: user.battle.gather.enterBattle(data.id); break;
+            case BattleType.Gather: user.battle.gather.enterBattle(data.id, data.gatherTime); break;
         }
         user.base.changeItemCount(BaseDataType.Vigor, -user.battle.getVigorCost(data.type, data.id));
     }

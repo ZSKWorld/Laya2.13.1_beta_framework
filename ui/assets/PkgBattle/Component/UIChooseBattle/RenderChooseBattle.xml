@@ -7,15 +7,15 @@
       <gearSize controller="ctrlState" pages="0,3,4,5,2" values="692,170,1,1|692,170,1,1|692,170,1,1|692,170,1,1|692,300,1,1"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <graph id="n5_mz80" name="graph_light" xy="2,2" size="688,296" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00272b37">
+    <graph id="n5_mz80" name="graph_light" xy="0,0" size="692,300" alpha="0" touchable="false" blend="add" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00272b37">
       <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <richtext id="n1_sbd0" name="txt_content1" xy="20,115" size="292,73" touchable="false" fontSize="55" color="#d5c187" ubb="true" text="Lv.10 墓穴">
+    <richtext id="n1_sbd0" name="txt_content1" xy="20,115" size="282,73" touchable="false" fontSize="55" color="#d5c187" ubb="true" text="Lv.10 墓穴">
       <gearDisplay controller="ctrlState" pages="0,3,4,5"/>
       <relation target="" sidePair="middle-middle"/>
     </richtext>
-    <richtext id="n3_sbd0" name="txt_content2" xy="93,85" size="528,129" touchable="false" fontSize="100" color="#d5c187" text="Lv.10 墓穴">
+    <richtext id="n3_sbd0" name="txt_content2" xy="93,85" size="504,129" touchable="false" fontSize="100" color="#d5c187" text="Lv.10 墓穴">
       <gearDisplay controller="ctrlState" pages="2"/>
       <relation target="" sidePair="center-center,middle-middle"/>
     </richtext>
@@ -31,7 +31,7 @@
       <gearDisplay controller="ctrlState" pages="5"/>
       <relation target="" sidePair="middle-middle,right-right"/>
     </text>
-    <component id="n4_sbd0" name="btn_break" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="502,210" size="175,75">
+    <component id="n4_sbd0" name="btn_break" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="502,210" size="175,75">
       <gearDisplay controller="ctrlState" pages="2"/>
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button title="中断" titleColor="#ff0000" titleFontSize="45"/>

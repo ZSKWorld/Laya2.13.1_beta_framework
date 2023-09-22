@@ -40,6 +40,7 @@ class Boss extends Decode<IBossData> implements IBoss {
 class Gather extends Decode<IGatherData> implements IGather {
     usedMap: KeyMap<number> = null;
     startTimeMap: KeyMap<number> = null;
+    gatherTimeMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
         const cfg = cfgMgr.Gather[ id ];
@@ -51,8 +52,7 @@ class Gather extends Decode<IGatherData> implements IGather {
         if (!this.startTimeMap) return 0;
         const startTime = this.startTimeMap[ id ];
         if (!startTime) return 0;
-        const cfg = cfgMgr.Gather[ id ];
-        return Math.max(cfg.gatherTime - (GameUtil.GetSecondStamp() - startTime), 0);
+        return Math.max(this.gatherTimeMap[ id ] - (GameUtil.GetSecondStamp() - startTime), 0);
     }
 }
 

@@ -22,6 +22,8 @@ declare interface IGatherData {
     usedMap: KeyMap<number>;
     /** 各个采集点开始时间 */
     startTimeMap: KeyMap<number>;
+    /** 各个采集点采集时长 */
+    gatherTimeMap: KeyMap<number>;
 }
 
 declare interface IBattleData {

@@ -33,7 +33,7 @@ declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
     /** 剩余采集时间 */
     lastGatherTime(id: number): number;
     /** 开始采集 */
-    enterBattle(id: number): void;
+    enterBattle(id: number, gatherTime:number): void;
     reset(): void;
 }
 

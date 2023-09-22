@@ -2,7 +2,7 @@ declare type BattleLevel = CfgLevelData | CfgCopyData | CfgSecretData | CfgBossD
 
 declare interface IBattleCtrl {
     enterBattle(data: EnterBattleInput): void;
-    requestBattle(data:RequestBattleInput): void;
+    requestBattle(data: RequestBattleInput): void;
     existBattle(data: ExistBattleInput): void;
 }
 
@@ -11,8 +11,8 @@ declare interface EnterBattleInput extends UserInput {
     type: number;
     /** 关卡id */
     id: number;
-    /** 采集专用，采集时长 */
-    hour?: number;
+    /** 采集专用，采集时长，单位秒 */
+    gatherTime?: number;
 }
 
 declare interface EnterBattleOutput extends UserOutput {

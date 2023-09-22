@@ -11,8 +11,8 @@ declare interface EnterBattleInput extends UserInput {
     type: number;
     /** 关卡id */
     id: number;
-    /** 采集专用，采集时长 */
-    hour?: number;
+    /** 采集专用，采集时长，秒 */
+    gatherTime?: number;
 }
 
 declare interface EnterBattleOutput extends UserOutput {

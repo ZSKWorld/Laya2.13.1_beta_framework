@@ -34,7 +34,8 @@ export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, Com
 
 	private onBtnBattleClick() {
 		const { data, type } = this.data;
-		BattleService.Inst.enterBattle({ type: type, id: data.id, hour: this.view.slider_num.value });
+		const gatherTime = Math.floor(this.view.slider_num.value * 3600);
+		BattleService.Inst.enterBattle({ type: type, id: data.id, gatherTime });
 	}
 
 }
