@@ -508,7 +508,7 @@
             var lineHeight = style.lineHeight;
             var widthAuto = style._widthAuto() || !style.wordWrap;
             var width = widthAuto ? 999999 : element.width;
-            var height = element.height;
+            element.height;
             var maxWidth = 0;
             var exWidth = style.italic ? style.fontSize / 3 : 0;
             var align = style.align;
@@ -626,16 +626,12 @@
     Laya.ClassUtils.regClass("laya.html.utils.Layout", Layout);
     Laya.ClassUtils.regClass("Laya.Layout", Layout);
 
+    exports.HTMLElementType = void 0;
     (function (HTMLElementType) {
         HTMLElementType[HTMLElementType["BASE"] = 0] = "BASE";
         HTMLElementType[HTMLElementType["IMAGE"] = 1] = "IMAGE";
     })(exports.HTMLElementType || (exports.HTMLElementType = {}));
     class HTMLElement {
-        constructor() {
-            this.eletype = exports.HTMLElementType.BASE;
-            this._creates();
-            this.reset();
-        }
         static formatURL1(url, basePath = null) {
             if (!url)
                 return "null path";
@@ -662,6 +658,11 @@
                 return url;
             }
             return basePath + url;
+        }
+        constructor() {
+            this.eletype = exports.HTMLElementType.BASE;
+            this._creates();
+            this.reset();
         }
         _creates() {
             this._style = HTMLStyle.create();
@@ -944,9 +945,8 @@
         renderSelfToGraphic(graphic, gX, gY, recList) {
             var cssStyle = this.style;
             var words = this._getWords();
-            var len;
             if (words) {
-                len = words.length;
+                words.length;
                 if (cssStyle) {
                     var font = cssStyle.font;
                     var color = cssStyle.color;
@@ -1254,8 +1254,8 @@
             if (!this._style)
                 return;
             var style = this._style;
-            var w = style.widthed(this) ? -1 : this._tex.width;
-            var h = style.heighted(this) ? -1 : this._tex.height;
+            style.widthed(this) ? -1 : this._tex.width;
+            style.heighted(this) ? -1 : this._tex.height;
             if (!style.widthed(this) && this._width != this._tex.width) {
                 this.width = this._tex.width;
                 this.parent && this.parent._layoutLater();
@@ -1558,4 +1558,6 @@
     exports.Layout = Layout;
     exports.LayoutLine = LayoutLine;
 
-}(window.Laya = window.Laya || {}, Laya));
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);

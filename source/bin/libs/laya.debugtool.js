@@ -106,8 +106,7 @@
 	        while (StringTool.isEmpty(str.charAt(i)) && i >= 0) {
 	            i--;
 	        }
-	        var rst;
-	        rst = str.substring(0, i);
+	        str.substring(0, i);
 	        if (i >= 0) {
 	            return str.substring(0, i + 1);
 	        }
@@ -512,13 +511,12 @@
 	    static flatObj(obj, rst = null, tKey = "") {
 	        rst = rst ? rst : {};
 	        var key;
-	        var tValue;
 	        for (key in obj) {
 	            if (obj[key] instanceof Object) {
 	                ObjectTools.flatObj(obj[key], rst, ObjectTools.getFlatKey(tKey, key));
 	            }
 	            else {
-	                tValue = obj[key];
+	                obj[key];
 	                rst[ObjectTools.getFlatKey(tKey, key)] = obj[key];
 	            }
 	        }
@@ -642,7 +640,7 @@
 	            pos = 0;
 	        if (pos > src.length)
 	            pos = src.length;
-	        var preLen = src.length;
+	        src.length;
 	        var i, len;
 	        src.length += insertArr.length;
 	        var moveLen;
@@ -1867,8 +1865,7 @@
 	        arg = DTrace.getArgArr(arg);
 	        arg.push(TraceTool.getCallLoc(2));
 	        console.log.apply(console, arg);
-	        var str;
-	        str = arg.join(" ");
+	        arg.join(" ");
 	    }
 	    static timeStart(sign) {
 	        console.time(sign);
@@ -1905,8 +1902,7 @@
 	        RunProfile._runShowDic[funName] = false;
 	    }
 	    static getRunInfo(funName) {
-	        var rst;
-	        rst = RunProfile.infoDic[funName];
+	        RunProfile.infoDic[funName];
 	        return RunProfile.infoDic[funName];
 	    }
 	    static runTest(fun, count, sign = "runTest") {
@@ -2058,19 +2054,19 @@
 	IDTools.idSign = "_M_id_";
 
 	class NodeInfosItem extends Laya.Sprite {
-	    constructor() {
-	        super();
-	        this._infoTxt = new Laya.Text();
-	        this._infoTxt.color = "#ff0000";
-	        this._infoTxt.bgColor = "#00ff00";
-	        this._infoTxt.fontSize = 12;
-	    }
 	    static init() {
 	        if (!NodeInfosItem.NodeInfoContainer) {
 	            DebugInfoLayer.init();
 	            NodeInfosItem.NodeInfoContainer = DebugInfoLayer.I;
 	            Laya.Laya.stage.addChild(NodeInfosItem.NodeInfoContainer);
 	        }
+	    }
+	    constructor() {
+	        super();
+	        this._infoTxt = new Laya.Text();
+	        this._infoTxt.color = "#ff0000";
+	        this._infoTxt.bgColor = "#00ff00";
+	        this._infoTxt.fontSize = 12;
 	    }
 	    static getNodeInfoByNode(node) {
 	        IDTools.idObj(node);
@@ -2269,16 +2265,16 @@
 	NodeInfosItem._nodePoint = new Laya.Point();
 
 	class NodeInfoPanel extends Laya.Sprite {
-	    constructor() {
-	        super();
-	        this._stateDic = {};
-	        this.isWorkState = false;
-	    }
 	    static init() {
 	        if (!NodeInfoPanel.I) {
 	            NodeInfoPanel.I = new NodeInfoPanel();
 	            NodeInfosItem.init();
 	        }
+	    }
+	    constructor() {
+	        super();
+	        this._stateDic = {};
+	        this.isWorkState = false;
 	    }
 	    showDisInfo(node) {
 	        this.recoverNodes();
@@ -3599,6 +3595,14 @@
 	TraceTool._debugtrace = DebugTool.dTrace;
 
 	class ByteEx {
+	    static getSystemEndian() {
+	        if (!ByteEx._sysEndian) {
+	            var buffer = new ArrayBuffer(2);
+	            new DataView(buffer).setInt16(0, 256, true);
+	            ByteEx._sysEndian = (new Int16Array(buffer))[0] === 256 ? ByteEx.LITTLE_ENDIAN : ByteEx.BIG_ENDIAN;
+	        }
+	        return ByteEx._sysEndian;
+	    }
 	    constructor(data = null) {
 	        this._xd_ = true;
 	        this._allocated_ = 8;
@@ -3612,14 +3616,6 @@
 	        else {
 	            this._resizeBuffer(this._allocated_);
 	        }
-	    }
-	    static getSystemEndian() {
-	        if (!ByteEx._sysEndian) {
-	            var buffer = new ArrayBuffer(2);
-	            new DataView(buffer).setInt16(0, 256, true);
-	            ByteEx._sysEndian = (new Int16Array(buffer))[0] === 256 ? ByteEx.LITTLE_ENDIAN : ByteEx.BIG_ENDIAN;
-	        }
-	        return ByteEx._sysEndian;
 	    }
 	    get buffer() {
 	        var rstBuffer = this._d_.buffer;
@@ -4078,9 +4074,8 @@
 	        }
 	        Laya.Laya.stage.addChild(this.mSprite);
 	        this.mIndex++;
-	        var tTexture;
 	        if (this.mTextureDic[this.mIndex]) {
-	            tTexture = this.mTextureDic[this.mIndex];
+	            this.mTextureDic[this.mIndex];
 	        }
 	    }
 	}
@@ -4463,15 +4458,15 @@
 	DisplayHook.isFirst = false;
 
 	class ClickSelectTool {
-	    constructor() {
-	        this._selectTip = new Laya.Sprite();
-	        this._selectTip.setSelfBounds(new Laya.Rectangle(0, 0, 0, 0));
-	        Notice.listen(DisplayHook.ITEM_CLICKED, this, this.itemClicked);
-	    }
 	    static get I() {
 	        if (!ClickSelectTool._I)
 	            ClickSelectTool._I = new ClickSelectTool();
 	        return ClickSelectTool._I;
+	    }
+	    constructor() {
+	        this._selectTip = new Laya.Sprite();
+	        this._selectTip.setSelfBounds(new Laya.Rectangle(0, 0, 0, 0));
+	        Notice.listen(DisplayHook.ITEM_CLICKED, this, this.itemClicked);
 	    }
 	    beginClickSelect(complete = null) {
 	        this.completeHandler = complete;
@@ -4539,7 +4534,7 @@
 	    }
 	    _canvas(sprite, context, x, y) {
 	        var _cacheStyle = sprite._cacheStyle;
-	        var _next = this._next;
+	        this._next;
 	        var _repaint;
 	        if (!_cacheStyle.enableCanvasRender) {
 	            RenderSpriteHook._oldCanvas.call(this, sprite, context, x, y);
@@ -4912,11 +4907,10 @@
 	    }
 	    initTreeWidthDrag() {
 	        var leftDiv;
-	        var rightDiv;
 	        leftDiv = Laya.Browser.document.getElementById("tree_container");
 	        var parentNode;
 	        parentNode = leftDiv.parentNode;
-	        rightDiv = parentNode.children[1];
+	        parentNode.children[1];
 	        var isMouseDown = false;
 	        function onDivMouseMove(e) {
 	            var abs;
@@ -5472,7 +5466,7 @@
 	    static getRGBByRGBStr(str) {
 	        str.charAt(0) == '#' && (str = str.substr(1));
 	        var color = parseInt(str, 16);
-	        var flag = (str.length == 8);
+	        (str.length == 8);
 	        var _color;
 	        _color = [((0x00FF0000 & color) >> 16), ((0x0000FF00 & color) >> 8), (0x000000FF & color)];
 	        return _color;
@@ -5778,13 +5772,11 @@
 	        var tx = (Laya.Laya.stage.mouseX - this._lastPoint.x) / scale;
 	        var ty = (Laya.Laya.stage.mouseY - this._lastPoint.y) / scale;
 	        var sameScale = false;
-	        var adptX;
-	        var adptY;
 	        if (e.nativeEvent.shiftKey) {
 	            if (this.fixScale < 0)
 	                this.initFixScale();
-	            adptY = tx * this.fixScale;
-	            adptX = ty / this.fixScale;
+	            tx * this.fixScale;
+	            ty / this.fixScale;
 	            sameScale = true;
 	            switch (this._currDir) {
 	                case this._topLeft:
@@ -6447,8 +6439,7 @@
 	                rstTxts.push("原因:" + " " + (MouseEventAnalyser.infoO[IDTools.getObjID(node)] ? MouseEventAnalyser.infoO[IDTools.getObjID(node)] : "鼠标事件在父级已停止派发"));
 	            }
 	        }
-	        var rstStr;
-	        rstStr = rstTxts.join("\n");
+	        rstTxts.join("\n");
 	    }
 	    static check(sp, mouseX, mouseY, callBack) {
 	        IDTools.idObj(sp);
@@ -7176,9 +7167,6 @@
 	}
 
 	class ClassCreateHook {
-	    constructor() {
-	        this.createInfo = {};
-	    }
 	    static get I() {
 	        if (!ClassCreateHook._instance) {
 	            ClassCreateHook._instance = new ClassCreateHook();
@@ -7187,6 +7175,9 @@
 	    }
 	    static set I(value) {
 	        ClassCreateHook._instance = value;
+	    }
+	    constructor() {
+	        this.createInfo = {};
 	    }
 	    hookClass(clz) {
 	        if (ClassCreateHook.isInited)
@@ -7957,4 +7948,6 @@
 	exports.XML2Object = XML2Object;
 	exports.XML2ObjectNodejs = XML2ObjectNodejs;
 
-}(window.Laya = window.Laya || {}, Laya));
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);

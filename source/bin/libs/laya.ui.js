@@ -872,9 +872,9 @@
 	    }
 	    jumptoGame() {
 	        var advsObj = this.advsListArr[this._playIndex];
-	        var desGameId = parseInt(advsObj.gameid);
-	        var extendInfo = advsObj.extendInfo;
-	        var path = advsObj.path;
+	        parseInt(advsObj.gameid);
+	        advsObj.extendInfo;
+	        advsObj.path;
 	        if (Laya.Browser.onMiniGame) {
 	            if (this.isSupportJump()) {
 	                window.wx.navigateToMiniProgram({
@@ -2216,7 +2216,7 @@
 	            var pow = Math.pow(10, (this._tick + "").length - 1);
 	            this._value = Math.round(Math.round(this._value / this._tick) * this._tick * pow) / pow;
 	        }
-	        if (this._max >= this._max) {
+	        if (this._max >= this._min) {
 	            this._value = this._value > this._max ? this._max : this._value < this._min ? this._min : this._value;
 	        }
 	        else {
@@ -2840,6 +2840,7 @@
 	        super(...arguments);
 	        this.selectEnable = false;
 	        this.totalPage = 0;
+	        this.disableStopScroll = false;
 	        this._$componentType = "List";
 	        this._repeatX = 0;
 	        this._repeatY = 0;
@@ -3327,7 +3328,7 @@
 	        this._selectedIndex = this._selectedIndex < length ? this._selectedIndex : length - 1;
 	        this.startIndex = this._startIndex;
 	        if (this._scrollBar) {
-	            this._scrollBar.stopScroll();
+	            (!this.disableStopScroll && this._scrollBar.stopScroll());
 	            var numX = this._isVertical ? this.repeatX : this.repeatY;
 	            var numY = this._isVertical ? this.repeatY : this.repeatX;
 	            var lineCount = Math.ceil(length / numX);
@@ -3490,8 +3491,10 @@
 	        super();
 	        this._visibleNum = 6;
 	        this._itemColors = Styles.comboBoxItemColors;
+	        this._itemPadding = [3, 3, 3, 3];
 	        this._itemSize = 12;
 	        this._labels = [];
+	        this._defaultLabel = '';
 	        this._selectedIndex = -1;
 	        this.itemRender = null;
 	        this.skin = skin;
@@ -3506,8 +3509,10 @@
 	        this._button = null;
 	        this._list = null;
 	        this._itemColors = null;
+	        this._itemPadding = null;
 	        this._labels = null;
 	        this._selectHandler = null;
+	        this._defaultLabel = null;
 	    }
 	    createChildren() {
 	        this.addChild(this._button = new Button());
@@ -3556,8 +3561,9 @@
 	        this._listChanged = false;
 	        var labelWidth = this.width - 2;
 	        var labelColor = this._itemColors[2];
-	        this._itemHeight = this._itemSize + 6;
-	        this._list.itemRender = this.itemRender || { type: "Box", child: [{ type: "Label", props: { name: "label", x: 1, padding: "3,3,3,3", width: labelWidth, height: this._itemHeight, fontSize: this._itemSize, color: labelColor } }] };
+	        this._itemHeight = (this._itemHeight) ? this._itemHeight : this._itemSize + 6;
+	        let _padding = (this.itemPadding) ? this.itemPadding : "3,3,3,3";
+	        this._list.itemRender = this.itemRender || { type: "Box", child: [{ type: "Label", props: { name: "label", x: 1, padding: _padding, width: labelWidth, height: this._itemHeight, fontSize: this._itemSize, color: labelColor } }] };
 	        this._list.repeatY = this._visibleNum;
 	        this._list.refresh();
 	    }
@@ -3653,6 +3659,13 @@
 	    changeSelected() {
 	        this._button.label = this.selectedLabel;
 	    }
+	    get defaultLabel() {
+	        return this._defaultLabel;
+	    }
+	    set defaultLabel(value) {
+	        this._defaultLabel = value;
+	        this._selectedIndex < 0 && (this._button.label = value);
+	    }
 	    get selectHandler() {
 	        return this._selectHandler;
 	    }
@@ -3660,7 +3673,7 @@
 	        this._selectHandler = value;
 	    }
 	    get selectedLabel() {
-	        return this._selectedIndex > -1 && this._selectedIndex < this._labels.length ? this._labels[this._selectedIndex] : null;
+	        return this._selectedIndex > -1 && this._selectedIndex < this._labels.length ? this._labels[this._selectedIndex] : this.defaultLabel;
 	    }
 	    set selectedLabel(value) {
 	        this.selectedIndex = this._labels.indexOf(value);
@@ -3679,11 +3692,24 @@
 	        this._itemColors = UIUtils.fillArray(this._itemColors, value, String);
 	        this._listChanged = true;
 	    }
+	    get itemPadding() {
+	        return this._itemPadding.join(",");
+	    }
+	    set itemPadding(value) {
+	        this._itemPadding = UIUtils.fillArray(this._itemPadding, value, Number);
+	    }
 	    get itemSize() {
 	        return this._itemSize;
 	    }
 	    set itemSize(value) {
 	        this._itemSize = value;
+	        this._listChanged = true;
+	    }
+	    get itemHeight() {
+	        return this._itemHeight;
+	    }
+	    set itemHeight(value) {
+	        this._itemHeight = value;
 	        this._listChanged = true;
 	    }
 	    get isOpen() {
@@ -3699,7 +3725,7 @@
 	                this._itemChanged && this.changeItem();
 	                var p = this.localToGlobal(Laya.Point.TEMP.setTo(0, 0));
 	                var py = p.y + this._button.height;
-	                py = py + this._listHeight <= Laya.ILaya.stage.height ? py : p.y - this._listHeight;
+	                py = py + this._listHeight <= Laya.ILaya.stage.height ? py : p.y - this._listHeight < 0 ? py : p.y - this._listHeight;
 	                this._list.pos(p.x, py);
 	                this._list.zOrder = 1001;
 	                Laya.ILaya.stage.addChild(this._list);
@@ -4394,6 +4420,10 @@
 	        this._tf.on(Laya.Event.ENTER, this, this._onEnter);
 	        this._tf.on(Laya.Event.BLUR, this, this._onBlur);
 	        this._tf.on(Laya.Event.FOCUS, this, this._onFocus);
+	        this._tf.on(Laya.Event.CHANGE, this, this._onChange);
+	    }
+	    _onChange() {
+	        this.event(Laya.Event.CHANGE, this);
 	    }
 	    _onFocus() {
 	        this.event(Laya.Event.FOCUS, this);
@@ -4618,29 +4648,27 @@
 	        return this._tf.scrollX;
 	    }
 	    changeScroll() {
-	        var vShow = this._vScrollBar && this._tf.maxScrollY > 0;
-	        var hShow = this._hScrollBar && this._tf.maxScrollX > 0;
-	        var showWidth = vShow ? this._width - this._vScrollBar.width : this._width;
-	        var showHeight = hShow ? this._height - this._hScrollBar.height : this._height;
-	        var padding = this._tf.padding || Styles.labelPadding;
-	        this._tf.width = showWidth;
-	        this._tf.height = showHeight;
+	        let vShow = this._vScrollBar && this._tf.maxScrollY > 0, hShow = this._hScrollBar && this._tf.maxScrollX > 0, vScrollBarWidth = 0, hScrollBarHeight = 0, padding = this._tf.padding || Styles.labelPadding;
+	        vShow && (vScrollBarWidth = this._vScrollBar.width);
+	        hShow && (hScrollBarHeight = this._hScrollBar.height);
+	        this._tf.width = this._width - vScrollBarWidth;
+	        this._tf.height = this._height - hScrollBarHeight;
 	        if (this._vScrollBar) {
-	            this._vScrollBar.x = this._width - this._vScrollBar.width - padding[2];
-	            this._vScrollBar.y = padding[1];
-	            this._vScrollBar.height = this._height - (hShow ? this._hScrollBar.height : 0) - padding[1] - padding[3];
+	            this._vScrollBar.x = this._width - this._vScrollBar.width - padding[1];
+	            this._vScrollBar.y = padding[0];
+	            this._vScrollBar.height = this._height - hScrollBarHeight - padding[0] - padding[2];
 	            this._vScrollBar.scrollSize = 1;
-	            this._vScrollBar.thumbPercent = showHeight / Math.max(this._tf.textHeight, showHeight);
-	            this._vScrollBar.setScroll(1, this._tf.maxScrollY, this._tf.scrollY);
+	            this._vScrollBar.thumbPercent = this._tf.height / Math.max(this._tf.textHeight, this._tf.height);
+	            this._vScrollBar.setScroll(0, this._tf.maxScrollY + 5, this._tf.scrollY);
 	            this._vScrollBar.visible = vShow;
 	        }
 	        if (this._hScrollBar) {
-	            this._hScrollBar.x = padding[0];
-	            this._hScrollBar.y = this._height - this._hScrollBar.height - padding[3];
-	            this._hScrollBar.width = this._width - (vShow ? this._vScrollBar.width : 0) - padding[0] - padding[2];
-	            this._hScrollBar.scrollSize = Math.max(showWidth * 0.033, 1);
-	            this._hScrollBar.thumbPercent = showWidth / Math.max(this._tf.textWidth, showWidth);
-	            this._hScrollBar.setScroll(0, this.maxScrollX, this.scrollX);
+	            this._hScrollBar.x = padding[3];
+	            this._hScrollBar.y = this._height - this._hScrollBar.height - padding[2];
+	            this._hScrollBar.width = this._width - vScrollBarWidth - padding[1] - padding[3];
+	            this._hScrollBar.scrollSize = Math.max(this._tf.width * 0.033, 1);
+	            this._hScrollBar.thumbPercent = this._tf.width / Math.max(this._tf.textWidth, this._tf.width);
+	            this._hScrollBar.setScroll(0, this._tf.maxScrollX + padding[1] + padding[3] + 8, this._tf.scrollX);
 	            this._hScrollBar.visible = hShow;
 	        }
 	    }
@@ -5560,6 +5588,11 @@
 	Laya.ClassUtils.regClass("Laya.FontClip", FontClip);
 
 	class View extends Laya.Scene {
+	    static __init__() {
+	        Laya.ILaya.ClassUtils.regShortClassName([ViewStack, Button, TextArea, ColorPicker, Box, ScaleBox, CheckBox, Clip, ComboBox, UIComponent,
+	            HScrollBar, HSlider, Image, Label, List, Panel, ProgressBar, Radio, RadioGroup, ScrollBar, Slider, Tab, TextInput, View,
+	            VScrollBar, VSlider, Tree, HBox, VBox, Laya.Animation, Laya.Text, FontClip]);
+	    }
 	    constructor() {
 	        super(false);
 	        this._watchMap = {};
@@ -5567,11 +5600,6 @@
 	        this._anchorY = NaN;
 	        this._widget = Widget.EMPTY;
 	        this.createChildren();
-	    }
-	    static __init__() {
-	        Laya.ILaya.ClassUtils.regShortClassName([ViewStack, Button, TextArea, ColorPicker, Box, ScaleBox, CheckBox, Clip, ComboBox, UIComponent,
-	            HScrollBar, HSlider, Image, Label, List, Panel, ProgressBar, Radio, RadioGroup, ScrollBar, Slider, Tab, TextInput, View,
-	            VScrollBar, VSlider, Tree, HBox, VBox, Laya.Animation, Laya.Text, FontClip]);
 	    }
 	    static regComponent(key, compClass) {
 	        Laya.ILaya.ClassUtils.regClass(key, compClass);
@@ -5850,6 +5878,12 @@
 	Laya.ClassUtils.regClass("Laya.DialogManager", DialogManager);
 
 	class Dialog extends View {
+	    static get manager() {
+	        return Dialog._manager = Dialog._manager || new DialogManager();
+	    }
+	    static set manager(value) {
+	        Dialog._manager = value;
+	    }
 	    constructor() {
 	        super();
 	        this.isShowEffect = true;
@@ -5858,12 +5892,6 @@
 	        this.closeEffect = Dialog.manager.closeEffectHandler;
 	        this._dealDragArea();
 	        this.on(Laya.Event.CLICK, this, this._onClick);
-	    }
-	    static get manager() {
-	        return Dialog._manager = Dialog._manager || new DialogManager();
-	    }
-	    static set manager(value) {
-	        Dialog._manager = value;
 	    }
 	    _dealDragArea() {
 	        var dragTarget = this.getChildByName("drag");
@@ -6192,4 +6220,6 @@
 	exports.WXOpenDataViewer = WXOpenDataViewer;
 	exports.Widget = Widget;
 
-}(window.Laya = window.Laya || {}, Laya));
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);

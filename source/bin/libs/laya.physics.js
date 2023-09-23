@@ -16383,17 +16383,19 @@ var box2d = window.box2d = (function (exports) {
             if (!this._body)
                 this._onAwake();
             var p = this._body.GetLocalCenter();
-            p.x = p.x * IPhysics.Physics.PIXEL_RATIO;
-            p.y = p.y * IPhysics.Physics.PIXEL_RATIO;
-            return p;
+            RigidBody._tempPoint.copy(p);
+            RigidBody._tempPoint.x = RigidBody._tempPoint.x * IPhysics.Physics.PIXEL_RATIO;
+            RigidBody._tempPoint.y = RigidBody._tempPoint.y * IPhysics.Physics.PIXEL_RATIO;
+            return RigidBody._tempPoint;
         }
         getWorldCenter() {
             if (!this._body)
                 this._onAwake();
             var p = this._body.GetWorldCenter();
-            p.x = p.x * IPhysics.Physics.PIXEL_RATIO;
-            p.y = p.y * IPhysics.Physics.PIXEL_RATIO;
-            return p;
+            RigidBody._tempPoint.copy(p);
+            RigidBody._tempPoint.x = RigidBody._tempPoint.x * IPhysics.Physics.PIXEL_RATIO;
+            RigidBody._tempPoint.y = RigidBody._tempPoint.y * IPhysics.Physics.PIXEL_RATIO;
+            return RigidBody._tempPoint;
         }
         get type() {
             return this._type;
@@ -16479,6 +16481,7 @@ var box2d = window.box2d = (function (exports) {
                 this._body.SetBullet(value);
         }
     }
+    RigidBody._tempPoint = new Laya.Point();
     Laya.ClassUtils.regClass("laya.physics.RigidBody", RigidBody);
     Laya.ClassUtils.regClass("Laya.RigidBody", RigidBody);
 
@@ -16495,15 +16498,15 @@ var box2d = window.box2d = (function (exports) {
     }
 
     class Physics extends Laya.EventDispatcher {
+        static get I() {
+            return Physics._I || (Physics._I = new Physics());
+        }
         constructor() {
             super();
             this.box2d = window.box2d;
             this.velocityIterations = 8;
             this.positionIterations = 3;
             this._eventList = [];
-        }
-        static get I() {
-            return Physics._I || (Physics._I = new Physics());
         }
         static enable(options = null) {
             Physics.I.start(options);
@@ -16930,6 +16933,13 @@ var box2d = window.box2d = (function (exports) {
     Laya.ClassUtils.regClass("Laya.EdgeCollider", EdgeCollider);
 
     class PhysicsDebugDraw extends Laya.Sprite {
+        static init() {
+            PhysicsDebugDraw.box2d = Laya.Browser.window.box2d;
+            PhysicsDebugDraw.DrawString_s_color = new PhysicsDebugDraw.box2d.b2Color(0.9, 0.6, 0.6);
+            PhysicsDebugDraw.DrawStringWorld_s_p = new PhysicsDebugDraw.box2d.b2Vec2();
+            PhysicsDebugDraw.DrawStringWorld_s_cc = new PhysicsDebugDraw.box2d.b2Vec2();
+            PhysicsDebugDraw.DrawStringWorld_s_color = new PhysicsDebugDraw.box2d.b2Color(0.5, 0.9, 0.5);
+        }
         constructor() {
             super();
             this.m_drawFlags = 99;
@@ -16948,13 +16958,6 @@ var box2d = window.box2d = (function (exports) {
             this._textSp = new Laya.Sprite();
             this._textG = this._textSp.graphics;
             this.addChild(this._textSp);
-        }
-        static init() {
-            PhysicsDebugDraw.box2d = Laya.Browser.window.box2d;
-            PhysicsDebugDraw.DrawString_s_color = new PhysicsDebugDraw.box2d.b2Color(0.9, 0.6, 0.6);
-            PhysicsDebugDraw.DrawStringWorld_s_p = new PhysicsDebugDraw.box2d.b2Vec2();
-            PhysicsDebugDraw.DrawStringWorld_s_cc = new PhysicsDebugDraw.box2d.b2Vec2();
-            PhysicsDebugDraw.DrawStringWorld_s_color = new PhysicsDebugDraw.box2d.b2Color(0.5, 0.9, 0.5);
         }
         render(ctx, x, y) {
             this._renderToGraphic();
@@ -16995,8 +16998,8 @@ var box2d = window.box2d = (function (exports) {
             this._mG.restore();
         }
         DrawPolygon(vertices, vertexCount, color) {
-            var i, len;
-            len = vertices.length;
+            var i;
+            vertices.length;
             var points;
             points = [];
             for (i = 0; i < vertexCount; i++) {
@@ -17005,8 +17008,8 @@ var box2d = window.box2d = (function (exports) {
             this._mG.drawPoly(0, 0, points, null, color.MakeStyleString(1), this.lineWidth);
         }
         DrawSolidPolygon(vertices, vertexCount, color) {
-            var i, len;
-            len = vertices.length;
+            var i;
+            vertices.length;
             var points;
             points = [];
             for (i = 0; i < vertexCount; i++) {
@@ -17870,4 +17873,6 @@ var box2d = window.box2d = (function (exports) {
     exports.WeldJoint = WeldJoint;
     exports.WheelJoint = WheelJoint;
 
-}(window.Laya = window.Laya || {}, Laya));
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);

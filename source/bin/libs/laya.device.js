@@ -12,13 +12,13 @@
 	}
 
 	class Accelerator extends Laya.EventDispatcher {
-	    constructor(singleton) {
-	        super();
-	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
-	    }
 	    static get instance() {
 	        Accelerator._instance = Accelerator._instance || new Accelerator(0);
 	        return Accelerator._instance;
+	    }
+	    constructor(singleton) {
+	        super();
+	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
 	    }
 	    on(type, caller, listener, args = null) {
 	        super.on(type, caller, listener, args);
@@ -225,11 +225,11 @@
 	    }
 	    createDomElement() {
 	        this._source = this.video = Laya.ILaya.Browser.createElement("video");
+	        this.video.setAttribute('crossorigin', 'Anonymous');
 	        var style = this.video.style;
 	        style.position = 'absolute';
 	        style.top = '0px';
 	        style.left = '0px';
-	        this.video.setAttribute('crossorigin', 'anonymous');
 	        this.video.addEventListener("loadedmetadata", () => {
 	            this._w = this.video.videoWidth;
 	            this._h = this.video.videoHeight;
@@ -633,13 +633,13 @@
 	Video.SUPPORT_NO = "";
 
 	class Gyroscope extends Laya.EventDispatcher {
-	    constructor(singleton) {
-	        super();
-	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
-	    }
 	    static get instance() {
 	        Gyroscope._instance = Gyroscope._instance || new Gyroscope(0);
 	        return Gyroscope._instance;
+	    }
+	    constructor(singleton) {
+	        super();
+	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
 	    }
 	    on(type, caller, listener, args = null) {
 	        super.on(type, caller, listener, args);
@@ -676,4 +676,6 @@
 	exports.Video = Video;
 	exports.WebGLVideo = WebGLVideo;
 
-}(window.Laya = window.Laya || {}, Laya));
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);

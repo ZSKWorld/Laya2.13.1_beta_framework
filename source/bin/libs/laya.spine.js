@@ -72,7 +72,7 @@
 	        let drawOrder = skeleton.drawOrder;
 	        let attachmentColor = null;
 	        let skeletonColor = skeleton.color;
-	        let vertexSize =  8;
+	        let vertexSize = 8;
 	        let inRange = false;
 	        if (slotRangeStart == -1)
 	            inRange = true;
@@ -600,9 +600,9 @@
 	}
 
 	var AssetManager = spine.AssetManager;
-	var AtlasAttachmentLoader = spine.AtlasAttachmentLoader;
-	var SkeletonJson = spine.SkeletonJson;
-	var SkeletonBinary = spine.SkeletonBinary;
+	var AtlasAttachmentLoader$1 = spine.AtlasAttachmentLoader;
+	var SkeletonJson$1 = spine.SkeletonJson;
+	var SkeletonBinary$1 = spine.SkeletonBinary;
 	class SpineTemplet_3_x extends SpineTempletBase {
 	    constructor() {
 	        super();
@@ -650,13 +650,13 @@
 	            return;
 	        }
 	        let atlas = this.assetManager.get(this.atlasUrl);
-	        let atlasLoader = new AtlasAttachmentLoader(atlas);
+	        let atlasLoader = new AtlasAttachmentLoader$1(atlas);
 	        if (this.jsonOrSkelUrl.endsWith(".skel")) {
-	            this.skeletonBinary = new SkeletonBinary(atlasLoader);
+	            this.skeletonBinary = new SkeletonBinary$1(atlasLoader);
 	            this.skeletonData = this.skeletonBinary.readSkeletonData(this.assetManager.get(this.jsonOrSkelUrl));
 	        }
 	        else {
-	            this.skeletonJson = new SkeletonJson(atlasLoader);
+	            this.skeletonJson = new SkeletonJson$1(atlasLoader);
 	            this.skeletonData = this.skeletonJson.readSkeletonData(this.assetManager.get(this.jsonOrSkelUrl));
 	        }
 	        this.event(Laya.Event.COMPLETE, this);
@@ -675,9 +675,9 @@
 	    }
 	}
 
-	var AtlasAttachmentLoader$1 = spine.AtlasAttachmentLoader;
-	var SkeletonJson$1 = spine.SkeletonJson;
-	var SkeletonBinary$1 = spine.SkeletonBinary;
+	var AtlasAttachmentLoader = spine.AtlasAttachmentLoader;
+	var SkeletonJson = spine.SkeletonJson;
+	var SkeletonBinary = spine.SkeletonBinary;
 	class SpineTemplet_4_0 extends SpineTempletBase {
 	    constructor() {
 	        super();
@@ -719,13 +719,13 @@
 	            return;
 	        }
 	        let atlas = this.assetManager.get(this.atlasUrl);
-	        let atlasLoader = new AtlasAttachmentLoader$1(atlas);
+	        let atlasLoader = new AtlasAttachmentLoader(atlas);
 	        if (this.jsonOrSkelUrl.endsWith(".skel")) {
-	            this.skeletonBinary = new SkeletonBinary$1(atlasLoader);
+	            this.skeletonBinary = new SkeletonBinary(atlasLoader);
 	            this.skeletonData = this.skeletonBinary.readSkeletonData(this.assetManager.get(this.jsonOrSkelUrl));
 	        }
 	        else {
-	            this.skeletonJson = new SkeletonJson$1(atlasLoader);
+	            this.skeletonJson = new SkeletonJson(atlasLoader);
 	            this.skeletonData = this.skeletonJson.readSkeletonData(this.assetManager.get(this.jsonOrSkelUrl));
 	        }
 	        this.event(Laya.Event.COMPLETE, this);
@@ -773,11 +773,13 @@
 	    destroy() {
 	    }
 	}
+	exports.SpineVersion = void 0;
 	(function (SpineVersion) {
 	    SpineVersion["v3_7"] = "v3_7";
 	    SpineVersion["v3_8"] = "v3_8";
 	    SpineVersion["v4_0"] = "v4_0";
 	})(exports.SpineVersion || (exports.SpineVersion = {}));
+	exports.SpineFormat = void 0;
 	(function (SpineFormat) {
 	    SpineFormat["json"] = "json";
 	    SpineFormat["binary"] = "binary";
@@ -792,4 +794,6 @@
 	exports.SpineTemplet_3_x = SpineTemplet_3_x;
 	exports.SpineTemplet_4_0 = SpineTemplet_4_0;
 
-}(window.Laya = window.Laya || {}, Laya));
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);

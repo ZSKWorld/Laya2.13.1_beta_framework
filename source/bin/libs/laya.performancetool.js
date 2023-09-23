@@ -345,18 +345,6 @@
   };
 
   class PerformanceDataTool {
-      constructor() {
-          this._enable = false;
-          this._AllPathMap = {};
-          this._pathColor = {};
-          this._pathCount = 0;
-          this._runtimeShowPathIndex = -1;
-          this._nodeList = [];
-          this.samplerFramStep = 6;
-          this._memoryDataMap = {};
-          this.pointArray = [];
-          this.fpsArray = [];
-      }
       static InitLayaPerformanceInfo() {
           PerformanceDataTool.instance.InitLayaPerformanceInfo();
       }
@@ -422,6 +410,18 @@
               this._runtimeShowPathIndex = showPathIndex;
           else
               this._runtimeShowPathIndex = -1;
+      }
+      constructor() {
+          this._enable = false;
+          this._AllPathMap = {};
+          this._pathColor = {};
+          this._pathCount = 0;
+          this._runtimeShowPathIndex = -1;
+          this._nodeList = [];
+          this.samplerFramStep = 6;
+          this._memoryDataMap = {};
+          this.pointArray = [];
+          this.fpsArray = [];
       }
       getNodePathIndex(path) {
           var id;
@@ -664,13 +664,6 @@
   PerformanceDataTool.StepLength = 250;
   PerformanceDataTool.stepLengthArrayMap = new Array();
   class PerforManceNode {
-      constructor() {
-          this.inPool = false;
-          this.nodeNum = 0;
-          this.nodeStart = [];
-          this.nodeDelty = [];
-          this.applyCount = 0;
-      }
       static create(nodeNum) {
           let perNode;
           perNode = this._pool.length > 0 ? this._pool.pop() : new PerforManceNode();
@@ -682,6 +675,13 @@
           node.inPool = true;
           this._pool.push(node);
           node.clearData();
+      }
+      constructor() {
+          this.inPool = false;
+          this.nodeNum = 0;
+          this.nodeStart = [];
+          this.nodeDelty = [];
+          this.applyCount = 0;
       }
       clearData() {
           this.nodeStart.length = 0;
@@ -790,4 +790,6 @@
   exports.PerformanceDataTool = PerformanceDataTool;
   exports.PerformanceNodeParse = PerformanceNodeParse;
 
-}(window.Laya = window.Laya || {}, Laya));
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})(this.Laya = this.Laya || {}, Laya);
