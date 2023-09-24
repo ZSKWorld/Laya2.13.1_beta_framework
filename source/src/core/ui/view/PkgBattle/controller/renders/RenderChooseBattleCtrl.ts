@@ -5,7 +5,7 @@ import { RenderChooseBattleMsg, RenderChooseBattleView } from "../../view/render
 import { UIBattleConfirmData } from "../UIBattleConfirmCtrl";
 
 export class RenderChooseBattleCtrl extends BaseViewCtrl<RenderChooseBattleView, BattleType>{
-	private _cfgData: BattleLevel;
+	private _cfgData: BattleCfgData;
 	private _time: number = 0;
 
 	override onAdded() {
@@ -25,7 +25,7 @@ export class RenderChooseBattleCtrl extends BaseViewCtrl<RenderChooseBattleView,
 		}
 	}
 
-	setData(data: BattleType, cfgData: BattleLevel) {
+	setData(data: BattleType, cfgData: BattleCfgData) {
 		this.data = data;
 		this._cfgData = cfgData;
 		this.view.refreshByType(this.data, cfgData);

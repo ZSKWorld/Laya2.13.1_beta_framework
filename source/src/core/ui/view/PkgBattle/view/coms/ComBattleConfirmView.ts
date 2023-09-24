@@ -21,7 +21,7 @@ export class ComBattleConfirmView extends ExtensionClass<IView, ComBattleConfirm
 		btn_battle.onClick(this, this.sendMessage, [ ComBattleConfirmMsg.OnBtnBattleClick ]);
 	}
 
-	refreshContent(type: BattleType, data: BattleLevel) {
+	refreshContent(type: BattleType, data: BattleCfgData) {
 		const { txt_title, txt_content, ctrl_openType } = this;
 		ctrl_openType.selectedIndex = type - 1;
 		if (type == BattleType.Gather) {

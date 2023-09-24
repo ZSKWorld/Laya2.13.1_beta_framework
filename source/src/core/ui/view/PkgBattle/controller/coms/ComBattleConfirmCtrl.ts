@@ -4,7 +4,7 @@ import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ComBattleConfirmMsg, ComBattleConfirmView } from "../../view/coms/ComBattleConfirmView";
 export interface ComBattleConfirmData {
 	type: BattleType;
-	data: BattleLevel;
+	data: BattleCfgData;
 }
 
 export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, ComBattleConfirmData>{

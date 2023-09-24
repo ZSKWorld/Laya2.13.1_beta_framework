@@ -5,7 +5,7 @@ import { UIBattleConfirmView } from "../view/UIBattleConfirmView";
 import { ComBattleConfirmCtrl } from "./coms/ComBattleConfirmCtrl";
 export interface UIBattleConfirmData {
     type: BattleType;
-    data: BattleLevel;
+    data: BattleCfgData;
 }
 
 export class UIBattleConfirmCtrl extends BaseViewCtrl<UIBattleConfirmView, UIBattleConfirmData>{

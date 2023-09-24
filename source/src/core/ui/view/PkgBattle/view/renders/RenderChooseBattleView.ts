@@ -17,7 +17,7 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
         btn_break.onClick(this, this.sendMessage, [ RenderChooseBattleMsg.OnBtnBreakClick ]);
     }
 
-    refreshByType(type: BattleType, data: BattleLevel) {
+    refreshByType(type: BattleType, data: BattleCfgData) {
         const { txt_content1, txt_content2, txt_content3, ctrlState, graph_touch, graph_light } = this;
         ctrlState.selectedIndex = type - 1;
         switch (type) {

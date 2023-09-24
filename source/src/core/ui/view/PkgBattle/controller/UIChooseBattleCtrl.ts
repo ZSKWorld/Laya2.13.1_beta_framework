@@ -9,7 +9,7 @@ import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleVie
 import { RenderChooseBattleCtrl } from "./renders/RenderChooseBattleCtrl";
 
 export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType>{
-	private items: BattleLevel[];
+	private items: BattleCfgData[];
 
 	override onAdded() {
 		this.addMessage(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
@@ -24,7 +24,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	@RegisterEvent(UserDataEvent.UserData_Battle_Changed)
 	private refreshList() {
 		this.view.setBattleType(this.data - 1);
-		let itemCfg;
+		let itemCfg: BattleCfg;
 		switch (this.data) {
 			case BattleType.Level: itemCfg = cfgMgr.Level; break;
 			case BattleType.Copy: itemCfg = cfgMgr.Copy; break;
