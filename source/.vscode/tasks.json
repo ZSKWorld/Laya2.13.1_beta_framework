@@ -40,7 +40,7 @@
         {
             "label": "导出表配置",
             "type": "shell",
-            "command": "../../tool/BatMain.bat 1",
+            "command": "node ../../tool/bin/js/BatMain.js 1",
             "presentation": {
                 "close": true
             },
@@ -49,7 +49,7 @@
         {
             "label": "更新资源路径",
             "type": "shell",
-            "command": "../../tool/BatMain.bat 2",
+            "command": "node ../../tool/bin/js/BatMain.js 2",
             "presentation": {
                 "close": true
             },
@@ -58,7 +58,7 @@
         {
             "label": "用户数据事件",
             "type": "shell",
-            "command": "../../tool/BatMain.bat 3",
+            "command": "node ../../tool/bin/js/BatMain.js 3",
             "presentation": {
                 "close": true
             },
@@ -67,7 +67,7 @@
         {
             "label": "更新网络相关",
             "type": "shell",
-            "command": "../../tool/BatMain.bat 4",
+            "command": "node ../../tool/bin/js/BatMain.js 4",
             "presentation": {
                 "close": true
             },
