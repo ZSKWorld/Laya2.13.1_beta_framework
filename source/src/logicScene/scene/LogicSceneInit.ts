@@ -19,10 +19,6 @@ export interface SceneInitData {
 /** 初始化逻辑场景 */
 export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 
-	protected override getNormalResArray() {
-		return [];
-	}
-
 	protected onEnter() {
 		windowImmit("showConfirm", this.showConfirm);
 		layerMgr.init();

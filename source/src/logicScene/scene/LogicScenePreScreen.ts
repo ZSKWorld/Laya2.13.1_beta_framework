@@ -17,7 +17,6 @@ export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
     protected override getConstResArray() {
         const resArray: string[] = [
             ResPath.ConfigPath.Config,
-            ResPath.PkgPath.PkgCommon,
         ];
         resArray.push(...platformMgr.platform.res);
         return resArray;
@@ -27,7 +26,7 @@ export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
         windowImmit("cfgMgr", new CfgManager());
         windowImmit("userData", new User());
         this.showPreScreen();
-        Laya.timer.once(100, this, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
+        logicSceneMgr.enterScene(LogicScene.LoginScene);
     }
 
     protected onExit() {

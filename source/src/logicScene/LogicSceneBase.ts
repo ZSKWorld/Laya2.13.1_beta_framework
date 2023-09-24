@@ -1,3 +1,4 @@
+import { skeletonMgr } from "../core/game/SkeletonMgr";
 import { Observer } from "../core/libs/event/Observer";
 import { loadMgr } from "../core/libs/load/LoadManager";
 import { uiMgr } from "../core/ui/core/UIManager";
@@ -31,14 +32,15 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 
 	load() {
 		const resArr = this.getResGroup(ResGroupType.All);
-		const [ uiRes, otherRes ] = resArr;
+		const [ uiRes, skeletonRes, otherRes ] = resArr;
 		let loadCnt = this.setLoadProgres(resArr.length);
 		return Promise.all([
 			loadMgr.loadPackage(uiRes, null, this._progressHandlers[ --loadCnt ]),
+			skeletonMgr.loadSkeleton(skeletonRes, this._progressHandlers[ --loadCnt ]),
 			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCnt ]),
 			//加个最短加载时间，避免loadjing页一闪而过
 			this.loadViewId ? new Promise(resolve => {
-				const tween = Laya.Tween.to(this._progresses, { [ --loadCnt ]: 1 }, 100, null, Laya.Handler.create(null, resolve), 0, true);
+				const tween = Laya.Tween.to(this._progresses, { [ --loadCnt ]: 1 }, 200, null, Laya.Handler.create(null, resolve), 0, true);
 				tween.update = this._progressHandlers[ loadCnt ];
 			}) : null,
 		]).then(
@@ -71,11 +73,12 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	protected clearRes(type: ResGroupType) {
-		const [ uiRes, otherRes ] = this.getResGroup(type);
+		const [ uiRes, skeletonRes, otherRes ] = this.getResGroup(type);
 		uiRes.forEach(v => {
 			const res = fgui.UIPackage.getById(v);
 			res && res.dispose();
 		});
+		skeletonRes.forEach(v => skeletonMgr.disposeSkeleton(v));
 		otherRes.forEach(v => Laya.loader.clearRes(v));
 	}
 
@@ -120,20 +123,22 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	/** 获取资源数组 */
-	private getResGroup(groupType: ResGroupType): [ string[], string[] ] {
+	private getResGroup(groupType: ResGroupType): [ string[], string[], string[] ] {
 		const uiRes: string[] = [];
+		const skeletonRes: string[] = [];
 		const otherRes: string[] = [];
 		let resArr: string[];
 		switch (groupType) {
 			case ResGroupType.Normal: resArr = this.getNormalResArray(); break;
 			case ResGroupType.Const: resArr = this.getConstResArray(); break;
 			case ResGroupType.All: resArr = this.getNormalResArray().concat(this.getConstResArray()); break;
-			default: return [ [], [] ];
+			default: return [ [], [], [] ];
 		}
 		resArr.forEach(res => {
 			if (res.startsWith("res/ui/")) uiRes.push(res);
+			else if (res.startsWith("res/skeleton/")) skeletonRes.push(res);
 			else otherRes.push(res);
 		});
-		return [ uiRes, otherRes ];
+		return [ uiRes, skeletonRes, otherRes ];
 	}
 }

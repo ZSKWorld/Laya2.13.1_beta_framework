@@ -18,22 +18,22 @@ class TipManager {
         if (!this._cache) {
             this._cache = [];
             Laya.timer.frameLoop(1, this, this.update);
-        }
+        } else if (this._cache.includes(text)) return;
         this._cache.push(text, color);
     }
 
     private update() {
+        if (!this._cache.length) return;
         this._curTime += Laya.timer.delta;
-        if (this._cache.length && this._curTime >= this.showDelay) {
-            this._curTime = 0;
-            const viewCtrl = <IViewCtrl>Laya.Pool.getItemByCreateFun(UIPoolKey.TipInfo, () => {
-                const viewCtrl = uiMgr.createView(ViewID.ComTipInfoView);
-                viewCtrl.view.touchable = false;
-                return viewCtrl;
-            });
-            viewCtrl.data = { text: this._cache.shift(), color: this._cache.shift() };
-            layerMgr.addObject(viewCtrl.view, Layer.Bottom);
-        }
+        if (this._curTime < this.showDelay) return;
+        this._curTime = 0;
+        const viewCtrl = <IViewCtrl>Laya.Pool.getItemByCreateFun(UIPoolKey.TipInfo, () => {
+            const viewCtrl = uiMgr.createView(ViewID.ComTipInfoView);
+            viewCtrl.view.touchable = false;
+            return viewCtrl;
+        });
+        viewCtrl.data = { text: this._cache.shift(), color: this._cache.shift() };
+        layerMgr.addObject(viewCtrl.view, Layer.Bottom);
     }
 }
 export const tipMgr = new TipManager();

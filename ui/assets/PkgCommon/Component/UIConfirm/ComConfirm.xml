@@ -9,13 +9,13 @@
     </graph>
     <text id="n8_izot" name="txt_title" xy="323,14" pivot="0.5,0.5" size="104,66" fontSize="50" bold="true" text="提示"/>
     <richtext id="n9_izot" name="txt_content" xy="40,136" size="669,48" fontSize="35" ubb="true" autoSize="height" autoClearText="true" text="场景资源加载失败，是否重试？"/>
-    <component id="n1_aqq0" name="btn_cancel" src="sbd05i" fileName="Component/BtnTxt.xml" xy="121,250" size="204,60" group="n11_dnfc" controller="ctrlBgColor,3">
+    <component id="n1_aqq0" name="btn_cancel" src="sbd05i" fileName="Component/BtnTxt.xml" xy="105,245" size="204,70" group="n11_dnfc" controller="ctrlBgColor,3">
       <Button title="取消" titleColor="#ffffff" titleFontSize="40" icon="ui://vx9zwser10au31s"/>
     </component>
-    <component id="n6_izot" name="btn_confirm" src="sbd05i" fileName="Component/BtnTxt.xml" xy="527,280" pivot="0.5,0.5" anchor="true" size="204,60" group="n11_dnfc" controller="ctrlBgColor,4">
+    <component id="n6_izot" name="btn_confirm" src="sbd05i" fileName="Component/BtnTxt.xml" xy="542,280" pivot="0.5,0.5" anchor="true" size="204,70" group="n11_dnfc" controller="ctrlBgColor,4">
       <Button title="确认" titleColor="#ffffff" titleFontSize="40" icon="ui://vx9zwser10au31r"/>
     </component>
-    <group id="n11_dnfc" name="n11" xy="121,250" size="508,60" advanced="true">
+    <group id="n11_dnfc" name="n11" xy="105,245" size="539,70" advanced="true" layout="hz" colGap="131" excludeInvisibles="true">
       <relation target="" sidePair="center-center,bottom-bottom"/>
     </group>
   </displayList>
