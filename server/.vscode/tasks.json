@@ -7,7 +7,9 @@
             "label": "编译",
             "type": "shell",
             "command": "node ./.vscode/compile.js",
-            // "command": "tsc ./src/Main.ts  --outDir ./bin/js",
+            "presentation": {
+                "close": true
+            },
             "problemMatcher": []
         },
         {
@@ -17,10 +19,13 @@
             "problemMatcher": []
         },
         {
-            "label": "执行Bat",
+            "label": "导出表配置",
             "type": "shell",
-            "command": "../../tool/BatMain.bat",
+            "command": "node ../../tool/bin/js/BatMain.js 5",
+            "presentation": {
+                "close": true
+            },
             "problemMatcher": []
-        },
+        }
     ]
 }

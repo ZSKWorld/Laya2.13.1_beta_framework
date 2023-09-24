@@ -47,6 +47,7 @@
 	export const enum PkgName {
 		PkgBattle = "PkgBattle",
 		PkgCommon = "PkgCommon",
+		PkgDesign = "PkgDesign",
 		PkgLogin = "PkgLogin",
 		PkgMain = "PkgMain",
 	}
@@ -54,6 +55,7 @@
 	export const enum PkgPath {
 		PkgBattle = "res/ui/PkgBattle",
 		PkgCommon = "res/ui/PkgCommon",
+		PkgDesign = "res/ui/PkgDesign",
 		PkgLogin = "res/ui/PkgLogin",
 		PkgMain = "res/ui/PkgMain",
 	}

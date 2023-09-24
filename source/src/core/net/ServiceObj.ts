@@ -17,7 +17,7 @@ export class ServiceObj implements IFacade {
 	sellEquip(data: SellEquipInput): void { throw new Error("Method not implemented."); }
 	decomposeEquip(data: DecomposeEquipInput): void { throw new Error("Method not implemented."); }
 	enterBattle(data: EnterBattleInput): void { throw new Error("Method not implemented."); }
-	requestBattle(data:RequestBattleInput): void { throw new Error("Method not implemented."); }
+	requestBattle(data: RequestBattleInput): void { throw new Error("Method not implemented."); }
 	existBattle(data: ExistBattleInput): void { throw new Error("Method not implemented."); }
 	addFriend(data: AddFriendInput): void { throw new Error("Method not implemented."); }
 	friendMsg(data: FriendMsgInput): void { throw new Error("Method not implemented."); }

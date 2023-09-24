@@ -1,5 +1,5 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
@@ -11,13 +11,67 @@
                 "kind": "build",
                 "isDefault": true
             },
+            "presentation": {
+                "close": true
+            }
+        },
+        {
+            "label": "执行所有工具",
+            "type": "shell",
+            "dependsOn": [
+                "创建 View & ViewCtrl & ViewProxy",
+                "导出表配置",
+                "更新资源路径",
+                "用户数据事件",
+                "更新网络相关"
+            ],
+            "dependsOrder": "parallel",
             "problemMatcher": []
         },
         {
-            "label": "执行Bat",
+            "label": "创建 View & ViewCtrl & ViewProxy",
             "type": "shell",
-            "command": "../../tool/BatMain.bat",
+            "command": "node ../../tool/bin/js/BatMain.js 0",
+            "presentation": {
+                "close": true
+            },
             "problemMatcher": []
         },
+        {
+            "label": "导出表配置",
+            "type": "shell",
+            "command": "../../tool/BatMain.bat 1",
+            "presentation": {
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "更新资源路径",
+            "type": "shell",
+            "command": "../../tool/BatMain.bat 2",
+            "presentation": {
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "用户数据事件",
+            "type": "shell",
+            "command": "../../tool/BatMain.bat 3",
+            "presentation": {
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "更新网络相关",
+            "type": "shell",
+            "command": "../../tool/BatMain.bat 4",
+            "presentation": {
+                "close": true
+            },
+            "problemMatcher": []
+        }
     ]
 }
