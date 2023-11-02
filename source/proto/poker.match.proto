@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package pk;
+
+import "poker.share.proto";
+
+option go_package = ".;protocol";
+
+service Match {
+  rpc StartUnifiedMatch(ReqStartUnifiedMatch) returns (ResEmpty);
+  rpc CancelUnifiedMatch(ReqCancelUnifiedMatch) returns (ResEmpty);
+}
+
+message NotifyUnifiedMatchTimeout {
+  string sid = 1;
+}
+
+// 匹配被取消（通常是因为重复匹配造成的问题）
+message NotifyMatchCanceled {
+  string sid = 1;
+}
+
+// 取消匹配成功状态，重新进入匹配队列
+message NotifyMatchReset {
+  string sid = 1;
+}
+
+// 匹配成功
+message NotifyMatchSuccess {
+  string sid = 1;
+}
+
+message ReqStartUnifiedMatch {
+  string sid = 1;
+  uint32 open_hands = 2;
+}
+
+message ReqCancelUnifiedMatch {
+  string sid = 1;
+}

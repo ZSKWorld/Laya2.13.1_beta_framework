@@ -1,0 +1,16 @@
+{
+    "typescript": {
+        "poker.event": {
+            "GameRecord": {
+                "events": ""
+            }
+        }
+    },
+    "lua": {
+        "poker.event": {
+            "GameRecord": {
+                "events": ""
+            }
+        }
+    }
+}

@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package pk;
+
+option go_package = ".;protocol";
+
+import "poker.share.proto";
+
+service Room {
+  rpc CreateRoom(ReqCreateRoom) returns (ResCreateRoom);
+  rpc LeaveRoom(ReqLeaveRoom) returns (ResEmpty);
+  rpc JoinRoom(ReqJoinRoom) returns (ResJoinRoom);
+  rpc AddRoomRobot(ReqAddRoomRobot) returns (ResEmpty);
+  rpc UpdateRoomRule(ReqUpdateRoomRule) returns (ResEmpty);
+  rpc UpdateRoomSeat(ReqEmpty) returns (ResEmpty);
+  rpc MemberLoadEnd(ReqMemberLoadEnd) returns (ResEmpty);
+  rpc PlayerReady(ReqPlayerReady) returns (ResEmpty);
+  rpc OpenHand(ReqOpenHand) returns (ResEmpty);
+  rpc StartGame(ReqEmpty) returns (ResEmpty); // 房主调用
+  rpc SetRoomOwner(ReqSetRoomOwner) returns (ResEmpty);
+  rpc KickRoomMember(ReqKickRoomMember) returns(ResEmpty);
+  rpc ChangeRoomOwner(ReqChangeRoomOwner) returns(ResEmpty);
+  rpc InviteFriendToRoom(ReqInviteFriendToRoom) returns(ResEmpty);
+  // 发送表情
+  rpc RoomEmoji(ReqRoomEmoji) returns (ResEmpty);
+  rpc FetchRoomInfo(ReqFetchRoomInfo) returns (ResFetchRoomInfo);
+}
+
+message RoomMemberState {
+  uint32 account_id = 1;
+  uint32 ready_state = 2;
+  uint32 open_hand = 3; // 是否明牌，0=普通，1=明牌
+}
+
+message NotifyRoomInvite {
+  uint32 room_id = 1;
+  uint32 account_id = 2;
+  uint32 seat = 3;
+}
+
+message NotifyRoomKicked {}
+
+message NotifyRoomUpdate {
+  repeated PlayerSnapshot members = 1;
+  PlayRuleSetting setting = 2;
+  uint32 owner_id = 3;
+  RoomStatus room_status = 4;
+  uint32 room_id = 5;
+  repeated RoomMemberState member_states = 6;
+}
+
+// 针对房主
+message RoomStatus {
+  uint32 loaded_num = 1;
+  uint32 ready_num = 2;
+}
+
+//// Deprecated 2022.09.01 zhq
+//message NotifyMemberLoadEnd {
+//  uint32 account_id = 1;
+//}
+
+
+message ReqChangeRoomOwner {
+  uint32 account_id = 1;
+}
+
+message ReqKickRoomMember {
+  uint32 seat = 1;
+}
+
+message ReqSetRoomOwner {
+  uint32 seat = 1;
+}
+
+message ReqPlayerReady {
+  uint32 ready_state = 1; // 状态状态，0=未准备, 1=准备
+}
+
+message ReqOpenHand {
+  uint32 open_hand = 1; // 是否明牌，0=普通，1=明牌
+}
+
+message ReqMemberLoadEnd {
+  uint32 account_id = 1;
+}
+
+message ReqUpdateRoomRule {
+  PlayRuleSetting setting = 1;
+}
+
+message ReqCreateRoom {
+  PlayRuleSetting setting = 1;
+}
+message ResCreateRoom {
+  uint32 room_id = 1;
+  PlayerSnapshot owner = 2;
+}
+
+message ReqJoinRoom {
+  uint32 room_id = 1;
+  uint32 seat = 2;
+}
+message ResJoinRoom {
+  repeated PlayerSnapshot members = 1;
+  PlayRuleSetting setting = 2;
+  uint32 owner_id = 3;
+  repeated RoomMemberState member_states = 4;
+  RoomStatus room_status = 5;
+  uint32 room_id = 6;
+}
+
+message ReqLeaveRoom {}
+message ResLeaveRoom {}
+
+message ReqAddRoomRobot {
+  uint32 seat = 1;
+}
+message ResAddRoomRobot {}
+
+message ReqInviteFriendToRoom {
+  uint32 account_id = 1;
+  uint32 seat = 2;
+}
+
+// 好友房表情发送通知
+message NotifyRoomEmoji {
+  uint32 account_id = 1;
+  uint32 type = 2; // 0-emoji 1-快捷短语
+  uint32 emoji = 3; // emoji编号
+  uint32 phrase_id = 4; // 快捷短语编号
+}
+
+// 发送表情
+// room和game都用到了，只能放这里
+message ReqRoomEmoji {
+  uint32 type = 1; // 0-emoji 1-快捷短语
+  uint32 emoji = 2; // emoji编号
+  uint32 phrase_id = 3; // 快捷短语编号
+}
+
+message ReqFetchRoomInfo {}
+
+message ResFetchRoomInfo {
+  uint32 room_id = 1;
+  repeated PlayerSnapshot members = 2;
+  PlayRuleSetting setting = 3;
+  uint32 owner_id = 4;
+  RoomStatus room_status = 5;
+  repeated RoomMemberState member_states = 6;
+}

@@ -1,0 +1,181 @@
+syntax = "proto3";
+
+package pk;
+
+import "poker.share.proto";
+import "poker.trigger.proto";
+
+option go_package = ".;protocol";
+
+message GameRecord {
+  uint32 version = 1;
+  string uuid = 2;
+  uint32 create_time = 3;
+  uint32 finish_time = 4;
+  uint32 finish_scene = 5;
+  uint32 category = 6;
+  GameMeta meta = 7;
+  GameRule rule = 8;
+  repeated PlayerSnapshot players = 9;
+  repeated bytes events = 10;
+  uint32 season_id = 11;
+  PlayRuleSetting setting = 12;
+}
+
+message Event {
+  uint32 id = 1; // 事件ID
+  int64 time = 2; // 事件发生时间（单位：毫秒）
+  bytes buffer = 3; // 事件序列化内容（根据事件ID来）
+}
+
+// ENameBeginGame    id=1
+message EventBeginGame {
+}
+
+// ENameEndGame      id=2
+message EventEndGame {
+}
+
+// ENameBeginStage   id=3
+message EventBeginStage {
+  uint32 stage = 1;
+  repeated PlayerStageStartSnap stage_start_players = 2;
+  Multiple multiple = 3;
+  repeated GameEffect effects = 4;
+}
+
+// ENameEndStage     id=4
+message EventEndStage {
+  StageResult result = 1;
+  repeated GameEffect effects = 2;
+}
+
+// ENameConnect      id=5
+message EventConnect {
+  uint32 seat = 1;
+  uint32 connect = 2; // 1=连接 0=断开连接
+  uint32 ready = 3; // 就绪人数
+  uint32 game_state = 4; // 对局状态
+}
+
+// ENameDealCard     id=6
+message EventDealCard {
+  bytes deal_cards = 1; // 发牌的牌堆顺序（发之前的）
+  bytes river = 2; // 发牌之后剩余的3张牌
+  uint32 call_seat = 3; // 叫地主的座位号，同时也是第一个发牌的人
+  repeated PlayerStageStartSnap deal_card_players = 4;
+  DealSetting deal_setting = 5;
+  bytes tian_laizi = 6; // 天癞子
+}
+
+// ENameWaitCall     id=7
+message EventWaitCall {
+  uint32 seat = 1;
+}
+
+// ENameDoCall       id=8
+message EventDoCall {
+  uint32 seat = 1;
+  uint32 call = 2; // 是否叫地主 0=不叫 1=叫
+  int32 duration = 3; // 叫地主所花的毫秒数 （-1表示超时）
+}
+
+// ENameWaitGrab     id=9
+message EventWaitGrab {
+  uint32 seat = 1;
+}
+
+// ENameDoGrab       id=10
+message EventDoGrab {
+  uint32 seat = 1;
+  uint32 grab = 2; // 是否抢地主 0=不抢 1=抢
+  int32 duration = 3; // 抢地主所花的毫秒数 （-1表示超时）
+  Multiple multiple = 4;
+  repeated GameEffect effects = 5;
+}
+
+// ENameConfirm      id=11
+message EventConfirm {
+  uint32 seat = 1;
+  bytes river = 2; // 3张牌内容
+  bytes di_laizi = 3; // 地癞子
+}
+
+// ENameWaitDiscard  id=12
+message EventWaitDiscard {
+  uint32 seat = 1;
+  CardUnion last_union = 2; // 上次的有效出牌内容
+  uint32 thinking_time = 3; // 思考时间（单位：秒）
+}
+
+// ENameDoDiscard    id=13
+message EventDoDiscard {
+  uint32 seat = 1;
+  uint32 discard = 2;
+  CardUnion union = 3;
+  Multiple multiple = 4;
+  uint32 remain = 5;
+  int32 duration = 6; // 操作所花时间（毫秒）（-1表示超时）
+  repeated GameEffect effects = 7;
+  bool time_out = 8;
+}
+
+// ENameWaitOpenHand id=14
+message EventWaitOpenHand {
+  uint32 seat = 1;
+}
+
+// ENameDoOpenHand   id=15
+message EventOpenHand {
+  uint32 seat = 1;
+  bytes hand = 2;
+  Multiple multiple = 3;
+  repeated GameEffect effects = 4;
+}
+
+// ENameDelegate     id=16
+message EventDelegate {
+  uint32 seat = 1;
+  uint32 delegate = 2; // 是否托管 0=不托管 1=托管
+}
+
+// ENameWaitStage    id=17
+message EventWaitStage {
+}
+
+// ENameEmoji        id=18
+message EventEmoji {
+  uint32 seat = 1;
+  uint32 type = 2; // 0-emoji 1-快捷短语
+  uint32 emoji = 3; // emoji编号
+  uint32 phrase_id = 4; // 快捷短语编号
+}
+
+// ENameAFK          id=19
+message EventAFK {
+  uint32 seat = 1;
+  uint32 afk = 2; // 是否AFK 0=否 1=是
+}
+
+// ENameFight        id=20
+message EventFight {
+}
+
+// ENameVote        id=21
+message EventVote {
+  uint32 seat = 1;
+  bool initiate = 2;
+  bool agree = 3;
+}
+
+// ENameVoteResult        id=22
+message EventVoteResult {
+  bool result = 1;
+}
+
+// EventDiscardError        id=23
+message EventDiscardError {
+  uint32 error_seq = 1; // 有问题的轮次
+  string error_message = 2; // 错误原因
+  CardUnion union = 3; // 出牌内容
+}

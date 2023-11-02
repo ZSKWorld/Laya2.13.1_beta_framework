@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package pk;
+
+import "poker.auth.proto";
+import "poker.game.proto";

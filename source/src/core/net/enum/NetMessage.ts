@@ -174,16 +174,16 @@ export const enum NetMessage {
 	RequestBattleError = "NetMsg_RequestBattle_Error",
 
 	/**
-	 * @param output {@link ExistBattleOutput}
-	 * @param input {@link ExistBattleInput}
+	 * @param output {@link ExitBattleOutput}
+	 * @param input {@link ExitBattleInput}
 	 */
-	ExistBattle = "NetMsg_ExistBattle",
+	ExitBattle = "NetMsg_ExitBattle",
 
 	/**
-	 * @param output {@link ExistBattleOutput}
-	 * @param input {@link ExistBattleInput}
+	 * @param output {@link ExitBattleOutput}
+	 * @param input {@link ExitBattleInput}
 	 */
-	ExistBattleError = "NetMsg_ExistBattle_Error",
+	ExitBattleError = "NetMsg_ExitBattle_Error",
 
 	/**
 	 * @param output {@link AddFriendOutput}

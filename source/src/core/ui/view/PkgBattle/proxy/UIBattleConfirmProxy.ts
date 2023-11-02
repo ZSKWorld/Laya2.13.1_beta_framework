@@ -4,5 +4,5 @@ import { ViewID } from "../../../core/ViewID";
 import { UIBattleConfirmCtrl } from "../controller/UIBattleConfirmCtrl";
 
 export class UIBattleConfirmProxy extends BaseProxy<UIBattleConfirmCtrl>{
-    
+
 }

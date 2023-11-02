@@ -1,0 +1,284 @@
+syntax = "proto3";
+
+package pk;
+
+import "poker.share.proto";
+import "poker.trigger.proto";
+
+option go_package = ".;protocol";
+
+service Game {
+  // 获取对局信息
+  rpc FetchGameInfo(ReqEmpty) returns (ResFetchGameInfo);
+  // 连接控制器
+  rpc ConnectController(ReqEmpty) returns (ResEmpty);
+  // 准备就绪
+  rpc ReadyToPlay(ReqEmpty) returns (ResReadyToPlay);
+  // 同步数据
+  rpc SyncGame(ReqSyncGame) returns (ResSyncGame);
+  // 结束同步数据（暂未使用）
+  rpc FinishSync(ReqEmpty) returns (ResEmpty);
+  // 叫地主
+  rpc PlayerCallLord(ReqCallLord) returns (ResEmpty);
+  // 抢地主
+  rpc PlayerGrabLord(ReqGrabLord) returns (ResEmpty);
+  // 地主明牌
+  rpc MasterOpenHand(ReqMasterOpenHand) returns (ResEmpty);
+  // 出牌
+  rpc PlayerDiscard(ReqDiscard) returns (ResEmpty);
+  // 下一个小局
+  rpc PlayNextStage(ReqPlayNextStage) returns (ResEmpty);
+  // 托管
+  rpc Delegate(ReqDelegate) returns (ResEmpty);
+  // 发送表情
+  rpc Emoji(ReqEmoji) returns (ResEmpty);
+  // AFK状态改变
+  rpc AFK(ReqAFK) returns (ResEmpty);
+  // 好友房投票终止对局
+  rpc Vote(ReqVote) returns (ResEmpty);
+}
+
+// 获取对局信息
+message ResFetchGameInfo {
+  PlayRuleSetting setting = 1;
+  GameMeta meta = 2;
+  repeated PlayerSnapshot accounts = 3;
+  // 对局状态 0=创建 1=开始 2=结束 3=中断 4=销毁 5=暂停
+  uint32 game_state = 4;
+  string uuid = 5;
+  uint32 create_time = 6;
+}
+
+// 准备就绪
+message ResReadyToPlay {
+  // 对局状态 0=创建 1=开始 2=结束 3=中断 4=销毁 5=暂停
+  uint32 game_state = 1;
+}
+
+// 同步数据
+message ReqSyncGame {
+  uint32 step = 1; // 客户端保存的最大step
+}
+message ResSyncGame {
+  bool is_end = 1;
+  GameRestore game_restore = 2;
+}
+
+// 叫地主
+message ReqCallLord {
+  bool call = 1;
+  int32 duration = 2;
+}
+// 抢地主
+message ReqGrabLord {
+  bool grab = 1;
+  int32 duration = 2;
+}
+// 地主选择是否明牌，或者是否出牌
+message ReqMasterOpenHand {
+  bool open = 1; // open=true 为明牌操作，此时union无效；open=false，为出牌操作
+  CardUnion union = 2; // 出牌内容
+  int32 duration = 3;
+}
+// 玩家出牌
+message ReqDiscard {
+  bool discard = 1; // 是否出牌
+  CardUnion union = 2; // 出牌内容
+  int32 duration = 3;
+  int32 discard_event_id = 4; // 出牌轮次
+}
+// 继续下一个小局
+message ReqPlayNextStage {
+  bool open = 1;
+  int32 duration = 3;
+}
+// 托管
+message ReqDelegate {
+  bool delegate = 1;
+}
+// 发送表情
+message ReqEmoji {
+  uint32 type = 1; // 0-emoji 1-快捷短语
+  uint32 emoji = 2; // emoji编号
+  uint32 phrase_id = 3; // 快捷短语编号
+}
+// AFK状态改变
+message ReqAFK {
+  bool afk = 1; // false=取消AFK true=目前无效
+}
+
+message PlayerStageStart {
+  uint32 seat = 1;
+  bool open_hand = 2; // 明牌开始
+}
+
+// 当前座位的牌信息
+message DealCardSeat {
+  uint32 seat = 1;
+  uint32 count = 2; // 剩余牌的数量
+  bytes cards = 3; // 仅seat是自己时，才会有cards信息
+}
+
+// 游戏开始
+message NotifyGameStart {
+  string uuid = 1; // game uuid
+  uint32 time = 2; // 对局创建时间
+}
+// 游戏结束
+message NotifyGameEnd {
+}
+// 游戏中止
+message NotifyGameTerminated {
+}
+
+// Fight动画
+message NotifyFight {
+}
+
+// 开始新对局
+message NotifyStageStart {
+  uint32 current_stage = 1; // 当前对局（从1开始）
+  repeated PlayerStageStart players = 2; // 玩家开始信息
+  Multiple multiple = 3;
+  repeated GameEffect effects = 4;
+}
+// 结束当前对局
+message NotifyStageEnd {
+  uint32 winner = 1;
+  uint32 winner_camp = 2;
+  bool is_spring = 3;
+  // 玩家的结算信息
+  repeated PlayerStageEndSnap stage_end_players = 4;
+  Multiple multiple = 5;
+  repeated GameEffect effects = 6;
+}
+
+// 发牌
+message NotifyDealCard {
+  repeated DealCardSeat seats = 1;
+  uint32 call_seat = 2; // 叫地主的座位
+  uint32 tian_laizi_point = 3; // 天癞子点数
+}
+// 等待玩家确认是否要叫地主
+message NotifyWaitCallLord {
+  uint32 seat = 1;
+  uint32 timeout = 2; // 等待时长（seat为本人时才会发送）
+}
+// 玩家叫地主操作
+message NotifyCallLord {
+  uint32 seat = 1;
+  bool call = 2;
+}
+// 等待玩家确认是否要抢地主
+message NotifyWaitGrabLord {
+  uint32 seat = 1;
+  uint32 timeout = 2; // 等待时长（seat为本人时才会发送）
+}
+// 玩家抢地主操作
+message NotifyGrabLord {
+  uint32 seat = 1;
+  bool grab = 2;
+  Multiple multiple = 3;
+  repeated GameEffect effects = 4;
+}
+// 确认地主
+message NotifyConfirmLandlord {
+  uint32 seat = 1; // 地主的座位
+  bytes river = 2; // 3张公共牌信息
+  uint32 di_laizi_point = 3; // 地癞子点数
+}
+// 等待地主确认是否明牌
+message NotifyWaitOpenHand {
+  uint32 seat = 1;
+  uint32 timeout = 2; // 等待时长（seat为本人时才会发送）
+}
+// 地主确认是否明牌
+message NotifyOpenHand {
+  uint32 seat = 1;
+  bool open = 2;
+  bytes cards = 3; // 地主明牌内容
+  Multiple multiple = 4;
+  repeated GameEffect effects = 5;
+}
+// 等待玩家出牌
+message NotifyWaitDiscard {
+  uint32 seat = 1;
+  uint32 timeout = 2; // 等待时长（seat为本人时才会发送）
+  CardUnion last_union = 3; // 上次的有效出牌内容
+}
+// 玩家出牌
+message NotifyDiscard {
+  uint32 seat = 1;
+  bool discard = 2; // 是否出牌
+  CardUnion union = 3; // 出牌的牌型
+  Multiple multiple = 4; // 倍率（有变化时发送）
+  uint32 remain_count = 5; // 剩余牌数量
+  repeated GameEffect effects = 6;
+}
+
+// 等待开始下一局
+message NotifyWaitNewStage {
+}
+
+// 托管通知
+message NotifyDelegate {
+  uint32 seat = 1;
+  bool delegate = 2;
+}
+
+// AFK通知
+message NotifyAFK {
+  uint32 seat = 1;
+  bool afk = 2;
+}
+
+// 玩家连接状态通知
+message NotifyConnect {
+  uint32 seat = 1;
+  bool connect = 2; // true=已连接 false=已断开
+  uint32 ready = 3; // 就绪人数
+  uint32 game_state = 4; // 对局状态
+}
+
+// 发送表情
+message NotifyEmoji {
+  uint32 seat = 1;
+  uint32 type = 2; // 0-emoji 1-快捷短语
+  uint32 emoji = 3; // emoji编号
+  uint32 phrase_id = 4; // 快捷短语编号
+}
+
+message GameRestore {
+  repeated bytes actions = 1;
+}
+
+// 对局消息封装
+message NotifyGameAction {
+  uint32 seq = 1; // 消息编号 从0开始
+  int64 time = 2; // 消息发生的时间戳，单位：毫秒
+  string name = 3; // 消息名字
+  bytes data = 4; // 消息内容（protobuf序列化）
+  uint32 bucket = 5; // 消息桶 1=对局普通消息 2=实时插入的消息
+  string uuid = 6; // game uuid
+}
+
+message ReqVote {
+  bool initiate = 1;
+  bool agree = 2;
+}
+
+// 投票终止对局相关
+message NotifyVote {
+  uint32 seat = 1;
+  bool initiate = 2;
+  bool agree = 3;
+}
+
+message NotifyVoteResult {
+  bool result = 1;
+}
+
+message NotifyDiscardError {
+  uint32 error_seq = 1; // 有问题的轮次
+  string error_message = 2; // 错误原因
+}

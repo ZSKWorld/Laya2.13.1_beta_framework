@@ -1,0 +1,608 @@
+syntax = "proto3";
+
+package pk;
+
+option go_package = ".;protocol";
+
+message ClientUserInfo {
+  string device_id = 1;
+  string runtime_id = 2;
+  string device = 3;
+  string os = 4;
+  string ip = 5;
+  string channel = 6;
+  string client_version = 7;
+  string code = 8;
+}
+
+message AccountLevel {
+  uint32 type = 1; // 赛季类型
+  uint32 id = 2; // 段位编号
+  uint32 score = 3; // 当前段位胜场数
+  uint32 season_id = 4; // 赛季编号
+  uint32 extra = 5; // 额外奖励分
+}
+
+message SkinData {
+  uint32 type = 1;
+  uint32 res_id = 2;
+}
+
+
+
+message CharacterSkinGroup {
+  uint32 group_id = 1;
+  repeated SkinData skin_items = 2;
+  string name = 3;
+  uint32 create_time = 4;
+}
+
+message CharacterData {
+  uint32 character_id = 1;
+  uint32 current_skin_group = 2;
+  repeated CharacterSkinGroup skin_groups = 3;
+  uint32 exp = 4;
+  uint32 rewarded_level = 5;
+  repeated uint32 rewarded_levels = 6;
+  repeated QuickPhrase quick_phrase = 7;
+}
+
+message AccountCharacter {
+  uint32 current_character_id = 1;
+  repeated CharacterData character = 2;
+  repeated uint32 rewarded_suites = 3;
+}
+
+message ItemReplace {
+  uint64 replace_count = 1;
+  uint32 res_id = 2;
+  uint64 res_count = 3;
+}
+
+// 通用道具结构，可用于奖励道具推送
+// PS 不需要另外做个单独的奖励结构了
+message Item {
+  uint32 res_id = 1;
+  int64 res_count = 2;
+  repeated ItemReplace replace = 3;
+  uint32 update_time = 4; // 更新时间，只在背包相关协议中有值
+}
+
+message AccountBag {
+  repeated Item items = 1;
+}
+
+message AccountFriend {
+  repeated uint32 friend = 1;
+  repeated AccountFriendRequest apply_request = 2;
+}
+
+message Mail {
+  uint32 read_time = 1;
+  uint32 recv_attachment_time = 2;
+  uint32 mail_id = 3;
+  uint32 expire_time = 4;
+  uint32 create_time = 5;
+}
+
+message MailDetail {
+  string title = 1;
+  string content = 2;
+  repeated Item attachments = 3;
+  uint32 mail_id = 4;
+}
+
+message AccountMail {
+  repeated Mail mails = 1;
+}
+
+message AccountDailyTask {
+  repeated BaseTaskProgress progresses = 1;
+}
+
+message AccountAchievement {
+  repeated AchievementProgress achievement_progresses = 1; // 成就进度
+  repeated AchievementLevelProgress level_progresses = 2; // 成就等级领奖记录
+}
+
+// 相关更新结构体为 AccountSettingUpdate
+message AccountSetting {
+  uint32 achievement_permission = 1;
+  uint32 comment_permission = 2;
+  uint32 brief_season_permission = 3;
+}
+
+message EffectData {
+  uint32 type = 1;
+  uint32 res_id = 2;
+}
+
+message CardFaceData {
+  uint32 type = 1;
+  uint32 res_id = 2;
+}
+
+message EffectGroup {
+  uint32 group_id = 1;
+  repeated EffectData effects = 2;
+}
+
+message CardFaceGroup {
+  uint32 group_id = 1;
+  repeated CardFaceData card_faces = 2;
+  bool open_cutin = 3;
+}
+
+message AccountDecoration {
+  uint32 lobby_background = 1;
+  uint32 game_background = 2;
+  uint32 effect_main_group = 3;
+  repeated EffectGroup effects = 4;
+  uint32 card_face_main_group = 5;
+  repeated CardFaceGroup card_faces = 6;
+}
+
+message SosCoinData {
+  uint32 id = 1;
+  uint32 count = 2;
+}
+
+message ShopRecord {
+  uint32 shop_id = 1;
+  uint32 count = 2;
+}
+
+message PickupRecord {
+  uint32 pickup_id = 1;
+  uint32 pickup_count = 2;
+}
+
+message AccountMisc {
+  repeated SosCoinData sos_coin = 1;
+  repeated uint32 read_ann_id = 2;
+  repeated ShopRecord shop_record = 3;
+  repeated PickupRecord pickup_record = 4;
+}
+
+message CardSnapshot {
+  uint32 suit = 1;
+  uint32 points = 2;
+}
+
+message ReqEmpty {
+}
+
+message ResEmpty {
+}
+
+message AccountBrief1 {
+  uint32 account_id = 1;
+  string nickname = 2;
+  uint32 avatar_id = 3;
+  uint32 title_id = 4;
+  repeated AccountLevel levels = 5;
+  uint32 frame_id = 6;
+  string avatar_png = 7; // 头像图片地址
+  uint32 likes = 8; //点赞数
+  string bust_png = 9;
+}
+
+message CharacterBrief {
+  uint32 id = 1; // 使用的角色ID
+  repeated SkinData skins = 2; // 该角色使用的皮肤列表
+  uint32 exp = 3;
+}
+
+message AccountBrief2 {
+  AccountBrief1 brief1 = 1;
+  CharacterBrief character = 2;
+}
+
+message GameSummary {
+  uint32 game_count = 1; // 对局数，多局制统计方式：每一小局算一局
+  uint32 win_count = 2; // 胜场数
+  uint32 win_hand_count = 3;
+  bytes recent_win = 4; // 近期胜利记录
+  uint32 highest_mul = 5; // 最高倍数
+  uint32 highest_win = 6; // 最高连胜
+  uint32 discard_duration = 7; // 出牌总时长
+  uint32 positive_bean_sum = 8; // 赢得豆子的总数（不算扣除豆子的场次）
+  uint32 positive_bean_count = 9; // 赢得豆子的场次（不算扣除豆子的场次）
+
+  // 出牌风格
+  uint32 open_count = 20; // 明牌开始次数
+  uint32 landlord_open_count = 21; // 地主明牌次数
+  uint32 total_discard_count = 22; // 累计出牌的次数（自己出牌后所有家不要次数）
+  uint32 landlord_count = 23; // 成为鬼王次数
+  uint32 landlord_win_count = 24; // 鬼王获胜的局数
+  uint32 farmer_count = 25; // 武士的局数
+  uint32 farmer_win_count = 26; // 武士获胜的局数
+  uint32 teammate_complete_count = 27;  // 队友先出完次数
+  uint32 multiple_sum = 28; // 所有对局的倍数累和
+  repeated CardShape shapes = 29; // 牌型统计
+  uint32 spring_count = 30; // 春天次数
+}
+
+message CardShape {
+  uint32 type = 1; // 牌型
+  uint32 count = 2; // 数量
+}
+
+message GameStatistic {
+  uint32 play_mode = 1;
+  GameSummary summary = 2;
+  repeated RecentTrend recent_trend_list = 3;
+}
+
+message SeasonStatistic {
+  uint32 season_id = 1;
+  uint32 season_type = 2;
+  uint32 highest_level_id = 3;
+  uint32 highest_level_score = 4;
+  // GameSummary summary = 5;
+  // SeasonSummary season_summary = 6;
+}
+
+message CharacterGameCount {
+  uint32 character_id = 1;
+  uint32 count = 2;
+}
+
+message SeasonMatchSummary {
+  uint32 match_id = 1;
+  uint32 game_count = 2;
+  uint32 win_count = 3;
+}
+
+message SeasonSummaries {
+  repeated SeasonSummary season_summaries = 1;
+}
+
+message SeasonSummary {
+  uint32 season_id = 1;
+  uint32 season_type = 2;
+  repeated CharacterGameCount character_game_count = 3; // 各人物使用次数
+  uint32 beat_count = 4; // 击败玩家数
+  uint32 total_time = 5; // 总游戏时长
+  uint32 tongbi_count = 6; // 获取铜币数
+  int32 score_count = 7; // 总段位分变化
+  uint32 extra_score_count = 8; // 总获取奖励分
+  uint32 highest_tongbi = 9; // 最高单局获得铜币
+  uint32 cap_count = 10; // 封顶次数
+  uint32 character_exp_count = 11; // 生涯经验获取数
+  uint32 tips_count = 12; // 场代总花费
+  uint32 login_day_count = 13; // 登陆天数
+  uint32 daily_task_count = 14; // 完成每日任务数
+  uint32 sos_count = 15; // 救济金数
+  uint32 chest_count = 16; // 银之礼盒开启数
+  repeated SeasonMatchSummary match_summary = 17; // 各排位类型数据
+}
+
+message RecentTrend {
+  bool lord = 1;         // 是否地主
+  bool win = 2;          // 胜负
+  uint32 multiple = 3;   // 倍率
+  bool copper_top = 4;   // 铜币封顶
+}
+
+message GoodsRecord {
+  uint32 goods_id = 1; 
+  uint32 purchased_count = 2; // 购买次数,仅礼包使用
+  uint32 start_time = 3; // 开始时间，仅礼包使用
+  uint32 end_time = 4; // 结束时间，仅礼包使用
+  bool is_first_pay = 5; // 是否有首充优惠，仅充值使用
+
+  uint32 wallet = 6;            // 小钱包数额，仅月卡使用
+  uint32 last_receive_time = 7; // 上次领取时间，仅月卡使用
+  uint32 expire_time = 8;       // 月卡到期时间，仅月卡使用
+}
+
+message AccountMall {
+  uint32 accumulate_value = 1;
+  uint32 vip = 2;
+  repeated uint32 received_vip_rewards = 3;
+  repeated GoodsRecord currency = 4;
+  repeated GoodsRecord package = 5;
+  repeated GoodsRecord month_ticket = 6;
+}
+
+message AccountBrief3 {
+  AccountBrief2 brief2 = 1;
+  repeated GameStatistic game_statistic = 2;
+  repeated SeasonStatistic season_statistic = 3;
+  uint32 last_achieved_achievement_id = 4; // 最后一次完成的成就ID
+  uint32 total_achieved_achievement_point = 5; // 总的成就点数
+  uint32 profile_background = 6; // 个人资料背景
+  uint32 season_permission = 7; // 查看赛季信息的权限 0-所有人 1-仅好友 2-仅自己
+}
+
+message AccountFriendRequest {
+  uint32 account_id = 1;
+  uint32 apply_time = 2;
+}
+
+message OptionalUint32 {
+  bool ok = 1;
+  uint32 value = 2;
+}
+
+message OptionalString {
+  bool ok = 1;
+  string value = 2;
+}
+
+message BaseTaskProgress {
+  uint32 task_id = 1;
+  uint32 counter = 2;
+  uint32 achieved = 3;
+  uint32 rewarded = 4;
+}
+
+message AchievementProgress {
+  uint32 achievement_id = 1;
+  uint32 counter = 2;
+  uint32 achieved = 3;
+  uint32 achieved_time = 4;
+  uint32 rewarded = 5;
+}
+
+message AchievementLevelProgress {
+  uint32 level = 1;
+  uint32 rewarded_time = 2;
+}
+
+message Announcement {
+  uint32 id = 1;
+  string content = 2;
+  string title = 3;
+}
+
+// 斗地主玩法配置
+// 添加客户端在斗地主玩法下允许配置的字段（不需要包含GameRule的所有字段）
+message LandlordPlaySetting {
+  uint32 stage_count = 2; // 对局数量
+  uint32 can_multiple = 3; // 是否允许加倍
+  uint32 can_open_hands = 4; // 是否允许明牌
+  uint32 max_point = 5; // 最大点数（鬼王封顶）
+  // uint32 shuffle_mode = 6; // 洗牌模式 1=斗地主随机洗牌 2=斗地主牌库随机
+  uint32 game_mode = 6; // 对局模式 1-正常斗地主 2-不洗牌模式 3-天地癞子模式
+  DevPlaySetting dev = 7; // 开发环境设置，正式环境无效
+
+  // // 可选特性（1=天癞子 2=地癞子）
+  // // 目前服务器会检查 天地癞子必须一起
+  // repeated uint32 features = 8;
+}
+
+// 玩法配置
+// 注意：后续新的玩法规则这里面补充添加
+message PlayRuleSetting {
+  uint32 rule = 1; // 选择的玩法规则  1=斗地主（下面需要读取landlord字段）
+  LandlordPlaySetting landlord = 2; // 斗地主
+}
+
+message PlayerSnapshot {
+  uint32 account_id = 1;
+  string nickname = 2;
+  repeated AccountLevel levels = 3;
+  uint32 open = 4; // 是否明牌开始 0=否 1=是
+  uint32 character_id = 5;
+  repeated SkinData skins = 6;
+  uint32 seat = 7;
+  int64 currency = 8;
+  uint32 title_id = 9; // 称号
+  repeated uint32 emoji = 10; // 表情列表
+  repeated EffectData effects = 11; // 特效列表
+  repeated QuickPhrase quick_phrase = 12; // 快捷短语列表
+  repeated CardFaceData card_faces = 13; // 牌面列表
+  bool open_cutin = 14;
+}
+
+message PlayMeta {
+  uint32 room_id = 1;
+  uint32 match_id = 2;
+}
+
+message GameMeta {
+  uint32 room_id = 1; // 友人房ID
+  uint32 match_id = 2; // 匹配配置ID
+}
+
+// 账号正在进行中的对局信息
+message AccountPlayingGame {
+  string uuid = 1;
+  uint32 category = 2; // 1=友人房 2=排位
+  GameMeta meta = 3; // 对局
+}
+
+// 账号好友房信息
+message AccountRoomInfo {
+  uint32 room_id = 1;
+}
+
+// 账号在线信息
+message AccountOnlineState {
+  uint32 account_id = 1;
+  bool online = 2; // 是否在线
+  uint32 last_login_time = 3; // 上次登录时间
+  uint32 last_logout_time = 4; // 上次登出时间
+  AccountPlayingGame playing = 5; // 正在进行中的对局信息
+  AccountRoomInfo room = 6; // 好友房信息
+}
+
+// 开发环境对局作弊牌型
+message GameDevShuffle {
+  uint32 shuffle_id = 1;
+  uint32 create_time = 2;
+  string cards = 3;
+  string title = 4;
+  string description = 5;
+}
+
+// 开发环境对局作弊设置（包含之后需要的所有作弊设置）
+message DevPlaySetting {
+  uint32 open_hand = 1; // 是否展开所有人的手牌 0=否 1=是
+  uint32 open_river = 2; // 是否展开发牌之后的最后三张牌 0=否 1=是
+  uint32 shuffler_id = 3;
+  uint32 cheat_mode = 4; // 是否开启作弊牌谱
+}
+
+// 对局发牌设置（不完全等价 DevPlaySetting，仅限于发牌时候的设置）
+message DealSetting {
+  uint32 open_hand = 1; // 是否展开所有人的手牌 0=否 1=是
+  uint32 open_river = 2; // 是否展开发牌之后的最后三张牌 0=否 1=是
+  uint32 shuffler_id = 3;
+}
+
+// 对局宝箱的进度更新信息
+message GameChestProgressUpdate {
+  uint32 chest_id = 1;
+  uint32 origin = 2;
+  uint32 final = 3;
+  bool is_graded = 4;
+  repeated Item rewards = 5;
+}
+
+// 公共倍率
+message Multiple {
+  uint32 initial = 1; // 初始
+  repeated uint32 open_hand = 2; // 明牌
+  repeated uint32 grab_lord = 3; // 抢地主
+  repeated uint32 boom = 4; // 炸弹
+  uint32 spring = 5; // 春天
+}
+
+// 出的牌型
+message CardUnion {
+  uint32 type = 1; // 类型
+  bytes primary = 2; // 逻辑牌主牌
+  bytes secondary = 3; // 逻辑牌副牌
+  bytes entity_primary = 4; // 实体牌主牌
+  bytes entity_secondary = 5; // 实体牌副牌
+}
+
+// 对局规则
+// 对局进程使用
+message GameRule {
+  uint32 stage = 1; // 总对局数
+  uint32 player_count = 2; // 玩家人数
+  uint32 multiple = 3; // 是否允许加倍
+  uint32 open_hand = 4; // 是否允许明牌
+  uint32 base_point = 5; // 底分
+  uint32 max_score = 6; // 封顶点数
+  uint32 fight = 7; // Fight动画
+  uint32 shuffle_mode = 8; // 洗牌模式 1=斗地主随机洗牌 2=斗地主牌库随机
+  uint32 ai_level = 9; // AI等级
+  DevPlaySetting dev = 10; // 开发环境设置
+  uint32 tips = 11; // 场代
+  uint32 init_multi = 12; // 初始倍率
+  repeated uint32 features = 13; // 特征
+}
+
+
+// 玩家对局开始时快照
+message PlayerStageStartSnap {
+  uint32 seat = 1;
+  bytes hand = 2;
+  uint32 open = 3; // 是否明牌 0=否 1=是
+  uint32 open_start = 4; // 是否明牌开始 0=否 1=是
+  uint32 camp = 5;
+  uint32 delegate = 6;
+}
+
+message PlayerStageEndSnap {
+  uint32 seat = 1;
+  uint32 camp = 2;
+  uint32 base_point = 3;
+  uint32 multiple = 4;
+  int64 stage_score = 5; // 小局得分
+  int64 fixed_score = 6; // 小局修正得分 （=0时表示没有修正，直接使用stage_score字段）（刚好达到上限分数也是封顶）
+  int64 total_score = 7; // 所有小局总分
+  bytes hand = 8;
+  uint32 is_open = 9;
+  uint32 win = 10;
+  int64 stage_currency = 11; // 小局获得货币
+  int64 fixed_currency = 12; // 小局获得货币的修正（=0时表示没有修正）
+  uint32 win_stage = 13;
+  uint32 game_rule_fix_flag = 14; // 游戏规则封顶触发修正标记 0=未触发修正 1=触发修正（影响fixed_score值）
+  uint32 player_debt_fix_flag = 15; // 玩家欠费触发修正标记 0=未触发修正 1=触发修正（影响fixed_currency值）
+  uint32 extra_score = 16; // 奖励分
+}
+
+message StageResult {
+  uint32 winner = 1;
+  uint32 winner_camp = 2;
+  uint32 is_spring = 3;
+  repeated PlayerStageEndSnap stage_end_players = 4;
+  Multiple multiple = 5;
+  uint32 stage = 6;
+}
+
+message AccountSeasonStatistic {
+  uint32 type = 1; // 赛季类型
+  uint32 id = 2; // 段位编号
+  uint32 score = 3; // 当前段位胜场数
+  uint32 season_id = 4; // 赛季编号
+}
+
+message WordStock {
+  uint32 sentence_id = 1;
+  repeated uint32 words_id = 2;
+}
+
+message Comment {
+  int64 auto_id = 1;
+  uint32 account_id = 2;
+  uint32 commentor = 3;
+  WordStock comment = 4;
+  uint32 emo_id = 5;
+  uint32 comment_time = 6; 
+}
+
+message QuickPhrase {
+  uint32 phrase_id = 1;
+  WordStock quick_phrase = 2;
+}
+
+message AccountBattlePassRewards {
+  repeated uint32 free_rewards = 1;
+  repeated uint32 rewards = 2;
+}
+
+message AccountBattlePassTask {
+  uint32 task_id = 1;
+  uint32 progress = 2;
+  bool achieved = 3;
+  bool rewarded = 4;
+}
+
+message AccountBattlePass {
+  uint32 battle_pass_id = 1;
+  uint32 paid_version = 2;
+  uint32 level = 3;
+  uint32 exp = 4;
+  uint32 week_exp = 5;
+  AccountBattlePassRewards rewards = 6;
+  repeated AccountBattlePassTask tasks = 7;
+  uint32 settle_time = 8;
+}
+
+message AccountFreePackage {
+  uint32 id = 1;
+  uint32 receive_count = 2;
+  uint32 last_receive_time = 3;
+}
+
+message AccountSeasonRewards {
+  uint32 season_id = 1;
+  repeated uint32 received_rewards = 2; // 已领取奖励
+}
+
+message AccountSeason {
+  repeated AccountSeasonRewards season_rewards = 1;
+}
+
+message PaymentPlatformConfig {
+  uint32 platform_id = 1;
+  uint32 open_payment = 2;
+  uint32 open_clear = 3;
+}

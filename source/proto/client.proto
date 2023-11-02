@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pk;
+
+import "poker.auth.proto";
+import "poker.game.proto";
+import "poker.event.proto";
+import "poker.room.proto";
+import "poker.lobby.proto";
+import "poker.match.proto";
+import "poker.payment.proto";

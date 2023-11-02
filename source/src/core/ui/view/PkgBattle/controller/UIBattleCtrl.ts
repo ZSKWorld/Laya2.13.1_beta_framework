@@ -1,4 +1,5 @@
 import { BattleType } from "../../../../net/enum/BattleEnums";
+import { BattleService } from "../../../../net/Services";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ViewID } from "../../../core/ViewID";
 import { UIBattleMsg, UIBattleView } from "../view/UIBattleView";
@@ -16,7 +17,7 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 	}
 
 	override onEnable() {
-		
+
 	}
 
 	private onBtnOfflineClick() {
@@ -29,8 +30,7 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 
 	@CtrlKeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ESCAPE)
 	private onBtnQuitBattleClick() {
-		this.showView(ViewID.UIChooseBattleView);
-		this.removeSelf();
+		BattleService.Inst.exitBattle({});
 	}
 
 }

@@ -1,6 +1,6 @@
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { UIPoolKey } from "../../../../tool/UIPoolKey";
-import { ComTipInfoView } from "../../view/Coms/ComTipInfoView";
+import { ComTipInfoView } from "../../view/coms/ComTipInfoView";
 
 export interface ComTipInfoData {
     text: string;

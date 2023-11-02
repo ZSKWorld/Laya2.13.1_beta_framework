@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package pk;
+
+import "poker.share.proto";
+
+option go_package = ".;protocol";
+
+// 支付相关协议
+service Payment {
+  // 创建沙盒订单
+  rpc CreateSandboxOrder(ReqCreateSandboxOrder) returns (ResCreateSandboxOrder);
+  // 处理沙盒订单
+  rpc ResolveSandboxOrder(ReqResolveSandboxOrder) returns (ResResolveSandboxOrder);
+  // 处理疑似未支付订单
+  rpc ResolveUnfilledOrder(ReqResolveUnfilledOrder) returns (ResResolveUnfilledOrder);
+  // 创建Xsolla订单
+  rpc CreateXsollaOrder(ReqCreateXsollaOrder) returns (ResCreateXsollaOrder);
+  // 创建Mycard订单
+  rpc CreateMycardOrder(ReqCreateMycardOrder) returns (ResCreateMycardOrder);
+  // 查询订单状态（只能查自己的订单，别人的订单无效）
+  rpc QueryOrder(ReqQueryOrder) returns (ResQueryOrder);
+  // 创建Apple订单
+  rpc CreateAppleOrder(ReqCreateAppleOrder) returns (ResCreateAppleOrder);
+  // 校验Apple订单
+  rpc CheckAppleOrder(ReqCheckAppleOrder) returns (ResEmpty);
+  // 获取Steam地址
+  rpc FetchSteamLocation(ReqFetchSteamLocation) returns (ResFetchSteamLocation);
+  // 创建Steam订单
+  rpc CreateSteamOrder(ReqCreateSteamOrder) returns (ResCreateSteamOrder);
+  // 校验Steam订单
+  rpc CheckSteamOrder(ReqCheckSteamOrder) returns (ResEmpty);
+  // 创建Google订单
+  rpc CreateGoogleOrder(ReqCreateGoogleOrder) returns (ResCreateGoogleOrder);
+  // 校验Google订单
+  rpc CheckGoogleOrder(ReqCheckGoogleOrder) returns (ResEmpty);
+}
+
+message ReqCreateSandboxOrder {
+  uint32 goods_id = 1;
+  string debt_order_id = 2;
+}
+message ResCreateSandboxOrder {
+  string order_id = 1;
+}
+message ReqResolveSandboxOrder {
+  string order_id = 1;
+  string action = 2; // pay：模拟成功支付, close：模拟取消支付
+}
+message ResResolveSandboxOrder {
+}
+
+// 通知：充值结果
+message NotifyPayResult {
+  uint32 pay_status = 1; // 1=支付成功 2=支付取消 3=已退款 4=请联系客服退款 5=补款成功
+  string order_id = 2;
+  uint32 goods_id = 3;
+  repeated Item rewards = 4;
+  uint32 accumulate_value = 5; // 累充额度
+  message BattlePassLevel {
+    uint32 origin = 1;
+    uint32 final = 2;
+  }
+  BattlePassLevel level = 6;
+  string debt_order_id = 7;
+}
+
+message ReqResolveUnfilledOrder {
+  string action = 1; // payed: 已支付, cancel: 取消支付
+}
+
+message ResResolveUnfilledOrder {
+}
+
+message ReqCreateXsollaOrder {
+  uint32 goods_id = 1;
+  string debt_order_id = 2;
+}
+message ResCreateXsollaOrder {
+  string order_id = 1;
+  string url = 2;
+}
+
+message ReqCreateMycardOrder {
+  uint32 goods_id = 1;
+  string debt_order_id = 2;
+}
+message ResCreateMycardOrder {
+  string order_id = 1;
+  string url = 2;
+  string auth_code = 3;
+}
+
+message ReqQueryOrder {
+  string order_id = 1;
+}
+message ResQueryOrder {
+  uint32 pay_result = 1; // 1-交付未完成 2-交付已完成 3-已退款
+  repeated Item rewards = 2;
+}
+
+message ReqCreateAppleOrder {
+  uint32 goods_id = 1;
+  string debt_order_id = 2;
+}
+message ResCreateAppleOrder {
+  string order_id = 1;
+}
+
+message ReqCheckAppleOrder {
+  string order_id = 1;
+  string transaction_id = 2;
+  string receipt_data = 3;
+}
+
+message ReqFetchSteamLocation {
+  uint64 steam_id = 1;
+}
+
+message ResFetchSteamLocation {
+  string country = 2;
+}
+
+message ReqCreateSteamOrder {
+  uint32 goods_id = 1;
+  string language = 2;
+  uint64 steam_id = 3;
+  string debt_order_id = 4;
+}
+
+message ResCreateSteamOrder {
+  string order_id = 1;
+}
+
+message ReqCheckSteamOrder {
+  string order_id = 1;
+}
+
+message ReqCreateGoogleOrder {
+  uint32 goods_id = 1;
+  string debt_order_id = 2;
+}
+
+message ResCreateGoogleOrder {
+  string order_id = 1;
+}
+
+message ReqCheckGoogleOrder {
+  string order_id = 1;
+  string token = 2;
+}

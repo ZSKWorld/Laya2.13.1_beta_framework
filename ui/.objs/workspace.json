@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "auxline1": true,
+  "snapToGrid": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66qjdo0",
@@ -64,10 +64,10 @@
     "/Component/UIMain/Train/"
   ],
   "showGrid": false,
-  "snapToGrid": true,
+  "gridSize": 10,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 10,
+  "auxline1": true,
   "gridColor": 42
 }
