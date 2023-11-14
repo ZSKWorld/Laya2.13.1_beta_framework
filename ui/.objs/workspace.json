@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "snapToGrid": true,
+  "auxline1": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66qjdo0",
@@ -23,7 +23,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vith2b66whk31d",
+  "doc.activeDoc": "ui://vith2b66sbd01",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "va1qbl3h",
@@ -64,10 +64,10 @@
     "/Component/UIMain/Train/"
   ],
   "showGrid": false,
-  "gridSize": 10,
+  "snapToGrid": true,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "auxline1": true,
+  "gridSize": 10,
   "gridColor": 42
 }

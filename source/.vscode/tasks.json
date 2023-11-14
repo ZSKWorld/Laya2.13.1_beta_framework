@@ -6,11 +6,31 @@
         {
             "label": "编译项目",
             "type": "shell",
-            "command": "layaair2-cmd compile",
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "command": "nvm use 16.20.0",
+            "dependsOn": [
+                "切换node_10_24_1",
+                "编译"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "close": true
             },
+            "problemMatcher": []
+        },
+        {
+            "label": "切换node_10_24_1",
+            "type": "shell",
+            "command": "nvm use 10.24.1",
+            "hide": true,
+            "presentation": {
+                "close": true
+            }
+        },
+        {
+            "label": "编译",
+            "type": "shell",
+            "command": "layaair2-cmd compile",
+            "hide": true,
             "presentation": {
                 "close": true
             }
