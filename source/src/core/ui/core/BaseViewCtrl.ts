@@ -18,7 +18,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	private __messageMap: KeyMap<Function[]>;
 
 	override get isSingleton(): boolean { return true; }
-	override get name(): string { return this[ "constructor" ].name; }
+	override get name(): string { return this.constructor.name; }
 	override get view(): V { return this._view; }
 	override get listener(): Laya.EventDispatcher { return this._listener; }
 
