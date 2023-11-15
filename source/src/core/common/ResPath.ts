@@ -43,6 +43,11 @@
 		Font15 = "res/font/Font15.ttf",
 	}
 
+	// res/prescreen/
+	export const enum PrescreenPath {
+		Prescreen = "res/prescreen/prescreen.png",
+	}
+
 	// res/skeleton/
 	export const enum SkeletonPath {
 		Bianhua = "res/skeleton/bianhua.sk",
@@ -100,6 +105,59 @@
 		Yuchaolailin = "res/skeleton/yuchaolailin.sk",
 		Zhaohuanguanjia = "res/skeleton/zhaohuanguanjia.sk",
 		Zhuancheng = "res/skeleton/zhuancheng.sk",
+	}
+
+	// res/sound/
+	export const enum SoundPath {
+		Button1 = "res/sound/Button1.wav",
+		Button10 = "res/sound/Button10.wav",
+		Button11 = "res/sound/Button11.wav",
+		Button12 = "res/sound/Button12.wav",
+		Button13 = "res/sound/Button13.wav",
+		Button14 = "res/sound/Button14.wav",
+		Button15 = "res/sound/Button15.wav",
+		Button16 = "res/sound/Button16.wav",
+		Button17 = "res/sound/Button17.wav",
+		Button18 = "res/sound/Button18.wav",
+		Button19 = "res/sound/Button19.wav",
+		Button2 = "res/sound/Button2.wav",
+		Button20 = "res/sound/Button20.wav",
+		Button21 = "res/sound/Button21.wav",
+		Button22 = "res/sound/Button22.wav",
+		Button23 = "res/sound/Button23.wav",
+		Button24 = "res/sound/Button24.wav",
+		Button25 = "res/sound/Button25.wav",
+		Button26 = "res/sound/Button26.wav",
+		Button27 = "res/sound/Button27.wav",
+		Button28 = "res/sound/Button28.wav",
+		Button29 = "res/sound/Button29.wav",
+		Button3 = "res/sound/Button3.wav",
+		Button30 = "res/sound/Button30.wav",
+		Button31 = "res/sound/Button31.wav",
+		Button32 = "res/sound/Button32.wav",
+		Button33 = "res/sound/Button33.wav",
+		Button34 = "res/sound/Button34.wav",
+		Button35 = "res/sound/Button35.wav",
+		Button36 = "res/sound/Button36.wav",
+		Button37 = "res/sound/Button37.wav",
+		Button38 = "res/sound/Button38.wav",
+		Button39 = "res/sound/Button39.wav",
+		Button4 = "res/sound/Button4.wav",
+		Button40 = "res/sound/Button40.wav",
+		Button41 = "res/sound/Button41.wav",
+		Button42 = "res/sound/Button42.wav",
+		Button43 = "res/sound/Button43.wav",
+		Button44 = "res/sound/Button44.wav",
+		Button45 = "res/sound/Button45.wav",
+		Button46 = "res/sound/Button46.wav",
+		Button47 = "res/sound/Button47.wav",
+		Button48 = "res/sound/Button48.wav",
+		Button49 = "res/sound/Button49.wav",
+		Button5 = "res/sound/Button5.wav",
+		Button6 = "res/sound/Button6.wav",
+		Button7 = "res/sound/Button7.wav",
+		Button8 = "res/sound/Button8.wav",
+		Button9 = "res/sound/Button9.wav",
 	}
 
 	// res/ui/

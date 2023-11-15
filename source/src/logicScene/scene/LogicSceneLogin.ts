@@ -21,11 +21,11 @@ export class LogicSceneLogin extends LogicSceneBase<SceneLoginData> {
 		];
 	}
 
-	protected onEnter() {
+	protected override onEnter() {
 		uiMgr.showView(ViewID.UILoginView);
 	}
 
-	protected onExit() {
+	protected override onExit() {
 	}
 
 }

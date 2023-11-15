@@ -17,11 +17,11 @@ export class LogicSceneMain extends LogicSceneBase<SceneMainData> {
 		];
 	}
 
-	protected onEnter() {
+	protected override onEnter() {
 		redDotMgr.init();
 		uiMgr.showView(ViewID.UIMainView);
 	}
 
-	protected onExit() {
+	protected override onExit() {
 	}
 }

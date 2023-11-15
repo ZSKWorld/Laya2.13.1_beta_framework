@@ -51,7 +51,7 @@ class Main {
 			[ LogicScene.MainScene, new LogicSceneMain() ],
 			[ LogicScene.GameScene, new LogicSceneGame() ],
 		]);
-		logicSceneMgr.enterScene(LogicScene.InitScene);
+		logicSceneMgr.enterScene(LogicScene.PreScreen);
 	}
 
 }

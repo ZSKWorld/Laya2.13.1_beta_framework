@@ -37,8 +37,8 @@ export class ViewExtend {
 			viewId.startsWith("UI") && uiMgr.removeView(viewId);
 		}
 
-		const constructFromResource = prototype[ "constructFromResource" ];
-		prototype[ "constructFromResource" ] = function () {
+		const constructFromResource = prototype.constructFromResource;
+		prototype.constructFromResource = function () {
 			constructFromResource.call(this);
 			const viewInst = <IView>this;
 			let viewCtrl: IViewCtrl;

@@ -24,6 +24,7 @@ class LogicSceneManager extends Observer {
 		if (this._currentType != type) {
 			this._loadCompleted = false;
 			const newScene = this._sceneMap.get(type);
+			newScene.preEnter();
 			newScene.load().then(() => {
 				this._currentType = type;
 				this._currentScene?.exit();

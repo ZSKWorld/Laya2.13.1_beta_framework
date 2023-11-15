@@ -15,7 +15,10 @@ export interface IScene {
 	/**加载场景，进入场景前的资源加载 */
 	load(): Promise<void>;
 
-	/** 进入场景 */
+	/** 资源加载前执行 */
+	preEnter(): void;
+
+	/** 进入场景，资源加载后执行 */
 	enter(data: any): void;
 
 	/** 退出场景 */

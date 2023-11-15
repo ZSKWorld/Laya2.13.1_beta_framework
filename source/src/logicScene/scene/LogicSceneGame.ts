@@ -18,11 +18,11 @@ export class LogicSceneGame extends LogicSceneBase<SceneGameData> {
 		];
 	}
 
-	protected onEnter(): void {
+	protected override onEnter(): void {
 		uiMgr.showView(ViewID.UIChooseBattleView, this.data.battleType);
 	}
 
-	protected onExit(): void {
+	protected override onExit(): void {
 
 	}
 

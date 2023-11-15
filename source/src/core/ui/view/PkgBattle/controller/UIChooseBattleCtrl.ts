@@ -21,6 +21,16 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		this.refreshList();
 	}
 
+	override onOpenAni(): Promise<void> {
+		return new Promise<void>(resolve => {
+			const childIndex = this.view.list_battle.numChildren - 1;
+			this.view.list_battle._children.forEach((v, i) => {
+				v.alpha = 0;
+				Laya.Tween.to(v, { alpha: 1 }, 100, null, i == childIndex ? Laya.Handler.create(null, resolve) : null, i * 50, true);
+			});
+		});
+	}
+
 	@RegisterEvent(UserDataEvent.UserData_Battle_Changed)
 	private refreshList() {
 		this.view.setBattleType(this.data - 1);

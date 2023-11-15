@@ -1,5 +1,6 @@
 import { GameEvent } from "../../core/common/GameEvent";
 import { ResPath } from "../../core/common/ResPath";
+import { CfgManager } from "../../core/config/CfgManager";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { websocket } from "../../core/net/WebSocket";
 import { layerMgr } from "../../core/ui/core/LayerManager";
@@ -7,6 +8,7 @@ import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewID } from "../../core/ui/core/ViewID";
 import { viewRegister } from "../../core/ui/core/ViewRegister";
 import { tipMgr } from "../../core/ui/tool/TipManager";
+import { User } from "../../core/userData/User";
 import { platformMgr } from "../../platform/PlatformManager";
 import { LogicSceneBase } from "../LogicSceneBase";
 import { logicSceneMgr } from "../LogicSceneManager";
@@ -18,18 +20,49 @@ export interface SceneInitData {
 
 /** 初始化逻辑场景 */
 export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
+	private _prescreen: fgui.GLoader;
 
-	protected onEnter() {
+	protected override getConstResArray() {
+		const resArray: string[] = [
+			ResPath.ConfigPath.Config,
+		];
+		resArray.push(...platformMgr.platform.res);
+		return resArray;
+	}
+
+	protected override onPreEnter() {
+		this.showPreScreen();
+	}
+
+	protected override onEnter() {
 		windowImmit("showConfirm", this.showConfirm);
+		windowImmit("cfgMgr", new CfgManager());
+		windowImmit("userData", new User());
 		layerMgr.init();
 		uiMgr.init();
 		viewRegister.init();
 		websocket.init();
-		platformMgr.init();
-		logicSceneMgr.enterScene(LogicScene.PreScreen);
+		Laya.timer.once(3000, null, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
 	}
 
-	protected onExit() {
+	protected override onExit() {
+		if (this._prescreen) {
+			this._prescreen.dispose();
+			this._prescreen = null;
+		}
+		Laya.loader.clearRes(ResPath.PrescreenPath.Prescreen);
+	}
+
+	private showPreScreen() {
+		if (!this._prescreen) {
+			const groot = fgui.GRoot.inst;
+			const pscreen = this._prescreen = new fgui.GLoader();
+			pscreen.url = ResPath.PrescreenPath.Prescreen;
+			pscreen.setSize(groot.width, groot.height);
+			pscreen.addRelation(groot, fgui.RelationType.Size);
+			pscreen.fill = fgui.LoaderFillType.ScaleFree;
+			groot.addChild(this._prescreen);
+		}
 	}
 
 	@RegisterEvent(GameEvent.SocketOpened, false, [ true ])
@@ -46,7 +79,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 			logicSceneMgr.enterScene(LogicScene.LoginScene);
 	}
 
-	private showConfirm(title: string, msg: string, cancel:boolean = true) {
+	private showConfirm(title: string, msg: string, cancel: boolean = true) {
 		const commonPkg = fgui.UIPackage.getById(ResPath.PkgPath.PkgCommon);
 		if (!commonPkg) return platformMgr.showConfirm(title, msg);
 		return new Promise<boolean>(resolve => {
@@ -55,7 +88,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 				{
 					title,
 					content: msg,
-					cancel:cancel,
+					cancel: cancel,
 					onCancel: cancel ? Laya.Handler.create(null, resolve, [ false ]) : null,
 					onConfirm: Laya.Handler.create(null, resolve, [ true ]),
 				});

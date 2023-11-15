@@ -57,6 +57,10 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 		});
 	}
 
+	preEnter() {
+		this.onPreEnter();
+	}
+
 	enter(data: T) {
 		this.data = data;
 		this.onEnter();
@@ -88,11 +92,11 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	/** 不可卸载资源，加载后不会卸载，只能手动卸载 */
 	protected getConstResArray(): string[] { return []; };
 
-	/** 进入场景时执行 */
-	protected abstract onEnter(): void;
+	protected onPreEnter() { }
 
-	/** 退出场景时执行 */
-	protected abstract onExit(): void;
+	protected onEnter() { }
+
+	protected onExit() { }
 
 	private setLoadProgres(count: number) {
 		if (this.loadViewId) {
