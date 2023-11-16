@@ -32,6 +32,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 
 	protected override onPreEnter() {
 		this.showPreScreen();
+		platformMgr.init();
 	}
 
 	protected override onEnter() {
@@ -83,15 +84,13 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 		const commonPkg = fgui.UIPackage.getById(ResPath.PkgPath.PkgCommon);
 		if (!commonPkg) return platformMgr.showConfirm(title, msg);
 		return new Promise<boolean>(resolve => {
-			uiMgr.showView(
-				ViewID.UIConfirmView,
-				{
-					title,
-					content: msg,
-					cancel: cancel,
-					onCancel: cancel ? Laya.Handler.create(null, resolve, [ false ]) : null,
-					onConfirm: Laya.Handler.create(null, resolve, [ true ]),
-				});
+			uiMgr.showView(ViewID.UIConfirmView, {
+				title,
+				content: msg,
+				cancel: cancel,
+				onCancel: cancel ? Laya.Handler.create(null, resolve, [ false ]) : null,
+				onConfirm: Laya.Handler.create(null, resolve, [ true ]),
+			});
 		});
 	}
 }

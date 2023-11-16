@@ -1,15 +1,15 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import ComRenWu from "./ComRenWu";
-import ComXinFa from "./ComXinFa";
-import ComSkill from "./ComSkill";
+import { ComRenWuView } from "../../view/PkgMain/view/coms/ComRenWuView";
+import { ComXinFaView } from "../../view/PkgMain/view/coms/ComXinFaView";
+import { ComSkillView } from "../../view/PkgMain/view/coms/ComSkillView";
 
 export default class ComChar extends fgui.GComponent {
 
 	public c1:fgui.Controller;
-	public com_renWu:ComRenWu;
-	public com_xinFa:ComXinFa;
-	public com_skill:ComSkill;
+	public com_renWu:ComRenWuView;
+	public com_xinFa:ComXinFaView;
+	public com_skill:ComSkillView;
 	public RenWuIn:fgui.Transition;
 	public RenWuOut:fgui.Transition;
 	public XinFaIn:fgui.Transition;
@@ -24,9 +24,9 @@ export default class ComChar extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.c1 = this.getControllerAt(0);
-		this.com_renWu = <ComRenWu>(this.getChildAt(9));
-		this.com_xinFa = <ComXinFa>(this.getChildAt(10));
-		this.com_skill = <ComSkill>(this.getChildAt(11));
+		this.com_renWu = <ComRenWuView>(this.getChildAt(9));
+		this.com_xinFa = <ComXinFaView>(this.getChildAt(10));
+		this.com_skill = <ComSkillView>(this.getChildAt(11));
 		this.RenWuIn = this.getTransitionAt(0);
 		this.RenWuOut = this.getTransitionAt(1);
 		this.XinFaIn = this.getTransitionAt(2);

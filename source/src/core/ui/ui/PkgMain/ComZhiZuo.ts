@@ -1,19 +1,19 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
 import CmbDongFu from "./CmbDongFu";
-import BtnTxt from "../PkgCommon/BtnTxt";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComZhiZuo extends fgui.GComponent {
 
-	public btn_jpyl:BtnTxt;
-	public btn_dzzb:BtnTxt;
-	public btn_zjzb:BtnTxt;
-	public btn_czzb:BtnTxt;
-	public btn_bshc:BtnTxt;
-	public btn_zztz:BtnTxt;
-	public btn_fjzb:BtnTxt;
-	public btn_fjbs:BtnTxt;
-	public btn_yjhc:BtnTxt;
+	public btn_jpyl:BtnTxtView;
+	public btn_dzzb:BtnTxtView;
+	public btn_zjzb:BtnTxtView;
+	public btn_czzb:BtnTxtView;
+	public btn_bshc:BtnTxtView;
+	public btn_zztz:BtnTxtView;
+	public btn_fjzb:BtnTxtView;
+	public btn_fjbs:BtnTxtView;
+	public btn_yjhc:BtnTxtView;
 	public cmb_level:CmbDongFu;
 	public cmb_type:CmbDongFu;
 	public cmb_detail:CmbDongFu;
@@ -26,15 +26,15 @@ export default class ComZhiZuo extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.btn_jpyl = <BtnTxt>(this.getChildAt(6));
-		this.btn_dzzb = <BtnTxt>(this.getChildAt(7));
-		this.btn_zjzb = <BtnTxt>(this.getChildAt(8));
-		this.btn_czzb = <BtnTxt>(this.getChildAt(9));
-		this.btn_bshc = <BtnTxt>(this.getChildAt(10));
-		this.btn_zztz = <BtnTxt>(this.getChildAt(11));
-		this.btn_fjzb = <BtnTxt>(this.getChildAt(13));
-		this.btn_fjbs = <BtnTxt>(this.getChildAt(14));
-		this.btn_yjhc = <BtnTxt>(this.getChildAt(15));
+		this.btn_jpyl = <BtnTxtView>(this.getChildAt(6));
+		this.btn_dzzb = <BtnTxtView>(this.getChildAt(7));
+		this.btn_zjzb = <BtnTxtView>(this.getChildAt(8));
+		this.btn_czzb = <BtnTxtView>(this.getChildAt(9));
+		this.btn_bshc = <BtnTxtView>(this.getChildAt(10));
+		this.btn_zztz = <BtnTxtView>(this.getChildAt(11));
+		this.btn_fjzb = <BtnTxtView>(this.getChildAt(13));
+		this.btn_fjbs = <BtnTxtView>(this.getChildAt(14));
+		this.btn_yjhc = <BtnTxtView>(this.getChildAt(15));
 		this.cmb_level = <CmbDongFu>(this.getChildAt(16));
 		this.cmb_type = <CmbDongFu>(this.getChildAt(17));
 		this.cmb_detail = <CmbDongFu>(this.getChildAt(18));

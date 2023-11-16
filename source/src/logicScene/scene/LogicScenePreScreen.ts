@@ -1,5 +1,4 @@
 import { ResPath } from "../../core/common/ResPath";
-import { platformMgr } from "../../platform/PlatformManager";
 import { LogicSceneBase } from "../LogicSceneBase";
 import { logicSceneMgr } from "../LogicSceneManager";
 import { LogicScene } from "../LogicSceneType";
@@ -22,7 +21,6 @@ export class LogicScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
     }
 
     protected override onEnter() {
-        platformMgr.init();
         Laya.stage.on(Laya.Event.CLICK, this, this.onStageClick);
         logicSceneMgr.enterScene(LogicScene.InitScene);
     }

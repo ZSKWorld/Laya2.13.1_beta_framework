@@ -1,17 +1,17 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnTxt from "../PkgCommon/BtnTxt";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComGoods extends fgui.GComponent {
 
 	public ctrlSelectType:fgui.Controller;
-	public btn_shouCang:BtnTxt;
-	public btn_equip:BtnTxt;
-	public btn_prop:BtnTxt;
-	public btn_gem:BtnTxt;
-	public btn_material:BtnTxt;
-	public btn_book:BtnTxt;
-	public btn_other:BtnTxt;
+	public btn_shouCang:BtnTxtView;
+	public btn_equip:BtnTxtView;
+	public btn_prop:BtnTxtView;
+	public btn_gem:BtnTxtView;
+	public btn_material:BtnTxtView;
+	public btn_book:BtnTxtView;
+	public btn_other:BtnTxtView;
 	public list_item:fgui.GList;
 	public static URL:string = "ui://vith2b66sbd02";
 
@@ -21,13 +21,13 @@ export default class ComGoods extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.ctrlSelectType = this.getControllerAt(0);
-		this.btn_shouCang = <BtnTxt>(this.getChildAt(0));
-		this.btn_equip = <BtnTxt>(this.getChildAt(1));
-		this.btn_prop = <BtnTxt>(this.getChildAt(2));
-		this.btn_gem = <BtnTxt>(this.getChildAt(3));
-		this.btn_material = <BtnTxt>(this.getChildAt(4));
-		this.btn_book = <BtnTxt>(this.getChildAt(5));
-		this.btn_other = <BtnTxt>(this.getChildAt(6));
+		this.btn_shouCang = <BtnTxtView>(this.getChildAt(0));
+		this.btn_equip = <BtnTxtView>(this.getChildAt(1));
+		this.btn_prop = <BtnTxtView>(this.getChildAt(2));
+		this.btn_gem = <BtnTxtView>(this.getChildAt(3));
+		this.btn_material = <BtnTxtView>(this.getChildAt(4));
+		this.btn_book = <BtnTxtView>(this.getChildAt(5));
+		this.btn_other = <BtnTxtView>(this.getChildAt(6));
 		this.list_item = <fgui.GList>(this.getChildAt(8));
 	}
 }

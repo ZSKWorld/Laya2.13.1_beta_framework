@@ -1,11 +1,11 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import ComSetting from "./ComSetting";
+import { ComSettingView } from "../../view/PkgMain/view/coms/ComSettingView";
 
 export default class UISetting extends fgui.GComponent {
 
 	public graph_bg:fgui.GGraph;
-	public com_panel:ComSetting;
+	public com_panel:ComSettingView;
 	public static URL:string = "ui://vith2b66sbd0x";
 
 	public static createInstance():UISetting {
@@ -14,6 +14,6 @@ export default class UISetting extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.graph_bg = <fgui.GGraph>(this.getChildAt(0));
-		this.com_panel = <ComSetting>(this.getChildAt(2));
+		this.com_panel = <ComSettingView>(this.getChildAt(2));
 	}
 }

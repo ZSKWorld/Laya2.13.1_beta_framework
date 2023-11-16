@@ -1,17 +1,17 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnTxt from "../PkgCommon/BtnTxt";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 import Pro1 from "../PkgCommon/Pro1";
 
 export default class UISect extends fgui.GComponent {
 
-	public btn_sect0:BtnTxt;
-	public btn_sect1:BtnTxt;
-	public btn_sect2:BtnTxt;
-	public btn_sect3:BtnTxt;
-	public btn_sect4:BtnTxt;
-	public btn_sect5:BtnTxt;
-	public btn_submit:BtnTxt;
+	public btn_sect0:BtnTxtView;
+	public btn_sect1:BtnTxtView;
+	public btn_sect2:BtnTxtView;
+	public btn_sect3:BtnTxtView;
+	public btn_sect4:BtnTxtView;
+	public btn_sect5:BtnTxtView;
+	public btn_submit:BtnTxtView;
 	public txt_desc:fgui.GTextField;
 	public pro_0:Pro1;
 	public pro_1:Pro1;
@@ -27,13 +27,13 @@ export default class UISect extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.btn_sect0 = <BtnTxt>(this.getChildAt(1));
-		this.btn_sect1 = <BtnTxt>(this.getChildAt(2));
-		this.btn_sect2 = <BtnTxt>(this.getChildAt(3));
-		this.btn_sect3 = <BtnTxt>(this.getChildAt(4));
-		this.btn_sect4 = <BtnTxt>(this.getChildAt(5));
-		this.btn_sect5 = <BtnTxt>(this.getChildAt(6));
-		this.btn_submit = <BtnTxt>(this.getChildAt(7));
+		this.btn_sect0 = <BtnTxtView>(this.getChildAt(1));
+		this.btn_sect1 = <BtnTxtView>(this.getChildAt(2));
+		this.btn_sect2 = <BtnTxtView>(this.getChildAt(3));
+		this.btn_sect3 = <BtnTxtView>(this.getChildAt(4));
+		this.btn_sect4 = <BtnTxtView>(this.getChildAt(5));
+		this.btn_sect5 = <BtnTxtView>(this.getChildAt(6));
+		this.btn_submit = <BtnTxtView>(this.getChildAt(7));
 		this.txt_desc = <fgui.GTextField>(this.getChildAt(8));
 		this.pro_0 = <Pro1>(this.getChildAt(10));
 		this.pro_1 = <Pro1>(this.getChildAt(11));

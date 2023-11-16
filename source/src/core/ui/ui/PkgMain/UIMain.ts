@@ -1,26 +1,26 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import ComTrain from "./ComTrain";
-import ComChar from "./ComChar";
-import ComGoods from "./ComGoods";
-import ComShop from "./ComShop";
-import ComAbode from "./ComAbode";
-import BtnTxt from "../PkgCommon/BtnTxt";
+import { ComTrainView } from "../../view/PkgMain/view/coms/ComTrainView";
+import { ComCharView } from "../../view/PkgMain/view/coms/ComCharView";
+import { ComGoodsView } from "../../view/PkgMain/view/coms/ComGoodsView";
+import { ComShopView } from "../../view/PkgMain/view/coms/ComShopView";
+import { ComAbodeView } from "../../view/PkgMain/view/coms/ComAbodeView";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class UIMain extends fgui.GComponent {
 
 	public ctrlShow:fgui.Controller;
-	public com_train:ComTrain;
-	public com_char:ComChar;
-	public com_goods:ComGoods;
-	public com_shop:ComShop;
-	public com_abode:ComAbode;
-	public btn_train:BtnTxt;
-	public btn_char:BtnTxt;
-	public btn_goods:BtnTxt;
-	public btn_shop:BtnTxt;
-	public btn_abode:BtnTxt;
-	public btn_chat:BtnTxt;
+	public com_train:ComTrainView;
+	public com_char:ComCharView;
+	public com_goods:ComGoodsView;
+	public com_shop:ComShopView;
+	public com_abode:ComAbodeView;
+	public btn_train:BtnTxtView;
+	public btn_char:BtnTxtView;
+	public btn_goods:BtnTxtView;
+	public btn_shop:BtnTxtView;
+	public btn_abode:BtnTxtView;
+	public btn_chat:BtnTxtView;
 	public graph_info:fgui.GGraph;
 	public txt_nickname:fgui.GTextField;
 	public txt_level:fgui.GTextField;
@@ -40,17 +40,17 @@ export default class UIMain extends fgui.GComponent {
 
 	protected override onConstruct():void {
 		this.ctrlShow = this.getControllerAt(0);
-		this.com_train = <ComTrain>(this.getChildAt(2));
-		this.com_char = <ComChar>(this.getChildAt(3));
-		this.com_goods = <ComGoods>(this.getChildAt(4));
-		this.com_shop = <ComShop>(this.getChildAt(5));
-		this.com_abode = <ComAbode>(this.getChildAt(6));
-		this.btn_train = <BtnTxt>(this.getChildAt(7));
-		this.btn_char = <BtnTxt>(this.getChildAt(8));
-		this.btn_goods = <BtnTxt>(this.getChildAt(9));
-		this.btn_shop = <BtnTxt>(this.getChildAt(10));
-		this.btn_abode = <BtnTxt>(this.getChildAt(11));
-		this.btn_chat = <BtnTxt>(this.getChildAt(12));
+		this.com_train = <ComTrainView>(this.getChildAt(2));
+		this.com_char = <ComCharView>(this.getChildAt(3));
+		this.com_goods = <ComGoodsView>(this.getChildAt(4));
+		this.com_shop = <ComShopView>(this.getChildAt(5));
+		this.com_abode = <ComAbodeView>(this.getChildAt(6));
+		this.btn_train = <BtnTxtView>(this.getChildAt(7));
+		this.btn_char = <BtnTxtView>(this.getChildAt(8));
+		this.btn_goods = <BtnTxtView>(this.getChildAt(9));
+		this.btn_shop = <BtnTxtView>(this.getChildAt(10));
+		this.btn_abode = <BtnTxtView>(this.getChildAt(11));
+		this.btn_chat = <BtnTxtView>(this.getChildAt(12));
 		this.graph_info = <fgui.GGraph>(this.getChildAt(14));
 		this.txt_nickname = <fgui.GTextField>(this.getChildAt(17));
 		this.txt_level = <fgui.GTextField>(this.getChildAt(19));

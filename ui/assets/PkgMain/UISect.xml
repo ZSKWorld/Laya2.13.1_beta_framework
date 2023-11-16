@@ -4,48 +4,48 @@
     <graph id="n0_btv5" name="n0" xy="0,0" size="1080,1920" touchable="false" type="rect" lineSize="0" lineColor="#ff91c7ff" fillColor="#ff000000">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n17_btv5" name="btn_sect0" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="187,908" size="222,83" controller="ctrlBgColor,7">
+    <component id="n17_btv5" name="btn_sect0" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="187,908" size="222,83" controller="ctrlBgColor,7">
       <Button title="少林" titleFontSize="50"/>
     </component>
-    <component id="n23_btv5" name="btn_sect1" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="429,908" size="222,83" controller="ctrlBgColor,7">
+    <component id="n23_btv5" name="btn_sect1" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="429,908" size="222,83" controller="ctrlBgColor,7">
       <Button title="星宿" titleFontSize="50"/>
     </component>
-    <component id="n24_btv5" name="btn_sect2" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="671,908" size="222,83" controller="ctrlBgColor,7">
+    <component id="n24_btv5" name="btn_sect2" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="671,908" size="222,83" controller="ctrlBgColor,7">
       <Button title="天山" titleFontSize="50"/>
     </component>
-    <component id="n25_btv5" name="btn_sect3" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="187,1010" size="222,83" controller="ctrlBgColor,7">
+    <component id="n25_btv5" name="btn_sect3" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="187,1010" size="222,83" controller="ctrlBgColor,7">
       <Button title="明教" titleFontSize="50"/>
     </component>
-    <component id="n26_btv5" name="btn_sect4" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="429,1010" size="222,83" controller="ctrlBgColor,7">
+    <component id="n26_btv5" name="btn_sect4" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="429,1010" size="222,83" controller="ctrlBgColor,7">
       <Button title="慕容" titleFontSize="50"/>
     </component>
-    <component id="n27_btv5" name="btn_sect5" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="671,1010" size="222,83" controller="ctrlBgColor,7">
+    <component id="n27_btv5" name="btn_sect5" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="671,1010" size="222,83" controller="ctrlBgColor,7">
       <Button title="丐帮" titleFontSize="50"/>
     </component>
-    <component id="n31_btv5" name="btn_submit" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="423,1415" size="234,83">
+    <component id="n31_btv5" name="btn_submit" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="423,1415" size="234,83">
       <Button title="确定" titleFontSize="55"/>
     </component>
     <text id="n30_btv5" name="txt_desc" xy="165,1140" size="750,172" fontSize="40" color="#ffffff" align="center" leading="10" autoSize="height" text="主属性-金木水火土&#xA;各项成长都一样&#xA;「丐帮」"/>
     <text id="n32_btv5" name="n32" xy="398,1326" size="284,54" fontSize="40" color="#f10000" align="center" text="你确定要加入么"/>
-    <component id="n1_btv5" name="pro_0" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,392" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n1_btv5" name="pro_0" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,392" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
-    <component id="n10_btv5" name="pro_1" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,462" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n10_btv5" name="pro_1" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,462" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
-    <component id="n11_btv5" name="pro_2" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,532" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n11_btv5" name="pro_2" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,532" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
-    <component id="n12_btv5" name="pro_3" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,602" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n12_btv5" name="pro_3" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,602" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
-    <component id="n13_btv5" name="pro_4" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,672" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n13_btv5" name="pro_4" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,672" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
-    <component id="n14_btv5" name="pro_5" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,742" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n14_btv5" name="pro_5" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,742" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
-    <component id="n15_btv5" name="pro_6" src="sbd05t" fileName="Component/ProgressBar/ProgressBar1.xml" pkg="vx9zwser" xy="279,812" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
+    <component id="n15_btv5" name="pro_6" src="sbd05t" fileName="Component/ProgressBar/Pro1.xml" pkg="vx9zwser" xy="279,812" size="614,50" group="n35_vdo6" touchable="false" controller="ctrlColor,3,ctrlText,1">
       <ProgressBar value="583" max="1000"/>
     </component>
     <group id="n35_vdo6" name="n35" xy="279,392" size="614,470" advanced="true" layout="vt" lineGap="20" excludeInvisibles="true"/>

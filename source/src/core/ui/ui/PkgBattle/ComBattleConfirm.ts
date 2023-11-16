@@ -1,6 +1,6 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import BtnTxt from "../PkgCommon/BtnTxt";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComBattleConfirm extends fgui.GComponent {
 
@@ -8,10 +8,10 @@ export default class ComBattleConfirm extends fgui.GComponent {
 	public txt_title:fgui.GRichTextField;
 	public txt_content:fgui.GRichTextField;
 	public slider_num:fgui.GSlider;
-	public btn_buyFood:BtnTxt;
-	public btn_buyTimes:BtnTxt;
-	public btn_saoDang:BtnTxt;
-	public btn_battle:BtnTxt;
+	public btn_buyFood:BtnTxtView;
+	public btn_buyTimes:BtnTxtView;
+	public btn_saoDang:BtnTxtView;
+	public btn_battle:BtnTxtView;
 	public group_btns:fgui.GGroup;
 	public static URL:string = "ui://va1qbl3hawbvw";
 
@@ -24,10 +24,10 @@ export default class ComBattleConfirm extends fgui.GComponent {
 		this.txt_title = <fgui.GRichTextField>(this.getChildAt(3));
 		this.txt_content = <fgui.GRichTextField>(this.getChildAt(4));
 		this.slider_num = <fgui.GSlider>(this.getChildAt(5));
-		this.btn_buyFood = <BtnTxt>(this.getChildAt(6));
-		this.btn_buyTimes = <BtnTxt>(this.getChildAt(7));
-		this.btn_saoDang = <BtnTxt>(this.getChildAt(8));
-		this.btn_battle = <BtnTxt>(this.getChildAt(9));
+		this.btn_buyFood = <BtnTxtView>(this.getChildAt(6));
+		this.btn_buyTimes = <BtnTxtView>(this.getChildAt(7));
+		this.btn_saoDang = <BtnTxtView>(this.getChildAt(8));
+		this.btn_battle = <BtnTxtView>(this.getChildAt(9));
 		this.group_btns = <fgui.GGroup>(this.getChildAt(10));
 	}
 }

@@ -1,7 +1,7 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
 import ItemXinFa from "./ItemXinFa";
-import BtnTxt from "../PkgCommon/BtnTxt";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComXinFa extends fgui.GComponent {
 
@@ -19,13 +19,13 @@ export default class ComXinFa extends fgui.GComponent {
 	public txt_xinFaName:fgui.GTextField;
 	public txt_xinFaDesc:fgui.GTextField;
 	public txt_upgradeInfo:fgui.GTextField;
-	public btn_skill0:BtnTxt;
-	public btn_skill1:BtnTxt;
-	public btn_skill2:BtnTxt;
-	public btn_skill3:BtnTxt;
-	public btn_upgrade0:BtnTxt;
-	public btn_upgrade1:BtnTxt;
-	public btn_upgrade2:BtnTxt;
+	public btn_skill0:BtnTxtView;
+	public btn_skill1:BtnTxtView;
+	public btn_skill2:BtnTxtView;
+	public btn_skill3:BtnTxtView;
+	public btn_upgrade0:BtnTxtView;
+	public btn_upgrade1:BtnTxtView;
+	public btn_upgrade2:BtnTxtView;
 	public static URL:string = "ui://vith2b66btv51i";
 
 	public static createInstance():ComXinFa {
@@ -47,12 +47,12 @@ export default class ComXinFa extends fgui.GComponent {
 		this.txt_xinFaName = <fgui.GTextField>(this.getChildAt(11));
 		this.txt_xinFaDesc = <fgui.GTextField>(this.getChildAt(12));
 		this.txt_upgradeInfo = <fgui.GTextField>(this.getChildAt(13));
-		this.btn_skill0 = <BtnTxt>(this.getChildAt(14));
-		this.btn_skill1 = <BtnTxt>(this.getChildAt(15));
-		this.btn_skill2 = <BtnTxt>(this.getChildAt(16));
-		this.btn_skill3 = <BtnTxt>(this.getChildAt(17));
-		this.btn_upgrade0 = <BtnTxt>(this.getChildAt(18));
-		this.btn_upgrade1 = <BtnTxt>(this.getChildAt(19));
-		this.btn_upgrade2 = <BtnTxt>(this.getChildAt(20));
+		this.btn_skill0 = <BtnTxtView>(this.getChildAt(14));
+		this.btn_skill1 = <BtnTxtView>(this.getChildAt(15));
+		this.btn_skill2 = <BtnTxtView>(this.getChildAt(16));
+		this.btn_skill3 = <BtnTxtView>(this.getChildAt(17));
+		this.btn_upgrade0 = <BtnTxtView>(this.getChildAt(18));
+		this.btn_upgrade1 = <BtnTxtView>(this.getChildAt(19));
+		this.btn_upgrade2 = <BtnTxtView>(this.getChildAt(20));
 	}
 }

@@ -1,12 +1,12 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import ComGoodsInfo from "./ComGoodsInfo";
+import { ComGoodsInfoView } from "../../view/PkgMain/view/coms/ComGoodsInfoView";
 
 export default class UIGoodsInfo extends fgui.GComponent {
 
 	public ctrlState:fgui.Controller;
 	public graph_bg:fgui.GGraph;
-	public com_panel:ComGoodsInfo;
+	public com_panel:ComGoodsInfoView;
 	public static URL:string = "ui://vith2b66irlv1e";
 
 	public static createInstance():UIGoodsInfo {
@@ -16,6 +16,6 @@ export default class UIGoodsInfo extends fgui.GComponent {
 	protected override onConstruct():void {
 		this.ctrlState = this.getControllerAt(0);
 		this.graph_bg = <fgui.GGraph>(this.getChildAt(0));
-		this.com_panel = <ComGoodsInfo>(this.getChildAt(1));
+		this.com_panel = <ComGoodsInfoView>(this.getChildAt(1));
 	}
 }
