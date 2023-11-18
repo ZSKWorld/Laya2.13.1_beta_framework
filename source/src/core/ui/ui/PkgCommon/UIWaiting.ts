@@ -1,10 +1,10 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
-import ComWaiting from "./ComWaiting";
+import { ComWaitingView } from "../../view/PkgCommon/view/coms/ComWaitingView";
 
 export default class UIWaiting extends fgui.GComponent {
 
-	public com_waitting:ComWaiting;
+	public com_waitting:ComWaitingView;
 	public txt_info:fgui.GTextField;
 	public static URL:string = "ui://vx9zwser7vow63";
 
@@ -13,7 +13,7 @@ export default class UIWaiting extends fgui.GComponent {
 	}
 
 	protected override onConstruct():void {
-		this.com_waitting = <ComWaiting>(this.getChildAt(1));
+		this.com_waitting = <ComWaitingView>(this.getChildAt(1));
 		this.txt_info = <fgui.GTextField>(this.getChildAt(2));
 	}
 }

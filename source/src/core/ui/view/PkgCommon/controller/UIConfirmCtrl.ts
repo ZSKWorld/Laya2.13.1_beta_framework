@@ -1,7 +1,6 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIUtility } from "../../../tool/UIUtility";
 import { UIConfirmView } from "../view/UIConfirmView";
-import { ComConfirmCtrl } from "./coms/ComConfirmCtrl";
 
 export interface UIConfirmData {
 	title: string,
@@ -12,15 +11,14 @@ export interface UIConfirmData {
 }
 
 export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData>{
-	private _comPanelCtrl: ComConfirmCtrl;
 
 	override onAdded() {
-		this._comPanelCtrl = this.view.com_panel.getComponent(ComConfirmCtrl);
+
 	}
 
 	override onForeground() {
-		this._comPanelCtrl.data = this.data;
-		this._comPanelCtrl.onForeground();
+		this.view.com_panel.viewCtrl.data = this.data;
+		this.view.com_panel.viewCtrl.onForeground();
 	}
 
 	override onOpenAni() {

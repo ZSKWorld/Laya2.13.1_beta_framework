@@ -12,19 +12,19 @@ export class ViewExtend {
 	private static FGUIGComponentExtend() {
 		let prototype = fgui.GComponent.prototype as IView;
 		prototype.dispatch = function (...args) { eventMgr.event(...args); }
-		prototype.sendMessage = function (...args) { (<IView>this).controller.sendMessage(...args); }
+		prototype.sendMessage = function (...args) { (<IView>this).viewCtrl.sendMessage(...args); }
 		prototype.addMessage = function (type, callback, args?, once?) {
 			const _this = <IView>this;
-			const controller = _this.controller;
-			if (controller) {
-				if (once) controller.listener.once(type, _this, callback, args);
-				else controller.listener.on(type, _this, callback, args);
+			const viewCtrl = _this.viewCtrl;
+			if (viewCtrl) {
+				if (once) viewCtrl.listener.once(type, _this, callback, args);
+				else viewCtrl.listener.on(type, _this, callback, args);
 			}
 		}
 		prototype.removeMessage = function (type, listener, onceOnly?) {
 			const _this = <IView>this;
-			if (_this.controller)
-				_this.controller.listener.off(type, _this, listener, onceOnly);
+			if (_this.viewCtrl)
+				_this.viewCtrl.listener.off(type, _this, listener, onceOnly);
 		}
 		prototype.createView = function (...args) { return uiMgr.createView(...args); }
 		prototype.showView = function (...args) { uiMgr.showView(...args); }
@@ -33,7 +33,6 @@ export class ViewExtend {
 		prototype.removeView = function (...args) { uiMgr.removeView(...args); }
 		prototype.removeSelf = function () {
 			const viewId = (<IView>this).viewId;
-			//只有UI界面才能移除自身
 			viewId.startsWith("UI") && uiMgr.removeView(viewId);
 		}
 
@@ -48,7 +47,7 @@ export class ViewExtend {
 				if (!viewCtrl && CtrlCls) {
 					viewCtrl = viewInst.addComponent(CtrlCls);
 				}
-				viewInst.controller = viewCtrl;
+				viewInst.viewCtrl = viewCtrl;
 			}
 			viewInst.onCreate?.();
 		}
@@ -57,7 +56,7 @@ export class ViewExtend {
 		prototype.dispose = function () {
 			oldDispose.call(this);
 			const _this = this as IView;
-			_this.controller = null;
+			_this.viewCtrl = null;
 		}
 	}
 

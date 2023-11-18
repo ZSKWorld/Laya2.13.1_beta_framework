@@ -18,7 +18,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
         this.addMessage(UILoginMsg.OnBtnCancelClick, this.onBtnCancelClick);
     }
 
-    override onEnable(): void {
+    override onEnable() {
         const data = localData.get<LoginInput>(LocalDataKey.LastLoginAccount);
         data && this.view.refreshLoginInfo(data.account, data.password);
         data && this.toLogin(data);

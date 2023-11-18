@@ -36,7 +36,7 @@ export class Equipment extends Item<IEquipmentData> implements IEquipment {
     bodyAttri: number[];
     //#endregion
 
-    get part(): EquipmentPart { return cfgMgr.Equipment[ this.id ].part; }
+    get part() { return cfgMgr.Equipment[ this.id ].part as EquipmentPart; }
     get levelName() { return this.name + " +" + this.level; }
     get colorLevelName() { return GameUtil.GetColorStr(this.quality, this.levelName); }
     get infoStr() {

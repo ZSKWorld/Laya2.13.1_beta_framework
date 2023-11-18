@@ -5,7 +5,7 @@ export abstract class PlatformBase extends Observer implements IPlatform {
     protected _platform: PlatformType;
     protected _safeArea: IArea;
     protected _menuBtnArea: IArea;
-    get res(): string[] { return []; }
+    get res() { return [] as string[]; }
     get type() { return this._platform; }
     get safeArea() { return this._safeArea; }
     get menuBtnArea() { return this._menuBtnArea; }
@@ -16,7 +16,9 @@ export abstract class PlatformBase extends Observer implements IPlatform {
 
     }
 
-    abstract showConfirm(title: string, msg: string): Promise<boolean>;
+    showConfirm(title: string, msg: string) {
+        return Promise.resolve(false);
+    }
 
     /** 引擎修复 */
     protected abstract onFix(): void;

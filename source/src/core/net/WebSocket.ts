@@ -8,9 +8,9 @@ class WebSocket extends Observer {
     private _socket: Laya.Socket;
     private _waitList: UserInput[];
     private _current: UserInput;
-    get connected(): boolean { return this._socket.connected; }
+    get connected() { return this._socket.connected; }
 
-    init(): void {
+    init() {
         if (!this._waitList) {
             this._waitList = [];
             this._socket = new Laya.Socket();
@@ -22,7 +22,7 @@ class WebSocket extends Observer {
         }
     }
 
-    sendMsg(msg: UserInput): void {
+    sendMsg(msg: UserInput) {
         const { _current, _waitList } = this;
         if (_current && msg.cmd == _current.cmd) return;
         if (_waitList.length && _waitList.find(v => v.cmd == msg.cmd)) return;
@@ -30,7 +30,7 @@ class WebSocket extends Observer {
         this.executeWaitMsg();
     }
 
-    private onSocketOpen(): void {
+    private onSocketOpen() {
         this.dispatch(GameEvent.SocketOpened);
         this.executeWaitMsg();
     }
@@ -70,16 +70,16 @@ class WebSocket extends Observer {
         this._socket.input.clear();
     }
 
-    private onSocketError(e): void { }
+    private onSocketError(e) { }
 
-    private onSocketClose(): void {
+    private onSocketClose() {
         this._current = null;
         this._waitList.length = 0;
         this.dispatch(GameEvent.SocketClosed);
         this._socket.connectByUrl(this._url);
     }
 
-    private executeWaitMsg(): void {
+    private executeWaitMsg() {
         if (this.connected && !this._current && this._waitList.length > 0) {
             this._current = this._waitList.shift();
             this._current.token = this._current.token || userData.account.account;

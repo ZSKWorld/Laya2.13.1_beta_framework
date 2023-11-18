@@ -17,11 +17,11 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		UIUtility.SetList(this.view.list_battle, true, this, this.onListBattleRender);
 	}
 
-	override onEnable(): void {
+	override onEnable() {
 		this.refreshList();
 	}
 
-	override onOpenAni(): Promise<void> {
+	override onOpenAni() {
 		return new Promise<void>(resolve => {
 			const childIndex = this.view.list_battle.numChildren - 1;
 			this.view.list_battle._children.forEach((v, i) => {
@@ -48,7 +48,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private onListBattleRender(index: number, item: RenderChooseBattleView) {
-		const itemCtrl = item.controller as RenderChooseBattleCtrl;
+		const itemCtrl = item.viewCtrl as RenderChooseBattleCtrl;
 		itemCtrl.setData(this.data, this.items[ index ]);
 	}
 

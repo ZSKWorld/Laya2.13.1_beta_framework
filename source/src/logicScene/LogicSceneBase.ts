@@ -1,6 +1,6 @@
-import { skeletonMgr } from "../core/game/SkeletonMgr";
+import { loadMgr } from "../core/libs/LoadManager";
+import { skeletonMgr } from "../core/libs/SkeletonMgr";
 import { Observer } from "../core/libs/event/Observer";
-import { loadMgr } from "../core/libs/load/LoadManager";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";
 import { IScene } from "./LogicSceneType";
@@ -28,7 +28,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	private _progresses: number[] = [];
 
 	/** 场景名称 */
-	get name(): string { return this[ "__proto__" ].constructor.name; }
+	get name() { return String(this[ "__proto__" ].constructor.name); }
 
 	load() {
 		const resArr = this.getResGroup(ResGroupType.All);
@@ -87,10 +87,10 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	/** 可卸载资源，场景退出时卸载 */
-	protected getNormalResArray(): string[] { return []; };
+	protected getNormalResArray() { return [] as string[]; };
 
 	/** 不可卸载资源，加载后不会卸载，只能手动卸载 */
-	protected getConstResArray(): string[] { return []; };
+	protected getConstResArray() { return [] as string[]; };
 
 	protected onPreEnter() { }
 

@@ -1,15 +1,15 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { UIWaitingMsg, UIWaitingView } from "../view/UIWaitingView";
+import { UIWaitingView } from "../view/UIWaitingView";
 
 export class UIWaitingCtrl extends BaseViewCtrl<UIWaitingView, string>{
     private _curIndex: number;
     private _speed: number;
 
-    override onAwake(): void {
+    override onAwake() {
 
     }
 
-    override onEnable(): void {
+    override onEnable() {
     }
 
     override onForeground() {
@@ -19,7 +19,7 @@ export class UIWaitingCtrl extends BaseViewCtrl<UIWaitingView, string>{
         this.view.refreshText(this.data);
     }
 
-    override onUpdate(): void {
+    override onUpdate() {
         if (--this._speed > 0) return;
         this._speed = 20;
         this.view.refreshText(this.data.substring(0, this._curIndex));
@@ -30,11 +30,11 @@ export class UIWaitingCtrl extends BaseViewCtrl<UIWaitingView, string>{
         }
     }
 
-    override onDisable(): void {
+    override onDisable() {
 
     }
 
-    override onDestroy(): void {
+    override onDestroy() {
 
     }
 }

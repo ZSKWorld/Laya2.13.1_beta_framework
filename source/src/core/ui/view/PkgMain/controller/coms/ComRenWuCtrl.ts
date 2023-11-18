@@ -26,7 +26,7 @@ export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
 		this.addMessage(ComRenWuMsg.OnBtnFaBaoClick, this.showEquipmentInfo, [ EquipmentPart.MagicWeapon ]);
     }
 
-	override onEnable(): void {
+	override onEnable() {
 		this.view.refreshEquipInfo();
 	}
 

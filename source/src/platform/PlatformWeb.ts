@@ -11,7 +11,7 @@ export class PlatformWeb extends PlatformBase {
     override get safeArea() {
         if (!this._safeArea) {
             const { width, height } = Laya.stage;
-            this._safeArea = { width: width, height: height, top: 0, bottom: height, left: 0, right: width, };
+            this._safeArea = { width, height, top: 0, bottom: height, left: 0, right: width, };
         }
         return this._safeArea;
     }
@@ -22,8 +22,8 @@ export class PlatformWeb extends PlatformBase {
         return this._menuBtnArea;
     }
 
-    showConfirm(title: string, msg: string) {
-        return new Promise<boolean>(resolve => resolve(confirm(msg)));
+    override showConfirm(title: string, msg: string) {
+        return Promise.resolve(confirm(msg));
     }
 
     protected onFix() {

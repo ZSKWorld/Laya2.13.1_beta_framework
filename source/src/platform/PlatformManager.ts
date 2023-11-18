@@ -20,7 +20,7 @@ class PlatformManager {
 
     showConfirm(title: string, msg: string) {
         if (this._platform) return this._platform.showConfirm(title, msg);
-        else return new Promise<boolean>(resolve => resolve(false));
+        else return Promise.resolve(false);
     }
 
     private isPlatform(platform: PlatformType) {

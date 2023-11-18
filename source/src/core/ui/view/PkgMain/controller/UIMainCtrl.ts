@@ -49,7 +49,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 		this.dispatch(GameEvent.AddExperienceLog, txt.end());
 	}
 
-	override onEnable(): void {
+	override onEnable() {
 		this._sphereDragged = false;
 		this.view.refreshPlayerInfo();
 	}

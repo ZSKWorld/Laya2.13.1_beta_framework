@@ -17,10 +17,10 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	/** 页面装饰器注册的消息映射 */
 	private __messageMap: KeyMap<Function[]>;
 
-	override get isSingleton(): boolean { return true; }
-	override get name(): string { return this.constructor.name; }
-	override get view(): V { return this._view; }
-	override get listener(): Laya.EventDispatcher { return this._listener; }
+	override get isSingleton() { return true; }
+	override get name() { return this.constructor.name; }
+	override get view() { return this._view; }
+	override get listener() { return this._listener; }
 
 	override onReset() {
 		const { _listener, _proxy } = this;

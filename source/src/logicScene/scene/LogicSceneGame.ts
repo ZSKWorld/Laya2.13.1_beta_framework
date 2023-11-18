@@ -12,17 +12,17 @@ export interface SceneGameData {
 export class LogicSceneGame extends LogicSceneBase<SceneGameData> {
 	protected override loadViewId = ViewID.UILoading1View;
 
-	protected override getNormalResArray(): string[] {
+	protected override getNormalResArray() {
 		return [
 			ResPath.PkgPath.PkgBattle
 		];
 	}
 
-	protected override onEnter(): void {
+	protected override onEnter() {
 		uiMgr.showView(ViewID.UIChooseBattleView, this.data.battleType);
 	}
 
-	protected override onExit(): void {
+	protected override onExit() {
 
 	}
 

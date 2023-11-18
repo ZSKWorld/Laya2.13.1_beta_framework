@@ -92,14 +92,14 @@ declare interface IViewExtend {
      */
     removeView(viewId: ViewID): void;
 
-    /** 移除当前页面 */
+    /** 移除当前页面，只有UI界面才能移除自身，其他Com，Btn，Render之类的无效 */
     removeSelf(): void;
 }
 
 /**页面实例类型 */
 declare interface IView extends fgui.GComponent, IViewExtend {
     readonly layer: Layer;
-    controller: IViewCtrl;
+    viewCtrl: IViewCtrl;
 
     /**
      * 页面创建完毕之后执行，只执行一次。

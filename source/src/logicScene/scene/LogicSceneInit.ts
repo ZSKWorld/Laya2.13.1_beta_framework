@@ -43,7 +43,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 		uiMgr.init();
 		viewRegister.init();
 		websocket.init();
-		Laya.timer.once(3000, null, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
+		Laya.timer.once(500, null, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
 	}
 
 	protected override onExit() {

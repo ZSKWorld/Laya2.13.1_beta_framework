@@ -26,7 +26,7 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 		UIUtility.SetList(this.view.list_log, true, this, this.onListLogRenderer);
 	}
 
-	override onEnable(): void {
+	override onEnable() {
 		trainLogMgr.randomLog();
 	}
 
@@ -45,11 +45,11 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 		logicSceneMgr.enterScene(LogicScene.GameScene, { battleType });
 	}
 
-	private onBtnGongLueClick(): void {
+	private onBtnGongLueClick() {
 
 	}
 
-	private onBtnWaiYuClick(): void {
+	private onBtnWaiYuClick() {
 
 	}
 

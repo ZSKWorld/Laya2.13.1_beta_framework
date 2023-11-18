@@ -15,10 +15,10 @@ export class UILoading1Ctrl<V extends Loading1Type = UILoading1View, D extends U
     protected deltaTime = 2000;
     protected curTime = 0;
 
-    override onAwake(): void {
+    override onAwake() {
     }
 
-    override onEnable(): void {
+    override onEnable() {
         this.curTime = this.deltaTime;
         if (!this._progressHandler) {
             this._progressHandler = Laya.Handler.create(this, this.onProgress, null, false);
@@ -26,7 +26,7 @@ export class UILoading1Ctrl<V extends Loading1Type = UILoading1View, D extends U
         this.data.updateHandler = this._progressHandler;
     }
 
-    override onUpdate(): void {
+    override onUpdate() {
         this.curTime += Laya.timer.delta;
         if (this.curTime >= this.deltaTime) {
             this.curTime = 0;
@@ -35,11 +35,11 @@ export class UILoading1Ctrl<V extends Loading1Type = UILoading1View, D extends U
         }
     }
 
-    override onDisable(): void {
+    override onDisable() {
 
     }
 
-    override onDestroy(): void {
+    override onDestroy() {
 
     }
 

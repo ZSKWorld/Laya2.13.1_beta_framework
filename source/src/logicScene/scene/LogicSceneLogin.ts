@@ -15,7 +15,7 @@ export class LogicSceneLogin extends LogicSceneBase<SceneLoginData> {
 		];
 	}
 
-	protected override getConstResArray(): string[] {
+	protected override getConstResArray() {
 		return [
 			ResPath.PkgPath.PkgCommon,
 		];

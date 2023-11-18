@@ -28,7 +28,7 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 		UIUtility.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
 
-	override onEnable(): void {
+	override onEnable() {
 		this.refreshListByType(this.showType);
 	}
 
