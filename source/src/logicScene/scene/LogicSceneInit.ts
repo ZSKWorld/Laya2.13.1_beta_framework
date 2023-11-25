@@ -43,7 +43,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 		uiMgr.init();
 		viewRegister.init();
 		websocket.init();
-		Laya.timer.once(500, null, () => logicSceneMgr.enterScene(LogicScene.LoginScene));
+		Laya.timer.once(500, logicSceneMgr, logicSceneMgr.enterScene, [ LogicScene.LoginScene ]);
 	}
 
 	protected override onExit() {
@@ -66,20 +66,6 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 		}
 	}
 
-	@RegisterEvent(GameEvent.SocketOpened, false, [ true ])
-	@RegisterEvent(GameEvent.SocketClosed, false, [ false ])
-	private socketConnectChanged(open: boolean) {
-		if (open) uiMgr.removeView(ViewID.UIWaitingView);
-		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
-	}
-
-	@RegisterEvent(GameEvent.NetMsgError)
-	private netMsgError(msg: UserOutput) {
-		tipMgr.showTip(cfgMgr.Error[ msg.error ].text);
-		if (msg.error == ErrorCode.NOT_LOGIN)
-			logicSceneMgr.enterScene(LogicScene.LoginScene);
-	}
-
 	private showConfirm(title: string, msg: string, cancel: boolean = true) {
 		const commonPkg = fgui.UIPackage.getById(ResPath.PkgPath.PkgCommon);
 		if (!commonPkg) return platformMgr.showConfirm(title, msg);
@@ -92,6 +78,20 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 				onConfirm: Laya.Handler.create(null, resolve, [ true ]),
 			});
 		});
+	}
+
+	@RegisterEvent(GameEvent.SocketOpened, false, [ true ])
+	@RegisterEvent(GameEvent.SocketClosed, false, [ false ])
+	private socketConnectChanged(open: boolean) {
+		if (open) uiMgr.removeView(ViewID.UIWaitingView);
+		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
+	}
+
+	@RegisterEvent(GameEvent.NetMsgError)
+	private netMsgError(msg: UserOutput) {
+		tipMgr.showTip(cfgMgr.Error[ msg.error ].text);
+		if (msg.error == ErrorCode.NOT_LOGIN)
+			logicSceneMgr.enterScene(LogicScene.LoginScene);
 	}
 }
 

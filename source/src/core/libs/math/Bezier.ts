@@ -1,7 +1,8 @@
+import Vector3 = Laya.Vector3;
 /** 匀速贝塞尔曲线，文档：https://www.freesion.com/article/2280255606/ */
 export class Bezier {
-    /**普通贝塞尔点 */
-    static NormalPoint(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
+    /** 普通2d贝塞尔点 */
+    static BezierPoint2D(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
         const u = 1 - t;
         const tt = t * t;
         const uu = u * u;
@@ -14,23 +15,23 @@ export class Bezier {
     }
 
     /**
-     * 普通贝塞尔点集合
+     * 普通2d贝塞尔点集合
      * @param start {@link IPoint} 起始位置
      * @param end {@link IPoint} 结束位置
      * @param control {@link IPoint} 控制点位置
      * @param pointNum 点数量
      * @returns
      */
-    static NormalPoints(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
+    static BezierPoints2D(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
         const points: IPoint[] = [];
         for (let i = 0; i <= pointNum; i++) {
-            points.push(this.NormalPoint(start, end, control, i / pointNum))
+            points.push(this.BezierPoint2D(start, end, control, i / pointNum))
         }
         return points;
     }
 
-    /**匀速贝塞尔点 */
-    static UniformPoint(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
+    /** 匀速2d贝塞尔点 */
+    static UniformBezierPoint2D(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
         let ax = start.x - 2 * control.x + end.x;
         let ay = start.y - 2 * control.y + end.y;
         let bx = 2 * control.x - 2 * start.x;
@@ -57,14 +58,14 @@ export class Bezier {
     }
 
     /**
-     * 匀速贝塞尔点集合
+     * 匀速2d贝塞尔点集合
      * @param start {@link IPoint} 起始位置
      * @param end {@link IPoint} 结束位置
      * @param control {@link IPoint} 控制点位置
      * @param pointNum 点数量
      * @returns
      */
-    static UniformPoints(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
+    static UniformBezierPoints2D(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
         let ax = start.x - 2 * control.x + end.x;
         let ay = start.y - 2 * control.y + end.y;
         let bx = 2 * control.x - 2 * start.x;
@@ -115,10 +116,60 @@ export class Bezier {
         return t2;
     }
 
-
     /**速度函数 s(t_) = Sqrt[A*t*t+B*t+C] */
     private static GetSpeed(a: number, b: number, c: number, t: number) {
         return Math.sqrt(a * t * t + b * t + c);
+    }
+
+    private static tempV30 = new Vector3();
+    private static tempV31 = new Vector3();
+    /** 二阶贝塞尔曲线 */
+    static BezierPoint3D(startPos: Vector3, ctrlPos: Vector3, endPos: Vector3, t: number, out: Vector3) {
+        const { tempV30 } = this;
+        Vector3.subtract(ctrlPos, startPos, tempV30);
+        Vector3.scale(tempV30, t, tempV30);
+        Vector3.add(startPos, tempV30, tempV30);
+
+        Vector3.subtract(endPos, ctrlPos, out);
+        Vector3.scale(out, t, out);
+        Vector3.add(ctrlPos, out, out);
+
+        Vector3.subtract(out, tempV30, out);
+        Vector3.scale(out, t, out);
+        Vector3.add(tempV30, out, out);
+        return out;
+    }
+
+    /** 三阶贝塞尔曲线 */
+    static CubicBezierPoint3D(a: Vector3, b: Vector3, c: Vector3, d: Vector3, t: number, cc: Vector3) {
+        const { tempV30: aa, tempV31: bb } = this;
+
+        Vector3.subtract(b, a, aa);
+        Vector3.scale(aa, t, aa);
+        Vector3.add(a, aa, aa);
+
+        Vector3.subtract(c, b, bb);
+        Vector3.scale(bb, t, bb);
+        Vector3.add(b, bb, bb);
+
+        Vector3.subtract(d, c, cc);
+        Vector3.scale(cc, t, cc);
+        Vector3.add(c, cc, cc);
+
+        const bbb = cc;
+        Vector3.subtract(cc, bb, bbb);
+        Vector3.scale(bbb, t, bbb);
+        Vector3.add(bb, bbb, bbb);
+
+        const aaa = bb;
+        Vector3.subtract(bb, aa, aaa);
+        Vector3.scale(aaa, t, aaa);
+        Vector3.add(aa, aaa, aaa);
+
+        Vector3.subtract(bbb, aaa, bbb);
+        Vector3.scale(bbb, t, bbb);
+        Vector3.add(aaa, bbb, bbb);
+        return cc;
     }
 }
 windowImmit("Bezier", Bezier);

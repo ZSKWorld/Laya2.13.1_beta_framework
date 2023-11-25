@@ -23,6 +23,10 @@ export class Controller {
 
     }
 
+    close() {
+
+    }
+
     recover() {
         this._connection = null;
         Pool.recover(this.constructor.name as any, this);

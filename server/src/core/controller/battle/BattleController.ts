@@ -5,7 +5,7 @@ import { BattleHandle } from "./BattleHandle";
 
 export class BattleController extends Controller implements IBattleCtrl {
     private _inBattle: boolean = false;
-    private _battleType: number;
+    private _battleType: BattleType;
     private _battleId: number;
 
     @AddCMD
@@ -34,6 +34,11 @@ export class BattleController extends Controller implements IBattleCtrl {
         if (errorCode) return this.response(data.cmd, null, errorCode);
         this._inBattle = false;
         this.response(data.cmd);
+    }
+
+    override close(): void {
+        super.close();
+        this._inBattle = false;
     }
 
     override recover(): void {

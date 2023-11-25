@@ -2,8 +2,7 @@
 
 import { websocket } from "./WebSocket";
 
-class BaseService<T> {
-    protected _proxy: T;
+class BaseService {
     protected constructor() {
         const serviceKeys = [ "register", "login", "signIn", "clearAccount", "useItem", "sellItem", "changeCollect", "decomposeGem", "dressEquip", "takeOffEquip", "sellEquip", "decomposeEquip", "enterBattle", "requestBattle", "exitBattle", "addFriend", "friendMsg", "buyGoods", ];
         serviceKeys.forEach(key => {
@@ -20,7 +19,7 @@ class BaseService<T> {
 }
 
 function ServiceInst<T>() {
-    return class ServiceInst extends BaseService<T>{
+    return class ServiceInst extends BaseService{
         protected static _inst: ServiceInst;
         static get Inst() { return (this._inst || (this._inst = new this())) as unknown as T; }
     }

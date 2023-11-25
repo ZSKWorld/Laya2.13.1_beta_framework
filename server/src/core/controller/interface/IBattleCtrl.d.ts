@@ -9,7 +9,7 @@ declare interface IBattleCtrl {
 
 declare interface EnterBattleInput extends UserInput {
     /** 战斗类型 */
-    type: number;
+    type: BattleType;
     /** 关卡id */
     id: number;
     /** 采集专用，采集时长，秒 */

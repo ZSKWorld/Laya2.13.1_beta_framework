@@ -7,6 +7,7 @@ import { connectionMgr } from "./ConnectionMgr";
 import { Controller } from "./controller/Controller";
 import { AccouontController } from "./controller/account/AccouontController";
 import { BagController } from "./controller/bag/BagController";
+import { BaseController } from "./controller/base/BaseController";
 import { BattleController } from "./controller/battle/BattleController";
 import { FriendController } from "./controller/friend/FriendController";
 import { HeartController } from "./controller/heart/HeartController";
@@ -14,7 +15,6 @@ import { ShopController } from "./controller/shop/ShopController";
 import { ErrorCode } from "./enum/ErrorCode";
 import { MessageType } from "./enum/MessageType";
 import { User } from "./userdata/User";
-import { BaseController } from "./controller/base/BaseController";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -74,12 +74,11 @@ export class Connection {
             connectionMgr.addConnection(data.account.uid, this);
             this._user.decode(data);
             clearInterval(this._intervalId);
-            let startTime = TimeUtil.getTimeStamp();
+            let lastTime = TimeUtil.getTimeStamp();
             this._intervalId = setInterval(() => {
                 const time = TimeUtil.getTimeStamp();
-                const delta = time - startTime;
-                startTime = time;
-                this._controllers.forEach(v => v.update(delta));
+                this._controllers.forEach(v => v.update(time - lastTime));
+                lastTime = time;
             }, 16);
         }
     }
@@ -146,6 +145,7 @@ export class Connection {
             this._connection.off(ConnectionEvent.Message, this._onMessage);
         }
         this._connection = null;
+        this._controllers && this._controllers.forEach(v => v.close());
         this._user?.save();
         connectionMgr.connectionClosed(this._token, this);
     }
