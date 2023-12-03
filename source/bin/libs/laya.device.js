@@ -12,13 +12,13 @@
 	}
 
 	class Accelerator extends Laya.EventDispatcher {
-	    static get instance() {
-	        Accelerator._instance = Accelerator._instance || new Accelerator(0);
-	        return Accelerator._instance;
-	    }
 	    constructor(singleton) {
 	        super();
 	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
+	    }
+	    static get instance() {
+	        Accelerator._instance = Accelerator._instance || new Accelerator(0);
+	        return Accelerator._instance;
 	    }
 	    on(type, caller, listener, args = null) {
 	        super.on(type, caller, listener, args);
@@ -633,13 +633,13 @@
 	Video.SUPPORT_NO = "";
 
 	class Gyroscope extends Laya.EventDispatcher {
-	    static get instance() {
-	        Gyroscope._instance = Gyroscope._instance || new Gyroscope(0);
-	        return Gyroscope._instance;
-	    }
 	    constructor(singleton) {
 	        super();
 	        this.onDeviceOrientationChange = this.onDeviceOrientationChange.bind(this);
+	    }
+	    static get instance() {
+	        Gyroscope._instance = Gyroscope._instance || new Gyroscope(0);
+	        return Gyroscope._instance;
 	    }
 	    on(type, caller, listener, args = null) {
 	        super.on(type, caller, listener, args);
@@ -676,6 +676,4 @@
 	exports.Video = Video;
 	exports.WebGLVideo = WebGLVideo;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

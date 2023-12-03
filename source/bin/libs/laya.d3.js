@@ -274,6 +274,11 @@
 	Vector4.UnitW = new Vector4(0.0, 0.0, 0.0, 1.0);
 
 	class Vector3 {
+	    constructor(x = 0, y = 0, z = 0) {
+	        this.x = x;
+	        this.y = y;
+	        this.z = z;
+	    }
 	    static distanceSquared(value1, value2) {
 	        var x = value1.x - value2.x;
 	        var y = value1.y - value2.y;
@@ -414,11 +419,6 @@
 	    static equals(a, b) {
 	        return MathUtils3D.nearEqual(a.x, b.x) && MathUtils3D.nearEqual(a.y, b.y) && MathUtils3D.nearEqual(a.z, b.z);
 	    }
-	    constructor(x = 0, y = 0, z = 0) {
-	        this.x = x;
-	        this.y = y;
-	        this.z = z;
-	    }
 	    setValue(x, y, z) {
 	        this.x = x;
 	        this.y = y;
@@ -476,7 +476,6 @@
 	Vector3._ForwardLH = new Vector3(0, 0, 1);
 	Vector3._Up = new Vector3(0, 1, 0);
 
-	exports.PBRRenderQuality = void 0;
 	(function (PBRRenderQuality) {
 	    PBRRenderQuality[PBRRenderQuality["High"] = 0] = "High";
 	    PBRRenderQuality[PBRRenderQuality["Low"] = 1] = "Low";
@@ -529,6 +528,31 @@
 	Physics3D._enablePhysics = false;
 
 	class Config3D {
+	    constructor() {
+	        this._defaultPhysicsMemory = 16;
+	        this._maxLightCount = 32;
+	        this._lightClusterCount = new Vector3(12, 12, 12);
+	        this._resoluWidth = -1;
+	        this._resoluHeight = -1;
+	        this._resoluRatio = 1;
+	        this._customPixel = false;
+	        this._editerEnvironment = false;
+	        this.isAntialias = true;
+	        this.isAlpha = false;
+	        this.premultipliedAlpha = true;
+	        this.isStencil = true;
+	        this.enableMultiLight = true;
+	        this.octreeCulling = false;
+	        this.octreeInitialSize = 64.0;
+	        this.octreeInitialCenter = new Vector3(0, 0, 0);
+	        this.octreeMinNodeSize = 2.0;
+	        this.octreeLooseness = 1.25;
+	        this.distanceVolumCull = false;
+	        this.debugFrustumCulling = false;
+	        this.pbrRenderQuality = exports.PBRRenderQuality.High;
+	        this.isUseCannonPhysicsEngine = false;
+	        this._maxAreaLightCountPerClusterAverage = Math.min(Math.floor(2048 / this._lightClusterCount.z - 1) * 4, this._maxLightCount);
+	    }
 	    static get useCannonPhysics() {
 	        return Config3D._config.isUseCannonPhysicsEngine;
 	    }
@@ -617,31 +641,6 @@
 	            console.warn("Config3D: if the area light(PointLight、SpotLight) count is large than " + maxAreaLightCountWithZ + ",maybe the far away culster will ingonre some light.");
 	        this._maxAreaLightCountPerClusterAverage = Math.min(maxAreaLightCountWithZ, this._maxLightCount);
 	    }
-	    constructor() {
-	        this._defaultPhysicsMemory = 16;
-	        this._maxLightCount = 32;
-	        this._lightClusterCount = new Vector3(12, 12, 12);
-	        this._resoluWidth = -1;
-	        this._resoluHeight = -1;
-	        this._resoluRatio = 1;
-	        this._customPixel = false;
-	        this._editerEnvironment = false;
-	        this.isAntialias = true;
-	        this.isAlpha = false;
-	        this.premultipliedAlpha = true;
-	        this.isStencil = true;
-	        this.enableMultiLight = true;
-	        this.octreeCulling = false;
-	        this.octreeInitialSize = 64.0;
-	        this.octreeInitialCenter = new Vector3(0, 0, 0);
-	        this.octreeMinNodeSize = 2.0;
-	        this.octreeLooseness = 1.25;
-	        this.distanceVolumCull = false;
-	        this.debugFrustumCulling = false;
-	        this.pbrRenderQuality = exports.PBRRenderQuality.High;
-	        this.isUseCannonPhysicsEngine = false;
-	        this._maxAreaLightCountPerClusterAverage = Math.min(Math.floor(2048 / this._lightClusterCount.z - 1) * 4, this._maxLightCount);
-	    }
 	    cloneTo(dest) {
 	        var destConfig3D = dest;
 	        destConfig3D._defaultPhysicsMemory = this._defaultPhysicsMemory;
@@ -727,7 +726,6 @@
 	    }
 	}
 
-	exports.WeightedMode = void 0;
 	(function (WeightedMode) {
 	    WeightedMode[WeightedMode["None"] = 0] = "None";
 	    WeightedMode[WeightedMode["In"] = 1] = "In";
@@ -766,6 +764,18 @@
 	}
 
 	class Matrix3x3 {
+	    constructor() {
+	        var e = this.elements = new Float32Array(9);
+	        e[0] = 1;
+	        e[1] = 0;
+	        e[2] = 0;
+	        e[3] = 0;
+	        e[4] = 1;
+	        e[5] = 0;
+	        e[6] = 0;
+	        e[7] = 0;
+	        e[8] = 1;
+	    }
 	    static createRotationQuaternion(rotation, out) {
 	        var rotX = rotation.x;
 	        var rotY = rotation.y;
@@ -860,18 +870,6 @@
 	        e[6] = r31 * l11 + r32 * l21 + r33 * l31;
 	        e[7] = r31 * l12 + r32 * l22 + r33 * l32;
 	        e[8] = r31 * l13 + r32 * l23 + r33 * l33;
-	    }
-	    constructor() {
-	        var e = this.elements = new Float32Array(9);
-	        e[0] = 1;
-	        e[1] = 0;
-	        e[2] = 0;
-	        e[3] = 0;
-	        e[4] = 1;
-	        e[5] = 0;
-	        e[6] = 0;
-	        e[7] = 0;
-	        e[8] = 1;
 	    }
 	    determinant() {
 	        var f = this.elements;
@@ -1032,6 +1030,12 @@
 	Matrix3x3._tempV32 = new Vector3();
 
 	class Quaternion {
+	    constructor(x = 0, y = 0, z = 0, w = 1) {
+	        this.x = x;
+	        this.y = y;
+	        this.z = z;
+	        this.w = w;
+	    }
 	    static createFromYawPitchRoll(yaw, pitch, roll, out) {
 	        var halfRoll = roll * 0.5;
 	        var halfPitch = pitch * 0.5;
@@ -1183,12 +1187,6 @@
 	    }
 	    static dot(left, right) {
 	        return left.x * right.x + left.y * right.y + left.z * right.z + left.w * right.w;
-	    }
-	    constructor(x = 0, y = 0, z = 0, w = 1) {
-	        this.x = x;
-	        this.y = y;
-	        this.z = z;
-	        this.w = w;
 	    }
 	    setValue(x, y, z, w) {
 	        this.x = x;
@@ -1931,14 +1929,14 @@
 	AnimationClipParser04._DATA = { offset: 0, size: 0 };
 
 	class KeyframeNodeList {
+	    constructor() {
+	        this._nodes = [];
+	    }
 	    get count() {
 	        return this._nodes.length;
 	    }
 	    set count(value) {
 	        this._nodes.length = value;
-	    }
-	    constructor() {
-	        this._nodes = [];
 	    }
 	    getNodeByIndex(index) {
 	        return this._nodes[index];
@@ -2497,6 +2495,14 @@
 	Utils3D._compIdToNode = new Object();
 
 	class AnimationClip extends Laya.Resource {
+	    constructor() {
+	        super();
+	        this._duration = 0;
+	        this._frameRate = 0;
+	        this._nodes = new KeyframeNodeList();
+	        this.islooping = false;
+	        this._animationEvents = [];
+	    }
 	    static _parse(data) {
 	        var clip = new AnimationClip();
 	        var reader = new Laya.Byte(data);
@@ -2520,14 +2526,6 @@
 	    }
 	    duration() {
 	        return this._duration;
-	    }
-	    constructor() {
-	        super();
-	        this._duration = 0;
-	        this._frameRate = 0;
-	        this._nodes = new KeyframeNodeList();
-	        this.islooping = false;
-	        this._animationEvents = [];
 	    }
 	    _weightModeHermite(weightMode, nextweightMode) {
 	        return (((weightMode & exports.WeightedMode.Out) == 0) && ((nextweightMode & exports.WeightedMode.In) == 0));
@@ -2880,6 +2878,9 @@
 	AnimationClip._tempQuaternion0 = new Quaternion();
 
 	class AnimatorPlayState {
+	    constructor() {
+	        this._currentState = null;
+	    }
 	    get normalizedTime() {
 	        return this._normalizedTime;
 	    }
@@ -2888,9 +2889,6 @@
 	    }
 	    get animatorState() {
 	        return this._currentState;
-	    }
-	    constructor() {
-	        this._currentState = null;
 	    }
 	    _resetPlayState(startTime, clipDuration) {
 	        this._finish = false;
@@ -2914,19 +2912,6 @@
 	}
 
 	class AnimatorControllerLayer {
-	    get defaultState() {
-	        return this._defaultState;
-	    }
-	    set defaultState(value) {
-	        this._defaultState = value;
-	        this._statesMap[value.name] = value;
-	    }
-	    get avatarMask() {
-	        return this._avatarMask;
-	    }
-	    set avatarMask(value) {
-	        this._avatarMask = value;
-	    }
 	    constructor(name) {
 	        this._referenceCount = 0;
 	        this._playType = -1;
@@ -2945,6 +2930,19 @@
 	        this.defaultWeight = 1.0;
 	        this.playOnWake = true;
 	        this.name = name;
+	    }
+	    get defaultState() {
+	        return this._defaultState;
+	    }
+	    set defaultState(value) {
+	        this._defaultState = value;
+	        this._statesMap[value.name] = value;
+	    }
+	    get avatarMask() {
+	        return this._avatarMask;
+	    }
+	    set avatarMask(value) {
+	        this._avatarMask = value;
 	    }
 	    _removeClip(clipStateInfos, statesMap, index, state) {
 	        var clip = state._clip;
@@ -3034,6 +3032,17 @@
 	AnimatorControllerLayer.BLENDINGMODE_ADDTIVE = 1;
 
 	class AnimatorState {
+	    constructor() {
+	        this._referenceCount = 0;
+	        this._clip = null;
+	        this._nodeOwners = [];
+	        this._currentFrameIndices = null;
+	        this._realtimeDatas = [];
+	        this._scripts = null;
+	        this.speed = 1.0;
+	        this.clipStart = 0.0;
+	        this.clipEnd = 1.0;
+	    }
 	    get clip() {
 	        return this._clip;
 	    }
@@ -3068,17 +3077,6 @@
 	            }
 	            this._clip = value;
 	        }
-	    }
-	    constructor() {
-	        this._referenceCount = 0;
-	        this._clip = null;
-	        this._nodeOwners = [];
-	        this._currentFrameIndices = null;
-	        this._realtimeDatas = [];
-	        this._scripts = null;
-	        this.speed = 1.0;
-	        this.clipStart = 0.0;
-	        this.clipEnd = 1.0;
 	    }
 	    _getReferenceCount() {
 	        return this._referenceCount;
@@ -3204,13 +3202,27 @@
 	    }
 	}
 
-	exports.AnimatorUpdateMode = void 0;
 	(function (AnimatorUpdateMode) {
 	    AnimatorUpdateMode[AnimatorUpdateMode["Normal"] = 0] = "Normal";
 	    AnimatorUpdateMode[AnimatorUpdateMode["LowFrame"] = 1] = "LowFrame";
 	    AnimatorUpdateMode[AnimatorUpdateMode["UnScaleTime"] = 2] = "UnScaleTime";
 	})(exports.AnimatorUpdateMode || (exports.AnimatorUpdateMode = {}));
 	class Animator extends Laya.Component {
+	    constructor() {
+	        super();
+	        this._keyframeNodeOwners = [];
+	        this._updateMode = exports.AnimatorUpdateMode.Normal;
+	        this._lowUpdateDelty = 20;
+	        this._linkAvatarSpritesData = {};
+	        this._linkAvatarSprites = [];
+	        this._renderableSprites = [];
+	        this.cullingMode = Animator.CULLINGMODE_CULLCOMPLETELY;
+	        this._controllerLayers = [];
+	        this._linkSprites = {};
+	        this._speed = 1.0;
+	        this._keyframeNodeOwnerMap = {};
+	        this._updateMark = 0;
+	    }
 	    static _update(scene) {
 	        var pool = scene._animatorPool;
 	        var elements = pool.elements;
@@ -3233,21 +3245,6 @@
 	    }
 	    get controllerLayerCount() {
 	        return this._controllerLayers.length;
-	    }
-	    constructor() {
-	        super();
-	        this._keyframeNodeOwners = [];
-	        this._updateMode = exports.AnimatorUpdateMode.Normal;
-	        this._lowUpdateDelty = 20;
-	        this._linkAvatarSpritesData = {};
-	        this._linkAvatarSprites = [];
-	        this._renderableSprites = [];
-	        this.cullingMode = Animator.CULLINGMODE_CULLCOMPLETELY;
-	        this._controllerLayers = [];
-	        this._linkSprites = {};
-	        this._speed = 1.0;
-	        this._keyframeNodeOwnerMap = {};
-	        this._updateMark = 0;
 	    }
 	    _linkToSprites(linkSprites) {
 	        for (var k in linkSprites) {
@@ -4364,6 +4361,25 @@
 	RenderContext3D._instance = new RenderContext3D();
 
 	class RenderTexture extends Laya.BaseTexture {
+	    constructor(width, height, format = Laya.RenderTextureFormat.R8G8B8, depthStencilFormat = Laya.RenderTextureDepthFormat.DEPTH_16, mipmap = false) {
+	        super(format, false);
+	        this._inPool = false;
+	        this._mulSampler = 1;
+	        this._mulSamplerRT = false;
+	        this._depthAttachMode = Laya.RTDEPTHATTACHMODE.RENDERBUFFER;
+	        this._isCameraTarget = false;
+	        this._glTextureType = Laya.LayaGL.instance.TEXTURE_2D;
+	        this._width = width;
+	        this._height = height;
+	        this._depthStencilFormat = depthStencilFormat;
+	        this._mipmapCount = 1;
+	        if (mipmap && this._isPot(width) && this._isPot(height)) {
+	            this._mipmap = mipmap;
+	            let mipmapCount = Math.max(Math.ceil(Math.log2(width)) + 1, Math.ceil(Math.log2(height)) + 1);
+	            this._mipmapCount = mipmapCount;
+	        }
+	        this._create(width, height);
+	    }
 	    static get currentActive() {
 	        return RenderTexture._currentActive;
 	    }
@@ -4436,29 +4452,10 @@
 	    get depthAttachMode() {
 	        return this._depthAttachMode;
 	    }
-	    constructor(width, height, format = Laya.RenderTextureFormat.R8G8B8, depthStencilFormat = Laya.RenderTextureDepthFormat.DEPTH_16, mipmap = false) {
-	        super(format, false);
-	        this._inPool = false;
-	        this._mulSampler = 1;
-	        this._mulSamplerRT = false;
-	        this._depthAttachMode = Laya.RTDEPTHATTACHMODE.RENDERBUFFER;
-	        this._isCameraTarget = false;
-	        this._glTextureType = Laya.LayaGL.instance.TEXTURE_2D;
-	        this._width = width;
-	        this._height = height;
-	        this._depthStencilFormat = depthStencilFormat;
-	        this._mipmapCount = 1;
-	        if (mipmap && this._isPot(width) && this._isPot(height)) {
-	            this._mipmap = mipmap;
-	            let mipmapCount = Math.max(Math.ceil(Math.log2(width)) + 1, Math.ceil(Math.log2(height)) + 1);
-	            this._mipmapCount = mipmapCount;
-	        }
-	        this._create(width, height);
-	    }
 	    _create(width, height) {
 	        var gl = Laya.LayaGL.instance;
 	        var layaGPU = Laya.LayaGL.layaGPUInstance;
-	        layaGPU._isWebGL2;
+	        var isWebGL2 = layaGPU._isWebGL2;
 	        var format = this._format;
 	        this._frameBuffer = gl.createFramebuffer();
 	        gl.bindFramebuffer(gl.FRAMEBUFFER, this._frameBuffer);
@@ -4804,15 +4801,6 @@
 	}
 
 	class VertexBuffer3D extends Laya.Buffer {
-	    get vertexDeclaration() {
-	        return this._vertexDeclaration;
-	    }
-	    set vertexDeclaration(value) {
-	        this._vertexDeclaration = value;
-	    }
-	    get canRead() {
-	        return this._canRead;
-	    }
 	    constructor(byteLength, bufferUsage, canRead = false) {
 	        super();
 	        this._vertexDeclaration = null;
@@ -4828,6 +4816,15 @@
 	            this._buffer = new Uint8Array(byteLength);
 	            this._float32Reader = new Float32Array(this._buffer.buffer);
 	        }
+	    }
+	    get vertexDeclaration() {
+	        return this._vertexDeclaration;
+	    }
+	    set vertexDeclaration(value) {
+	        this._vertexDeclaration = value;
+	    }
+	    get canRead() {
+	        return this._canRead;
 	    }
 	    bind() {
 	        if (Laya.Buffer._bindedVertexBuffer !== this._glBuffer) {
@@ -4933,6 +4930,25 @@
 	VertexElementFormat.HalfVector4 = "halfvector4";
 
 	class Matrix4x4 {
+	    constructor(m11 = 1, m12 = 0, m13 = 0, m14 = 0, m21 = 0, m22 = 1, m23 = 0, m24 = 0, m31 = 0, m32 = 0, m33 = 1, m34 = 0, m41 = 0, m42 = 0, m43 = 0, m44 = 1, elements = null) {
+	        var e = elements ? this.elements = elements : this.elements = new Float32Array(16);
+	        e[0] = m11;
+	        e[1] = m12;
+	        e[2] = m13;
+	        e[3] = m14;
+	        e[4] = m21;
+	        e[5] = m22;
+	        e[6] = m23;
+	        e[7] = m24;
+	        e[8] = m31;
+	        e[9] = m32;
+	        e[10] = m33;
+	        e[11] = m34;
+	        e[12] = m41;
+	        e[13] = m42;
+	        e[14] = m43;
+	        e[15] = m44;
+	    }
 	    static createRotationX(rad, out) {
 	        var oe = out.elements;
 	        var s = Math.sin(rad), c = Math.cos(rad);
@@ -5204,25 +5220,6 @@
 	        oe[12] = (left + right) / (left - right);
 	        oe[13] = (top + bottom) / (bottom - top);
 	        oe[14] = -znear * zRange;
-	    }
-	    constructor(m11 = 1, m12 = 0, m13 = 0, m14 = 0, m21 = 0, m22 = 1, m23 = 0, m24 = 0, m31 = 0, m32 = 0, m33 = 1, m34 = 0, m41 = 0, m42 = 0, m43 = 0, m44 = 1, elements = null) {
-	        var e = elements ? this.elements = elements : this.elements = new Float32Array(16);
-	        e[0] = m11;
-	        e[1] = m12;
-	        e[2] = m13;
-	        e[3] = m14;
-	        e[4] = m21;
-	        e[5] = m22;
-	        e[6] = m23;
-	        e[7] = m24;
-	        e[8] = m31;
-	        e[9] = m32;
-	        e[10] = m33;
-	        e[11] = m34;
-	        e[12] = m41;
-	        e[13] = m42;
-	        e[14] = m43;
-	        e[15] = m44;
 	    }
 	    getElementByRowColumn(row, column) {
 	        if (row < 0 || row > 3)
@@ -5909,15 +5906,6 @@
 	ShaderData._SET_RUNTIME_VALUE_MODE_REFERENCE_ = true;
 
 	class VertexDeclaration {
-	    get id() {
-	        return this._id;
-	    }
-	    get vertexStride() {
-	        return this._vertexStride;
-	    }
-	    get vertexElementCount() {
-	        return this._vertexElements.length;
-	    }
 	    constructor(vertexStride, vertexElements) {
 	        this._id = ++VertexDeclaration._uniqueIDCounter;
 	        this._vertexElementsDic = {};
@@ -5939,6 +5927,15 @@
 	            this._shaderValues.setAttribute(name, value);
 	        }
 	    }
+	    get id() {
+	        return this._id;
+	    }
+	    get vertexStride() {
+	        return this._vertexStride;
+	    }
+	    get vertexElementCount() {
+	        return this._vertexElements.length;
+	    }
 	    getVertexElementByIndex(index) {
 	        return this._vertexElements[index];
 	    }
@@ -5949,6 +5946,11 @@
 	VertexDeclaration._uniqueIDCounter = 1;
 
 	class VertexElement {
+	    constructor(offset, elementFormat, elementUsage) {
+	        this._offset = offset;
+	        this._elementFormat = elementFormat;
+	        this._elementUsage = elementUsage;
+	    }
 	    get offset() {
 	        return this._offset;
 	    }
@@ -5957,11 +5959,6 @@
 	    }
 	    get elementUsage() {
 	        return this._elementUsage;
-	    }
-	    constructor(offset, elementFormat, elementUsage) {
-	        this._offset = offset;
-	        this._elementFormat = elementFormat;
-	        this._elementUsage = elementUsage;
 	    }
 	}
 
@@ -6048,11 +6045,6 @@
 	}
 
 	class ScreenQuad extends Laya.Resource {
-	    static __init__() {
-	        ScreenQuad._vertexDeclaration = new VertexDeclaration(16, [new VertexElement(0, VertexElementFormat.Vector4, ScreenQuad.SCREENQUAD_POSITION_UV)]);
-	        ScreenQuad.instance = new ScreenQuad();
-	        ScreenQuad.instance.lock = true;
-	    }
 	    constructor() {
 	        super();
 	        this._bufferState = new BufferState();
@@ -6071,6 +6063,11 @@
 	        this._bufferStateInvertUV.applyVertexBuffer(this._vertexBufferInvertUV);
 	        this._bufferStateInvertUV.unBind();
 	        this._setGPUMemory(this._vertexBuffer._byteLength + this._vertexBufferInvertUV._byteLength);
+	    }
+	    static __init__() {
+	        ScreenQuad._vertexDeclaration = new VertexDeclaration(16, [new VertexElement(0, VertexElementFormat.Vector4, ScreenQuad.SCREENQUAD_POSITION_UV)]);
+	        ScreenQuad.instance = new ScreenQuad();
+	        ScreenQuad.instance.lock = true;
 	    }
 	    render() {
 	        var gl = Laya.LayaGL.instance;
@@ -6098,11 +6095,6 @@
 	ScreenQuad._verticesInvertUV = new Float32Array([1, 1, 1, 0, 1, -1, 1, 1, -1, 1, 0, 0, -1, -1, 0, 1]);
 
 	class ScreenTriangle extends Laya.Resource {
-	    static __init__() {
-	        ScreenTriangle._vertexDeclaration = new VertexDeclaration(16, [new VertexElement(0, VertexElementFormat.Vector4, ScreenTriangle.SCREENTRIANGLE_POSITION_UV)]);
-	        ScreenTriangle.instance = new ScreenTriangle();
-	        ScreenTriangle.instance.lock = true;
-	    }
 	    constructor() {
 	        super();
 	        this._bufferState = new BufferState();
@@ -6121,6 +6113,11 @@
 	        this._bufferStateInvertUV.applyVertexBuffer(this._vertexBufferInvertUV);
 	        this._bufferStateInvertUV.unBind();
 	        this._setGPUMemory(this._vertexBuffer._byteLength + this._vertexBufferInvertUV._byteLength);
+	    }
+	    static __init__() {
+	        ScreenTriangle._vertexDeclaration = new VertexDeclaration(16, [new VertexElement(0, VertexElementFormat.Vector4, ScreenTriangle.SCREENTRIANGLE_POSITION_UV)]);
+	        ScreenTriangle.instance = new ScreenTriangle();
+	        ScreenTriangle.instance.lock = true;
 	    }
 	    render() {
 	        var gl = Laya.LayaGL.instance;
@@ -6155,6 +6152,11 @@
 	}
 
 	class ShaderVariant {
+	    constructor(shader, subShaderIndex, passIndex, defines) {
+	        this._subShaderIndex = 0;
+	        this._passIndex = 0;
+	        this.setValue(shader, subShaderIndex, passIndex, defines);
+	    }
 	    get shader() {
 	        return this._shader;
 	    }
@@ -6166,11 +6168,6 @@
 	    }
 	    get defineNames() {
 	        return this._defineNames;
-	    }
-	    constructor(shader, subShaderIndex, passIndex, defines) {
-	        this._subShaderIndex = 0;
-	        this._passIndex = 0;
-	        this.setValue(shader, subShaderIndex, passIndex, defines);
 	    }
 	    setValue(shader, subShaderIndex, passIndex, defineNames) {
 	        if (shader) {
@@ -6274,6 +6271,18 @@
 	}
 
 	class Shader3D {
+	    constructor(name, attributeMap, uniformMap, enableInstancing, supportReflectionProbe) {
+	        this._attributeMap = null;
+	        this._uniformMap = null;
+	        this._enableInstancing = false;
+	        this._supportReflectionProbe = false;
+	        this._subShaders = [];
+	        this._name = name;
+	        this._attributeMap = attributeMap;
+	        this._uniformMap = uniformMap;
+	        this._enableInstancing = enableInstancing;
+	        this._supportReflectionProbe = supportReflectionProbe;
+	    }
 	    static _getNamesByDefineData(defineData, out) {
 	        var maskMap = Shader3D._maskMap;
 	        var mask = defineData._mask;
@@ -6357,18 +6366,6 @@
 	    get name() {
 	        return this._name;
 	    }
-	    constructor(name, attributeMap, uniformMap, enableInstancing, supportReflectionProbe) {
-	        this._attributeMap = null;
-	        this._uniformMap = null;
-	        this._enableInstancing = false;
-	        this._supportReflectionProbe = false;
-	        this._subShaders = [];
-	        this._name = name;
-	        this._attributeMap = attributeMap;
-	        this._uniformMap = uniformMap;
-	        this._enableInstancing = enableInstancing;
-	        this._supportReflectionProbe = supportReflectionProbe;
-	    }
 	    addSubShader(subShader) {
 	        this._subShaders.push(subShader);
 	        subShader._owner = this;
@@ -6438,12 +6435,12 @@
 	Shader3D.debugShaderVariantCollection = new ShaderVariantCollection();
 
 	class Command {
+	    constructor() {
+	        this._commandBuffer = null;
+	    }
 	    static __init__() {
 	        Command._screenShaderData = new ShaderData();
 	        Command._screenShader = Shader3D.find("BlitScreen");
-	    }
-	    constructor() {
-	        this._commandBuffer = null;
 	    }
 	    run() {
 	    }
@@ -6587,7 +6584,6 @@
 	}
 	SetRenderTargetCMD._pool = [];
 
-	exports.ShaderDataType = void 0;
 	(function (ShaderDataType) {
 	    ShaderDataType[ShaderDataType["Int"] = 0] = "Int";
 	    ShaderDataType[ShaderDataType["Bool"] = 1] = "Bool";
@@ -6673,9 +6669,31 @@
 	SetShaderDataCMD._pool = [];
 
 	class Transform3D extends Laya.EventDispatcher {
+	    constructor(owner) {
+	        super();
+	        this._localPosition = new Vector3(0, 0, 0);
+	        this._localRotation = new Quaternion(0, 0, 0, 1);
+	        this._localScale = new Vector3(1, 1, 1);
+	        this._localRotationEuler = new Vector3(0, 0, 0);
+	        this._localMatrix = new Matrix4x4();
+	        this._position = new Vector3(0, 0, 0);
+	        this._rotation = new Quaternion(0, 0, 0, 1);
+	        this._scale = new Vector3(1, 1, 1);
+	        this._rotationEuler = new Vector3(0, 0, 0);
+	        this._worldMatrix = new Matrix4x4();
+	        this._children = null;
+	        this._isDefaultMatrix = false;
+	        this._parent = null;
+	        this._dummy = null;
+	        this._transformFlag = 0;
+	        this._owner = owner;
+	        this._children = [];
+	        this._setTransformFlag(Transform3D.TRANSFORM_LOCALQUATERNION | Transform3D.TRANSFORM_LOCALEULER | Transform3D.TRANSFORM_LOCALMATRIX, false);
+	        this._setTransformFlag(Transform3D.TRANSFORM_WORLDPOSITION | Transform3D.TRANSFORM_WORLDQUATERNION | Transform3D.TRANSFORM_WORLDEULER | Transform3D.TRANSFORM_WORLDSCALE | Transform3D.TRANSFORM_WORLDMATRIX, true);
+	    }
 	    get isDefaultMatrix() {
 	        if (this._getTransformFlag(Transform3D.TRANSFORM_LOCALMATRIX)) {
-	            this.localMatrix;
+	            let localMat = this.localMatrix;
 	        }
 	        return this._isDefaultMatrix;
 	    }
@@ -6959,28 +6977,6 @@
 	            value.cloneTo(this._worldMatrix);
 	        this._setTransformFlag(Transform3D.TRANSFORM_WORLDMATRIX, false);
 	    }
-	    constructor(owner) {
-	        super();
-	        this._localPosition = new Vector3(0, 0, 0);
-	        this._localRotation = new Quaternion(0, 0, 0, 1);
-	        this._localScale = new Vector3(1, 1, 1);
-	        this._localRotationEuler = new Vector3(0, 0, 0);
-	        this._localMatrix = new Matrix4x4();
-	        this._position = new Vector3(0, 0, 0);
-	        this._rotation = new Quaternion(0, 0, 0, 1);
-	        this._scale = new Vector3(1, 1, 1);
-	        this._rotationEuler = new Vector3(0, 0, 0);
-	        this._worldMatrix = new Matrix4x4();
-	        this._children = null;
-	        this._isDefaultMatrix = false;
-	        this._parent = null;
-	        this._dummy = null;
-	        this._transformFlag = 0;
-	        this._owner = owner;
-	        this._children = [];
-	        this._setTransformFlag(Transform3D.TRANSFORM_LOCALQUATERNION | Transform3D.TRANSFORM_LOCALEULER | Transform3D.TRANSFORM_LOCALMATRIX, false);
-	        this._setTransformFlag(Transform3D.TRANSFORM_WORLDPOSITION | Transform3D.TRANSFORM_WORLDQUATERNION | Transform3D.TRANSFORM_WORLDEULER | Transform3D.TRANSFORM_WORLDSCALE | Transform3D.TRANSFORM_WORLDMATRIX, true);
-	    }
 	    _getScaleMatrix() {
 	        var invRotation = Transform3D._tempQuaternion0;
 	        var invRotationMat = Transform3D._tempMatrix3x30;
@@ -7202,13 +7198,12 @@
 	        Vector3.TransformNormal(pos, Transform3D._tempMatrix0, out);
 	    }
 	    toDir(forward, dir) {
-	        this.worldMatrix;
+	        var wmat = this.worldMatrix;
 	        this.rotationTo(this.rotation, forward, dir);
 	        this.rotation = this.rotation;
 	    }
 	    rotationTo(out, a, b) {
 	        var dot = Vector3.dot(a, b);
-	        Vector3._Up;
 	        if (dot < -0.999999) {
 	            Vector3.cross(Vector3._UnitX, a, Transform3D.tmpVec3);
 	            if (Vector3.scalarLength(Transform3D.tmpVec3) < 0.000001)
@@ -7254,6 +7249,16 @@
 	Transform3D.tmpVec3 = new Vector3();
 
 	class Sprite3D extends Laya.Node {
+	    constructor(name = null, isStatic = false) {
+	        super();
+	        this._needProcessCollisions = false;
+	        this._needProcessTriggers = false;
+	        this._id = ++Sprite3D._uniqueIDCounter;
+	        this._transform = new Transform3D(this);
+	        this._isStatic = isStatic;
+	        this.layer = 0;
+	        this.name = name ? name : "New Sprite3D";
+	    }
 	    static __init__() {
 	    }
 	    static instantiate(original, parent = null, worldPositionStays = true, position = null, rotation = null) {
@@ -7298,16 +7303,6 @@
 	    }
 	    get transform() {
 	        return this._transform;
-	    }
-	    constructor(name = null, isStatic = false) {
-	        super();
-	        this._needProcessCollisions = false;
-	        this._needProcessTriggers = false;
-	        this._id = ++Sprite3D._uniqueIDCounter;
-	        this._transform = new Transform3D(this);
-	        this._isStatic = isStatic;
-	        this.layer = 0;
-	        this.name = name ? name : "New Sprite3D";
 	    }
 	    _setCreateURL(url) {
 	        this._url = Laya.URL.formatURL(url);
@@ -7472,6 +7467,12 @@
 	Sprite3D._uniqueIDCounter = 0;
 
 	class DrawMeshCMD extends Command {
+	    constructor() {
+	        super();
+	        this._projectionViewWorldMatrix = new Matrix4x4();
+	        this._renderShaderValue = new ShaderData();
+	        this._renderShaderValue = new ShaderData(null);
+	    }
 	    static create(mesh, matrix, material, subMeshIndex, subShaderIndex, commandBuffer) {
 	        var cmd;
 	        cmd = DrawMeshCMD._pool.length > 0 ? DrawMeshCMD._pool.pop() : new DrawMeshCMD();
@@ -7482,12 +7483,6 @@
 	        cmd._subShaderIndex = subShaderIndex;
 	        cmd._commandBuffer = commandBuffer;
 	        return cmd;
-	    }
-	    constructor() {
-	        super();
-	        this._projectionViewWorldMatrix = new Matrix4x4();
-	        this._renderShaderValue = new ShaderData();
-	        this._renderShaderValue = new ShaderData(null);
 	    }
 	    run() {
 	        var renderSubShader = this._material._shader.getSubShaderAt(this._subShaderIndex);
@@ -7681,7 +7676,7 @@
 	            throw "This render command material cannot be empty";
 	        this.setContext(this._commandBuffer._context);
 	        var context = this._context;
-	        context.scene;
+	        var scene = context.scene;
 	        var renderElements = this._render._renderElements;
 	        for (var i = 0, n = renderElements.length; i < n; i++) {
 	            var renderelement = renderElements[i];
@@ -7846,6 +7841,14 @@
 	VertexMesh._vertexDeclarationMap = {};
 
 	class DrawMeshInstancedCMD extends Command {
+	    constructor() {
+	        super();
+	        this._renderShaderValue = new ShaderData(null);
+	        let gl = Laya.LayaGL.instance;
+	        this._instanceWorldMatrixData = new Float32Array(DrawMeshInstancedCMD.maxInstanceCount * 16);
+	        this._instanceWorldMatrixBuffer = new VertexBuffer3D(this._instanceWorldMatrixData.length * 4, gl.DYNAMIC_DRAW);
+	        this._instanceWorldMatrixBuffer.vertexDeclaration = VertexMesh.instanceWorldMatrixDeclaration;
+	    }
 	    static create(mesh, subMeshIndex, matrixs, material, subShaderIndex, instanceProperty, drawnums, commandBuffer) {
 	        var cmd;
 	        if ((matrixs && matrixs.length > DrawMeshInstancedCMD.maxInstanceCount) || drawnums > DrawMeshInstancedCMD.maxInstanceCount) {
@@ -7863,14 +7866,6 @@
 	        matrixs && cmd._updateWorldMatrixBuffer();
 	        cmd._setInstanceBuffer();
 	        return cmd;
-	    }
-	    constructor() {
-	        super();
-	        this._renderShaderValue = new ShaderData(null);
-	        let gl = Laya.LayaGL.instance;
-	        this._instanceWorldMatrixData = new Float32Array(DrawMeshInstancedCMD.maxInstanceCount * 16);
-	        this._instanceWorldMatrixBuffer = new VertexBuffer3D(this._instanceWorldMatrixData.length * 4, gl.DYNAMIC_DRAW);
-	        this._instanceWorldMatrixBuffer.vertexDeclaration = VertexMesh.instanceWorldMatrixDeclaration;
 	    }
 	    get bufferState() {
 	        return this._instanceWorldMatrixBuffer;
@@ -8102,11 +8097,6 @@
 	}
 
 	class PostProcess {
-	    static __init__() {
-	        PostProcess.SHADERDEFINE_BLOOM_LOW = Shader3D.getDefineByName("BLOOM_LOW");
-	        PostProcess.SHADERDEFINE_BLOOM = Shader3D.getDefineByName("BLOOM");
-	        PostProcess.SHADERDEFINE_FINALPASS = Shader3D.getDefineByName("FINALPASS");
-	    }
 	    constructor() {
 	        this._compositeShader = Shader3D.find("PostProcessComposite");
 	        this._compositeShaderData = new ShaderData();
@@ -8116,6 +8106,11 @@
 	        this._context = new PostProcessRenderContext();
 	        this._context.compositeShaderData = this._compositeShaderData;
 	        this._context.command = new CommandBuffer();
+	    }
+	    static __init__() {
+	        PostProcess.SHADERDEFINE_BLOOM_LOW = Shader3D.getDefineByName("BLOOM_LOW");
+	        PostProcess.SHADERDEFINE_BLOOM = Shader3D.getDefineByName("BLOOM");
+	        PostProcess.SHADERDEFINE_FINALPASS = Shader3D.getDefineByName("FINALPASS");
 	    }
 	    get enable() {
 	        return this._enable;
@@ -8381,6 +8376,11 @@
 	}
 
 	class Avatar extends Laya.Resource {
+	    constructor() {
+	        super();
+	        this._nativeNodeCount = 0;
+	        this._nativeCurCloneCount = 0;
+	    }
 	    static _parse(data, propertyParams = null, constructParams = null) {
 	        var avatar = new Avatar();
 	        avatar._rootNode = new AnimationNode();
@@ -8392,11 +8392,6 @@
 	    }
 	    static load(url, complete) {
 	        Laya.ILaya.loader.create(url, complete, null, Avatar.AVATAR);
-	    }
-	    constructor() {
-	        super();
-	        this._nativeNodeCount = 0;
-	        this._nativeCurCloneCount = 0;
 	    }
 	    _initCloneToAnimator(destNode, destAnimator) {
 	        destAnimator._avatarNodeMap[destNode.name] = destNode;
@@ -8483,6 +8478,12 @@
 	Avatar.AVATAR = "AVATAR";
 
 	class Material extends Laya.Resource {
+	    constructor() {
+	        super();
+	        this._shaderValues = new ShaderData(this);
+	        this.renderQueue = Material.RENDERQUEUE_OPAQUE;
+	        this.alphaTest = false;
+	    }
 	    static load(url, complete) {
 	        Laya.Laya.loader.create(url, complete, null, Material.MATERIAL);
 	    }
@@ -8719,12 +8720,6 @@
 	        Shader3D._getNamesByDefineData(defineData, shaderDefineArray);
 	        return shaderDefineArray;
 	    }
-	    constructor() {
-	        super();
-	        this._shaderValues = new ShaderData(this);
-	        this.renderQueue = Material.RENDERQUEUE_OPAQUE;
-	        this.alphaTest = false;
-	    }
 	    _removeTetxureReference() {
 	        var data = this._shaderValues.getData();
 	        for (var k in data) {
@@ -8808,16 +8803,6 @@
 	BaseMaterial.ALPHATESTVALUE = Shader3D.propertyNameToID("u_AlphaTestValue");
 
 	class RenderState {
-	    static __init__(gl) {
-	        RenderState.STENCILOP_KEEP = gl.KEEP;
-	        RenderState.STENCILOP_ZERO = gl.ZERO;
-	        RenderState.STENCILOP_REPLACE = gl.REPLACE;
-	        RenderState.STENCILOP_INCR = gl.INCR;
-	        RenderState.STENCILOP_INCR_WRAP = gl.INCR_WRAP;
-	        RenderState.STENCILOP_DECR = gl.DECR;
-	        RenderState.STENCILOP_DECR_WRAP = gl.DECR_WRAP;
-	        RenderState.STENCILOP_INVERT = gl.INVERT;
-	    }
 	    constructor() {
 	        this.cull = RenderState.CULL_BACK;
 	        this.blend = RenderState.BLEND_DISABLE;
@@ -8837,6 +8822,16 @@
 	        this.stencilTest = RenderState.STENCILTEST_OFF;
 	        this.stencilWrite = false;
 	        this.stencilOp = new Vector3(RenderState.STENCILOP_KEEP, RenderState.STENCILOP_KEEP, RenderState.STENCILOP_REPLACE);
+	    }
+	    static __init__(gl) {
+	        RenderState.STENCILOP_KEEP = gl.KEEP;
+	        RenderState.STENCILOP_ZERO = gl.ZERO;
+	        RenderState.STENCILOP_REPLACE = gl.REPLACE;
+	        RenderState.STENCILOP_INCR = gl.INCR;
+	        RenderState.STENCILOP_INCR_WRAP = gl.INCR_WRAP;
+	        RenderState.STENCILOP_DECR = gl.DECR;
+	        RenderState.STENCILOP_DECR_WRAP = gl.DECR_WRAP;
+	        RenderState.STENCILOP_INVERT = gl.INVERT;
 	    }
 	    cloneTo(dest) {
 	        var destState = dest;
@@ -8901,6 +8896,19 @@
 	RenderState.STENCILTEST_ALWAYS = 0x0207;
 
 	class BlinnPhongMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("BLINNPHONG");
+	        this.albedoIntensity = 1.0;
+	        var sv = this._shaderValues;
+	        sv.setVector(BlinnPhongMaterial.ALBEDOCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        sv.setVector(BlinnPhongMaterial.MATERIALSPECULAR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        sv.setNumber(BlinnPhongMaterial.SHININESS, 0.078125);
+	        sv.setNumber(Material.ALPHATESTVALUE, 0.5);
+	        sv.setVector(BlinnPhongMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
+	        this.albedoIntensity = 1.0;
+	        this.renderMode = BlinnPhongMaterial.RENDERMODE_OPAQUE;
+	    }
 	    static __initDefine__() {
 	        BlinnPhongMaterial.SHADERDEFINE_DIFFUSEMAP = Shader3D.getDefineByName("DIFFUSEMAP");
 	        BlinnPhongMaterial.SHADERDEFINE_NORMALMAP = Shader3D.getDefineByName("NORMALMAP");
@@ -9249,19 +9257,6 @@
 	    set transmissionColor(value) {
 	        this._shaderValues.setVector(BlinnPhongMaterial.TRANSMISSIONCOLOR, value);
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("BLINNPHONG");
-	        this.albedoIntensity = 1.0;
-	        var sv = this._shaderValues;
-	        sv.setVector(BlinnPhongMaterial.ALBEDOCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        sv.setVector(BlinnPhongMaterial.MATERIALSPECULAR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        sv.setNumber(BlinnPhongMaterial.SHININESS, 0.078125);
-	        sv.setNumber(Material.ALPHATESTVALUE, 0.5);
-	        sv.setVector(BlinnPhongMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
-	        this.albedoIntensity = 1.0;
-	        this.renderMode = BlinnPhongMaterial.RENDERMODE_OPAQUE;
-	    }
 	    clone() {
 	        var dest = new BlinnPhongMaterial();
 	        this.cloneTo(dest);
@@ -9296,6 +9291,13 @@
 	BlinnPhongMaterial.AlbedoIntensity = Shader3D.propertyNameToID("u_AlbedoIntensity");
 
 	class EffectMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("Effect");
+	        this._shaderValues.setVector(EffectMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
+	        this._shaderValues.setVector(EffectMaterial.TINTCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        this.renderMode = EffectMaterial.RENDERMODE_ADDTIVE;
+	    }
 	    static __initDefine__() {
 	        EffectMaterial.SHADERDEFINE_MAINTEXTURE = Shader3D.getDefineByName("MAINTEXTURE");
 	        EffectMaterial.SHADERDEFINE_ADDTIVEFOG = Shader3D.getDefineByName("ADDTIVEFOG");
@@ -9479,13 +9481,6 @@
 	            this._shaderValues.getVector(EffectMaterial.TILINGOFFSET).setValue(1.0, 1.0, 0.0, 0.0);
 	        }
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("Effect");
-	        this._shaderValues.setVector(EffectMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
-	        this._shaderValues.setVector(EffectMaterial.TINTCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        this.renderMode = EffectMaterial.RENDERMODE_ADDTIVE;
-	    }
 	    clone() {
 	        var dest = new EffectMaterial();
 	        this.cloneTo(dest);
@@ -9499,6 +9494,11 @@
 	EffectMaterial.TILINGOFFSET = Shader3D.propertyNameToID("u_TilingOffset");
 
 	class ExtendTerrainMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("ExtendTerrain");
+	        this.renderMode = ExtendTerrainMaterial.RENDERMODE_OPAQUE;
+	    }
 	    static __initDefine__() {
 	        ExtendTerrainMaterial.SHADERDEFINE_DETAIL_NUM1 = Shader3D.getDefineByName("ExtendTerrain_DETAIL_NUM1");
 	        ExtendTerrainMaterial.SHADERDEFINE_DETAIL_NUM2 = Shader3D.getDefineByName("ExtendTerrain_DETAIL_NUM2");
@@ -9584,11 +9584,6 @@
 	                throw new Error("ExtendTerrainMaterial:renderMode value error.");
 	        }
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("ExtendTerrain");
-	        this.renderMode = ExtendTerrainMaterial.RENDERMODE_OPAQUE;
-	    }
 	    _setDetailNum(value) {
 	        switch (value) {
 	            case 1:
@@ -9648,7 +9643,6 @@
 	ExtendTerrainMaterial.DIFFUSESCALEOFFSET4 = Shader3D.propertyNameToID("u_DiffuseScaleOffset4");
 	ExtendTerrainMaterial.DIFFUSESCALEOFFSET5 = Shader3D.propertyNameToID("u_DiffuseScaleOffset5");
 
-	exports.PBRRenderMode = void 0;
 	(function (PBRRenderMode) {
 	    PBRRenderMode[PBRRenderMode["Opaque"] = 0] = "Opaque";
 	    PBRRenderMode[PBRRenderMode["Cutout"] = 1] = "Cutout";
@@ -9656,6 +9650,19 @@
 	    PBRRenderMode[PBRRenderMode["Transparent"] = 3] = "Transparent";
 	})(exports.PBRRenderMode || (exports.PBRRenderMode = {}));
 	class PBRMaterial extends Material {
+	    constructor() {
+	        super();
+	        this._shaderValues.setVector(PBRMaterial.ALBEDOCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        this._shaderValues.setVector(PBRMaterial.EMISSIONCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        this._shaderValues.setVector(PBRMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
+	        this._shaderValues.setNumber(PBRMaterial.SMOOTHNESS, 0.5);
+	        this._shaderValues.setNumber(PBRMaterial.SMOOTHNESSSCALE, 1.0);
+	        this._shaderValues.setNumber(PBRMaterial.OCCLUSIONSTRENGTH, 1.0);
+	        this._shaderValues.setNumber(PBRMaterial.NORMALSCALE, 1.0);
+	        this._shaderValues.setNumber(PBRMaterial.PARALLAXSCALE, 0.001);
+	        this._shaderValues.setNumber(Material.ALPHATESTVALUE, 0.5);
+	        this.renderMode = exports.PBRRenderMode.Opaque;
+	    }
 	    static __init__() {
 	        PBRMaterial.SHADERDEFINE_ALBEDOTEXTURE = Shader3D.getDefineByName("ALBEDOTEXTURE");
 	        PBRMaterial.SHADERDEFINE_NORMALTEXTURE = Shader3D.getDefineByName("NORMALTEXTURE");
@@ -9827,19 +9834,6 @@
 	                throw new Error("PBRMaterial:unknown renderMode value.");
 	        }
 	    }
-	    constructor() {
-	        super();
-	        this._shaderValues.setVector(PBRMaterial.ALBEDOCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        this._shaderValues.setVector(PBRMaterial.EMISSIONCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        this._shaderValues.setVector(PBRMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
-	        this._shaderValues.setNumber(PBRMaterial.SMOOTHNESS, 0.5);
-	        this._shaderValues.setNumber(PBRMaterial.SMOOTHNESSSCALE, 1.0);
-	        this._shaderValues.setNumber(PBRMaterial.OCCLUSIONSTRENGTH, 1.0);
-	        this._shaderValues.setNumber(PBRMaterial.NORMALSCALE, 1.0);
-	        this._shaderValues.setNumber(PBRMaterial.PARALLAXSCALE, 0.001);
-	        this._shaderValues.setNumber(Material.ALPHATESTVALUE, 0.5);
-	        this.renderMode = exports.PBRRenderMode.Opaque;
-	    }
 	}
 	PBRMaterial.ALBEDOTEXTURE = Shader3D.propertyNameToID("u_AlbedoTexture");
 	PBRMaterial.ALBEDOCOLOR = Shader3D.propertyNameToID("u_AlbedoColor");
@@ -9856,13 +9850,13 @@
 	PBRMaterial.EMISSIONCOLOR = Shader3D.propertyNameToID("u_EmissionColor");
 	PBRMaterial.renderQuality = exports.PBRRenderQuality.High;
 
-	var PBRPS$1 = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#define SETUP_BRDF_INPUT specularSetup\r\n\r\n#include \"Lighting.glsl\";\r\n#include \"PBRFSInput.glsl\";\r\n#include \"LayaPBRBRDF.glsl\";\r\n#include \"GlobalIllumination.glsl\";\r\n#include \"Shadow.glsl\"\r\n#include \"PBRCore.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tfragmentForward();\r\n}";
+	var PBRPS = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#define SETUP_BRDF_INPUT specularSetup\r\n\r\n#include \"Lighting.glsl\";\r\n#include \"PBRFSInput.glsl\";\r\n#include \"LayaPBRBRDF.glsl\";\r\n#include \"GlobalIllumination.glsl\";\r\n#include \"Shadow.glsl\"\r\n#include \"PBRCore.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tfragmentForward();\r\n}";
 
-	var PBRVS$1 = "#include \"PBRVSInput.glsl\";\r\n#include \"Lighting.glsl\";\r\n#include \"PBRVertex.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tvertexForward();\r\n\tgl_Position=remapGLPositionZ(gl_Position);\r\n}";
+	var PBRVS = "#include \"PBRVSInput.glsl\";\r\n#include \"Lighting.glsl\";\r\n#include \"PBRVertex.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tvertexForward();\r\n\tgl_Position=remapGLPositionZ(gl_Position);\r\n}";
 
-	var PBRShadowCasterPS$1 = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"ShadowCasterFS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tgl_FragColor=shadowCasterFragment();\r\n}";
+	var PBRShadowCasterPS = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"ShadowCasterFS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tgl_FragColor=shadowCasterFragment();\r\n}";
 
-	var PBRShadowCasterVS$1 = "#include \"ShadowCasterVS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tvec4 positionCS =  shadowCasterVertex();\r\n\tgl_Position=remapGLPositionZ(positionCS);\r\n}";
+	var PBRShadowCasterVS = "#include \"ShadowCasterVS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tvec4 positionCS =  shadowCasterVertex();\r\n\tgl_Position=remapGLPositionZ(positionCS);\r\n}";
 
 	var DepthNormalsTextureVS = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"Lighting.glsl\";\r\n#include \"LayaUtile.glsl\"\r\n\r\nattribute vec4 a_Position;\r\nattribute vec3 a_Normal;\r\n\r\n#ifdef BONE\r\n\tconst int c_MaxBoneCount = 24;\r\n\tattribute vec4 a_BoneIndices;\r\n\tattribute vec4 a_BoneWeights;\r\n\tuniform mat4 u_Bones[c_MaxBoneCount];\r\n#endif\r\n\r\n#ifdef GPU_INSTANCE\r\n\tattribute mat4 a_WorldMat;\r\n#else\r\n\tuniform mat4 u_WorldMat;\r\n#endif\r\nuniform mat4 u_View;\r\nuniform mat4 u_ViewProjection;\r\nuniform vec4 u_ProjectionParams;\r\n\r\n//传入法线\r\nvarying vec4 depthNormals;\r\n\r\n\r\nvec4 depthNormalsVertex()\r\n{\r\n\tmat4 worldMat;\r\n\t#ifdef GPU_INSTANCE\r\n\t\tworldMat = a_WorldMat;\r\n\t#else\r\n\t\tworldMat = u_WorldMat;\r\n\t#endif\r\n\t\r\n\t#ifdef BONE\r\n\t\tmat4 skinTransform;\r\n\t \t#ifdef SIMPLEBONE\r\n\t\t\tfloat currentPixelPos;\r\n\t\t\t#ifdef GPU_INSTANCE\r\n\t\t\t\tcurrentPixelPos = a_SimpleTextureParams.x+a_SimpleTextureParams.y;\r\n\t\t\t#else\r\n\t\t\t\tcurrentPixelPos = u_SimpleAnimatorParams.x+u_SimpleAnimatorParams.y;\r\n\t\t\t#endif\r\n\t\t\tfloat offset = 1.0/u_SimpleAnimatorTextureSize;\r\n\t\t\tskinTransform =  loadMatFromTexture(currentPixelPos,int(a_BoneIndices.x),offset) * a_BoneWeights.x;\r\n\t\t\tskinTransform += loadMatFromTexture(currentPixelPos,int(a_BoneIndices.y),offset) * a_BoneWeights.y;\r\n\t\t\tskinTransform += loadMatFromTexture(currentPixelPos,int(a_BoneIndices.z),offset) * a_BoneWeights.z;\r\n\t\t\tskinTransform += loadMatFromTexture(currentPixelPos,int(a_BoneIndices.w),offset) * a_BoneWeights.w;\r\n\t\t#else\r\n\t\t\tskinTransform =  u_Bones[int(a_BoneIndices.x)] * a_BoneWeights.x;\r\n\t\t\tskinTransform += u_Bones[int(a_BoneIndices.y)] * a_BoneWeights.y;\r\n\t\t\tskinTransform += u_Bones[int(a_BoneIndices.z)] * a_BoneWeights.z;\r\n\t\t\tskinTransform += u_Bones[int(a_BoneIndices.w)] * a_BoneWeights.w;\r\n\t\t#endif\r\n\t\tworldMat = worldMat * skinTransform;\r\n\t#endif\r\n\r\n\tvec4 positionWS = worldMat * a_Position;\r\n\r\n\tmat3 worldInvMat;\r\n\t#ifdef BONE\r\n\t\tworldInvMat=INVERSE_MAT(mat3(worldMat*skinTransform));\r\n\t#else\r\n\t\tworldInvMat=INVERSE_MAT(mat3(worldMat));\r\n\t#endif  \r\n\r\n\tvec3 normalWS = normalize(a_Normal*worldInvMat);//if no normalize will cause precision problem\r\n\t//depthNormals.xyz = normalWS;\r\n\t//存储View空间法线\r\n\tvec3 normalVS = mat3(u_View) * normalWS;\r\n\tdepthNormals.xyz = normalVS;\r\n\t\r\n\tvec4 positionCS = u_ViewProjection * positionWS;\r\n\tdepthNormals.w = (positionCS.z * 2.0 - positionCS.w)*u_ProjectionParams.w;\r\n\t\r\n    return positionCS;\r\n}\r\n\r\nvoid main()\r\n{\r\n\tvec4 positionCS =  depthNormalsVertex();\r\n\tgl_Position=remapGLPositionZ(positionCS);\r\n}";
 
@@ -10541,6 +10535,12 @@
 	}
 
 	class Color {
+	    constructor(r = 1, g = 1, b = 1, a = 1) {
+	        this.r = r;
+	        this.g = g;
+	        this.b = b;
+	        this.a = a;
+	    }
 	    static gammaToLinearSpace(value) {
 	        if (value <= 0.04045)
 	            return value / 12.92;
@@ -10558,12 +10558,6 @@
 	            return 1.055 * Math.pow(value, 0.41666) - 0.055;
 	        else
 	            return Math.pow(value, 0.41666);
-	    }
-	    constructor(r = 1, g = 1, b = 1, a = 1) {
-	        this.r = r;
-	        this.g = g;
-	        this.b = b;
-	        this.a = a;
 	    }
 	    toLinear(out) {
 	        out.r = Color.gammaToLinearSpace(this.r);
@@ -11225,7 +11219,6 @@
 	Cluster._tempVector37 = new Vector3();
 	Cluster._tempLightBound = new LightBound();
 
-	exports.TextureCubeFace = void 0;
 	(function (TextureCubeFace) {
 	    TextureCubeFace[TextureCubeFace["PositiveX"] = 0] = "PositiveX";
 	    TextureCubeFace[TextureCubeFace["NegativeX"] = 1] = "NegativeX";
@@ -11235,6 +11228,27 @@
 	    TextureCubeFace[TextureCubeFace["NegativeZ"] = 5] = "NegativeZ";
 	})(exports.TextureCubeFace || (exports.TextureCubeFace = {}));
 	class TextureCube extends Laya.BaseTexture {
+	    constructor(size, format = Laya.TextureFormat.R8G8B8, mipmap = false) {
+	        super(format, mipmap);
+	        this._glTextureType = Laya.LayaGL.instance.TEXTURE_CUBE_MAP;
+	        this._width = size;
+	        this._height = size;
+	        var gl = Laya.LayaGL.instance;
+	        this._setWarpMode(gl.TEXTURE_WRAP_S, this._wrapModeU);
+	        this._setWarpMode(gl.TEXTURE_WRAP_T, this._wrapModeV);
+	        this._setFilterMode(this._filterMode);
+	        this._setAnisotropy(this._anisoLevel);
+	        if (this._mipmap) {
+	            this._mipmapCount = Math.ceil(Math.log2(size)) + 1;
+	            for (var i = 0; i < this._mipmapCount; i++)
+	                this._setPixels([], i, Math.max(size >> i, 1), Math.max(size >> i, 1));
+	            this._setGPUMemory(size * size * 4 * (1 + 1 / 3) * 6);
+	        }
+	        else {
+	            this._mipmapCount = 1;
+	            this._setGPUMemory(size * size * 4 * 6);
+	        }
+	    }
 	    static get blackTexture() {
 	        return TextureCube._blackTexture;
 	    }
@@ -11271,27 +11285,6 @@
 	    }
 	    get defaulteTexture() {
 	        return TextureCube.grayTexture;
-	    }
-	    constructor(size, format = Laya.TextureFormat.R8G8B8, mipmap = false) {
-	        super(format, mipmap);
-	        this._glTextureType = Laya.LayaGL.instance.TEXTURE_CUBE_MAP;
-	        this._width = size;
-	        this._height = size;
-	        var gl = Laya.LayaGL.instance;
-	        this._setWarpMode(gl.TEXTURE_WRAP_S, this._wrapModeU);
-	        this._setWarpMode(gl.TEXTURE_WRAP_T, this._wrapModeV);
-	        this._setFilterMode(this._filterMode);
-	        this._setAnisotropy(this._anisoLevel);
-	        if (this._mipmap) {
-	            this._mipmapCount = Math.ceil(Math.log2(size)) + 1;
-	            for (var i = 0; i < this._mipmapCount; i++)
-	                this._setPixels([], i, Math.max(size >> i, 1), Math.max(size >> i, 1));
-	            this._setGPUMemory(size * size * 4 * (1 + 1 / 3) * 6);
-	        }
-	        else {
-	            this._mipmapCount = 1;
-	            this._setGPUMemory(size * size * 4 * 6);
-	        }
 	    }
 	    _setPixels(pixels, miplevel, width, height) {
 	        var gl = Laya.LayaGL.instance;
@@ -11654,16 +11647,16 @@
 	}
 
 	class Touch {
+	    constructor() {
+	        this._indexInList = -1;
+	        this._identifier = -1;
+	        this._position = new Vector2();
+	    }
 	    get identifier() {
 	        return this._identifier;
 	    }
 	    get position() {
 	        return this._position;
-	    }
-	    constructor() {
-	        this._indexInList = -1;
-	        this._identifier = -1;
-	        this._position = new Vector2();
 	    }
 	    _getIndexInList() {
 	        return this._indexInList;
@@ -11938,7 +11931,6 @@
 	        var denominator = Vector3.scalarLength(CollisionUtils._tempV30);
 	        if (MathUtils3D.isZero(denominator)) {
 	            if (MathUtils3D.nearEqual(ray2oeX, ray1oeX) && MathUtils3D.nearEqual(ray2oeY, ray1oeY) && MathUtils3D.nearEqual(ray2oeZ, ray1oeZ)) {
-	                Vector3._ZERO;
 	                return true;
 	            }
 	        }
@@ -11964,10 +11956,8 @@
 	        var point1e = CollisionUtils._tempV32;
 	        var point2e = CollisionUtils._tempV33;
 	        if (!MathUtils3D.nearEqual(point2e.x, point1e.x) || !MathUtils3D.nearEqual(point2e.y, point1e.y) || !MathUtils3D.nearEqual(point2e.z, point1e.z)) {
-	            Vector3._ZERO;
 	            return false;
 	        }
-	        CollisionUtils._tempV32;
 	        return true;
 	    }
 	    static intersectsPlaneAndTriangle(plane, vertex1, vertex2, vertex3) {
@@ -12160,7 +12150,6 @@
 	        Vector3.subtract(CollisionUtils._tempV30, CollisionUtils._tempV31, CollisionUtils._tempV32);
 	        Vector3.cross(CollisionUtils._tempV32, CollisionUtils._tempV34, CollisionUtils._tempV33);
 	        Vector3.normalize(CollisionUtils._tempV34, CollisionUtils._tempV34);
-	        new Ray(CollisionUtils._tempV33, CollisionUtils._tempV34);
 	        return true;
 	    }
 	    static intersectsPlaneAndBox(plane, box) {
@@ -12301,39 +12290,63 @@
 	    }
 	    static sphereContainsBox(sphere, box) {
 	        var sphereC = sphere.center;
-	        sphereC.x;
-	        sphereC.y;
-	        sphereC.z;
+	        var sphereCeX = sphereC.x;
+	        var sphereCeY = sphereC.y;
+	        var sphereCeZ = sphereC.z;
 	        var sphereR = sphere.radius;
 	        var boxMin = box.min;
-	        boxMin.x;
-	        boxMin.y;
-	        boxMin.z;
+	        var boxMineX = boxMin.x;
+	        var boxMineY = boxMin.y;
+	        var boxMineZ = boxMin.z;
 	        var boxMax = box.max;
-	        boxMax.x;
-	        boxMax.y;
-	        boxMax.z;
+	        var boxMaxeX = boxMax.x;
+	        var boxMaxeY = boxMax.y;
+	        var boxMaxeZ = boxMax.z;
 	        var _tempV30e = CollisionUtils._tempV30;
-	        _tempV30e.x;
-	        _tempV30e.y;
-	        _tempV30e.z;
+	        var _tempV30eX = _tempV30e.x;
+	        var _tempV30eY = _tempV30e.y;
+	        var _tempV30eZ = _tempV30e.z;
 	        if (!CollisionUtils.intersectsBoxAndSphere(box, sphere))
 	            return ContainmentType.Disjoint;
 	        var radiusSquared = sphereR * sphereR;
+	        _tempV30eX = sphereCeX - boxMineX;
+	        _tempV30eY = sphereCeY - boxMaxeY;
+	        _tempV30eZ = sphereCeZ - boxMaxeZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMaxeX;
+	        _tempV30eY = sphereCeY - boxMaxeY;
+	        _tempV30eZ = sphereCeZ - boxMaxeZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMaxeX;
+	        _tempV30eY = sphereCeY - boxMineY;
+	        _tempV30eZ = sphereCeZ - boxMaxeZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMineX;
+	        _tempV30eY = sphereCeY - boxMineY;
+	        _tempV30eZ = sphereCeZ - boxMaxeZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMineX;
+	        _tempV30eY = sphereCeY - boxMaxeY;
+	        _tempV30eZ = sphereCeZ - boxMineZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMaxeX;
+	        _tempV30eY = sphereCeY - boxMaxeY;
+	        _tempV30eZ = sphereCeZ - boxMineZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMaxeX;
+	        _tempV30eY = sphereCeY - boxMineY;
+	        _tempV30eZ = sphereCeZ - boxMineZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
+	        _tempV30eX = sphereCeX - boxMineX;
+	        _tempV30eY = sphereCeY - boxMineY;
+	        _tempV30eZ = sphereCeZ - boxMineZ;
 	        if (Vector3.scalarLengthSquared(CollisionUtils._tempV30) > radiusSquared)
 	            return ContainmentType.Intersects;
 	        return ContainmentType.Contains;
@@ -12435,7 +12448,6 @@
 	CollisionUtils._tempV35 = new Vector3();
 	CollisionUtils._tempV36 = new Vector3();
 
-	exports.FrustumCorner = void 0;
 	(function (FrustumCorner) {
 	    FrustumCorner[FrustumCorner["FarBottomLeft"] = 0] = "FarBottomLeft";
 	    FrustumCorner[FrustumCorner["FarTopLeft"] = 1] = "FarTopLeft";
@@ -12448,6 +12460,16 @@
 	    FrustumCorner[FrustumCorner["unknown"] = 8] = "unknown";
 	})(exports.FrustumCorner || (exports.FrustumCorner = {}));
 	class BoundFrustum {
+	    constructor(matrix) {
+	        this._matrix = matrix;
+	        this._near = new Plane(new Vector3());
+	        this._far = new Plane(new Vector3());
+	        this._left = new Plane(new Vector3());
+	        this._right = new Plane(new Vector3());
+	        this._top = new Plane(new Vector3());
+	        this._bottom = new Plane(new Vector3());
+	        BoundFrustum.getPlanesFromMatrix(this._matrix, this._near, this._far, this._left, this._right, this._top, this._bottom);
+	    }
 	    static getPlanesFromMatrix(m, np, fp, lp, rp, tp, bp) {
 	        var matrixE = m.elements;
 	        var m11 = matrixE[0];
@@ -12502,16 +12524,6 @@
 	        bottomNorE.z = m34 + m32;
 	        bp.distance = m44 + m42;
 	        bp.normalize();
-	    }
-	    constructor(matrix) {
-	        this._matrix = matrix;
-	        this._near = new Plane(new Vector3());
-	        this._far = new Plane(new Vector3());
-	        this._left = new Plane(new Vector3());
-	        this._right = new Plane(new Vector3());
-	        this._top = new Plane(new Vector3());
-	        this._bottom = new Plane(new Vector3());
-	        BoundFrustum.getPlanesFromMatrix(this._matrix, this._near, this._far, this._left, this._right, this._top, this._bottom);
 	    }
 	    get matrix() {
 	        return this._matrix;
@@ -12894,7 +12906,6 @@
 	Picker._tempVector33 = new Vector3();
 	Picker._tempVector34 = new Vector3();
 
-	exports.IndexFormat = void 0;
 	(function (IndexFormat) {
 	    IndexFormat[IndexFormat["UInt8"] = 0] = "UInt8";
 	    IndexFormat[IndexFormat["UInt16"] = 1] = "UInt16";
@@ -12902,18 +12913,6 @@
 	})(exports.IndexFormat || (exports.IndexFormat = {}));
 
 	class IndexBuffer3D extends Laya.Buffer {
-	    get indexType() {
-	        return this._indexType;
-	    }
-	    get indexTypeByteCount() {
-	        return this._indexTypeByteCount;
-	    }
-	    get indexCount() {
-	        return this._indexCount;
-	    }
-	    get canRead() {
-	        return this._canRead;
-	    }
 	    constructor(indexType, indexCount, bufferUsage = 0x88E4, canRead = false) {
 	        super();
 	        this._indexType = indexType;
@@ -12965,6 +12964,18 @@
 	                    break;
 	            }
 	        }
+	    }
+	    get indexType() {
+	        return this._indexType;
+	    }
+	    get indexTypeByteCount() {
+	        return this._indexTypeByteCount;
+	    }
+	    get indexCount() {
+	        return this._indexCount;
+	    }
+	    get canRead() {
+	        return this._canRead;
 	    }
 	    _bindForVAO() {
 	        if (Laya.BufferStateBase._curBindedBufferState) {
@@ -13060,9 +13071,6 @@
 	}
 
 	class SkyBox extends SkyMesh {
-	    static __init__() {
-	        SkyBox.instance = new SkyBox();
-	    }
 	    constructor() {
 	        super();
 	        var gl = Laya.LayaGL.instance;
@@ -13092,6 +13100,9 @@
 	        bufferState.unBind();
 	        this._bufferState = bufferState;
 	    }
+	    static __init__() {
+	        SkyBox.instance = new SkyBox();
+	    }
 	    _render(state) {
 	        var gl = Laya.LayaGL.instance;
 	        gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_BYTE, 0);
@@ -13101,6 +13112,9 @@
 	}
 
 	class SkyRenderer {
+	    constructor() {
+	        this._mesh = SkyBox.instance;
+	    }
 	    get material() {
 	        return this._material;
 	    }
@@ -13118,9 +13132,6 @@
 	        if (this._mesh !== value) {
 	            this._mesh = value;
 	        }
-	    }
-	    constructor() {
-	        this._mesh = SkyBox.instance;
 	    }
 	    _isAvailable() {
 	        return this._material && this._mesh ? true : false;
@@ -13197,6 +13208,23 @@
 	SkyRenderer._compileDefine = new DefineDatas();
 
 	class BaseCamera extends Sprite3D {
+	    constructor(nearPlane = 0.3, farPlane = 1000) {
+	        super();
+	        this._skyRenderer = new SkyRenderer();
+	        this._forward = new Vector3();
+	        this._up = new Vector3();
+	        this.clearColor = new Vector4(100 / 255, 149 / 255, 237 / 255, 255 / 255);
+	        this._shaderValues = new ShaderData(null);
+	        this._fieldOfView = 60;
+	        this._useUserProjectionMatrix = false;
+	        this._orthographic = false;
+	        this._orthographicVerticalSize = 10;
+	        this.renderingOrder = 0;
+	        this._nearPlane = nearPlane;
+	        this._farPlane = farPlane;
+	        this.cullingMask = 2147483647;
+	        this.useOcclusionCulling = true;
+	    }
 	    get skyRenderer() {
 	        return this._skyRenderer;
 	    }
@@ -13241,23 +13269,6 @@
 	    set renderingOrder(value) {
 	        this._renderingOrder = value;
 	        this._sortCamerasByRenderingOrder();
-	    }
-	    constructor(nearPlane = 0.3, farPlane = 1000) {
-	        super();
-	        this._skyRenderer = new SkyRenderer();
-	        this._forward = new Vector3();
-	        this._up = new Vector3();
-	        this.clearColor = new Vector4(100 / 255, 149 / 255, 237 / 255, 255 / 255);
-	        this._shaderValues = new ShaderData(null);
-	        this._fieldOfView = 60;
-	        this._useUserProjectionMatrix = false;
-	        this._orthographic = false;
-	        this._orthographicVerticalSize = 10;
-	        this.renderingOrder = 0;
-	        this._nearPlane = nearPlane;
-	        this._farPlane = farPlane;
-	        this.cullingMask = 2147483647;
-	        this.useOcclusionCulling = true;
 	    }
 	    _sortCamerasByRenderingOrder() {
 	        if (this.displayedInStage) {
@@ -13360,7 +13371,6 @@
 	BaseCamera.CLEARFLAG_DEPTHONLY = 2;
 	BaseCamera.CLEARFLAG_NONE = 3;
 
-	exports.ShadowMode = void 0;
 	(function (ShadowMode) {
 	    ShadowMode[ShadowMode["None"] = 0] = "None";
 	    ShadowMode[ShadowMode["Hard"] = 1] = "Hard";
@@ -13371,13 +13381,28 @@
 	class Scene3DShaderDeclaration {
 	}
 
-	exports.LightType = void 0;
 	(function (LightType) {
 	    LightType[LightType["Directional"] = 0] = "Directional";
 	    LightType[LightType["Spot"] = 1] = "Spot";
 	    LightType[LightType["Point"] = 2] = "Point";
 	})(exports.LightType || (exports.LightType = {}));
 	class LightSprite extends Sprite3D {
+	    constructor() {
+	        super();
+	        this._shadowMode = exports.ShadowMode.None;
+	        this._isAlternate = false;
+	        this._shadowResolution = 2048;
+	        this._shadowDistance = 50.0;
+	        this._shadowDepthBias = 1.0;
+	        this._shadowNormalBias = 1.0;
+	        this._shadowNearPlane = 0.1;
+	        this._shadowStrength = 1.0;
+	        this._lightWoldMatrix = new Matrix4x4();
+	        this._intensity = 1.0;
+	        this._intensityColor = new Vector3();
+	        this.color = new Vector3(1.0, 1.0, 1.0);
+	        this._lightmapBakedType = LightSprite.LIGHTMAPBAKEDTYPE_REALTIME;
+	    }
 	    get intensity() {
 	        return this._intensity;
 	    }
@@ -13445,22 +13470,6 @@
 	        var quaterian = this.transform.rotation;
 	        Matrix4x4.createAffineTransformation(position, quaterian, Vector3._ONE, this._lightWoldMatrix);
 	        return this._lightWoldMatrix;
-	    }
-	    constructor() {
-	        super();
-	        this._shadowMode = exports.ShadowMode.None;
-	        this._isAlternate = false;
-	        this._shadowResolution = 2048;
-	        this._shadowDistance = 50.0;
-	        this._shadowDepthBias = 1.0;
-	        this._shadowNormalBias = 1.0;
-	        this._shadowNearPlane = 0.1;
-	        this._shadowStrength = 1.0;
-	        this._lightWoldMatrix = new Matrix4x4();
-	        this._intensity = 1.0;
-	        this._intensityColor = new Vector3();
-	        this.color = new Vector3(1.0, 1.0, 1.0);
-	        this._lightmapBakedType = LightSprite.LIGHTMAPBAKEDTYPE_REALTIME;
 	    }
 	    _parse(data, spriteMap) {
 	        super._parse(data, spriteMap);
@@ -13534,7 +13543,6 @@
 	LightSprite.LIGHTMAPBAKEDTYPE_MIXED = 1;
 	LightSprite.LIGHTMAPBAKEDTYPE_BAKED = 2;
 
-	exports.ShadowCascadesMode = void 0;
 	(function (ShadowCascadesMode) {
 	    ShadowCascadesMode[ShadowCascadesMode["NoCascades"] = 0] = "NoCascades";
 	    ShadowCascadesMode[ShadowCascadesMode["TwoCascades"] = 1] = "TwoCascades";
@@ -13823,7 +13831,6 @@
 	];
 	ShadowUtils.atlasBorderSize = 4.0;
 
-	exports.DepthTextureMode = void 0;
 	(function (DepthTextureMode) {
 	    DepthTextureMode[DepthTextureMode["None"] = 0] = "None";
 	    DepthTextureMode[DepthTextureMode["Depth"] = 1] = "Depth";
@@ -13933,6 +13940,12 @@
 	DepthPass.DEPTHZBUFFERPARAMS = Shader3D.propertyNameToID("u_ZBufferParams");
 
 	class MulSampleRenderTexture extends RenderTexture {
+	    constructor(width, height, format = Laya.RenderTextureFormat.R8G8B8, depthStencilFormat = Laya.RenderTextureDepthFormat.DEPTH_16, mulSampler = 1, mipmap = false) {
+	        super(width, height, format, depthStencilFormat, mipmap);
+	        this._mulSampler = 1;
+	        this._mulSamplerRT = true;
+	        this._mulSampler = mulSampler;
+	    }
 	    static createFromPool(width, height, format = Laya.RenderTextureFormat.R8G8B8, depthStencilFormat = Laya.RenderTextureDepthFormat.DEPTH_16, mulSamples = 4, mipmap = false) {
 	        var tex;
 	        if (!Laya.LayaGL.layaGPUInstance._isWebGL2 || mulSamples == 1) {
@@ -13953,18 +13966,12 @@
 	        tex.lock = true;
 	        return tex;
 	    }
-	    constructor(width, height, format = Laya.RenderTextureFormat.R8G8B8, depthStencilFormat = Laya.RenderTextureDepthFormat.DEPTH_16, mulSampler = 1, mipmap = false) {
-	        super(width, height, format, depthStencilFormat, mipmap);
-	        this._mulSampler = 1;
-	        this._mulSamplerRT = true;
-	        this._mulSampler = mulSampler;
-	    }
 	    _create(width, height) {
 	        var gl = Laya.LayaGL.instance;
 	        var gl2 = gl;
-	        this._glTextureType;
+	        var glTextureType = this._glTextureType;
 	        var layaGPU = Laya.LayaGL.layaGPUInstance;
-	        layaGPU._isWebGL2;
+	        var isWebGL2 = layaGPU._isWebGL2;
 	        var format = this._format;
 	        this._mulSampler = 4;
 	        this._frameBuffer = gl.createFramebuffer();
@@ -14114,14 +14121,12 @@
 	    }
 	}
 
-	exports.CameraClearFlags = void 0;
 	(function (CameraClearFlags) {
 	    CameraClearFlags[CameraClearFlags["SolidColor"] = 0] = "SolidColor";
 	    CameraClearFlags[CameraClearFlags["Sky"] = 1] = "Sky";
 	    CameraClearFlags[CameraClearFlags["DepthOnly"] = 2] = "DepthOnly";
 	    CameraClearFlags[CameraClearFlags["Nothing"] = 3] = "Nothing";
 	})(exports.CameraClearFlags || (exports.CameraClearFlags = {}));
-	exports.CameraEventFlags = void 0;
 	(function (CameraEventFlags) {
 	    CameraEventFlags[CameraEventFlags["BeforeForwardOpaque"] = 0] = "BeforeForwardOpaque";
 	    CameraEventFlags[CameraEventFlags["BeforeSkyBox"] = 2] = "BeforeSkyBox";
@@ -14130,6 +14135,37 @@
 	    CameraEventFlags[CameraEventFlags["AfterEveryThing"] = 8] = "AfterEveryThing";
 	})(exports.CameraEventFlags || (exports.CameraEventFlags = {}));
 	class Camera extends BaseCamera {
+	    constructor(aspectRatio = 0, nearPlane = 0.3, farPlane = 1000) {
+	        super(nearPlane, farPlane);
+	        this._updateViewMatrix = true;
+	        this._postProcess = null;
+	        this._enableHDR = false;
+	        this._viewportParams = new Vector4();
+	        this._projectionParams = new Vector4();
+	        this._needBuiltInRenderTexture = false;
+	        this._msaa = false;
+	        this._offScreenRenderTexture = null;
+	        this._internalRenderTexture = null;
+	        this._canBlitDepth = false;
+	        this._internalCommandBuffer = new CommandBuffer();
+	        this._depthTextureFormat = Laya.RenderTextureDepthFormat.DEPTH_16;
+	        this._cameraEventCommandBuffer = {};
+	        this._clusterPlaneCacheFlag = new Vector2(-1, -1);
+	        this._screenOffsetScale = new Vector4();
+	        this.enableRender = true;
+	        this.clearFlag = exports.CameraClearFlags.SolidColor;
+	        this._viewMatrix = new Matrix4x4();
+	        this._projectionMatrix = new Matrix4x4();
+	        this._projectionViewMatrix = new Matrix4x4();
+	        this._viewport = new Viewport(0, 0, 0, 0);
+	        this._normalizedViewport = new Viewport(0, 0, 1, 1);
+	        this._rayViewport = new Viewport(0, 0, 0, 0);
+	        this._aspectRatio = aspectRatio;
+	        this._boundFrustum = new BoundFrustum(new Matrix4x4());
+	        this._calculateProjectionMatrix();
+	        Laya.Laya.stage.on(Laya.Event.RESIZE, this, this._onScreenSizeChanged);
+	        this.transform.on(Laya.Event.TRANSFORM_CHANGED, this, this._onTransformChanged);
+	    }
 	    static set _updateMark(value) {
 	        Camera.__updateMark = value;
 	    }
@@ -14356,37 +14392,6 @@
 	    }
 	    set depthNormalTexture(value) {
 	        this._depthNormalsTexture = value;
-	    }
-	    constructor(aspectRatio = 0, nearPlane = 0.3, farPlane = 1000) {
-	        super(nearPlane, farPlane);
-	        this._updateViewMatrix = true;
-	        this._postProcess = null;
-	        this._enableHDR = false;
-	        this._viewportParams = new Vector4();
-	        this._projectionParams = new Vector4();
-	        this._needBuiltInRenderTexture = false;
-	        this._msaa = false;
-	        this._offScreenRenderTexture = null;
-	        this._internalRenderTexture = null;
-	        this._canBlitDepth = false;
-	        this._internalCommandBuffer = new CommandBuffer();
-	        this._depthTextureFormat = Laya.RenderTextureDepthFormat.DEPTH_16;
-	        this._cameraEventCommandBuffer = {};
-	        this._clusterPlaneCacheFlag = new Vector2(-1, -1);
-	        this._screenOffsetScale = new Vector4();
-	        this.enableRender = true;
-	        this.clearFlag = exports.CameraClearFlags.SolidColor;
-	        this._viewMatrix = new Matrix4x4();
-	        this._projectionMatrix = new Matrix4x4();
-	        this._projectionViewMatrix = new Matrix4x4();
-	        this._viewport = new Viewport(0, 0, 0, 0);
-	        this._normalizedViewport = new Viewport(0, 0, 1, 1);
-	        this._rayViewport = new Viewport(0, 0, 0, 0);
-	        this._aspectRatio = aspectRatio;
-	        this._boundFrustum = new BoundFrustum(new Matrix4x4());
-	        this._calculateProjectionMatrix();
-	        Laya.Laya.stage.on(Laya.Event.RESIZE, this, this._onScreenSizeChanged);
-	        this.transform.on(Laya.Event.TRANSFORM_CHANGED, this, this._onTransformChanged);
 	    }
 	    _calculationViewport(normalizedViewport, width, height) {
 	        var lx = normalizedViewport.x * width;
@@ -14830,6 +14835,17 @@
 	Camera.depthPass = new DepthPass();
 
 	class Input3D {
+	    constructor() {
+	        this._eventList = [];
+	        this._mouseTouch = new MouseTouch();
+	        this._touchPool = [];
+	        this._touches = new SimpleSingletonList();
+	        this._multiTouchEnabled = true;
+	        this._pushEventList = ((e) => {
+	            (e.cancelable) && (e.preventDefault());
+	            this._eventList.push(e);
+	        }).bind(this);
+	    }
 	    __init__(canvas, scene) {
 	        this._scene = scene;
 	        Physics3D._bullet && (Input3D._tempHitResult0 = new Laya.HitResult());
@@ -14865,17 +14881,6 @@
 	    }
 	    set multiTouchEnabled(value) {
 	        this._multiTouchEnabled = value;
-	    }
-	    constructor() {
-	        this._eventList = [];
-	        this._mouseTouch = new MouseTouch();
-	        this._touchPool = [];
-	        this._touches = new SimpleSingletonList();
-	        this._multiTouchEnabled = true;
-	        this._pushEventList = ((e) => {
-	            (e.cancelable) && (e.preventDefault());
-	            this._eventList.push(e);
-	        }).bind(this);
 	    }
 	    _getTouch(touchID, type) {
 	        var touch = this._touchPool[touchID];
@@ -15103,6 +15108,10 @@
 	Input3D._tempRay0 = new Ray(new Vector3(), new Vector3());
 
 	class VertexPositionTexture0 {
+	    constructor(position, textureCoordinate0) {
+	        this._position = position;
+	        this._textureCoordinate0 = textureCoordinate0;
+	    }
 	    static get vertexDeclaration() {
 	        return VertexPositionTexture0._vertexDeclaration;
 	    }
@@ -15119,22 +15128,9 @@
 	    get vertexDeclaration() {
 	        return VertexPositionTexture0._vertexDeclaration;
 	    }
-	    constructor(position, textureCoordinate0) {
-	        this._position = position;
-	        this._textureCoordinate0 = textureCoordinate0;
-	    }
 	}
 
 	class SkyDome extends SkyMesh {
-	    static __init__() {
-	        SkyDome.instance = new SkyDome();
-	    }
-	    get stacks() {
-	        return this._stacks;
-	    }
-	    get slices() {
-	        return this._slices;
-	    }
 	    constructor(stacks = 48, slices = 48) {
 	        super();
 	        var gl = Laya.LayaGL.instance;
@@ -15185,6 +15181,15 @@
 	        bufferState.applyIndexBuffer(this._indexBuffer);
 	        bufferState.unBind();
 	        this._bufferState = bufferState;
+	    }
+	    static __init__() {
+	        SkyDome.instance = new SkyDome();
+	    }
+	    get stacks() {
+	        return this._stacks;
+	    }
+	    get slices() {
+	        return this._slices;
 	    }
 	    _render(state) {
 	        var gl = Laya.LayaGL.instance;
@@ -15248,6 +15253,11 @@
 	}
 
 	class PixelLineMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("LineShader");
+	        this._shaderValues.setVector(PixelLineMaterial.COLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	    }
 	    static __initDefine__() {
 	    }
 	    get color() {
@@ -15255,11 +15265,6 @@
 	    }
 	    set color(value) {
 	        this._shaderValues.setVector(PixelLineMaterial.COLOR, value);
-	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("LineShader");
-	        this._shaderValues.setVector(PixelLineMaterial.COLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
 	    }
 	    clone() {
 	        var dest = new PixelLineMaterial();
@@ -15361,6 +15366,15 @@
 	BoundBox._tempVector31 = new Vector3();
 
 	class Bounds {
+	    constructor(min, max) {
+	        this._updateFlag = 0;
+	        this._center = new Vector3();
+	        this._extent = new Vector3();
+	        this._boundBox = new BoundBox(new Vector3(), new Vector3());
+	        min.cloneTo(this._boundBox.min);
+	        max.cloneTo(this._boundBox.max);
+	        this._setUpdateFlag(Bounds._UPDATE_CENTER | Bounds._UPDATE_EXTENT, true);
+	    }
 	    setMin(value) {
 	        var min = this._boundBox.min;
 	        if (value !== min)
@@ -15416,15 +15430,6 @@
 	            this._setUpdateFlag(Bounds._UPDATE_EXTENT, false);
 	        }
 	        return this._extent;
-	    }
-	    constructor(min, max) {
-	        this._updateFlag = 0;
-	        this._center = new Vector3();
-	        this._extent = new Vector3();
-	        this._boundBox = new BoundBox(new Vector3(), new Vector3());
-	        min.cloneTo(this._boundBox.min);
-	        max.cloneTo(this._boundBox.max);
-	        this._setUpdateFlag(Bounds._UPDATE_CENTER | Bounds._UPDATE_EXTENT, true);
 	    }
 	    _getUpdateFlag(type) {
 	        return (this._updateFlag & type) != 0;
@@ -15520,11 +15525,11 @@
 	Bounds.TEMP_VECTOR3_MAX1 = new Vector3();
 
 	class GeometryElement {
-	    get destroyed() {
-	        return this._destroyed;
-	    }
 	    constructor() {
 	        this._destroyed = false;
+	    }
+	    get destroyed() {
+	        return this._destroyed;
 	    }
 	    _getType() {
 	        throw "GeometryElement:must override it.";
@@ -15544,6 +15549,8 @@
 	GeometryElement._typeCounter = 0;
 
 	class PixelLineVertex {
+	    constructor() {
+	    }
 	    static get vertexDeclaration() {
 	        return PixelLineVertex._vertexDeclaration;
 	    }
@@ -15553,8 +15560,6 @@
 	    }
 	    get vertexDeclaration() {
 	        return PixelLineVertex._vertexDeclaration;
-	    }
-	    constructor() {
 	    }
 	}
 
@@ -15757,13 +15762,13 @@
 	PixelLineFilter._type = GeometryElement._typeCounter++;
 
 	class RenderableSprite3D extends Sprite3D {
+	    constructor(name) {
+	        super(name);
+	    }
 	    static __init__() {
 	        RenderableSprite3D.SHADERDEFINE_RECEIVE_SHADOW = Shader3D.getDefineByName("RECEIVESHADOW");
 	        RenderableSprite3D.SAHDERDEFINE_LIGHTMAP = Shader3D.getDefineByName("LIGHTMAP");
 	        RenderableSprite3D.SHADERDEFINE_LIGHTMAP_DIRECTIONAL = Shader3D.getDefineByName("LIGHTMAP_DIRECTIONAL");
-	    }
-	    constructor(name) {
-	        super(name);
 	    }
 	    _onInActive() {
 	        super._onInActive();
@@ -15833,9 +15838,6 @@
 	}
 
 	class SubMeshInstanceBatch extends GeometryElement {
-	    static __init__() {
-	        SubMeshInstanceBatch.instance = new SubMeshInstanceBatch();
-	    }
 	    constructor() {
 	        super();
 	        this.instanceWorldMatrixData = new Float32Array(SubMeshInstanceBatch.maxInstanceCount * 16);
@@ -15845,6 +15847,9 @@
 	        this.instanceWorldMatrixBuffer.vertexDeclaration = VertexMesh.instanceWorldMatrixDeclaration;
 	        this.instanceSimpleAnimatorBuffer = new VertexBuffer3D(this.instanceSimpleAnimatorData.length * 4, gl.DYNAMIC_DRAW);
 	        this.instanceSimpleAnimatorBuffer.vertexDeclaration = VertexMesh.instanceSimpleAnimatorDeclaration;
+	    }
+	    static __init__() {
+	        SubMeshInstanceBatch.instance = new SubMeshInstanceBatch();
 	    }
 	    _render(state) {
 	        var gl = Laya.LayaGL.instance;
@@ -16354,6 +16359,12 @@
 	SubMeshRenderElement.enableStaticBatch = true;
 
 	class StaticBatchManager {
+	    constructor() {
+	        this._initBatchSprites = [];
+	        this._staticBatches = {};
+	        this._batchRenderElementPoolIndex = 0;
+	        this._batchRenderElementPool = [];
+	    }
 	    static _addToStaticBatchQueue(sprite3D, renderableSprite3D) {
 	        if (sprite3D instanceof RenderableSprite3D)
 	            renderableSprite3D.push(sprite3D);
@@ -16385,12 +16396,6 @@
 	                manager._initStaticBatchs(staticBatchRoot);
 	            }
 	        }
-	    }
-	    constructor() {
-	        this._initBatchSprites = [];
-	        this._staticBatches = {};
-	        this._batchRenderElementPoolIndex = 0;
-	        this._batchRenderElementPool = [];
 	    }
 	    _partition(items, left, right) {
 	        var pivot = items[Math.floor((right + left) / 2)];
@@ -16678,13 +16683,13 @@
 	SubMeshStaticBatch._batchIDCounter = 0;
 
 	class MeshRenderStaticBatchManager extends StaticBatchManager {
-	    static __init__() {
-	        MeshRenderStaticBatchManager._verDec = VertexMesh.getVertexDeclaration("POSITION,NORMAL,COLOR,UV,UV1,TANGENT");
-	    }
 	    constructor() {
 	        super();
 	        this._opaqueBatchMarks = [];
 	        this._updateCountMark = 0;
+	    }
+	    static __init__() {
+	        MeshRenderStaticBatchManager._verDec = VertexMesh.getVertexDeclaration("POSITION,NORMAL,COLOR,UV,UV1,TANGENT");
 	    }
 	    _compare(left, right) {
 	        var lRender = left._render, rRender = right._render;
@@ -16805,7 +16810,6 @@
 	}
 	MeshRenderStaticBatchManager.instance = new MeshRenderStaticBatchManager();
 
-	exports.ReflectionProbeMode = void 0;
 	(function (ReflectionProbeMode) {
 	    ReflectionProbeMode[ReflectionProbeMode["off"] = 0] = "off";
 	    ReflectionProbeMode[ReflectionProbeMode["simple"] = 1] = "simple";
@@ -16934,6 +16938,37 @@
 	ReflectionProbe.defaultTextureHDRDecodeValues = new Vector4(1.0, 1.0, 0.0, 0.0);
 
 	class BaseRender extends Laya.EventDispatcher {
+	    constructor(owner) {
+	        super();
+	        this._lightmapScaleOffset = new Vector4(1, 1, 0, 0);
+	        this._indexInList = -1;
+	        this._indexInCastShadowList = -1;
+	        this._boundsChange = true;
+	        this._castShadow = false;
+	        this._supportOctree = true;
+	        this._sharedMaterials = [];
+	        this._renderMark = -1;
+	        this._indexInOctreeMotionList = -1;
+	        this._reflectionMode = exports.ReflectionProbeMode.simple;
+	        this._sceneUpdateMark = -1;
+	        this._updateMark = -1;
+	        this._updateRenderType = -1;
+	        this._isPartOfStaticBatch = false;
+	        this._staticBatch = null;
+	        this._ratioIgnor = 0.005;
+	        this._id = ++BaseRender._uniqueIDCounter;
+	        this._indexInCastShadowList = -1;
+	        this._bounds = new Bounds(Vector3._ZERO, Vector3._ZERO);
+	        this._renderElements = [];
+	        this._owner = owner;
+	        this._enable = true;
+	        this._materialsInstance = [];
+	        this._shaderValues = new ShaderData(null);
+	        this.lightmapIndex = -1;
+	        this.receiveShadow = false;
+	        this.sortingFudge = 0.0;
+	        (owner) && (this._owner.transform.on(Laya.Event.TRANSFORM_CHANGED, this, this._onWorldMatNeedChange));
+	    }
 	    get id() {
 	        return this._id;
 	    }
@@ -17074,37 +17109,6 @@
 	    }
 	    get reflectionMode() {
 	        return this._reflectionMode;
-	    }
-	    constructor(owner) {
-	        super();
-	        this._lightmapScaleOffset = new Vector4(1, 1, 0, 0);
-	        this._indexInList = -1;
-	        this._indexInCastShadowList = -1;
-	        this._boundsChange = true;
-	        this._castShadow = false;
-	        this._supportOctree = true;
-	        this._sharedMaterials = [];
-	        this._renderMark = -1;
-	        this._indexInOctreeMotionList = -1;
-	        this._reflectionMode = exports.ReflectionProbeMode.simple;
-	        this._sceneUpdateMark = -1;
-	        this._updateMark = -1;
-	        this._updateRenderType = -1;
-	        this._isPartOfStaticBatch = false;
-	        this._staticBatch = null;
-	        this._ratioIgnor = 0.005;
-	        this._id = ++BaseRender._uniqueIDCounter;
-	        this._indexInCastShadowList = -1;
-	        this._bounds = new Bounds(Vector3._ZERO, Vector3._ZERO);
-	        this._renderElements = [];
-	        this._owner = owner;
-	        this._enable = true;
-	        this._materialsInstance = [];
-	        this._shaderValues = new ShaderData(null);
-	        this.lightmapIndex = -1;
-	        this.receiveShadow = false;
-	        this.sortingFudge = 0.0;
-	        (owner) && (this._owner.transform.on(Laya.Event.TRANSFORM_CHANGED, this, this._onWorldMatNeedChange));
 	    }
 	    _getOctreeNode() {
 	        return this._octreeNode;
@@ -17258,6 +17262,14 @@
 	}
 
 	class PixelLineSprite3D extends RenderableSprite3D {
+	    constructor(maxCount = 2, name = null) {
+	        super(name);
+	        this._isRenderActive = false;
+	        this._isInRenders = false;
+	        this._geometryFilter = new PixelLineFilter(this, maxCount);
+	        this._render = new PixelLineRenderer(this);
+	        this._changeRenderObjects(0, PixelLineMaterial.defaultMaterial);
+	    }
 	    get maxLineCount() {
 	        return this._geometryFilter._maxLineCount;
 	    }
@@ -17276,14 +17288,6 @@
 	    }
 	    get pixelLineRenderer() {
 	        return this._render;
-	    }
-	    constructor(maxCount = 2, name = null) {
-	        super(name);
-	        this._isRenderActive = false;
-	        this._isInRenders = false;
-	        this._geometryFilter = new PixelLineFilter(this, maxCount);
-	        this._render = new PixelLineRenderer(this);
-	        this._changeRenderObjects(0, PixelLineMaterial.defaultMaterial);
 	    }
 	    _onInActive() {
 	        Laya.Stat.spriteCount--;
@@ -17519,7 +17523,6 @@
 	    }
 	}
 
-	exports.ShadowLightType = void 0;
 	(function (ShadowLightType) {
 	    ShadowLightType[ShadowLightType["DirectionLight"] = 0] = "DirectionLight";
 	    ShadowLightType[ShadowLightType["SpotLight"] = 1] = "SpotLight";
@@ -17779,11 +17782,11 @@
 	ShadowCasterPass._frustumPlanes = new Array(new Plane(new Vector3()), new Plane(new Vector3()), new Plane(new Vector3()), new Plane(new Vector3()), new Plane(new Vector3()), new Plane(new Vector3()));
 
 	class DynamicBatchManager {
-	    static _registerManager(manager) {
-	        DynamicBatchManager._managers.push(manager);
-	    }
 	    constructor() {
 	        this._batchRenderElementPool = [];
+	    }
+	    static _registerManager(manager) {
+	        DynamicBatchManager._managers.push(manager);
 	    }
 	    _clear() {
 	        this._batchRenderElementPoolIndex = 0;
@@ -17896,9 +17899,6 @@
 	}
 
 	class BoundsOctreeNode {
-	    static _encapsulates(outerBound, innerBound) {
-	        return CollisionUtils.boxContainsBox(outerBound, innerBound) == ContainmentType.Contains;
-	    }
 	    constructor(octree, parent, baseLength, center) {
 	        this._bounds = new BoundBox(new Vector3(), new Vector3());
 	        this._objects = [];
@@ -17906,6 +17906,9 @@
 	        this.center = new Vector3();
 	        this.baseLength = 0.0;
 	        this._setValues(octree, parent, baseLength, center);
+	    }
+	    static _encapsulates(outerBound, innerBound) {
+	        return CollisionUtils.boxContainsBox(outerBound, innerBound) == ContainmentType.Contains;
 	    }
 	    _setValues(octree, parent, baseLength, center) {
 	        this._octree = octree;
@@ -18737,13 +18740,87 @@
 	BlitFrameBufferCMD._pool = [];
 	BlitFrameBufferCMD._defaultOffsetScale = new Vector4(0, 0, 1, 1);
 
-	exports.AmbientMode = void 0;
 	(function (AmbientMode) {
 	    AmbientMode[AmbientMode["SolidColor"] = 0] = "SolidColor";
 	    AmbientMode[AmbientMode["SphericalHarmonics"] = 1] = "SphericalHarmonics";
 	    AmbientMode[AmbientMode["TripleColor"] = 2] = "TripleColor";
 	})(exports.AmbientMode || (exports.AmbientMode = {}));
 	class Scene3D extends Laya.Sprite {
+	    constructor() {
+	        super();
+	        this._lightCount = 0;
+	        this._pointLights = new LightQueue();
+	        this._spotLights = new LightQueue();
+	        this._directionLights = new LightQueue();
+	        this._alternateLights = new AlternateLightQueue();
+	        this._lightmaps = [];
+	        this._skyRenderer = new SkyRenderer();
+	        this._input = new Input3D();
+	        this._timer = Laya.ILaya.timer;
+	        this._time = 0;
+	        this._shCoefficients = new Array(7);
+	        this._ambientMode = exports.AmbientMode.SolidColor;
+	        this._ambientSphericalHarmonics = new SphericalHarmonicsL2();
+	        this._ambientSphericalHarmonicsIntensity = 1.0;
+	        this._ambientSkyColor = new Vector3();
+	        this._ambientEquatorColor = new Vector3();
+	        this._ambientGroundColor = new Vector3();
+	        this._reflectionDecodeFormat = Laya.TextureDecodeFormat.Normal;
+	        this._reflectionIntensity = 1.0;
+	        this._collsionTestList = [];
+	        this._renders = new SimpleSingletonList();
+	        this._opaqueQueue = new RenderQueue(false);
+	        this._transparentQueue = new RenderQueue(true);
+	        this._cameraPool = [];
+	        this._animatorPool = new SimpleSingletonList();
+	        this._updateScriptPool = new Array();
+	        this._lateUpdateScriptPool = new Array();
+	        this._preRenderScriptPool = new Array();
+	        this._postRenderScriptPool = new Array();
+	        this._scriptPool = new Array();
+	        this._tempScriptPool = new Array();
+	        this._needClearScriptPool = false;
+	        this._reflectionCubeHDRParams = new Vector4();
+	        this._reflectionProbeManager = new ReflectionProbeManager();
+	        this.currentCreationLayer = Math.pow(2, 0);
+	        this.enableLight = true;
+	        this._key = new Laya.SubmitKey();
+	        this._pickIdToSprite = new Object();
+	        this._reflectionMode = 0;
+	        if (!Config3D._config.isUseCannonPhysicsEngine && Physics3D._bullet)
+	            this._physicsSimulation = new Laya.PhysicsSimulation(Scene3D.physicsSettings);
+	        else if (Physics3D._cannon) {
+	            this._cannonPhysicsSimulation = new Laya.CannonPhysicsSimulation(Scene3D.cannonPhysicsSettings);
+	        }
+	        this._shaderValues = new ShaderData(null);
+	        this.enableFog = false;
+	        this.fogStart = 300;
+	        this.fogRange = 1000;
+	        this.fogColor = new Vector3(0.7, 0.7, 0.7);
+	        this.ambientColor = new Vector3(0.212, 0.227, 0.259);
+	        this.reflectionIntensity = 1.0;
+	        this.reflection = TextureCube.blackTexture;
+	        for (var i = 0; i < 7; i++)
+	            this._shCoefficients[i] = new Vector4();
+	        this._reflectionProbeManager.sceneReflectionCubeHDRParam = this._reflectionCubeHDRParams;
+	        this._scene = this;
+	        this._input.__init__(Laya.Render.canvas, this);
+	        if (Scene3D.octreeCulling)
+	            this._octree = new BoundsOctree(Scene3D.octreeInitialSize, Scene3D.octreeInitialCenter, Scene3D.octreeMinNodeSize, Scene3D.octreeLooseness);
+	        if (FrustumCulling.debugFrustumCulling) {
+	            this._debugTool = new PixelLineSprite3D();
+	            var lineMaterial = new PixelLineMaterial();
+	            lineMaterial.renderQueue = Material.RENDERQUEUE_TRANSPARENT;
+	            lineMaterial.alphaTest = false;
+	            lineMaterial.depthWrite = false;
+	            lineMaterial.cull = RenderState.CULL_BACK;
+	            lineMaterial.blend = RenderState.BLEND_ENABLE_ALL;
+	            lineMaterial.blendSrc = RenderState.BLENDPARAM_SRC_ALPHA;
+	            lineMaterial.blendDst = RenderState.BLENDPARAM_ONE_MINUS_SRC_ALPHA;
+	            lineMaterial.depthTest = RenderState.DEPTHTEST_LESS;
+	            this._debugTool.pixelLineRenderer.sharedMaterial = lineMaterial;
+	        }
+	    }
 	    static set _updateMark(value) {
 	        Scene3D.__updateMark = value;
 	    }
@@ -18981,81 +19058,6 @@
 	        }
 	        else {
 	            maps.length = 0;
-	        }
-	    }
-	    constructor() {
-	        super();
-	        this._lightCount = 0;
-	        this._pointLights = new LightQueue();
-	        this._spotLights = new LightQueue();
-	        this._directionLights = new LightQueue();
-	        this._alternateLights = new AlternateLightQueue();
-	        this._lightmaps = [];
-	        this._skyRenderer = new SkyRenderer();
-	        this._input = new Input3D();
-	        this._timer = Laya.ILaya.timer;
-	        this._time = 0;
-	        this._shCoefficients = new Array(7);
-	        this._ambientMode = exports.AmbientMode.SolidColor;
-	        this._ambientSphericalHarmonics = new SphericalHarmonicsL2();
-	        this._ambientSphericalHarmonicsIntensity = 1.0;
-	        this._ambientSkyColor = new Vector3();
-	        this._ambientEquatorColor = new Vector3();
-	        this._ambientGroundColor = new Vector3();
-	        this._reflectionDecodeFormat = Laya.TextureDecodeFormat.Normal;
-	        this._reflectionIntensity = 1.0;
-	        this._collsionTestList = [];
-	        this._renders = new SimpleSingletonList();
-	        this._opaqueQueue = new RenderQueue(false);
-	        this._transparentQueue = new RenderQueue(true);
-	        this._cameraPool = [];
-	        this._animatorPool = new SimpleSingletonList();
-	        this._updateScriptPool = new Array();
-	        this._lateUpdateScriptPool = new Array();
-	        this._preRenderScriptPool = new Array();
-	        this._postRenderScriptPool = new Array();
-	        this._scriptPool = new Array();
-	        this._tempScriptPool = new Array();
-	        this._needClearScriptPool = false;
-	        this._reflectionCubeHDRParams = new Vector4();
-	        this._reflectionProbeManager = new ReflectionProbeManager();
-	        this.currentCreationLayer = Math.pow(2, 0);
-	        this.enableLight = true;
-	        this._key = new Laya.SubmitKey();
-	        this._pickIdToSprite = new Object();
-	        this._reflectionMode = 0;
-	        if (!Config3D._config.isUseCannonPhysicsEngine && Physics3D._bullet)
-	            this._physicsSimulation = new Laya.PhysicsSimulation(Scene3D.physicsSettings);
-	        else if (Physics3D._cannon) {
-	            this._cannonPhysicsSimulation = new Laya.CannonPhysicsSimulation(Scene3D.cannonPhysicsSettings);
-	        }
-	        this._shaderValues = new ShaderData(null);
-	        this.enableFog = false;
-	        this.fogStart = 300;
-	        this.fogRange = 1000;
-	        this.fogColor = new Vector3(0.7, 0.7, 0.7);
-	        this.ambientColor = new Vector3(0.212, 0.227, 0.259);
-	        this.reflectionIntensity = 1.0;
-	        this.reflection = TextureCube.blackTexture;
-	        for (var i = 0; i < 7; i++)
-	            this._shCoefficients[i] = new Vector4();
-	        this._reflectionProbeManager.sceneReflectionCubeHDRParam = this._reflectionCubeHDRParams;
-	        this._scene = this;
-	        this._input.__init__(Laya.Render.canvas, this);
-	        if (Scene3D.octreeCulling)
-	            this._octree = new BoundsOctree(Scene3D.octreeInitialSize, Scene3D.octreeInitialCenter, Scene3D.octreeMinNodeSize, Scene3D.octreeLooseness);
-	        if (FrustumCulling.debugFrustumCulling) {
-	            this._debugTool = new PixelLineSprite3D();
-	            var lineMaterial = new PixelLineMaterial();
-	            lineMaterial.renderQueue = Material.RENDERQUEUE_TRANSPARENT;
-	            lineMaterial.alphaTest = false;
-	            lineMaterial.depthWrite = false;
-	            lineMaterial.cull = RenderState.CULL_BACK;
-	            lineMaterial.blend = RenderState.BLEND_ENABLE_ALL;
-	            lineMaterial.blendSrc = RenderState.BLENDPARAM_SRC_ALPHA;
-	            lineMaterial.blendDst = RenderState.BLENDPARAM_ONE_MINUS_SRC_ALPHA;
-	            lineMaterial.depthTest = RenderState.DEPTHTEST_LESS;
-	            this._debugTool.pixelLineRenderer.sharedMaterial = lineMaterial;
 	        }
 	    }
 	    _applySHCoefficients(originalSH, intensity) {
@@ -19858,9 +19860,6 @@
 	Scene3D.mainCavansViewPort = new Viewport(0, 0, 1, 1);
 
 	class ShaderPass extends Laya.ShaderCompile {
-	    get renderState() {
-	        return this._renderState;
-	    }
 	    constructor(owner, vs, ps, stateMap) {
 	        super(vs, ps, null);
 	        this._cacheSharders = {};
@@ -19872,6 +19871,9 @@
 	        this._stateMap = stateMap;
 	        for (var k in this.defs)
 	            this._validDefine.add(Shader3D.getDefineByName(k));
+	    }
+	    get renderState() {
+	        return this._renderState;
 	    }
 	    _compileToTree(parent, lines, start, includefiles, defs) {
 	        var node, preNode;
@@ -20834,12 +20836,16 @@
 	    }
 	}
 
-	exports.PBRSpecularSmoothnessSource = void 0;
 	(function (PBRSpecularSmoothnessSource) {
 	    PBRSpecularSmoothnessSource[PBRSpecularSmoothnessSource["SpecularTextureAlpha"] = 0] = "SpecularTextureAlpha";
 	    PBRSpecularSmoothnessSource[PBRSpecularSmoothnessSource["AlbedoTextureAlpha"] = 1] = "AlbedoTextureAlpha";
 	})(exports.PBRSpecularSmoothnessSource || (exports.PBRSpecularSmoothnessSource = {}));
 	class PBRSpecularMaterial extends PBRMaterial {
+	    constructor() {
+	        super();
+	        this.setShaderName("PBRSpecular");
+	        this._shaderValues.setVector(PBRSpecularMaterial.SPECULARCOLOR, new Vector4(0.2, 0.2, 0.2, 1.0));
+	    }
 	    static __init__() {
 	        PBRSpecularMaterial.SHADERDEFINE_SPECULARGLOSSTEXTURE = Shader3D.getDefineByName("SPECULARGLOSSTEXTURE");
 	        PBRSpecularMaterial.SHADERDEFINE_SMOOTHNESSSOURCE_ALBEDOTEXTURE_ALPHA = Shader3D.getDefineByName("SMOOTHNESSSOURCE_ALBEDOTEXTURE_ALPHA");
@@ -20929,8 +20935,8 @@
 	        var shader = Shader3D.add("PBRSpecular", attributeMap, uniformMap, true, true);
 	        var subShader = new SubShader(attributeMap, uniformMap);
 	        shader.addSubShader(subShader);
-	        subShader.addShaderPass(PBRVS$1, PBRPS$1, stateMap, "Forward");
-	        subShader.addShaderPass(PBRShadowCasterVS$1, PBRShadowCasterPS$1, stateMap, "ShadowCaster");
+	        subShader.addShaderPass(PBRVS, PBRPS, stateMap, "Forward");
+	        subShader.addShaderPass(PBRShadowCasterVS, PBRShadowCasterPS, stateMap, "ShadowCaster");
 	        subShader.addShaderPass(DepthNormalsTextureVS, DepthNormalsTextureFS, stateMap, "DepthNormal");
 	    }
 	    get specularTexture() {
@@ -20949,11 +20955,6 @@
 	    set specularColor(value) {
 	        this._shaderValues.setVector(PBRSpecularMaterial.SPECULARCOLOR, value);
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("PBRSpecular");
-	        this._shaderValues.setVector(PBRSpecularMaterial.SPECULARCOLOR, new Vector4(0.2, 0.2, 0.2, 1.0));
-	    }
 	    clone() {
 	        var dest = new PBRSpecularMaterial();
 	        this.cloneTo(dest);
@@ -20963,20 +20964,25 @@
 	PBRSpecularMaterial.SPECULARTEXTURE = Shader3D.propertyNameToID("u_SpecGlossTexture");
 	PBRSpecularMaterial.SPECULARCOLOR = Shader3D.propertyNameToID("u_SpecularColor");
 
-	var PBRPS = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"Lighting.glsl\";\r\n#include \"Shadow.glsl\"\r\n#include \"PBRFSInput.glsl\";\r\n#include \"LayaPBRBRDF.glsl\";\r\n#include \"GlobalIllumination.glsl\";\r\n#include \"PBRCore.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tfragmentForward();\r\n}";
+	var PBRPS$1 = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"Lighting.glsl\";\r\n#include \"Shadow.glsl\"\r\n#include \"PBRFSInput.glsl\";\r\n#include \"LayaPBRBRDF.glsl\";\r\n#include \"GlobalIllumination.glsl\";\r\n#include \"PBRCore.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tfragmentForward();\r\n}";
 
-	var PBRVS = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n#include \"Lighting.glsl\";\r\n#include \"LayaUtile.glsl\"\r\n#include \"Shadow.glsl\"\r\n#include \"PBRVSInput.glsl\";\r\n#include \"PBRVertex.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tvertexForward();\r\n\tgl_Position=remapGLPositionZ(gl_Position);\r\n}";
+	var PBRVS$1 = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n#include \"Lighting.glsl\";\r\n#include \"LayaUtile.glsl\"\r\n#include \"Shadow.glsl\"\r\n#include \"PBRVSInput.glsl\";\r\n#include \"PBRVertex.glsl\";\r\n\r\nvoid main()\r\n{\r\n\tvertexForward();\r\n\tgl_Position=remapGLPositionZ(gl_Position);\r\n}";
 
-	var PBRShadowCasterPS = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"ShadowCasterFS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tgl_FragColor=shadowCasterFragment();\r\n}";
+	var PBRShadowCasterPS$1 = "#if defined(GL_FRAGMENT_PRECISION_HIGH)// 原来的写法会被我们自己的解析流程处理，而我们的解析是不认内置宏的，导致被删掉，所以改成 if defined 了\r\n\tprecision highp float;\r\n\tprecision highp int;\r\n#else\r\n\tprecision mediump float;\r\n\tprecision mediump int;\r\n#endif\r\n\r\n#include \"ShadowCasterFS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tgl_FragColor=shadowCasterFragment();\r\n}";
 
-	var PBRShadowCasterVS = "#include \"ShadowCasterVS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tvec4 positionCS =  shadowCasterVertex();\r\n\tgl_Position=remapGLPositionZ(positionCS);\r\n}";
+	var PBRShadowCasterVS$1 = "#include \"ShadowCasterVS.glsl\"\r\n\r\nvoid main()\r\n{\r\n\tvec4 positionCS =  shadowCasterVertex();\r\n\tgl_Position=remapGLPositionZ(positionCS);\r\n}";
 
-	exports.PBRMetallicSmoothnessSource = void 0;
 	(function (PBRMetallicSmoothnessSource) {
 	    PBRMetallicSmoothnessSource[PBRMetallicSmoothnessSource["MetallicGlossTextureAlpha"] = 0] = "MetallicGlossTextureAlpha";
 	    PBRMetallicSmoothnessSource[PBRMetallicSmoothnessSource["AlbedoTextureAlpha"] = 1] = "AlbedoTextureAlpha";
 	})(exports.PBRMetallicSmoothnessSource || (exports.PBRMetallicSmoothnessSource = {}));
 	class PBRStandardMaterial extends PBRMaterial {
+	    constructor() {
+	        super();
+	        this._smoothnessSource = 0;
+	        this.setShaderName("PBR");
+	        this._shaderValues.setNumber(PBRStandardMaterial.METALLIC, 0.0);
+	    }
 	    static __init__() {
 	        PBRStandardMaterial.SHADERDEFINE_METALLICGLOSSTEXTURE = Shader3D.getDefineByName("METALLICGLOSSTEXTURE");
 	        PBRStandardMaterial.SHADERDEFINE_SMOOTHNESSSOURCE_ALBEDOTEXTURE_ALPHA = Shader3D.getDefineByName("SMOOTHNESSSOURCE_ALBEDOTEXTURE_ALPHA");
@@ -21066,8 +21072,8 @@
 	        var shader = Shader3D.add("PBR", attributeMap, uniformMap, true, true);
 	        var subShader = new SubShader(attributeMap, uniformMap);
 	        shader.addSubShader(subShader);
-	        subShader.addShaderPass(PBRVS, PBRPS, stateMap, "Forward");
-	        subShader.addShaderPass(PBRShadowCasterVS, PBRShadowCasterPS, stateMap, "ShadowCaster");
+	        subShader.addShaderPass(PBRVS$1, PBRPS$1, stateMap, "Forward");
+	        subShader.addShaderPass(PBRShadowCasterVS$1, PBRShadowCasterPS$1, stateMap, "ShadowCaster");
 	        subShader.addShaderPass(DepthNormalsTextureVS, DepthNormalsTextureFS, stateMap, "DepthNormal");
 	    }
 	    get metallicGlossTexture() {
@@ -21096,12 +21102,6 @@
 	            this._shaderValues.removeDefine(PBRStandardMaterial.SHADERDEFINE_SMOOTHNESSSOURCE_ALBEDOTEXTURE_ALPHA);
 	        this._smoothnessSource = value;
 	    }
-	    constructor() {
-	        super();
-	        this._smoothnessSource = 0;
-	        this.setShaderName("PBR");
-	        this._shaderValues.setNumber(PBRStandardMaterial.METALLIC, 0.0);
-	    }
 	    clone() {
 	        var dest = new PBRStandardMaterial();
 	        this.cloneTo(dest);
@@ -21112,6 +21112,13 @@
 	PBRStandardMaterial.METALLIC = Shader3D.propertyNameToID("u_Metallic");
 
 	class SkyBoxMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("SkyBox");
+	        this.tintColor = new Vector4(0.5, 0.5, 0.5, 0.5);
+	        this.exposure = 1.0;
+	        this.rotation = 0;
+	    }
 	    static __initDefine__() {
 	    }
 	    get tintColor() {
@@ -21143,13 +21150,6 @@
 	        this.cloneTo(dest);
 	        return dest;
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("SkyBox");
-	        this.tintColor = new Vector4(0.5, 0.5, 0.5, 0.5);
-	        this.exposure = 1.0;
-	        this.rotation = 0;
-	    }
 	}
 	SkyBoxMaterial.TINTCOLOR = Shader3D.propertyNameToID("u_TintColor");
 	SkyBoxMaterial.EXPOSURE = Shader3D.propertyNameToID("u_Exposure");
@@ -21157,6 +21157,17 @@
 	SkyBoxMaterial.TEXTURECUBE = Shader3D.propertyNameToID("u_CubeTexture");
 
 	class SkyProceduralMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("SkyBoxProcedural");
+	        this.sunDisk = SkyProceduralMaterial.SUN_HIGH_QUALITY;
+	        this.sunSize = 0.04;
+	        this.sunSizeConvergence = 5;
+	        this.atmosphereThickness = 1.0;
+	        this.skyTint = new Vector4(0.5, 0.5, 0.5, 1.0);
+	        this.groundTint = new Vector4(0.369, 0.349, 0.341, 1.0);
+	        this.exposure = 1.3;
+	    }
 	    static __initDefine__() {
 	        SkyProceduralMaterial.SHADERDEFINE_SUN_HIGH_QUALITY = Shader3D.getDefineByName("SUN_HIGH_QUALITY");
 	        SkyProceduralMaterial.SHADERDEFINE_SUN_SIMPLE = Shader3D.getDefineByName("SUN_SIMPLE");
@@ -21223,17 +21234,6 @@
 	        value = Math.min(Math.max(0.0, value), 8.0);
 	        this._shaderValues.setNumber(SkyProceduralMaterial.EXPOSURE, value);
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("SkyBoxProcedural");
-	        this.sunDisk = SkyProceduralMaterial.SUN_HIGH_QUALITY;
-	        this.sunSize = 0.04;
-	        this.sunSizeConvergence = 5;
-	        this.atmosphereThickness = 1.0;
-	        this.skyTint = new Vector4(0.5, 0.5, 0.5, 1.0);
-	        this.groundTint = new Vector4(0.369, 0.349, 0.341, 1.0);
-	        this.exposure = 1.3;
-	    }
 	    clone() {
 	        var dest = new SkyProceduralMaterial();
 	        this.cloneTo(dest);
@@ -21251,6 +21251,14 @@
 	SkyProceduralMaterial.EXPOSURE = Shader3D.propertyNameToID("u_Exposure");
 
 	class UnlitMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("Unlit");
+	        this._shaderValues.setVector(UnlitMaterial.ALBEDOCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        this._shaderValues.setVector(UnlitMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
+	        this.renderMode = UnlitMaterial.RENDERMODE_OPAQUE;
+	        this.albedoIntensity = 1.0;
+	    }
 	    static __initDefine__() {
 	        UnlitMaterial.SHADERDEFINE_ALBEDOTEXTURE = Shader3D.getDefineByName("ALBEDOTEXTURE");
 	        UnlitMaterial.SHADERDEFINE_ENABLEVERTEXCOLOR = Shader3D.getDefineByName("ENABLEVERTEXCOLOR");
@@ -21472,14 +21480,6 @@
 	                throw new Error("UnlitMaterial : renderMode value error.");
 	        }
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("Unlit");
-	        this._shaderValues.setVector(UnlitMaterial.ALBEDOCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        this._shaderValues.setVector(UnlitMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
-	        this.renderMode = UnlitMaterial.RENDERMODE_OPAQUE;
-	        this.albedoIntensity = 1.0;
-	    }
 	    clone() {
 	        var dest = new UnlitMaterial();
 	        this.cloneTo(dest);
@@ -21495,6 +21495,13 @@
 	UnlitMaterial.TILINGOFFSET = Shader3D.propertyNameToID("u_TilingOffset");
 
 	class WaterPrimaryMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("WaterPrimary");
+	        this._shaderValues.setVector(WaterPrimaryMaterial.HORIZONCOLOR, new Vector4(0.172, 0.463, 0.435, 0));
+	        this._shaderValues.setNumber(WaterPrimaryMaterial.WAVESCALE, 0.15);
+	        this._shaderValues.setVector(WaterPrimaryMaterial.WAVESPEED, new Vector4(19, 9, -16, -7));
+	    }
 	    static __initDefine__() {
 	        WaterPrimaryMaterial.SHADERDEFINE_MAINTEXTURE = Shader3D.getDefineByName("MAINTEXTURE");
 	        WaterPrimaryMaterial.SHADERDEFINE_NORMALTEXTURE = Shader3D.getDefineByName("NORMALTEXTURE");
@@ -21536,13 +21543,6 @@
 	    }
 	    set waveSpeed(value) {
 	        this._shaderValues.setVector(WaterPrimaryMaterial.WAVESPEED, value);
-	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("WaterPrimary");
-	        this._shaderValues.setVector(WaterPrimaryMaterial.HORIZONCOLOR, new Vector4(0.172, 0.463, 0.435, 0));
-	        this._shaderValues.setNumber(WaterPrimaryMaterial.WAVESCALE, 0.15);
-	        this._shaderValues.setVector(WaterPrimaryMaterial.WAVESPEED, new Vector4(19, 9, -16, -7));
 	    }
 	    clone() {
 	        var dest = new WaterPrimaryMaterial();
@@ -21699,6 +21699,9 @@
 	}
 
 	class MeshFilter {
+	    constructor(owner) {
+	        this._owner = owner;
+	    }
 	    get sharedMesh() {
 	        return this._sharedMesh;
 	    }
@@ -21721,9 +21724,6 @@
 	            this._owner._render._onMeshChange(value);
 	            this._sharedMesh = value;
 	        }
-	    }
-	    constructor(owner) {
-	        this._owner = owner;
 	    }
 	    _getMeshDefine(mesh, out) {
 	        out.length = 0;
@@ -21757,9 +21757,6 @@
 	MeshFilter._meshVerticeDefine = [];
 
 	class SubMeshDynamicBatch extends GeometryElement {
-	    static __init__() {
-	        SubMeshDynamicBatch.instance = new SubMeshDynamicBatch();
-	    }
 	    constructor() {
 	        super();
 	        this._bufferState = new BufferState();
@@ -21772,6 +21769,9 @@
 	        this._indexBuffer = new IndexBuffer3D(exports.IndexFormat.UInt16, this._indices.length, gl.DYNAMIC_DRAW);
 	        var memorySize = this._vertexBuffer._byteLength + this._indexBuffer._byteLength;
 	        Laya.Resource._addMemory(memorySize, memorySize);
+	    }
+	    static __init__() {
+	        SubMeshDynamicBatch.instance = new SubMeshDynamicBatch();
 	    }
 	    _getBatchVertices(vertexDeclaration, batchVertices, batchOffset, element, subMesh) {
 	        var vertexFloatCount = vertexDeclaration.vertexStride / 4;
@@ -21983,6 +21983,12 @@
 	MeshRenderDynamicBatchManager.instance = new MeshRenderDynamicBatchManager();
 
 	class MeshSprite3D extends RenderableSprite3D {
+	    constructor(mesh = null, name = null) {
+	        super(name);
+	        this._meshFilter = new MeshFilter(this);
+	        this._render = new MeshRenderer(this);
+	        (mesh) && (this._meshFilter.sharedMesh = mesh);
+	    }
 	    static __init__() {
 	        MeshSprite3DShaderDeclaration.SHADERDEFINE_UV0 = Shader3D.getDefineByName("UV");
 	        MeshSprite3DShaderDeclaration.SHADERDEFINE_COLOR = Shader3D.getDefineByName("COLOR");
@@ -21997,12 +22003,6 @@
 	    }
 	    get meshRenderer() {
 	        return this._render;
-	    }
-	    constructor(mesh = null, name = null) {
-	        super(name);
-	        this._meshFilter = new MeshFilter(this);
-	        this._render = new MeshRenderer(this);
-	        (mesh) && (this._meshFilter.sharedMesh = mesh);
 	    }
 	    _parse(data, spriteMap) {
 	        super._parse(data, spriteMap);
@@ -22062,6 +22062,20 @@
 	GradientMode.Fixed = 1;
 
 	class Gradient {
+	    constructor(maxColorRGBKeyCount, maxColorAlphaKeyCount) {
+	        this._mode = 0;
+	        this._maxColorRGBKeysCount = 0;
+	        this._maxColorAlphaKeysCount = 0;
+	        this._colorRGBKeysCount = 0;
+	        this._colorAlphaKeysCount = 0;
+	        this._keyRanges = new Vector4(1, 0, 1, 0);
+	        this._alphaElements = null;
+	        this._rgbElements = null;
+	        this._maxColorRGBKeysCount = maxColorRGBKeyCount;
+	        this._maxColorAlphaKeysCount = maxColorAlphaKeyCount;
+	        this._rgbElements = new Float32Array(maxColorRGBKeyCount * 4);
+	        this._alphaElements = new Float32Array(maxColorAlphaKeyCount * 2);
+	    }
 	    get mode() {
 	        return this._mode;
 	    }
@@ -22079,20 +22093,6 @@
 	    }
 	    get maxColorAlphaKeysCount() {
 	        return this._maxColorAlphaKeysCount;
-	    }
-	    constructor(maxColorRGBKeyCount, maxColorAlphaKeyCount) {
-	        this._mode = 0;
-	        this._maxColorRGBKeysCount = 0;
-	        this._maxColorAlphaKeysCount = 0;
-	        this._colorRGBKeysCount = 0;
-	        this._colorAlphaKeysCount = 0;
-	        this._keyRanges = new Vector4(1, 0, 1, 0);
-	        this._alphaElements = null;
-	        this._rgbElements = null;
-	        this._maxColorRGBKeysCount = maxColorRGBKeyCount;
-	        this._maxColorAlphaKeysCount = maxColorAlphaKeyCount;
-	        this._rgbElements = new Float32Array(maxColorRGBKeyCount * 4);
-	        this._alphaElements = new Float32Array(maxColorAlphaKeyCount * 2);
 	    }
 	    addColorRGB(key, value) {
 	        if (this._colorRGBKeysCount < this._maxColorRGBKeysCount) {
@@ -22344,6 +22344,11 @@
 	}
 
 	class Burst {
+	    constructor(time, minCount, maxCount) {
+	        this._time = time;
+	        this._minCount = minCount;
+	        this._maxCount = maxCount;
+	    }
 	    get time() {
 	        return this._time;
 	    }
@@ -22352,11 +22357,6 @@
 	    }
 	    get maxCount() {
 	        return this._maxCount;
-	    }
-	    constructor(time, minCount, maxCount) {
-	        this._time = time;
-	        this._minCount = minCount;
-	        this._maxCount = maxCount;
 	    }
 	    cloneTo(destObject) {
 	        var destBurst = destObject;
@@ -22372,6 +22372,15 @@
 	}
 
 	class GradientColor {
+	    constructor() {
+	        this._type = 0;
+	        this._constant = null;
+	        this._constantMin = null;
+	        this._constantMax = null;
+	        this._gradient = null;
+	        this._gradientMin = null;
+	        this._gradientMax = null;
+	    }
 	    static createByConstant(constant) {
 	        var gradientColor = new GradientColor();
 	        gradientColor._type = 0;
@@ -22419,15 +22428,6 @@
 	    get gradientMax() {
 	        return this._gradientMax;
 	    }
-	    constructor() {
-	        this._type = 0;
-	        this._constant = null;
-	        this._constantMin = null;
-	        this._constantMax = null;
-	        this._gradient = null;
-	        this._gradientMin = null;
-	        this._gradientMax = null;
-	    }
 	    cloneTo(destObject) {
 	        var destGradientColor = destObject;
 	        destGradientColor._type = this._type;
@@ -22446,11 +22446,11 @@
 	}
 
 	class ColorOverLifetime {
-	    get color() {
-	        return this._color;
-	    }
 	    constructor(color) {
 	        this._color = color;
+	    }
+	    get color() {
+	        return this._color;
 	    }
 	    cloneTo(destObject) {
 	        var destColorOverLifetime = destObject;
@@ -22480,6 +22480,15 @@
 	}
 
 	class FrameOverTime {
+	    constructor() {
+	        this._type = 0;
+	        this._constant = 0;
+	        this._overTime = null;
+	        this._constantMin = 0;
+	        this._constantMax = 0;
+	        this._overTimeMin = null;
+	        this._overTimeMax = null;
+	    }
 	    static createByConstant(constant = 0) {
 	        var rotationOverLifetime = new FrameOverTime();
 	        rotationOverLifetime._type = 0;
@@ -22527,15 +22536,6 @@
 	    get frameOverTimeDataMax() {
 	        return this._overTimeMax;
 	    }
-	    constructor() {
-	        this._type = 0;
-	        this._constant = 0;
-	        this._overTime = null;
-	        this._constantMin = 0;
-	        this._constantMax = 0;
-	        this._overTimeMin = null;
-	        this._overTimeMax = null;
-	    }
 	    cloneTo(destObject) {
 	        var destFrameOverTime = destObject;
 	        destFrameOverTime._type = this._type;
@@ -22554,6 +22554,31 @@
 	}
 
 	class GradientAngularVelocity {
+	    constructor() {
+	        this._type = 0;
+	        this._separateAxes = false;
+	        this._constant = 0;
+	        this._constantSeparate = null;
+	        this._gradient = null;
+	        this._gradientX = null;
+	        this._gradientY = null;
+	        this._gradientZ = null;
+	        this._gradientW = null;
+	        this._constantMin = 0;
+	        this._constantMax = 0;
+	        this._constantMinSeparate = null;
+	        this._constantMaxSeparate = null;
+	        this._gradientMin = null;
+	        this._gradientMax = null;
+	        this._gradientXMin = null;
+	        this._gradientXMax = null;
+	        this._gradientYMin = null;
+	        this._gradientYMax = null;
+	        this._gradientZMin = null;
+	        this._gradientZMax = null;
+	        this._gradientWMin = null;
+	        this._gradientWMax = null;
+	    }
 	    static createByConstant(constant) {
 	        var gradientAngularVelocity = new GradientAngularVelocity();
 	        gradientAngularVelocity._type = 0;
@@ -22691,31 +22716,6 @@
 	    get gradientWMax() {
 	        return this._gradientWMax;
 	    }
-	    constructor() {
-	        this._type = 0;
-	        this._separateAxes = false;
-	        this._constant = 0;
-	        this._constantSeparate = null;
-	        this._gradient = null;
-	        this._gradientX = null;
-	        this._gradientY = null;
-	        this._gradientZ = null;
-	        this._gradientW = null;
-	        this._constantMin = 0;
-	        this._constantMax = 0;
-	        this._constantMinSeparate = null;
-	        this._constantMaxSeparate = null;
-	        this._gradientMin = null;
-	        this._gradientMax = null;
-	        this._gradientXMin = null;
-	        this._gradientXMax = null;
-	        this._gradientYMin = null;
-	        this._gradientYMax = null;
-	        this._gradientZMin = null;
-	        this._gradientZMax = null;
-	        this._gradientWMin = null;
-	        this._gradientWMax = null;
-	    }
 	    cloneTo(destObject) {
 	        var destGradientAngularVelocity = destObject;
 	        destGradientAngularVelocity._type = this._type;
@@ -22747,12 +22747,12 @@
 	}
 
 	class GradientDataInt {
-	    get gradientCount() {
-	        return this._currentLength / 2;
-	    }
 	    constructor() {
 	        this._currentLength = 0;
 	        this._elements = new Float32Array(8);
+	    }
+	    get gradientCount() {
+	        return this._currentLength / 2;
 	    }
 	    add(key, value) {
 	        if (this._currentLength < 8) {
@@ -22783,12 +22783,12 @@
 	}
 
 	class GradientDataNumber {
-	    get gradientCount() {
-	        return this._currentLength / 2;
-	    }
 	    constructor() {
 	        this._currentLength = 0;
 	        this._elements = new Float32Array(8);
+	    }
+	    get gradientCount() {
+	        return this._currentLength / 2;
 	    }
 	    add(key, value) {
 	        if (this._currentLength < 8) {
@@ -22836,6 +22836,26 @@
 	}
 
 	class GradientSize {
+	    constructor() {
+	        this._type = 0;
+	        this._separateAxes = false;
+	        this._gradient = null;
+	        this._gradientX = null;
+	        this._gradientY = null;
+	        this._gradientZ = null;
+	        this._constantMin = 0;
+	        this._constantMax = 0;
+	        this._constantMinSeparate = null;
+	        this._constantMaxSeparate = null;
+	        this._gradientMin = null;
+	        this._gradientMax = null;
+	        this._gradientXMin = null;
+	        this._gradientXMax = null;
+	        this._gradientYMin = null;
+	        this._gradientYMax = null;
+	        this._gradientZMin = null;
+	        this._gradientZMax = null;
+	    }
 	    static createByGradient(gradient) {
 	        var gradientSize = new GradientSize();
 	        gradientSize._type = 0;
@@ -22942,26 +22962,6 @@
 	    get gradientZMax() {
 	        return this._gradientZMax;
 	    }
-	    constructor() {
-	        this._type = 0;
-	        this._separateAxes = false;
-	        this._gradient = null;
-	        this._gradientX = null;
-	        this._gradientY = null;
-	        this._gradientZ = null;
-	        this._constantMin = 0;
-	        this._constantMax = 0;
-	        this._constantMinSeparate = null;
-	        this._constantMaxSeparate = null;
-	        this._gradientMin = null;
-	        this._gradientMax = null;
-	        this._gradientXMin = null;
-	        this._gradientXMax = null;
-	        this._gradientYMin = null;
-	        this._gradientYMax = null;
-	        this._gradientZMin = null;
-	        this._gradientZMax = null;
-	    }
 	    getMaxSizeInGradient(meshMode = false) {
 	        var i, n;
 	        var maxSize = -Number.MAX_VALUE;
@@ -23053,6 +23053,21 @@
 	}
 
 	class GradientVelocity {
+	    constructor() {
+	        this._type = 0;
+	        this._constant = null;
+	        this._gradientX = null;
+	        this._gradientY = null;
+	        this._gradientZ = null;
+	        this._constantMin = null;
+	        this._constantMax = null;
+	        this._gradientXMin = null;
+	        this._gradientXMax = null;
+	        this._gradientYMin = null;
+	        this._gradientYMax = null;
+	        this._gradientZMin = null;
+	        this._gradientZMax = null;
+	    }
 	    static createByConstant(constant) {
 	        var gradientVelocity = new GradientVelocity();
 	        gradientVelocity._type = 0;
@@ -23124,21 +23139,6 @@
 	    get gradientZMax() {
 	        return this._gradientZMax;
 	    }
-	    constructor() {
-	        this._type = 0;
-	        this._constant = null;
-	        this._gradientX = null;
-	        this._gradientY = null;
-	        this._gradientZ = null;
-	        this._constantMin = null;
-	        this._constantMax = null;
-	        this._gradientXMin = null;
-	        this._gradientXMax = null;
-	        this._gradientYMin = null;
-	        this._gradientYMax = null;
-	        this._gradientZMin = null;
-	        this._gradientZMax = null;
-	    }
 	    cloneTo(destObject) {
 	        var destGradientVelocity = destObject;
 	        destGradientVelocity._type = this._type;
@@ -23163,11 +23163,11 @@
 	}
 
 	class RotationOverLifetime {
-	    get angularVelocity() {
-	        return this._angularVelocity;
-	    }
 	    constructor(angularVelocity) {
 	        this._angularVelocity = angularVelocity;
+	    }
+	    get angularVelocity() {
+	        return this._angularVelocity;
 	    }
 	    cloneTo(destObject) {
 	        var destRotationOverLifetime = destObject;
@@ -23208,7 +23208,6 @@
 	    }
 	}
 
-	exports.ParticleSystemShapeType = void 0;
 	(function (ParticleSystemShapeType) {
 	    ParticleSystemShapeType[ParticleSystemShapeType["Box"] = 0] = "Box";
 	    ParticleSystemShapeType[ParticleSystemShapeType["Circle"] = 1] = "Circle";
@@ -23827,11 +23826,11 @@
 	}
 
 	class SizeOverLifetime {
-	    get size() {
-	        return this._size;
-	    }
 	    constructor(size) {
 	        this._size = size;
+	    }
+	    get size() {
+	        return this._size;
 	    }
 	    cloneTo(destObject) {
 	        var destSizeOverLifetime = destObject;
@@ -23867,6 +23866,12 @@
 	}
 
 	class StartFrame {
+	    constructor() {
+	        this._type = 0;
+	        this._constant = 0;
+	        this._constantMin = 0;
+	        this._constantMax = 0;
+	    }
 	    static createByConstant(constant = 0) {
 	        var rotationOverLifetime = new StartFrame();
 	        rotationOverLifetime._type = 0;
@@ -23892,12 +23897,6 @@
 	    get constantMax() {
 	        return this._constantMax;
 	    }
-	    constructor() {
-	        this._type = 0;
-	        this._constant = 0;
-	        this._constantMin = 0;
-	        this._constantMax = 0;
-	    }
 	    cloneTo(destObject) {
 	        var destStartFrame = destObject;
 	        destStartFrame._type = this._type;
@@ -23913,12 +23912,6 @@
 	}
 
 	class TextureSheetAnimation {
-	    get frame() {
-	        return this._frame;
-	    }
-	    get startFrame() {
-	        return this._startFrame;
-	    }
 	    constructor(frame, startFrame) {
 	        this.type = 0;
 	        this.randomRow = false;
@@ -23934,6 +23927,12 @@
 	        this.enableUVChannels = 1;
 	        this._frame = frame;
 	        this._startFrame = startFrame;
+	    }
+	    get frame() {
+	        return this._frame;
+	    }
+	    get startFrame() {
+	        return this._startFrame;
 	    }
 	    cloneTo(destObject) {
 	        var destTextureSheetAnimation = destObject;
@@ -23979,13 +23978,13 @@
 	}
 
 	class VelocityOverLifetime {
-	    get velocity() {
-	        return this._velocity;
-	    }
 	    constructor(velocity) {
 	        this.enable = false;
 	        this.space = 0;
 	        this._velocity = velocity;
+	    }
+	    get velocity() {
+	        return this._velocity;
 	    }
 	    cloneTo(destObject) {
 	        var destVelocityOverLifetime = destObject;
@@ -24072,6 +24071,23 @@
 	ShuriKenParticle3DShaderDeclaration.TEXTURESHEETANIMATIONGRADIENTMAXUVS = Shader3D.propertyNameToID("u_TSAMaxGradientUVs");
 
 	class VertexShurikenParticleBillboard extends VertexShuriKenParticle {
+	    constructor(cornerTextureCoordinate, positionStartLifeTime, velocity, startColor, startSize, startRotation0, startRotation1, startRotation2, ageAddScale, time, startSpeed, randoms0, randoms1, simulationWorldPostion) {
+	        super();
+	        this._cornerTextureCoordinate = cornerTextureCoordinate;
+	        this._positionStartLifeTime = positionStartLifeTime;
+	        this._velocity = velocity;
+	        this._startColor = startColor;
+	        this._startSize = startSize;
+	        this._startRotation0 = startRotation0;
+	        this._startRotation1 = startRotation1;
+	        this._startRotation2 = startRotation2;
+	        this._startLifeTime = ageAddScale;
+	        this._time = time;
+	        this._startSpeed = startSpeed;
+	        this._randoms0 = randoms0;
+	        this._randoms1 = randoms1;
+	        this._simulationWorldPostion = simulationWorldPostion;
+	    }
 	    static get vertexDeclaration() {
 	        return VertexShurikenParticleBillboard._vertexDeclaration;
 	    }
@@ -24173,6 +24189,9 @@
 	    get simulationWorldPostion() {
 	        return this._simulationWorldPostion;
 	    }
+	}
+
+	class VertexShurikenParticleMesh extends VertexShuriKenParticle {
 	    constructor(cornerTextureCoordinate, positionStartLifeTime, velocity, startColor, startSize, startRotation0, startRotation1, startRotation2, ageAddScale, time, startSpeed, randoms0, randoms1, simulationWorldPostion) {
 	        super();
 	        this._cornerTextureCoordinate = cornerTextureCoordinate;
@@ -24190,9 +24209,6 @@
 	        this._randoms1 = randoms1;
 	        this._simulationWorldPostion = simulationWorldPostion;
 	    }
-	}
-
-	class VertexShurikenParticleMesh extends VertexShuriKenParticle {
 	    static __init__() {
 	        VertexShurikenParticleMesh._vertexDeclaration = new VertexDeclaration(188, [new VertexElement(0, VertexElementFormat.Vector3, VertexShuriKenParticle.PARTICLE_POSITION0),
 	            new VertexElement(12, VertexElementFormat.Vector4, VertexShuriKenParticle.PARTICLE_COLOR0),
@@ -24277,23 +24293,6 @@
 	    }
 	    get simulationWorldPostion() {
 	        return this._simulationWorldPostion;
-	    }
-	    constructor(cornerTextureCoordinate, positionStartLifeTime, velocity, startColor, startSize, startRotation0, startRotation1, startRotation2, ageAddScale, time, startSpeed, randoms0, randoms1, simulationWorldPostion) {
-	        super();
-	        this._cornerTextureCoordinate = cornerTextureCoordinate;
-	        this._positionStartLifeTime = positionStartLifeTime;
-	        this._velocity = velocity;
-	        this._startColor = startColor;
-	        this._startSize = startSize;
-	        this._startRotation0 = startRotation0;
-	        this._startRotation1 = startRotation1;
-	        this._startRotation2 = startRotation2;
-	        this._startLifeTime = ageAddScale;
-	        this._time = time;
-	        this._startSpeed = startSpeed;
-	        this._randoms0 = randoms0;
-	        this._randoms1 = randoms1;
-	        this._simulationWorldPostion = simulationWorldPostion;
 	    }
 	}
 
@@ -24644,6 +24643,14 @@
 	ShurikenParticleData.startUVInfo = new Float32Array(4);
 
 	class Rand {
+	    constructor(seed) {
+	        this._temp = new Uint32Array(1);
+	        this.seeds = new Uint32Array(4);
+	        this.seeds[0] = seed;
+	        this.seeds[1] = this.seeds[0] * 0x6C078965 + 1;
+	        this.seeds[2] = this.seeds[1] * 0x6C078965 + 1;
+	        this.seeds[3] = this.seeds[2] * 0x6C078965 + 1;
+	    }
 	    static getFloatFromInt(v) {
 	        return (v & 0x007FFFFF) * (1.0 / 8388607.0);
 	    }
@@ -24654,14 +24661,6 @@
 	        return this.seeds[0];
 	    }
 	    set seed(seed) {
-	        this.seeds[0] = seed;
-	        this.seeds[1] = this.seeds[0] * 0x6C078965 + 1;
-	        this.seeds[2] = this.seeds[1] * 0x6C078965 + 1;
-	        this.seeds[3] = this.seeds[2] * 0x6C078965 + 1;
-	    }
-	    constructor(seed) {
-	        this._temp = new Uint32Array(1);
-	        this.seeds = new Uint32Array(4);
 	        this.seeds[0] = seed;
 	        this.seeds[1] = this.seeds[0] * 0x6C078965 + 1;
 	        this.seeds[2] = this.seeds[1] * 0x6C078965 + 1;
@@ -24685,6 +24684,12 @@
 	}
 
 	class Emission {
+	    constructor() {
+	        this._emissionRate = 10;
+	        this._emissionRateOverDistance = 0;
+	        this._destroyed = false;
+	        this._bursts = [];
+	    }
 	    set emissionRate(value) {
 	        if (value < 0)
 	            throw new Error("ParticleBaseShape:emissionRate value must large or equal than 0.");
@@ -24702,12 +24707,6 @@
 	    }
 	    get destroyed() {
 	        return this._destroyed;
-	    }
-	    constructor() {
-	        this._emissionRate = 10;
-	        this._emissionRateOverDistance = 0;
-	        this._destroyed = false;
-	        this._bursts = [];
 	    }
 	    destroy() {
 	        this._bursts = null;
@@ -24763,6 +24762,181 @@
 	}
 
 	class ShurikenParticleSystem extends GeometryElement {
+	    constructor(owner) {
+	        super();
+	        this._boundingSphere = null;
+	        this._boundingBox = null;
+	        this._boundingBoxCorners = null;
+	        this._bounds = null;
+	        this._gravityOffset = new Vector2();
+	        this._customBounds = null;
+	        this._useCustomBounds = false;
+	        this._owner = null;
+	        this._ownerRender = null;
+	        this._vertices = null;
+	        this._floatCountPerVertex = 0;
+	        this._startLifeTimeIndex = 0;
+	        this._timeIndex = 0;
+	        this._simulationUV_Index = 0;
+	        this._simulateUpdate = false;
+	        this._firstActiveElement = 0;
+	        this._firstNewElement = 0;
+	        this._firstFreeElement = 0;
+	        this._firstRetiredElement = 0;
+	        this._drawCounter = 0;
+	        this._bufferMaxParticles = 0;
+	        this._emission = null;
+	        this._shape = null;
+	        this._isEmitting = false;
+	        this._isPlaying = false;
+	        this._isPaused = false;
+	        this._playStartDelay = 0;
+	        this._frameRateTime = 0;
+	        this._emissionTime = 0;
+	        this._totalDelayTime = 0;
+	        this._emissionDistance = 0;
+	        this._emissionLastPosition = new Vector3();
+	        this._burstsIndex = 0;
+	        this._velocityOverLifetime = null;
+	        this._colorOverLifetime = null;
+	        this._sizeOverLifetime = null;
+	        this._rotationOverLifetime = null;
+	        this._textureSheetAnimation = null;
+	        this._startLifetimeType = 0;
+	        this._startLifetimeConstant = 0;
+	        this._startLifeTimeGradient = null;
+	        this._startLifetimeConstantMin = 0;
+	        this._startLifetimeConstantMax = 0;
+	        this._startLifeTimeGradientMin = null;
+	        this._startLifeTimeGradientMax = null;
+	        this._maxStartLifetime = 0;
+	        this._uvLength = new Vector2();
+	        this._vertexStride = 0;
+	        this._indexStride = 0;
+	        this._vertexBuffer = null;
+	        this._indexBuffer = null;
+	        this._bufferState = new BufferState();
+	        this._updateMask = 0;
+	        this._currentTime = 0;
+	        this._startUpdateLoopCount = 0;
+	        this._rand = null;
+	        this._randomSeeds = null;
+	        this.duration = 0;
+	        this.looping = false;
+	        this.prewarm = false;
+	        this.startDelayType = 0;
+	        this.startDelay = 0;
+	        this.startDelayMin = 0;
+	        this.startDelayMax = 0;
+	        this.startSpeedType = 0;
+	        this.startSpeedConstant = 0;
+	        this.startSpeedConstantMin = 0;
+	        this.startSpeedConstantMax = 0;
+	        this.dragType = 0;
+	        this.dragConstant = 0;
+	        this.dragSpeedConstantMin = 0;
+	        this.dragSpeedConstantMax = 0;
+	        this.threeDStartSize = false;
+	        this.startSizeType = 0;
+	        this.startSizeConstant = 0;
+	        this.startSizeConstantSeparate = null;
+	        this.startSizeConstantMin = 0;
+	        this.startSizeConstantMax = 0;
+	        this.startSizeConstantMinSeparate = null;
+	        this.startSizeConstantMaxSeparate = null;
+	        this.threeDStartRotation = false;
+	        this.startRotationType = 0;
+	        this.startRotationConstant = 0;
+	        this.startRotationConstantSeparate = null;
+	        this.startRotationConstantMin = 0;
+	        this.startRotationConstantMax = 0;
+	        this.startRotationConstantMinSeparate = null;
+	        this.startRotationConstantMaxSeparate = null;
+	        this.randomizeRotationDirection = 0;
+	        this.startColorType = 0;
+	        this.startColorConstant = new Vector4(1, 1, 1, 1);
+	        this.startColorConstantMin = new Vector4(0, 0, 0, 0);
+	        this.startColorConstantMax = new Vector4(1, 1, 1, 1);
+	        this.gravityModifier = 0;
+	        this.simulationSpace = 0;
+	        this.simulationSpeed = 1.0;
+	        this.scaleMode = 1;
+	        this.playOnAwake = false;
+	        this.randomSeed = null;
+	        this.autoRandomSeed = false;
+	        this.isPerformanceMode = false;
+	        this._firstActiveElement = 0;
+	        this._firstNewElement = 0;
+	        this._firstFreeElement = 0;
+	        this._firstRetiredElement = 0;
+	        this._owner = owner;
+	        this._ownerRender = owner.particleRenderer;
+	        this._boundingBoxCorners = [];
+	        this._boundingSphere = new BoundSphere(new Vector3(), Number.MAX_VALUE);
+	        this._boundingBox = new BoundBox(new Vector3(-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE), new Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE));
+	        this._bounds = new Bounds(this._boundingBox.min, this._boundingBox.max);
+	        this._useCustomBounds = false;
+	        this._currentTime = 0;
+	        this._isEmitting = false;
+	        this._isPlaying = false;
+	        this._isPaused = false;
+	        this._burstsIndex = 0;
+	        this._frameRateTime = 0;
+	        this._emissionTime = 0;
+	        this._totalDelayTime = 0;
+	        this._simulateUpdate = false;
+	        this._bufferMaxParticles = 1;
+	        this.duration = 5.0;
+	        this.looping = true;
+	        this.prewarm = false;
+	        this.startDelayType = 0;
+	        this.startDelay = 0.0;
+	        this.startDelayMin = 0.0;
+	        this.startDelayMax = 0.0;
+	        this._startLifetimeType = 0;
+	        this._startLifetimeConstant = 5.0;
+	        this._startLifeTimeGradient = new GradientDataNumber();
+	        this._startLifetimeConstantMin = 0.0;
+	        this._startLifetimeConstantMax = 5.0;
+	        this._startLifeTimeGradientMin = new GradientDataNumber();
+	        this._startLifeTimeGradientMax = new GradientDataNumber();
+	        this._maxStartLifetime = 5.0;
+	        this.startSpeedType = 0;
+	        this.startSpeedConstant = 5.0;
+	        this.startSpeedConstantMin = 0.0;
+	        this.startSpeedConstantMax = 5.0;
+	        this.dragType = 0;
+	        this.dragConstant = 0;
+	        this.dragSpeedConstantMin = 0;
+	        this.dragSpeedConstantMax = 0;
+	        this.threeDStartSize = false;
+	        this.startSizeType = 0;
+	        this.startSizeConstant = 1;
+	        this.startSizeConstantSeparate = new Vector3(1, 1, 1);
+	        this.startSizeConstantMin = 0;
+	        this.startSizeConstantMax = 1;
+	        this.startSizeConstantMinSeparate = new Vector3(0, 0, 0);
+	        this.startSizeConstantMaxSeparate = new Vector3(1, 1, 1);
+	        this.threeDStartRotation = false;
+	        this.startRotationType = 0;
+	        this.startRotationConstant = 0;
+	        this.startRotationConstantSeparate = new Vector3(0, 0, 0);
+	        this.startRotationConstantMin = 0.0;
+	        this.startRotationConstantMax = 0.0;
+	        this.startRotationConstantMinSeparate = new Vector3(0, 0, 0);
+	        this.startRotationConstantMaxSeparate = new Vector3(0, 0, 0);
+	        this.gravityModifier = 0.0;
+	        this.simulationSpace = 1;
+	        this.scaleMode = 1;
+	        this.playOnAwake = true;
+	        this._rand = new Rand(0);
+	        this.autoRandomSeed = true;
+	        this.randomSeed = new Uint32Array(1);
+	        this._randomSeeds = new Uint32Array(ShurikenParticleSystem._RANDOMOFFSET.length);
+	        this.isPerformanceMode = true;
+	        this._emission = new Emission();
+	        this._emission.enable = true;
+	    }
 	    ;
 	    get maxParticles() {
 	        return this._bufferMaxParticles - 1;
@@ -25290,181 +25464,6 @@
 	        }
 	        this._textureSheetAnimation = value;
 	    }
-	    constructor(owner) {
-	        super();
-	        this._boundingSphere = null;
-	        this._boundingBox = null;
-	        this._boundingBoxCorners = null;
-	        this._bounds = null;
-	        this._gravityOffset = new Vector2();
-	        this._customBounds = null;
-	        this._useCustomBounds = false;
-	        this._owner = null;
-	        this._ownerRender = null;
-	        this._vertices = null;
-	        this._floatCountPerVertex = 0;
-	        this._startLifeTimeIndex = 0;
-	        this._timeIndex = 0;
-	        this._simulationUV_Index = 0;
-	        this._simulateUpdate = false;
-	        this._firstActiveElement = 0;
-	        this._firstNewElement = 0;
-	        this._firstFreeElement = 0;
-	        this._firstRetiredElement = 0;
-	        this._drawCounter = 0;
-	        this._bufferMaxParticles = 0;
-	        this._emission = null;
-	        this._shape = null;
-	        this._isEmitting = false;
-	        this._isPlaying = false;
-	        this._isPaused = false;
-	        this._playStartDelay = 0;
-	        this._frameRateTime = 0;
-	        this._emissionTime = 0;
-	        this._totalDelayTime = 0;
-	        this._emissionDistance = 0;
-	        this._emissionLastPosition = new Vector3();
-	        this._burstsIndex = 0;
-	        this._velocityOverLifetime = null;
-	        this._colorOverLifetime = null;
-	        this._sizeOverLifetime = null;
-	        this._rotationOverLifetime = null;
-	        this._textureSheetAnimation = null;
-	        this._startLifetimeType = 0;
-	        this._startLifetimeConstant = 0;
-	        this._startLifeTimeGradient = null;
-	        this._startLifetimeConstantMin = 0;
-	        this._startLifetimeConstantMax = 0;
-	        this._startLifeTimeGradientMin = null;
-	        this._startLifeTimeGradientMax = null;
-	        this._maxStartLifetime = 0;
-	        this._uvLength = new Vector2();
-	        this._vertexStride = 0;
-	        this._indexStride = 0;
-	        this._vertexBuffer = null;
-	        this._indexBuffer = null;
-	        this._bufferState = new BufferState();
-	        this._updateMask = 0;
-	        this._currentTime = 0;
-	        this._startUpdateLoopCount = 0;
-	        this._rand = null;
-	        this._randomSeeds = null;
-	        this.duration = 0;
-	        this.looping = false;
-	        this.prewarm = false;
-	        this.startDelayType = 0;
-	        this.startDelay = 0;
-	        this.startDelayMin = 0;
-	        this.startDelayMax = 0;
-	        this.startSpeedType = 0;
-	        this.startSpeedConstant = 0;
-	        this.startSpeedConstantMin = 0;
-	        this.startSpeedConstantMax = 0;
-	        this.dragType = 0;
-	        this.dragConstant = 0;
-	        this.dragSpeedConstantMin = 0;
-	        this.dragSpeedConstantMax = 0;
-	        this.threeDStartSize = false;
-	        this.startSizeType = 0;
-	        this.startSizeConstant = 0;
-	        this.startSizeConstantSeparate = null;
-	        this.startSizeConstantMin = 0;
-	        this.startSizeConstantMax = 0;
-	        this.startSizeConstantMinSeparate = null;
-	        this.startSizeConstantMaxSeparate = null;
-	        this.threeDStartRotation = false;
-	        this.startRotationType = 0;
-	        this.startRotationConstant = 0;
-	        this.startRotationConstantSeparate = null;
-	        this.startRotationConstantMin = 0;
-	        this.startRotationConstantMax = 0;
-	        this.startRotationConstantMinSeparate = null;
-	        this.startRotationConstantMaxSeparate = null;
-	        this.randomizeRotationDirection = 0;
-	        this.startColorType = 0;
-	        this.startColorConstant = new Vector4(1, 1, 1, 1);
-	        this.startColorConstantMin = new Vector4(0, 0, 0, 0);
-	        this.startColorConstantMax = new Vector4(1, 1, 1, 1);
-	        this.gravityModifier = 0;
-	        this.simulationSpace = 0;
-	        this.simulationSpeed = 1.0;
-	        this.scaleMode = 1;
-	        this.playOnAwake = false;
-	        this.randomSeed = null;
-	        this.autoRandomSeed = false;
-	        this.isPerformanceMode = false;
-	        this._firstActiveElement = 0;
-	        this._firstNewElement = 0;
-	        this._firstFreeElement = 0;
-	        this._firstRetiredElement = 0;
-	        this._owner = owner;
-	        this._ownerRender = owner.particleRenderer;
-	        this._boundingBoxCorners = [];
-	        this._boundingSphere = new BoundSphere(new Vector3(), Number.MAX_VALUE);
-	        this._boundingBox = new BoundBox(new Vector3(-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE), new Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE));
-	        this._bounds = new Bounds(this._boundingBox.min, this._boundingBox.max);
-	        this._useCustomBounds = false;
-	        this._currentTime = 0;
-	        this._isEmitting = false;
-	        this._isPlaying = false;
-	        this._isPaused = false;
-	        this._burstsIndex = 0;
-	        this._frameRateTime = 0;
-	        this._emissionTime = 0;
-	        this._totalDelayTime = 0;
-	        this._simulateUpdate = false;
-	        this._bufferMaxParticles = 1;
-	        this.duration = 5.0;
-	        this.looping = true;
-	        this.prewarm = false;
-	        this.startDelayType = 0;
-	        this.startDelay = 0.0;
-	        this.startDelayMin = 0.0;
-	        this.startDelayMax = 0.0;
-	        this._startLifetimeType = 0;
-	        this._startLifetimeConstant = 5.0;
-	        this._startLifeTimeGradient = new GradientDataNumber();
-	        this._startLifetimeConstantMin = 0.0;
-	        this._startLifetimeConstantMax = 5.0;
-	        this._startLifeTimeGradientMin = new GradientDataNumber();
-	        this._startLifeTimeGradientMax = new GradientDataNumber();
-	        this._maxStartLifetime = 5.0;
-	        this.startSpeedType = 0;
-	        this.startSpeedConstant = 5.0;
-	        this.startSpeedConstantMin = 0.0;
-	        this.startSpeedConstantMax = 5.0;
-	        this.dragType = 0;
-	        this.dragConstant = 0;
-	        this.dragSpeedConstantMin = 0;
-	        this.dragSpeedConstantMax = 0;
-	        this.threeDStartSize = false;
-	        this.startSizeType = 0;
-	        this.startSizeConstant = 1;
-	        this.startSizeConstantSeparate = new Vector3(1, 1, 1);
-	        this.startSizeConstantMin = 0;
-	        this.startSizeConstantMax = 1;
-	        this.startSizeConstantMinSeparate = new Vector3(0, 0, 0);
-	        this.startSizeConstantMaxSeparate = new Vector3(1, 1, 1);
-	        this.threeDStartRotation = false;
-	        this.startRotationType = 0;
-	        this.startRotationConstant = 0;
-	        this.startRotationConstantSeparate = new Vector3(0, 0, 0);
-	        this.startRotationConstantMin = 0.0;
-	        this.startRotationConstantMax = 0.0;
-	        this.startRotationConstantMinSeparate = new Vector3(0, 0, 0);
-	        this.startRotationConstantMaxSeparate = new Vector3(0, 0, 0);
-	        this.gravityModifier = 0.0;
-	        this.simulationSpace = 1;
-	        this.scaleMode = 1;
-	        this.playOnAwake = true;
-	        this._rand = new Rand(0);
-	        this.autoRandomSeed = true;
-	        this.randomSeed = new Uint32Array(1);
-	        this._randomSeeds = new Uint32Array(ShurikenParticleSystem._RANDOMOFFSET.length);
-	        this.isPerformanceMode = true;
-	        this._emission = new Emission();
-	        this._emission.enable = true;
-	    }
 	    _getVertexBuffer(index = 0) {
 	        if (index === 0)
 	            return this._vertexBuffer;
@@ -25760,7 +25759,7 @@
 	    }
 	    _freeRetiredParticles() {
 	        while (this._firstRetiredElement != this._firstActiveElement) {
-	            this._drawCounter - this._vertices[this._firstRetiredElement * this._floatCountPerVertex * this._vertexStride + this._timeIndex];
+	            var age = this._drawCounter - this._vertices[this._firstRetiredElement * this._floatCountPerVertex * this._vertexStride + this._timeIndex];
 	            this._firstRetiredElement++;
 	            if (this._firstRetiredElement >= this._bufferMaxParticles)
 	                this._firstRetiredElement = 0;
@@ -26628,7 +26627,7 @@
 	    }
 	    _freeRetiredParticles() {
 	        while (this._firstRetiredElement != this._firstActiveElement) {
-	            this._drawCounter - this._instanceVertex[this._firstRetiredElement * this._floatCountPerParticleData + this._timeIndex];
+	            let age = this._drawCounter - this._instanceVertex[this._firstRetiredElement * this._floatCountPerParticleData + this._timeIndex];
 	            this._firstRetiredElement++;
 	            if (this._firstRetiredElement >= this._bufferMaxParticles)
 	                this._firstRetiredElement = 0;
@@ -26897,6 +26896,13 @@
 	}
 
 	class ShurikenParticleMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("PARTICLESHURIKEN");
+	        this._shaderValues.setVector(ShurikenParticleMaterial.TINTCOLOR, new Vector4(0.5, 0.5, 0.5, 0.5));
+	        this._shaderValues.setVector(ShurikenParticleMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
+	        this.renderMode = ShurikenParticleMaterial.RENDERMODE_ALPHABLENDED;
+	    }
 	    static __initDefine__() {
 	        ShurikenParticleMaterial.SHADERDEFINE_DIFFUSEMAP = Shader3D.getDefineByName("DIFFUSEMAP");
 	        ShurikenParticleMaterial.SHADERDEFINE_TINTCOLOR = Shader3D.getDefineByName("TINTCOLOR");
@@ -27077,13 +27083,6 @@
 	            this._shaderValues.removeDefine(ShurikenParticleMaterial.SHADERDEFINE_DIFFUSEMAP);
 	        this._shaderValues.setTexture(ShurikenParticleMaterial.DIFFUSETEXTURE, value);
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("PARTICLESHURIKEN");
-	        this._shaderValues.setVector(ShurikenParticleMaterial.TINTCOLOR, new Vector4(0.5, 0.5, 0.5, 0.5));
-	        this._shaderValues.setVector(ShurikenParticleMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
-	        this.renderMode = ShurikenParticleMaterial.RENDERMODE_ALPHABLENDED;
-	    }
 	    clone() {
 	        var dest = new ShurikenParticleMaterial();
 	        this.cloneTo(dest);
@@ -27125,6 +27124,17 @@
 	Physics3DUtils.gravity = new Vector3(0, -9.81, 0);
 
 	class ShurikenParticleRenderer extends BaseRender {
+	    constructor(owner) {
+	        super(owner);
+	        this._finalGravity = new Vector3();
+	        this._dragConstant = new Vector2();
+	        this._mesh = null;
+	        this.stretchedBillboardCameraSpeedScale = 0;
+	        this.stretchedBillboardSpeedScale = 0;
+	        this.stretchedBillboardLengthScale = 2;
+	        this.renderMode = 0;
+	        this._supportOctree = false;
+	    }
 	    get renderMode() {
 	        return this._renderMode;
 	    }
@@ -27182,17 +27192,6 @@
 	            (value) && (value._addReference());
 	            this._owner.particleSystem._initBufferDatas();
 	        }
-	    }
-	    constructor(owner) {
-	        super(owner);
-	        this._finalGravity = new Vector3();
-	        this._dragConstant = new Vector2();
-	        this._mesh = null;
-	        this.stretchedBillboardCameraSpeedScale = 0;
-	        this.stretchedBillboardSpeedScale = 0;
-	        this.stretchedBillboardLengthScale = 2;
-	        this.renderMode = 0;
-	        this._supportOctree = false;
 	    }
 	    _calculateBoundingBox() {
 	        var particleSystem = this._owner.particleSystem;
@@ -27306,6 +27305,21 @@
 	}
 
 	class ShuriKenParticle3D extends RenderableSprite3D {
+	    constructor() {
+	        super(null);
+	        this._render = new ShurikenParticleRenderer(this);
+	        if (!Laya.LayaGL.layaGPUInstance.supportInstance()) {
+	            this._particleSystem = new ShurikenParticleSystem(this);
+	        }
+	        else
+	            this._particleSystem = new ShurikenParticleInstanceSystem(this);
+	        var elements = this._render._renderElements;
+	        var element = elements[0] = new RenderElement();
+	        element.setTransform(this._transform);
+	        element.render = this._render;
+	        element.setGeometry(this._particleSystem);
+	        element.material = ShurikenParticleMaterial.defaultMaterial;
+	    }
 	    static __init__() {
 	        ShuriKenParticle3DShaderDeclaration.SHADERDEFINE_RENDERMODE_BILLBOARD = Shader3D.getDefineByName("SPHERHBILLBOARD");
 	        ShuriKenParticle3DShaderDeclaration.SHADERDEFINE_RENDERMODE_STRETCHEDBILLBOARD = Shader3D.getDefineByName("STRETCHEDBILLBOARD");
@@ -27338,21 +27352,6 @@
 	    }
 	    get particleRenderer() {
 	        return this._render;
-	    }
-	    constructor() {
-	        super(null);
-	        this._render = new ShurikenParticleRenderer(this);
-	        if (!Laya.LayaGL.layaGPUInstance.supportInstance()) {
-	            this._particleSystem = new ShurikenParticleSystem(this);
-	        }
-	        else
-	            this._particleSystem = new ShurikenParticleInstanceSystem(this);
-	        var elements = this._render._renderElements;
-	        var element = elements[0] = new RenderElement();
-	        element.setTransform(this._transform);
-	        element.render = this._render;
-	        element.setGeometry(this._particleSystem);
-	        element.material = ShurikenParticleMaterial.defaultMaterial;
 	    }
 	    _parseModule(module, moduleData) {
 	        for (var t in moduleData) {
@@ -28116,6 +28115,13 @@
 	}
 
 	class SkinnedMeshRenderer extends MeshRenderer {
+	    constructor(owner) {
+	        super(owner);
+	        this._bones = [];
+	        this._skinnedDataLoopMarks = [];
+	        this._localBounds = new Bounds(Vector3._ZERO, Vector3._ZERO);
+	        this._cacheAnimationNode = [];
+	    }
 	    get localBounds() {
 	        return this._localBounds;
 	    }
@@ -28141,13 +28147,6 @@
 	    }
 	    get bones() {
 	        return this._bones;
-	    }
-	    constructor(owner) {
-	        super(owner);
-	        this._bones = [];
-	        this._skinnedDataLoopMarks = [];
-	        this._localBounds = new Bounds(Vector3._ZERO, Vector3._ZERO);
-	        this._cacheAnimationNode = [];
 	    }
 	    _computeSkinnedData() {
 	        if (this._cacheMesh && this._cacheAvatar || this._cacheMesh && !this._cacheAvatar) {
@@ -28362,6 +28361,12 @@
 	SkinnedMeshRenderer._tempMatrix4x4 = new Matrix4x4();
 
 	class SkinnedMeshSprite3D extends RenderableSprite3D {
+	    constructor(mesh = null, name = null) {
+	        super(name);
+	        this._meshFilter = new MeshFilter(this);
+	        this._render = new SkinnedMeshRenderer(this);
+	        (mesh) && (this._meshFilter.sharedMesh = mesh);
+	    }
 	    static __init__() {
 	        SkinnedMeshSprite3DShaderDeclaration.SHADERDEFINE_BONE = Shader3D.getDefineByName("BONE");
 	        SkinnedMeshSprite3DShaderDeclaration.SHADERDEFINE_SIMPLEBONE = Shader3D.getDefineByName("SIMPLEBONE");
@@ -28371,12 +28376,6 @@
 	    }
 	    get skinnedMeshRenderer() {
 	        return this._render;
-	    }
-	    constructor(mesh = null, name = null) {
-	        super(name);
-	        this._meshFilter = new MeshFilter(this);
-	        this._render = new SkinnedMeshRenderer(this);
-	        (mesh) && (this._meshFilter.sharedMesh = mesh);
 	    }
 	    _parse(data, spriteMap) {
 	        super._parse(data, spriteMap);
@@ -28481,6 +28480,14 @@
 	SkinnedMeshSprite3D.SIMPLE_SIMPLEANIMATORTEXTURESIZE = Shader3D.propertyNameToID("u_SimpleAnimatorTextureSize");
 
 	class TrailMaterial extends Material {
+	    constructor() {
+	        super();
+	        this.setShaderName("Trail");
+	        this._color = new Vector4(1.0, 1.0, 1.0, 1.0);
+	        this._shaderValues.setVector(TrailMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
+	        this._shaderValues.setVector(TrailMaterial.TINTCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
+	        this.renderMode = TrailMaterial.RENDERMODE_ALPHABLENDED;
+	    }
 	    static __initDefine__() {
 	        TrailMaterial.SHADERDEFINE_MAINTEXTURE = Shader3D.getDefineByName("MAINTEXTURE");
 	        TrailMaterial.SHADERDEFINE_ADDTIVEFOG = Shader3D.getDefineByName("ADDTIVEFOG");
@@ -28648,14 +28655,6 @@
 	            this._shaderValues.getVector(TrailMaterial.TILINGOFFSET).setValue(1.0, 1.0, 0.0, 0.0);
 	        }
 	    }
-	    constructor() {
-	        super();
-	        this.setShaderName("Trail");
-	        this._color = new Vector4(1.0, 1.0, 1.0, 1.0);
-	        this._shaderValues.setVector(TrailMaterial.TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
-	        this._shaderValues.setVector(TrailMaterial.TINTCOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
-	        this.renderMode = TrailMaterial.RENDERMODE_ALPHABLENDED;
-	    }
 	    clone() {
 	        var dest = new TrailMaterial();
 	        this.cloneTo(dest);
@@ -28673,7 +28672,6 @@
 	TextureMode.Stretch = 0;
 	TextureMode.Tile = 1;
 
-	exports.TrailAlignment = void 0;
 	(function (TrailAlignment) {
 	    TrailAlignment[TrailAlignment["View"] = 0] = "View";
 	    TrailAlignment[TrailAlignment["TransformZ"] = 1] = "TransformZ";
@@ -29010,6 +29008,15 @@
 	TrailGeometry._type = GeometryElement._typeCounter++;
 
 	class TrailFilter {
+	    constructor(owner) {
+	        this._totalLength = 0;
+	        this._lastPosition = new Vector3();
+	        this._curtime = 0;
+	        this.alignment = TrailFilter.ALIGNMENT_VIEW;
+	        this._owner = owner;
+	        this._initDefaultData();
+	        this.addRenderElement();
+	    }
 	    get time() {
 	        return this._time;
 	    }
@@ -29056,15 +29063,6 @@
 	    }
 	    set textureMode(value) {
 	        this._textureMode = value;
-	    }
-	    constructor(owner) {
-	        this._totalLength = 0;
-	        this._lastPosition = new Vector3();
-	        this._curtime = 0;
-	        this.alignment = TrailFilter.ALIGNMENT_VIEW;
-	        this._owner = owner;
-	        this._initDefaultData();
-	        this.addRenderElement();
 	    }
 	    addRenderElement() {
 	        var render = this._owner._render;
@@ -29171,6 +29169,11 @@
 	}
 
 	class TrailSprite3D extends RenderableSprite3D {
+	    constructor(name = null) {
+	        super(name);
+	        this._render = new TrailRenderer(this);
+	        this._geometryFilter = new TrailFilter(this);
+	    }
 	    static __init__() {
 	    }
 	    get trailFilter() {
@@ -29178,11 +29181,6 @@
 	    }
 	    get trailRenderer() {
 	        return this._render;
-	    }
-	    constructor(name = null) {
-	        super(name);
-	        this._render = new TrailRenderer(this);
-	        this._geometryFilter = new TrailFilter(this);
 	    }
 	    _parse(data, spriteMap) {
 	        super._parse(data, spriteMap);
@@ -29273,6 +29271,12 @@
 	}
 
 	class VertexPositionTerrain {
+	    constructor(position, normal, textureCoord0, textureCoord1) {
+	        this._position = position;
+	        this._normal = normal;
+	        this._textureCoord0 = textureCoord0;
+	        this._textureCoord1 = textureCoord1;
+	    }
 	    static __init__() {
 	        VertexPositionTerrain._vertexDeclaration = new VertexDeclaration(40, [new VertexElement(0, VertexElementFormat.Vector3, VertexPositionTerrain.TERRAIN_POSITION0),
 	            new VertexElement(12, VertexElementFormat.Vector3, VertexPositionTerrain.TERRAIN_NORMAL0),
@@ -29297,12 +29301,6 @@
 	    get vertexDeclaration() {
 	        return VertexPositionTerrain._vertexDeclaration;
 	    }
-	    constructor(position, normal, textureCoord0, textureCoord1) {
-	        this._position = position;
-	        this._normal = normal;
-	        this._textureCoord0 = textureCoord0;
-	        this._textureCoord1 = textureCoord1;
-	    }
 	}
 	VertexPositionTerrain.TERRAIN_POSITION0 = 0;
 	VertexPositionTerrain.TERRAIN_NORMAL0 = 1;
@@ -29310,9 +29308,6 @@
 	VertexPositionTerrain.TERRAIN_TEXTURECOORDINATE1 = 3;
 
 	class SubMesh extends GeometryElement {
-	    get indexCount() {
-	        return this._indexCount;
-	    }
 	    constructor(mesh) {
 	        super();
 	        this._id = ++SubMesh._uniqueIDCounter;
@@ -29320,6 +29315,9 @@
 	        this._boneIndicesList = [];
 	        this._subIndexBufferStart = [];
 	        this._subIndexBufferCount = [];
+	    }
+	    get indexCount() {
+	        return this._indexCount;
 	    }
 	    _setIndexRange(indexStart, indexCount, indexFormat = exports.IndexFormat.UInt16) {
 	        this._indexStart = indexStart;
@@ -29411,6 +29409,26 @@
 	    }
 	}
 	class Mesh extends Laya.Resource {
+	    constructor(isReadable = true) {
+	        super();
+	        this._tempVector30 = new Vector3();
+	        this._tempVector31 = new Vector3();
+	        this._tempVector32 = new Vector3();
+	        this._minVerticesUpdate = -1;
+	        this._maxVerticesUpdate = -1;
+	        this._needUpdateBounds = true;
+	        this._bounds = new Bounds(new Vector3(), new Vector3());
+	        this._bufferState = new BufferState();
+	        this._instanceBufferState = new BufferState();
+	        this._instanceBufferStateType = 0;
+	        this._vertexBuffer = null;
+	        this._indexBuffer = null;
+	        this._skinnedMatrixCaches = [];
+	        this._vertexCount = 0;
+	        this._indexFormat = exports.IndexFormat.UInt16;
+	        this._isReadable = isReadable;
+	        this._subMeshes = [];
+	    }
 	    static __init__() {
 	        var physics3D = Physics3D._bullet;
 	        if (physics3D) {
@@ -29443,26 +29461,6 @@
 	    }
 	    get indexFormat() {
 	        return this._indexFormat;
-	    }
-	    constructor(isReadable = true) {
-	        super();
-	        this._tempVector30 = new Vector3();
-	        this._tempVector31 = new Vector3();
-	        this._tempVector32 = new Vector3();
-	        this._minVerticesUpdate = -1;
-	        this._maxVerticesUpdate = -1;
-	        this._needUpdateBounds = true;
-	        this._bounds = new Bounds(new Vector3(), new Vector3());
-	        this._bufferState = new BufferState();
-	        this._instanceBufferState = new BufferState();
-	        this._instanceBufferStateType = 0;
-	        this._vertexBuffer = null;
-	        this._indexBuffer = null;
-	        this._skinnedMatrixCaches = [];
-	        this._vertexCount = 0;
-	        this._indexFormat = exports.IndexFormat.UInt16;
-	        this._isReadable = isReadable;
-	        this._subMeshes = [];
 	    }
 	    _getPositionElement(vertexBuffer) {
 	        var vertexElements = vertexBuffer.vertexDeclaration._vertexElements;
@@ -30392,6 +30390,14 @@
 	}
 
 	class DirectionLight extends LightSprite {
+	    constructor() {
+	        super();
+	        this._direction = new Vector3();
+	        this._shadowCascadesMode = exports.ShadowCascadesMode.NoCascades;
+	        this._shadowTwoCascadeSplits = 1.0 / 3.0;
+	        this._shadowFourCascadeSplits = new Vector3(1.0 / 15, 3.0 / 15.0, 7.0 / 15.0);
+	        this._lightType = exports.LightType.Directional;
+	    }
 	    get shadowCascadesMode() {
 	        return this._shadowCascadesMode;
 	    }
@@ -30412,14 +30418,6 @@
 	            throw "DiretionLight:Invalid value.";
 	        value.cloneTo(this._shadowFourCascadeSplits);
 	    }
-	    constructor() {
-	        super();
-	        this._direction = new Vector3();
-	        this._shadowCascadesMode = exports.ShadowCascadesMode.NoCascades;
-	        this._shadowTwoCascadeSplits = 1.0 / 3.0;
-	        this._shadowFourCascadeSplits = new Vector3(1.0 / 15, 3.0 / 15.0, 7.0 / 15.0);
-	        this._lightType = exports.LightType.Directional;
-	    }
 	    _addToLightQueue() {
 	        this._scene._directionLights.add(this);
 	    }
@@ -30432,16 +30430,16 @@
 	}
 
 	class PointLight extends LightSprite {
+	    constructor() {
+	        super();
+	        this._range = 6.0;
+	        this._lightType = exports.LightType.Point;
+	    }
 	    get range() {
 	        return this._range;
 	    }
 	    set range(value) {
 	        this._range = value;
-	    }
-	    constructor() {
-	        super();
-	        this._range = 6.0;
-	        this._lightType = exports.LightType.Point;
 	    }
 	    _addToLightQueue() {
 	        this._scene._pointLights.add(this);
@@ -30465,6 +30463,13 @@
 	}
 
 	class SpotLight extends LightSprite {
+	    constructor() {
+	        super();
+	        this._spotAngle = 30.0;
+	        this._range = 10.0;
+	        this._direction = new Vector3();
+	        this._lightType = exports.LightType.Spot;
+	    }
 	    get spotAngle() {
 	        return this._spotAngle;
 	    }
@@ -30476,13 +30481,6 @@
 	    }
 	    set range(value) {
 	        this._range = value;
-	    }
-	    constructor() {
-	        super();
-	        this._spotAngle = 30.0;
-	        this._range = 10.0;
-	        this._direction = new Vector3();
-	        this._lightType = exports.LightType.Spot;
 	    }
 	    _addToLightQueue() {
 	        this._scene._spotLights.add(this);
@@ -30507,6 +30505,13 @@
 	}
 
 	class SimpleSkinnedMeshRenderer extends SkinnedMeshRenderer {
+	    constructor(owner) {
+	        super(owner);
+	        this._simpleAnimatorParams = new Vector4();
+	        this._simpleAnimatorOffset = new Vector2();
+	        this._shaderValues.addDefine(SkinnedMeshSprite3DShaderDeclaration.SHADERDEFINE_SIMPLEBONE);
+	        this._shaderValues.addDefine(SkinnedMeshSprite3DShaderDeclaration.SHADERDEFINE_BONE);
+	    }
 	    get simpleAnimatorTexture() {
 	        return this._simpleAnimatorTexture;
 	    }
@@ -30522,13 +30527,6 @@
 	    }
 	    set simpleAnimatorOffset(value) {
 	        value.cloneTo(this._simpleAnimatorOffset);
-	    }
-	    constructor(owner) {
-	        super(owner);
-	        this._simpleAnimatorParams = new Vector4();
-	        this._simpleAnimatorOffset = new Vector2();
-	        this._shaderValues.addDefine(SkinnedMeshSprite3DShaderDeclaration.SHADERDEFINE_SIMPLEBONE);
-	        this._shaderValues.addDefine(SkinnedMeshSprite3DShaderDeclaration.SHADERDEFINE_BONE);
 	    }
 	    _computeAnimatorParamsData() {
 	        if (this._cacheMesh) {
@@ -30631,6 +30629,12 @@
 	}
 
 	class SimpleSkinnedMeshSprite3D extends RenderableSprite3D {
+	    constructor(mesh = null, name = null) {
+	        super(name);
+	        this._meshFilter = new MeshFilter(this);
+	        this._render = new SimpleSkinnedMeshRenderer(this);
+	        (mesh) && (this._meshFilter.sharedMesh = mesh);
+	    }
 	    static __init__() {
 	        SimpleSkinnedMeshRenderer.SIMPLE_SIMPLEANIMATORPARAMS = SimpleSkinnedMeshSprite3D.SIMPLE_SIMPLEANIMATORPARAMS;
 	        SimpleSkinnedMeshRenderer.SIMPLE_SIMPLEANIMATORTEXTURE = SimpleSkinnedMeshSprite3D.SIMPLE_SIMPLEANIMATORTEXTURE;
@@ -30641,12 +30645,6 @@
 	    }
 	    get simpleSkinnedMeshRenderer() {
 	        return this._render;
-	    }
-	    constructor(mesh = null, name = null) {
-	        super(name);
-	        this._meshFilter = new MeshFilter(this);
-	        this._render = new SimpleSkinnedMeshRenderer(this);
-	        (mesh) && (this._meshFilter.sharedMesh = mesh);
 	    }
 	    _parse(data, spriteMap) {
 	        super._parse(data, spriteMap);
@@ -30990,7 +30988,7 @@
 	    }
 	    static READ_MESH() {
 	        var gl = Laya.LayaGL.instance;
-	        LoadModelV04._readString();
+	        var name = LoadModelV04._readString();
 	        var arrayBuffer = LoadModelV04._readData.__getBuffer();
 	        var i;
 	        var memorySize = 0;
@@ -31154,7 +31152,7 @@
 	        var gl = Laya.LayaGL.instance;
 	        var i;
 	        var memorySize = 0;
-	        LoadModelV05._readString();
+	        var name = LoadModelV05._readString();
 	        var reader = LoadModelV05._readData;
 	        var arrayBuffer = reader.__getBuffer();
 	        var vertexBufferCount = reader.getInt16();
@@ -31389,6 +31387,17 @@
 	var SkyPanoramicVS = "#include \"Lighting.glsl\";\r\n\r\n#define PI 3.14159265359\r\n\r\nattribute vec4 a_Position;\r\n\r\nuniform mat4 u_ViewProjection;\r\nuniform float u_Rotation;\r\n\r\nvarying vec3 v_Texcoord;\r\nvarying vec2 v_Image180ScaleAndCutoff;\r\nvarying vec4 v_Layout3DScaleAndOffset;\r\n\r\nvec4 rotateAroundYInDegrees (vec4 vertex, float degrees)\r\n{\r\n\tfloat angle = degrees * PI / 180.0;\r\n\tfloat sina=sin(angle);\r\n\tfloat cosa=cos(angle);\r\n\tmat2 m = mat2(cosa, -sina, sina, cosa);\r\n\treturn vec4(m*vertex.xz, vertex.yw).xzyw;\r\n}\r\n\r\n\t\t\r\nvoid main()\r\n{\r\n\tvec4 position = rotateAroundYInDegrees(a_Position, u_Rotation);\r\n\t\r\n\r\n\tv_Texcoord=vec3(-a_Position.x,-a_Position.y,a_Position.z);// NOTE: -a_Position.x convert coords system\r\n\r\n\t// Calculate constant horizontal scale and cutoff for 180 (vs 360) image type\r\n\tv_Image180ScaleAndCutoff = vec2(1.0, 1.0);// 360 degree mode\r\n\r\n\t// Calculate constant scale and offset for 3D layouts\r\n\tv_Layout3DScaleAndOffset = vec4(0,0,1,1);\r\n\tgl_Position = u_ViewProjection*position;\r\n\tgl_Position=skyRemapGLPositionZ(gl_Position);\r\n\r\n}\r\n";
 
 	class SkyPanoramicMaterial extends Material {
+	    constructor() {
+	        super();
+	        this._exposure = 1.0;
+	        this._textureDecodeFormat = Laya.TextureDecodeFormat.Normal;
+	        this._textureHDRParams = new Vector4(1.0, 0.0, 0.0, 1.0);
+	        this.setShaderName("SkyPanoramic");
+	        var shaderValues = this._shaderValues;
+	        shaderValues.setVector(SkyPanoramicMaterial.TINTCOLOR, new Vector4(0.5, 0.5, 0.5, 0.5));
+	        shaderValues.setNumber(SkyPanoramicMaterial.ROTATION, 0.0);
+	        shaderValues.setVector(SkyPanoramicMaterial.TEXTURE_HDR_PARAMS, this._textureHDRParams);
+	    }
 	    static __init__() {
 	        var attributeMap = {
 	            'a_Position': VertexMesh.MESH_POSITION0
@@ -31447,17 +31456,6 @@
 	                this._textureHDRParams.x = this._exposure;
 	        }
 	    }
-	    constructor() {
-	        super();
-	        this._exposure = 1.0;
-	        this._textureDecodeFormat = Laya.TextureDecodeFormat.Normal;
-	        this._textureHDRParams = new Vector4(1.0, 0.0, 0.0, 1.0);
-	        this.setShaderName("SkyPanoramic");
-	        var shaderValues = this._shaderValues;
-	        shaderValues.setVector(SkyPanoramicMaterial.TINTCOLOR, new Vector4(0.5, 0.5, 0.5, 0.5));
-	        shaderValues.setNumber(SkyPanoramicMaterial.ROTATION, 0.0);
-	        shaderValues.setVector(SkyPanoramicMaterial.TEXTURE_HDR_PARAMS, this._textureHDRParams);
-	    }
 	}
 	SkyPanoramicMaterial.TINTCOLOR = Shader3D.propertyNameToID("u_TintColor");
 	SkyPanoramicMaterial.EXPOSURE = Shader3D.propertyNameToID("u_Exposure");
@@ -31466,6 +31464,8 @@
 	SkyPanoramicMaterial.TEXTURE_HDR_PARAMS = Shader3D.propertyNameToID("u_TextureHDRParams");
 
 	class Laya3D {
+	    constructor() {
+	    }
 	    static get enablePhysics() {
 	        return Physics3D._enablePhysics;
 	    }
@@ -31788,7 +31788,7 @@
 	                var component = components[k];
 	                switch (component.type) {
 	                    case "Animator":
-	                        component.avatarPath;
+	                        var avatarPath = component.avatarPath;
 	                        var avatarData = component.avatar;
 	                        (avatarData) && (avatarData.path = Laya3D._addHierarchyInnerUrls(fourthLelUrls, subUrls, urlVersion, hierarchyBasePath, avatarData.path, Laya3D.AVATAR));
 	                        var clipPaths = component.clipPaths;
@@ -31911,7 +31911,7 @@
 	        var materialBasePath = Laya.URL.getPath(url);
 	        var urls = [];
 	        var subUrls = [];
-	        lmatData.customProps;
+	        var customProps = lmatData.customProps;
 	        var formatSubUrl;
 	        var version = lmatData.version;
 	        switch (version) {
@@ -32105,8 +32105,6 @@
 	                compolete && compolete.run();
 	            });
 	        }
-	    }
-	    constructor() {
 	    }
 	}
 	Laya3D.HIERARCHY = "HIERARCHY";
@@ -32515,21 +32513,6 @@
 	WebXRSessionManager.EVENT_FRAME_LOOP = "xrFrameLoop";
 
 	class WebXRCameraManager {
-	    get position() {
-	        return this._position;
-	    }
-	    set position(newPosition) {
-	        newPosition.cloneTo(this._position);
-	    }
-	    set rotationQuaternion(value) {
-	        value.cloneTo(this._referenceQuaternion);
-	    }
-	    get rotationQuaternion() {
-	        return this._referenceQuaternion;
-	    }
-	    get rigCameras() {
-	        return this._rigCameras;
-	    }
 	    constructor(camera, manager = null) {
 	        this._referenceQuaternion = new Quaternion();
 	        this._referencedPosition = new Vector3();
@@ -32546,6 +32529,21 @@
 	        this._webXRSessionManager.on(WebXRSessionManager.EVENT_FRAME_LOOP, this, this._updateFromXRSession);
 	        this._webXRSessionManager.on(WebXRSessionManager.EVENT_FRAME_LOOP, this, this._updateReferenceSpace);
 	        this._webXRSessionManager.on(WebXRSessionManager.EVENT_MANAGER_END, this, this.destroy);
+	    }
+	    get position() {
+	        return this._position;
+	    }
+	    set position(newPosition) {
+	        newPosition.cloneTo(this._position);
+	    }
+	    set rotationQuaternion(value) {
+	        value.cloneTo(this._referenceQuaternion);
+	    }
+	    get rotationQuaternion() {
+	        return this._referenceQuaternion;
+	    }
+	    get rigCameras() {
+	        return this._rigCameras;
 	    }
 	    _updateFromXRSession() {
 	        let pose = this._webXRSessionManager.currentFrame && this._webXRSessionManager.currentFrame.getViewerPose(this._webXRSessionManager.referenceSpace);
@@ -32872,6 +32870,13 @@
 	}
 
 	class HeightMap {
+	    constructor(width, height, minHeight, maxHeight) {
+	        this._datas = [];
+	        this._w = width;
+	        this._h = height;
+	        this._minHeight = minHeight;
+	        this._maxHeight = maxHeight;
+	    }
 	    static creatFromMesh(mesh, width, height, outCellSize) {
 	        var vertices = [];
 	        var indexs = [];
@@ -32975,13 +32980,6 @@
 	    get minHeight() {
 	        return this._minHeight;
 	    }
-	    constructor(width, height, minHeight, maxHeight) {
-	        this._datas = [];
-	        this._w = width;
-	        this._h = height;
-	        this._minHeight = minHeight;
-	        this._maxHeight = maxHeight;
-	    }
 	    _inBounds(row, col) {
 	        return row >= 0 && row < this._h && col >= 0 && col < this._w;
 	    }
@@ -32995,6 +32993,11 @@
 	HeightMap._tempRay = new Ray(new Vector3(), new Vector3());
 
 	class MeshTerrainSprite3D extends MeshSprite3D {
+	    constructor(mesh, heightMap, name = null) {
+	        super(mesh, name);
+	        this._heightMap = heightMap;
+	        this._cellSize = new Vector2();
+	    }
 	    static createFromMesh(mesh, heightMapWidth, heightMapHeight, name = null) {
 	        var meshTerrainSprite3D = new MeshTerrainSprite3D(mesh, null, name);
 	        meshTerrainSprite3D._initCreateFromMesh(heightMapWidth, heightMapHeight);
@@ -33020,11 +33023,6 @@
 	    }
 	    get depth() {
 	        return (this._heightMap.height - 1) * this._cellSize.y * this._getScaleZ();
-	    }
-	    constructor(mesh, heightMap, name = null) {
-	        super(mesh, name);
-	        this._heightMap = heightMap;
-	        this._cellSize = new Vector2();
 	    }
 	    _disableRotation() {
 	        var rotation = this.transform.rotation;
@@ -33130,12 +33128,12 @@
 	MeshTerrainSprite3D._tempMatrix4x4 = new Matrix4x4();
 
 	class GradientDataVector2 {
-	    get gradientCount() {
-	        return this._currentLength / 3;
-	    }
 	    constructor() {
 	        this._currentLength = 0;
 	        this._elements = new Float32Array(12);
+	    }
+	    get gradientCount() {
+	        return this._currentLength / 3;
 	    }
 	    add(key, value) {
 	        if (this._currentLength < 8) {
@@ -33189,6 +33187,30 @@
 	}
 
 	class BloomEffect extends PostProcessEffect {
+	    constructor() {
+	        super();
+	        this._shader = null;
+	        this._shaderData = new ShaderData();
+	        this._linearColor = new Color();
+	        this._bloomTextureTexelSize = new Vector4();
+	        this._shaderThreshold = new Vector4();
+	        this._shaderParams = new Vector4();
+	        this._pyramid = null;
+	        this._intensity = 0.0;
+	        this._threshold = 1.0;
+	        this._softKnee = 0.5;
+	        this._diffusion = 7.0;
+	        this._anamorphicRatio = 0.0;
+	        this._dirtIntensity = 0.0;
+	        this._shaderSetting = new Vector4();
+	        this._dirtTileOffset = new Vector4();
+	        this.clamp = 65472.0;
+	        this.color = new Color(1.0, 1.0, 1.0, 1.0);
+	        this.fastMode = false;
+	        this.dirtTexture = null;
+	        this._shader = Shader3D.find("PostProcessBloom");
+	        this._pyramid = new Array(BloomEffect.MAXPYRAMIDSIZE * 2);
+	    }
 	    get intensity() {
 	        return this._intensity;
 	    }
@@ -33224,30 +33246,6 @@
 	    }
 	    set dirtIntensity(value) {
 	        this._dirtIntensity = Math.max(value, 0.0);
-	    }
-	    constructor() {
-	        super();
-	        this._shader = null;
-	        this._shaderData = new ShaderData();
-	        this._linearColor = new Color();
-	        this._bloomTextureTexelSize = new Vector4();
-	        this._shaderThreshold = new Vector4();
-	        this._shaderParams = new Vector4();
-	        this._pyramid = null;
-	        this._intensity = 0.0;
-	        this._threshold = 1.0;
-	        this._softKnee = 0.5;
-	        this._diffusion = 7.0;
-	        this._anamorphicRatio = 0.0;
-	        this._dirtIntensity = 0.0;
-	        this._shaderSetting = new Vector4();
-	        this._dirtTileOffset = new Vector4();
-	        this.clamp = 65472.0;
-	        this.color = new Color(1.0, 1.0, 1.0, 1.0);
-	        this.fastMode = false;
-	        this.dirtTexture = null;
-	        this._shader = Shader3D.find("PostProcessBloom");
-	        this._pyramid = new Array(BloomEffect.MAXPYRAMIDSIZE * 2);
 	    }
 	    render(context) {
 	        var cmd = context.command;
@@ -33389,7 +33387,6 @@
 	    }
 	}
 
-	exports.InstanceLocation = void 0;
 	(function (InstanceLocation) {
 	    InstanceLocation[InstanceLocation["CUSTOME0"] = 12] = "CUSTOME0";
 	    InstanceLocation[InstanceLocation["CUSTOME1"] = 13] = "CUSTOME1";
@@ -33469,6 +33466,13 @@
 	MaterialInstancePropertyBlock.INSTANCETYPE_UNIFORMBUFFER = 1;
 
 	class ConchVector4 {
+	    constructor(x = 0, y = 0, z = 0, w = 0) {
+	        var v = this.elements = new Float32Array(4);
+	        v[0] = x;
+	        v[1] = y;
+	        v[2] = z;
+	        v[3] = w;
+	    }
 	    get x() {
 	        return this.elements[0];
 	    }
@@ -33492,13 +33496,6 @@
 	    }
 	    set w(value) {
 	        this.elements[3] = value;
-	    }
-	    constructor(x = 0, y = 0, z = 0, w = 0) {
-	        var v = this.elements = new Float32Array(4);
-	        v[0] = x;
-	        v[1] = y;
-	        v[2] = z;
-	        v[3] = w;
 	    }
 	    fromArray(array, offset = 0) {
 	        this.elements[0] = array[offset + 0];
@@ -33681,6 +33678,19 @@
 	ConchVector4.UnitW = new ConchVector4(0.0, 0.0, 0.0, 1.0);
 
 	class ConchVector3 {
+	    constructor(x = 0, y = 0, z = 0, nativeElements = null) {
+	        var v;
+	        if (nativeElements) {
+	            v = nativeElements;
+	        }
+	        else {
+	            v = new Float32Array(3);
+	        }
+	        this.elements = v;
+	        v[0] = x;
+	        v[1] = y;
+	        v[2] = z;
+	    }
 	    static distanceSquared(value1, value2) {
 	        var value1e = value1.elements;
 	        var value2e = value2.elements;
@@ -33890,19 +33900,6 @@
 	    set z(value) {
 	        this.elements[2] = value;
 	    }
-	    constructor(x = 0, y = 0, z = 0, nativeElements = null) {
-	        var v;
-	        if (nativeElements) {
-	            v = nativeElements;
-	        }
-	        else {
-	            v = new Float32Array(3);
-	        }
-	        this.elements = v;
-	        v[0] = x;
-	        v[1] = y;
-	        v[2] = z;
-	    }
 	    setValue(x, y, z) {
 	        this.elements[0] = x;
 	        this.elements[1] = y;
@@ -33945,6 +33942,20 @@
 	ConchVector3.NAN = new ConchVector3(NaN, NaN, NaN);
 
 	class ConchQuaternion {
+	    constructor(x = 0, y = 0, z = 0, w = 1, nativeElements = null) {
+	        var v;
+	        if (nativeElements) {
+	            v = nativeElements;
+	        }
+	        else {
+	            v = new Float32Array(4);
+	        }
+	        v[0] = x;
+	        v[1] = y;
+	        v[2] = z;
+	        v[3] = w;
+	        this.elements = v;
+	    }
 	    static _dotArray(l, r) {
 	        return l[0] * r[0] + l[1] * r[1] + l[2] * r[2] + l[3] * r[3];
 	    }
@@ -34180,20 +34191,6 @@
 	    }
 	    set w(value) {
 	        this.elements[3] = value;
-	    }
-	    constructor(x = 0, y = 0, z = 0, w = 1, nativeElements = null) {
-	        var v;
-	        if (nativeElements) {
-	            v = nativeElements;
-	        }
-	        else {
-	            v = new Float32Array(4);
-	        }
-	        v[0] = x;
-	        v[1] = y;
-	        v[2] = z;
-	        v[3] = w;
-	        this.elements = v;
 	    }
 	    scaling(scaling, out) {
 	        var e = out.elements;
@@ -34471,6 +34468,8 @@
 	RandX.defaultRand = new RandX([0, Date.now() / 65536, 0, Date.now() % 65536]);
 
 	class TextMesh {
+	    constructor() {
+	    }
 	    get text() {
 	        return this._text;
 	    }
@@ -34489,11 +34488,15 @@
 	    set color(value) {
 	        this._color = value;
 	    }
-	    constructor() {
-	    }
 	}
 
 	class Size {
+	    constructor(width, height) {
+	        this._width = 0;
+	        this._height = 0;
+	        this._width = width;
+	        this._height = height;
+	    }
 	    static get fullScreen() {
 	        return new Size(-1, -1);
 	    }
@@ -34506,12 +34509,6 @@
 	        if (this._height === -1)
 	            return RenderContext3D.clientHeight;
 	        return this._height;
-	    }
-	    constructor(width, height) {
-	        this._width = 0;
-	        this._height = 0;
-	        this._width = width;
-	        this._height = height;
 	    }
 	}
 
@@ -34757,6 +34754,4 @@
 	exports.WebXRSessionManager = WebXRSessionManager;
 	exports.skinnedMatrixCache = skinnedMatrixCache;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

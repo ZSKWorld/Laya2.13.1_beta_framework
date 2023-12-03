@@ -1,5 +1,5 @@
-import { logicSceneMgr } from "../../../../../../logicScene/LogicSceneManager";
-import { LogicScene } from "../../../../../../logicScene/LogicSceneType";
+import { SceneType } from "../../../../../../scene/SceneDefine";
+import { sceneMgr } from "../../../../../../scene/SceneManager";
 import { GameEvent } from "../../../../../common/GameEvent";
 import { trainLogMgr } from "../../../../../game/TrainLogManager";
 import { BattleType } from "../../../../../net/enum/BattleEnums";
@@ -42,7 +42,7 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 	}
 
 	private enterBattle(battleType: BattleType): void {
-		logicSceneMgr.enterScene(LogicScene.GameScene, { battleType });
+		sceneMgr.enterScene(SceneType.GameScene, { battleType });
 	}
 
 	private onBtnGongLueClick() {

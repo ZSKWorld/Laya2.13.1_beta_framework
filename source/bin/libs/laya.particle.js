@@ -634,6 +634,4 @@
     exports.ParticleTemplateBase = ParticleTemplateBase;
     exports.ParticleTemplateWebGL = ParticleTemplateWebGL;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

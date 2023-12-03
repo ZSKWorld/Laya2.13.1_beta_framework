@@ -1,9 +1,9 @@
 import { DataType, ItemBagType } from "../net/enum/ItemEnum";
-import { Decode } from "./Decode";
+import { ClassName, Decode } from "./Decode";
 import { Equipment, Goods } from "./Goods";
 
+@ClassName("BagData")
 export class Bag extends Decode<IBagData> implements IBag {
-    private static readonly ClassName = "BagData";
     collect: number[];
     equipment: IEquipment[];
     gem: IGoods[];

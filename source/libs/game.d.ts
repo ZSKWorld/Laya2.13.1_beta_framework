@@ -60,6 +60,13 @@ declare namespace Laya {
          */
         onAdded(): void;
     }
+    interface Script3D {
+        /**
+         * 组件被挂载后执行，此方法只执行一次
+         * 此方法为虚方法，使用时重写覆盖即可
+         */
+        onAdded(): void;
+    }
 
     interface Vector2 {
         get length(): number;

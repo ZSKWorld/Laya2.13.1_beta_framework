@@ -872,9 +872,9 @@
 	    }
 	    jumptoGame() {
 	        var advsObj = this.advsListArr[this._playIndex];
-	        parseInt(advsObj.gameid);
-	        advsObj.extendInfo;
-	        advsObj.path;
+	        var desGameId = parseInt(advsObj.gameid);
+	        var extendInfo = advsObj.extendInfo;
+	        var path = advsObj.path;
 	        if (Laya.Browser.onMiniGame) {
 	            if (this.isSupportJump()) {
 	                window.wx.navigateToMiniProgram({
@@ -5588,11 +5588,6 @@
 	Laya.ClassUtils.regClass("Laya.FontClip", FontClip);
 
 	class View extends Laya.Scene {
-	    static __init__() {
-	        Laya.ILaya.ClassUtils.regShortClassName([ViewStack, Button, TextArea, ColorPicker, Box, ScaleBox, CheckBox, Clip, ComboBox, UIComponent,
-	            HScrollBar, HSlider, Image, Label, List, Panel, ProgressBar, Radio, RadioGroup, ScrollBar, Slider, Tab, TextInput, View,
-	            VScrollBar, VSlider, Tree, HBox, VBox, Laya.Animation, Laya.Text, FontClip]);
-	    }
 	    constructor() {
 	        super(false);
 	        this._watchMap = {};
@@ -5600,6 +5595,11 @@
 	        this._anchorY = NaN;
 	        this._widget = Widget.EMPTY;
 	        this.createChildren();
+	    }
+	    static __init__() {
+	        Laya.ILaya.ClassUtils.regShortClassName([ViewStack, Button, TextArea, ColorPicker, Box, ScaleBox, CheckBox, Clip, ComboBox, UIComponent,
+	            HScrollBar, HSlider, Image, Label, List, Panel, ProgressBar, Radio, RadioGroup, ScrollBar, Slider, Tab, TextInput, View,
+	            VScrollBar, VSlider, Tree, HBox, VBox, Laya.Animation, Laya.Text, FontClip]);
 	    }
 	    static regComponent(key, compClass) {
 	        Laya.ILaya.ClassUtils.regClass(key, compClass);
@@ -5878,12 +5878,6 @@
 	Laya.ClassUtils.regClass("Laya.DialogManager", DialogManager);
 
 	class Dialog extends View {
-	    static get manager() {
-	        return Dialog._manager = Dialog._manager || new DialogManager();
-	    }
-	    static set manager(value) {
-	        Dialog._manager = value;
-	    }
 	    constructor() {
 	        super();
 	        this.isShowEffect = true;
@@ -5892,6 +5886,12 @@
 	        this.closeEffect = Dialog.manager.closeEffectHandler;
 	        this._dealDragArea();
 	        this.on(Laya.Event.CLICK, this, this._onClick);
+	    }
+	    static get manager() {
+	        return Dialog._manager = Dialog._manager || new DialogManager();
+	    }
+	    static set manager(value) {
+	        Dialog._manager = value;
 	    }
 	    _dealDragArea() {
 	        var dragTarget = this.getChildByName("drag");
@@ -6220,6 +6220,4 @@
 	exports.WXOpenDataViewer = WXOpenDataViewer;
 	exports.Widget = Widget;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

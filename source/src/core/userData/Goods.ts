@@ -1,6 +1,6 @@
 import { GameUtil } from "../common/GameUtil";
 import { EquipmentPart } from "../net/enum/ItemEnum";
-import { Decode } from "./Decode";
+import { ClassDontDispatch, ClassName, Decode } from "./Decode";
 import { UserUtil } from "./UserUtil";
 class Item<T> extends Decode<T>{
     id: number;
@@ -15,15 +15,15 @@ class Item<T> extends Decode<T>{
     get useRequireStr() { return UserUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
 }
 
+@ClassDontDispatch
+@ClassName("GoodsData")
 export class Goods extends Item<IGoodsData> implements IGoods {
-    protected static readonly ClassName: string = "ItemBase";
-    protected static readonly DontDispatch = true;
     count: number;
 
 }
 
+@ClassName("EquipmentData")
 export class Equipment extends Item<IEquipmentData> implements IEquipment {
-    protected static readonly ClassName = "Equipment";
     //#region 字段
     uid: string;
     star: number;

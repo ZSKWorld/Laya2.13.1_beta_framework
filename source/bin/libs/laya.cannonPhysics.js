@@ -13849,6 +13849,18 @@ World.prototype.clearForces = function(){
 	}
 
 	class CannonColliderShape {
+	    constructor() {
+	        this._scale = new Laya.Vector3(1, 1, 1);
+	        this._centerMatrix = new Laya.Matrix4x4();
+	        this._attatched = false;
+	        this._indexInCompound = -1;
+	        this._compoundParent = null;
+	        this._attatchedCollisionObject = null;
+	        this._referenceCount = 0;
+	        this._localOffset = new Laya.Vector3(0, 0, 0);
+	        this._localRotation = new Laya.Quaternion(0, 0, 0, 1);
+	        this.needsCustomCollisionCallback = false;
+	    }
 	    static __init__() {
 	        CannonColliderShape._btScale = new CANNON.Vec3();
 	        CannonColliderShape._btVector30 = new CANNON.Vec3();
@@ -13891,18 +13903,6 @@ World.prototype.clearForces = function(){
 	        this._localRotation = value;
 	        if (this._compoundParent)
 	            this._compoundParent._updateChildTransform(this);
-	    }
-	    constructor() {
-	        this._scale = new Laya.Vector3(1, 1, 1);
-	        this._centerMatrix = new Laya.Matrix4x4();
-	        this._attatched = false;
-	        this._indexInCompound = -1;
-	        this._compoundParent = null;
-	        this._attatchedCollisionObject = null;
-	        this._referenceCount = 0;
-	        this._localOffset = new Laya.Vector3(0, 0, 0);
-	        this._localRotation = new Laya.Quaternion(0, 0, 0, 1);
-	        this.needsCustomCollisionCallback = false;
 	    }
 	    _setScale(value) {
 	    }
@@ -13952,6 +13952,15 @@ World.prototype.clearForces = function(){
 	CannonColliderShape._tempVector30 = new Laya.Vector3();
 
 	class CannonBoxColliderShape extends CannonColliderShape {
+	    constructor(sizeX = 1.0, sizeY = 1.0, sizeZ = 1.0) {
+	        super();
+	        this._sizeX = sizeX;
+	        this._sizeY = sizeY;
+	        this._sizeZ = sizeZ;
+	        this._type = CannonColliderShape.SHAPETYPES_BOX;
+	        var btsize = new CANNON.Vec3(sizeX / 2, sizeY / 2, sizeZ / 2);
+	        this._btShape = new CANNON.Box(btsize);
+	    }
 	    static __init__() {
 	        CannonBoxColliderShape._btSize = new CANNON.Vec3();
 	    }
@@ -13963,15 +13972,6 @@ World.prototype.clearForces = function(){
 	    }
 	    get sizeZ() {
 	        return this._sizeZ;
-	    }
-	    constructor(sizeX = 1.0, sizeY = 1.0, sizeZ = 1.0) {
-	        super();
-	        this._sizeX = sizeX;
-	        this._sizeY = sizeY;
-	        this._sizeZ = sizeZ;
-	        this._type = CannonColliderShape.SHAPETYPES_BOX;
-	        var btsize = new CANNON.Vec3(sizeX / 2, sizeY / 2, sizeZ / 2);
-	        this._btShape = new CANNON.Box(btsize);
 	    }
 	    _setScale(scale) {
 	        this._scale.setValue(scale.x, scale.y, scale.z);
@@ -13987,14 +13987,14 @@ World.prototype.clearForces = function(){
 	}
 
 	class CannonSphereColliderShape extends CannonColliderShape {
-	    get radius() {
-	        return this._radius;
-	    }
 	    constructor(radius = 0.5) {
 	        super();
 	        this._radius = radius;
 	        this._type = CannonColliderShape.SHAPETYPES_SPHERE;
 	        this._btShape = new CANNON.Sphere(radius);
+	    }
+	    get radius() {
+	        return this._radius;
 	    }
 	    _setScale(scale) {
 	        var max = Math.max(scale.x, scale.y, scale.z);
@@ -14010,6 +14010,22 @@ World.prototype.clearForces = function(){
 	}
 
 	class CannonPhysicsComponent extends Laya.Component {
+	    constructor(collisionGroup, canCollideWith) {
+	        super();
+	        this._restitution = 0.0;
+	        this._friction = 0.5;
+	        this._collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER;
+	        this._canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER;
+	        this._colliderShape = null;
+	        this._transformFlag = 2147483647;
+	        this._controlBySimulation = false;
+	        this._enableProcessCollisions = true;
+	        this._inPhysicUpdateListIndex = -1;
+	        this.canScaleShape = true;
+	        this._collisionGroup = collisionGroup;
+	        this._canCollideWith = canCollideWith;
+	        CannonPhysicsComponent._physicObjectsMap[this.id] = this;
+	    }
 	    static __init__() {
 	        CannonPhysicsComponent._btVector30 = new CANNON.Vec3(0, 0, 0);
 	        CannonPhysicsComponent._btQuaternion0 = new CANNON.Quaternion(0, 0, 0, 1);
@@ -14136,22 +14152,6 @@ World.prototype.clearForces = function(){
 	                this._addToSimulation();
 	            }
 	        }
-	    }
-	    constructor(collisionGroup, canCollideWith) {
-	        super();
-	        this._restitution = 0.0;
-	        this._friction = 0.5;
-	        this._collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER;
-	        this._canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER;
-	        this._colliderShape = null;
-	        this._transformFlag = 2147483647;
-	        this._controlBySimulation = false;
-	        this._enableProcessCollisions = true;
-	        this._inPhysicUpdateListIndex = -1;
-	        this.canScaleShape = true;
-	        this._collisionGroup = collisionGroup;
-	        this._canCollideWith = canCollideWith;
-	        CannonPhysicsComponent._physicObjectsMap[this.id] = this;
 	    }
 	    _parseShape(shapesData) {
 	        var shapeCount = shapesData.length;
@@ -14340,6 +14340,10 @@ World.prototype.clearForces = function(){
 	CannonPhysicsComponent._addUpdateList = true;
 
 	class CannonPhysicsTriggerComponent extends CannonPhysicsComponent {
+	    constructor(collisionGroup, canCollideWith) {
+	        super(collisionGroup, canCollideWith);
+	        this._isTrigger = false;
+	    }
 	    get isTrigger() {
 	        return this._isTrigger;
 	    }
@@ -14359,10 +14363,6 @@ World.prototype.clearForces = function(){
 	                    this._btColliderObject.type ^= CANNON.Body.STATIC;
 	            }
 	        }
-	    }
-	    constructor(collisionGroup, canCollideWith) {
-	        super(collisionGroup, canCollideWith);
-	        this._isTrigger = false;
 	    }
 	    _onAdded() {
 	        super._onAdded();
@@ -14437,6 +14437,27 @@ World.prototype.clearForces = function(){
 	}
 
 	class CannonPhysicsSimulation {
+	    constructor(configuration) {
+	        this._gravity = new Laya.Vector3(0, -10, 0);
+	        this._btClosestRayResultCallback = new CANNON.RaycastResult();
+	        this._btRayoption = {};
+	        this._collisionsUtils = new CannonCollisionTool();
+	        this._previousFrameCollisions = [];
+	        this._currentFrameCollisions = [];
+	        this._physicsUpdateList = new CannonPhysicsUpdateList();
+	        this._updatedRigidbodies = 0;
+	        this.maxSubSteps = 1;
+	        this.fixedTimeStep = 1.0 / 60.0;
+	        this.maxSubSteps = configuration.maxSubSteps;
+	        this.fixedTimeStep = configuration.fixedTimeStep;
+	        this._btDiscreteDynamicsWorld = new CANNON.World();
+	        this._btBroadphase = new CANNON.NaiveBroadphase();
+	        this._btDiscreteDynamicsWorld.broadphase = this._btBroadphase;
+	        this._btDiscreteDynamicsWorld.defaultContactMaterial.contactEquationRelaxation = configuration.contactEquationRelaxation;
+	        this._btDiscreteDynamicsWorld.defaultContactMaterial.contactEquationStiffness = configuration.contactEquationStiffness;
+	        this.gravity = this._gravity;
+	        CannonPhysicsSimulation._cannonPhysicsSimulation = this;
+	    }
 	    static __init__() {
 	        CannonPhysicsSimulation._btTempVector30 = new CANNON.Vec3(0, 0, 0);
 	        CannonPhysicsSimulation._btTempVector31 = new CANNON.Vec3(0, 0, 0);
@@ -14464,27 +14485,6 @@ World.prototype.clearForces = function(){
 	            throw "Simulation:Cannot perform this action when the physics engine is set to CollisionsOnly";
 	        this._btDiscreteDynamicsWorld.solver.iterations = value;
 	        this._iterations = value;
-	    }
-	    constructor(configuration) {
-	        this._gravity = new Laya.Vector3(0, -10, 0);
-	        this._btClosestRayResultCallback = new CANNON.RaycastResult();
-	        this._btRayoption = {};
-	        this._collisionsUtils = new CannonCollisionTool();
-	        this._previousFrameCollisions = [];
-	        this._currentFrameCollisions = [];
-	        this._physicsUpdateList = new CannonPhysicsUpdateList();
-	        this._updatedRigidbodies = 0;
-	        this.maxSubSteps = 1;
-	        this.fixedTimeStep = 1.0 / 60.0;
-	        this.maxSubSteps = configuration.maxSubSteps;
-	        this.fixedTimeStep = configuration.fixedTimeStep;
-	        this._btDiscreteDynamicsWorld = new CANNON.World();
-	        this._btBroadphase = new CANNON.NaiveBroadphase();
-	        this._btDiscreteDynamicsWorld.broadphase = this._btBroadphase;
-	        this._btDiscreteDynamicsWorld.defaultContactMaterial.contactEquationRelaxation = configuration.contactEquationRelaxation;
-	        this._btDiscreteDynamicsWorld.defaultContactMaterial.contactEquationStiffness = configuration.contactEquationStiffness;
-	        this.gravity = this._gravity;
-	        CannonPhysicsSimulation._cannonPhysicsSimulation = this;
 	    }
 	    _simulate(deltaTime) {
 	        this._updatedRigidbodies = 0;
@@ -14816,6 +14816,19 @@ World.prototype.clearForces = function(){
 	CannonPhysicsSimulation.disableSimulation = false;
 
 	class CannonRigidbody3D extends CannonPhysicsCollider {
+	    constructor(collisionGroup = -1, canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER) {
+	        super(collisionGroup, canCollideWith);
+	        this._isKinematic = false;
+	        this._mass = 1.0;
+	        this._gravity = new Laya.Vector3(0, -10, 0);
+	        this._angularDamping = 0.0;
+	        this._linearDamping = 0.0;
+	        this._totalTorque = new Laya.Vector3(0, 0, 0);
+	        this._totalForce = new Laya.Vector3(0, 0, 0);
+	        this._linearVelocity = new Laya.Vector3();
+	        this._angularVelocity = new Laya.Vector3();
+	        this._controlBySimulation = true;
+	    }
 	    static __init__() {
 	        CannonRigidbody3D._btTempVector30 = new CANNON.Vec3();
 	        CannonRigidbody3D._btTempVector31 = new CANNON.Vec3();
@@ -14933,19 +14946,6 @@ World.prototype.clearForces = function(){
 	    }
 	    get btColliderObject() {
 	        return this._btColliderObject;
-	    }
-	    constructor(collisionGroup = -1, canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER) {
-	        super(collisionGroup, canCollideWith);
-	        this._isKinematic = false;
-	        this._mass = 1.0;
-	        this._gravity = new Laya.Vector3(0, -10, 0);
-	        this._angularDamping = 0.0;
-	        this._linearDamping = 0.0;
-	        this._totalTorque = new Laya.Vector3(0, 0, 0);
-	        this._totalForce = new Laya.Vector3(0, 0, 0);
-	        this._linearVelocity = new Laya.Vector3();
-	        this._angularVelocity = new Laya.Vector3();
-	        this._controlBySimulation = true;
 	    }
 	    _updateMass(mass) {
 	        if (this._btColliderObject && this._colliderShape) {
@@ -15076,12 +15076,12 @@ World.prototype.clearForces = function(){
 	CannonRigidbody3D._BT_ENABLE_GYROPSCOPIC_FORCE = 2;
 
 	class CannonCompoundColliderShape extends CannonColliderShape {
-	    static __init__() {
-	    }
 	    constructor() {
 	        super();
 	        this._childColliderShapes = [];
 	        this._type = CannonColliderShape.SHAPETYPES_COMPOUND;
+	    }
+	    static __init__() {
 	    }
 	    _clearChildShape(shape) {
 	        shape._attatched = false;
@@ -15195,6 +15195,4 @@ World.prototype.clearForces = function(){
 	exports.CannonRigidbody3D = CannonRigidbody3D;
 	exports.CannonSphereColliderShape = CannonSphereColliderShape;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

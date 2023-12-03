@@ -26,6 +26,18 @@ window.Physics3D = function (initialMemory, interactive) {
 	'use strict';
 
 	class ColliderShape {
+	    constructor() {
+	        this._scale = new Laya.Vector3(1, 1, 1);
+	        this._centerMatrix = new Laya.Matrix4x4();
+	        this._attatched = false;
+	        this._indexInCompound = -1;
+	        this._compoundParent = null;
+	        this._attatchedCollisionObject = null;
+	        this._referenceCount = 0;
+	        this._localOffset = new Laya.Vector3(0, 0, 0);
+	        this._localRotation = new Laya.Quaternion(0, 0, 0, 1);
+	        this.needsCustomCollisionCallback = false;
+	    }
 	    static __init__() {
 	        var bt = Laya.ILaya3D.Physics3D._bullet;
 	        ColliderShape._btScale = bt.btVector3_create(1, 1, 1);
@@ -72,18 +84,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	        this._localRotation = value;
 	        if (this._compoundParent)
 	            this._compoundParent._updateChildTransform(this);
-	    }
-	    constructor() {
-	        this._scale = new Laya.Vector3(1, 1, 1);
-	        this._centerMatrix = new Laya.Matrix4x4();
-	        this._attatched = false;
-	        this._indexInCompound = -1;
-	        this._compoundParent = null;
-	        this._attatchedCollisionObject = null;
-	        this._referenceCount = 0;
-	        this._localOffset = new Laya.Vector3(0, 0, 0);
-	        this._localRotation = new Laya.Quaternion(0, 0, 0, 1);
-	        this.needsCustomCollisionCallback = false;
 	    }
 	    _setScale(value) {
 	        if (this._compoundParent) {
@@ -142,6 +142,16 @@ window.Physics3D = function (initialMemory, interactive) {
 	ColliderShape._tempVector30 = new Laya.Vector3();
 
 	class BoxColliderShape extends ColliderShape {
+	    constructor(sizeX = 1.0, sizeY = 1.0, sizeZ = 1.0) {
+	        super();
+	        this._sizeX = sizeX;
+	        this._sizeY = sizeY;
+	        this._sizeZ = sizeZ;
+	        this._type = ColliderShape.SHAPETYPES_BOX;
+	        var bt = Laya.ILaya3D.Physics3D._bullet;
+	        bt.btVector3_setValue(BoxColliderShape._btSize, sizeX / 2, sizeY / 2, sizeZ / 2);
+	        this._btShape = bt.btBoxShape_create(BoxColliderShape._btSize);
+	    }
 	    static __init__() {
 	        BoxColliderShape._btSize = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
 	    }
@@ -154,16 +164,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	    get sizeZ() {
 	        return this._sizeZ;
 	    }
-	    constructor(sizeX = 1.0, sizeY = 1.0, sizeZ = 1.0) {
-	        super();
-	        this._sizeX = sizeX;
-	        this._sizeY = sizeY;
-	        this._sizeZ = sizeZ;
-	        this._type = ColliderShape.SHAPETYPES_BOX;
-	        var bt = Laya.ILaya3D.Physics3D._bullet;
-	        bt.btVector3_setValue(BoxColliderShape._btSize, sizeX / 2, sizeY / 2, sizeZ / 2);
-	        this._btShape = bt.btBoxShape_create(BoxColliderShape._btSize);
-	    }
 	    clone() {
 	        var dest = new BoxColliderShape(this._sizeX, this._sizeY, this._sizeZ);
 	        this.cloneTo(dest);
@@ -172,15 +172,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class CapsuleColliderShape extends ColliderShape {
-	    get radius() {
-	        return this._radius;
-	    }
-	    get length() {
-	        return this._length;
-	    }
-	    get orientation() {
-	        return this._orientation;
-	    }
 	    constructor(radius = 0.5, length = 1.25, orientation = ColliderShape.SHAPEORIENTATION_UPY) {
 	        super();
 	        this._radius = radius;
@@ -201,6 +192,15 @@ window.Physics3D = function (initialMemory, interactive) {
 	            default:
 	                throw "CapsuleColliderShape:unknown orientation.";
 	        }
+	    }
+	    get radius() {
+	        return this._radius;
+	    }
+	    get length() {
+	        return this._length;
+	    }
+	    get orientation() {
+	        return this._orientation;
 	    }
 	    _setScale(value) {
 	        var fixScale = CapsuleColliderShape._tempVector30;
@@ -231,18 +231,18 @@ window.Physics3D = function (initialMemory, interactive) {
 	CapsuleColliderShape._tempVector30 = new Laya.Vector3();
 
 	class CompoundColliderShape extends ColliderShape {
+	    constructor() {
+	        super();
+	        this._childColliderShapes = [];
+	        this._type = ColliderShape.SHAPETYPES_COMPOUND;
+	        this._btShape = Laya.ILaya3D.Physics3D._bullet.btCompoundShape_create();
+	    }
 	    static __init__() {
 	        var bt = Laya.ILaya3D.Physics3D._bullet;
 	        CompoundColliderShape._btVector3One = bt.btVector3_create(1, 1, 1);
 	        CompoundColliderShape._btTransform = bt.btTransform_create();
 	        CompoundColliderShape._btOffset = bt.btVector3_create(0, 0, 0);
 	        CompoundColliderShape._btRotation = bt.btQuaternion_create(0, 0, 0, 1);
-	    }
-	    constructor() {
-	        super();
-	        this._childColliderShapes = [];
-	        this._type = ColliderShape.SHAPETYPES_COMPOUND;
-	        this._btShape = Laya.ILaya3D.Physics3D._bullet.btCompoundShape_create();
 	    }
 	    _clearChildShape(shape) {
 	        shape._attatched = false;
@@ -329,15 +329,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class ConeColliderShape extends ColliderShape {
-	    get radius() {
-	        return this._radius;
-	    }
-	    get height() {
-	        return this._height;
-	    }
-	    get orientation() {
-	        return this._orientation;
-	    }
 	    constructor(radius = 0.5, height = 1.0, orientation = ColliderShape.SHAPEORIENTATION_UPY) {
 	        super();
 	        this._radius = 1;
@@ -361,17 +352,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	                throw "ConeColliderShape:unknown orientation.";
 	        }
 	    }
-	    clone() {
-	        var dest = new ConeColliderShape(this._radius, this._height, this._orientation);
-	        this.cloneTo(dest);
-	        return dest;
-	    }
-	}
-
-	class CylinderColliderShape extends ColliderShape {
-	    static __init__() {
-	        CylinderColliderShape._btSize = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
-	    }
 	    get radius() {
 	        return this._radius;
 	    }
@@ -381,6 +361,14 @@ window.Physics3D = function (initialMemory, interactive) {
 	    get orientation() {
 	        return this._orientation;
 	    }
+	    clone() {
+	        var dest = new ConeColliderShape(this._radius, this._height, this._orientation);
+	        this.cloneTo(dest);
+	        return dest;
+	    }
+	}
+
+	class CylinderColliderShape extends ColliderShape {
 	    constructor(radius = 0.5, height = 1.0, orientation = ColliderShape.SHAPEORIENTATION_UPY) {
 	        super();
 	        this._radius = 1;
@@ -407,6 +395,18 @@ window.Physics3D = function (initialMemory, interactive) {
 	                throw "CapsuleColliderShape:unknown orientation.";
 	        }
 	    }
+	    static __init__() {
+	        CylinderColliderShape._btSize = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
+	    }
+	    get radius() {
+	        return this._radius;
+	    }
+	    get height() {
+	        return this._height;
+	    }
+	    get orientation() {
+	        return this._orientation;
+	    }
 	    clone() {
 	        var dest = new CylinderColliderShape(this._radius, this._height, this._orientation);
 	        this.cloneTo(dest);
@@ -415,6 +415,11 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class MeshColliderShape extends ColliderShape {
+	    constructor() {
+	        super();
+	        this._mesh = null;
+	        this._convex = false;
+	    }
 	    get mesh() {
 	        return this._mesh;
 	    }
@@ -436,11 +441,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	    }
 	    set convex(value) {
 	        this._convex = value;
-	    }
-	    constructor() {
-	        super();
-	        this._mesh = null;
-	        this._convex = false;
 	    }
 	    _setPhysicsMesh() {
 	        if (this._attatchedCollisionObject) {
@@ -494,14 +494,14 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class SphereColliderShape extends ColliderShape {
-	    get radius() {
-	        return this._radius;
-	    }
 	    constructor(radius = 0.5) {
 	        super();
 	        this._radius = radius;
 	        this._type = ColliderShape.SHAPETYPES_SPHERE;
 	        this._btShape = Laya.ILaya3D.Physics3D._bullet.btSphereShape_create(radius);
+	    }
+	    get radius() {
+	        return this._radius;
 	    }
 	    clone() {
 	        var dest = new SphereColliderShape(this._radius);
@@ -511,6 +511,25 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class PhysicsComponent extends Laya.Component {
+	    constructor(collisionGroup, canCollideWith) {
+	        super();
+	        this._restitution = 0.0;
+	        this._friction = 0.5;
+	        this._rollingFriction = 0.0;
+	        this._ccdMotionThreshold = 0.0;
+	        this._ccdSweptSphereRadius = 0.0;
+	        this._collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER;
+	        this._canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER;
+	        this._colliderShape = null;
+	        this._transformFlag = 2147483647;
+	        this._controlBySimulation = false;
+	        this._enableProcessCollisions = true;
+	        this._inPhysicUpdateListIndex = -1;
+	        this.canScaleShape = true;
+	        this._collisionGroup = collisionGroup;
+	        this._canCollideWith = canCollideWith;
+	        PhysicsComponent._physicObjectsMap[this.id] = this;
+	    }
 	    static __init__() {
 	        var bt = Laya.ILaya3D.Physics3D._bullet;
 	        PhysicsComponent._btVector30 = bt.btVector3_create(0, 0, 0);
@@ -690,25 +709,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	                this._addToSimulation();
 	            }
 	        }
-	    }
-	    constructor(collisionGroup, canCollideWith) {
-	        super();
-	        this._restitution = 0.0;
-	        this._friction = 0.5;
-	        this._rollingFriction = 0.0;
-	        this._ccdMotionThreshold = 0.0;
-	        this._ccdSweptSphereRadius = 0.0;
-	        this._collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER;
-	        this._canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER;
-	        this._colliderShape = null;
-	        this._transformFlag = 2147483647;
-	        this._controlBySimulation = false;
-	        this._enableProcessCollisions = true;
-	        this._inPhysicUpdateListIndex = -1;
-	        this.canScaleShape = true;
-	        this._collisionGroup = collisionGroup;
-	        this._canCollideWith = canCollideWith;
-	        PhysicsComponent._physicObjectsMap[this.id] = this;
 	    }
 	    _parseShape(shapesData) {
 	        var shapeCount = shapesData.length;
@@ -942,6 +942,18 @@ window.Physics3D = function (initialMemory, interactive) {
 	};
 
 	class CharacterController extends PhysicsComponent {
+	    constructor(stepheight = 0.1, upAxis = null, collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER) {
+	        super(collisionGroup, canCollideWith);
+	        this._upAxis = new Laya.Vector3(0, 1, 0);
+	        this._maxSlope = 45.0;
+	        this._jumpSpeed = 10.0;
+	        this._fallSpeed = 55.0;
+	        this._gravity = new Laya.Vector3(0, -9.8 * 3, 0);
+	        this._btKinematicCharacter = null;
+	        this._stepHeight = stepheight;
+	        (upAxis) && (this._upAxis = upAxis);
+	        this._controlBySimulation = true;
+	    }
 	    static __init__() {
 	        CharacterController._btTempVector30 = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
 	    }
@@ -994,18 +1006,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	        var btUpAxis = CharacterController._btTempVector30;
 	        Laya.Utils3D._convertToBulletVec3(value, btUpAxis, false);
 	        Laya.ILaya3D.Physics3D._bullet.btKinematicCharacterController_setUp(this._btKinematicCharacter, btUpAxis);
-	    }
-	    constructor(stepheight = 0.1, upAxis = null, collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER) {
-	        super(collisionGroup, canCollideWith);
-	        this._upAxis = new Laya.Vector3(0, 1, 0);
-	        this._maxSlope = 45.0;
-	        this._jumpSpeed = 10.0;
-	        this._fallSpeed = 55.0;
-	        this._gravity = new Laya.Vector3(0, -9.8 * 3, 0);
-	        this._btKinematicCharacter = null;
-	        this._stepHeight = stepheight;
-	        (upAxis) && (this._upAxis = upAxis);
-	        this._controlBySimulation = true;
 	    }
 	    _constructCharacter() {
 	        var bt = Laya.ILaya3D.Physics3D._bullet;
@@ -1198,6 +1198,10 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class PhysicsTriggerComponent extends PhysicsComponent {
+	    constructor(collisionGroup, canCollideWith) {
+	        super(collisionGroup, canCollideWith);
+	        this._isTrigger = false;
+	    }
 	    get isTrigger() {
 	        return this._isTrigger;
 	    }
@@ -1215,10 +1219,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	                    bt.btCollisionObject_setCollisionFlags(this._btColliderObject, flags ^ PhysicsComponent.COLLISIONFLAGS_NO_CONTACT_RESPONSE);
 	            }
 	        }
-	    }
-	    constructor(collisionGroup, canCollideWith) {
-	        super(collisionGroup, canCollideWith);
-	        this._isTrigger = false;
 	    }
 	    _onAdded() {
 	        super._onAdded();
@@ -1303,47 +1303,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class PhysicsSimulation {
-	    static __init__() {
-	        var bt = Laya.ILaya3D.Physics3D._bullet;
-	        PhysicsSimulation._btTempVector30 = bt.btVector3_create(0, 0, 0);
-	        PhysicsSimulation._btTempVector31 = bt.btVector3_create(0, 0, 0);
-	        PhysicsSimulation._btTempQuaternion0 = bt.btQuaternion_create(0, 0, 0, 1);
-	        PhysicsSimulation._btTempQuaternion1 = bt.btQuaternion_create(0, 0, 0, 1);
-	        PhysicsSimulation._btTempTransform0 = bt.btTransform_create();
-	        PhysicsSimulation._btTempTransform1 = bt.btTransform_create();
-	    }
-	    static createConstraint() {
-	    }
-	    get continuousCollisionDetection() {
-	        return Laya.ILaya3D.Physics3D._bullet.btCollisionWorld_get_m_useContinuous(this._btDispatchInfo);
-	    }
-	    set continuousCollisionDetection(value) {
-	        Laya.ILaya3D.Physics3D._bullet.btCollisionWorld_set_m_useContinuous(this._btDispatchInfo, value);
-	    }
-	    get gravity() {
-	        if (!this._btDiscreteDynamicsWorld)
-	            throw "Simulation:Cannot perform this action when the physics engine is set to CollisionsOnly";
-	        return this._gravity;
-	    }
-	    set gravity(value) {
-	        if (!this._btDiscreteDynamicsWorld)
-	            throw "Simulation:Cannot perform this action when the physics engine is set to CollisionsOnly";
-	        this._gravity = value;
-	        var bt = Laya.ILaya3D.Physics3D._bullet;
-	        var btGravity = PhysicsSimulation._btTempVector30;
-	        bt.btVector3_setValue(btGravity, -value.x, value.y, value.z);
-	        bt.btDiscreteDynamicsWorld_setGravity(this._btDiscreteDynamicsWorld, btGravity);
-	    }
-	    get speculativeContactRestitution() {
-	        if (!this._btDiscreteDynamicsWorld)
-	            throw "Simulation:Cannot Cannot perform this action when the physics engine is set to CollisionsOnly";
-	        return Laya.ILaya3D.Physics3D._bullet.btDiscreteDynamicsWorld_getApplySpeculativeContactRestitution(this._btDiscreteDynamicsWorld);
-	    }
-	    set speculativeContactRestitution(value) {
-	        if (!this._btDiscreteDynamicsWorld)
-	            throw "Simulation:Cannot Cannot perform this action when the physics engine is set to CollisionsOnly";
-	        Laya.ILaya3D.Physics3D._bullet.btDiscreteDynamicsWorld_setApplySpeculativeContactRestitution(this._btDiscreteDynamicsWorld, value);
-	    }
 	    constructor(configuration) {
 	        this._gravity = new Laya.Vector3(0, -10, 0);
 	        this._btVector3Zero = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
@@ -1385,6 +1344,47 @@ window.Physics3D = function (initialMemory, interactive) {
 	        this._btClosestConvexResultCallback = bt.ClosestConvexResultCallback_create(this._btVector3Zero, this._btVector3Zero);
 	        this._btAllConvexResultCallback = bt.AllConvexResultCallback_create(this._btVector3Zero, this._btVector3Zero);
 	        bt.btGImpactCollisionAlgorithm_RegisterAlgorithm(this._btDispatcher);
+	    }
+	    static __init__() {
+	        var bt = Laya.ILaya3D.Physics3D._bullet;
+	        PhysicsSimulation._btTempVector30 = bt.btVector3_create(0, 0, 0);
+	        PhysicsSimulation._btTempVector31 = bt.btVector3_create(0, 0, 0);
+	        PhysicsSimulation._btTempQuaternion0 = bt.btQuaternion_create(0, 0, 0, 1);
+	        PhysicsSimulation._btTempQuaternion1 = bt.btQuaternion_create(0, 0, 0, 1);
+	        PhysicsSimulation._btTempTransform0 = bt.btTransform_create();
+	        PhysicsSimulation._btTempTransform1 = bt.btTransform_create();
+	    }
+	    static createConstraint() {
+	    }
+	    get continuousCollisionDetection() {
+	        return Laya.ILaya3D.Physics3D._bullet.btCollisionWorld_get_m_useContinuous(this._btDispatchInfo);
+	    }
+	    set continuousCollisionDetection(value) {
+	        Laya.ILaya3D.Physics3D._bullet.btCollisionWorld_set_m_useContinuous(this._btDispatchInfo, value);
+	    }
+	    get gravity() {
+	        if (!this._btDiscreteDynamicsWorld)
+	            throw "Simulation:Cannot perform this action when the physics engine is set to CollisionsOnly";
+	        return this._gravity;
+	    }
+	    set gravity(value) {
+	        if (!this._btDiscreteDynamicsWorld)
+	            throw "Simulation:Cannot perform this action when the physics engine is set to CollisionsOnly";
+	        this._gravity = value;
+	        var bt = Laya.ILaya3D.Physics3D._bullet;
+	        var btGravity = PhysicsSimulation._btTempVector30;
+	        bt.btVector3_setValue(btGravity, -value.x, value.y, value.z);
+	        bt.btDiscreteDynamicsWorld_setGravity(this._btDiscreteDynamicsWorld, btGravity);
+	    }
+	    get speculativeContactRestitution() {
+	        if (!this._btDiscreteDynamicsWorld)
+	            throw "Simulation:Cannot Cannot perform this action when the physics engine is set to CollisionsOnly";
+	        return Laya.ILaya3D.Physics3D._bullet.btDiscreteDynamicsWorld_getApplySpeculativeContactRestitution(this._btDiscreteDynamicsWorld);
+	    }
+	    set speculativeContactRestitution(value) {
+	        if (!this._btDiscreteDynamicsWorld)
+	            throw "Simulation:Cannot Cannot perform this action when the physics engine is set to CollisionsOnly";
+	        Laya.ILaya3D.Physics3D._bullet.btDiscreteDynamicsWorld_setApplySpeculativeContactRestitution(this._btDiscreteDynamicsWorld, value);
 	    }
 	    _simulate(deltaTime) {
 	        this._updatedRigidbodies = 0;
@@ -1951,6 +1951,23 @@ window.Physics3D = function (initialMemory, interactive) {
 	PhysicsSimulation.disableSimulation = false;
 
 	class Rigidbody3D extends PhysicsTriggerComponent {
+	    constructor(collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER) {
+	        super(collisionGroup, canCollideWith);
+	        this._isKinematic = false;
+	        this._mass = 1.0;
+	        this._gravity = new Laya.Vector3(0, -10, 0);
+	        this._angularDamping = 0.0;
+	        this._linearDamping = 0.0;
+	        this._overrideGravity = false;
+	        this._totalTorque = new Laya.Vector3(0, 0, 0);
+	        this._totalForce = new Laya.Vector3(0, 0, 0);
+	        this._linearVelocity = new Laya.Vector3();
+	        this._angularVelocity = new Laya.Vector3();
+	        this._linearFactor = new Laya.Vector3(1, 1, 1);
+	        this._angularFactor = new Laya.Vector3(1, 1, 1);
+	        this._detectCollisions = true;
+	        this._controlBySimulation = true;
+	    }
 	    static __init__() {
 	        var bt = Laya.ILaya3D.Physics3D._bullet;
 	        Rigidbody3D._btTempVector30 = bt.btVector3_create(0, 0, 0);
@@ -2157,23 +2174,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	    get constaintRigidbodyB() {
 	        return this._constaintRigidbodyB;
 	    }
-	    constructor(collisionGroup = Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, canCollideWith = Laya.Physics3DUtils.COLLISIONFILTERGROUP_ALLFILTER) {
-	        super(collisionGroup, canCollideWith);
-	        this._isKinematic = false;
-	        this._mass = 1.0;
-	        this._gravity = new Laya.Vector3(0, -10, 0);
-	        this._angularDamping = 0.0;
-	        this._linearDamping = 0.0;
-	        this._overrideGravity = false;
-	        this._totalTorque = new Laya.Vector3(0, 0, 0);
-	        this._totalForce = new Laya.Vector3(0, 0, 0);
-	        this._linearVelocity = new Laya.Vector3();
-	        this._angularVelocity = new Laya.Vector3();
-	        this._linearFactor = new Laya.Vector3(1, 1, 1);
-	        this._angularFactor = new Laya.Vector3(1, 1, 1);
-	        this._detectCollisions = true;
-	        this._controlBySimulation = true;
-	    }
 	    _updateMass(mass) {
 	        if (this._btColliderObject && this._colliderShape) {
 	            var bt = Laya.ILaya3D.Physics3D._bullet;
@@ -2374,6 +2374,27 @@ window.Physics3D = function (initialMemory, interactive) {
 	Rigidbody3D._BT_ENABLE_GYROPSCOPIC_FORCE = 2;
 
 	class ConstraintComponent extends Laya.Component {
+	    constructor(constraintType) {
+	        super();
+	        this._anchor = new Laya.Vector3();
+	        this._connectAnchor = new Laya.Vector3();
+	        this._feedbackEnabled = false;
+	        this._getJointFeedBack = false;
+	        this._currentForce = new Laya.Vector3();
+	        this._currentTorque = new Laya.Vector3();
+	        this._constraintType = constraintType;
+	        var bt = Laya.Physics3D._bullet;
+	        this._btframATrans = bt.btTransform_create();
+	        this._btframBTrans = bt.btTransform_create();
+	        bt.btTransform_setIdentity(this._btframATrans);
+	        bt.btTransform_setIdentity(this._btframBTrans);
+	        this._btframAPos = bt.btVector3_create(0, 0, 0);
+	        this._btframBPos = bt.btVector3_create(0, 0, 0);
+	        bt.btTransform_setOrigin(this._btframATrans, this._btframAPos);
+	        bt.btTransform_setOrigin(this._btframBTrans, this._btframBPos);
+	        this._breakForce = -1;
+	        this._breakTorque = -1;
+	    }
 	    get enabled() {
 	        return super.enabled;
 	    }
@@ -2436,27 +2457,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	    }
 	    get connectAnchor() {
 	        return this._connectAnchor;
-	    }
-	    constructor(constraintType) {
-	        super();
-	        this._anchor = new Laya.Vector3();
-	        this._connectAnchor = new Laya.Vector3();
-	        this._feedbackEnabled = false;
-	        this._getJointFeedBack = false;
-	        this._currentForce = new Laya.Vector3();
-	        this._currentTorque = new Laya.Vector3();
-	        this._constraintType = constraintType;
-	        var bt = Laya.Physics3D._bullet;
-	        this._btframATrans = bt.btTransform_create();
-	        this._btframBTrans = bt.btTransform_create();
-	        bt.btTransform_setIdentity(this._btframATrans);
-	        bt.btTransform_setIdentity(this._btframBTrans);
-	        this._btframAPos = bt.btVector3_create(0, 0, 0);
-	        this._btframBPos = bt.btVector3_create(0, 0, 0);
-	        bt.btTransform_setOrigin(this._btframATrans, this._btframAPos);
-	        bt.btTransform_setOrigin(this._btframBTrans, this._btframBPos);
-	        this._breakForce = -1;
-	        this._breakTorque = -1;
 	    }
 	    setOverrideNumSolverIterations(overideNumIterations) {
 	        var bt = Laya.Physics3D._bullet;
@@ -3049,9 +3049,6 @@ window.Physics3D = function (initialMemory, interactive) {
 	}
 
 	class StaticPlaneColliderShape extends ColliderShape {
-	    static __init__() {
-	        StaticPlaneColliderShape._btNormal = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
-	    }
 	    constructor(normal, offset) {
 	        super();
 	        this._normal = normal;
@@ -3060,6 +3057,9 @@ window.Physics3D = function (initialMemory, interactive) {
 	        var bt = Laya.ILaya3D.Physics3D._bullet;
 	        bt.btVector3_setValue(StaticPlaneColliderShape._btNormal, -normal.x, normal.y, normal.z);
 	        this._btShape = bt.btStaticPlaneShape_create(StaticPlaneColliderShape._btNormal, offset);
+	    }
+	    static __init__() {
+	        StaticPlaneColliderShape._btNormal = Laya.ILaya3D.Physics3D._bullet.btVector3_create(0, 0, 0);
 	    }
 	    clone() {
 	        var dest = new StaticPlaneColliderShape(this._normal, this._offset);
@@ -3095,6 +3095,4 @@ window.Physics3D = function (initialMemory, interactive) {
 	exports.SphereColliderShape = SphereColliderShape;
 	exports.StaticPlaneColliderShape = StaticPlaneColliderShape;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

@@ -1,9 +1,9 @@
 import { EquipmentPart } from "../net/enum/ItemEnum";
-import { Decode } from "./Decode";
+import { ClassName, Decode } from "./Decode";
 import { Equipment } from "./Goods";
 
+@ClassName("BodyData")
 export class Body extends Decode<IBodyData> implements IBody {
-    private static readonly ClassName = "BodyData";
     //#region 字段
     weapon: IEquipment;
     helmet: IEquipment;

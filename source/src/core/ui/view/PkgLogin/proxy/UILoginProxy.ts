@@ -1,5 +1,5 @@
-import { logicSceneMgr } from "../../../../../logicScene/LogicSceneManager";
-import { LogicScene } from "../../../../../logicScene/LogicSceneType";
+import { SceneType } from "../../../../../scene/SceneDefine";
+import { sceneMgr } from "../../../../../scene/SceneManager";
 import { localData } from "../../../../libs/localData/LocalData";
 import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { NetMessage } from "../../../../net/enum/NetMessage";
@@ -12,7 +12,7 @@ export class UILoginProxy extends BaseProxy<UILoginCtrl>{
     private login(output: LoginOutput, input: LoginInput) {
         const param = { account: input.account, password: input.password };
         localData.set(LocalDataKey.LastLoginAccount, param);
-        logicSceneMgr.enterScene(LogicScene.MainScene);
+        sceneMgr.enterScene(SceneType.MainScene);
     }
 
     @RegisterEvent(NetMessage.LoginError)

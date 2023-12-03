@@ -864,11 +864,11 @@
 	            let attributes = glTFMeshPrimitive.attributes;
 	            let position = glTFUtils.getArrributeBuffer(attributes.POSITION, "POSITION", attributeMap, vertexDeclarArr);
 	            let normal = glTFUtils.getArrributeBuffer(attributes.NORMAL, "NORMAL", attributeMap, vertexDeclarArr);
-	            glTFUtils.getArrributeBuffer(attributes.COLOR_0, "COLOR", attributeMap, vertexDeclarArr);
-	            glTFUtils.getArrributeBuffer(attributes.TEXCOORD_0, "UV", attributeMap, vertexDeclarArr);
-	            glTFUtils.getArrributeBuffer(attributes.TEXCOORD_1, "UV1", attributeMap, vertexDeclarArr);
-	            glTFUtils.getArrributeBuffer(attributes.WEIGHTS_0, "BLENDWEIGHT", attributeMap, vertexDeclarArr);
-	            glTFUtils.getArrributeBuffer(attributes.JOINTS_0, "BLENDINDICES", attributeMap, vertexDeclarArr);
+	            let color = glTFUtils.getArrributeBuffer(attributes.COLOR_0, "COLOR", attributeMap, vertexDeclarArr);
+	            let uv = glTFUtils.getArrributeBuffer(attributes.TEXCOORD_0, "UV", attributeMap, vertexDeclarArr);
+	            let uv1 = glTFUtils.getArrributeBuffer(attributes.TEXCOORD_1, "UV1", attributeMap, vertexDeclarArr);
+	            let blendWeight = glTFUtils.getArrributeBuffer(attributes.WEIGHTS_0, "BLENDWEIGHT", attributeMap, vertexDeclarArr);
+	            let blendIndices = glTFUtils.getArrributeBuffer(attributes.JOINTS_0, "BLENDINDICES", attributeMap, vertexDeclarArr);
 	            let tangent = glTFUtils.getArrributeBuffer(attributes.TANGENT, "TANGENT", attributeMap, vertexDeclarArr);
 	            let targets = glTFMeshPrimitive.targets;
 	            (targets) && targets.forEach((target, index) => {
@@ -1055,7 +1055,7 @@
 	    }
 	    static _createAnimator(animation) {
 	        let channels = animation.channels;
-	        animation.samplers;
+	        let samplers = animation.samplers;
 	        let animatorRoot = glTFUtils.getAnimationRoot(channels);
 	        if (!animatorRoot) {
 	            return null;
@@ -1163,7 +1163,7 @@
 	                    case 4:
 	                        let floatArrayKeyframe = new Laya.Vector3Keyframe();
 	                        node._setKeyframeByIndex(j, floatArrayKeyframe);
-	                        floatArrayKeyframe.time = gLTFClipNode.timeArray[j];
+	                        let startTimev3 = floatArrayKeyframe.time = gLTFClipNode.timeArray[j];
 	                        let inTangent = floatArrayKeyframe.inTangent;
 	                        let outTangent = floatArrayKeyframe.outTangent;
 	                        let value = floatArrayKeyframe.value;
@@ -1174,7 +1174,7 @@
 	                    case 2:
 	                        let quaternionKeyframe = new Laya.QuaternionKeyframe();
 	                        node._setKeyframeByIndex(j, quaternionKeyframe);
-	                        quaternionKeyframe.time = gLTFClipNode.timeArray[j];
+	                        let startTimeQu = quaternionKeyframe.time = gLTFClipNode.timeArray[j];
 	                        let inTangentQua = quaternionKeyframe.inTangent;
 	                        let outTangentQua = quaternionKeyframe.outTangent;
 	                        let valueQua = quaternionKeyframe.value;
@@ -1367,6 +1367,4 @@
 	exports.glTFTextureEditor = glTFTextureEditor;
 	exports.glTFUtils = glTFUtils;
 
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

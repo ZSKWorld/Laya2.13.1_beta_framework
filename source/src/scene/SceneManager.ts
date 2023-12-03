@@ -1,25 +1,25 @@
 import { Observer } from "../core/libs/event/Observer";
-import { IScene, LogicScene } from "./LogicSceneType";
+import { IScene, SceneType } from "./SceneDefine";
 
 /** 逻辑场景管理类 */
-class LogicSceneManager extends Observer {
-	private _currentType: LogicScene;
+class SceneManager extends Observer {
+	private _currentType: SceneType;
 	private _currentScene: IScene;
 	private _loadCompleted: boolean = true;
-	private _sceneMap: Map<LogicScene, IScene>;
+	private _sceneMap: Map<SceneType, IScene>;
 
-	init(sceneMap: [ LogicScene, IScene ][]) {
+	init(sceneMap: [ SceneType, IScene ][]) {
 		if (!this._sceneMap) {
 			this._sceneMap = new Map(sceneMap);
 		}
 	}
 
-	registerSceneView(type: LogicScene, view: string) {
+	registerSceneView(type: SceneType, view: string) {
 		const scene = this._sceneMap.get(type);
 		if (scene) scene.views.add(view);
 	}
 
-	enterScene(type: LogicScene, data?: any) {
+	enterScene(type: SceneType, data?: any) {
 		if (!this._loadCompleted) return;
 		if (this._currentType != type) {
 			this._loadCompleted = false;
@@ -41,5 +41,5 @@ class LogicSceneManager extends Observer {
 		}
 	}
 }
-export const logicSceneMgr = new LogicSceneManager();
-windowImmit("logicSceneMgr", logicSceneMgr);
+export const sceneMgr = new SceneManager();
+windowImmit("logicSceneMgr", sceneMgr);

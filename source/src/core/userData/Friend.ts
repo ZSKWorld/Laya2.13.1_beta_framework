@@ -1,7 +1,7 @@
-import { Decode } from "./Decode";
+import { ClassName, Decode } from "./Decode";
 
+@ClassName("FriendData")
 export class Friend extends Decode<IFriendData> implements IFriend {
-    private static readonly ClassName = "FriendData";
     friend: string[];
 
 }

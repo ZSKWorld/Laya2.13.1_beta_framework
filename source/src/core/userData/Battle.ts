@@ -1,5 +1,5 @@
 import { GameUtil } from "../common/GameUtil";
-import { Decode } from "./Decode";
+import { ClassName, Decode } from "./Decode";
 
 class Level extends Decode<ILevelData> implements ILevel {
 
@@ -56,8 +56,8 @@ class Gather extends Decode<IGatherData> implements IGather {
     }
 }
 
+@ClassName("BattleData")
 export class Battle extends Decode<IBattleData> implements IBattle {
-    private static readonly ClassName = "BattleData";
     level = new Level();
     copy = new Copy();
     secret = new Secret();

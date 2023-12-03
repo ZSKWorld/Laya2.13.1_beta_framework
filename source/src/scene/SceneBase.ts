@@ -3,7 +3,7 @@ import { skeletonMgr } from "../core/libs/SkeletonMgr";
 import { Observer } from "../core/libs/event/Observer";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";
-import { IScene } from "./LogicSceneType";
+import { IScene } from "./SceneDefine";
 
 const enum ResGroupType {
 	Normal,

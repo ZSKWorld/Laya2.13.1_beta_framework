@@ -1,9 +1,9 @@
 import { BaseDataType, DataType } from "../net/enum/ItemEnum";
-import { Decode } from "./Decode";
+import { ClassName, Decode } from "./Decode";
 import { UserUtil } from "./UserUtil";
 
+@ClassName("BaseData")
 export class Base extends Decode<IBaseData> implements IBase {
-    private static readonly ClassName = "BaseData";
     //#region 字段
     signedInTime: number;
     coin: number;

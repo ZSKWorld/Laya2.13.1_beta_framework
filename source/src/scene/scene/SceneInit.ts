@@ -1,8 +1,8 @@
 import { GameEvent } from "../../core/common/GameEvent";
 import { ResPath } from "../../core/common/ResPath";
 import { CfgManager } from "../../core/config/CfgManager";
-import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { websocket } from "../../core/net/WebSocket";
+import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { layerMgr } from "../../core/ui/core/LayerManager";
 import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewID } from "../../core/ui/core/ViewID";
@@ -10,16 +10,16 @@ import { viewRegister } from "../../core/ui/core/ViewRegister";
 import { tipMgr } from "../../core/ui/tool/TipManager";
 import { User } from "../../core/userData/User";
 import { platformMgr } from "../../platform/PlatformManager";
-import { LogicSceneBase } from "../LogicSceneBase";
-import { logicSceneMgr } from "../LogicSceneManager";
-import { LogicScene } from "../LogicSceneType";
+import { LogicSceneBase } from "../SceneBase";
+import { SceneType } from "../SceneDefine";
+import { sceneMgr } from "../SceneManager";
 
 export interface SceneInitData {
 
 }
 
 /** 初始化逻辑场景 */
-export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
+export class SceneInit extends LogicSceneBase<SceneInitData> {
 	private _prescreen: fgui.GLoader;
 
 	protected override getConstResArray() {
@@ -43,7 +43,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 		uiMgr.init();
 		viewRegister.init();
 		websocket.init();
-		Laya.timer.once(500, logicSceneMgr, logicSceneMgr.enterScene, [ LogicScene.LoginScene ]);
+		Laya.timer.once(500, sceneMgr, sceneMgr.enterScene, [ SceneType.LoginScene ]);
 	}
 
 	protected override onExit() {
@@ -91,7 +91,7 @@ export class LogicSceneInit extends LogicSceneBase<SceneInitData> {
 	private netMsgError(msg: UserOutput) {
 		tipMgr.showTip(cfgMgr.Error[ msg.error ].text);
 		if (msg.error == ErrorCode.NOT_LOGIN)
-			logicSceneMgr.enterScene(LogicScene.LoginScene);
+			sceneMgr.enterScene(SceneType.LoginScene);
 	}
 }
 

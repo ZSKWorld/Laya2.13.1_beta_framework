@@ -1,4 +1,4 @@
-import { logicSceneMgr } from "../../../logicScene/LogicSceneManager";
+import { sceneMgr } from "../../../scene/SceneManager";
 
 export class ViewLogicRegister {
     static Init() {
@@ -6,7 +6,7 @@ export class ViewLogicRegister {
     }
 
     private static Register() {
-        const registerView = logicSceneMgr.registerSceneView.bind(logicSceneMgr);
+        const registerView = sceneMgr.registerSceneView.bind(sceneMgr);
         // registerView(LogicScene.InitScene)
 
         // registerView(LogicScene.LoginScene, ViewID.LoginView)

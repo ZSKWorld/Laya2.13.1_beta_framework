@@ -1,7 +1,7 @@
-import { Decode } from "./Decode";
+import { ClassName, Decode } from "./Decode";
 
+@ClassName("AccountData")
 export class Account extends Decode<IAccountData> implements IAccount {
-    private static readonly ClassName = "AccountData";
     uid: string;
     nickname: string;
     account: string;

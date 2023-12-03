@@ -134,8 +134,8 @@
         init(layerData, map) {
             this._map = map;
             this._mapData = layerData.data;
-            layerData.height;
-            layerData.width;
+            var tHeight = layerData.height;
+            var tWidth = layerData.width;
             var tTileW = map.tileWidth;
             var tTileH = map.tileHeight;
             this.layerName = layerData.name;
@@ -349,7 +349,7 @@
                         if (tTileTexSet) {
                             var tX = 0;
                             var tY = 0;
-                            tTileTexSet.texture;
+                            var tTexture = tTileTexSet.texture;
                             switch (this._map.orientation) {
                                 case IMap.TiledMap.ORIENTATION_STAGGERED:
                                     tX = tileX * this._map.tileWidth % this._map.gridWidth + (tileY & 1) * this._tileWidthHalf;
@@ -707,7 +707,7 @@
             return tResultPath;
         }
         onTextureComplete(e) {
-            this._jsonData;
+            var json = this._jsonData;
             var tTexture = e;
             if (!this._enableLinear) {
                 tTexture.bitmap.minFifter = 0x2600;
@@ -719,7 +719,7 @@
             var tTileTextureH = tTileSet.tileheight;
             var tImageWidth = tTileSet.imagewidth;
             var tImageHeight = tTileSet.imageheight;
-            tTileSet.firstgid;
+            var tFirstgid = tTileSet.firstgid;
             var tTileWNum = Math.floor((tImageWidth - tTileSet.margin - tTileTextureW) / (tTileTextureW + tTileSet.spacing)) + 1;
             var tTileHNum = Math.floor((tImageHeight - tTileSet.margin - tTileTextureH) / (tTileTextureH + tTileSet.spacing)) + 1;
             var tTileTexSet = null;
@@ -1256,7 +1256,7 @@
                             tBottom1 = Math.floor(tBottom / tHalfTileHeight);
                             tLeft1 = this._mapW + Math.floor((tLeft - tHalfMapWidth) / tHalfTileWidth);
                             tRight1 = this._mapW + Math.floor((tRight - tHalfMapWidth) / tHalfTileWidth);
-                            this._mapW * 2;
+                            var tMapW = this._mapW * 2;
                             var tMapH = this._mapH * 2;
                             if (tTop1 < 0) {
                                 tTop1 = 0;
@@ -1598,6 +1598,4 @@
     exports.TileTexSet = TileTexSet;
     exports.TiledMap = TiledMap;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
-})(this.Laya = this.Laya || {}, Laya);
+}(window.Laya = window.Laya || {}, Laya));

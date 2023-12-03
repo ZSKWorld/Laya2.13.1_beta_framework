@@ -1,11 +1,11 @@
-import { logicSceneMgr } from "../../../../../logicScene/LogicSceneManager";
-import { LogicScene } from "../../../../../logicScene/LogicSceneType";
+import { SceneType } from "../../../../../scene/SceneDefine";
+import { sceneMgr } from "../../../../../scene/SceneManager";
 import { BattleType } from "../../../../net/enum/BattleEnums";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIUtility } from "../../../tool/UIUtility";
-import { RenderChooseBattleView } from "../view/renders/RenderChooseBattleView";
 import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleView";
+import { RenderChooseBattleView } from "../view/renders/RenderChooseBattleView";
 import { RenderChooseBattleCtrl } from "./renders/RenderChooseBattleCtrl";
 
 export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType>{
@@ -53,7 +53,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	}
 
 	private onBtnBackClick() {
-		logicSceneMgr.enterScene(LogicScene.MainScene);
+		sceneMgr.enterScene(SceneType.MainScene);
 	}
 
 }

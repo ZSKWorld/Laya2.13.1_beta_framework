@@ -1,17 +1,17 @@
+import GameConfig from "./GameConfig";
 import { Logger } from "./core/libs/utils/Logger";
 import { ViewExtend } from "./core/ui/core/ViewExtend";
 import { FGUIExtension } from "./engine/FGUIExtension";
 import { FGUIRepair } from "./engine/FGUIRepair";
 import { LayaExtension } from "./engine/LayaExtension";
 import { LayaRepair } from "./engine/LayaRepair";
-import GameConfig from "./GameConfig";
-import { logicSceneMgr } from "./logicScene/LogicSceneManager";
-import { LogicScene } from "./logicScene/LogicSceneType";
-import { LogicSceneGame } from "./logicScene/scene/LogicSceneGame";
-import { LogicSceneInit } from "./logicScene/scene/LogicSceneInit";
-import { LogicSceneLogin } from "./logicScene/scene/LogicSceneLogin";
-import { LogicSceneMain } from "./logicScene/scene/LogicSceneMain";
-import { LogicScenePreScreen } from "./logicScene/scene/LogicScenePreScreen";
+import { SceneType } from "./scene/SceneDefine";
+import { sceneMgr } from "./scene/SceneManager";
+import { SceneGame } from "./scene/scene/SceneGame";
+import { SceneInit } from "./scene/scene/SceneInit";
+import { SceneLogin } from "./scene/scene/SceneLogin";
+import { SceneMain } from "./scene/scene/SceneMain";
+import { ScenePreScreen } from "./scene/scene/ScenePreScreen";
 
 class Main {
 	constructor() {
@@ -44,14 +44,14 @@ class Main {
 	}
 
 	private onConfigLoaded() {
-		logicSceneMgr.init([
-			[ LogicScene.PreScreen, new LogicScenePreScreen() ],
-			[ LogicScene.InitScene, new LogicSceneInit() ],
-			[ LogicScene.LoginScene, new LogicSceneLogin() ],
-			[ LogicScene.MainScene, new LogicSceneMain() ],
-			[ LogicScene.GameScene, new LogicSceneGame() ],
+		sceneMgr.init([
+			[ SceneType.PreScreen, new ScenePreScreen() ],
+			[ SceneType.InitScene, new SceneInit() ],
+			[ SceneType.LoginScene, new SceneLogin() ],
+			[ SceneType.MainScene, new SceneMain() ],
+			[ SceneType.GameScene, new SceneGame() ],
 		]);
-		logicSceneMgr.enterScene(LogicScene.PreScreen);
+		sceneMgr.enterScene(SceneType.PreScreen);
 	}
 
 }
