@@ -39,15 +39,15 @@ export class LayaExample {
         Laya.stage.addChild(this.text);
 
         for (var i: number = 0; i < this.n; i++) {
-            this.tpoint1[ i ] = this.points1[ i ];
-            this.tpoint2[ i ] = this.points2[ i ];
-            this.tpoint3[ i ] = this.points3[ i ];
+            this.tpoint1[i] = this.points1[i];
+            this.tpoint2[i] = this.points2[i];
+            this.tpoint3[i] = this.points3[i];
 
             var tempBall: Sprite = new Sprite();
             tempBall.loadImage('res/aaaa.png');
             tempBall.pivot(3, 3);
             tempBall.alpha = 0.5;
-            this.balls[ i ] = tempBall;
+            this.balls[i] = tempBall;
 
             Laya.stage.addChild(tempBall);
         }
@@ -104,36 +104,36 @@ export class LayaExample {
         switch (t) {
             case 0:
                 for (i = 0; i < this.n; i++) {
-                    this.points1[ i ] = -50 + Math.round(Math.random() * 100);
-                    this.points2[ i ] = 0;
-                    this.points3[ i ] = 0;
+                    this.points1[i] = -50 + Math.round(Math.random() * 100);
+                    this.points2[i] = 0;
+                    this.points3[i] = 0;
                 }
                 break;
 
             case 1:
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(t * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(xd) * 10) * (Math.sin(t * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(xd) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(t * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(xd) * 10) * (Math.sin(t * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(xd) * 100;
                 }
                 break;
 
             case 2:
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + (Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(t * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(xd) * 10) * (Math.sin(t * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(t * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(xd) * 10) * (Math.sin(t * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
             case 3:
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
-                    this.points2[ i ] = (Math.cos(xd) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(xd) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
+                    this.points2[i] = (Math.cos(xd) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(xd) * 100;
                 }
                 break;
 
@@ -141,9 +141,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
-                    this.points2[ i ] = (Math.cos(xd) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
+                    this.points2[i] = (Math.cos(xd) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -151,11 +151,11 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
 
 
-                    this.points2[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points2[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -163,9 +163,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -173,9 +173,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(i * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(i * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -183,9 +183,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(i * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(xd) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(i * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(xd) * 100;
                 }
                 break;
 
@@ -193,9 +193,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(xd) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(xd) * 100;
                 }
                 break;
 
@@ -203,9 +203,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.cos(xd) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.cos(xd) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -213,9 +213,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.sin(xd) * 10) * (Math.sin(i * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(xd) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.sin(xd) * 10) * (Math.sin(i * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(xd) * 100;
                 }
                 break;
 
@@ -223,9 +223,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
-                    this.points2[ i ] = (Math.sin(xd) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
+                    this.points2[i] = (Math.sin(xd) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -233,9 +233,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.sin(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.sin(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -243,9 +243,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.sin(xd) * 10) * (Math.cos(xd) * 10);
-                    this.points2[ i ] = (Math.sin(xd) * 10) * (Math.sin(i * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.sin(xd) * 10) * (Math.cos(xd) * 10);
+                    this.points2[i] = (Math.sin(xd) * 10) * (Math.sin(i * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -253,9 +253,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.sin(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.sin(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
 
@@ -263,9 +263,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
-                    this.points2[ i ] = (Math.sin(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
-                    this.points3[ i ] = Math.sin(xd) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(i * 360 / this.n) * 10);
+                    this.points2[i] = (Math.sin(i * 360 / this.n) * 10) * (Math.sin(xd) * 10);
+                    this.points3[i] = Math.sin(xd) * 100;
                 }
                 break;
 
@@ -273,9 +273,9 @@ export class LayaExample {
 
                 for (i = 0; i < this.n; i++) {
                     xd = -90 + Math.round(Math.random() * 180);
-                    this.points1[ i ] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
-                    this.points2[ i ] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(i * 360 / this.n) * 10);
-                    this.points3[ i ] = Math.sin(i * 360 / this.n) * 100;
+                    this.points1[i] = (Math.cos(xd) * 10) * (Math.cos(xd) * 10);
+                    this.points2[i] = (Math.cos(i * 360 / this.n) * 10) * (Math.sin(i * 360 / this.n) * 10);
+                    this.points3[i] = Math.sin(i * 360 / this.n) * 100;
                 }
                 break;
         }
@@ -303,28 +303,28 @@ export class LayaExample {
             + "vz：" + this.vz + "\n";
 
         for (var i: number = 0; i < this.n; i++) {
-            if (this.points1[ i ] > this.tpoint1[ i ]) {
-                this.tpoint1[ i ] = this.tpoint1[ i ] + 1;
+            if (this.points1[i] > this.tpoint1[i]) {
+                this.tpoint1[i] = this.tpoint1[i] + 1;
             }
-            if (this.points1[ i ] < this.tpoint1[ i ]) {
-                this.tpoint1[ i ] = this.tpoint1[ i ] - 1;
+            if (this.points1[i] < this.tpoint1[i]) {
+                this.tpoint1[i] = this.tpoint1[i] - 1;
             }
-            if (this.points2[ i ] > this.tpoint2[ i ]) {
-                this.tpoint2[ i ] = this.tpoint2[ i ] + 1;
+            if (this.points2[i] > this.tpoint2[i]) {
+                this.tpoint2[i] = this.tpoint2[i] + 1;
             }
-            if (this.points2[ i ] < this.tpoint2[ i ]) {
-                this.tpoint2[ i ] = this.tpoint2[ i ] - 1;
+            if (this.points2[i] < this.tpoint2[i]) {
+                this.tpoint2[i] = this.tpoint2[i] - 1;
             }
-            if (this.points3[ i ] > this.tpoint3[ i ]) {
-                this.tpoint3[ i ] = this.tpoint3[ i ] + 1;
+            if (this.points3[i] > this.tpoint3[i]) {
+                this.tpoint3[i] = this.tpoint3[i] + 1;
             }
-            if (this.points3[ i ] < this.tpoint3[ i ]) {
-                this.tpoint3[ i ] = this.tpoint3[ i ] - 1;
+            if (this.points3[i] < this.tpoint3[i]) {
+                this.tpoint3[i] = this.tpoint3[i] - 1;
             }
 
-            x3d = this.tpoint1[ i ];
-            y3d = this.tpoint2[ i ];
-            z3d = this.tpoint3[ i ];
+            x3d = this.tpoint1[i];
+            y3d = this.tpoint2[i];
+            z3d = this.tpoint3[i];
 
             ty = (y3d * Math.cos(this.vx)) - (z3d * Math.sin(this.vx));
             tz = (y3d * Math.sin(this.vx)) + (z3d * Math.cos(this.vx));
@@ -334,8 +334,8 @@ export class LayaExample {
             tx = (tx * Math.cos(this.vz)) - (ty * Math.sin(this.vz));
             ty = (ox * Math.sin(this.vz)) + (ty * Math.cos(this.vz));
 
-            this.balls[ i ].x = (512 * tx) / (this.d - tz) + Laya.stage.width / 2;
-            this.balls[ i ].y = (Laya.stage.height / 2) - (512 * ty) / (this.d - tz);
+            this.balls[i].x = (512 * tx) / (this.d - tz) + Laya.stage.width / 2;
+            this.balls[i].y = (Laya.stage.height / 2) - (512 * ty) / (this.d - tz);
         }
     }
 }

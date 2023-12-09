@@ -15,10 +15,10 @@ export class ComBattleConfirmView extends ExtensionClass<IView, ComBattleConfirm
 
 	override onCreate() {
 		const { btn_buyFood, btn_buyTimes, btn_saoDang, btn_battle } = this;
-		btn_buyFood.onClick(this, this.sendMessage, [ ComBattleConfirmMsg.OnBtnBuyFoodClick ]);
-		btn_buyTimes.onClick(this, this.sendMessage, [ ComBattleConfirmMsg.OnBtnBuyTimesClick ]);
-		btn_saoDang.onClick(this, this.sendMessage, [ ComBattleConfirmMsg.OnBtnSaoDangClick ]);
-		btn_battle.onClick(this, this.sendMessage, [ ComBattleConfirmMsg.OnBtnBattleClick ]);
+		btn_buyFood.onClick(this, this.sendMessage, [ComBattleConfirmMsg.OnBtnBuyFoodClick]);
+		btn_buyTimes.onClick(this, this.sendMessage, [ComBattleConfirmMsg.OnBtnBuyTimesClick]);
+		btn_saoDang.onClick(this, this.sendMessage, [ComBattleConfirmMsg.OnBtnSaoDangClick]);
+		btn_battle.onClick(this, this.sendMessage, [ComBattleConfirmMsg.OnBtnBattleClick]);
 	}
 
 	refreshContent(type: BattleType, data: BattleCfgData) {

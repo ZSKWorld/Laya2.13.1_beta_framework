@@ -30,19 +30,19 @@ export class Base extends Decode<IBaseData> implements IBase {
     get maxVigro() {
         let xinFaJL = 0;
         const citta = this.citta;
-        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorAddition));
+        Object.keys(citta).forEach(v => xinFaJL += (citta[v] * cfgMgr.XinFaBook[v].vigorAddition));
         return Math.floor(86400 + xinFaJL);
     }
 
     get vigorRecover() {
         let xinFaJLHF = 0;
         const citta = this.citta;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorRecoverAddition));
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[v] * cfgMgr.XinFaBook[v].vigorRecoverAddition));
         return 1 + xinFaJLHF;
     }
 
     getItemCount(id: number): number {
-        const item = cfgMgr.Item[ id ];
+        const item = cfgMgr.Item[id];
         if (!item) return 0;
         if (item.dataType != DataType.BaseData) return 0;
         switch (id) {

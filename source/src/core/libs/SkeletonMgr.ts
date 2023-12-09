@@ -82,7 +82,7 @@ class SkeletonMgr {
         if (poolArr && poolArr.includes(skeleton)) return;
         skeleton.removeSelf();
         if (!poolArr) {
-            poolArr = [ skeleton ];
+            poolArr = [skeleton];
             this._skeletonPool.set(url, poolArr);
         } else poolArr.push(skeleton);
     }

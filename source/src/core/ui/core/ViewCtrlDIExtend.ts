@@ -1,6 +1,6 @@
 
 type FuncCfg = { __once: boolean, __done: boolean, __args: any[] };
-type CfgFunction = Function & { [ key: string ]: FuncCfg; };
+type CfgFunction = Function & { [key: string]: FuncCfg; };
 export type DIViewCtrl = IViewCtrl & {
 	__keyEventList?: KeyMap<KeyMap<CfgFunction[]>>;
 	__mouseEventList?: KeyMap<CfgFunction[]>,
@@ -77,17 +77,17 @@ export class ViewCtrlDIExtend {
 		const { __keyEventList: kel, __mouseEventList: mel } = viewCtrl;
 		if (kel) {
 			for (const key in kel) {
-				const eventList = kel[ key ];
+				const eventList = kel[key];
 				for (const eventKey in eventList) {
-					const list = eventList[ eventKey ];
-					list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
+					const list = eventList[eventKey];
+					list.forEach(v => Object.keys(v).forEach(v1 => v[v1].__done != null && (v[v1].__done = false)));
 				}
 			}
 		}
 		if (mel) {
 			for (const key in mel) {
-				const list = mel[ key ];
-				list.forEach(v => Object.keys(v).forEach(v1 => v[ v1 ].__done != null && (v[ v1 ].__done = false)));
+				const list = mel[key];
+				list.forEach(v => Object.keys(v).forEach(v1 => v[v1].__done != null && (v[v1].__done = false)));
 			}
 		}
 	}
@@ -97,14 +97,14 @@ export class ViewCtrlDIExtend {
 		//这里的this是BaseViewCtrl
 		const __keyEventList = (this as unknown as DIViewCtrl).__keyEventList;
 		if (!__keyEventList) return;
-		let eventList = __keyEventList[ e.type ];
+		let eventList = __keyEventList[e.type];
 		if (!eventList) return;
-		let list = eventList[ e.keyCode ];
+		let list = eventList[e.keyCode];
 		if (!list) return;
 		for (let i = 0, len = list.length; i < len; i++) {
-			const func = list[ i ];
-			const cfg = func[ e.keyCode ];
-			const args = cfg && cfg.__args ? [ ...cfg.__args, e ] : [ e ];
+			const func = list[i];
+			const cfg = func[e.keyCode];
+			const args = cfg && cfg.__args ? [...cfg.__args, e] : [e];
 			if (cfg && cfg.__once) {
 				if (!cfg.__done) {
 					cfg.__done = true;
@@ -122,12 +122,12 @@ export class ViewCtrlDIExtend {
 		//这里的this是BaseViewCtrl
 		const __mouseEventList = (this as unknown as DIViewCtrl).__mouseEventList;
 		if (!__mouseEventList) return;
-		const list = __mouseEventList[ eType ];
+		const list = __mouseEventList[eType];
 		if (!list) return;
 		for (let i = 0, len = list.length; i < len; i++) {
-			const func = list[ i ];
-			const cfg = func[ eType ];
-			const args = cfg && cfg.__args ? [ ...cfg.__args, e ] : [ e ];
+			const func = list[i];
+			const cfg = func[eType];
+			const args = cfg && cfg.__args ? [...cfg.__args, e] : [e];
 			if (cfg && cfg.__once) {
 				if (!cfg.__done) {
 					cfg.__done = true;

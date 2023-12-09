@@ -22,17 +22,17 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 
 	override onCreate() {
 		const { btn_train, btn_char, btn_goods, btn_shop, btn_abode, btn_chat, btn_setting, btn_rank, btn_sphere } = this;
-		btn_train.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnTrainClick ]);
-		btn_char.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnCharClick ]);
-		btn_goods.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnGoodsClick ]);
-		btn_shop.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnShopClick ]);
-		btn_abode.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnAbodeClick ]);
-		btn_chat.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnChatClick ]);
-		btn_setting.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnSettingClick ]);
-		btn_rank.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnRankClick ]);
-		btn_sphere.onClick(this, this.sendMessage, [ UIMainMsg.OnBtnSphereClick ]);
-		btn_sphere.on(fgui.Events.DRAG_START, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, true ]);
-		btn_sphere.on(fgui.Events.DRAG_END, this, this.sendMessage, [ UIMainMsg.OnBtnSphereDraged, false ]);
+		btn_train.onClick(this, this.sendMessage, [UIMainMsg.OnBtnTrainClick]);
+		btn_char.onClick(this, this.sendMessage, [UIMainMsg.OnBtnCharClick]);
+		btn_goods.onClick(this, this.sendMessage, [UIMainMsg.OnBtnGoodsClick]);
+		btn_shop.onClick(this, this.sendMessage, [UIMainMsg.OnBtnShopClick]);
+		btn_abode.onClick(this, this.sendMessage, [UIMainMsg.OnBtnAbodeClick]);
+		btn_chat.onClick(this, this.sendMessage, [UIMainMsg.OnBtnChatClick]);
+		btn_setting.onClick(this, this.sendMessage, [UIMainMsg.OnBtnSettingClick]);
+		btn_rank.onClick(this, this.sendMessage, [UIMainMsg.OnBtnRankClick]);
+		btn_sphere.onClick(this, this.sendMessage, [UIMainMsg.OnBtnSphereClick]);
+		btn_sphere.on(fgui.Events.DRAG_START, this, this.sendMessage, [UIMainMsg.OnBtnSphereDraged, true]);
+		btn_sphere.on(fgui.Events.DRAG_END, this, this.sendMessage, [UIMainMsg.OnBtnSphereDraged, false]);
 
 		btn_sphere.draggable = true;
 	}
@@ -48,7 +48,7 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		this.txt_exp.text = nextJingJieExp == 0 ? "(最高境界)" : (MathUtil.ToGroupNumber(exp) + "/" + MathUtil.ToGroupNumber(nextJingJieExp));
 		this.txt_coin.text = "金币:" + MathUtil.ToGroupNumber(coin);
 		this.txt_ingot.text = "元宝:" + MathUtil.ToGroupNumber(vcoin);
-		this.txt_sect.text = "门派：" + (cfgMgr.Sect[ sect ]?.name || "无");
+		this.txt_sect.text = "门派：" + (cfgMgr.Sect[sect]?.name || "无");
 	}
 
 }

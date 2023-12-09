@@ -5,13 +5,13 @@ import { UserUtil } from "./UserUtil";
 class Item<T> extends Decode<T>{
     id: number;
 
-    get name() { return cfgMgr.Item[ this.id ].name; }
+    get name() { return cfgMgr.Item[this.id].name; }
     get colorName() { return GameUtil.GetColorStr(this.quality, this.name); }
-    get quality() { return cfgMgr.Item[ this.id ].quality; }
-    get color() { return cfgMgr.Color[ this.quality ].color; }
-    get description() { return cfgMgr.Item[ this.id ].desc; }
-    get salable() { return cfgMgr.Item[ this.id ].salable; }
-    get useRequire() { return cfgMgr.Item[ this.id ].useRequire; }
+    get quality() { return cfgMgr.Item[this.id].quality; }
+    get color() { return cfgMgr.Color[this.quality].color; }
+    get description() { return cfgMgr.Item[this.id].desc; }
+    get salable() { return cfgMgr.Item[this.id].salable; }
+    get useRequire() { return cfgMgr.Item[this.id].useRequire; }
     get useRequireStr() { return UserUtil.GetJingJieStr(this.useRequire.jingJie, this.useRequire.cengJi); }
 }
 
@@ -36,7 +36,7 @@ export class Equipment extends Item<IEquipmentData> implements IEquipment {
     bodyAttri: number[];
     //#endregion
 
-    get part() { return cfgMgr.Equipment[ this.id ].part as EquipmentPart; }
+    get part() { return cfgMgr.Equipment[this.id].part as EquipmentPart; }
     get levelName() { return this.name + " +" + this.level; }
     get colorLevelName() { return GameUtil.GetColorStr(this.quality, this.levelName); }
     get infoStr() {
@@ -44,7 +44,7 @@ export class Equipment extends Item<IEquipmentData> implements IEquipment {
             "", "武器[攻击]", "头盔[防御]", "项链[特殊]", "衣服[防御]", "戒指[攻击]", "裤子[防御]", "护符[攻击]", "鞋子[防御]",
             "坐骑[特殊]", "时装[特殊]", "暗器[特殊]", "法宝[特殊]",
         ];
-        return `类别:${ typeStr[ this.part ] }<br>
+        return `类别:${ typeStr[this.part] }<br>
         境界需求:${ this.useRequireStr }<br>
         铭刻:0/100<br>
         ${ this.shenYou }阶神佑加成: ${ (/**equip.shenYouAddition */0 * 100).toFixed(2) }%<br>

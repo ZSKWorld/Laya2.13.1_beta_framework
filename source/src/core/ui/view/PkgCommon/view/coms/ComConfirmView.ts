@@ -11,12 +11,12 @@ export class ComConfirmView extends ExtensionClass<IView, ComConfirm>(ComConfirm
 
 	override onCreate() {
 		const { btn_cancel, btn_confirm } = this;
-		btn_cancel.onClick(this, this.sendMessage, [ ComConfirmMsg.OnBtnCancelClick ]);
-		btn_confirm.onClick(this, this.sendMessage, [ ComConfirmMsg.OnBtnConfirmClick ]);
+		btn_cancel.onClick(this, this.sendMessage, [ComConfirmMsg.OnBtnCancelClick]);
+		btn_confirm.onClick(this, this.sendMessage, [ComConfirmMsg.OnBtnConfirmClick]);
 	}
 
-	refreshContent(title: string, content: string, cancel:boolean) {
-		const { txt_title, txt_content ,btn_cancel} = this;
+	refreshContent(title: string, content: string, cancel: boolean) {
+		const { txt_title, txt_content, btn_cancel } = this;
 		txt_title.text = title;
 		txt_content.text = content;
 		btn_cancel.visible = cancel;

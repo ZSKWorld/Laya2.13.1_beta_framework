@@ -9,9 +9,9 @@ export abstract class Decode<D> extends Observer implements IDecode<D, any> {
         Object.keys(data).forEach((key) => {
             //规定__开头的私有变量不进行decode
             if (key.startsWith("__")) return;
-            this[ key ] = this.onDecode(data, key as any);
-            const clsName = this.constructor[ "__className" ];
-            if (!this.constructor[ "__dontDispatch" ])
+            this[key] = this.onDecode(data, key as any);
+            const clsName = this.constructor["__className"];
+            if (!this.constructor["__dontDispatch"])
                 Decode.dispatchArr.add(`${ clsName }_${ key }_changed`.toLocaleLowerCase());
         });
         Laya.timer.callLater(Decode, Decode.dispatchEvent);
@@ -20,7 +20,7 @@ export abstract class Decode<D> extends Observer implements IDecode<D, any> {
     }
 
     protected onDecode(data: D, key: keyof D) {
-        return data[ key ];
+        return data[key];
     }
 
     protected afterDecode() { }

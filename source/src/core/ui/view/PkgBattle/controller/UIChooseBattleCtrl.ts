@@ -43,13 +43,13 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 			case BattleType.Gather: itemCfg = cfgMgr.Gather; break;
 			default: this.items ? this.items.length = 0 : this.items = []; break;
 		}
-		itemCfg && (this.items = Object.keys(itemCfg).map((v) => itemCfg[ v ]));
+		itemCfg && (this.items = Object.keys(itemCfg).map((v) => itemCfg[v]));
 		this.view.list_battle.numItems = this.items.length;
 	}
 
 	private onListBattleRender(index: number, item: RenderChooseBattleView) {
 		const itemCtrl = item.viewCtrl as RenderChooseBattleCtrl;
-		itemCtrl.setData(this.data, this.items[ index ]);
+		itemCtrl.setData(this.data, this.items[index]);
 	}
 
 	private onBtnBackClick() {

@@ -37,7 +37,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 
 	/** Laya.Script私有方法重写 */
 	private _onAdded() {
-		this._view = this.owner[ "$owner" ];
+		this._view = this.owner["$owner"];
 		this._listener = Laya.Pool.createByClass(Laya.EventDispatcher);
 		if (this.ProxyClass) {
 			this._proxy = Laya.Pool.createByClass(this.ProxyClass);
@@ -48,7 +48,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
 		this.addMessage(ViewEvent.OnForeground, this._onForeground);
 		this.addMessage(ViewEvent.OnBackground, this._onBackground);
-		super[ "_onAdded" ]();
+		super["_onAdded"]();
 	}
 
 	/** Laya.Script私有方法重写 */
@@ -56,7 +56,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.registerEvent(this);
 		eventMgr.registerEvent(this._view);
 		eventMgr.registerEvent(this._proxy);
-		super[ "_onEnable" ]();
+		super["_onEnable"]();
 	}
 
 	/** Laya.Script私有方法重写 */
@@ -64,7 +64,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.offAllCaller(this);
 		eventMgr.offAllCaller(this._view);
 		eventMgr.offAllCaller(this._proxy);
-		super[ "_onDisable" ]();
+		super["_onDisable"]();
 	}
 
 	private _onForeground() {
@@ -80,10 +80,10 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		const { __messageMap } = this;
 		if (__messageMap) {
 			for (const messageName in __messageMap) {
-				const callbackMap = __messageMap[ messageName ];
+				const callbackMap = __messageMap[messageName];
 				for (const k in callbackMap) {
-					const callback = callbackMap[ k ];
-					const param = callback[ messageName ];
+					const callback = callbackMap[k];
+					const param = callback[messageName];
 					const once = param ? param.__once : false;
 					const args = param ? param.__args : null;
 					this.addMessage(messageName, callback, args, once);
@@ -128,20 +128,20 @@ windowImmit("MouseEventType", MouseEventType);
 function CtrlKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__keyEventList) target.__keyEventList = {};
-		if (!target.__keyEventList[ keyEventType ]) target.__keyEventList[ keyEventType ] = {};
-		if (!target.__keyEventList[ keyEventType ][ key ]) target.__keyEventList[ keyEventType ][ key ] = [];
+		if (!target.__keyEventList[keyEventType]) target.__keyEventList[keyEventType] = {};
+		if (!target.__keyEventList[keyEventType][key]) target.__keyEventList[keyEventType][key] = [];
 
 		const func = descriptor.value;
-		const list = target.__keyEventList[ keyEventType ][ key ];
+		const list = target.__keyEventList[keyEventType][key];
 		if (list.indexOf(func) < 0) {
 			list.push(func);
 			if (once) {
-				func[ key ] = func[ key ] || {};
-				func[ key ].__once = true;
+				func[key] = func[key] || {};
+				func[key].__once = true;
 			}
 			if (args) {
-				func[ key ] = func[ key ] || {};
-				func[ key ].__args = args;
+				func[key] = func[key] || {};
+				func[key].__args = args;
 			}
 		}
 	}
@@ -157,19 +157,19 @@ windowImmit("CtrlKeyEvent", CtrlKeyEvent);
 function CtrlMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__mouseEventList) target.__mouseEventList = {};
-		if (!target.__mouseEventList[ mouseEventType ]) target.__mouseEventList[ mouseEventType ] = [];
+		if (!target.__mouseEventList[mouseEventType]) target.__mouseEventList[mouseEventType] = [];
 
 		const func = descriptor.value;
-		const list = target.__mouseEventList[ mouseEventType ];
+		const list = target.__mouseEventList[mouseEventType];
 		if (list.indexOf(func) < 0) {
 			list.push(func);
 			if (once) {
-				func[ mouseEventType ] = func[ mouseEventType ] || {};
-				func[ mouseEventType ].__once = once;
+				func[mouseEventType] = func[mouseEventType] || {};
+				func[mouseEventType].__once = once;
 			}
 			if (args) {
-				func[ mouseEventType ] = func[ mouseEventType ] || {};
-				func[ mouseEventType ].__args = args;
+				func[mouseEventType] = func[mouseEventType] || {};
+				func[mouseEventType].__args = args;
 			}
 		}
 	}
@@ -186,19 +186,19 @@ windowImmit("CtrlMouseEvent", CtrlMouseEvent);
 function CtrlMessage(name: string, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 		if (!target.__messageMap) target.__messageMap = {};
-		if (!target.__messageMap[ name ]) target.__messageMap[ name ] = [];
+		if (!target.__messageMap[name]) target.__messageMap[name] = [];
 
 		const func = descriptor.value;
-		const list: Function[] = target.__messageMap[ name ];
+		const list: Function[] = target.__messageMap[name];
 		if (list.indexOf(func) == -1) {
 			list.push(func);
 			if (once) {
-				func[ name ] = func[ name ] || {};
-				func[ name ].__once = once;
+				func[name] = func[name] || {};
+				func[name].__once = once;
 			}
 			if (args) {
-				func[ name ] = func[ name ] || {};
-				func[ name ].__args = args;
+				func[name] = func[name] || {};
+				func[name].__args = args;
 			}
 		}
 	}

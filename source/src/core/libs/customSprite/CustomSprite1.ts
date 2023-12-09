@@ -5,7 +5,7 @@ class DissValue2D extends Laya.Value2D {
     //     this._attribLocation = [ "posuv2", 5 ];
     // }
     public u_Time: number = 0;
-    public u_LightWidth:number = 0.2;
+    public u_LightWidth: number = 0.2;
     public u_NoiseTex: Laya.Texture2D;
 }
 export class CustomSprite1 extends BaseCustomSprite<DissValue2D> {

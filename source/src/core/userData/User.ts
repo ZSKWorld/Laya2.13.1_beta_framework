@@ -27,8 +27,8 @@ export class User extends Decode<IUserData> implements IUser {
     //#endregion
 
     protected override onDecode(data: IUserData, key: keyof IUserData) {
-        if (key == "offline") return data[ key ];
-        return (<IDecode<any, any>>this[ key ]).decode(data[ key ]);
+        if (key == "offline") return data[key];
+        return (<IDecode<any, any>>this[key]).decode(data[key]);
     }
 
     @RegisterEvent(NetMessage.SyncInfo)

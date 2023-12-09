@@ -5,10 +5,10 @@ function RedDotEvent(eventName: RDTriggerType) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const eventMap: KeyMap<Function[]> = target._triggerMap = target._triggerMap || {};
         const func = descriptor.value;
-        if (eventMap[ eventName ])
-            eventMap[ eventName ].push(func);
+        if (eventMap[eventName])
+            eventMap[eventName].push(func);
         else
-            eventMap[ eventName ] = [ func ];
+            eventMap[eventName] = [func];
     }
 }
 
@@ -20,7 +20,7 @@ export class RedDotTrigger extends Observer {
         this._eventCenter = event;
         const triggerMap = this._triggerMap;
         for (const key in triggerMap) {
-            triggerMap[ key ].forEach(func => event.on("Trigger" + key, this, func, [ key ]));
+            triggerMap[key].forEach(func => event.on("Trigger" + key, this, func, [key]));
         }
     }
 
@@ -46,6 +46,6 @@ export class RedDotTrigger extends Observer {
     }
 
     private doTrigger(type: RDTriggerType, triggered: boolean, triggerId?: number) {
-        this._eventCenter.event(type, [ type, triggered, triggerId ]);
+        this._eventCenter.event(type, [type, triggered, triggerId]);
     }
 }

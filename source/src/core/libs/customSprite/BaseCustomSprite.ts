@@ -7,12 +7,12 @@ export class BaseCustomSprite<T extends Laya.Value2D> extends Laya.Sprite {
             this.loadImage(value);
         }
         else if (this._texture != value) {
-            this._texture && this._texture[ "_removeReference" ]();
+            this._texture && this._texture["_removeReference"]();
             this._texture = value;
-            value && value[ "_addReference" ]();
-            this[ "_setTexture" ](value);
-            this[ "_setWidth" ](this._texture, this.width);
-            this[ "_setHeight" ](this._texture, this.height);
+            value && value["_addReference"]();
+            this["_setTexture"](value);
+            this["_setWidth"](this._texture, this.width);
+            this["_setHeight"](this._texture, this.height);
             // if (value)
             //     this._renderType |= SpriteConst.TEXTURE;
             // else

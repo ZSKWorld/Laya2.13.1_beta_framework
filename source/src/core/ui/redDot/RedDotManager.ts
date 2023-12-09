@@ -31,7 +31,7 @@ class RedDotManager extends Laya.EventDispatcher {
         if (data.node.comp == comp) return data;
         const childs = data.childs;
         for (let i = 0, cnt = childs.length; i < cnt; i++) {
-            const result = this.getRDByComp(childs[ i ], comp);
+            const result = this.getRDByComp(childs[i], comp);
             if (result) return result;
         }
         return null;

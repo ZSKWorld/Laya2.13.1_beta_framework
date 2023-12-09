@@ -266,7 +266,7 @@ class MyPromise<T> {
             T9 | PromiseLike<T9>,
             T10 | PromiseLike<T10>
         ]
-    ): MyPromise<[ T1, T2, T3, T4, T5, T6, T7, T8, T9, T10 ]>
+    ): MyPromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>
     static all<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         values: readonly [
             T1 | PromiseLike<T1>,
@@ -279,7 +279,7 @@ class MyPromise<T> {
             T8 | PromiseLike<T8>,
             T9 | PromiseLike<T9>
         ]
-    ): MyPromise<[ T1, T2, T3, T4, T5, T6, T7, T8, T9 ]>
+    ): MyPromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>
     static all<T1, T2, T3, T4, T5, T6, T7, T8>(
         values: readonly [
             T1 | PromiseLike<T1>,
@@ -291,7 +291,7 @@ class MyPromise<T> {
             T7 | PromiseLike<T7>,
             T8 | PromiseLike<T8>
         ]
-    ): MyPromise<[ T1, T2, T3, T4, T5, T6, T7, T8 ]>
+    ): MyPromise<[T1, T2, T3, T4, T5, T6, T7, T8]>
     static all<T1, T2, T3, T4, T5, T6, T7>(
         values: readonly [
             T1 | PromiseLike<T1>,
@@ -302,7 +302,7 @@ class MyPromise<T> {
             T6 | PromiseLike<T6>,
             T7 | PromiseLike<T7>
         ]
-    ): MyPromise<[ T1, T2, T3, T4, T5, T6, T7 ]>
+    ): MyPromise<[T1, T2, T3, T4, T5, T6, T7]>
     static all<T1, T2, T3, T4, T5, T6>(
         values: readonly [
             T1 | PromiseLike<T1>,
@@ -312,7 +312,7 @@ class MyPromise<T> {
             T5 | PromiseLike<T5>,
             T6 | PromiseLike<T6>
         ]
-    ): MyPromise<[ T1, T2, T3, T4, T5, T6 ]>
+    ): MyPromise<[T1, T2, T3, T4, T5, T6]>
     static all<T1, T2, T3, T4, T5>(
         values: readonly [
             T1 | PromiseLike<T1>,
@@ -321,7 +321,7 @@ class MyPromise<T> {
             T4 | PromiseLike<T4>,
             T5 | PromiseLike<T5>
         ]
-    ): MyPromise<[ T1, T2, T3, T4, T5 ]>
+    ): MyPromise<[T1, T2, T3, T4, T5]>
     static all<T1, T2, T3, T4>(
         values: readonly [
             T1 | PromiseLike<T1>,
@@ -329,17 +329,17 @@ class MyPromise<T> {
             T3 | PromiseLike<T3>,
             T4 | PromiseLike<T4>
         ]
-    ): MyPromise<[ T1, T2, T3, T4 ]>
+    ): MyPromise<[T1, T2, T3, T4]>
     static all<T1, T2, T3>(
         values: readonly [
             T1 | PromiseLike<T1>,
             T2 | PromiseLike<T2>,
             T3 | PromiseLike<T3>
         ]
-    ): MyPromise<[ T1, T2, T3 ]>
+    ): MyPromise<[T1, T2, T3]>
     static all<T1, T2>(
-        values: readonly [ T1 | PromiseLike<T1>, T2 | PromiseLike<T2> ]
-    ): MyPromise<[ T1, T2 ]>
+        values: readonly [T1 | PromiseLike<T1>, T2 | PromiseLike<T2>]
+    ): MyPromise<[T1, T2]>
     static all<T>(values: readonly (T | PromiseLike<T>)[]): MyPromise<T[]>
     static all<T>(values: Iterable<T | PromiseLike<T>>): MyPromise<T[]>
     static all<T>(values: Iterable<T | PromiseLike<T>>): MyPromise<T[]> {
@@ -347,15 +347,15 @@ class MyPromise<T> {
             // PromiseLike<T> 对象会跟踪转换为 T
             const resultArr: T[] = []
             // 获取迭代器对象
-            let iter = values[ Symbol.iterator ]()
+            let iter = values[Symbol.iterator]()
             //  判断是否已经全部完成了
             const doneArr: boolean[] = []
             // 获取值 {value:xxx, done: false}
             let cur = iter.next()
             // 判断迭代器是否迭代完毕同时将最后得到的值放入结果数组中
             const resolveResult = (value: T, index: number, done?: boolean) => {
-                resultArr[ index ] = value
-                doneArr[ index ] = true
+                resultArr[index] = value
+                doneArr[index] = true
                 if (done && doneArr.every((item) => item)) {
                     resolve(resultArr)
                 }
@@ -385,7 +385,7 @@ class MyPromise<T> {
         values: Iterable<T>
     ): MyPromise<T extends PromiseLike<infer U> ? U : T> {
         return new MyPromise((resolve, reject) => {
-            const iter = values[ Symbol.iterator ]()
+            const iter = values[Symbol.iterator]()
             let cur = iter.next()
             while (!cur.done) {
                 const value = cur.value
@@ -400,12 +400,12 @@ class MyPromise<T> {
         })
     }
 
-    static allSettled<T extends readonly unknown[] | readonly [ unknown ]>(
+    static allSettled<T extends readonly unknown[] | readonly [unknown]>(
         values: T
     ): MyPromise<
         {
-            -readonly [ P in keyof T ]: PromiseSettledResult<
-                T[ P ] extends PromiseLike<infer U> ? U : T[ P ]
+            -readonly [P in keyof T]: PromiseSettledResult<
+                T[P] extends PromiseLike<infer U> ? U : T[P]
             >
         }
     >
@@ -417,15 +417,15 @@ class MyPromise<T> {
             const resultArr: any[] = []
             const doneArr: boolean[] = []
             // 获取迭代器
-            const iter = values[ Symbol.iterator ]()
+            const iter = values[Symbol.iterator]()
             // 当前值
             let cur = iter.next()
             const resolveResult = (value: any, index: number, done?: boolean) => {
-                resultArr[ index ] = {
+                resultArr[index] = {
                     status: Status.FULFILLED,
                     value
                 }
-                doneArr[ index ] = true
+                doneArr[index] = true
                 if (done && doneArr.every((item) => item)) {
                     reslove(resultArr)
                 }
@@ -441,11 +441,11 @@ class MyPromise<T> {
                         },
                         (reason) => {
                             // 这里和 resolve 基本也没什么区别，修改一下状态和属性就ok了
-                            resultArr[ i ] = {
+                            resultArr[i] = {
                                 status: Status.REJECTED,
                                 reason
                             }
-                            doneArr[ i ] = true
+                            doneArr[i] = true
                             if (cur.done && doneArr.every((item) => item)) {
                                 reslove(resultArr)
                             }
@@ -464,7 +464,7 @@ class MyPromise<T> {
     ): MyPromise<T> {
         return new MyPromise((resolve, reject) => {
             // 接收迭代器
-            const iter = values[ Symbol.iterator ]()
+            const iter = values[Symbol.iterator]()
             let cur = iter.next()
             const doneArr: boolean[] = []
             for (let i = 0; !cur.done; i++) {
@@ -474,7 +474,7 @@ class MyPromise<T> {
                 if (isPromise(value)) {
                     // 如果为 thenable，根据该 thenable 的状态进行判断
                     value.then(resolve, () => {
-                        doneArr[ i ] = true
+                        doneArr[i] = true
                         // 只有传入迭代器的值全是 thenable 并且 thenable 的状态全部为 rejected 才会触发
                         if (cur.done && doneArr.every((item) => item)) {
                             //应该抛出 AggregateError 的错误类型，但是因为 AggregateError 因为是实验版本，所有只有最新版浏览器才会有，我这里就用 Error代替了

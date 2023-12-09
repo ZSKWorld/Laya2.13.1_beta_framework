@@ -13,16 +13,16 @@ export class MathUtil {
 
     /**数字转中文数字 */
     static ToChineseNum(num: number) {
-        const arr1 = [ "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" ];
-        const arr2 = [ "", "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千", "万", "十", "百", "千", "亿" ];
+        const arr1 = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+        const arr2 = ["", "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千", "万", "十", "百", "千", "亿"];
         if (!num || isNaN(num)) return "零";
         const english = num.toString().split("");
         let result = "";
         for (let i = 0, n = english.length; i < n; i++) {
             const des_i = n - 1 - i;// 倒序排列设值
-            result = arr2[ i ] + result;
-            const arr1_index = english[ des_i ];
-            result = arr1[ arr1_index ] + result;
+            result = arr2[i] + result;
+            const arr1_index = english[des_i];
+            result = arr1[arr1_index] + result;
         }
         result = result.replace(/零(千|百|十)/g, "零").replace(/十零/g, "十"); // 将【零千、零百】换成【零】 【十零】换成【十】
         result = result.replace(/零+/g, "零"); // 合并中间多个零为一个零
@@ -53,8 +53,8 @@ export class MathUtil {
                 num /= 1e3;
                 let carry = true;
                 for (let i = numLetter.length - 1; i >= 0; i--) {
-                    if (++numLetter[ i ] > 122) {
-                        numLetter[ i ] = 97;
+                    if (++numLetter[i] > 122) {
+                        numLetter[i] = 97;
                     } else {
                         carry = false;
                         break;
@@ -72,7 +72,7 @@ export class MathUtil {
     static letterToNum(str: string) {
         const reg = /^-?\d+(\.\d+)?[a-z]*$/;
         if (!reg.test(str)) throw Error("Invalid number string: " + str);
-        const [ num, letter ] = str.match(/[a-z]+|-?\d+(\.\d+)?/g);
+        const [num, letter] = str.match(/[a-z]+|-?\d+(\.\d+)?/g);
         let sign = 0;
         if (letter) {
             let letterNum = letter.split("").map(v => v.charCodeAt(0)).reverse();

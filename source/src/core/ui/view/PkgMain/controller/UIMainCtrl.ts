@@ -21,8 +21,8 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 		this.addMessage(UIMainMsg.OnBtnGoodsClick, this.onBtnGoodsClick);
 		this.addMessage(UIMainMsg.OnBtnShopClick, this.onBtnShopClick);
 		this.addMessage(UIMainMsg.OnBtnAbodeClick, this.onBtnAbodeClick);
-		this.addMessage(UIMainMsg.OnBtnChatClick, this.showView, [ ViewID.UIChatView ]);
-		this.addMessage(UIMainMsg.OnBtnSettingClick, this.showView, [ ViewID.UISettingView ]);
+		this.addMessage(UIMainMsg.OnBtnChatClick, this.showView, [ViewID.UIChatView]);
+		this.addMessage(UIMainMsg.OnBtnSettingClick, this.showView, [ViewID.UISettingView]);
 		this.addMessage(UIMainMsg.OnBtnRankClick, this.onBtnRankClick);
 		this.addMessage(UIMainMsg.OnBtnSphereClick, this.onBtnSphereClick);
 		this.addMessage(UIMainMsg.OnBtnSphereDraged, this.onBtnSphereDraged);
@@ -38,7 +38,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 		if (offline) {
 			offlineConfirmTxt.combineBreak(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`)
 				.combineBreak(`获得精力${ offline.vigor }点`);
-			Laya.timer.callLater(null, showConfirm, [ "离线详情", offlineConfirmTxt.getStr(), false ]);
+			Laya.timer.callLater(null, showConfirm, ["离线详情", offlineConfirmTxt.getStr(), false]);
 		}
 		txt.combineBreak(offlineConfirmTxt.end());
 		const battleSpeed = localData.get(LocalDataKey.BattleSpeed) || 1;
@@ -85,7 +85,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 
 	private onBtnSphereDraged(draged: boolean) {
 		if (!!draged) this.setSphereDraged(true);
-		else Laya.timer.frameOnce(1, this, this.setSphereDraged, [ false ]);
+		else Laya.timer.frameOnce(1, this, this.setSphereDraged, [false]);
 	}
 
 	private setSphereDraged(value: boolean) {

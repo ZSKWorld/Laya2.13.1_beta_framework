@@ -16,10 +16,10 @@ import { ScenePreScreen } from "./scene/scene/ScenePreScreen";
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎
-		if (window[ "Laya3D" ]) Laya3D.init(GameConfig.width, GameConfig.height);
-		else Laya.init(GameConfig.width, GameConfig.height, Laya[ "WebGL" ]);
-		Laya[ "Physics" ] && Laya[ "Physics" ].enable();
-		Laya[ "DebugPanel" ] && Laya[ "DebugPanel" ].enable();
+		if (window["Laya3D"]) Laya3D.init(GameConfig.width, GameConfig.height);
+		else Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);
+		Laya["Physics"] && Laya["Physics"].enable();
+		Laya["DebugPanel"] && Laya["DebugPanel"].enable();
 		Laya.stage.scaleMode = GameConfig.scaleMode;
 		Laya.stage.screenMode = GameConfig.screenMode;
 		Laya.stage.alignV = GameConfig.alignV;
@@ -45,11 +45,11 @@ class Main {
 
 	private onConfigLoaded() {
 		sceneMgr.init([
-			[ SceneType.PreScreen, new ScenePreScreen() ],
-			[ SceneType.InitScene, new SceneInit() ],
-			[ SceneType.LoginScene, new SceneLogin() ],
-			[ SceneType.MainScene, new SceneMain() ],
-			[ SceneType.GameScene, new SceneGame() ],
+			[SceneType.PreScreen, new ScenePreScreen()],
+			[SceneType.InitScene, new SceneInit()],
+			[SceneType.LoginScene, new SceneLogin()],
+			[SceneType.MainScene, new SceneMain()],
+			[SceneType.GameScene, new SceneGame()],
 		]);
 		sceneMgr.enterScene(SceneType.PreScreen);
 	}

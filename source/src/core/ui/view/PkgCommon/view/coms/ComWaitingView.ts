@@ -1,5 +1,5 @@
-import ComWaiting from "../../../../ui/PkgCommon/ComWaiting";
 import { ResPath } from "../../../../../common/ResPath";
+import ComWaiting from "../../../../ui/PkgCommon/ComWaiting";
 
 export const enum ComWaitingMsg {
 
@@ -8,8 +8,8 @@ export const enum ComWaitingMsg {
 export class ComWaitingView extends ExtensionClass<IView, ComWaiting>(ComWaiting) {
     static readonly PkgRes = ResPath.PkgPath.PkgCommon;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
 }

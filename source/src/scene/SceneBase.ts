@@ -28,20 +28,20 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	private _progresses: number[] = [];
 
 	/** 场景名称 */
-	get name() { return String(this[ "__proto__" ].constructor.name); }
+	get name() { return String(this["__proto__"].constructor.name); }
 
 	load() {
 		const resArr = this.getResGroup(ResGroupType.All);
-		const [ uiRes, skeletonRes, otherRes ] = resArr;
+		const [uiRes, skeletonRes, otherRes] = resArr;
 		let loadCnt = this.setLoadProgres(resArr.length);
 		return Promise.all([
-			loadMgr.loadPackage(uiRes, null, this._progressHandlers[ --loadCnt ]),
-			skeletonMgr.loadSkeleton(skeletonRes, this._progressHandlers[ --loadCnt ]),
-			loadMgr.load(otherRes, null, this._progressHandlers[ --loadCnt ]),
+			loadMgr.loadPackage(uiRes, null, this._progressHandlers[--loadCnt]),
+			skeletonMgr.loadSkeleton(skeletonRes, this._progressHandlers[--loadCnt]),
+			loadMgr.load(otherRes, null, this._progressHandlers[--loadCnt]),
 			//加个最短加载时间，避免loadjing页一闪而过
 			this.loadViewId ? new Promise(resolve => {
-				const tween = Laya.Tween.to(this._progresses, { [ --loadCnt ]: 1 }, 200, null, Laya.Handler.create(null, resolve), 0, true);
-				tween.update = this._progressHandlers[ loadCnt ];
+				const tween = Laya.Tween.to(this._progresses, { [--loadCnt]: 1 }, 200, null, Laya.Handler.create(null, resolve), 0, true);
+				tween.update = this._progressHandlers[loadCnt];
 			}) : null,
 		]).then(
 			() => {
@@ -77,7 +77,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	protected clearRes(type: ResGroupType) {
-		const [ uiRes, skeletonRes, otherRes ] = this.getResGroup(type);
+		const [uiRes, skeletonRes, otherRes] = this.getResGroup(type);
 		uiRes.forEach(v => {
 			const res = fgui.UIPackage.getById(v);
 			res && res.dispose();
@@ -108,14 +108,14 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 		this._progressHandlers.length = 0;
 		for (let i = 0; i < count; i++) {
 			this._progresses.push(0);
-			this._progressHandlers.push(Laya.Handler.create(this, this.onProgress, [ i ], false));
+			this._progressHandlers.push(Laya.Handler.create(this, this.onProgress, [i], false));
 		}
 		this.onProgress(0, 0);
 		return count;
 	}
 
 	private onProgress(index: number, progress: number) {
-		progress != null && (this._progresses[ index ] = progress);
+		progress != null && (this._progresses[index] = progress);
 		Laya.timer.callLater(this, this.updateProgres);
 	}
 
@@ -127,7 +127,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	/** 获取资源数组 */
-	private getResGroup(groupType: ResGroupType): [ string[], string[], string[] ] {
+	private getResGroup(groupType: ResGroupType): [string[], string[], string[]] {
 		const uiRes: string[] = [];
 		const skeletonRes: string[] = [];
 		const otherRes: string[] = [];
@@ -136,13 +136,13 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 			case ResGroupType.Normal: resArr = this.getNormalResArray(); break;
 			case ResGroupType.Const: resArr = this.getConstResArray(); break;
 			case ResGroupType.All: resArr = this.getNormalResArray().concat(this.getConstResArray()); break;
-			default: return [ [], [], [] ];
+			default: return [[], [], []];
 		}
 		resArr.forEach(res => {
 			if (res.startsWith("res/ui/")) uiRes.push(res);
 			else if (res.startsWith("res/skeleton/")) skeletonRes.push(res);
 			else otherRes.push(res);
 		});
-		return [ uiRes, skeletonRes, otherRes ];
+		return [uiRes, skeletonRes, otherRes];
 	}
 }

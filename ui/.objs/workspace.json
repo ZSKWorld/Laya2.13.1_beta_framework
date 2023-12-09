@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "gridSize": 10,
+  "auxline1": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66qjdo0",
@@ -56,6 +56,6 @@
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "auxline1": true,
+  "gridSize": 10,
   "gridColor": 42
 }

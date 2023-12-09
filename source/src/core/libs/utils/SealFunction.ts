@@ -26,12 +26,12 @@ export function SealFunction(funcName: string | string[]) {
                 if (Array.isArray(funcName)) {
                     const len = funcName.length;
                     for (let i = 0; i < len; i++) {
-                        if (this[ funcName[ i ] ] !== NewClass.prototype[ funcName[ i ] ])
-                            throw ("密封方法不能重写=>" + funcName[ i ]);
+                        if (this[funcName[i]] !== NewClass.prototype[funcName[i]])
+                            throw ("密封方法不能重写=>" + funcName[i]);
                     }
                 }
                 else {
-                    if (this[ funcName ] !== NewClass.prototype[ funcName ])
+                    if (this[funcName] !== NewClass.prototype[funcName])
                         throw ("密封方法不能重写=>" + funcName);
                 }
             }

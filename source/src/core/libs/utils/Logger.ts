@@ -14,15 +14,15 @@ export class Logger {
     };
     /** 默认日志打印器 */
     private static readonly default = new Logger("Default", true);
-    private static loggerMap: { [ name: string ]: Logger } = {};
+    private static loggerMap: { [name: string]: Logger } = {};
     /** 是否开启日志打印，全局开关 */
     private static enable: boolean = true;
     /** 各类型日志 字体颜色和背景色 */
-    private static color: { [ key in LogLevel ]: [ string, string, string ] } = {
-        [ LogLevel.Log ]: [ "#FFFFFF", "#00AAFF", "#FF0000" ],
-        [ LogLevel.Warn ]: [ "#000080", "#FFC900", "#FF0000" ],
-        [ LogLevel.Error ]: [ "#FF0000", "#FFC8C8", "#FF0000" ],
-        [ LogLevel.Assert ]: [ "#FF0000", "#FFC8C8", "#FF0000" ],
+    private static color: { [key in LogLevel]: [string, string, string] } = {
+        [LogLevel.Log]: ["#FFFFFF", "#00AAFF", "#FF0000"],
+        [LogLevel.Warn]: ["#000080", "#FFC900", "#FF0000"],
+        [LogLevel.Error]: ["#FF0000", "#FFC8C8", "#FF0000"],
+        [LogLevel.Assert]: ["#FF0000", "#FFC8C8", "#FF0000"],
     }
 
     /**
@@ -32,9 +32,9 @@ export class Logger {
      */
     static Create(name: string, enable = true) {
         if (!this.enable) return this.default;
-        let logger = Logger.loggerMap[ name ];
+        let logger = Logger.loggerMap[name];
         if (!logger)
-            Logger.loggerMap[ name ] = logger = new Logger(name);
+            Logger.loggerMap[name] = logger = new Logger(name);
         return logger.setEnable(enable);
     }
 
@@ -58,26 +58,26 @@ export class Logger {
         return args;
         const borderRadius = 7;
         name += name ? ":" : "";
-        const logParams = [ "%c" + name + type, `color:${ this.color[ type ][ 0 ] };border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px;background:#66CCFF;padding:5px;` ];
+        const logParams = ["%c" + name + type, `color:${ this.color[type][0] };border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px;background:#66CCFF;padding:5px;`];
         const len = args.length;
         let lastIsStr = false;
         let lastStrIndex = 1;
         for (let i = 0; i < len; i++) {
-            const msg = args[ i ];
+            const msg = args[i];
             if (typeof msg == "object") {
-                logParams[ 0 ] += "%o";
+                logParams[0] += "%o";
                 logParams.push(msg);
                 lastIsStr = false;
             }
             else {
-                logParams[ 0 ] += "%c" + String(msg);
-                logParams.push(`color:${ this.color[ type ][ 0 ] };padding:5px;background:${ this.color[ type ][ 1 ] };font-weight:bold;${ lastIsStr ? "border-left:2px solid #ffffff;border-top:1px solid #ffffff;" : "" }`);
+                logParams[0] += "%c" + String(msg);
+                logParams.push(`color:${ this.color[type][0] };padding:5px;background:${ this.color[type][1] };font-weight:bold;${ lastIsStr ? "border-left:2px solid #ffffff;border-top:1px solid #ffffff;" : "" }`);
                 lastIsStr = true;
                 lastStrIndex = logParams.length - 1;
             }
         }
-        if (lastStrIndex == 1) logParams[ lastStrIndex ] = logParams[ lastStrIndex ].replace(`border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px`, `border-radius:${ borderRadius }px`);
-        else logParams[ lastStrIndex ] += `border-radius:0px ${ borderRadius }px ${ borderRadius }px 0px;`;
+        if (lastStrIndex == 1) logParams[lastStrIndex] = logParams[lastStrIndex].replace(`border-radius:${ borderRadius }px 0px 0px ${ borderRadius }px`, `border-radius:${ borderRadius }px`);
+        else logParams[lastStrIndex] += `border-radius:0px ${ borderRadius }px ${ borderRadius }px 0px;`;
         return logParams;
     }
 

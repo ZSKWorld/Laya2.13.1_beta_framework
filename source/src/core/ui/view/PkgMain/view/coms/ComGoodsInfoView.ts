@@ -16,23 +16,23 @@ export class ComGoodsInfoView extends ExtensionClass<IView, ComGoodsInfo>(ComGoo
 
 	override onCreate() {
 		const { btn_collect, btn_use, btn_sell, btn_buy, input_num } = this;
-		btn_collect.onClick(this, this.sendMessage, [ ComGoodsInfoMsg.OnBtnCollectClick ]);
-		btn_use.onClick(this, this.sendMessage, [ ComGoodsInfoMsg.OnBtnUseClick ]);
-		btn_sell.onClick(this, this.sendMessage, [ ComGoodsInfoMsg.OnBtnSellClick ]);
-		btn_buy.onClick(this, this.sendMessage, [ ComGoodsInfoMsg.OnBtnBuyClick ]);
-		input_num.on(Laya.Event.INPUT, this, this.sendMessage, [ ComGoodsInfoMsg.OnNumInput ]);
+		btn_collect.onClick(this, this.sendMessage, [ComGoodsInfoMsg.OnBtnCollectClick]);
+		btn_use.onClick(this, this.sendMessage, [ComGoodsInfoMsg.OnBtnUseClick]);
+		btn_sell.onClick(this, this.sendMessage, [ComGoodsInfoMsg.OnBtnSellClick]);
+		btn_buy.onClick(this, this.sendMessage, [ComGoodsInfoMsg.OnBtnBuyClick]);
+		input_num.on(Laya.Event.INPUT, this, this.sendMessage, [ComGoodsInfoMsg.OnNumInput]);
 	}
 
 	setContent(id: number, buy: boolean) {
-		const realID = buy ? cfgMgr.Shop[ id ].sellID : id;
-		const { sellRewards, name, desc, quality, useRequire, itemType, salable } = cfgMgr.Item[ realID ];
+		const realID = buy ? cfgMgr.Shop[id].sellID : id;
+		const { sellRewards, name, desc, quality, useRequire, itemType, salable } = cfgMgr.Item[realID];
 		const canSell = !buy && !!salable;
 		this.ctrlState.selectedIndex = buy ? 3 : (canSell ? 2 : 1);
 		const sellTxt = buy ? "" : (canSell ? `<br>出售：${ GameUtil.GetItemString(sellRewards, true, true) }` : "<br>[color=#FF0000]不可出售[/color]");
-		const buyTxt = buy ? `<br>价格：${ GameUtil.GetItemString(cfgMgr.Shop[ id ].sellPrice) }` : "";
+		const buyTxt = buy ? `<br>价格：${ GameUtil.GetItemString(cfgMgr.Shop[id].sellPrice) }` : "";
 		const haveTxt = buy ? `<br>拥有：${ userData.bag.getItemCount(realID) }` : "";
 		this.txt_content.text = `${ GameUtil.GetColorStr(quality, name + (buy ? "" : ` x${ userData.bag.getItemCount(id) }`)) }
-			<br>类别：${ cfgMgr.Lang[ itemType || 1110 ].text }`
+			<br>类别：${ cfgMgr.Lang[itemType || 1110].text }`
 			+ buyTxt + haveTxt
 			+ `<br>境界需求：${ useRequire ? UserUtil.GetJingJieStr(useRequire.jingJie, useRequire.cengJi) : "无" }`
 			+ sellTxt

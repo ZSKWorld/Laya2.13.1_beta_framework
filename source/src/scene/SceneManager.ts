@@ -8,7 +8,7 @@ class SceneManager extends Observer {
 	private _loadCompleted: boolean = true;
 	private _sceneMap: Map<SceneType, IScene>;
 
-	init(sceneMap: [ SceneType, IScene ][]) {
+	init(sceneMap: [SceneType, IScene][]) {
 		if (!this._sceneMap) {
 			this._sceneMap = new Map(sceneMap);
 		}

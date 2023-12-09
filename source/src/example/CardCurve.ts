@@ -115,9 +115,9 @@ module fight.duel {
                     case AnimationPropertyType.LocalScale: property = transform.localScale; break;
                     default: return;
                 }
-                property.x = this.hermiteInterpolate(v.curves[ 0 ], _time, property.x);
-                property.y = this.hermiteInterpolate(v.curves[ 1 ], _time, property.y);
-                property.z = this.hermiteInterpolate(v.curves[ 2 ], _time, property.z);
+                property.x = this.hermiteInterpolate(v.curves[0], _time, property.x);
+                property.y = this.hermiteInterpolate(v.curves[1], _time, property.y);
+                property.z = this.hermiteInterpolate(v.curves[2], _time, property.z);
                 switch (v.propertyeType) {
                     case AnimationPropertyType.LocalPosition: transform.localPosition = property; break;
                     case AnimationPropertyType.LocalEuler: transform.localRotationEuler = property; break;
@@ -138,13 +138,13 @@ module fight.duel {
             if (!curve) return defaultValue;
             const n = curve.length;
             if (n < 1) return defaultValue;
-            if (t <= curve[ 0 ].x) return curve[ 0 ].y;
-            if (t >= curve[ n - 1 ].x) return curve[ n - 1 ].y;
-            if (n == 1) return curve[ 0 ].y;
+            if (t <= curve[0].x) return curve[0].y;
+            if (t >= curve[n - 1].x) return curve[n - 1].y;
+            if (n == 1) return curve[0].y;
             for (let i = 1; i < n; i++) {
-                if (curve[ i ].x >= t) {
-                    const { x: x0, y: y0, outTangent: out0 } = curve[ i - 1 ];
-                    const { x: x1, y: y1, inTangent: in1 } = curve[ i ];
+                if (curve[i].x >= t) {
+                    const { x: x0, y: y0, outTangent: out0 } = curve[i - 1];
+                    const { x: x1, y: y1, inTangent: in1 } = curve[i];
                     const rate0 = (t - x0) / (x1 - x0);
                     const rate1 = (t - x1) / (x0 - x1);
                     return (y0 * (1 + 2 * rate0) + out0 * (t - x0)) * rate1 * rate1 + (y1 * (1 + 2 * rate1) + in1 * (t - x1)) * rate0 * rate0;

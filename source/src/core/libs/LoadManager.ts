@@ -17,7 +17,7 @@ class LoadManager {
 				this.checkLoaded(complete, resolve, reject, url, true);
 			}
 			else
-				Laya.loader.load(url, Laya.Handler.create(this, this.checkLoaded, [ complete, resolve, reject, url ]),
+				Laya.loader.load(url, Laya.Handler.create(this, this.checkLoaded, [complete, resolve, reject, url]),
 					progress, type, priority, cache, group, ignoreCache, useWorkerLoader);
 		});
 	}
@@ -38,7 +38,7 @@ class LoadManager {
 				this.checkLoaded(complete, resolve, reject, url, true);
 			}
 			else
-				Laya.loader.create(url, Laya.Handler.create(this, this.checkLoaded, [ complete, resolve, reject, url ]),
+				Laya.loader.create(url, Laya.Handler.create(this, this.checkLoaded, [complete, resolve, reject, url]),
 					progress, type, constructParams, propertyParams, priority, cache);
 		});
 	}
@@ -54,7 +54,7 @@ class LoadManager {
 				this.checkLoaded(complete, resolve, reject, resKey, true);
 			}
 			else
-				fgui.UIPackage.loadPackage(resKey, Laya.Handler.create(this, this.checkLoaded, [ complete, resolve, reject, resKey ]), progress);
+				fgui.UIPackage.loadPackage(resKey, Laya.Handler.create(this, this.checkLoaded, [complete, resolve, reject, resKey]), progress);
 		});
 	}
 

@@ -15,10 +15,10 @@ export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGo
 
     refreshShop(id: number) {
         const { txt_name, txt_count } = this;
-        const { name, quality } = cfgMgr.Item[ id ];
+        const { name, quality } = cfgMgr.Item[id];
         txt_name.text = name;
         txt_count.text = "";
-        txt_name.color = cfgMgr.Color[ quality ].color;
+        txt_name.color = cfgMgr.Color[quality].color;
         txt_count.color = txt_name.color;
     }
 
@@ -39,11 +39,11 @@ export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGo
     }
 
     refreshSkill(skillID: number, unlock: boolean, sect: number) {
-        const itemCfg = cfgMgr.Item[ skillID ];
-        const skillCfg = cfgMgr.SkillBook[ skillID ];
+        const itemCfg = cfgMgr.Item[skillID];
+        const skillCfg = cfgMgr.SkillBook[skillID];
         //#F48B59   #623E2E #474747
         const { txt_name, bg } = this;
-        txt_name.text = itemCfg?.name.split("·")[ 1 ] || "0";
+        txt_name.text = itemCfg?.name.split("·")[1] || "0";
 
         const canUse = skillCfg && (skillCfg.sectRequire.length ? skillCfg.sectRequire.includes(sect) : true);
         this.touchable = unlock && canUse;

@@ -17,12 +17,12 @@ export class UIEquipmentInfoView extends ExtensionClass<IView, UIEquipmentInfo>(
 	override onCreate() {
 		const { graph_bg, btn_sell, btn_dress, btn_intensify, btn_inlay, btn_engrave, btn_bless } = this;
 		graph_bg.onClick(this, this.removeSelf);
-		btn_sell.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnSellClick ]);
-		btn_dress.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnDressClick ]);
-		btn_intensify.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnIntensifyClick ]);
-		btn_inlay.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnInlayClick ]);
-		btn_engrave.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnEngraveClick ]);
-		btn_bless.onClick(this, this.sendMessage, [ UIEquipmentInfoMsg.OnBtnBlessClick ]);
+		btn_sell.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnSellClick]);
+		btn_dress.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnDressClick]);
+		btn_intensify.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnIntensifyClick]);
+		btn_inlay.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnInlayClick]);
+		btn_engrave.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnEngraveClick]);
+		btn_bless.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnBlessClick]);
 	}
 
 	refreshEquipInfo(equip1: IEquipment, equip2: IEquipment, hasGem: boolean) {

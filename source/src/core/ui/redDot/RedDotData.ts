@@ -61,7 +61,7 @@ export class RedDotData implements IRedDotData {
         let count = 0;
         if (hasTrigger) {
             for (const key in _triggeredMap) {
-                count += _triggeredMap[ key ];
+                count += _triggeredMap[key];
             }
         }
         _childs.forEach(v => count += Math.max(v.rdCount, 0));
@@ -102,7 +102,7 @@ export class RedDotData implements IRedDotData {
         const { _childs } = this;
         let child: IRedDotData;
         for (let i = 0, cnt = _childs.length; i < cnt; i++) {
-            child = _childs[ i ];
+            child = _childs[i];
             if (child.id == id) break;
         }
         return child;
@@ -116,7 +116,7 @@ export class RedDotData implements IRedDotData {
         const { _childs } = this;
         let child: RedDotData;
         for (let i = _childs.length - 1; i >= 0; i--) {
-            child = _childs[ i ];
+            child = _childs[i];
             if (child.id == id) {
                 child._parent = null;
                 _childs.splice(i, 1);
@@ -159,13 +159,13 @@ export class RedDotData implements IRedDotData {
     private onTrigger(type: RDTriggerType, triggered: boolean, id?: number) {
         if (!this.hasTrigger) return;
         if (id == this.id || this.triggers.indexOf(type) >= 0) {
-            this._triggeredMap[ type ] = +!!triggered;
+            this._triggeredMap[type] = +!!triggered;
             this.calculateCountLater(id == this.id);
         }
     }
 
     private calculateCountLater(force?: boolean) {
-        Laya.timer.callLater(this, this.calculateRD, [ force ]);
+        Laya.timer.callLater(this, this.calculateRD, [force]);
     }
 }
 

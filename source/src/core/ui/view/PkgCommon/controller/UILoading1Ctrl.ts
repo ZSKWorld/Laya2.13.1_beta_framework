@@ -31,7 +31,7 @@ export class UILoading1Ctrl<V extends Loading1Type = UILoading1View, D extends U
         if (this.curTime >= this.deltaTime) {
             this.curTime = 0;
             if (this._tips.length)
-                this.view.txt_tip.text = this._tips[ MathUtil.RandomInt(0, this._tips.length - 1) ];
+                this.view.txt_tip.text = this._tips[MathUtil.RandomInt(0, this._tips.length - 1)];
         }
     }
 

@@ -1,7 +1,6 @@
 import { GameEvent } from "../common/GameEvent";
 import { Observer } from "../libs/event/Observer";
 import { MathUtil } from "../libs/math/MathUtil";
-import { Logger } from "../libs/utils/Logger";
 
 /** 历练日志管理器 */
 class TrainLogManager extends Observer {
@@ -21,20 +20,20 @@ class TrainLogManager extends Observer {
 
     randomLog() {
         const logs = TrainLogManager.constLogs;
-        this.addLog(logs[ MathUtil.RandomInt(0, logs.length - 1) ]);
+        this.addLog(logs[MathUtil.RandomInt(0, logs.length - 1)]);
     }
 
     @RegisterEvent(GameEvent.AddExperienceLog)
     private addLog(log: string | string[]) {
         if (Array.isArray(log)) this._logs.push(...log);
         else this._logs.push(log);
-        Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);
+        Laya.timer.callLater(this, this.dispatch, [GameEvent.RefreshExperienceLog]);
     }
 
     @RegisterEvent(GameEvent.ClearExperienceLog)
     private clearLog() {
         this._logs.length = 0;
-        Laya.timer.callLater(this, this.dispatch, [ GameEvent.RefreshExperienceLog ]);
+        Laya.timer.callLater(this, this.dispatch, [GameEvent.RefreshExperienceLog]);
     }
 }
 export const trainLogMgr = new TrainLogManager();

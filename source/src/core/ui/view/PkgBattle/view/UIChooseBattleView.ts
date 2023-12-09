@@ -10,7 +10,7 @@ export class UIChooseBattleView extends ExtensionClass<IView, UIChooseBattle>(UI
 
 	override onCreate() {
 		const { btn_back } = this;
-		btn_back.onClick(this, this.sendMessage, [ UIChooseBattleMsg.OnBtnBackClick ]);
+		btn_back.onClick(this, this.sendMessage, [UIChooseBattleMsg.OnBtnBackClick]);
 	}
 
 	setBattleType(type: number) {

@@ -22,7 +22,7 @@ export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl>{
     @RegisterEvent(NetMessage.BuyGoods)
     private buyGoods(output: BuyGoodsOutput, input: BuyGoodsInput) {
         let titleStr = richStrMgr.start("消耗");
-        const item = cfgMgr.Shop[ input.id ];
+        const item = cfgMgr.Shop[input.id];
         item.sellPrice.forEach(v => titleStr.combineSpace(GameUtil.GetItemCountStr(v.id, v.count * input.count)));
         titleStr.combineSpace("购买");
         GameUtil.ShowRewardsTip(titleStr.end(), output.rewards);

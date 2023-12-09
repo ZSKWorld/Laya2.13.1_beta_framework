@@ -1,5 +1,5 @@
-import ComAbode from "../../../../ui/PkgMain/ComAbode";
 import { ResPath } from "../../../../../common/ResPath";
+import ComAbode from "../../../../ui/PkgMain/ComAbode";
 
 export const enum ComAbodeMsg {
 	OnBtnCreateClick = "ComAbode_OnBtnCreateClick",
@@ -11,16 +11,16 @@ export const enum ComAbodeMsg {
 }
 
 export class ComAbodeView extends ExtensionClass<IView, ComAbode>(ComAbode) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-        const { btn_create, btn_about, btn_setting, btn_meet, btn_pet, btn_repair } = this;
-		btn_create.onClick(this, this.sendMessage, [ ComAbodeMsg.OnBtnCreateClick ]);
-		btn_about.onClick(this, this.sendMessage, [ ComAbodeMsg.OnBtnAboutClick ]);
-		btn_setting.onClick(this, this.sendMessage, [ ComAbodeMsg.OnBtnSettingClick ]);
-		btn_meet.onClick(this, this.sendMessage, [ ComAbodeMsg.OnBtnMeetClick ]);
-		btn_pet.onClick(this, this.sendMessage, [ ComAbodeMsg.OnBtnPetClick ]);
-		btn_repair.onClick(this, this.sendMessage, [ ComAbodeMsg.OnBtnRepairClick ]);
-    }
+		const { btn_create, btn_about, btn_setting, btn_meet, btn_pet, btn_repair } = this;
+		btn_create.onClick(this, this.sendMessage, [ComAbodeMsg.OnBtnCreateClick]);
+		btn_about.onClick(this, this.sendMessage, [ComAbodeMsg.OnBtnAboutClick]);
+		btn_setting.onClick(this, this.sendMessage, [ComAbodeMsg.OnBtnSettingClick]);
+		btn_meet.onClick(this, this.sendMessage, [ComAbodeMsg.OnBtnMeetClick]);
+		btn_pet.onClick(this, this.sendMessage, [ComAbodeMsg.OnBtnPetClick]);
+		btn_repair.onClick(this, this.sendMessage, [ComAbodeMsg.OnBtnRepairClick]);
+	}
 
 }

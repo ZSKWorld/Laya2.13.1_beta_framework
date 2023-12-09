@@ -17,13 +17,13 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 	private showType: ItemBagType = ItemBagType.Collect;
 
 	override onAdded() {
-		this.addMessage(ComGoodsMsg.OnBtnShouCangClick, this.refreshListByType, [ ItemBagType.Collect ]);
-		this.addMessage(ComGoodsMsg.OnBtnEquipClick, this.refreshListByType, [ ItemBagType.Equip ]);
-		this.addMessage(ComGoodsMsg.OnBtnPropClick, this.refreshListByType, [ ItemBagType.Prop ]);
-		this.addMessage(ComGoodsMsg.OnBtnGemClick, this.refreshListByType, [ ItemBagType.Gem ]);
-		this.addMessage(ComGoodsMsg.OnBtnMaterialClick, this.refreshListByType, [ ItemBagType.Material ]);
-		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.refreshListByType, [ ItemBagType.Book ]);
-		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.refreshListByType, [ ItemBagType.Other ]);
+		this.addMessage(ComGoodsMsg.OnBtnShouCangClick, this.refreshListByType, [ItemBagType.Collect]);
+		this.addMessage(ComGoodsMsg.OnBtnEquipClick, this.refreshListByType, [ItemBagType.Equip]);
+		this.addMessage(ComGoodsMsg.OnBtnPropClick, this.refreshListByType, [ItemBagType.Prop]);
+		this.addMessage(ComGoodsMsg.OnBtnGemClick, this.refreshListByType, [ItemBagType.Gem]);
+		this.addMessage(ComGoodsMsg.OnBtnMaterialClick, this.refreshListByType, [ItemBagType.Material]);
+		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.refreshListByType, [ItemBagType.Book]);
+		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.refreshListByType, [ItemBagType.Other]);
 
 		UIUtility.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
@@ -41,13 +41,13 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 	}
 
 	private onListRenderer(index: number, item: RenderGoodsView) {
-		item.refreshGoods(this.items[ index ]);
+		item.refreshGoods(this.items[index]);
 	}
 
 	private onListClick(item: any) {
 		const list = this.view.list_item;
 		const index = list.childIndexToItemIndex(list.getChildIndex(item));
-		const data = this.items[ index ];
+		const data = this.items[index];
 		if (this.showType == ItemBagType.Equip) {
 			let equip1 = <IEquipment>data;
 			let equip2 = <IEquipment>userData.body.getDressedEquip(equip1.part);

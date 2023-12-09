@@ -23,18 +23,18 @@ export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 
 	override onCreate() {
 		const { btn_wuQi, btn_xiangLian, btn_jieZhi, btn_huFu, btn_zuoQi, btn_anQi, btn_touKui, btn_yiFu, btn_xiaZhuang, btn_xieZi, btn_shiZhuang, btn_faBao } = this;
-		btn_wuQi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnWuQiClick ]);
-		btn_xiangLian.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXiangLianClick ]);
-		btn_jieZhi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnJieZhiClick ]);
-		btn_huFu.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnHuFuClick ]);
-		btn_zuoQi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnZuoQiClick ]);
-		btn_anQi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnAnQiClick ]);
-		btn_touKui.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnTouKuiClick ]);
-		btn_yiFu.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnYiFuClick ]);
-		btn_xiaZhuang.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXiaZhuangClick ]);
-		btn_xieZi.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnXieZiClick ]);
-		btn_shiZhuang.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnShiZhuangClick ]);
-		btn_faBao.onClick(this, this.sendMessage, [ ComRenWuMsg.OnBtnFaBaoClick ]);
+		btn_wuQi.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnWuQiClick]);
+		btn_xiangLian.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnXiangLianClick]);
+		btn_jieZhi.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnJieZhiClick]);
+		btn_huFu.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnHuFuClick]);
+		btn_zuoQi.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnZuoQiClick]);
+		btn_anQi.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnAnQiClick]);
+		btn_touKui.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnTouKuiClick]);
+		btn_yiFu.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnYiFuClick]);
+		btn_xiaZhuang.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnXiaZhuangClick]);
+		btn_xieZi.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnXieZiClick]);
+		btn_shiZhuang.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnShiZhuangClick]);
+		btn_faBao.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnFaBaoClick]);
 	}
 
 	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
@@ -62,7 +62,7 @@ export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 		btn_shiZhuang.text = fashion ? (fashion.name + " +" + fashion.level) : "无";
 		btn_faBao.text = magicWeapon ? (magicWeapon.name + " +" + magicWeapon.level) : "无";
 
-		const defaultColor = cfgMgr.Color[ 1 ].color;
+		const defaultColor = cfgMgr.Color[1].color;
 		btn_wuQi.titleColor = weapon?.color || defaultColor;
 		btn_xiangLian.titleColor = necklace?.color || defaultColor;
 		btn_jieZhi.titleColor = ring?.color || defaultColor;
@@ -78,7 +78,7 @@ export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 		btn_faBao.titleColor = magicWeapon?.color || defaultColor;
 
 		// const { jinGong, muGong, shuiGong, huoGong, tuGong, jinFang, muFang, shuiFang, huoFang, tuFang, } = this.userData.attribute;
-		const [ jinGong, muGong, shuiGong, huoGong, tuGong, jinFang, muFang, shuiFang, huoFang, tuFang ] = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+		const [jinGong, muGong, shuiGong, huoGong, tuGong, jinFang, muFang, shuiFang, huoFang, tuFang] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		txt_jingLi.text = "精力：" + Math.floor(vigor) + "/" + maxVigro;
 		txt_jinAtk.text = "金攻：" + jinGong;
 		txt_muAtk.text = "木攻：" + muGong;

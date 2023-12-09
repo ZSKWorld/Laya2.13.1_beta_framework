@@ -1,20 +1,20 @@
 /** FGUI修复 */
-export class FGUIRepair{
-    static Fix(){
-        this.UbbTagI();
-        this.PlayTransitionAction();
-        this.FixGUIInputSingleLine();
+export class FGUIRepair {
+	static Fix() {
+		this.UbbTagI();
+		this.PlayTransitionAction();
+		this.FixGUIInputSingleLine();
 		this.FixGUILoadPackgeProgressError();
 		this.FixGUIRichTextAlignError();
-    }
+	}
 
 	/**修复GUI粗体不生效 */
 	private static UbbTagI() {
 		const inst = fgui.UBBParser.inst as any;
-		inst._handlers[ "i" ] = function onTag_I(tagName, end, attr) {
+		inst._handlers["i"] = function onTag_I(tagName, end, attr) {
 			return end ? ("</span>") : ("<span style='italic:true'>");
 		}
-		inst._handlers[ "u" ] = function onTag_U(tagName, end, attr) {
+		inst._handlers["u"] = function onTag_U(tagName, end, attr) {
 			if (!end) return "<a href=\" \">";
 			else return "</a>";
 		}
@@ -23,7 +23,7 @@ export class FGUIRepair{
 	/** 修改控制器动效播放机制为每次都从头播放 */
 	private static PlayTransitionAction() {
 		const prototype = fgui.PlayTransitionAction.prototype;
-		prototype[ "enter" ] = function (controller: fgui.Controller) {
+		prototype["enter"] = function (controller: fgui.Controller) {
 			if (!this._currentTransition) {
 				this._currentTransition = controller.parent.getTransition(this.transitionName);
 			}
@@ -54,18 +54,18 @@ export class FGUIRepair{
 			let i;
 			if (Array.isArray(resKey)) {
 				for (i = 0; i < resKey.length; i++) {
-					loadKeyArr.push({ url: resKey[ i ] + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER });
-					keys.push(resKey[ i ]);
+					loadKeyArr.push({ url: resKey[i] + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER });
+					keys.push(resKey[i]);
 				}
 			}
 			else {
-				loadKeyArr = [ { url: resKey + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER } ];
-				keys = [ resKey ];
+				loadKeyArr = [{ url: resKey + "." + fgui.UIConfig.packageFileExtension, type: Laya.Loader.BUFFER }];
+				keys = [resKey];
 			}
 			let pkgArr = [];
 			let pkg;
 			for (i = 0; i < loadKeyArr.length; i++) {
-				pkg = UIPackage._instById[ keys[ i ] ];
+				pkg = UIPackage._instById[keys[i]];
 				if (pkg) {
 					pkgArr.push(pkg);
 					loadKeyArr.splice(i, 1);
@@ -75,22 +75,22 @@ export class FGUIRepair{
 			}
 			if (loadKeyArr.length == 0) {
 				progressHandler && progressHandler.runWith(1);
-				completeHandler.runWith([ pkgArr ]);
+				completeHandler.runWith([pkgArr]);
 				return;
 			}
 			var descCompleteHandler = Laya.Handler.create(this, function () {
 				let pkg;
 				let urls = [];
 				for (i = 0; i < loadKeyArr.length; i++) {
-					let asset = fgui.AssetProxy.inst.getRes(loadKeyArr[ i ].url);
+					let asset = fgui.AssetProxy.inst.getRes(loadKeyArr[i].url);
 					if (asset) {
 						pkg = new UIPackage();
 						pkgArr.push(pkg);
-						pkg._resKey = keys[ i ];
+						pkg._resKey = keys[i];
 						pkg.loadPackage(new fgui.ByteBuffer(asset));
 						let cnt = pkg._items.length;
 						for (let j = 0; j < cnt; j++) {
-							let pi = pkg._items[ j ];
+							let pi = pkg._items[j];
 							if (pi.type == fgui.PackageItemType.Atlas) {
 								urls.push({ url: pi.file, type: Laya.Loader.IMAGE });
 							}
@@ -103,27 +103,27 @@ export class FGUIRepair{
 				if (urls.length > 0) {
 					fgui.AssetProxy.inst.load(urls, Laya.Handler.create(this, function () {
 						for (i = 0; i < pkgArr.length; i++) {
-							pkg = pkgArr[ i ];
-							if (!UIPackage._instById[ pkg.id ]) {
-								UIPackage._instById[ pkg.id ] = pkg;
-								UIPackage._instByName[ pkg.name ] = pkg;
-								UIPackage._instById[ pkg._resKey ] = pkg;
+							pkg = pkgArr[i];
+							if (!UIPackage._instById[pkg.id]) {
+								UIPackage._instById[pkg.id] = pkg;
+								UIPackage._instByName[pkg.name] = pkg;
+								UIPackage._instById[pkg._resKey] = pkg;
 							}
 						}
-						completeHandler.runWith([ pkgArr ]);
+						completeHandler.runWith([pkgArr]);
 					}, null, true), progressHandler);
 				}
 				else {
 					for (i = 0; i < pkgArr.length; i++) {
-						pkg = pkgArr[ i ];
-						if (!UIPackage._instById[ pkg.id ]) {
-							UIPackage._instById[ pkg.id ] = pkg;
-							UIPackage._instByName[ pkg.name ] = pkg;
-							UIPackage._instById[ pkg._resKey ] = pkg;
+						pkg = pkgArr[i];
+						if (!UIPackage._instById[pkg.id]) {
+							UIPackage._instById[pkg.id] = pkg;
+							UIPackage._instByName[pkg.name] = pkg;
+							UIPackage._instById[pkg._resKey] = pkg;
 						}
 					}
 					progressHandler && progressHandler.runWith(1);
-					completeHandler.runWith([ pkgArr ]);
+					completeHandler.runWith([pkgArr]);
 				}
 			}, null, true);
 			fgui.AssetProxy.inst.load(loadKeyArr, descCompleteHandler, null, Laya.Loader.BUFFER);
@@ -132,7 +132,7 @@ export class FGUIRepair{
 
 	private static FixGUIRichTextAlignError() {
 		const prototype = fgui.GRichTextField.prototype;
-		prototype[ "correctDivXY" ] = function () {
+		prototype["correctDivXY"] = function () {
 			if (!this._div) return;
 			if (!this.parent) return;
 			if (this.align != "center") return;

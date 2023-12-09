@@ -13,8 +13,8 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
 
     override onCreate() {
         const { graph_touch, btn_break } = this;
-        graph_touch.onClick(this, this.sendMessage, [ RenderChooseBattleMsg.OnGraphTouchClick ]);
-        btn_break.onClick(this, this.sendMessage, [ RenderChooseBattleMsg.OnBtnBreakClick ]);
+        graph_touch.onClick(this, this.sendMessage, [RenderChooseBattleMsg.OnGraphTouchClick]);
+        btn_break.onClick(this, this.sendMessage, [RenderChooseBattleMsg.OnBtnBreakClick]);
     }
 
     refreshByType(type: BattleType, data: BattleCfgData) {

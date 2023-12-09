@@ -8,20 +8,27 @@ export class LayaRepair {
     /** 修复Laya.Pool._getClassSign方法，原方法会导致子类和父类回收到一个对象池中 */
     private static FixLayaPoolSign() {
         const pool = Laya.Pool;
-        pool[ "_getClassSign" ] = function (cla: any) {
-            var className = cla[ "__className" ] || (Object.prototype.hasOwnProperty.call(cla, "_$gid") ? cla[ "_$gid" ] : null);
+        pool["_getClassSign"] = function (cla: any) {
+            var className = cla["__className"] || (Object.prototype.hasOwnProperty.call(cla, "_$gid") ? cla["_$gid"] : null);
             if (!className) {
-                cla[ "_$gid" ] = className = Laya.Pool[ "_CLSID" ] + "";
-                Laya.Pool[ "_CLSID" ]++;
+                cla["_$gid"] = className = Laya.Pool["_CLSID"] + "";
+                Laya.Pool["_CLSID"]++;
             }
             return className;
         }
+
+        // var className = cla["__className"] || cla["_$gid"];
+        // if (!className) {
+        //     cla["_$gid"] = className = Pool._CLSID + "";
+        //     Pool._CLSID++;
+        // }
+        // return className;
     }
 
     /** 修复ttf字体浏览器下加载失败不触发加载失败回调的bug */
     private static FixTTFLoaderCallback() {
         const ttfProto = Laya.TTFLoader.prototype;
-        ttfProto[ "_loadWithFontFace" ] = function () {
+        ttfProto["_loadWithFontFace"] = function () {
             var fontFace = new window.FontFace(this.fontName, "url('" + this._url + "')");
             document.fonts["add"](fontFace);
             var self = this;
@@ -32,7 +39,7 @@ export class LayaRepair {
         }
 
         const loaderProto = Laya.Loader.prototype;
-        loaderProto[ "_loadTTF" ] = function (url) {
+        loaderProto["_loadTTF"] = function (url) {
             url = Laya.URL.formatURL(url);
             var ttfLoader = new Laya.TTFLoader();
             ttfLoader.complete = Laya.Handler.create(this, this.onLoaded);

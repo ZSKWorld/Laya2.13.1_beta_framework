@@ -72,8 +72,8 @@ export class Body extends Decode<IBodyData> implements IBody {
             case "mount":
             case "hiddenWeeapon":
             case "fashion":
-            case "magicWeapon": return data[ key ] ? (data[ key ] instanceof Equipment ? data[ key ] : new Equipment().decode(data[ key ])) : null;
-            default: return data[ key ];
+            case "magicWeapon": return data[key] ? (data[key] instanceof Equipment ? data[key] : new Equipment().decode(data[key])) : null;
+            default: return data[key];
         }
     }
 

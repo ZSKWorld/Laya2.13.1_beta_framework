@@ -7,7 +7,7 @@ declare interface IBagCtrl {
     /** 添加/取消 收藏 */
     changeCollect(data: ChangeCollectInput): void;
     /** 分解宝石 */
-    decomposeGem(data:DecomposeGemInput): void;
+    decomposeGem(data: DecomposeGemInput): void;
 
     /** 穿戴装备 */
     dressEquip(data: DressEquipInput): void;
@@ -54,11 +54,11 @@ declare interface ChangeCollectOutput extends UserOutput {
 
 }
 
-declare interface DecomposeGemInput extends UserInput{
+declare interface DecomposeGemInput extends UserInput {
     level: number;
 }
 
-declare interface DecomposeGemOutput extends UserOutput{
+declare interface DecomposeGemOutput extends UserOutput {
     /** 获得的奖励 */
     rewards: IGoodsData[];
 }

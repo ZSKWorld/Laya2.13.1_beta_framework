@@ -28,7 +28,7 @@ export class GameUtil {
     }
 
     static GetColorStr(id: number, text: string) {
-        return richStrMgr.start(text).color(cfgMgr.Color[ id ].color).end();
+        return richStrMgr.start(text).color(cfgMgr.Color[id].color).end();
     }
 
     static ShowRewardsTip(title: string, rewards: IGoodsData[]) {
@@ -44,7 +44,7 @@ export class GameUtil {
 
     /** 获取物品数量字符串 */
     static GetItemCountStr(id: number, count?: number) {
-        const { name, quality } = cfgMgr.Item[ id ];
+        const { name, quality } = cfgMgr.Item[id];
         const color = GameUtil.GetColorStr(quality, name);
         return richStrMgr.start().space().combineSpace(`${ color }${ count != null ? " x" + count : "" }`).space().end();
     }
@@ -52,7 +52,7 @@ export class GameUtil {
     /**获取多个物品字符串 */
     static GetItemString(items: IGoodsData[], hasCount = true, color = false) {
         let str = "";
-        items.forEach((v, index) => str += (color ? this.GetColorStr(cfgMgr.Item[ v.id ].quality, cfgMgr.Item[ v.id ].name) : cfgMgr.Item[ v.id ].name)
+        items.forEach((v, index) => str += (color ? this.GetColorStr(cfgMgr.Item[v.id].quality, cfgMgr.Item[v.id].name) : cfgMgr.Item[v.id].name)
             + (hasCount ? `x${ v.count }` : "") + (index == items.length - 1 ? "" : "、"));
         return str;
     }

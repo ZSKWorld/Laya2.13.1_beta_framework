@@ -15,11 +15,11 @@ export interface ComTrainData {
 export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 
 	override onAdded() {
-		this.addMessage(ComTrainMsg.OnBtnLevelClick, this.enterBattle, [ BattleType.Level ]);
-		this.addMessage(ComTrainMsg.OnBtnCopyClick, this.enterBattle, [ BattleType.Copy ]);
-		this.addMessage(ComTrainMsg.OnBtnSecretClick, this.enterBattle, [ BattleType.Secret ]);
-		this.addMessage(ComTrainMsg.OnBtnBossClick, this.enterBattle, [ BattleType.Boss ]);
-		this.addMessage(ComTrainMsg.OnBtnGatherClick, this.enterBattle, [ BattleType.Gather ]);
+		this.addMessage(ComTrainMsg.OnBtnLevelClick, this.enterBattle, [BattleType.Level]);
+		this.addMessage(ComTrainMsg.OnBtnCopyClick, this.enterBattle, [BattleType.Copy]);
+		this.addMessage(ComTrainMsg.OnBtnSecretClick, this.enterBattle, [BattleType.Secret]);
+		this.addMessage(ComTrainMsg.OnBtnBossClick, this.enterBattle, [BattleType.Boss]);
+		this.addMessage(ComTrainMsg.OnBtnGatherClick, this.enterBattle, [BattleType.Gather]);
 		this.addMessage(ComTrainMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
 		this.addMessage(ComTrainMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
 
@@ -38,7 +38,7 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 	}
 
 	private onListLogRenderer(index: number, item: RenderTextView) {
-		item.setText(trainLogMgr.logs[ index ]);
+		item.setText(trainLogMgr.logs[index]);
 	}
 
 	private enterBattle(battleType: BattleType): void {

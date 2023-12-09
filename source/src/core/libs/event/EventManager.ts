@@ -6,10 +6,10 @@ class EventManager extends Laya.EventDispatcher {
         const eventList = caller.__eventMap;
         if (eventList) {
             for (const eventName in eventList) {
-                const callbackList = eventList[ eventName ];
+                const callbackList = eventList[eventName];
                 for (const k in callbackList) {
-                    const callback: any = callbackList[ k ];
-                    const param = callback[ eventName ];
+                    const callback: any = callbackList[k];
+                    const param = callback[eventName];
                     const once = param ? param.__once : false;
                     const args = param ? param.__args : null;
                     if (once) {
@@ -35,19 +35,19 @@ windowImmit("eventMgr", eventMgr);
 function RegisterEvent(eventName: string, once?: boolean, args?: any[]): MethodDecorator {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         if (!target.__eventMap) target.__eventMap = {};
-        if (!target.__eventMap[ eventName ]) target.__eventMap[ eventName ] = [];
+        if (!target.__eventMap[eventName]) target.__eventMap[eventName] = [];
 
         const func = descriptor.value;
-        const list: Function[] = target.__eventMap[ eventName ];
+        const list: Function[] = target.__eventMap[eventName];
         if (list.indexOf(func) == -1) {
             list.push(func);
             if (once) {
-                func[ eventName ] = func[ eventName ] || {};
-                func[ eventName ].__once = once;
+                func[eventName] = func[eventName] || {};
+                func[eventName].__once = once;
             }
             if (args) {
-                func[ eventName ] = func[ eventName ] || {};
-                func[ eventName ].__args = args;
+                func[eventName] = func[eventName] || {};
+                func[eventName].__args = args;
             }
         }
     };

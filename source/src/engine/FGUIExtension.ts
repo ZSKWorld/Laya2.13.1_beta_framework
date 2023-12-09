@@ -39,19 +39,19 @@ export class FGUIExtension {
 		const touchMgrPrototype = Laya.TouchManager.prototype;
 		const lockChildMap = new Map<number, boolean>();
 		//拦截触摸事件派发，处理事件锁
-		touchMgrPrototype[ "sendEvents" ] = function (eles: (Laya.Sprite & { __eventLockMap: any })[], type) {
+		touchMgrPrototype["sendEvents"] = function (eles: (Laya.Sprite & { __eventLockMap: any })[], type) {
 			let i, len, tE, eventLockMap, lockChild
 			len = eles.length;
 			this._event._stoped = false;
-			let _target = eles[ 0 ];
+			let _target = eles[0];
 			lockChildMap.clear();
 			for (i = len - 1; i >= 0; i--) {
-				tE = eles[ i ];
+				tE = eles[i];
 				if (tE.destroyed) break;
 				eventLockMap = tE.__eventLockMap;
 				if (eventLockMap) {
-					if (eventLockMap[ "$LockAll" ]) lockChild = !!eventLockMap[ "$LockAll_LockChild" ];
-					else if (eventLockMap[ type ]) lockChild = !!eventLockMap[ type + "_LockChild" ];
+					if (eventLockMap["$LockAll"]) lockChild = !!eventLockMap["$LockAll_LockChild"];
+					else if (eventLockMap[type]) lockChild = !!eventLockMap[type + "_LockChild"];
 					else continue;
 					if (lockChild) {
 						i++;
@@ -61,7 +61,7 @@ export class FGUIExtension {
 			}
 			i < 0 && (i = 0);
 			for (; i < len; i++) {
-				tE = eles[ i ];
+				tE = eles[i];
 				if (tE.destroyed)
 					return;
 				if (!lockChildMap.get(i))
@@ -76,7 +76,7 @@ export class FGUIExtension {
 		//拦截事件，处理事件锁
 		eventDispatchProto.event = function (type: string, data?: any): boolean {
 			const eventLockMap = this.__eventLockMap;
-			if (eventLockMap && (eventLockMap[ "$LockAll" ] || eventLockMap[ type ]))
+			if (eventLockMap && (eventLockMap["$LockAll"] || eventLockMap[type]))
 				return;
 			return oldEvent.call(this, type, data);
 		}
@@ -87,15 +87,15 @@ export class FGUIExtension {
 			lockChild = lockChild == void 0 ? true : lockChild;
 			if (this.isDisposed || type == "") return;
 			const eventLockMap = this.displayObject.__eventLockMap || (this.displayObject.__eventLockMap = {});
-			eventLockMap[ type ] = true;
-			eventLockMap[ type + "_LockChild" ] = lockChild;
+			eventLockMap[type] = true;
+			eventLockMap[type + "_LockChild"] = lockChild;
 		}
 		gobjProto.hasEventLock = function (type?: string) {
 			type = type == void 0 ? "$LockAll" : type;
 			if (this.isDisposed || type == "") return false;
 			const eventLockMap = this.displayObject.__eventLockMap;
 			if (eventLockMap)
-				return !!eventLockMap[ type ];
+				return !!eventLockMap[type];
 			return false;
 		}
 		gobjProto.removeEventLock = function (type?: string) {
@@ -103,7 +103,7 @@ export class FGUIExtension {
 			if (this.isDisposed || type == "") return;
 			const eventLockMap = this.displayObject.__eventLockMap;
 			if (eventLockMap) {
-				if (eventLockMap[ type ]) eventLockMap[ type ] = false;
+				if (eventLockMap[type]) eventLockMap[type] = false;
 			}
 		}
 		gobjProto.removeAllEventLock = function () {

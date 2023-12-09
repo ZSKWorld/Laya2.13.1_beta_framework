@@ -15,7 +15,7 @@ export class RedDotNode {
             if (names && names.length) {
                 let target: fgui.GComponent = fgui.GRoot.inst;
                 for (let i = 0, cnt = names.length; i < cnt; i++) {
-                    if (target) target = target.getChild(names[ i ]) as fgui.GComponent;
+                    if (target) target = target.getChild(names[i]) as fgui.GComponent;
                     else break;
                 }
                 if (target) {

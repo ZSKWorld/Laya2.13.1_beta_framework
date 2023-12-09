@@ -15,14 +15,14 @@ export class Bag extends Decode<IBagData> implements IBag {
     isCollect(id: number) { return this.collect.includes(id); }
 
     getItemCount(id: number) {
-        const item = cfgMgr.Item[ id ];
+        const item = cfgMgr.Item[id];
         if (!item) return 0;
         if (item.dataType != DataType.BagData) return 0;
         return this.getItem(id)?.count || 0;
     }
 
     getItem(id: number) {
-        const item = cfgMgr.Item[ id ];
+        const item = cfgMgr.Item[id];
         if (!item) return null;
         let datas: IGoods[];
         switch (item.bagType) {
@@ -51,13 +51,13 @@ export class Bag extends Decode<IBagData> implements IBag {
 
     protected override onDecode(data: IBagData, key: keyof IBagData) {
         switch (key) {
-            case "equipment": return data[ key ].map(v => v instanceof Equipment ? v : new Equipment().decode(v));
+            case "equipment": return data[key].map(v => v instanceof Equipment ? v : new Equipment().decode(v));
             case "gem":
             case "prop":
             case "material":
             case "book":
-            case "other": return data[ key ].map(v => v instanceof Goods ? v : new Goods().decode(v));
-            default: return data[ key ];
+            case "other": return data[key].map(v => v instanceof Goods ? v : new Goods().decode(v));
+            default: return data[key];
         }
     }
 

@@ -43,7 +43,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 		uiMgr.init();
 		viewRegister.init();
 		websocket.init();
-		Laya.timer.once(500, sceneMgr, sceneMgr.enterScene, [ SceneType.LoginScene ]);
+		Laya.timer.once(500, sceneMgr, sceneMgr.enterScene, [SceneType.LoginScene]);
 	}
 
 	protected override onExit() {
@@ -74,14 +74,14 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 				title,
 				content: msg,
 				cancel: cancel,
-				onCancel: cancel ? Laya.Handler.create(null, resolve, [ false ]) : null,
-				onConfirm: Laya.Handler.create(null, resolve, [ true ]),
+				onCancel: cancel ? Laya.Handler.create(null, resolve, [false]) : null,
+				onConfirm: Laya.Handler.create(null, resolve, [true]),
 			});
 		});
 	}
 
-	@RegisterEvent(GameEvent.SocketOpened, false, [ true ])
-	@RegisterEvent(GameEvent.SocketClosed, false, [ false ])
+	@RegisterEvent(GameEvent.SocketOpened, false, [true])
+	@RegisterEvent(GameEvent.SocketClosed, false, [false])
 	private socketConnectChanged(open: boolean) {
 		if (open) uiMgr.removeView(ViewID.UIWaitingView);
 		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
@@ -89,7 +89,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 
 	@RegisterEvent(GameEvent.NetMsgError)
 	private netMsgError(msg: UserOutput) {
-		tipMgr.showTip(cfgMgr.Error[ msg.error ].text);
+		tipMgr.showTip(cfgMgr.Error[msg.error].text);
 		if (msg.error == ErrorCode.NOT_LOGIN)
 			sceneMgr.enterScene(SceneType.LoginScene);
 	}

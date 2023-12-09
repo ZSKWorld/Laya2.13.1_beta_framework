@@ -41,11 +41,11 @@ class UICache {
 /** UI管理类 */
 class UIManager extends Observer {
 	/** 页面类映射 */
-	private _viewClsMap: { [ key: string ]: Class<IView> & { createInstance?(): IView, readonly PkgRes?: string } } = {};
+	private _viewClsMap: { [key: string]: Class<IView> & { createInstance?(): IView, readonly PkgRes?: string } } = {};
 	/** 页面控制器类映射 */
-	private _ctrlClsMap: { [ key: string ]: Class<IViewCtrl> } = {};
+	private _ctrlClsMap: { [key: string]: Class<IViewCtrl> } = {};
 	/** 页面控制器网络代理类映射 */
-	private _proxyClsMap: { [ key: string ]: Class<IViewProxy> } = {};
+	private _proxyClsMap: { [key: string]: Class<IViewProxy> } = {};
 
 	/** 缓存池 */
 	private _cache: UICache;
@@ -57,7 +57,7 @@ class UIManager extends Observer {
 	private _openedCtrls: IViewCtrl[] = [];
 
 	/** 当前显示的顶层页面 */
-	private get topCtrl() { return this._openedCtrls[ 0 ]; }
+	private get topCtrl() { return this._openedCtrls[0]; }
 	private get lockMark() { return this._lockMark; }
 	private set lockMark(value: number) {
 		this._lockMark = value;
@@ -80,29 +80,29 @@ class UIManager extends Observer {
 
 	registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>) {
 		if (!viewCls) throw new Error("参数不能为空！");
-		if (!this._viewClsMap[ viewId ]) {
+		if (!this._viewClsMap[viewId]) {
 			viewCls && (viewCls.prototype.viewId = viewId);
 			ctrlCls && (ctrlCls.prototype.viewId = viewId);
 			ctrlCls && (ctrlCls.prototype.ProxyClass = proxyCls);
 			proxyCls && (proxyCls.prototype.viewId = viewId);
-			this._viewClsMap[ viewId ] = viewCls;
-			this._ctrlClsMap[ viewId ] = ctrlCls;
-			this._proxyClsMap[ viewId ] = proxyCls;
+			this._viewClsMap[viewId] = viewCls;
+			this._ctrlClsMap[viewId] = ctrlCls;
+			this._proxyClsMap[viewId] = proxyCls;
 		}
 	}
 
-	getViewClass(viewId: ViewID) { return this._viewClsMap[ viewId ]; }
+	getViewClass(viewId: ViewID) { return this._viewClsMap[viewId]; }
 
-	getCtrlClass(viewId: ViewID) { return this._ctrlClsMap[ viewId ]; }
+	getCtrlClass(viewId: ViewID) { return this._ctrlClsMap[viewId]; }
 
-	getProxyClass(viewId: ViewID) { return this._proxyClsMap[ viewId ]; }
+	getProxyClass(viewId: ViewID) { return this._proxyClsMap[viewId]; }
 
 	/** 创建页面
 	 * @param viewId 页面id
 	 * @param fullScreen 是否全屏
 	 */
 	createView(viewId: ViewID, fullScreen: boolean = false): IViewCtrl {
-		const viewInst = this._viewClsMap[ viewId ].createInstance();
+		const viewInst = this._viewClsMap[viewId].createInstance();
 		viewInst.name = viewId;
 		fullScreen && viewInst.makeFullScreen();
 		return viewInst.getComponent(this.getCtrlClass(viewId));
@@ -122,7 +122,7 @@ class UIManager extends Observer {
 			viewCtrl = this._cache.getView(viewId);
 			if (viewCtrl) this.showView2(viewCtrl, data, callback);
 			else {
-				fgui.UIPackage.loadPackage([ this._viewClsMap[ viewId ].PkgRes ], Laya.Handler.create(this, (res: any[]) => {
+				fgui.UIPackage.loadPackage([this._viewClsMap[viewId].PkgRes], Laya.Handler.create(this, (res: any[]) => {
 					if (!res || !res.length) {
 						showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
 							if (result) this.showView(viewId, data, callback);
@@ -135,7 +135,7 @@ class UIManager extends Observer {
 				}));
 			}
 		} else {
-			viewCtrl = this._openedCtrls[ openedIndex ];
+			viewCtrl = this._openedCtrls[openedIndex];
 			this.showView2(viewCtrl, data, callback);
 		}
 	}

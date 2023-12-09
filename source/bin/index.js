@@ -19,5 +19,6 @@ loadLib("libs/laya.d3.js")
 loadLib("libs/domparserinone.js")
 loadLib("libs/extends.js")
 loadLib("libs/fairygui.js")
+loadLib("libs/howler.js")
 //-----libs-end-------
 loadLib("js/bundle.js");

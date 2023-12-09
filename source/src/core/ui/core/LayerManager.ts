@@ -11,7 +11,7 @@ export enum Layer {
 
 /** UI层级管理 */
 class LayerManager {
-    private _layerMap: { [ key in Layer ]: fgui.GComponent };
+    private _layerMap: { [key in Layer]: fgui.GComponent };
 
     init() {
         this._layerMap = {} as any;
@@ -21,9 +21,9 @@ class LayerManager {
         for (const key in Layer) {
             if (Object.prototype.hasOwnProperty.call(Layer, key)) {
                 const layer = new fgui.GComponent();
-                layer.name = Layer[ key ];
+                layer.name = Layer[key];
                 gRoot.addChild(layer);
-                this._layerMap[ layer.name ] = layer;
+                this._layerMap[layer.name] = layer;
                 layer.displayObject.mouseThrough = true;
                 layer.displayObject.mouseEnabled = true;
                 layer.makeFullScreen();
@@ -39,9 +39,9 @@ class LayerManager {
      * @returns
      */
     addObject(obj: fgui.GObject, layer: Layer, index?: number) {
-        if (!obj || obj.isDisposed || !this._layerMap[ layer ]) return;
-        index = index ?? this._layerMap[ layer ].numChildren;
-        this._layerMap[ layer ].addChild(obj);
+        if (!obj || obj.isDisposed || !this._layerMap[layer]) return;
+        index = index ?? this._layerMap[layer].numChildren;
+        this._layerMap[layer].addChild(obj);
     }
 
     /**
@@ -52,9 +52,9 @@ class LayerManager {
      * @returns
      */
     addLayaObject(obj: Laya.Sprite, layer: string, index?: number) {
-        if (!obj || obj.destroyed || !this._layerMap[ layer ]) return;
-        index = index ?? this._layerMap[ layer ].numChildren;
-        this._layerMap[ layer ].displayObject.addChildAt(obj, index);
+        if (!obj || obj.destroyed || !this._layerMap[layer]) return;
+        index = index ?? this._layerMap[layer].numChildren;
+        this._layerMap[layer].displayObject.addChildAt(obj, index);
     }
 
 }
