@@ -92,6 +92,26 @@
                 "close": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "tsc监视",
+            "type": "typescript",
+            "tsconfig": "tsconfig.json",
+            "option": "watch",
+            "problemMatcher": [
+                "$tsc-watch"
+            ],
+            "group": "build",
+            "hide": true
+        },
+        {
+            "label": "监视&端口刷新",
+            "type": "shell",
+            "command": "gulp",
+            "dependsOn": [
+                "tsc监视"
+            ],
+            "problemMatcher": []
         }
     ]
 }

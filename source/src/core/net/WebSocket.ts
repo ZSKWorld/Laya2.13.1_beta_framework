@@ -4,7 +4,7 @@ import { MessageType } from "./enum/MessageType";
 import { NetMessage } from "./enum/NetMessage";
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.71.91:8007";
+    private _url: string = "ws://192.168.71.149:8007";
     private _socket: Laya.Socket;
     private _waitList: UserInput[];
     private _current: UserInput;
@@ -89,4 +89,4 @@ class WebSocket extends Observer {
 }
 
 export const websocket = new WebSocket();
-windowImmit("websocket", websocket)
+windowImmit("websocket", websocket);
