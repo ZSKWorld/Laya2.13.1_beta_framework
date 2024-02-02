@@ -8,7 +8,7 @@
  * @param args 参数
  * @return MethodDecorator
  */
-declare function CtrlKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator;
+declare function ViewKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator;
 
 /**
  * 页面控制器鼠标事件装饰器工厂
@@ -17,7 +17,7 @@ declare function CtrlKeyEvent(keyEventType: KeyEventType, key: number, once?: bo
  * @param args 参数
  * @return MethodDecorator
  */
-declare function CtrlMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: any[]): MethodDecorator;
+declare function ViewMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: any[]): MethodDecorator;
 
 /**
  * 页面控制器消息装饰器工厂
@@ -26,7 +26,7 @@ declare function CtrlMouseEvent(mouseEventType: MouseEventType, once?: boolean, 
  * @param args  参数
  * @returns MethodDecorator
  */
-declare function CtrlMessage(name: string, once?: boolean, args?: any[]): MethodDecorator;
+declare function ViewMessage(name: string, once?: boolean, args?: any[]): MethodDecorator;
 
 /** 按键事件类型 */
 declare enum KeyEventType {

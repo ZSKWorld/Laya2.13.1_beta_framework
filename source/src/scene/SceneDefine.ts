@@ -5,6 +5,7 @@ export const enum SceneType {
 	LoginScene = "LoginScene",
 	MainScene = "MainScene",
 	GameScene = "GameScene",
+	LittleGameScene = "LittleGameScene",
 }
 
 /** 逻辑场景 */

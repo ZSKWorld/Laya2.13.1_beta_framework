@@ -6,23 +6,23 @@ import { ComSkillView } from "../../view/PkgMain/view/coms/ComSkillView";
 
 export default class ComChar extends fgui.GComponent {
 
-	public c1:fgui.Controller;
-	public com_renWu:ComRenWuView;
-	public com_xinFa:ComXinFaView;
-	public com_skill:ComSkillView;
-	public RenWuIn:fgui.Transition;
-	public RenWuOut:fgui.Transition;
-	public XinFaIn:fgui.Transition;
-	public XinFaOut:fgui.Transition;
-	public SkillIn:fgui.Transition;
-	public SkillOut:fgui.Transition;
-	public static URL:string = "ui://vith2b66sbd04";
+	public c1: fgui.Controller;
+	public com_renWu: ComRenWuView;
+	public com_xinFa: ComXinFaView;
+	public com_skill: ComSkillView;
+	public RenWuIn: fgui.Transition;
+	public RenWuOut: fgui.Transition;
+	public XinFaIn: fgui.Transition;
+	public XinFaOut: fgui.Transition;
+	public SkillIn: fgui.Transition;
+	public SkillOut: fgui.Transition;
+	public static URL: string = "ui://vith2b66sbd04";
 
-	public static createInstance():ComChar {
+	public static createInstance(): ComChar {
 		return <ComChar>(fgui.UIPackage.createObject("PkgMain", "ComChar"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.c1 = this.getControllerAt(0);
 		this.com_renWu = <ComRenWuView>(this.getChildAt(9));
 		this.com_xinFa = <ComXinFaView>(this.getChildAt(10));

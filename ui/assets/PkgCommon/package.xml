@@ -131,7 +131,7 @@
     <image id="qjdo3v" name="Btn_ShiJianQiPao03.png" path="/Texture/"/>
     <image id="qjdo3w" name="Btn_ShiJianQiPao04.png" path="/Texture/"/>
     <image id="qjdo3x" name="Btn_Xingxi.png" path="/Texture/"/>
-    <image id="qjdo3y" name="Frame_Baojiankuojianzhezhao.png" path="/Texture/"/>
+    <image id="qjdo3y" name="Frame_Baojiankuojianzhezhao.png" path="/Texture/" exported="true"/>
     <image id="qjdo3z" name="Frame_NeiKuang11.png" path="/Texture/"/>
     <image id="qjdo40" name="Icon_Biaoqing_Bad.png" path="/Texture/"/>
     <image id="qjdo41" name="Frame_NeirongBG.png" path="/Texture/"/>
@@ -163,7 +163,7 @@
     <image id="qjdo4r" name="Frame_TipsNeiKuang.png" path="/Texture/"/>
     <image id="qjdo4s" name="Frame_Titlebg01.png" path="/Texture/"/>
     <image id="qjdo4t" name="Frame_Titlebg02.png" path="/Texture/"/>
-    <image id="qjdo4u" name="Frame_TongYong01.png" path="/Texture/"/>
+    <image id="qjdo4u" name="Frame_TongYong01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="27,28,2,1"/>
     <image id="qjdo4v" name="Frame_TongYong02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="39,36,0,3"/>
     <image id="qjdo4w" name="Frame_TongYong03.png" path="/Texture/"/>
     <image id="qjdo4x" name="Frame_WuPinKuang01_L.png" path="/Texture/"/>
@@ -206,6 +206,7 @@
     <component id="j8596j" name="UILoading2.xml" path="/" exported="true"/>
     <component id="shjv6k" name="UIConfirm.xml" path="/" exported="true"/>
     <component id="shjv6l" name="ComConfirm.xml" path="/Component/UIConfirm/"/>
+    <image id="9hon6m" name="Pic_back.png" path="/Texture/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -4,22 +4,22 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComGoods extends fgui.GComponent {
 
-	public ctrlSelectType:fgui.Controller;
-	public btn_shouCang:BtnTxtView;
-	public btn_equip:BtnTxtView;
-	public btn_prop:BtnTxtView;
-	public btn_gem:BtnTxtView;
-	public btn_material:BtnTxtView;
-	public btn_book:BtnTxtView;
-	public btn_other:BtnTxtView;
-	public list_item:fgui.GList;
-	public static URL:string = "ui://vith2b66sbd02";
+	public ctrlSelectType: fgui.Controller;
+	public btn_shouCang: BtnTxtView;
+	public btn_equip: BtnTxtView;
+	public btn_prop: BtnTxtView;
+	public btn_gem: BtnTxtView;
+	public btn_material: BtnTxtView;
+	public btn_book: BtnTxtView;
+	public btn_other: BtnTxtView;
+	public list_item: fgui.GList;
+	public static URL: string = "ui://vith2b66sbd02";
 
-	public static createInstance():ComGoods {
+	public static createInstance(): ComGoods {
 		return <ComGoods>(fgui.UIPackage.createObject("PkgMain", "ComGoods"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlSelectType = this.getControllerAt(0);
 		this.btn_shouCang = <BtnTxtView>(this.getChildAt(0));
 		this.btn_equip = <BtnTxtView>(this.getChildAt(1));

@@ -19,7 +19,7 @@ import ComConfirm from "./ComConfirm";
 import { ComConfirmView } from "../../view/PkgCommon/view/coms/ComConfirmView";
 
 export default class PkgCommonBinder {
-	public static bindAll():void {
+	public static bindAll(): void {
 		fgui.UIObjectFactory.setExtension(ComWaiting.URL, ComWaitingView);
 		fgui.UIObjectFactory.setExtension(UIWaiting.URL, UIWaitingView);
 		fgui.UIObjectFactory.setExtension(UILoading1.URL, UILoading1View);

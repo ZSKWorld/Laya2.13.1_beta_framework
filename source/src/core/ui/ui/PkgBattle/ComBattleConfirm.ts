@@ -4,22 +4,22 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComBattleConfirm extends fgui.GComponent {
 
-	public ctrl_openType:fgui.Controller;
-	public txt_title:fgui.GRichTextField;
-	public txt_content:fgui.GRichTextField;
-	public slider_num:fgui.GSlider;
-	public btn_buyFood:BtnTxtView;
-	public btn_buyTimes:BtnTxtView;
-	public btn_saoDang:BtnTxtView;
-	public btn_battle:BtnTxtView;
-	public group_btns:fgui.GGroup;
-	public static URL:string = "ui://va1qbl3hawbvw";
+	public ctrl_openType: fgui.Controller;
+	public txt_title: fgui.GRichTextField;
+	public txt_content: fgui.GRichTextField;
+	public slider_num: fgui.GSlider;
+	public btn_buyFood: BtnTxtView;
+	public btn_buyTimes: BtnTxtView;
+	public btn_saoDang: BtnTxtView;
+	public btn_battle: BtnTxtView;
+	public group_btns: fgui.GGroup;
+	public static URL: string = "ui://va1qbl3hawbvw";
 
-	public static createInstance():ComBattleConfirm {
+	public static createInstance(): ComBattleConfirm {
 		return <ComBattleConfirm>(fgui.UIPackage.createObject("PkgBattle", "ComBattleConfirm"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrl_openType = this.getControllerAt(0);
 		this.txt_title = <fgui.GRichTextField>(this.getChildAt(3));
 		this.txt_content = <fgui.GRichTextField>(this.getChildAt(4));

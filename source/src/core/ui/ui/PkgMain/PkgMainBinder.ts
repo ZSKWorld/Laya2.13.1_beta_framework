@@ -54,7 +54,7 @@ import ComRenWu from "./ComRenWu";
 import { ComRenWuView } from "../../view/PkgMain/view/coms/ComRenWuView";
 
 export default class PkgMainBinder {
-	public static bindAll():void {
+	public static bindAll(): void {
 		fgui.UIObjectFactory.setExtension(ComZhiZuo.URL, ComZhiZuoView);
 		fgui.UIObjectFactory.setExtension(ComGoodsInfo.URL, ComGoodsInfoView);
 		fgui.UIObjectFactory.setExtension(ComXinFa.URL, ComXinFaView);

@@ -4,21 +4,21 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComTrain extends fgui.GComponent {
 
-	public btn_level:BtnTxtView;
-	public btn_copy:BtnTxtView;
-	public btn_secret:BtnTxtView;
-	public btn_boss:BtnTxtView;
-	public btn_gather:BtnTxtView;
-	public btn_gongLue:BtnTxtView;
-	public btn_waiYu:BtnTxtView;
-	public list_log:fgui.GList;
-	public static URL:string = "ui://vith2b66sbd01";
+	public btn_level: BtnTxtView;
+	public btn_copy: BtnTxtView;
+	public btn_secret: BtnTxtView;
+	public btn_boss: BtnTxtView;
+	public btn_gather: BtnTxtView;
+	public btn_gongLue: BtnTxtView;
+	public btn_waiYu: BtnTxtView;
+	public list_log: fgui.GList;
+	public static URL: string = "ui://vith2b66sbd01";
 
-	public static createInstance():ComTrain {
+	public static createInstance(): ComTrain {
 		return <ComTrain>(fgui.UIPackage.createObject("PkgMain", "ComTrain"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.btn_level = <BtnTxtView>(this.getChildAt(1));
 		this.btn_copy = <BtnTxtView>(this.getChildAt(2));
 		this.btn_secret = <BtnTxtView>(this.getChildAt(3));

@@ -12,7 +12,7 @@ import RenderChooseBattle from "./RenderChooseBattle";
 import { RenderChooseBattleView } from "../../view/PkgBattle/view/renders/RenderChooseBattleView";
 
 export default class PkgBattleBinder {
-	public static bindAll():void {
+	public static bindAll(): void {
 		fgui.UIObjectFactory.setExtension(UIBattleConfirm.URL, UIBattleConfirmView);
 		fgui.UIObjectFactory.setExtension(ComBattleConfirm.URL, ComBattleConfirmView);
 		fgui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);

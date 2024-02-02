@@ -9,36 +9,36 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class UIMain extends fgui.GComponent {
 
-	public ctrlShow:fgui.Controller;
-	public com_train:ComTrainView;
-	public com_char:ComCharView;
-	public com_goods:ComGoodsView;
-	public com_shop:ComShopView;
-	public com_abode:ComAbodeView;
-	public btn_train:BtnTxtView;
-	public btn_char:BtnTxtView;
-	public btn_goods:BtnTxtView;
-	public btn_shop:BtnTxtView;
-	public btn_abode:BtnTxtView;
-	public btn_chat:BtnTxtView;
-	public graph_info:fgui.GGraph;
-	public txt_nickname:fgui.GTextField;
-	public txt_level:fgui.GTextField;
-	public txt_exp:fgui.GTextField;
-	public txt_sect:fgui.GTextField;
-	public txt_coin:fgui.GTextField;
-	public txt_ingot:fgui.GTextField;
-	public loader_head:fgui.GLoader;
-	public btn_setting:fgui.GButton;
-	public btn_rank:fgui.GButton;
-	public btn_sphere:fgui.GButton;
-	public static URL:string = "ui://vith2b66qjdo0";
+	public ctrlShow: fgui.Controller;
+	public com_train: ComTrainView;
+	public com_char: ComCharView;
+	public com_goods: ComGoodsView;
+	public com_shop: ComShopView;
+	public com_abode: ComAbodeView;
+	public btn_train: BtnTxtView;
+	public btn_char: BtnTxtView;
+	public btn_goods: BtnTxtView;
+	public btn_shop: BtnTxtView;
+	public btn_abode: BtnTxtView;
+	public btn_chat: BtnTxtView;
+	public graph_info: fgui.GGraph;
+	public txt_nickname: fgui.GTextField;
+	public txt_level: fgui.GTextField;
+	public txt_exp: fgui.GTextField;
+	public txt_sect: fgui.GTextField;
+	public txt_coin: fgui.GTextField;
+	public txt_ingot: fgui.GTextField;
+	public loader_head: fgui.GLoader;
+	public btn_setting: fgui.GButton;
+	public btn_rank: fgui.GButton;
+	public btn_sphere: fgui.GButton;
+	public static URL: string = "ui://vith2b66qjdo0";
 
-	public static createInstance():UIMain {
+	public static createInstance(): UIMain {
 		return <UIMain>(fgui.UIPackage.createObject("PkgMain", "UIMain"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlShow = this.getControllerAt(0);
 		this.com_train = <ComTrainView>(this.getChildAt(2));
 		this.com_char = <ComCharView>(this.getChildAt(3));

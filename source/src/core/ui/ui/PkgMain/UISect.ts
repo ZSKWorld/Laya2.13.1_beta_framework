@@ -5,28 +5,28 @@ import Pro1 from "../PkgCommon/Pro1";
 
 export default class UISect extends fgui.GComponent {
 
-	public btn_sect0:BtnTxtView;
-	public btn_sect1:BtnTxtView;
-	public btn_sect2:BtnTxtView;
-	public btn_sect3:BtnTxtView;
-	public btn_sect4:BtnTxtView;
-	public btn_sect5:BtnTxtView;
-	public btn_submit:BtnTxtView;
-	public txt_desc:fgui.GTextField;
-	public pro_0:Pro1;
-	public pro_1:Pro1;
-	public pro_2:Pro1;
-	public pro_3:Pro1;
-	public pro_4:Pro1;
-	public pro_5:Pro1;
-	public pro_6:Pro1;
-	public static URL:string = "ui://vith2b66btv51q";
+	public btn_sect0: BtnTxtView;
+	public btn_sect1: BtnTxtView;
+	public btn_sect2: BtnTxtView;
+	public btn_sect3: BtnTxtView;
+	public btn_sect4: BtnTxtView;
+	public btn_sect5: BtnTxtView;
+	public btn_submit: BtnTxtView;
+	public txt_desc: fgui.GTextField;
+	public pro_0: Pro1;
+	public pro_1: Pro1;
+	public pro_2: Pro1;
+	public pro_3: Pro1;
+	public pro_4: Pro1;
+	public pro_5: Pro1;
+	public pro_6: Pro1;
+	public static URL: string = "ui://vith2b66btv51q";
 
-	public static createInstance():UISect {
+	public static createInstance(): UISect {
 		return <UISect>(fgui.UIPackage.createObject("PkgMain", "UISect"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.btn_sect0 = <BtnTxtView>(this.getChildAt(1));
 		this.btn_sect1 = <BtnTxtView>(this.getChildAt(2));
 		this.btn_sect2 = <BtnTxtView>(this.getChildAt(3));

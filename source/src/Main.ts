@@ -9,6 +9,7 @@ import { SceneType } from "./scene/SceneDefine";
 import { sceneMgr } from "./scene/SceneManager";
 import { SceneGame } from "./scene/scene/SceneGame";
 import { SceneInit } from "./scene/scene/SceneInit";
+import { SceneLittleGame } from "./scene/scene/SceneLittleGame";
 import { SceneLogin } from "./scene/scene/SceneLogin";
 import { SceneMain } from "./scene/scene/SceneMain";
 import { ScenePreScreen } from "./scene/scene/ScenePreScreen";
@@ -50,6 +51,7 @@ class Main {
 			[SceneType.LoginScene, new SceneLogin()],
 			[SceneType.MainScene, new SceneMain()],
 			[SceneType.GameScene, new SceneGame()],
+			[SceneType.LittleGameScene, new SceneLittleGame()],
 		]);
 		sceneMgr.enterScene(SceneType.PreScreen);
 	}

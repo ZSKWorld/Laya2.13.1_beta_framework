@@ -2,14 +2,14 @@
 
 export default class ItemXinFa extends fgui.GLabel {
 
-	public c1:fgui.Controller;
-	public static URL:string = "ui://vith2b66btv51j";
+	public c1: fgui.Controller;
+	public static URL: string = "ui://vith2b66btv51j";
 
-	public static createInstance():ItemXinFa {
+	public static createInstance(): ItemXinFa {
 		return <ItemXinFa>(fgui.UIPackage.createObject("PkgMain", "ItemXinFa"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.c1 = this.getControllerAt(0);
 	}
 }

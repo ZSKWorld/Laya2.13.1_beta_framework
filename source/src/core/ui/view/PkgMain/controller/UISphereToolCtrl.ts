@@ -1,3 +1,5 @@
+import { SceneType } from "../../../../../scene/SceneDefine";
+import { sceneMgr } from "../../../../../scene/SceneManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UISphereToolMsg, UISphereToolView } from "../view/UISphereToolView";
 
@@ -5,11 +7,13 @@ export interface UISphereToolData {
 
 }
 
-export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToolData>{
+export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToolData> {
 
-    override onAdded() {
+	override onAdded() {
 		this.addMessage(UISphereToolMsg.OnBtnClearLogClick, this.onBtnClearLogClick);
 		this.addMessage(UISphereToolMsg.OnBtnRecoverVigorClick, this.onBtnRecoverVigorClick);
+		this.addMessage(UISphereToolMsg.OnBtnLittleGameClick, this.onBtnLittleGameClick);
+
 		this.addMessage(UISphereToolMsg.OnBtnCreateClick, this.onBtnCreateClick);
 		this.addMessage(UISphereToolMsg.OnBtnClearClick, this.onBtnClearClick);
 		this.addMessage(UISphereToolMsg.OnBtnPercentClick, this.onBtnPercentClick);
@@ -48,166 +52,170 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 		this.addMessage(UISphereToolMsg.OnBtnSubmitClick, this.onBtnSubmitClick);
 		this.addMessage(UISphereToolMsg.OnBtnRemoveClick, this.onBtnRemoveClick);
 		this.addMessage(UISphereToolMsg.OnBtnRemoveAllClick, this.onBtnRemoveAllClick);
-    }
+	}
 
 	private onBtnClearLogClick() {
-	
+
 	}
 
 	private onBtnRecoverVigorClick() {
-	
+
+	}
+
+	private onBtnLittleGameClick() {
+		sceneMgr.enterScene(SceneType.LittleGameScene);
 	}
 
 	private onBtnCreateClick() {
-	
+
 	}
 
 	private onBtnClearClick() {
-	
+
 	}
 
 	private onBtnPercentClick() {
-	
+
 	}
 
 	private onBtnCheck1Click() {
-	
+
 	}
 
 	private onBtnCheck2Click() {
-	
+
 	}
 
 	private onBtnCheck3Click() {
-	
+
 	}
 
 	private onBtnCheck4Click() {
-	
+
 	}
 
 	private onBtnCheck5Click() {
-	
+
 	}
 
 	private onBtnCheck6Click() {
-	
+
 	}
 
 	private onBtnCheck7Click() {
-	
+
 	}
 
 	private onBtnCheck8Click() {
-	
+
 	}
 
 	private onBtnCheck9Click() {
-	
+
 	}
 
 	private onBtnCheck10Click() {
-	
+
 	}
 
 	private onBtnCheck11Click() {
-	
+
 	}
 
 	private onBtnCheck12Click() {
-	
+
 	}
 
 	private onBtnCheck13Click() {
-	
+
 	}
 
 	private onBtnCheck14Click() {
-	
+
 	}
 
 	private onBtnCheck15Click() {
-	
+
 	}
 
 	private onBtnCheck16Click() {
-	
+
 	}
 
 	private onBtnCheck17Click() {
-	
+
 	}
 
 	private onBtnCheck18Click() {
-	
+
 	}
 
 	private onBtnCheck19Click() {
-	
+
 	}
 
 	private onBtnCheck20Click() {
-	
+
 	}
 
 	private onBtnCheck21Click() {
-	
+
 	}
 
 	private onBtnCheck22Click() {
-	
+
 	}
 
 	private onBtnCheck23Click() {
-	
+
 	}
 
 	private onBtnCheck24Click() {
-	
+
 	}
 
 	private onBtnCheck25Click() {
-	
+
 	}
 
 	private onBtnCheck26Click() {
-	
+
 	}
 
 	private onBtnCheck27Click() {
-	
+
 	}
 
 	private onBtnCheck28Click() {
-	
+
 	}
 
 	private onBtnCheck0Click() {
-	
+
 	}
 
 	private onBtnCheck31Click() {
-	
+
 	}
 
 	private onBtnCheck32Click() {
-	
+
 	}
 
 	private onBtnAddClick() {
-	
+
 	}
 
 	private onBtnSubmitClick() {
-	
+
 	}
 
 	private onBtnRemoveClick() {
-	
+
 	}
 
 	private onBtnRemoveAllClick() {
-	
+
 	}
 
 }

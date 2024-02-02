@@ -5,8 +5,9 @@ import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { NetMessage } from "../../../../net/enum/NetMessage";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { UILoginCtrl } from "../controller/UILoginCtrl";
+import { UILoginEvent } from "../event/UILoginEvent";
 
-export class UILoginProxy extends BaseProxy<UILoginCtrl>{
+export class UILoginProxy extends BaseProxy<UILoginCtrl> {
 
     @RegisterEvent(NetMessage.Login)
     private login(output: LoginOutput, input: LoginInput) {
@@ -17,11 +18,11 @@ export class UILoginProxy extends BaseProxy<UILoginCtrl>{
 
     @RegisterEvent(NetMessage.LoginError)
     private loginError(output: LoginOutput, input: LoginInput) {
-        this.viewCtrl.onLoginError();
+        this.sendMessage(UILoginEvent.OnLoginFailed);
     }
 
     @RegisterEvent(NetMessage.Register)
     private register(output: RegisterOutput, input: RegisterInput) {
-        this.viewCtrl.toLogin(input);
+        this.sendMessage(UILoginEvent.Login, input);
     }
 }

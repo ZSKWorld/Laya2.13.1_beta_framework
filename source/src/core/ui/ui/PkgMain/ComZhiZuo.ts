@@ -5,27 +5,27 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComZhiZuo extends fgui.GComponent {
 
-	public btn_jpyl:BtnTxtView;
-	public btn_dzzb:BtnTxtView;
-	public btn_zjzb:BtnTxtView;
-	public btn_czzb:BtnTxtView;
-	public btn_bshc:BtnTxtView;
-	public btn_zztz:BtnTxtView;
-	public btn_fjzb:BtnTxtView;
-	public btn_fjbs:BtnTxtView;
-	public btn_yjhc:BtnTxtView;
-	public cmb_level:CmbDongFu;
-	public cmb_type:CmbDongFu;
-	public cmb_detail:CmbDongFu;
-	public cmb_fjzbdj:CmbDongFu;
-	public cmb_fjbsdj:CmbDongFu;
-	public static URL:string = "ui://vith2b669f1k1h";
+	public btn_jpyl: BtnTxtView;
+	public btn_dzzb: BtnTxtView;
+	public btn_zjzb: BtnTxtView;
+	public btn_czzb: BtnTxtView;
+	public btn_bshc: BtnTxtView;
+	public btn_zztz: BtnTxtView;
+	public btn_fjzb: BtnTxtView;
+	public btn_fjbs: BtnTxtView;
+	public btn_yjhc: BtnTxtView;
+	public cmb_level: CmbDongFu;
+	public cmb_type: CmbDongFu;
+	public cmb_detail: CmbDongFu;
+	public cmb_fjzbdj: CmbDongFu;
+	public cmb_fjbsdj: CmbDongFu;
+	public static URL: string = "ui://vith2b669f1k1h";
 
-	public static createInstance():ComZhiZuo {
+	public static createInstance(): ComZhiZuo {
 		return <ComZhiZuo>(fgui.UIPackage.createObject("PkgMain", "ComZhiZuo"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.btn_jpyl = <BtnTxtView>(this.getChildAt(6));
 		this.btn_dzzb = <BtnTxtView>(this.getChildAt(7));
 		this.btn_zjzb = <BtnTxtView>(this.getChildAt(8));

@@ -4,26 +4,26 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class UILogin extends fgui.GComponent {
 
-	public ctrlState:fgui.Controller;
-	public btn_login:BtnTxtView;
-	public btn_loginRegister:BtnTxtView;
-	public input_account:fgui.GTextInput;
-	public input_password:fgui.GTextInput;
-	public btn_registerBack:BtnTxtView;
-	public btn_register:BtnTxtView;
-	public input_rAccount:fgui.GTextInput;
-	public input_rPassword:fgui.GTextInput;
-	public input_rName:fgui.GTextInput;
-	public btn_cancel:BtnTxtView;
-	public t0:fgui.Transition;
-	public t1:fgui.Transition;
-	public static URL:string = "ui://vs9845atqjdo0";
+	public ctrlState: fgui.Controller;
+	public btn_login: BtnTxtView;
+	public btn_loginRegister: BtnTxtView;
+	public input_account: fgui.GTextInput;
+	public input_password: fgui.GTextInput;
+	public btn_registerBack: BtnTxtView;
+	public btn_register: BtnTxtView;
+	public input_rAccount: fgui.GTextInput;
+	public input_rPassword: fgui.GTextInput;
+	public input_rName: fgui.GTextInput;
+	public btn_cancel: BtnTxtView;
+	public t0: fgui.Transition;
+	public t1: fgui.Transition;
+	public static URL: string = "ui://vs9845atqjdo0";
 
-	public static createInstance():UILogin {
+	public static createInstance(): UILogin {
 		return <UILogin>(fgui.UIPackage.createObject("PkgLogin", "UILogin"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlState = this.getControllerAt(0);
 		this.btn_login = <BtnTxtView>(this.getChildAt(4));
 		this.btn_loginRegister = <BtnTxtView>(this.getChildAt(5));

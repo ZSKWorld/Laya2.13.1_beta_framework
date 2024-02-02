@@ -5,34 +5,34 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComXinFa extends fgui.GComponent {
 
-	public ctrlUpgrade:fgui.Controller;
-	public btn_xinFa0:ItemXinFa;
-	public btn_xinFa1:ItemXinFa;
-	public btn_xinFa2:ItemXinFa;
-	public btn_xinFa3:ItemXinFa;
-	public btn_xinFa4:ItemXinFa;
-	public btn_xinFa5:ItemXinFa;
-	public btn_xinFa6:ItemXinFa;
-	public btn_xinFa7:ItemXinFa;
-	public btn_xinFa8:ItemXinFa;
-	public graph_upgradeBg:fgui.GGraph;
-	public txt_xinFaName:fgui.GTextField;
-	public txt_xinFaDesc:fgui.GTextField;
-	public txt_upgradeInfo:fgui.GTextField;
-	public btn_skill0:BtnTxtView;
-	public btn_skill1:BtnTxtView;
-	public btn_skill2:BtnTxtView;
-	public btn_skill3:BtnTxtView;
-	public btn_upgrade0:BtnTxtView;
-	public btn_upgrade1:BtnTxtView;
-	public btn_upgrade2:BtnTxtView;
-	public static URL:string = "ui://vith2b66btv51i";
+	public ctrlUpgrade: fgui.Controller;
+	public btn_xinFa0: ItemXinFa;
+	public btn_xinFa1: ItemXinFa;
+	public btn_xinFa2: ItemXinFa;
+	public btn_xinFa3: ItemXinFa;
+	public btn_xinFa4: ItemXinFa;
+	public btn_xinFa5: ItemXinFa;
+	public btn_xinFa6: ItemXinFa;
+	public btn_xinFa7: ItemXinFa;
+	public btn_xinFa8: ItemXinFa;
+	public graph_upgradeBg: fgui.GGraph;
+	public txt_xinFaName: fgui.GTextField;
+	public txt_xinFaDesc: fgui.GTextField;
+	public txt_upgradeInfo: fgui.GTextField;
+	public btn_skill0: BtnTxtView;
+	public btn_skill1: BtnTxtView;
+	public btn_skill2: BtnTxtView;
+	public btn_skill3: BtnTxtView;
+	public btn_upgrade0: BtnTxtView;
+	public btn_upgrade1: BtnTxtView;
+	public btn_upgrade2: BtnTxtView;
+	public static URL: string = "ui://vith2b66btv51i";
 
-	public static createInstance():ComXinFa {
+	public static createInstance(): ComXinFa {
 		return <ComXinFa>(fgui.UIPackage.createObject("PkgMain", "ComXinFa"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlUpgrade = this.getControllerAt(0);
 		this.btn_xinFa0 = <ItemXinFa>(this.getChildAt(0));
 		this.btn_xinFa1 = <ItemXinFa>(this.getChildAt(1));

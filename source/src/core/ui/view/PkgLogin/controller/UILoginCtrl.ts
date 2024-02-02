@@ -4,13 +4,14 @@ import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
 import { AccountService } from "../../../../net/Services";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { tipMgr } from "../../../tool/TipManager";
-import { UILoginMsg, UILoginView } from "../view/UILoginView";
+import { UILoginEvent } from "../event/UILoginEvent";
+import { UILoginMsg, UILoginStatus, UILoginView } from "../view/UILoginView";
 
 export interface UILoginData {
 
 }
 
-export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
+export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
 
     override onAdded() {
         this.addMessage(UILoginMsg.OnBtnLoginClick, this.onBtnLoginClick);
@@ -21,18 +22,13 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
     override onEnable() {
         const data = localData.get<LoginInput>(LocalDataKey.LastLoginAccount);
         data && this.view.refreshLoginInfo(data.account, data.password);
-        data && this.toLogin(data);
+        data && this.login(data);
     }
 
-    toLogin(data: LoginInput) {
+    @ViewMessage(UILoginEvent.Login)
+    private login(data: LoginInput) {
         data && this.view.refreshLoginInfo(data.account, data.password);
         this.onBtnLoginClick();
-    }
-
-    @RegisterEvent(GameEvent.SocketClosed)
-    onLoginError() {
-        this.view.refreshStatus(0);
-        Laya.timer.clearAll(this);
     }
 
     private onBtnLoginClick() {
@@ -40,7 +36,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
         if (!input_account.text.trim()) tipMgr.showTip("请输入账号");
         else if (!input_password.text.trim()) tipMgr.showTip("请输入密码");
         else {
-            this.view.refreshStatus(2);
+            this.view.refreshStatus(UILoginStatus.BeLogin);
             Laya.timer.once(1000, this, () => {
                 const param = { account: input_account.text, password: input_password.text };
                 AccountService.Inst.login(param);
@@ -62,8 +58,11 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData>{
         }
     }
 
+    @RegisterEvent(GameEvent.SocketClosed)
+    @ViewMessage(UILoginEvent.OnLoginFailed)
     private onBtnCancelClick() {
-        this.onLoginError();
+        this.view.refreshStatus(UILoginStatus.Login);
+        Laya.timer.clearAll(this);
     }
 
 }

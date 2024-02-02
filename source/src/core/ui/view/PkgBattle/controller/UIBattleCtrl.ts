@@ -1,16 +1,14 @@
-import { BattleType } from "../../../../net/enum/BattleEnums";
 import { BattleService } from "../../../../net/Services";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { ViewID } from "../../../core/ViewID";
 import { UIBattleMsg, UIBattleView } from "../view/UIBattleView";
 
 export interface UIBattleData {
 
 }
 
-export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
+export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 
-    override onAdded() {
+	override onAdded() {
 		this.addMessage(UIBattleMsg.OnBtnOfflineClick, this.onBtnOfflineClick);
 		this.addMessage(UIBattleMsg.OnBtnEnemyInfoClick, this.onBtnEnemyInfoClick);
 		this.addMessage(UIBattleMsg.OnBtnQuitBattleClick, this.onBtnQuitBattleClick);
@@ -28,7 +26,7 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData>{
 
 	}
 
-	@CtrlKeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ESCAPE)
+	@ViewKeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ESCAPE)
 	private onBtnQuitBattleClick() {
 		BattleService.Inst.exitBattle({});
 	}

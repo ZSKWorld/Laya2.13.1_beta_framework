@@ -125,7 +125,7 @@ windowImmit("MouseEventType", MouseEventType);
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-function CtrlKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator {
+function ViewKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__keyEventList) target.__keyEventList = {};
 		if (!target.__keyEventList[keyEventType]) target.__keyEventList[keyEventType] = {};
@@ -146,7 +146,7 @@ function CtrlKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, a
 		}
 	}
 }
-windowImmit("CtrlKeyEvent", CtrlKeyEvent);
+windowImmit("ViewKeyEvent", ViewKeyEvent);
 
 /**
  * 页面控制器鼠标事件装饰器工厂
@@ -154,7 +154,7 @@ windowImmit("CtrlKeyEvent", CtrlKeyEvent);
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-function CtrlMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: any[]): MethodDecorator {
+function ViewMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__mouseEventList) target.__mouseEventList = {};
 		if (!target.__mouseEventList[mouseEventType]) target.__mouseEventList[mouseEventType] = [];
@@ -174,7 +174,7 @@ function CtrlMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: a
 		}
 	}
 }
-windowImmit("CtrlMouseEvent", CtrlMouseEvent);
+windowImmit("ViewMouseEvent", ViewMouseEvent);
 
 /**
  * 页面控制器消息装饰器工厂
@@ -183,7 +183,7 @@ windowImmit("CtrlMouseEvent", CtrlMouseEvent);
  * @param args  参数
  * @returns MethodDecorator
  */
-function CtrlMessage(name: string, once?: boolean, args?: any[]): MethodDecorator {
+function ViewMessage(name: string, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 		if (!target.__messageMap) target.__messageMap = {};
 		if (!target.__messageMap[name]) target.__messageMap[name] = [];
@@ -203,4 +203,4 @@ function CtrlMessage(name: string, once?: boolean, args?: any[]): MethodDecorato
 		}
 	}
 }
-windowImmit("CtrlMessage", CtrlMessage);
+windowImmit("ViewMessage", ViewMessage);

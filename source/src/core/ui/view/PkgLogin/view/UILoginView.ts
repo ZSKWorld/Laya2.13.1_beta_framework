@@ -7,6 +7,12 @@ export const enum UILoginMsg {
 	OnBtnCancelClick = "UILogin_OnBtnCancelClick",
 }
 
+export const enum UILoginStatus {
+	Login,
+	Register,
+	BeLogin,
+}
+
 export class UILoginView extends ExtensionClass<IView, UILogin>(UILogin) {
 	static readonly PkgRes = ResPath.PkgPath.PkgLogin;
 
@@ -22,7 +28,7 @@ export class UILoginView extends ExtensionClass<IView, UILogin>(UILogin) {
 		this.input_password.text = password;
 	}
 
-	refreshStatus(status: 0 | 1 | 2) {
+	refreshStatus(status: UILoginStatus) {
 		this.ctrlState.selectedIndex = status;
 	}
 

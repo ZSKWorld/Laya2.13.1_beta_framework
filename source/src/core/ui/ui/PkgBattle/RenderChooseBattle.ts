@@ -4,22 +4,22 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class RenderChooseBattle extends fgui.GButton {
 
-	public ctrlState:fgui.Controller;
-	public graph_touch:fgui.GGraph;
-	public graph_light:fgui.GGraph;
-	public txt_content1:fgui.GRichTextField;
-	public txt_content2:fgui.GRichTextField;
-	public txt_content3:fgui.GTextField;
-	public txt_content4:fgui.GTextField;
-	public txt_content5:fgui.GTextField;
-	public btn_break:BtnTxtView;
-	public static URL:string = "ui://va1qbl3hsbd0u";
+	public ctrlState: fgui.Controller;
+	public graph_touch: fgui.GGraph;
+	public graph_light: fgui.GGraph;
+	public txt_content1: fgui.GRichTextField;
+	public txt_content2: fgui.GRichTextField;
+	public txt_content3: fgui.GTextField;
+	public txt_content4: fgui.GTextField;
+	public txt_content5: fgui.GTextField;
+	public btn_break: BtnTxtView;
+	public static URL: string = "ui://va1qbl3hsbd0u";
 
-	public static createInstance():RenderChooseBattle {
+	public static createInstance(): RenderChooseBattle {
 		return <RenderChooseBattle>(fgui.UIPackage.createObject("PkgBattle", "RenderChooseBattle"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlState = this.getControllerAt(0);
 		this.graph_touch = <fgui.GGraph>(this.getChildAt(0));
 		this.graph_light = <fgui.GGraph>(this.getChildAt(1));

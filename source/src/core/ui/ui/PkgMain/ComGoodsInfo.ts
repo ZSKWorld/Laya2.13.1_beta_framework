@@ -4,20 +4,20 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComGoodsInfo extends fgui.GComponent {
 
-	public ctrlState:fgui.Controller;
-	public txt_content:fgui.GRichTextField;
-	public input_num:fgui.GTextInput;
-	public btn_collect:fgui.GButton;
-	public btn_use:BtnTxtView;
-	public btn_sell:BtnTxtView;
-	public btn_buy:BtnTxtView;
-	public static URL:string = "ui://vith2b66awbv2f";
+	public ctrlState: fgui.Controller;
+	public txt_content: fgui.GRichTextField;
+	public input_num: fgui.GTextInput;
+	public btn_collect: fgui.GButton;
+	public btn_use: BtnTxtView;
+	public btn_sell: BtnTxtView;
+	public btn_buy: BtnTxtView;
+	public static URL: string = "ui://vith2b66awbv2f";
 
-	public static createInstance():ComGoodsInfo {
+	public static createInstance(): ComGoodsInfo {
 		return <ComGoodsInfo>(fgui.UIPackage.createObject("PkgMain", "ComGoodsInfo"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlState = this.getControllerAt(0);
 		this.txt_content = <fgui.GRichTextField>(this.getChildAt(4));
 		this.input_num = <fgui.GTextInput>(this.getChildAt(6));

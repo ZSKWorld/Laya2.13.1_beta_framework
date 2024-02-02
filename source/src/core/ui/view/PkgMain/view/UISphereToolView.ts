@@ -4,6 +4,7 @@ import UISphereTool from "../../../ui/PkgMain/UISphereTool";
 export const enum UISphereToolMsg {
 	OnBtnClearLogClick = "UISphereTool_OnBtnClearLogClick",
 	OnBtnRecoverVigorClick = "UISphereTool_OnBtnRecoverVigorClick",
+	OnBtnLittleGameClick = "UISphereTool_OnBtnLittleGameClick",
 	OnBtnCreateClick = "UISphereTool_OnBtnCreateClick",
 	OnBtnClearClick = "UISphereTool_OnBtnClearClick",
 	OnBtnPercentClick = "UISphereTool_OnBtnPercentClick",
@@ -48,7 +49,7 @@ export class UISphereToolView extends ExtensionClass<IView, UISphereTool>(UISphe
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-		const { graph_bg, btn_clearLog, btn_recoverVigor, btn_create, btn_clear, btn_percent, btn_check1, btn_check2,
+		const { graph_bg, btn_clearLog, btn_recoverVigor, btn_littleGame, btn_create, btn_clear, btn_percent, btn_check1, btn_check2,
 			btn_check3, btn_check4, btn_check5, btn_check6, btn_check7, btn_check8, btn_check9, btn_check10,
 			btn_check11, btn_check12, btn_check13, btn_check14, btn_check15, btn_check16, btn_check17, btn_check18,
 			btn_check19, btn_check20, btn_check21, btn_check22, btn_check23, btn_check24, btn_check25, btn_check26,
@@ -56,6 +57,7 @@ export class UISphereToolView extends ExtensionClass<IView, UISphereTool>(UISphe
 		graph_bg.onClick(this, this.removeSelf);
 		btn_clearLog.onClick(this, this.sendMessage, [UISphereToolMsg.OnBtnClearLogClick]);
 		btn_recoverVigor.onClick(this, this.sendMessage, [UISphereToolMsg.OnBtnRecoverVigorClick]);
+		btn_littleGame.onClick(this, this.sendMessage, [UISphereToolMsg.OnBtnLittleGameClick]);
 		btn_create.onClick(this, this.sendMessage, [UISphereToolMsg.OnBtnCreateClick]);
 		btn_clear.onClick(this, this.sendMessage, [UISphereToolMsg.OnBtnClearClick]);
 		btn_percent.onClick(this, this.sendMessage, [UISphereToolMsg.OnBtnPercentClick]);

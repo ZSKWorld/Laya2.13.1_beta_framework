@@ -4,25 +4,25 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComSkill extends fgui.GComponent {
 
-	public ctrlState:fgui.Controller;
-	public btn_normal0:BtnTxtView;
-	public btn_normal1:BtnTxtView;
-	public btn_normal2:BtnTxtView;
-	public btn_normal3:BtnTxtView;
-	public btn_normal4:BtnTxtView;
-	public btn_xian0:BtnTxtView;
-	public btn_xian1:BtnTxtView;
-	public btn_xian2:BtnTxtView;
-	public btn_xian3:BtnTxtView;
-	public btn_xian4:BtnTxtView;
-	public list_skill:fgui.GList;
-	public static URL:string = "ui://vith2b66rwel1r";
+	public ctrlState: fgui.Controller;
+	public btn_normal0: BtnTxtView;
+	public btn_normal1: BtnTxtView;
+	public btn_normal2: BtnTxtView;
+	public btn_normal3: BtnTxtView;
+	public btn_normal4: BtnTxtView;
+	public btn_xian0: BtnTxtView;
+	public btn_xian1: BtnTxtView;
+	public btn_xian2: BtnTxtView;
+	public btn_xian3: BtnTxtView;
+	public btn_xian4: BtnTxtView;
+	public list_skill: fgui.GList;
+	public static URL: string = "ui://vith2b66rwel1r";
 
-	public static createInstance():ComSkill {
+	public static createInstance(): ComSkill {
 		return <ComSkill>(fgui.UIPackage.createObject("PkgMain", "ComSkill"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlState = this.getControllerAt(0);
 		this.btn_normal0 = <BtnTxtView>(this.getChildAt(1));
 		this.btn_normal1 = <BtnTxtView>(this.getChildAt(2));

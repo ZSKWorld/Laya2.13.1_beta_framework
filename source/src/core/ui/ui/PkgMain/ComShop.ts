@@ -4,22 +4,22 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComShop extends fgui.GComponent {
 
-	public ctrlSelectType:fgui.Controller;
-	public btn_prop:BtnTxtView;
-	public btn_gem:BtnTxtView;
-	public btn_material:BtnTxtView;
-	public btn_miJi:BtnTxtView;
-	public btn_other:BtnTxtView;
-	public btn_heiShi:BtnTxtView;
-	public btn_xianJie:BtnTxtView;
-	public list_item:fgui.GList;
-	public static URL:string = "ui://vith2b66sbd03";
+	public ctrlSelectType: fgui.Controller;
+	public btn_prop: BtnTxtView;
+	public btn_gem: BtnTxtView;
+	public btn_material: BtnTxtView;
+	public btn_miJi: BtnTxtView;
+	public btn_other: BtnTxtView;
+	public btn_heiShi: BtnTxtView;
+	public btn_xianJie: BtnTxtView;
+	public list_item: fgui.GList;
+	public static URL: string = "ui://vith2b66sbd03";
 
-	public static createInstance():ComShop {
+	public static createInstance(): ComShop {
 		return <ComShop>(fgui.UIPackage.createObject("PkgMain", "ComShop"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.ctrlSelectType = this.getControllerAt(0);
 		this.btn_prop = <BtnTxtView>(this.getChildAt(0));
 		this.btn_gem = <BtnTxtView>(this.getChildAt(1));

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <component id="n43_9hon" name="btn_back" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="25,25" size="120,120">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://vx9zwser9hon6m"/>
+    </component>
+    <component id="n0_9hon" name="com_00" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="65,485" group="n6_9hon"/>
+    <component id="n1_9hon" name="com_01" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="225,485" group="n6_9hon"/>
+    <component id="n2_9hon" name="com_02" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="385,485" group="n6_9hon"/>
+    <component id="n3_9hon" name="com_03" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="545,485" group="n6_9hon"/>
+    <component id="n4_9hon" name="com_04" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="705,485" group="n6_9hon"/>
+    <component id="n5_9hon" name="com_05" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="865,485" group="n6_9hon"/>
+    <group id="n6_9hon" name="n6" xy="65,485" size="950,150" group="n42_9hon" advanced="true" layout="hz" colGap="10" excludeInvisibles="true"/>
+    <component id="n7_9hon" name="com_10" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="65,645" group="n13_9hon"/>
+    <component id="n8_9hon" name="com_11" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="225,645" group="n13_9hon"/>
+    <component id="n9_9hon" name="com_12" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="385,645" group="n13_9hon"/>
+    <component id="n10_9hon" name="com_13" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="545,645" group="n13_9hon"/>
+    <component id="n11_9hon" name="com_14" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="705,645" group="n13_9hon"/>
+    <component id="n12_9hon" name="com_15" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="865,645" group="n13_9hon"/>
+    <group id="n13_9hon" name="n13" xy="65,645" size="950,150" group="n42_9hon" advanced="true" layout="hz" colGap="10" excludeInvisibles="true"/>
+    <component id="n14_9hon" name="com_20" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="65,805" group="n20_9hon"/>
+    <component id="n15_9hon" name="com_21" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="225,805" group="n20_9hon"/>
+    <component id="n16_9hon" name="com_22" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="385,805" group="n20_9hon"/>
+    <component id="n17_9hon" name="com_23" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="545,805" group="n20_9hon"/>
+    <component id="n18_9hon" name="com_24" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="705,805" group="n20_9hon"/>
+    <component id="n19_9hon" name="com_25" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="865,805" group="n20_9hon"/>
+    <group id="n20_9hon" name="n20" xy="65,805" size="950,150" group="n42_9hon" advanced="true" layout="hz" colGap="10" excludeInvisibles="true"/>
+    <component id="n21_9hon" name="com_30" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="65,965" group="n27_9hon"/>
+    <component id="n22_9hon" name="com_31" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="225,965" group="n27_9hon"/>
+    <component id="n23_9hon" name="com_32" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="385,965" group="n27_9hon"/>
+    <component id="n24_9hon" name="com_33" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="545,965" group="n27_9hon"/>
+    <component id="n25_9hon" name="com_34" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="705,965" group="n27_9hon"/>
+    <component id="n26_9hon" name="com_35" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="865,965" group="n27_9hon"/>
+    <group id="n27_9hon" name="n27" xy="65,965" size="950,150" group="n42_9hon" advanced="true" layout="hz" colGap="10" excludeInvisibles="true"/>
+    <component id="n28_9hon" name="com_40" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="65,1125" group="n34_9hon"/>
+    <component id="n29_9hon" name="com_41" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="225,1125" group="n34_9hon"/>
+    <component id="n30_9hon" name="com_42" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="385,1125" group="n34_9hon"/>
+    <component id="n31_9hon" name="com_43" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="545,1125" group="n34_9hon"/>
+    <component id="n32_9hon" name="com_44" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="705,1125" group="n34_9hon"/>
+    <component id="n33_9hon" name="com_45" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="865,1125" group="n34_9hon"/>
+    <group id="n34_9hon" name="n34" xy="65,1125" size="950,150" group="n42_9hon" advanced="true" layout="hz" colGap="10" excludeInvisibles="true"/>
+    <component id="n35_9hon" name="com_50" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="65,1285" group="n41_9hon"/>
+    <component id="n36_9hon" name="com_51" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="225,1285" group="n41_9hon"/>
+    <component id="n37_9hon" name="com_52" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="385,1285" group="n41_9hon"/>
+    <component id="n38_9hon" name="com_53" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="545,1285" group="n41_9hon"/>
+    <component id="n39_9hon" name="com_54" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="705,1285" group="n41_9hon"/>
+    <component id="n40_9hon" name="com_55" src="9hon2" fileName="Component/UITenWater/ComTenWater.xml" xy="865,1285" group="n41_9hon"/>
+    <group id="n41_9hon" name="n41" xy="65,1285" size="950,150" group="n42_9hon" advanced="true" layout="hz" colGap="10" excludeInvisibles="true"/>
+    <group id="n42_9hon" name="n42" xy="65,485" size="950,950" advanced="true" layout="vt" lineGap="10" excludeInvisibles="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+</component>

@@ -160,11 +160,17 @@
 		Button9 = "res/sound/Button9.wav",
 	}
 
+	// res/texture/
+	export const enum TexturePath {
+		Aaaa = "res/texture/aaaa.png",
+	}
+
 	// res/ui/
 	export const enum PkgName {
 		PkgBattle = "PkgBattle",
 		PkgCommon = "PkgCommon",
 		PkgDesign = "PkgDesign",
+		PkgLittleGame = "PkgLittleGame",
 		PkgLogin = "PkgLogin",
 		PkgMain = "PkgMain",
 	}
@@ -173,6 +179,7 @@
 		PkgBattle = "res/ui/PkgBattle",
 		PkgCommon = "res/ui/PkgCommon",
 		PkgDesign = "res/ui/PkgDesign",
+		PkgLittleGame = "res/ui/PkgLittleGame",
 		PkgLogin = "res/ui/PkgLogin",
 		PkgMain = "res/ui/PkgMain",
 	}

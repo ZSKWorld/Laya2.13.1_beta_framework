@@ -4,43 +4,43 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComRenWu extends fgui.GComponent {
 
-	public txt_jingLi:fgui.GRichTextField;
-	public txt_jinAtk:fgui.GRichTextField;
-	public txt_muAtk:fgui.GRichTextField;
-	public txt_shuiAtk:fgui.GRichTextField;
-	public txt_huoAtk:fgui.GRichTextField;
-	public txt_tuAtk:fgui.GRichTextField;
-	public txt_moHe:fgui.GRichTextField;
-	public txt_moBi:fgui.GRichTextField;
-	public txt_lingShi:fgui.GRichTextField;
-	public txt_jingLiHF:fgui.GRichTextField;
-	public txt_jinDef:fgui.GRichTextField;
-	public txt_muDef:fgui.GRichTextField;
-	public txt_shuiDef:fgui.GRichTextField;
-	public txt_huoDef:fgui.GRichTextField;
-	public txt_tuDef:fgui.GRichTextField;
-	public txt_hunPo:fgui.GRichTextField;
-	public txt_gemScore:fgui.GRichTextField;
-	public txt_exp:fgui.GRichTextField;
-	public btn_wuQi:BtnTxtView;
-	public btn_xiangLian:BtnTxtView;
-	public btn_jieZhi:BtnTxtView;
-	public btn_huFu:BtnTxtView;
-	public btn_zuoQi:BtnTxtView;
-	public btn_anQi:BtnTxtView;
-	public btn_touKui:BtnTxtView;
-	public btn_yiFu:BtnTxtView;
-	public btn_xiaZhuang:BtnTxtView;
-	public btn_xieZi:BtnTxtView;
-	public btn_shiZhuang:BtnTxtView;
-	public btn_faBao:BtnTxtView;
-	public static URL:string = "ui://vith2b66whk31d";
+	public txt_jingLi: fgui.GRichTextField;
+	public txt_jinAtk: fgui.GRichTextField;
+	public txt_muAtk: fgui.GRichTextField;
+	public txt_shuiAtk: fgui.GRichTextField;
+	public txt_huoAtk: fgui.GRichTextField;
+	public txt_tuAtk: fgui.GRichTextField;
+	public txt_moHe: fgui.GRichTextField;
+	public txt_moBi: fgui.GRichTextField;
+	public txt_lingShi: fgui.GRichTextField;
+	public txt_jingLiHF: fgui.GRichTextField;
+	public txt_jinDef: fgui.GRichTextField;
+	public txt_muDef: fgui.GRichTextField;
+	public txt_shuiDef: fgui.GRichTextField;
+	public txt_huoDef: fgui.GRichTextField;
+	public txt_tuDef: fgui.GRichTextField;
+	public txt_hunPo: fgui.GRichTextField;
+	public txt_gemScore: fgui.GRichTextField;
+	public txt_exp: fgui.GRichTextField;
+	public btn_wuQi: BtnTxtView;
+	public btn_xiangLian: BtnTxtView;
+	public btn_jieZhi: BtnTxtView;
+	public btn_huFu: BtnTxtView;
+	public btn_zuoQi: BtnTxtView;
+	public btn_anQi: BtnTxtView;
+	public btn_touKui: BtnTxtView;
+	public btn_yiFu: BtnTxtView;
+	public btn_xiaZhuang: BtnTxtView;
+	public btn_xieZi: BtnTxtView;
+	public btn_shiZhuang: BtnTxtView;
+	public btn_faBao: BtnTxtView;
+	public static URL: string = "ui://vith2b66whk31d";
 
-	public static createInstance():ComRenWu {
+	public static createInstance(): ComRenWu {
 		return <ComRenWu>(fgui.UIPackage.createObject("PkgMain", "ComRenWu"));
 	}
 
-	protected override onConstruct():void {
+	protected override onConstruct(): void {
 		this.txt_jingLi = <fgui.GRichTextField>(this.getChildAt(2));
 		this.txt_jinAtk = <fgui.GRichTextField>(this.getChildAt(3));
 		this.txt_muAtk = <fgui.GRichTextField>(this.getChildAt(4));
