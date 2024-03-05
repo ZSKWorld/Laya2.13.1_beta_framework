@@ -50,5 +50,13 @@
     <group id="n42_9hon" name="n42" xy="65,485" size="950,950" advanced="true" layout="vt" lineGap="10" excludeInvisibles="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
+    <component id="n44_9hon" name="btn_calcuate" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="295,1615" size="490,87">
+      <Button title="开始计算" titleFontSize="44"/>
+    </component>
+    <component id="n48_9hon" name="btn_resetMap" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="295,1725" size="490,87">
+      <Button title="重置地图" titleFontSize="44"/>
+    </component>
+    <text id="n46_9hon" name="input_canUse" xy="489,1507" size="311,66" fontSize="50" color="#ffffff" align="center" autoSize="none" text="50" input="true" restrict="[0-9]"/>
+    <text id="n47_9hon" name="n47" xy="275,1508" size="204,66" fontSize="50" color="#ffffff" align="center" text="可用水滴"/>
   </displayList>
 </component>

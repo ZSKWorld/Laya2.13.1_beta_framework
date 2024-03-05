@@ -5,11 +5,13 @@
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <loader id="n1_9hon" name="loader_icon" xy="25,0" size="100,100" aspect="true" url="ui://1gl1luit9hon5" fill="scaleFree"/>
-    <component id="n2_9hon" name="btn_add" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="40,111" size="30,30">
+    <component id="n2_9hon" name="btn_add" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="31,111" size="30,30" group="n4_9hon">
       <Button title="+"/>
     </component>
-    <component id="n3_9hon" name="btn_sub" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="78,111" size="30,30">
+    <component id="n3_9hon" name="btn_sub" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="64,111" size="30,30" group="n4_9hon">
       <Button title="-"/>
     </component>
+    <group id="n4_9hon" name="n4" xy="31,111" size="63,30" advanced="true" layout="hz" colGap="3" excludeInvisibles="true"/>
+    <text id="n5_9hon" name="txt_needed" xy="107,106" pivot="0.5,0.5" size="34,42" fontSize="30" color="#ff0000" text="56"/>
   </displayList>
 </component>

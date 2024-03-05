@@ -2,183 +2,183 @@
 <packageDescription id="vx9zwser">
   <resources>
     <image id="qjdob" name="Bg_XingXing01.png" path="/Texture/" exported="true"/>
-    <image id="qjdoc" name="Icon_ShuXiDu02.png" path="/Texture/"/>
-    <image id="qjdod" name="Icon_ShuXiDu03.png" path="/Texture/"/>
-    <image id="qjdoe" name="Icon_ShuXiDu04.png" path="/Texture/"/>
-    <image id="qjdof" name="Icon_ShuXiDu05.png" path="/Texture/"/>
-    <image id="qjdog" name="Icon_TongBi.png" path="/Texture/"/>
-    <image id="qjdoh" name="Icon_Wonder.png" path="/Texture/"/>
-    <image id="qjdoi" name="Icon_Yilingqu.png" path="/Texture/"/>
-    <image id="qjdoj" name="Icon_YinLiang.png" path="/Texture/"/>
-    <image id="qjdok" name="Icon_ShuXiDu01.png" path="/Texture/"/>
-    <image id="qjdol" name="Pattern_Biaotiqian.png" path="/Texture/"/>
-    <image id="qjdom" name="Pattern_DiWen02.png" path="/Texture/"/>
-    <image id="qjdon" name="Pattern_DiWen03.png" path="/Texture/"/>
-    <image id="qjdoo" name="Pattern_LongDi01.png" path="/Texture/"/>
-    <image id="qjdop" name="Pattern_LongDi02.png" path="/Texture/"/>
-    <image id="qjdoq" name="Pattern_LongDi03.png" path="/Texture/"/>
-    <image id="qjdor" name="Pattern_LongDi04.png" path="/Texture/"/>
-    <image id="qjdos" name="Pattern_LongDi05.png" path="/Texture/"/>
-    <image id="qjdot" name="Pattern_LongWen.png" path="/Texture/"/>
-    <image id="qjdou" name="Pattern_DiWen01.png" path="/Texture/"/>
-    <image id="qjdov" name="Icon_ShuShi.png" path="/Texture/"/>
-    <image id="qjdow" name="Icon_SheHua.png" path="/Texture/"/>
-    <image id="qjdox" name="Icon_RenQi.png" path="/Texture/"/>
-    <image id="qjdoy" name="Icon_Book_Chuan.png" path="/Texture/"/>
-    <image id="qjdoz" name="Icon_Book_hui.png" path="/Texture/"/>
-    <image id="qjdo10" name="Icon_Book_Lu.png" path="/Texture/"/>
-    <image id="qjdo11" name="Icon_Book_Su.png" path="/Texture/"/>
-    <image id="qjdo12" name="Icon_Book_Yue.png" path="/Texture/"/>
-    <image id="qjdo13" name="Icon_Common_ChuanCai01.png" path="/Texture/"/>
-    <image id="qjdo14" name="Icon_Common_LuCai01.png" path="/Texture/"/>
-    <image id="qjdo15" name="Icon_Common_SuCai01.png" path="/Texture/"/>
-    <image id="qjdo16" name="Icon_Common_YueCai01.png" path="/Texture/"/>
-    <image id="qjdo17" name="Icon_Fire_06.png" path="/Texture/"/>
-    <image id="qjdo18" name="Icon_Fire_07.png" path="/Texture/"/>
-    <image id="qjdo19" name="Icon_HuanJin01.png" path="/Texture/"/>
-    <image id="qjdo1a" name="Icon_HuanJin02.png" path="/Texture/"/>
-    <image id="qjdo1b" name="Icon_HuanJing.png" path="/Texture/"/>
-    <image id="qjdo1c" name="Icon_JiaSu.png" path="/Texture/"/>
-    <image id="qjdo1d" name="Icon_KouWei01.png" path="/Texture/"/>
-    <image id="qjdo1e" name="Icon_KouWei02.png" path="/Texture/"/>
-    <image id="qjdo1f" name="Icon_Majiu.png" path="/Texture/"/>
-    <image id="qjdo1g" name="Icon_QvWei.png" path="/Texture/"/>
-    <image id="qjdo1h" name="Pattern_LongWen_L.png" path="/Texture/"/>
-    <image id="qjdo1i" name="Icon_Biaoqing_Well.png" path="/Texture/"/>
-    <image id="qjdo1j" name="Pattern_LongWen02.png" path="/Texture/"/>
-    <image id="qjdo1k" name="Pattern_ZhongJiaDi.png" path="/Texture/"/>
-    <image id="qjdo1l" name="Pic_Star05.png" path="/Texture/"/>
-    <image id="qjdo1m" name="Pic_Star06.png" path="/Texture/"/>
-    <image id="qjdo1n" name="Pic_Star07.png" path="/Texture/"/>
-    <image id="qjdo1o" name="Pic_Tiao07.png" path="/Texture/"/>
-    <image id="qjdo1p" name="Pic_TipsXian.png" path="/Texture/"/>
-    <image id="qjdo1q" name="Pic_WaiQuanGuang.png" path="/Texture/"/>
-    <image id="qjdo1r" name="Pic_Xian01.png" path="/Texture/"/>
-    <image id="qjdo1s" name="Pic_Xian02.png" path="/Texture/"/>
-    <image id="qjdo1t" name="Pic_ShuZiDi02.png" path="/Texture/"/>
-    <image id="qjdo1u" name="Pic_XvQiuDi01.png" path="/Texture/"/>
-    <image id="qjdo1v" name="Pic_XvQiuDi03.png" path="/Texture/"/>
-    <image id="qjdo1w" name="Pic_XvQiuDi04.png" path="/Texture/"/>
-    <image id="qjdo1x" name="Pic_Yu01.png" path="/Texture/"/>
-    <image id="qjdo1y" name="Pic_Yu02.png" path="/Texture/"/>
-    <image id="qjdo1z" name="Pic_Yuan.png" path="/Texture/"/>
-    <image id="qjdo20" name="Pic_YunWen.png" path="/Texture/"/>
-    <image id="qjdo21" name="Pic_Zan01.png" path="/Texture/"/>
-    <image id="qjdo22" name="Pic_Zan02.png" path="/Texture/"/>
-    <image id="qjdo23" name="Pic_XvQiuDi02.png" path="/Texture/"/>
-    <image id="qjdo24" name="Pic_ShuZiDi01.png" path="/Texture/"/>
-    <image id="qjdo25" name="Pic_ShiJianQiPao01.png" path="/Texture/"/>
-    <image id="qjdo26" name="Pic_ShengZi.png" path="/Texture/"/>
-    <image id="qjdo27" name="Pic_ Bgzhuangshi.png" path="/Texture/"/>
-    <image id="qjdo28" name="Pic_CaiPinBiaoQian.png" path="/Texture/"/>
-    <image id="qjdo29" name="Pic_DuiHuaQiPao01.png" path="/Texture/"/>
-    <image id="qjdo2a" name="Pic_FengGeXian.png" path="/Texture/"/>
+    <image id="qjdoc" name="Icon_ShuXiDu02.png" path="/Texture/" exported="true"/>
+    <image id="qjdod" name="Icon_ShuXiDu03.png" path="/Texture/" exported="true"/>
+    <image id="qjdoe" name="Icon_ShuXiDu04.png" path="/Texture/" exported="true"/>
+    <image id="qjdof" name="Icon_ShuXiDu05.png" path="/Texture/" exported="true"/>
+    <image id="qjdog" name="Icon_TongBi.png" path="/Texture/" exported="true"/>
+    <image id="qjdoh" name="Icon_Wonder.png" path="/Texture/" exported="true"/>
+    <image id="qjdoi" name="Icon_Yilingqu.png" path="/Texture/" exported="true"/>
+    <image id="qjdoj" name="Icon_YinLiang.png" path="/Texture/" exported="true"/>
+    <image id="qjdok" name="Icon_ShuXiDu01.png" path="/Texture/" exported="true"/>
+    <image id="qjdol" name="Pattern_Biaotiqian.png" path="/Texture/" exported="true"/>
+    <image id="qjdom" name="Pattern_DiWen02.png" path="/Texture/" exported="true"/>
+    <image id="qjdon" name="Pattern_DiWen03.png" path="/Texture/" exported="true"/>
+    <image id="qjdoo" name="Pattern_LongDi01.png" path="/Texture/" exported="true"/>
+    <image id="qjdop" name="Pattern_LongDi02.png" path="/Texture/" exported="true"/>
+    <image id="qjdoq" name="Pattern_LongDi03.png" path="/Texture/" exported="true"/>
+    <image id="qjdor" name="Pattern_LongDi04.png" path="/Texture/" exported="true"/>
+    <image id="qjdos" name="Pattern_LongDi05.png" path="/Texture/" exported="true"/>
+    <image id="qjdot" name="Pattern_LongWen.png" path="/Texture/" exported="true"/>
+    <image id="qjdou" name="Pattern_DiWen01.png" path="/Texture/" exported="true"/>
+    <image id="qjdov" name="Icon_ShuShi.png" path="/Texture/" exported="true"/>
+    <image id="qjdow" name="Icon_SheHua.png" path="/Texture/" exported="true"/>
+    <image id="qjdox" name="Icon_RenQi.png" path="/Texture/" exported="true"/>
+    <image id="qjdoy" name="Icon_Book_Chuan.png" path="/Texture/" exported="true"/>
+    <image id="qjdoz" name="Icon_Book_hui.png" path="/Texture/" exported="true"/>
+    <image id="qjdo10" name="Icon_Book_Lu.png" path="/Texture/" exported="true"/>
+    <image id="qjdo11" name="Icon_Book_Su.png" path="/Texture/" exported="true"/>
+    <image id="qjdo12" name="Icon_Book_Yue.png" path="/Texture/" exported="true"/>
+    <image id="qjdo13" name="Icon_Common_ChuanCai01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo14" name="Icon_Common_LuCai01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo15" name="Icon_Common_SuCai01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo16" name="Icon_Common_YueCai01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo17" name="Icon_Fire_06.png" path="/Texture/" exported="true"/>
+    <image id="qjdo18" name="Icon_Fire_07.png" path="/Texture/" exported="true"/>
+    <image id="qjdo19" name="Icon_HuanJin01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1a" name="Icon_HuanJin02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1b" name="Icon_HuanJing.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1c" name="Icon_JiaSu.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1d" name="Icon_KouWei01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1e" name="Icon_KouWei02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1f" name="Icon_Majiu.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1g" name="Icon_QvWei.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1h" name="Pattern_LongWen_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1i" name="Icon_Biaoqing_Well.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1j" name="Pattern_LongWen02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1k" name="Pattern_ZhongJiaDi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1l" name="Pic_Star05.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1m" name="Pic_Star06.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1n" name="Pic_Star07.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1o" name="Pic_Tiao07.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1p" name="Pic_TipsXian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1q" name="Pic_WaiQuanGuang.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1r" name="Pic_Xian01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1s" name="Pic_Xian02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1t" name="Pic_ShuZiDi02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1u" name="Pic_XvQiuDi01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1v" name="Pic_XvQiuDi03.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1w" name="Pic_XvQiuDi04.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1x" name="Pic_Yu01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1y" name="Pic_Yu02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo1z" name="Pic_Yuan.png" path="/Texture/" exported="true"/>
+    <image id="qjdo20" name="Pic_YunWen.png" path="/Texture/" exported="true"/>
+    <image id="qjdo21" name="Pic_Zan01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo22" name="Pic_Zan02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo23" name="Pic_XvQiuDi02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo24" name="Pic_ShuZiDi01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo25" name="Pic_ShiJianQiPao01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo26" name="Pic_ShengZi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo27" name="Pic_ Bgzhuangshi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo28" name="Pic_CaiPinBiaoQian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo29" name="Pic_DuiHuaQiPao01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2a" name="Pic_FengGeXian.png" path="/Texture/" exported="true"/>
     <image id="qjdo2c" name="Pic_GouxuanBG.png" path="/Texture/" exported="true" scale="9grid" scale9grid="8,8,16,16"/>
-    <image id="qjdo2d" name="Pic_Guang02.png" path="/Texture/"/>
-    <image id="qjdo2e" name="Pic_GuangDian.png" path="/Texture/"/>
-    <image id="qjdo2f" name="Pic_GuKeBiaoQian.png" path="/Texture/"/>
-    <image id="qjdo2g" name="Pic_JiaJvBiaoQian.png" path="/Texture/"/>
-    <image id="qjdo2h" name="Pic_lading_Tiao01.png" path="/Texture/"/>
-    <image id="qjdo2i" name="Pic_lading_Tiao03.png" path="/Texture/"/>
-    <image id="qjdo2j" name="Pic_lading_Tiao04.png" path="/Texture/"/>
-    <image id="qjdo2k" name="Pic_Loading01.png" path="/Texture/"/>
-    <image id="qjdo2l" name="Pic_Pin01.png" path="/Texture/"/>
-    <image id="qjdo2m" name="Pic_Pin02.png" path="/Texture/"/>
-    <image id="qjdo2n" name="Pic_qingbaodi.png" path="/Texture/"/>
-    <image id="qjdo2o" name="Pic_Quan01.png" path="/Texture/"/>
-    <image id="qjdo2p" name="Pic_question.png" path="/Texture/"/>
-    <image id="qjdo2q" name="Pattern_YunWen.png" path="/Texture/"/>
-    <image id="qjdo2r" name="Pic_ZheZhao.png" path="/Texture/"/>
-    <image id="qjdo2s" name="Icon_Biaoqing_Simple.png" path="/Texture/"/>
-    <image id="qjdo2t" name="Icon_BeiLei_Small.png" path="/Texture/"/>
-    <image id="qjdo2u" name="Frame_Biaotiwenshi.png" path="/Texture/"/>
-    <image id="qjdo2v" name="Frame_ChuyiBG.png" path="/Texture/"/>
-    <image id="qjdo2w" name="Frame_Copyright.png" path="/Texture/"/>
-    <image id="qjdo2x" name="Frame_DialogCompletePV01.png" path="/Texture/" scale="9grid" scale9grid="160,7,8,2"/>
-    <image id="qjdo2y" name="Frame_ErJiKuang.png" path="/Texture/"/>
+    <image id="qjdo2d" name="Pic_Guang02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2e" name="Pic_GuangDian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2f" name="Pic_GuKeBiaoQian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2g" name="Pic_JiaJvBiaoQian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2h" name="Pic_lading_Tiao01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2i" name="Pic_lading_Tiao03.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2j" name="Pic_lading_Tiao04.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2k" name="Pic_Loading01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2l" name="Pic_Pin01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2m" name="Pic_Pin02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2n" name="Pic_qingbaodi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2o" name="Pic_Quan01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2p" name="Pic_question.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2q" name="Pattern_YunWen.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2r" name="Pic_ZheZhao.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2s" name="Icon_Biaoqing_Simple.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2t" name="Icon_BeiLei_Small.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2u" name="Frame_Biaotiwenshi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2v" name="Frame_ChuyiBG.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2w" name="Frame_Copyright.png" path="/Texture/" exported="true"/>
+    <image id="qjdo2x" name="Frame_DialogCompletePV01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="160,7,8,2"/>
+    <image id="qjdo2y" name="Frame_ErJiKuang.png" path="/Texture/" exported="true"/>
     <image id="qjdo2z" name="Frame_ItemBG01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="41,42,82,84"/>
     <image id="qjdo30" name="Frame_ItemBG02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="41,42,82,84"/>
-    <image id="qjdo31" name="Frame_ItemBG03.png" path="/Texture/"/>
-    <image id="qjdo32" name="Frame_BiaoTiLan.png" path="/Texture/"/>
-    <image id="qjdo33" name="Frame_ItemBG04.png" path="/Texture/"/>
-    <image id="qjdo34" name="Frame_NeiKuang02.png" path="/Texture/"/>
-    <image id="qjdo35" name="Frame_NeiKuang06.png" path="/Texture/"/>
-    <image id="qjdo36" name="Frame_NeiKuang07.png" path="/Texture/"/>
-    <image id="qjdo37" name="Frame_NeiKuang07_2.png" path="/Texture/"/>
-    <image id="qjdo38" name="Frame_NeiKuang08.png" path="/Texture/"/>
-    <image id="qjdo39" name="Frame_NeiKuang08_01.png" path="/Texture/"/>
-    <image id="qjdo3a" name="Frame_NeiKuang09.png" path="/Texture/"/>
-    <image id="qjdo3b" name="Frame_NeiKuang10.png" path="/Texture/"/>
-    <image id="qjdo3c" name="Frame_Money.png" path="/Texture/"/>
-    <image id="qjdo3d" name="Frame_BiaoTiDi.png" path="/Texture/"/>
+    <image id="qjdo31" name="Frame_ItemBG03.png" path="/Texture/" exported="true"/>
+    <image id="qjdo32" name="Frame_BiaoTiLan.png" path="/Texture/" exported="true"/>
+    <image id="qjdo33" name="Frame_ItemBG04.png" path="/Texture/" exported="true"/>
+    <image id="qjdo34" name="Frame_NeiKuang02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo35" name="Frame_NeiKuang06.png" path="/Texture/" exported="true"/>
+    <image id="qjdo36" name="Frame_NeiKuang07.png" path="/Texture/" exported="true"/>
+    <image id="qjdo37" name="Frame_NeiKuang07_2.png" path="/Texture/" exported="true"/>
+    <image id="qjdo38" name="Frame_NeiKuang08.png" path="/Texture/" exported="true"/>
+    <image id="qjdo39" name="Frame_NeiKuang08_01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3a" name="Frame_NeiKuang09.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3b" name="Frame_NeiKuang10.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3c" name="Frame_Money.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3d" name="Frame_BiaoTiDi.png" path="/Texture/" exported="true"/>
     <image id="qjdo3e" name="Frame_Bg02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="34,38,52,20" gridTile="12"/>
-    <image id="qjdo3f" name="Frame_Bg.png" path="/Texture/" scale="9grid" scale9grid="50,55,11,1"/>
-    <image id="qjdo3g" name="Bg_XingXing02.png" path="/Texture/"/>
-    <image id="qjdo3h" name="Btn_Cancel_S.png" path="/Texture/"/>
-    <image id="qjdo3i" name="Btn_Confirm_L.png" path="/Texture/"/>
-    <image id="qjdo3j" name="Btn_Confirm_S.png" path="/Texture/"/>
-    <image id="qjdo3k" name="Btn_DuiHuaQiPao02.png" path="/Texture/"/>
-    <image id="qjdo3l" name="Btn_DuiHuaQiPao03.png" path="/Texture/"/>
-    <image id="qjdo3m" name="Btn_DuiHuaQiPao04.png" path="/Texture/"/>
+    <image id="qjdo3f" name="Frame_Bg.png" path="/Texture/" exported="true" scale="9grid" scale9grid="50,55,11,1"/>
+    <image id="qjdo3g" name="Bg_XingXing02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3h" name="Btn_Cancel_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3i" name="Btn_Confirm_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3j" name="Btn_Confirm_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3k" name="Btn_DuiHuaQiPao02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3l" name="Btn_DuiHuaQiPao03.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3m" name="Btn_DuiHuaQiPao04.png" path="/Texture/" exported="true"/>
     <image id="qjdo3n" name="Btn_FanHui.png" path="/Texture/" exported="true"/>
-    <image id="qjdo3o" name="Btn_FanZhuan.png" path="/Texture/"/>
-    <image id="qjdo3p" name="Btn_Goto_L.png" path="/Texture/"/>
-    <image id="qjdo3q" name="Btn_Goto_S.png" path="/Texture/"/>
-    <image id="qjdo3r" name="Btn_HuiTai_M.png" path="/Texture/"/>
-    <image id="qjdo3s" name="Btn_Recharge_L.png" path="/Texture/"/>
-    <image id="qjdo3t" name="Btn_Recharge_S.png" path="/Texture/"/>
-    <image id="qjdo3u" name="Btn_ShiJianQiPao02.png" path="/Texture/"/>
-    <image id="qjdo3v" name="Btn_ShiJianQiPao03.png" path="/Texture/"/>
-    <image id="qjdo3w" name="Btn_ShiJianQiPao04.png" path="/Texture/"/>
-    <image id="qjdo3x" name="Btn_Xingxi.png" path="/Texture/"/>
+    <image id="qjdo3o" name="Btn_FanZhuan.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3p" name="Btn_Goto_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3q" name="Btn_Goto_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3r" name="Btn_HuiTai_M.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3s" name="Btn_Recharge_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3t" name="Btn_Recharge_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3u" name="Btn_ShiJianQiPao02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3v" name="Btn_ShiJianQiPao03.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3w" name="Btn_ShiJianQiPao04.png" path="/Texture/" exported="true"/>
+    <image id="qjdo3x" name="Btn_Xingxi.png" path="/Texture/" exported="true"/>
     <image id="qjdo3y" name="Frame_Baojiankuojianzhezhao.png" path="/Texture/" exported="true"/>
-    <image id="qjdo3z" name="Frame_NeiKuang11.png" path="/Texture/"/>
-    <image id="qjdo40" name="Icon_Biaoqing_Bad.png" path="/Texture/"/>
-    <image id="qjdo41" name="Frame_NeirongBG.png" path="/Texture/"/>
-    <image id="qjdo42" name="Frame_TangKuang.png" path="/Texture/"/>
-    <image id="qjdo43" name="Frame_WuPinKuang04_S.png" path="/Texture/"/>
-    <image id="qjdo44" name="Frame_WuPinKuang05_L.png" path="/Texture/"/>
-    <image id="qjdo45" name="Frame_WuPinKuang05_M.png" path="/Texture/"/>
-    <image id="qjdo46" name="Frame_WuPinKuang05_MF.png" path="/Texture/"/>
-    <image id="qjdo47" name="Frame_WuPinKuang05_S.png" path="/Texture/"/>
-    <image id="qjdo48" name="Frame_WuPinKuangempty.png" path="/Texture/"/>
-    <image id="qjdo49" name="Frame_WuPinKuangZhe.png" path="/Texture/"/>
-    <image id="qjdo4a" name="Frame_Xiantiao.png" path="/Texture/"/>
-    <image id="qjdo4b" name="Frame_WuPinKuang04_MF.png" path="/Texture/"/>
-    <image id="qjdo4c" name="Frame_YanXiShiJian.png" path="/Texture/"/>
-    <image id="qjdo4d" name="Icon_AttrChuYi.png" path="/Texture/"/>
-    <image id="qjdo4e" name="Icon_AttrFoodRenQi.png" path="/Texture/"/>
-    <image id="qjdo4f" name="Icon_AttrHaoShi.png" path="/Texture/"/>
-    <image id="qjdo4g" name="Icon_AttrKouWei.png" path="/Texture/"/>
-    <image id="qjdo4h" name="Icon_AttrMeiLi.png" path="/Texture/"/>
-    <image id="qjdo4i" name="Icon_AttrShouJia.png" path="/Texture/"/>
-    <image id="qjdo4j" name="Icon_AttrTanXian.png" path="/Texture/"/>
-    <image id="qjdo4k" name="Icon_AttrXiaoLv.png" path="/Texture/"/>
-    <image id="qjdo4l" name="Icon_Add.png" path="/Texture/"/>
-    <image id="qjdo4m" name="Frame_WuPinKuang04_M.png" path="/Texture/"/>
-    <image id="qjdo4n" name="Frame_WuPinKuang04_L.png" path="/Texture/"/>
-    <image id="qjdo4o" name="Frame_WuPinKuang03_S.png" path="/Texture/"/>
+    <image id="qjdo3z" name="Frame_NeiKuang11.png" path="/Texture/" exported="true"/>
+    <image id="qjdo40" name="Icon_Biaoqing_Bad.png" path="/Texture/" exported="true"/>
+    <image id="qjdo41" name="Frame_NeirongBG.png" path="/Texture/" exported="true"/>
+    <image id="qjdo42" name="Frame_TangKuang.png" path="/Texture/" exported="true"/>
+    <image id="qjdo43" name="Frame_WuPinKuang04_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo44" name="Frame_WuPinKuang05_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo45" name="Frame_WuPinKuang05_M.png" path="/Texture/" exported="true"/>
+    <image id="qjdo46" name="Frame_WuPinKuang05_MF.png" path="/Texture/" exported="true"/>
+    <image id="qjdo47" name="Frame_WuPinKuang05_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo48" name="Frame_WuPinKuangempty.png" path="/Texture/" exported="true"/>
+    <image id="qjdo49" name="Frame_WuPinKuangZhe.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4a" name="Frame_Xiantiao.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4b" name="Frame_WuPinKuang04_MF.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4c" name="Frame_YanXiShiJian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4d" name="Icon_AttrChuYi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4e" name="Icon_AttrFoodRenQi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4f" name="Icon_AttrHaoShi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4g" name="Icon_AttrKouWei.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4h" name="Icon_AttrMeiLi.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4i" name="Icon_AttrShouJia.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4j" name="Icon_AttrTanXian.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4k" name="Icon_AttrXiaoLv.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4l" name="Icon_Add.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4m" name="Frame_WuPinKuang04_M.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4n" name="Frame_WuPinKuang04_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4o" name="Frame_WuPinKuang03_S.png" path="/Texture/" exported="true"/>
     <image id="qjdo4p" name="Frame_Tips01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="49,45,2,2"/>
-    <image id="qjdo4q" name="Frame_Tips02.png" path="/Texture/"/>
-    <image id="qjdo4r" name="Frame_TipsNeiKuang.png" path="/Texture/"/>
-    <image id="qjdo4s" name="Frame_Titlebg01.png" path="/Texture/"/>
-    <image id="qjdo4t" name="Frame_Titlebg02.png" path="/Texture/"/>
+    <image id="qjdo4q" name="Frame_Tips02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4r" name="Frame_TipsNeiKuang.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4s" name="Frame_Titlebg01.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4t" name="Frame_Titlebg02.png" path="/Texture/" exported="true"/>
     <image id="qjdo4u" name="Frame_TongYong01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="27,28,2,1"/>
     <image id="qjdo4v" name="Frame_TongYong02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="39,36,0,3"/>
-    <image id="qjdo4w" name="Frame_TongYong03.png" path="/Texture/"/>
-    <image id="qjdo4x" name="Frame_WuPinKuang01_L.png" path="/Texture/"/>
-    <image id="qjdo4y" name="Frame_WuPinKuang01_M.png" path="/Texture/"/>
+    <image id="qjdo4w" name="Frame_TongYong03.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4x" name="Frame_WuPinKuang01_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo4y" name="Frame_WuPinKuang01_M.png" path="/Texture/" exported="true"/>
     <image id="qjdo4z" name="Frame_WuPinKuang01_MF.png" path="/Texture/" exported="true" scale="9grid" scale9grid="40,50,80,100"/>
-    <image id="qjdo50" name="Frame_WuPinKuang01_S.png" path="/Texture/"/>
-    <image id="qjdo51" name="Frame_WuPinKuang02_L.png" path="/Texture/"/>
-    <image id="qjdo52" name="Frame_WuPinKuang02_M.png" path="/Texture/"/>
-    <image id="qjdo53" name="Frame_WuPinKuang02_MF.png" path="/Texture/"/>
-    <image id="qjdo54" name="Frame_WuPinKuang02_S.png" path="/Texture/"/>
-    <image id="qjdo55" name="Frame_WuPinKuang03_L.png" path="/Texture/"/>
-    <image id="qjdo56" name="Frame_WuPinKuang03_M.png" path="/Texture/"/>
-    <image id="qjdo57" name="Frame_WuPinKuang03_MF.png" path="/Texture/"/>
-    <image id="qjdo58" name="Frame_PopupBG_In.png" path="/Texture/"/>
-    <image id="qjdo59" name="Pic_ZhuangTaiDi.png" path="/Texture/"/>
+    <image id="qjdo50" name="Frame_WuPinKuang01_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo51" name="Frame_WuPinKuang02_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo52" name="Frame_WuPinKuang02_M.png" path="/Texture/" exported="true"/>
+    <image id="qjdo53" name="Frame_WuPinKuang02_MF.png" path="/Texture/" exported="true"/>
+    <image id="qjdo54" name="Frame_WuPinKuang02_S.png" path="/Texture/" exported="true"/>
+    <image id="qjdo55" name="Frame_WuPinKuang03_L.png" path="/Texture/" exported="true"/>
+    <image id="qjdo56" name="Frame_WuPinKuang03_M.png" path="/Texture/" exported="true"/>
+    <image id="qjdo57" name="Frame_WuPinKuang03_MF.png" path="/Texture/" exported="true"/>
+    <image id="qjdo58" name="Frame_PopupBG_In.png" path="/Texture/" exported="true"/>
+    <image id="qjdo59" name="Pic_ZhuangTaiDi.png" path="/Texture/" exported="true"/>
     <component id="fhzd5a" name="BtnCircleIcon.xml" path="/Component/" exported="true"/>
     <component id="sbd05c" name="ComTipInfo.xml" path="/Component/" exported="true"/>
     <component id="sbd05i" name="BtnTxt.xml" path="/Component/" exported="true"/>

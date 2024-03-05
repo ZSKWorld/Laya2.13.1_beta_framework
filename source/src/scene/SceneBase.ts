@@ -15,7 +15,7 @@ type LoadViewData = { updateHandler?: Laya.Handler };
 
 /** 逻辑场景基类 */
 export abstract class LogicSceneBase<T> extends Observer implements IScene {
-	views = new Set<ViewID>();
+	readonly views = new Set<ViewID>();
 	/** 场景参数 */
 	protected data: T;
 	/** 加载时显示的load页面id */
@@ -28,7 +28,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	private _progresses: number[] = [];
 
 	/** 场景名称 */
-	get name() { return String(this["__proto__"].constructor.name); }
+	get name() { return this.constructor.name; }
 
 	load() {
 		const resArr = this.getResGroup(ResGroupType.All);
@@ -72,10 +72,14 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 			this._loadViewData.updateHandler = null;
 			uiMgr.removeView(this.loadViewId);
 		}
-		//卸载资源
+		this.views.forEach(v => uiMgr.destroyView(v));
 		this.clearRes(ResGroupType.Normal);
 	}
 
+	/**
+	 * 清理场景资源
+	 * @param type 要清理的资源类型
+	 */
 	protected clearRes(type: ResGroupType) {
 		const [uiRes, skeletonRes, otherRes] = this.getResGroup(type);
 		uiRes.forEach(v => {
@@ -87,10 +91,10 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	}
 
 	/** 可卸载资源，场景退出时卸载 */
-	protected getNormalResArray() { return [] as string[]; };
+	protected getNormalResArray() { return [] as string[]; }
 
 	/** 不可卸载资源，加载后不会卸载，只能手动卸载 */
-	protected getConstResArray() { return [] as string[]; };
+	protected getConstResArray() { return [] as string[]; }
 
 	protected onPreEnter() { }
 

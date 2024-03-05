@@ -4,6 +4,7 @@ import { CfgManager } from "../../core/config/CfgManager";
 import { websocket } from "../../core/net/WebSocket";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { layerMgr } from "../../core/ui/core/LayerManager";
+import { sceneViewRegister } from "../../core/ui/core/SceneViewRegister";
 import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewID } from "../../core/ui/core/ViewID";
 import { viewRegister } from "../../core/ui/core/ViewRegister";
@@ -43,6 +44,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 		uiMgr.init();
 		viewRegister.init();
 		websocket.init();
+		sceneViewRegister.init();
 		Laya.timer.once(500, sceneMgr, sceneMgr.enterScene, [SceneType.LoginScene]);
 	}
 

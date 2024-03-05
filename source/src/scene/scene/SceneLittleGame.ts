@@ -1,5 +1,4 @@
 import { ResPath } from "../../core/common/ResPath";
-import { BattleType } from "../../core/net/enum/BattleEnums";
 import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewID } from "../../core/ui/core/ViewID";
 import { LogicSceneBase } from "../SceneBase";

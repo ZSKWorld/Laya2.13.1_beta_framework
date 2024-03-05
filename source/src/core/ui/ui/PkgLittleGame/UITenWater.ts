@@ -1,6 +1,7 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
 import { ComTenWaterView } from "../../view/PkgLittleGame/view/coms/ComTenWaterView";
+import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class UITenWater extends fgui.GComponent {
 
@@ -41,6 +42,9 @@ export default class UITenWater extends fgui.GComponent {
 	public com_53: ComTenWaterView;
 	public com_54: ComTenWaterView;
 	public com_55: ComTenWaterView;
+	public btn_calcuate: BtnTxtView;
+	public btn_resetMap: BtnTxtView;
+	public input_canUse: fgui.GTextInput;
 	public static URL: string = "ui://1gl1luit9hon1";
 
 	public static createInstance(): UITenWater {
@@ -85,5 +89,8 @@ export default class UITenWater extends fgui.GComponent {
 		this.com_53 = <ComTenWaterView>(this.getChildAt(39));
 		this.com_54 = <ComTenWaterView>(this.getChildAt(40));
 		this.com_55 = <ComTenWaterView>(this.getChildAt(41));
+		this.btn_calcuate = <BtnTxtView>(this.getChildAt(44));
+		this.btn_resetMap = <BtnTxtView>(this.getChildAt(45));
+		this.input_canUse = <fgui.GTextInput>(this.getChildAt(46));
 	}
 }

@@ -18,7 +18,7 @@ export class ScenePreScreen extends LogicSceneBase<ScenePreScreenData>{
     }
 
     protected override onEnter() {
-        Laya.stage.on(Laya.Event.CLICK, this, this.onStageClick);
+        // Laya.stage.on(Laya.Event.CLICK, this, this.onStageClick);
         sceneMgr.enterScene(SceneType.InitScene);
     }
 

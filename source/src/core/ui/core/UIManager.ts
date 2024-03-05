@@ -24,12 +24,14 @@ class UICache {
 	 * @returns
 	 */
 	getView(viewId: ViewID) {
-		let viewCtrl: IViewCtrl;
-		if (this._views.has(viewId)) {
-			viewCtrl = this._views.get(viewId);
-			this._views.delete(viewId);
-		}
+		const viewCtrl = this._views.get(viewId);
+		this._views.delete(viewId);
 		return viewCtrl;
+	}
+
+	destroyView(viewId: ViewID) {
+		const viewCtrl = this.getView(viewId);
+		viewCtrl && viewCtrl.view.dispose();
 	}
 
 	onResize() {
@@ -174,6 +176,16 @@ class UIManager extends Observer {
 			this._cache.cacheView(v);
 		});
 		this._openedCtrls.length = 0;
+	}
+
+	destroyView(viewId: ViewID) {
+		this._cache.destroyView(viewId);
+		const index = this._openedCtrls.findIndex(v => v.viewId == viewId);
+		if (index >= 0) {
+			const viewCtrl = this._openedCtrls[index];
+			this._openedCtrls.splice(index, 1);
+			viewCtrl.view.dispose();
+		}
 	}
 
 	private showView2(viewCtrl: IViewCtrl, data: any, callback?: Laya.Handler) {
