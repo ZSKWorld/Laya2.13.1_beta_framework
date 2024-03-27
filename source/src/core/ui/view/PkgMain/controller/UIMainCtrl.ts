@@ -1,7 +1,7 @@
 import { GameEvent } from "../../../../common/GameEvent";
-import { localData } from "../../../../libs/localData/LocalData";
-import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
-import { MathUtil } from "../../../../libs/math/MathUtil";
+import { localData } from "../../../../game/localData/LocalData";
+import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
+import { MathUtil } from "../../../../game/math/MathUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ViewID } from "../../../core/ViewID";
 import { richStrMgr } from "../../../tool/RichStrManager";
@@ -11,7 +11,7 @@ export interface UIMainData {
 
 }
 
-export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
+export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData> {
 	/** 悬浮球拖拽中 */
 	private _sphereDragged: boolean;
 
@@ -50,7 +50,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData>{
 	}
 
 	override onEnable() {
-		this._sphereDragged = false;
+		this.setSphereDraged(false);
 		this.view.refreshPlayerInfo();
 	}
 

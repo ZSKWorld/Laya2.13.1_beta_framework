@@ -1,4 +1,4 @@
-import { Observer } from "../core/libs/event/Observer";
+import { Observer } from "../core/game/event/Observer";
 import { IArea, IPlatform, PlatformType } from "./PlatformDefine";
 
 export abstract class PlatformBase extends Observer implements IPlatform {

@@ -1,4 +1,4 @@
-import { Observer } from "../../libs/event/Observer";
+import { Observer } from "../../game/event/Observer";
 import { RDTriggerType } from "./RedDotConst";
 
 function RedDotEvent(eventName: RDTriggerType) {

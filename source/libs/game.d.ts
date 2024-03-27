@@ -48,7 +48,8 @@ declare class Logger {
 
 declare namespace Laya {
     interface Node extends Laya.EventDispatcher {
-        addChild<T>(node: T): T;
+        addChild<T extends Node>(node: T): T;
+        addChildAt<T extends Node>(node: T, index: number): T;
         addComponentIntance<T extends Laya.Component>(component: T): T;
         addComponent<T extends Laya.Component>(componentType: Class<T>): T;
         getComponent<T extends Laya.Component>(componentType: Class<T>): T;

@@ -1,5 +1,5 @@
 import { GameUtil } from "../common/GameUtil";
-import { MathUtil } from "../libs/math/MathUtil";
+import { MathUtil } from "../game/math/MathUtil";
 import { AttributeEnum } from "../net/enum/AttributeEnum";
 /** 玩家数值计算公式 */
 export class UserDataFormula {

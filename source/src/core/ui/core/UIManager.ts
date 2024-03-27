@@ -1,6 +1,5 @@
-import { ResPath } from "../../common/ResPath";
 import { loadMgr } from "../../game/LoadManager";
-import { Observer } from "../../libs/event/Observer";
+import { Observer } from "../../game/event/Observer";
 import { Layer, layerMgr } from "./LayerManager";
 import { ViewEvent } from "./UIDefine";
 import { ViewID } from "./ViewID";
@@ -127,7 +126,7 @@ class UIManager extends Observer {
 			else {
 				loadMgr.loadPackage(this._viewClsMap[viewId].PkgRes).then(() => {
 					this.showView2(this.createView(viewId, true), data, callback);
-				}, () => { 
+				}, () => {
 					showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
 						if (result) this.showView(viewId, data, callback);
 						else this.showView2(null, data, callback);

@@ -1,4 +1,4 @@
-import { eventMgr } from "../libs/event/EventManager";
+import { eventMgr } from "../game/event/EventManager";
 import { richStrMgr } from "../ui/tool/RichStrManager";
 import { tipMgr } from "../ui/tool/TipManager";
 import { GameEvent } from "./GameEvent";

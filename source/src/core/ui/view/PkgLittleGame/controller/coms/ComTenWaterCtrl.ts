@@ -1,4 +1,4 @@
-import { MathUtil } from "../../../../../libs/math/MathUtil";
+import { MathUtil } from "../../../../../game/math/MathUtil";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ComTenWaterMsg, ComTenWaterView, WaterStatus } from "../../view/coms/ComTenWaterView";
 

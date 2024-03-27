@@ -1,5 +1,5 @@
 import GameConfig from "./GameConfig";
-import { Logger } from "./core/libs/utils/Logger";
+import { Logger } from "./core/game/Logger";
 import { ViewExtend } from "./core/ui/core/ViewExtend";
 import { FGUIExtension } from "./engine/FGUIExtension";
 import { FGUIRepair } from "./engine/FGUIRepair";

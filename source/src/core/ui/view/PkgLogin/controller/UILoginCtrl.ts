@@ -1,6 +1,6 @@
 import { GameEvent } from "../../../../common/GameEvent";
-import { localData } from "../../../../libs/localData/LocalData";
-import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
+import { localData } from "../../../../game/localData/LocalData";
+import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { AccountService } from "../../../../net/Services";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { tipMgr } from "../../../tool/TipManager";

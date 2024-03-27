@@ -1,4 +1,4 @@
-import { eventMgr } from "../../libs/event/EventManager";
+import { eventMgr } from "../../game/event/EventManager";
 import { ViewEvent } from "./UIDefine";
 import { DIViewCtrl, ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
 

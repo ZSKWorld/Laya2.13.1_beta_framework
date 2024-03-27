@@ -1,5 +1,5 @@
 import { GameEvent } from "../common/GameEvent";
-import { Observer } from "../libs/event/Observer";
+import { Observer } from "../game/event/Observer";
 import { MessageType } from "./enum/MessageType";
 import { NetMessage } from "./enum/NetMessage";
 

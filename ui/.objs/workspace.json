@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "gridSize": 10,
+  "snapToGrid": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66qjdo0",
@@ -18,7 +18,6 @@
     "ui://vith2b669f1k1h",
     "ui://vs9845atqjdo0",
     "ui://vith2b66irlv1e",
-    "ui://1gl1luityfsi0",
     "ui://1gl1luit9hon1",
     "ui://1gl1luitf5ii7",
     "ui://vith2b66sbd0x",
@@ -41,7 +40,7 @@
     "/"
   ],
   "showGrid": false,
-  "snapToGrid": true,
+  "gridSize": 10,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",

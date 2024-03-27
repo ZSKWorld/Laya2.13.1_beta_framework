@@ -1,5 +1,5 @@
 import { GameEvent } from "../../common/GameEvent";
-import { eventMgr } from "../../libs/event/EventManager";
+import { eventMgr } from "../../game/event/EventManager";
 import { RedDotData } from "./RedDotData";
 import { RDDefineInit, RDMap } from "./RedDotDefine";
 import { IRedDotData } from "./RedDotInterface";

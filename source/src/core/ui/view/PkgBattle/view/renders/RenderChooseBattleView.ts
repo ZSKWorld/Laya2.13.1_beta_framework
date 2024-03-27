@@ -1,5 +1,5 @@
 import { ResPath } from "../../../../../common/ResPath";
-import { MathUtil } from "../../../../../libs/math/MathUtil";
+import { MathUtil } from "../../../../../game/math/MathUtil";
 import { BattleType } from "../../../../../net/enum/BattleEnums";
 import RenderChooseBattle from "../../../../ui/PkgBattle/RenderChooseBattle";
 

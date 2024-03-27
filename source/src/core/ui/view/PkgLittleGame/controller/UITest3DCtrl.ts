@@ -26,7 +26,7 @@ export class UITest3DCtrl extends BaseViewCtrl<UITest3DView, UITest3DData> {
 
 	private createScene() {
 		if (this._scene) return;
-		this._scene = this.view.displayObject.addChild(new Laya.Scene3D());
+		this._scene = this.view.displayObject.addChildAt(new Laya.Scene3D(), 0);
 		this._camera = this._scene.addChild(new Laya.Camera());
 		const empty = this._scene.addChild(new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere()));
 		this._sphere1 = this._scene.addChild(new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere()));

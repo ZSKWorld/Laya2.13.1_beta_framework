@@ -1,6 +1,6 @@
 import { GameEvent } from "../common/GameEvent";
-import { Observer } from "../libs/event/Observer";
-import { MathUtil } from "../libs/math/MathUtil";
+import { Observer } from "./event/Observer";
+import { MathUtil } from "./math/MathUtil";
 
 /** 历练日志管理器 */
 class TrainLogManager extends Observer {

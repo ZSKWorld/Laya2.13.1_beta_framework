@@ -1,4 +1,4 @@
-import { Observer } from "../libs/event/Observer";
+import { Observer } from "../game/event/Observer";
 
 const ClassNameTag = "__className";
 const DontDispatchTag = "__dontDispatch";

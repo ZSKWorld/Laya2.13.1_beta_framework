@@ -1,5 +1,5 @@
 import { ResPath } from "../../../../common/ResPath";
-import { MathUtil } from "../../../../libs/math/MathUtil";
+import { MathUtil } from "../../../../game/math/MathUtil";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { UserUtil } from "../../../../userData/UserUtil";
 import UIMain from "../../../ui/PkgMain/UIMain";

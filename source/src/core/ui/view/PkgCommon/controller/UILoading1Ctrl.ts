@@ -1,4 +1,4 @@
-import { MathUtil } from "../../../../libs/math/MathUtil";
+import { MathUtil } from "../../../../game/math/MathUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UILoading1View } from "../view/UILoading1View";
 
@@ -8,7 +8,7 @@ export interface UILoading1Data {
 
 type Loading1Type = IView & Partial<UILoading1View>;
 
-export class UILoading1Ctrl<V extends Loading1Type = UILoading1View, D extends UILoading1Data = UILoading1Data> extends BaseViewCtrl<V, D>{
+export class UILoading1Ctrl<V extends Loading1Type = UILoading1View, D extends UILoading1Data = UILoading1Data> extends BaseViewCtrl<V, D> {
     private _tips = [];
     private _progressHandler: Laya.Handler;
 

@@ -1,7 +1,7 @@
 import { SceneType } from "../../../../../scene/SceneDefine";
 import { sceneMgr } from "../../../../../scene/SceneManager";
-import { localData } from "../../../../libs/localData/LocalData";
-import { LocalDataKey } from "../../../../libs/localData/LocalDataKey";
+import { localData } from "../../../../game/localData/LocalData";
+import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { NetMessage } from "../../../../net/enum/NetMessage";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { UILoginCtrl } from "../controller/UILoginCtrl";

@@ -1,4 +1,4 @@
-import { Observer } from "../core/libs/event/Observer";
+import { Observer } from "../core/game/event/Observer";
 import { IScene, SceneType } from "./SceneDefine";
 
 /** 逻辑场景管理类 */

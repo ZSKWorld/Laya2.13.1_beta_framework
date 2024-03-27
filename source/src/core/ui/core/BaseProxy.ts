@@ -1,4 +1,4 @@
-import { Notifier } from "../../libs/event/Notifier";
+import { Notifier } from "../../game/event/Notifier";
 
 /** 控制器网络回包代理 */
 export abstract class BaseProxy<T extends IViewCtrl = IViewCtrl> extends Notifier implements IViewProxy<T> {
