@@ -2,33 +2,35 @@
 /** Laya扩展 */
 export class LayaExtension {
 	static Init() {
-		this.ScriptImprove();
-		this.Vector2Improve();
+		this.ScriptExtend();
+		this.Script3DExtend();
+		this.Vector2Extend();
 	}
 
 	/** Laya.Script完善 */
-	private static ScriptImprove() {
-		const scriptPrototype: Laya.Script & { _onAdded?: () => void } = Laya.Script.prototype;
-		const scriptOnAdded = scriptPrototype._onAdded;
-		scriptPrototype._onAdded = function () {
-			scriptOnAdded.call(this);
+	private static ScriptExtend() {
+		const prototype: Laya.Script & { _onAdded?: () => void } = Laya.Script.prototype;
+		const _onAdded = prototype._onAdded;
+		prototype._onAdded = function () {
+			_onAdded.call(this);
 			this.onAdded();
 		}
-		scriptPrototype.onAdded = function () { }
+		prototype.onAdded = function () { }
+	}
 
-		if (Laya.Script3D) {
-			const script3dPrototype: Laya.Script3D & { _onAdded?: () => void } = Laya.Script3D.prototype;
-			const script3dOnAdded = script3dPrototype._onAdded;
-			script3dPrototype._onAdded = function () {
-				script3dOnAdded.call(this);
-				this.onAdded();
-			}
-			script3dPrototype.onAdded = function () { }
+	private static Script3DExtend() {
+		if (!Laya.Script3D) return;
+		const prototype: Laya.Script3D & { _onAdded?: () => void } = Laya.Script3D.prototype;
+		const _onAdded = prototype._onAdded;
+		prototype._onAdded = function () {
+			_onAdded.call(this);
+			this.onAdded();
 		}
+		prototype.onAdded = function () { }
 	}
 
 	/** Laya.Vector2扩展 */
-	private static Vector2Improve() {
+	private static Vector2Extend() {
 		if (!Laya.Vector2) return;
 		const prototype = Laya.Vector2.prototype;
 		Object.defineProperties(prototype, {

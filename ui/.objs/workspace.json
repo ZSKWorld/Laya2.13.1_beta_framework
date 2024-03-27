@@ -1,12 +1,11 @@
 {
   "libview.firstColumnWidth": 424,
-  "auxline1": true,
+  "gridSize": 10,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vith2b66qjdo0",
     "ui://vith2b66btv51q",
     "ui://vx9zwsersbd05t",
-    "ui://vx9zwserirlv60",
     "ui://vith2b66j87q1w",
     "ui://va1qbl3hsbd0s",
     "ui://va1qbl3hsbd0u",
@@ -21,6 +20,7 @@
     "ui://vith2b66irlv1e",
     "ui://1gl1luityfsi0",
     "ui://1gl1luit9hon1",
+    "ui://1gl1luitf5ii7",
     "ui://vith2b66sbd0x",
     "ui://1gl1luit9hon2",
     "ui://vith2b66e3vt1v",
@@ -30,7 +30,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vith2b66sbd0x",
+  "doc.activeDoc": "ui://1gl1luitf5ii7",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "vx9zwser",
@@ -38,25 +38,13 @@
     "vx9zwser",
     "/Component/",
     "1gl1luit",
-    "/",
-    "1gl1luit",
-    "/Component/",
-    "1gl1luit",
-    "/Component/UITenWater/",
-    "1gl1luit",
-    "/Texture/",
-    "vith2b66",
-    "/",
-    "vith2b66",
-    "/Component/",
-    "vith2b66",
-    "/Component/UISetting/"
+    "/"
   ],
   "showGrid": false,
   "snapToGrid": true,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 10,
+  "auxline1": true,
   "gridColor": 42
 }

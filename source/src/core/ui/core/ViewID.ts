@@ -39,6 +39,7 @@ export const enum ViewID {
 	UIWaitingView = "UIWaitingView",
 	UILittleGameView = "UILittleGameView",
 	UITenWaterView = "UITenWaterView",
+	UITest3DView = "UITest3DView",
 	UILoginView = "UILoginView",
 	UIChatView = "UIChatView",
 	UIEquipmentInfoView = "UIEquipmentInfoView",

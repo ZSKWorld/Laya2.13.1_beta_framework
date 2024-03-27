@@ -61,7 +61,7 @@ class LoadManager {
 	private checkLoaded(complete: Laya.Handler, resolve: Function, reject: Function, url: string | (string | Laya.loadItem)[], data: any) {
 		let loaded = data ? (Array.isArray(data) ? data.length > 0 : true) : false;
 		if (loaded) {
-			complete && complete.runWith(data);
+			complete && complete.runWith([data]);
 			resolve && resolve(data);
 		} else {
 			reject && reject(`${ String(url) }加载失败`);

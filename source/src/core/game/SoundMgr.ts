@@ -60,7 +60,6 @@ class AudioInfo {
 }
 export class SoundMgr {
 
-    private static _audio_id: number = 0;
     private static _audio_list: Array<AudioInfo> = []; // priority有序的audio,priority相同时 后来的排前面
 
     private static _audioVolume: number = 0;

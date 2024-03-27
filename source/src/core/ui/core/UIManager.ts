@@ -1,3 +1,5 @@
+import { ResPath } from "../../common/ResPath";
+import { loadMgr } from "../../game/LoadManager";
 import { Observer } from "../../libs/event/Observer";
 import { Layer, layerMgr } from "./LayerManager";
 import { ViewEvent } from "./UIDefine";
@@ -117,28 +119,23 @@ class UIManager extends Observer {
 	 */
 	showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler) {
 		this.lockMark++;
-		let viewCtrl: IViewCtrl;
 		let openedIndex = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (openedIndex == -1) {
 			//先尝试从缓存池中获取
-			viewCtrl = this._cache.getView(viewId);
+			const viewCtrl = this._cache.getView(viewId);
 			if (viewCtrl) this.showView2(viewCtrl, data, callback);
 			else {
-				fgui.UIPackage.loadPackage([this._viewClsMap[viewId].PkgRes], Laya.Handler.create(this, (res: any[]) => {
-					if (!res || !res.length) {
-						showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
-							if (result) this.showView(viewId, data, callback);
-							else this.showView2(viewCtrl, data, callback);
-						});
-					} else {
-						viewCtrl = this.createView(viewId, true);
-						this.showView2(viewCtrl, data, callback);
-					}
-				}));
+				loadMgr.loadPackage(this._viewClsMap[viewId].PkgRes).then(() => {
+					this.showView2(this.createView(viewId, true), data, callback);
+				}, () => { 
+					showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
+						if (result) this.showView(viewId, data, callback);
+						else this.showView2(null, data, callback);
+					});
+				});
 			}
 		} else {
-			viewCtrl = this._openedCtrls[openedIndex];
-			this.showView2(viewCtrl, data, callback);
+			this.showView2(this._openedCtrls[openedIndex], data, callback);
 		}
 	}
 

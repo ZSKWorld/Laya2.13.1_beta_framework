@@ -1,5 +1,5 @@
-import { loadMgr } from "../core/libs/LoadManager";
-import { skeletonMgr } from "../core/libs/SkeletonMgr";
+import { loadMgr } from "../core/game/LoadManager";
+import { skeletonMgr } from "../core/game/SkeletonMgr";
 import { Observer } from "../core/libs/event/Observer";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";

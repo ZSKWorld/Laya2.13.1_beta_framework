@@ -8,6 +8,7 @@
     <image id="9hon4" name="icon3.png" path="/Texture/" exported="true"/>
     <image id="9hon5" name="icon4.png" path="/Texture/" exported="true"/>
     <image id="9hon6" name="icon1.png" path="/Texture/" exported="true"/>
+    <component id="f5ii7" name="UITest3D.xml" path="/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

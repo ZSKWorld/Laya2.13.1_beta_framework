@@ -103,6 +103,9 @@ import { UISphereToolView } from "../view/PkgMain/view/UISphereToolView";
 import { UITenWaterCtrl } from "../view/PkgLittleGame/controller/UITenWaterCtrl";
 import { UITenWaterProxy } from "../view/PkgLittleGame/proxy/UITenWaterProxy";
 import { UITenWaterView } from "../view/PkgLittleGame/view/UITenWaterView";
+import { UITest3DCtrl } from "../view/PkgLittleGame/controller/UITest3DCtrl";
+import { UITest3DProxy } from "../view/PkgLittleGame/proxy/UITest3DProxy";
+import { UITest3DView } from "../view/PkgLittleGame/view/UITest3DView";
 import { UIWaitingCtrl } from "../view/PkgCommon/controller/UIWaitingCtrl";
 import { UIWaitingProxy } from "../view/PkgCommon/proxy/UIWaitingProxy";
 import { UIWaitingView } from "../view/PkgCommon/view/UIWaitingView";
@@ -168,6 +171,7 @@ class ViewRegister {
 		register(ViewID.UIWaitingView, UIWaitingView, UIWaitingCtrl, UIWaitingProxy);
 		register(ViewID.UILittleGameView, UILittleGameView, UILittleGameCtrl, UILittleGameProxy);
 		register(ViewID.UITenWaterView, UITenWaterView, UITenWaterCtrl, UITenWaterProxy);
+		register(ViewID.UITest3DView, UITest3DView, UITest3DCtrl, UITest3DProxy);
 		register(ViewID.UILoginView, UILoginView, UILoginCtrl, UILoginProxy);
 		register(ViewID.UIChatView, UIChatView, UIChatCtrl, UIChatProxy);
 		register(ViewID.UIEquipmentInfoView, UIEquipmentInfoView, UIEquipmentInfoCtrl, UIEquipmentInfoProxy);

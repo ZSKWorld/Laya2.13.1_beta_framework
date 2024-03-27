@@ -10,10 +10,11 @@ export interface UILittleGameData {
 
 export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGameData> {
 
-    override onAdded() {
+	override onAdded() {
 		this.addMessage(UILittleGameMsg.OnBtnBackClick, this.onBtnBackClick);
 		this.addMessage(UILittleGameMsg.OnBtnTenWaterClick, this.onBtnTenWaterClick);
-    }
+		this.addMessage(UILittleGameMsg.OnBtnTest3DClick, this.onBtnTest3DClick);
+	}
 
 	private onBtnBackClick() {
 		sceneMgr.enterScene(SceneType.MainScene);
@@ -21,6 +22,11 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 
 	private onBtnTenWaterClick() {
 		this.showView(ViewID.UITenWaterView);
+		this.removeSelf();
+	}
+
+	private onBtnTest3DClick() {
+		this.showView(ViewID.UITest3DView);
 		this.removeSelf();
 	}
 

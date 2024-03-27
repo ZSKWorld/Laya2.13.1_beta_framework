@@ -1,5 +1,5 @@
-declare type PartialAll<T> = { [ P in keyof T ]?: Partial<T[ P ]>; };
-declare type KeyMap<T> = { [ key: string ]: T; };
+declare type PartialAll<T> = { [P in keyof T]?: Partial<T[P]>; };
+declare type KeyMap<T> = { [key: string]: T; };
 declare type Class<T> = new (...args: any) => T;
 
 declare const userData: IUser;
@@ -48,12 +48,14 @@ declare class Logger {
 
 declare namespace Laya {
     interface Node extends Laya.EventDispatcher {
+        addChild<T>(node: T): T;
         addComponentIntance<T extends Laya.Component>(component: T): T;
         addComponent<T extends Laya.Component>(componentType: Class<T>): T;
         getComponent<T extends Laya.Component>(componentType: Class<T>): T;
         getComponents<T extends Laya.Component>(componentType: Class<T>): T[];
     }
     interface Script {
+        readonly owner: Laya.Sprite;
         /**
          * 组件被挂载后执行，此方法只执行一次
          * 此方法为虚方法，使用时重写覆盖即可
@@ -61,6 +63,7 @@ declare namespace Laya {
         onAdded(): void;
     }
     interface Script3D {
+        readonly owner: Laya.Sprite3D;
         /**
          * 组件被挂载后执行，此方法只执行一次
          * 此方法为虚方法，使用时重写覆盖即可
