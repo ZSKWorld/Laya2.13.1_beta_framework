@@ -2,7 +2,7 @@ declare interface IOffline extends IOfflineData {
 
 }
 
-declare interface IUser extends IUserData, IDecode<IUserData, IUser> {
+declare interface IUser extends IUserData, IDecodeObject<IUserData, IUser> {
     account: IAccount;
     base: IBase;
     /** 离线数据 */

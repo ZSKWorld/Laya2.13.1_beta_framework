@@ -83,7 +83,7 @@ export class Connection {
         }
     }
 
-    sendMessage(type: MessageType, data: UserOutput) {
+    sendMessage(type: MessageType, data: IUserOutput) {
         if (!this._connection) return;
         if (this._user) {
             const userSyncInfo = this._user.getSyncInfo();
@@ -125,7 +125,7 @@ export class Connection {
     private onConnectionMessage(message: websocket.Message) {
         if (message.type === 'utf8') {
             this._user && this._user.clearSyncInfo();
-            const data: UserInput = JSON.parse(message.utf8Data);
+            const data: IUserInput = JSON.parse(message.utf8Data);
             if (data.cmd != "register" && data.cmd != "login" && !this._logined)
                 return this.sendMessage(MessageType.Response, { cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
             if (this._listener.hasListener(data.cmd)) {

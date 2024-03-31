@@ -6,8 +6,8 @@ import { NetMessage } from "./enum/NetMessage";
 class WebSocket extends Observer {
     private _url: string = "ws://192.168.71.245:8007";
     private _socket: Laya.Socket;
-    private _waitList: UserInput[];
-    private _current: UserInput;
+    private _waitList: IUserInput[];
+    private _current: IUserInput;
     get connected() { return this._socket.connected; }
 
     init() {
@@ -22,7 +22,7 @@ class WebSocket extends Observer {
         }
     }
 
-    sendMsg(msg: UserInput) {
+    sendMsg(msg: IUserInput) {
         const { _current, _waitList } = this;
         if (_current && msg.cmd == _current.cmd) return;
         if (_waitList.length && _waitList.find(v => v.cmd == msg.cmd)) return;
@@ -36,14 +36,14 @@ class WebSocket extends Observer {
     }
 
     private onSocketMessage(message: string): void {
-        const output: UserOutput | UserNotify = JSON.parse(message);
+        const output: IUserOutput | IUserNotify = JSON.parse(message);
         switch (output.type) {
             case MessageType.Response: this.dealResponse(output); break;
             case MessageType.Notify: this.dealNotify(output); break;
         }
     }
 
-    private dealResponse(output: UserOutput) {
+    private dealResponse(output: IUserOutput) {
         const input = this._current;
         let netMsg = `NetMsg_${ output.cmd[0].toUpperCase() + output.cmd.substring(1) }`;
         if (!output.error) {
@@ -63,7 +63,7 @@ class WebSocket extends Observer {
         this.executeWaitMsg();
     }
 
-    private dealNotify(output: UserNotify) {
+    private dealNotify(output: IUserNotify) {
         if (output && output.syncInfo)
             this.dispatch(NetMessage.SyncInfo, output.syncInfo);
         this.dispatch(output.cmd, output);

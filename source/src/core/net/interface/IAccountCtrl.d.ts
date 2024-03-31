@@ -1,38 +1,38 @@
 declare interface IAccountCtrl {
-    register(data: RegisterInput): void;
-    login(data: LoginInput): void;
-    signIn(data:SignInInput): void;
-    clearAccount(data: ClearAccountInput): void;
+    register(data: IRegisterInput): void;
+    login(data: ILoginInput): void;
+    signIn(data: ISignInInput): void;
+    clearAccount(data: IClearAccountInput): void;
 }
 
-declare interface RegisterInput extends UserInput {
+declare interface IRegisterInput extends IUserInput {
     account: string;
     password: string;
     nickname: string;
 }
 
-declare interface RegisterOutput extends UserOutput {
+declare interface IRegisterOutput extends IUserOutput {
 
 }
 
-declare interface LoginInput extends UserInput {
+declare interface ILoginInput extends IUserInput {
     account: string;
     password: string;
 }
 
-declare interface LoginOutput extends UserOutput {
+declare interface ILoginOutput extends IUserOutput {
 }
 
-declare interface SignInInput extends UserInput {
+declare interface ISignInInput extends IUserInput {
 }
 
-declare interface SignInput extends UserOutput {
+declare interface ISignInput extends IUserOutput {
 }
 
-declare interface ClearAccountInput extends UserInput {
+declare interface IClearAccountInput extends IUserInput {
 
 }
 
-declare interface ClearAccountOutput extends UserOutput {
+declare interface IClearAccountOutput extends IUserOutput {
 
 }

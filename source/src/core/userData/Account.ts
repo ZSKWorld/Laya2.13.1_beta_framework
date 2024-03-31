@@ -1,7 +1,7 @@
-import { ClassName, Decode } from "./Decode";
+import { ClassName, DecodeObject } from "./DecodeObject";
 
 @ClassName("AccountData")
-export class Account extends Decode<IAccountData> implements IAccount {
+export class Account extends DecodeObject<IAccountData> implements IAccount {
     uid: string;
     nickname: string;
     account: string;

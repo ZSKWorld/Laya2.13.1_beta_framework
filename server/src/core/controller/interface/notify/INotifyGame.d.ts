@@ -1,7 +1,5 @@
-declare interface UserNotify extends UserOutput {
 
-}
 
-declare interface HeartNotify extends UserNotify {
+declare interface IHeartNotify extends IUserNotify {
     timeStamp: number;
 }

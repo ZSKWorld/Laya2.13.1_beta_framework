@@ -1,21 +1,21 @@
 declare interface IFriendCtrl {
-    addFriend(data: AddFriendInput): void;
-    friendMsg(data: FriendMsgInput): void;
+    addFriend(data: IAddFriendInput): void;
+    friendMsg(data: IFriendMsgInput): void;
 }
 
-declare interface AddFriendInput extends UserInput {
+declare interface IAddFriendInput extends IUserInput {
     friendUid: string;
 }
 
-declare interface AddFriendOutput extends UserOutput {
+declare interface IAddFriendOutput extends IUserOutput {
 
 }
 
 
-declare interface FriendMsgInput extends UserInput {
+declare interface IFriendMsgInput extends IUserInput {
     friendUid: string;
     chatMsg: string;
 }
 
-declare interface FriendMsgOutput extends UserOutput {
+declare interface IFriendMsgOutput extends IUserOutput {
 }

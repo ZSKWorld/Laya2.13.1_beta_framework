@@ -1,8 +1,8 @@
-declare interface ICitta extends ICittaData, IDecode<ICittaData, ICitta> {
+declare interface ICitta extends ICittaData, IDecodeObject<ICittaData, ICitta> {
 
 }
 
-declare interface IBase extends IBaseData, IDecode<IBaseData, IBase> {
+declare interface IBase extends IBaseData, IDecodeObject<IBaseData, IBase> {
     /**心法数据 */
     citta: ICitta;
 

@@ -1,8 +1,8 @@
 import { GameUtil } from "../common/GameUtil";
 import { EquipmentPart } from "../net/enum/ItemEnum";
-import { ClassDontDispatch, ClassName, Decode } from "./Decode";
+import { ClassDontDispatch, ClassName, DecodeObject } from "./DecodeObject";
 import { UserUtil } from "./UserUtil";
-class Item<T> extends Decode<T>{
+class Item<T> extends DecodeObject<T> {
     id: number;
 
     get name() { return cfgMgr.Item[this.id].name; }

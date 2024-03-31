@@ -1,7 +1,7 @@
 import { GameUtil } from "../../utils/GameUtil";
-import { Decode } from "./Decode";
+import { DecodeObject } from "./DecodeObject";
 
-export class CantSyncObject<D = any, O = any> extends Decode<D, O> {
+export class CantSyncObject<D = any, O = any> extends DecodeObject<D, O> {
     constructor() {
         super();
         GameUtil.cantSyncObj(this);

@@ -6,10 +6,10 @@ import { Bag } from "./Bag";
 import { Base } from "./Base";
 import { Battle } from "./Battle";
 import { Body } from "./Body";
-import { Decode } from "./Decode";
+import { DecodeObject } from "./DecodeObject";
 import { Friend } from "./Friend";
 
-export class User extends Decode<IUserData, IUser> implements IUser {
+export class User extends DecodeObject<IUserData, IUser> implements IUser {
     account: IAccount = null;
     base: IBase = null;
     offline?: IOffline = null;
@@ -54,17 +54,17 @@ export class User extends Decode<IUserData, IUser> implements IUser {
 
     protected override onEncode(key: keyof IUserData) {
         if (key == "offline") return null;
-        else return this[ key ].encode();
+        else return this[key].encode();
     }
 
     protected override onDecode(data: IUserData, key: keyof IUserData) {
         switch (key) {
             case "offline": return null;
-            default: return this[ key ].decode(data[ key ] as any);
+            default: return this[key].decode(data[key] as any);
         }
     }
 
-    protected override afterDecode() {
+    protected override onEndDecode() {
         this.account.loginNextDay && this.resetData();
     }
 

@@ -1,100 +1,100 @@
 
 declare interface IBagCtrl {
     /** 使用物品 */
-    useItem(data: UseItemInput): void;
+    useItem(data: IUseItemInput): void;
     /** 出售物品 */
-    sellItem(data: SellItemInput): void;
+    sellItem(data: ISellItemInput): void;
     /** 添加/取消 收藏 */
-    changeCollect(data: ChangeCollectInput): void;
+    changeCollect(data: IChangeCollectInput): void;
     /** 分解宝石 */
-    decomposeGem(data:DecomposeGemInput): void;
+    decomposeGem(data: IDecomposeGemInput): void;
 
     /** 穿戴装备 */
-    dressEquip(data: DressEquipInput): void;
+    dressEquip(data: IDressEquipInput): void;
     /** 脱下装备 */
-    takeOffEquip(data: TakeOffEquipInput): void;
+    takeOffEquip(data: ITakeOffEquipInput): void;
     /** 出售装备 */
-    sellEquip(data: SellEquipInput): void;
+    sellEquip(data: ISellEquipInput): void;
     /** 分解装备 */
-    decomposeEquip(data: DecomposeEquipInput): void;
+    decomposeEquip(data: IDecomposeEquipInput): void;
 }
 
-declare interface UseItemInput extends UserInput {
+declare interface IUseItemInput extends IUserInput {
     /** 物品id */
     id: number;
     /** 物品数量 */
     count: number;
 }
 
-declare interface UseItemOutput extends UserOutput {
+declare interface IUseItemOutput extends IUserOutput {
     /** 获得的奖励 */
     rewards: IGoodsData[];
 }
 
-declare interface SellItemInput extends UserInput {
+declare interface ISellItemInput extends IUserInput {
     /** 物品id */
     id: number;
     /** 物品数量 */
     count: number;
 }
 
-declare interface SellItemOutput extends UserOutput {
+declare interface ISellItemOutput extends IUserOutput {
     /** 获得的奖励 */
     rewards: IGoodsData[];
 }
 
-declare interface ChangeCollectInput extends UserInput {
+declare interface IChangeCollectInput extends IUserInput {
     /** 要收藏物品id */
     id: number;
     /** 添加/取消 */
     collect: boolean;
 }
 
-declare interface ChangeCollectOutput extends UserOutput {
+declare interface IChangeCollectOutput extends IUserOutput {
 
 }
 
-declare interface DecomposeGemInput extends UserInput{
+declare interface IDecomposeGemInput extends IUserInput {
     level: number;
 }
 
-declare interface DecomposeGemOutput extends UserOutput{
+declare interface IDecomposeGemOutput extends IUserOutput {
     /** 获得的奖励 */
     rewards: IGoodsData[];
 }
 
-declare interface DressEquipInput extends UserInput {
+declare interface IDressEquipInput extends IUserInput {
     /** 要穿戴装备的uid */
     uid: string;
 }
 
-declare interface DressEquipOutput extends UserOutput {
+declare interface IDressEquipOutput extends IUserOutput {
 }
 
-declare interface TakeOffEquipInput extends UserInput {
+declare interface ITakeOffEquipInput extends IUserInput {
     /** 要脱下装备的部位 */
     part: number;
 }
 
-declare interface TakeOffEquipOutput extends UserOutput {
+declare interface ITakeOffEquipOutput extends IUserOutput {
 }
 
-declare interface SellEquipInput extends UserInput {
+declare interface ISellEquipInput extends IUserInput {
     id: number;
     /** 要出售装备的uid */
     uid: string;
 }
 
-declare interface SellEquipOutput extends UserOutput {
+declare interface ISellEquipOutput extends IUserOutput {
     /** 获得的奖励 */
     rewards: IGoodsData[];
 }
 
-declare interface DecomposeEquipInput extends UserInput {
+declare interface IDecomposeEquipInput extends IUserInput {
     star: number;
 }
 
-declare interface DecomposeEquipOutput extends UserOutput {
+declare interface IDecomposeEquipOutput extends IUserOutput {
     /** 获得的奖励 */
     rewards: IGoodsData[];
 }

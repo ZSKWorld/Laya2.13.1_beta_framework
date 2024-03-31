@@ -76,4 +76,8 @@ export const enum ErrorCode {
     ALREADY_IN_BATTLE,
     /** 未开始战斗 */
     NOT_IN_BATTLE,
+    /** 采集中 */
+    ALREADY_IN_GATHER,
+    /** 未开始采集 */
+    NOT_IN_GATHER,
 }

@@ -10,19 +10,19 @@ import { UILoginEvent } from "../event/UILoginEvent";
 export class UILoginProxy extends BaseProxy<UILoginCtrl> {
 
     @RegisterEvent(NetMessage.Login)
-    private login(output: LoginOutput, input: LoginInput) {
+    private login(output: ILoginOutput, input: ILoginInput) {
         const param = { account: input.account, password: input.password };
         localData.set(LocalDataKey.LastLoginAccount, param);
         sceneMgr.enterScene(SceneType.MainScene);
     }
 
     @RegisterEvent(NetMessage.LoginError)
-    private loginError(output: LoginOutput, input: LoginInput) {
+    private loginError(output: ILoginOutput, input: ILoginInput) {
         this.sendMessage(UILoginEvent.OnLoginFailed);
     }
 
     @RegisterEvent(NetMessage.Register)
-    private register(output: RegisterOutput, input: RegisterInput) {
+    private register(output: IRegisterOutput, input: IRegisterInput) {
         this.sendMessage(UILoginEvent.Login, input);
     }
 }

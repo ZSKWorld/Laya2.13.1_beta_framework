@@ -8,7 +8,7 @@ import { UIMainCtrl } from "../controller/UIMainCtrl";
 
 export class UIMainProxy extends BaseProxy<UIMainCtrl> {
     @RegisterEvent(NetMessage.DecomposeGem)
-    decomposeGem(output: DecomposeGemOutput, input: DecomposeGemInput) {
+    decomposeGem(output: IDecomposeGemOutput, input: IDecomposeGemInput) {
         if (output.rewards?.length) {
             let logStr = richStrMgr.start(`分解${ input.level }级宝石获得`).break();
             output.rewards.forEach(v => {
@@ -21,7 +21,7 @@ export class UIMainProxy extends BaseProxy<UIMainCtrl> {
     }
 
     @RegisterEvent(NetMessage.DecomposeEquip)
-    decomposeEquip(output: DecomposeEquipOutput, input: DecomposeEquipInput) {
+    decomposeEquip(output: IDecomposeEquipOutput, input: IDecomposeEquipInput) {
         if (output.rewards?.length) {
             let logStr = richStrMgr.start(`分解${ input.star }星装备获得`).break();
             output.rewards?.forEach(v => {

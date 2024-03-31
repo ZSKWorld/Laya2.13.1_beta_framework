@@ -1,9 +1,9 @@
-declare interface ILevel extends ILevelData, IDecode<ILevelData, ILevel> {
+declare interface ILevel extends ILevelData, IDecodeObject<ILevelData, ILevel> {
     /** 开始战斗 */
     enterBattle(id: number): void;
 }
 
-declare interface ICopy extends ICopyData, IDecode<ICopyData, ICopy> {
+declare interface ICopy extends ICopyData, IDecodeObject<ICopyData, ICopy> {
     /** 获取副本剩余次数 */
     getLastCount(id: number): number;
     /** 开始战斗 */
@@ -11,7 +11,7 @@ declare interface ICopy extends ICopyData, IDecode<ICopyData, ICopy> {
     reset(): void;
 }
 
-declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
+declare interface ISecret extends ISecretData, IDecodeObject<ISecretData, ISecret> {
     /** 获取秘境剩余次数 */
     getLastCount(id: number): number;
     /** 开始战斗 */
@@ -19,7 +19,7 @@ declare interface ISecret extends ISecretData, IDecode<ISecretData, ISecret> {
     reset(): void;
 }
 
-declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
+declare interface IBoss extends IBossData, IDecodeObject<IBossData, IBoss> {
     /** 剩余冷却时间 */
     lastCoolTime(id: number): number;
     /** 开始战斗 */
@@ -27,17 +27,16 @@ declare interface IBoss extends IBossData, IDecode<IBossData, IBoss> {
     reset(): void;
 }
 
-declare interface IGather extends IGatherData, IDecode<IGatherData, IGather> {
-    /** 获取采集剩余次数 */
-    getLastCount(id: number): number;
+declare interface IGather extends IGatherData, IDecodeObject<IGatherData, IGather> {
     /** 剩余采集时间 */
-    lastGatherTime(id: number): number;
+    remainTime(id: number): number;
     /** 开始采集 */
-    enterBattle(id: number, gatherTime: number): void;
-    reset(): void;
+    startGather(id: number, gatherTime: number): void;
+    /** 停止采集 */
+    breakOffGather(id: number): void;
 }
 
-declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
+declare interface IBattle extends IBattleData, IDecodeObject<IBattleData, IBattle> {
     /**关卡数据 */
     level: ILevel;
     /**副本数据 */
@@ -49,13 +48,25 @@ declare interface IBattle extends IBattleData, IDecode<IBattleData, IBattle> {
     /** 采集数据 */
     gather: IGather;
 
-    /** 获取配置表 */
-    getConfig(type: BattleType, id: number): BattleCfgData;
-    /** 获取剩余次数，不包括采集 */
-    getLastCount(type: BattleType, id: number): number;
-    /** 是否冷却完毕 */
-    getIsCooldown(type: BattleType, id: number): boolean;
-    /** 获取精力消耗 */
-    getVigorCost(type: BattleType, id: number): number;
+    /** 
+     * 获取配置表
+     * @param type {@link BattleType}
+     */
+    getConfig(type: number, id: number): BattleCfgData;
+    /** 
+     * 获取剩余次数，不包括采集
+     * @param type {@link BattleType}
+     */
+    getLastCount(type: number, id: number): number;
+    /** 
+     * 是否冷却完毕
+     * @param type {@link BattleType}
+     */
+    getIsCooldown(type: number, id: number): boolean;
+    /** 
+     * 获取精力消耗
+     * @param type {@link BattleType}
+     */
+    getVigorCost(type: number, id: number): number;
     resetData(): void;
 }

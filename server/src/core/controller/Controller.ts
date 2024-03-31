@@ -4,7 +4,7 @@ import { ErrorCode } from "../enum/ErrorCode";
 import { MessageType } from "../enum/MessageType";
 
 export class Controller {
-    private _cmds: { [ key: string ]: Function };
+    private _cmds: { [key: string]: Function };
     private _connection: Connection;
     get connection() { return this._connection; }
     get user() { return this._connection.user; }
@@ -13,7 +13,7 @@ export class Controller {
         const result = Pool.get(this.prototype.constructor.name as any, this);
         result._connection = connection;
         for (let key in result._cmds) {
-            connection.listener.on(key, result, result[ key ]);
+            connection.listener.on(key, result, result[key]);
         }
         result.onCreate();
         return result;
@@ -36,7 +36,7 @@ export class Controller {
 
     protected response<T>(cmd: string, data?: T, error: number = ErrorCode.NONE) {
         if (this.connection) {
-            let args: UserOutput = { cmd, error };
+            let args: IUserOutput = { cmd, error };
             if (data) Object.assign(args, data);
             this.connection.sendMessage(MessageType.Response, args);
         }
@@ -44,7 +44,7 @@ export class Controller {
 
     protected notify<T>(cmd: string, data?: T) {
         if (this.connection) {
-            let args: UserNotify = { cmd };
+            let args: IUserNotify = { cmd };
             if (data) Object.assign(args, data);
             this.connection.sendMessage(MessageType.Notify, args);
         }
@@ -55,6 +55,6 @@ export function AddCMD(_: any, context: ClassMethodDecoratorContext) {
     context.addInitializer(function () {
         const _this = this as any;
         _this._cmds = _this._cmds || {};
-        _this._cmds[ context.name ] = context.name;
+        _this._cmds[context.name] = context.name;
     });
 }

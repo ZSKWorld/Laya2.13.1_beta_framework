@@ -1,7 +1,7 @@
-import { ClassName, Decode } from "./Decode";
+import { ClassName, DecodeObject } from "./DecodeObject";
 
 @ClassName("FriendData")
-export class Friend extends Decode<IFriendData> implements IFriend {
+export class Friend extends DecodeObject<IFriendData> implements IFriend {
     friend: string[];
 
 }

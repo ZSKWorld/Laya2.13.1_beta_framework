@@ -1,10 +1,11 @@
 import { BattleType } from "../../../../../net/enum/BattleEnums";
+import { BattleService } from "../../../../../net/Services";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ViewID } from "../../../../core/ViewID";
 import { RenderChooseBattleMsg, RenderChooseBattleView } from "../../view/renders/RenderChooseBattleView";
 import { UIBattleConfirmData } from "../UIBattleConfirmCtrl";
 
-export class RenderChooseBattleCtrl extends BaseViewCtrl<RenderChooseBattleView, BattleType>{
+export class RenderChooseBattleCtrl extends BaseViewCtrl<RenderChooseBattleView, BattleType> {
 	private _cfgData: BattleCfgData;
 	private _time: number = 0;
 
@@ -40,7 +41,7 @@ export class RenderChooseBattleCtrl extends BaseViewCtrl<RenderChooseBattleView,
 	}
 
 	private onBtnBreakClick() {
-
+		BattleService.Inst.breakOffGather({ id: this._cfgData.id });
 	}
 
 }

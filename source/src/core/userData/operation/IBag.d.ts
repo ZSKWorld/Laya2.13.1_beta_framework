@@ -1,4 +1,4 @@
-declare interface IBag extends IBagData, IDecode<IBagData, IBag> {
+declare interface IBag extends IBagData, IDecodeObject<IBagData, IBag> {
     equipment: IEquipment[];
     gem: IGoods[];
     prop: IGoods[];
@@ -11,6 +11,6 @@ declare interface IBag extends IBagData, IDecode<IBagData, IBag> {
     getItemCount(id: number): number;
 
     getItem(id: number): IGoods;
-    
+
     getItems(type: ItemBagType): IEquipment[] | IGoods[];
 }

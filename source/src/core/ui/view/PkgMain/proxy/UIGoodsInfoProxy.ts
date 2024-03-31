@@ -5,9 +5,9 @@ import { ViewID } from "../../../core/ViewID";
 import { richStrMgr } from "../../../tool/RichStrManager";
 import { UIGoodsInfoCtrl } from "../controller/UIGoodsInfoCtrl";
 
-export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl>{
+export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl> {
     @RegisterEvent(NetMessage.UseItem)
-    private useItem(output: UseItemOutput, input: UseItemInput) {
+    private useItem(output: IUseItemOutput, input: IUseItemInput) {
         if (input.id == 2010)
             this.viewCtrl.showView(ViewID.UISectView);
         else
@@ -15,12 +15,12 @@ export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl>{
     }
 
     @RegisterEvent(NetMessage.SellItem)
-    private sellItem(output: SellItemOutput, input: SellItemInput) {
+    private sellItem(output: ISellItemOutput, input: ISellItemInput) {
         GameUtil.ShowRewardsTip(`出售${ GameUtil.GetItemCountStr(input.id, input.count) }获得`, output.rewards);
     }
 
     @RegisterEvent(NetMessage.BuyGoods)
-    private buyGoods(output: BuyGoodsOutput, input: BuyGoodsInput) {
+    private buyGoods(output: IBuyGoodsOutput, input: IBuyGoodsInput) {
         let titleStr = richStrMgr.start("消耗");
         const item = cfgMgr.Shop[input.id];
         item.sellPrice.forEach(v => titleStr.combineSpace(GameUtil.GetItemCountStr(v.id, v.count * input.count)));

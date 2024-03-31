@@ -1,9 +1,9 @@
 import { EquipmentPart } from "../net/enum/ItemEnum";
-import { ClassName, Decode } from "./Decode";
+import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment } from "./Goods";
 
 @ClassName("BodyData")
-export class Body extends Decode<IBodyData> implements IBody {
+export class Body extends DecodeObject<IBodyData> implements IBody {
     //#region 字段
     weapon: IEquipment;
     helmet: IEquipment;

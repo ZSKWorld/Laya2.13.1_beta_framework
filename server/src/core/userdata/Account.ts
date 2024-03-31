@@ -1,8 +1,8 @@
 import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
-import { Decode } from "./Decode";
+import { DecodeObject } from "./DecodeObject";
 
-export class Account extends Decode<IAccountData, IAccount> implements IAccount {
+export class Account extends DecodeObject<IAccountData, IAccount> implements IAccount {
     uid: string = Util.generateUUID();
     nickname: string = "";
     account: string = "";
@@ -36,11 +36,11 @@ export class Account extends Decode<IAccountData, IAccount> implements IAccount 
         this.nickname = nickname;
     }
 
-    protected override beginEncode() {
+    protected override onBeginEncode() {
         this.lastOnlineTime = TimeUtil.getTimeStamp();
     }
 
-    protected override afterDecode() {
+    protected override onEndDecode() {
         const nowTime = TimeUtil.getTimeStamp();
         this._loginTime = nowTime;
         this._lastLoginTime = this.lastLoginTime;

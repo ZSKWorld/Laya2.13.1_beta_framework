@@ -1,5 +1,5 @@
 /** 物品 */
-declare interface IGoods extends IGoodsData, IDecode<IGoodsData, IGoods> {
+declare interface IGoods extends IGoodsData, IDecodeObject<IGoodsData, IGoods> {
     get name(): string;
     get colorName(): string;
     get quality(): number;
@@ -11,7 +11,7 @@ declare interface IGoods extends IGoodsData, IDecode<IGoodsData, IGoods> {
 }
 
 /** 装备 */
-declare interface IEquipment extends IEquipmentData, IDecode<IEquipmentData, IEquipment> {
+declare interface IEquipment extends IEquipmentData, IDecodeObject<IEquipmentData, IEquipment> {
     get name(): string;
     get colorName(): string;
     get quality(): number;

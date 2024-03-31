@@ -6,218 +6,230 @@ export const enum NetMessage {
 	SyncInfo = "NetMsg_SyncInfo",
 
 	/**
-	 * @param output {@link RegisterOutput}
-	 * @param input {@link RegisterInput}
+	 * @param output {@link IRegisterOutput}
+	 * @param input {@link IRegisterInput}
 	 */
 	Register = "NetMsg_Register",
 
 	/**
-	 * @param output {@link RegisterOutput}
-	 * @param input {@link RegisterInput}
+	 * @param output {@link IRegisterOutput}
+	 * @param input {@link IRegisterInput}
 	 */
 	RegisterError = "NetMsg_Register_Error",
 
 	/**
-	 * @param output {@link LoginOutput}
-	 * @param input {@link LoginInput}
+	 * @param output {@link ILoginOutput}
+	 * @param input {@link ILoginInput}
 	 */
 	Login = "NetMsg_Login",
 
 	/**
-	 * @param output {@link LoginOutput}
-	 * @param input {@link LoginInput}
+	 * @param output {@link ILoginOutput}
+	 * @param input {@link ILoginInput}
 	 */
 	LoginError = "NetMsg_Login_Error",
 
 	/**
 	 * @param output {@link SignInOutput}
-	 * @param input {@link SignInInput}
+	 * @param input {@link ISignInInput}
 	 */
 	SignIn = "NetMsg_SignIn",
 
 	/**
 	 * @param output {@link SignInOutput}
-	 * @param input {@link SignInInput}
+	 * @param input {@link ISignInInput}
 	 */
 	SignInError = "NetMsg_SignIn_Error",
 
 	/**
-	 * @param output {@link ClearAccountOutput}
-	 * @param input {@link ClearAccountInput}
+	 * @param output {@link IClearAccountOutput}
+	 * @param input {@link IClearAccountInput}
 	 */
 	ClearAccount = "NetMsg_ClearAccount",
 
 	/**
-	 * @param output {@link ClearAccountOutput}
-	 * @param input {@link ClearAccountInput}
+	 * @param output {@link IClearAccountOutput}
+	 * @param input {@link IClearAccountInput}
 	 */
 	ClearAccountError = "NetMsg_ClearAccount_Error",
 
 	/**
-	 * @param output {@link UseItemOutput}
-	 * @param input {@link UseItemInput}
+	 * @param output {@link IUseItemOutput}
+	 * @param input {@link IUseItemInput}
 	 */
 	UseItem = "NetMsg_UseItem",
 
 	/**
-	 * @param output {@link UseItemOutput}
-	 * @param input {@link UseItemInput}
+	 * @param output {@link IUseItemOutput}
+	 * @param input {@link IUseItemInput}
 	 */
 	UseItemError = "NetMsg_UseItem_Error",
 
 	/**
-	 * @param output {@link SellItemOutput}
-	 * @param input {@link SellItemInput}
+	 * @param output {@link ISellItemOutput}
+	 * @param input {@link ISellItemInput}
 	 */
 	SellItem = "NetMsg_SellItem",
 
 	/**
-	 * @param output {@link SellItemOutput}
-	 * @param input {@link SellItemInput}
+	 * @param output {@link ISellItemOutput}
+	 * @param input {@link ISellItemInput}
 	 */
 	SellItemError = "NetMsg_SellItem_Error",
 
 	/**
-	 * @param output {@link ChangeCollectOutput}
-	 * @param input {@link ChangeCollectInput}
+	 * @param output {@link IChangeCollectOutput}
+	 * @param input {@link IChangeCollectInput}
 	 */
 	ChangeCollect = "NetMsg_ChangeCollect",
 
 	/**
-	 * @param output {@link ChangeCollectOutput}
-	 * @param input {@link ChangeCollectInput}
+	 * @param output {@link IChangeCollectOutput}
+	 * @param input {@link IChangeCollectInput}
 	 */
 	ChangeCollectError = "NetMsg_ChangeCollect_Error",
 
 	/**
-	 * @param output {@link DecomposeGemOutput}
-	 * @param input {@link DecomposeGemInput}
+	 * @param output {@link IDecomposeGemOutput}
+	 * @param input {@link IDecomposeGemInput}
 	 */
 	DecomposeGem = "NetMsg_DecomposeGem",
 
 	/**
-	 * @param output {@link DecomposeGemOutput}
-	 * @param input {@link DecomposeGemInput}
+	 * @param output {@link IDecomposeGemOutput}
+	 * @param input {@link IDecomposeGemInput}
 	 */
 	DecomposeGemError = "NetMsg_DecomposeGem_Error",
 
 	/**
-	 * @param output {@link DressEquipOutput}
-	 * @param input {@link DressEquipInput}
+	 * @param output {@link IDressEquipOutput}
+	 * @param input {@link IDressEquipInput}
 	 */
 	DressEquip = "NetMsg_DressEquip",
 
 	/**
-	 * @param output {@link DressEquipOutput}
-	 * @param input {@link DressEquipInput}
+	 * @param output {@link IDressEquipOutput}
+	 * @param input {@link IDressEquipInput}
 	 */
 	DressEquipError = "NetMsg_DressEquip_Error",
 
 	/**
-	 * @param output {@link TakeOffEquipOutput}
-	 * @param input {@link TakeOffEquipInput}
+	 * @param output {@link ITakeOffEquipOutput}
+	 * @param input {@link ITakeOffEquipInput}
 	 */
 	TakeOffEquip = "NetMsg_TakeOffEquip",
 
 	/**
-	 * @param output {@link TakeOffEquipOutput}
-	 * @param input {@link TakeOffEquipInput}
+	 * @param output {@link ITakeOffEquipOutput}
+	 * @param input {@link ITakeOffEquipInput}
 	 */
 	TakeOffEquipError = "NetMsg_TakeOffEquip_Error",
 
 	/**
-	 * @param output {@link SellEquipOutput}
-	 * @param input {@link SellEquipInput}
+	 * @param output {@link ISellEquipOutput}
+	 * @param input {@link ISellEquipInput}
 	 */
 	SellEquip = "NetMsg_SellEquip",
 
 	/**
-	 * @param output {@link SellEquipOutput}
-	 * @param input {@link SellEquipInput}
+	 * @param output {@link ISellEquipOutput}
+	 * @param input {@link ISellEquipInput}
 	 */
 	SellEquipError = "NetMsg_SellEquip_Error",
 
 	/**
-	 * @param output {@link DecomposeEquipOutput}
-	 * @param input {@link DecomposeEquipInput}
+	 * @param output {@link IDecomposeEquipOutput}
+	 * @param input {@link IDecomposeEquipInput}
 	 */
 	DecomposeEquip = "NetMsg_DecomposeEquip",
 
 	/**
-	 * @param output {@link DecomposeEquipOutput}
-	 * @param input {@link DecomposeEquipInput}
+	 * @param output {@link IDecomposeEquipOutput}
+	 * @param input {@link IDecomposeEquipInput}
 	 */
 	DecomposeEquipError = "NetMsg_DecomposeEquip_Error",
 
 	/**
-	 * @param output {@link EnterBattleOutput}
-	 * @param input {@link EnterBattleInput}
+	 * @param output {@link IEnterBattleOutput}
+	 * @param input {@link IEnterBattleInput}
 	 */
 	EnterBattle = "NetMsg_EnterBattle",
 
 	/**
-	 * @param output {@link EnterBattleOutput}
-	 * @param input {@link EnterBattleInput}
+	 * @param output {@link IEnterBattleOutput}
+	 * @param input {@link IEnterBattleInput}
 	 */
 	EnterBattleError = "NetMsg_EnterBattle_Error",
 
 	/**
-	 * @param output {@link RequestBattleOutput}
-	 * @param input {@link RequestBattleInput}
-	 */
-	RequestBattle = "NetMsg_RequestBattle",
-
-	/**
-	 * @param output {@link RequestBattleOutput}
-	 * @param input {@link RequestBattleInput}
-	 */
-	RequestBattleError = "NetMsg_RequestBattle_Error",
-
-	/**
-	 * @param output {@link ExitBattleOutput}
-	 * @param input {@link ExitBattleInput}
+	 * @param output {@link IExitBattleOutput}
+	 * @param input {@link IExitBattleInput}
 	 */
 	ExitBattle = "NetMsg_ExitBattle",
 
 	/**
-	 * @param output {@link ExitBattleOutput}
-	 * @param input {@link ExitBattleInput}
+	 * @param output {@link IExitBattleOutput}
+	 * @param input {@link IExitBattleInput}
 	 */
 	ExitBattleError = "NetMsg_ExitBattle_Error",
 
 	/**
-	 * @param output {@link AddFriendOutput}
-	 * @param input {@link AddFriendInput}
+	 * @param output {@link IStartGatherOutput}
+	 * @param input {@link IStartGatherInput}
+	 */
+	StartGather = "NetMsg_StartGather",
+
+	/**
+	 * @param output {@link IStartGatherOutput}
+	 * @param input {@link IStartGatherInput}
+	 */
+	StartGatherError = "NetMsg_StartGather_Error",
+
+	/**
+	 * @param output {@link IBreakOffGatherOutput}
+	 * @param input {@link IBreakOffGatherInput}
+	 */
+	BreakOffGather = "NetMsg_BreakOffGather",
+
+	/**
+	 * @param output {@link IBreakOffGatherOutput}
+	 * @param input {@link IBreakOffGatherInput}
+	 */
+	BreakOffGatherError = "NetMsg_BreakOffGather_Error",
+
+	/**
+	 * @param output {@link IAddFriendOutput}
+	 * @param input {@link IAddFriendInput}
 	 */
 	AddFriend = "NetMsg_AddFriend",
 
 	/**
-	 * @param output {@link AddFriendOutput}
-	 * @param input {@link AddFriendInput}
+	 * @param output {@link IAddFriendOutput}
+	 * @param input {@link IAddFriendInput}
 	 */
 	AddFriendError = "NetMsg_AddFriend_Error",
 
 	/**
-	 * @param output {@link FriendMsgOutput}
-	 * @param input {@link FriendMsgInput}
+	 * @param output {@link IFriendMsgOutput}
+	 * @param input {@link IFriendMsgInput}
 	 */
 	FriendMsg = "NetMsg_FriendMsg",
 
 	/**
-	 * @param output {@link FriendMsgOutput}
-	 * @param input {@link FriendMsgInput}
+	 * @param output {@link IFriendMsgOutput}
+	 * @param input {@link IFriendMsgInput}
 	 */
 	FriendMsgError = "NetMsg_FriendMsg_Error",
 
 	/**
-	 * @param output {@link BuyGoodsOutput}
-	 * @param input {@link BuyGoodsInput}
+	 * @param output {@link IBuyGoodsOutput}
+	 * @param input {@link IBuyGoodsInput}
 	 */
 	BuyGoods = "NetMsg_BuyGoods",
 
 	/**
-	 * @param output {@link BuyGoodsOutput}
-	 * @param input {@link BuyGoodsInput}
+	 * @param output {@link IBuyGoodsOutput}
+	 * @param input {@link IBuyGoodsInput}
 	 */
 	BuyGoodsError = "NetMsg_BuyGoods_Error",
 }

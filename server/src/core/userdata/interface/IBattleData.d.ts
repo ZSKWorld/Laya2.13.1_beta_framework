@@ -18,8 +18,6 @@ declare interface IBossData {
 }
 
 declare interface IGatherData {
-    /** 各个采集点已采集的次数 */
-    usedMap: KeyMap<number>;
     /** 各个采集点开始时间 */
     startTimeMap: KeyMap<number>;
     /** 各个采集点采集时长 */

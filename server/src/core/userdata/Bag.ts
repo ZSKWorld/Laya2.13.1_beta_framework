@@ -1,9 +1,9 @@
 import { cfgMgr } from "../config/CfgManager";
 import { DataType, ItemBagType } from "../enum/ItemEnum";
-import { Decode } from "./Decode";
+import { DecodeObject } from "./DecodeObject";
 import { Equipment, Goods } from "./Goods";
 
-export class Bag extends Decode<IBagData, IBag> implements IBag {
+export class Bag extends DecodeObject<IBagData, IBag> implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [];
     gem: IGoods[] = [];
@@ -13,7 +13,7 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
     other: IGoods[] = [];
 
     getItem(id: number) {
-        const item = cfgMgr.Item[ id ];
+        const item = cfgMgr.Item[id];
         if (!item) return null;
         let datas: IGoods[];
         switch (item.bagType) {
@@ -32,7 +32,7 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
     }
 
     changeItemCount(id: number, count: number) {
-        const item = cfgMgr.Item[ id ];
+        const item = cfgMgr.Item[id];
         if (item.dataType == DataType.BagData) {
             let datas: IGoods[];
             switch (item.bagType) {
@@ -47,12 +47,12 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
             }
             const dataLen = datas.length;
             for (let i = 0; i < dataLen; i++) {
-                if (datas[ i ].id == id) {
-                    datas[ i ].count += count;
-                    if (datas[ i ].count <= 0)
+                if (datas[i].id == id) {
+                    datas[i].count += count;
+                    if (datas[i].count <= 0)
                         datas.splice(i, 1);
                     else
-                        datas.splice(i, 0, datas.splice(i, 1)[ 0 ]);
+                        datas.splice(i, 0, datas.splice(i, 1)[0]);
                     return;
                 }
             }
@@ -79,24 +79,24 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
     removeEquip(uid: string) {
         const equips = this.equipment;
         for (let i = 0, n = equips.length; i < n; i++) {
-            if (equips[ i ].uid == uid) {
-                return equips.splice(i, 1)[ 0 ];
+            if (equips[i].uid == uid) {
+                return equips.splice(i, 1)[0];
             }
         }
         return null;
     }
 
     protected override onEncode(key: keyof IBagData) {
-        const arr = this[ key ];
+        const arr = this[key];
         if (key == "collect") return arr;
         const result = [];
         if (arr && arr.length) {
-            const keys = Object.keys(arr[ 0 ]);
+            const keys = Object.keys(arr[0]);
             result.push(keys);
 
             arr.forEach(v => {
                 const vData = [];
-                keys.forEach(k => vData.push(v[ k ]));
+                keys.forEach(k => vData.push(v[k]));
                 result.push(vData);
             });
         }
@@ -104,17 +104,17 @@ export class Bag extends Decode<IBagData, IBag> implements IBag {
     }
 
     protected override onDecode(data: IBagData, key: keyof IBagData) {
-        const result = this[ key ] as any[];
+        const result = this[key] as any[];
         result.length = 0;
         switch (key) {
-            case "collect": result.push(...data[ key ]); return result;
+            case "collect": result.push(...data[key]); return result;
             default:
-                const value = data[ key ] as unknown as any[][];
+                const value = data[key] as unknown as any[][];
                 const keys = value.shift();
                 const cls = key == "equipment" ? Equipment : Goods;
                 value.forEach(v => {
                     const temp = {} as any;
-                    keys.forEach((k, index) => temp[ k ] = v[ index ]);
+                    keys.forEach((k, index) => temp[k] = v[index]);
                     result.push(new cls().decode(temp));
                 });
                 return result;

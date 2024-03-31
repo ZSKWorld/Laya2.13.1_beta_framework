@@ -4,7 +4,7 @@ const ClassNameTag = "__className";
 const DontDispatchTag = "__dontDispatch";
 
 /** 基本数据 */
-export abstract class Decode<D> extends Observer implements IDecode<D, any> {
+export abstract class DecodeObject<D> extends Observer implements IDecodeObject<D, any> {
     private static dispatchArr = new Set<string>();
 
     decode(data: D) {
@@ -15,9 +15,9 @@ export abstract class Decode<D> extends Observer implements IDecode<D, any> {
             this[key] = this.onDecode(data, key as any);
             const clsName = this.constructor[ClassNameTag];
             if (!this.constructor[DontDispatchTag])
-                Decode.dispatchArr.add(`${ clsName }_${ key }_changed`.toLocaleLowerCase());
+                DecodeObject.dispatchArr.add(`${ clsName }_${ key }_changed`.toLocaleLowerCase());
         });
-        Laya.timer.callLater(Decode, Decode.dispatchEvent);
+        Laya.timer.callLater(DecodeObject, DecodeObject.dispatchEvent);
         this.afterDecode();
         return this;
     }
@@ -29,7 +29,7 @@ export abstract class Decode<D> extends Observer implements IDecode<D, any> {
     protected afterDecode() { }
 
     private static dispatchEvent() {
-        this.dispatchArr.forEach(v => this.dispatch(v));
+        this.dispatchArr.forEach(this.dispatch, this);
         this.dispatchArr.clear();
     }
 }

@@ -90,7 +90,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 	}
 
 	@RegisterEvent(GameEvent.NetMsgError)
-	private netMsgError(msg: UserOutput) {
+	private netMsgError(msg: IUserOutput) {
 		tipMgr.showTip(cfgMgr.Error[msg.error].text);
 		if (msg.error == ErrorCode.NOT_LOGIN)
 			sceneMgr.enterScene(SceneType.LoginScene);

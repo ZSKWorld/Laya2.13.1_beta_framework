@@ -2,17 +2,17 @@ import * as http from "http";
 import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
-import { Color, Logger } from "./utils/Logger";
 import { cfgMgr } from "./core/config/CfgManager";
+import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");
 cfgMgr.load();
 Logger.setEnable(true);
-const originConnection: { [ key: string ]: websocket.connection } = {};
+const originConnection: { [key: string]: websocket.connection } = {};
 const originConOnMessage = function (conKey: string, msg: websocket.Message) {
-    const connect = originConnection[ conKey ];
-    delete originConnection[ conKey ];
+    const connect = originConnection[conKey];
+    delete originConnection[conKey];
     if (msg.type === 'utf8') {
-        const data: UserInput = JSON.parse(msg.utf8Data);
+        const data: IUserInput = JSON.parse(msg.utf8Data);
         Connection.startConnection(data.token, connect, msg);
     } else connect.close();
 }
@@ -29,9 +29,9 @@ wsServer.on("request", (request: websocket.request) => {
     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 已连接，连接数量：${ wsServer.connections.length }`, Color.green);
 
     const conKey = request.key;
-    originConnection[ conKey ] = connection;
+    originConnection[conKey] = connection;
     connection.once("message", (msg) => originConOnMessage(conKey, msg));
-    connection.once("close", () => delete originConnection[ conKey ]);
+    connection.once("close", () => delete originConnection[conKey]);
 });
 
 // wsServer.on("connect", (connection: websocket.connection) => {});
@@ -40,6 +40,6 @@ wsServer.on("close", (connection, reson, desc) => {
     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 断开连接，剩余连接数量：${ wsServer.connections.length }。${ reson }-${ desc }`, Color.red);
 });
 
-export function broadcastAll(msg: UserInput) {
+export function broadcastAll(msg: IUserInput) {
     wsServer.broadcastUTF(JSON.stringify(msg));
 }

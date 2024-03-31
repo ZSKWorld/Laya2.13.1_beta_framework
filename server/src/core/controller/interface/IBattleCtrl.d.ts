@@ -2,31 +2,41 @@ declare type BattleCfg = CfgLevel | CfgCopy | CfgSecret | CfgBoss | CfgGather;
 declare type BattleCfgData = CfgLevelData | CfgCopyData | CfgSecretData | CfgBossData | CfgGatherData;
 
 declare interface IBattleCtrl {
-    enterBattle(data: EnterBattleInput): void;
-    requestBattle(data: RequestBattleInput): void;
-    exitBattle(data: ExitBattleInput): void;
+    enterBattle(data: IEnterBattleInput): void;
+    exitBattle(data: IExitBattleInput): void;
+    startGather(data: IStartGatherInput): void;
+    breakOffGather(data: IBreakOffGatherInput): void;
 }
 
-declare interface EnterBattleInput extends UserInput {
-    /** 战斗类型 */
-    type: BattleType;
+declare interface IEnterBattleInput extends IUserInput {
+    /** 战斗类型 BattleType枚举 */
+    type: number;
     /** 关卡id */
     id: number;
-    /** 采集专用，采集时长，秒 */
+}
+
+declare interface IEnterBattleOutput extends IUserOutput {
+}
+
+
+declare interface IExitBattleInput extends IUserInput {
+}
+
+declare interface IExitBattleOutput extends IUserOutput {
+}
+
+declare interface IStartGatherInput extends IUserInput {
+    id: number;
+    /** 采集时长，秒 */
     gatherTime?: number;
 }
 
-declare interface EnterBattleOutput extends UserOutput {
+declare interface IStartGatherOutput extends IUserOutput {
 }
 
-declare interface RequestBattleInput extends UserInput {
+declare interface IBreakOffGatherInput extends IUserInput {
+    id: number;
 }
 
-declare interface RequestBattleOutput extends UserOutput {
-}
-
-declare interface ExitBattleInput extends UserInput {
-}
-
-declare interface ExitBattleOutput extends UserOutput {
+declare interface IBreakOffGatherOutput extends IUserOutput {
 }

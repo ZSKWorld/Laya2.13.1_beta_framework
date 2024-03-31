@@ -4,17 +4,17 @@ import { Bag } from "./Bag";
 import { Base } from "./Base";
 import { Battle } from "./Battle";
 import { Body } from "./Body";
-import { ClassName, Decode } from "./Decode";
+import { ClassName, DecodeObject } from "./DecodeObject";
 import { Friend } from "./Friend";
 
 @ClassName("OfflineData")
-class Offline extends Decode<IOffline> implements IOffline {
+class Offline extends DecodeObject<IOffline> implements IOffline {
     offlineTime: number;
     vigor: number;
 }
 
 @ClassName("UserData")
-export class User extends Decode<IUserData> implements IUser {
+export class User extends DecodeObject<IUserData> implements IUser {
 
     //#region Properties
     account = new Account();
@@ -28,7 +28,7 @@ export class User extends Decode<IUserData> implements IUser {
 
     protected override onDecode(data: IUserData, key: keyof IUserData) {
         if (key == "offline") return data[key];
-        return (<IDecode<any, any>>this[key]).decode(data[key]);
+        return (<IDecodeObject<any, any>>this[key]).decode(data[key]);
     }
 
     @RegisterEvent(NetMessage.SyncInfo)

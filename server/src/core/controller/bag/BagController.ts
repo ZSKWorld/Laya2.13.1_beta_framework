@@ -4,25 +4,25 @@ import { BagHandle } from "./BagHandle";
 
 export class BagController extends Controller implements IBagCtrl {
     @AddCMD
-    useItem(data: UseItemInput): void {
+    useItem(data: IUseItemInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkItemUsable(user, data.id, data.count);
         if (errorCode) return this.response(data.cmd, null, errorCode);
         const rewards = BagHandle.useItem(user, data.id, data.count);
-        this.response<UseItemOutput>(data.cmd, { rewards });
+        this.response<IUseItemOutput>(data.cmd, { rewards });
     }
 
     @AddCMD
-    sellItem(data: SellItemInput): void {
+    sellItem(data: ISellItemInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkItemSalable(user, data.id, data.count);
         if (errorCode) return this.response(data.cmd, null, errorCode);
         const rewards = BagHandle.sellItem(user, data.id, data.count);
-        this.response<SellItemOutput>(data.cmd, { rewards });
+        this.response<ISellItemOutput>(data.cmd, { rewards });
     }
 
     @AddCMD
-    changeCollect(data: ChangeCollectInput): void {
+    changeCollect(data: IChangeCollectInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkCollect(user, data.id, data.collect);
         if (errorCode) return this.response(data.cmd, null, errorCode);
@@ -31,13 +31,13 @@ export class BagController extends Controller implements IBagCtrl {
     }
 
     @AddCMD
-    decomposeGem(data: DecomposeGemInput): void {
+    decomposeGem(data: IDecomposeGemInput): void {
         const rewards = BagHandle.decomposeGemByLevel(this.user, data.level);
-        this.response<DecomposeGemOutput>(data.cmd, { rewards });
+        this.response<IDecomposeGemOutput>(data.cmd, { rewards });
     }
 
     @AddCMD
-    dressEquip(data: DressEquipInput): void {
+    dressEquip(data: IDressEquipInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkEquipDressable(user, data.uid);
         if (errorCode) return this.response(data.cmd, null, errorCode);
@@ -46,7 +46,7 @@ export class BagController extends Controller implements IBagCtrl {
     }
 
     @AddCMD
-    takeOffEquip(data: TakeOffEquipInput): void {
+    takeOffEquip(data: ITakeOffEquipInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkEquipTakeOff(user, data.part);
         if (errorCode) return this.response(data.cmd, null, errorCode);
@@ -55,18 +55,18 @@ export class BagController extends Controller implements IBagCtrl {
     }
 
     @AddCMD
-    sellEquip(data: SellEquipInput): void {
+    sellEquip(data: ISellEquipInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkEquipSalable(user, data.uid);
         if (errorCode) return this.response(data.cmd, null, errorCode);
         const rewards = BagHandle.sellEquip(user, data.uid);
-        this.response<SellEquipOutput>(data.cmd, { rewards });
+        this.response<ISellEquipOutput>(data.cmd, { rewards });
     }
 
     @AddCMD
-    decomposeEquip(data: DecomposeEquipInput): void {
+    decomposeEquip(data: IDecomposeEquipInput): void {
         const rewards = BagHandle.decomposeEquipByStar(this.user, data.star);
-        this.response<DecomposeEquipOutput>(data.cmd, { rewards });
+        this.response<IDecomposeEquipOutput>(data.cmd, { rewards });
     }
 
 }

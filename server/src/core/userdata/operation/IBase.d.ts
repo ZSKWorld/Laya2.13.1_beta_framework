@@ -1,11 +1,11 @@
-declare interface ICitta extends ICittaData, IDecode<ICittaData, ICitta> {
+declare interface ICitta extends ICittaData, IDecodeObject<ICittaData, ICitta> {
 
 }
 
-declare interface IBase extends IBaseData, IDecode<IBaseData, IBase> {
+declare interface IBase extends IBaseData, IDecodeObject<IBaseData, IBase> {
     citta: ICitta;
     /** 今日是否已签到 */
-    get signedIn():boolean;
+    get signedIn(): boolean;
     /** 获取最大精力值 */
     get maxVigro(): number;
     /** 获取精力回复速率 */

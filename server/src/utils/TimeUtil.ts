@@ -1,7 +1,9 @@
 import { Pool, PoolKey } from "../libs/pool/Pool";
 
 export class TimeUtil {
+    /** 获取毫秒级时间戳 */
     static getTimeStamp() { return Date.now(); }
+    /** 获取秒级时间戳 */
     static getSecondStamp() { return Math.floor(Date.now() / 1000); }
 
     static checkNextDay(lastTime: number, nowTime: number) {

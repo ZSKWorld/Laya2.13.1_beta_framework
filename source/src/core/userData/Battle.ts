@@ -1,11 +1,11 @@
 import { GameUtil } from "../common/GameUtil";
-import { ClassName, Decode } from "./Decode";
+import { ClassName, DecodeObject } from "./DecodeObject";
 
-class Level extends Decode<ILevelData> implements ILevel {
+class Level extends DecodeObject<ILevelData> implements ILevel {
 
 }
 
-class Copy extends Decode<ICopyData> implements ICopy {
+class Copy extends DecodeObject<ICopyData> implements ICopy {
     usedMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
@@ -15,7 +15,7 @@ class Copy extends Decode<ICopyData> implements ICopy {
     }
 }
 
-class Secret extends Decode<ISecretData> implements ISecret {
+class Secret extends DecodeObject<ISecretData> implements ISecret {
     usedMap: KeyMap<number> = null;
 
     getLastCount(id: number): number {
@@ -25,7 +25,7 @@ class Secret extends Decode<ISecretData> implements ISecret {
     }
 }
 
-class Boss extends Decode<IBossData> implements IBoss {
+class Boss extends DecodeObject<IBossData> implements IBoss {
     lastChallengeTime: KeyMap<number> = null;
 
     lastCooldownTime(id: number): number {
@@ -37,18 +37,11 @@ class Boss extends Decode<IBossData> implements IBoss {
     }
 }
 
-class Gather extends Decode<IGatherData> implements IGather {
-    usedMap: KeyMap<number> = null;
+class Gather extends DecodeObject<IGatherData> implements IGather {
     startTimeMap: KeyMap<number> = null;
     gatherTimeMap: KeyMap<number> = null;
 
-    getLastCount(id: number): number {
-        const cfg = cfgMgr.Gather[id];
-        if (!this.usedMap) return cfg.gatherCount;
-        return cfg.gatherCount - (this.usedMap[id] || 0);
-    }
-
-    lastGatherTime(id: number) {
+    remainTime(id: number) {
         if (!this.startTimeMap) return 0;
         const startTime = this.startTimeMap[id];
         if (!startTime) return 0;
@@ -57,7 +50,7 @@ class Gather extends Decode<IGatherData> implements IGather {
 }
 
 @ClassName("BattleData")
-export class Battle extends Decode<IBattleData> implements IBattle {
+export class Battle extends DecodeObject<IBattleData> implements IBattle {
     level = new Level();
     copy = new Copy();
     secret = new Secret();

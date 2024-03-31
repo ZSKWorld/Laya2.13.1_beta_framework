@@ -1,17 +1,17 @@
 export const ProxyKey = Symbol(111);
 export class ProxyMgr {
-    private static proxyMap: { [ uid: string ]: any } = {};
+    private static proxyMap: { [uid: string]: any } = {};
 
     static getProxy<T extends object>(uid: string, dataKey: string, target: T) {
         dataKey = dataKey || "";
-        if (target != null && typeof target === "object" && !target[ ProxyKey ] && !target[ "cantSyncObj" ]) {
-            target[ ProxyKey ] = true;
-            Object.keys(target).forEach(key => target[ key ] = this.getProxy(uid, `${ dataKey }.${ key }`, target[ key ]));
+        if (target != null && typeof target === "object" && !target[ProxyKey] && !target["cantSyncObj"]) {
+            target[ProxyKey] = true;
+            Object.keys(target).forEach(key => target[key] = this.getProxy(uid, `${ dataKey }.${ key }`, target[key]));
             Object.defineProperty(target, "getSyncInfo", {
                 value: function () {
-                    let result:object;
-                    const keyMap = ProxyMgr.proxyMap[ uid ];
-                    ProxyMgr.proxyMap[ uid ] = null;
+                    let result: object;
+                    const keyMap = ProxyMgr.proxyMap[uid];
+                    ProxyMgr.proxyMap[uid] = null;
                     if (keyMap) {
                         result = {};
                         Object.keys(keyMap).forEach(keyStr => {
@@ -19,17 +19,17 @@ export class ProxyMgr {
                             let tempResult = result;
                             const properties = keyStr.split(".");
                             for (let i = 0, n = properties.length - 1; i <= n; i++) {
-                                const key = properties[ i ];
+                                const key = properties[i];
                                 if (!key) continue;
                                 if (i == n) {
-                                    tempResult[ key ] = tempThis[ key ];
+                                    tempResult[key] = tempThis[key];
                                 } else {
-                                    tempThis = tempThis[ key ];
+                                    tempThis = tempThis[key];
                                     if (Array.isArray(tempThis)) {
-                                        tempResult[ key ] = tempThis;
+                                        tempResult[key] = tempThis;
                                         break;
                                     }
-                                    tempResult = tempResult[ key ] = tempResult[ key ] || {};
+                                    tempResult = tempResult[key] = tempResult[key] || {};
                                 }
                             }
                         });
@@ -40,7 +40,7 @@ export class ProxyMgr {
                 configurable: false,
             });
             Object.defineProperty(target, "clearSyncInfo", {
-                value: function () { ProxyMgr.proxyMap[ uid ] = null; },
+                value: function () { ProxyMgr.proxyMap[uid] = null; },
                 enumerable: false,
                 configurable: false,
             });
@@ -48,11 +48,11 @@ export class ProxyMgr {
                 set(target: any, p: string, value: any, receiver: any): boolean {
                     const tempKey = `${ dataKey }.${ p }`;
                     if (typeof p === "string")
-                        target[ p ] = value;
+                        target[p] = value;
                     else
-                        target[ p ] = ProxyMgr.getProxy(uid, tempKey, value);
-                    ProxyMgr.proxyMap[ uid ] = ProxyMgr.proxyMap[ uid ] || {};
-                    ProxyMgr.proxyMap[ uid ][ tempKey ] = true;
+                        target[p] = ProxyMgr.getProxy(uid, tempKey, value);
+                    ProxyMgr.proxyMap[uid] = ProxyMgr.proxyMap[uid] || {};
+                    ProxyMgr.proxyMap[uid][tempKey] = true;
                     return true;
                 },
                 // get(target: T, p: string, receiver: any) {

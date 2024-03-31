@@ -4,7 +4,7 @@ import { AddCMD, Controller } from "../Controller";
 
 export class FriendController extends Controller implements IFriendCtrl {
     @AddCMD
-    addFriend(data: AddFriendInput): void {
+    addFriend(data: IAddFriendInput): void {
         const { user } = this;
         if (user.friend.friend.includes(data.friendUid))
             return this.response(data.cmd, null, ErrorCode.ALREADY_FRIEND);
@@ -14,7 +14,7 @@ export class FriendController extends Controller implements IFriendCtrl {
 
 
     @AddCMD
-    friendMsg(data: FriendMsgInput): void {
+    friendMsg(data: IFriendMsgInput): void {
         if (!this.user.friend.friend.includes(data.friendUid))
             return this.response(data.cmd, null, ErrorCode.NOT_FRIEND);
         const friendCon = connectionMgr.getConnection(data.friendUid);

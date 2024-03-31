@@ -5,12 +5,12 @@ import { websocket } from "./WebSocket";
 class BaseService<T> {
     protected _proxy: T;
     protected constructor() {
-        const serviceKeys = ["register", "login", "signIn", "clearAccount", "useItem", "sellItem", "changeCollect", "decomposeGem", "dressEquip", "takeOffEquip", "sellEquip", "decomposeEquip", "enterBattle", "requestBattle", "exitBattle", "addFriend", "friendMsg", "buyGoods",];
+        const serviceKeys = ["register", "login", "signIn", "clearAccount", "useItem", "sellItem", "changeCollect", "decomposeGem", "dressEquip", "takeOffEquip", "sellEquip", "decomposeEquip", "enterBattle", "exitBattle", "startGather", "breakOffGather", "addFriend", "friendMsg", "buyGoods",];
         serviceKeys.forEach(key => {
             Object.defineProperty(this, key, {
                 configurable: false,
                 enumerable: false,
-                value: function (data: UserInput) {
+                value: function (data: IUserInput) {
                     data.cmd = key;
                     websocket.sendMsg(data);
                 }

@@ -7,7 +7,7 @@ export interface ComBattleConfirmData {
 	data: BattleCfgData;
 }
 
-export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, ComBattleConfirmData>{
+export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, ComBattleConfirmData> {
 
 	override onAdded() {
 		this.addMessage(ComBattleConfirmMsg.OnBtnBuyFoodClick, this.onBtnBuyFoodClick);
@@ -34,8 +34,10 @@ export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, Com
 
 	private onBtnBattleClick() {
 		const { data, type } = this.data;
-		const gatherTime = Math.floor(this.view.slider_num.value * 3600);
-		BattleService.Inst.enterBattle({ type: type, id: data.id, gatherTime });
+		if (type == BattleType.Gather) {
+			const gatherTime = Math.floor(this.view.slider_num.value * 3600);
+			BattleService.Inst.startGather({ id: data.id, gatherTime });
+		} else BattleService.Inst.enterBattle({ type: type, id: data.id });
 	}
 
 }

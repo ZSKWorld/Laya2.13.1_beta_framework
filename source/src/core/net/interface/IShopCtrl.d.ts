@@ -1,13 +1,13 @@
 declare interface IShopCtrl {
-    buyGoods(data: BuyGoodsInput): void;
+    buyGoods(data: IBuyGoodsInput): void;
 }
 
-declare interface BuyGoodsInput extends UserInput {
+declare interface IBuyGoodsInput extends IUserInput {
     id: number;
     count: number;
 }
 
-declare interface BuyGoodsOutput extends UserOutput {
+declare interface IBuyGoodsOutput extends IUserOutput {
     /** 获得的奖励 */
     rewards: IGoods[];
 }

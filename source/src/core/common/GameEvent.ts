@@ -9,7 +9,7 @@ export const enum GameEvent {
 	RedDotCompDestroy = "RedDotCompDestroy",
 	/**
 	 * 网络消息错误
-	 * @param msg {@link UserOutput} 错误消息
+	 * @param msg {@link IUserOutput} 错误消息
 	 */
 	NetMsgError = "NetMsgError",
 	/** socket连接 */

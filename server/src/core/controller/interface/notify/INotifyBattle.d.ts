@@ -1,3 +1,3 @@
-declare interface HeartNotify extends UserNotify {
-    timeStamp: number;
+declare interface INotifyBattleProgress extends IUserNotify {
+    
 }

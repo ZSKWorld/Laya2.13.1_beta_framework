@@ -20,13 +20,13 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
     }
 
     override onEnable() {
-        const data = localData.get<LoginInput>(LocalDataKey.LastLoginAccount);
+        const data = localData.get<ILoginInput>(LocalDataKey.LastLoginAccount);
         data && this.view.refreshLoginInfo(data.account, data.password);
         data && this.login(data);
     }
 
     @ViewMessage(UILoginEvent.Login)
-    private login(data: LoginInput) {
+    private login(data: ILoginInput) {
         data && this.view.refreshLoginInfo(data.account, data.password);
         this.onBtnLoginClick();
     }
