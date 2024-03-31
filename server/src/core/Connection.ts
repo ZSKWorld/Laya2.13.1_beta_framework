@@ -101,6 +101,7 @@ export class Connection {
             if (userSyncInfo) {
                 if (!data.syncInfo) data.syncInfo = userSyncInfo;
                 else data.syncInfo = Object.assign(userSyncInfo, data.syncInfo);
+                this._user.clearSyncInfo();
             }
         }
         data.type = type;
@@ -135,7 +136,6 @@ export class Connection {
 
     private onConnectionMessage(message: websocket.Message) {
         if (message.type === 'utf8') {
-            this._user && this._user.clearSyncInfo();
             const data: IUserInput = JSON.parse(message.utf8Data);
             if (data.cmd != "register" && data.cmd != "login" && !this._logined)
                 return this.sendMessage(MessageType.Response, { cmd: data.cmd, error: ErrorCode.NOT_LOGIN });
