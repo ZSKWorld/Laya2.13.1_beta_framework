@@ -1,5 +1,5 @@
 import { BaseDataType } from "../../../enum/ItemEnum";
-import { NotifyType } from "../../../enum/NotifyType";
+import { NetNotify } from "../../../enum/NetNotify";
 import { NotifyController } from "../NotifyController";
 
 export class NotifyBase extends NotifyController {
@@ -14,7 +14,7 @@ export class NotifyBase extends NotifyController {
                 if (base.vigor < base.maxVigro) {
                     const recover = Math.min((base.vigorRecover * 10) << 0, base.maxVigro - base.vigor);
                     base.changeItemCount(BaseDataType.Vigor, recover);
-                    this.notify(NotifyType.VigorRecover);
+                    this.notify<INotifyVigorRecover>(NetNotify.NotifyVigorRecover);
                 }
             }
         }

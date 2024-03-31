@@ -3,233 +3,233 @@ export const enum NetCMD {
 	/**
 	 * @param output {@link IUserData}
 	 */
-	SyncInfo = "NetMsg_SyncInfo",
+	SyncInfo = "NetCMD_SyncInfo",
 
 	/**
 	 * @param output {@link IRegisterOutput}
 	 * @param input {@link IRegisterInput}
 	 */
-	Register = "NetMsg_Register",
+	Register = "NetCMD_Register",
 
 	/**
 	 * @param output {@link IRegisterOutput}
 	 * @param input {@link IRegisterInput}
 	 */
-	RegisterError = "NetMsg_Register_Error",
+	RegisterError = "NetCMD_Register_Error",
 
 	/**
 	 * @param output {@link ILoginOutput}
 	 * @param input {@link ILoginInput}
 	 */
-	Login = "NetMsg_Login",
+	Login = "NetCMD_Login",
 
 	/**
 	 * @param output {@link ILoginOutput}
 	 * @param input {@link ILoginInput}
 	 */
-	LoginError = "NetMsg_Login_Error",
+	LoginError = "NetCMD_Login_Error",
 
 	/**
 	 * @param output {@link ISignInOutput}
 	 * @param input {@link ISignInInput}
 	 */
-	SignIn = "NetMsg_SignIn",
+	SignIn = "NetCMD_SignIn",
 
 	/**
 	 * @param output {@link ISignInOutput}
 	 * @param input {@link ISignInInput}
 	 */
-	SignInError = "NetMsg_SignIn_Error",
+	SignInError = "NetCMD_SignIn_Error",
 
 	/**
 	 * @param output {@link IClearAccountOutput}
 	 * @param input {@link IClearAccountInput}
 	 */
-	ClearAccount = "NetMsg_ClearAccount",
+	ClearAccount = "NetCMD_ClearAccount",
 
 	/**
 	 * @param output {@link IClearAccountOutput}
 	 * @param input {@link IClearAccountInput}
 	 */
-	ClearAccountError = "NetMsg_ClearAccount_Error",
+	ClearAccountError = "NetCMD_ClearAccount_Error",
 
 	/**
 	 * @param output {@link IUseItemOutput}
 	 * @param input {@link IUseItemInput}
 	 */
-	UseItem = "NetMsg_UseItem",
+	UseItem = "NetCMD_UseItem",
 
 	/**
 	 * @param output {@link IUseItemOutput}
 	 * @param input {@link IUseItemInput}
 	 */
-	UseItemError = "NetMsg_UseItem_Error",
+	UseItemError = "NetCMD_UseItem_Error",
 
 	/**
 	 * @param output {@link ISellItemOutput}
 	 * @param input {@link ISellItemInput}
 	 */
-	SellItem = "NetMsg_SellItem",
+	SellItem = "NetCMD_SellItem",
 
 	/**
 	 * @param output {@link ISellItemOutput}
 	 * @param input {@link ISellItemInput}
 	 */
-	SellItemError = "NetMsg_SellItem_Error",
+	SellItemError = "NetCMD_SellItem_Error",
 
 	/**
 	 * @param output {@link IChangeCollectOutput}
 	 * @param input {@link IChangeCollectInput}
 	 */
-	ChangeCollect = "NetMsg_ChangeCollect",
+	ChangeCollect = "NetCMD_ChangeCollect",
 
 	/**
 	 * @param output {@link IChangeCollectOutput}
 	 * @param input {@link IChangeCollectInput}
 	 */
-	ChangeCollectError = "NetMsg_ChangeCollect_Error",
+	ChangeCollectError = "NetCMD_ChangeCollect_Error",
 
 	/**
 	 * @param output {@link IDecomposeGemOutput}
 	 * @param input {@link IDecomposeGemInput}
 	 */
-	DecomposeGem = "NetMsg_DecomposeGem",
+	DecomposeGem = "NetCMD_DecomposeGem",
 
 	/**
 	 * @param output {@link IDecomposeGemOutput}
 	 * @param input {@link IDecomposeGemInput}
 	 */
-	DecomposeGemError = "NetMsg_DecomposeGem_Error",
+	DecomposeGemError = "NetCMD_DecomposeGem_Error",
 
 	/**
 	 * @param output {@link IDressEquipOutput}
 	 * @param input {@link IDressEquipInput}
 	 */
-	DressEquip = "NetMsg_DressEquip",
+	DressEquip = "NetCMD_DressEquip",
 
 	/**
 	 * @param output {@link IDressEquipOutput}
 	 * @param input {@link IDressEquipInput}
 	 */
-	DressEquipError = "NetMsg_DressEquip_Error",
+	DressEquipError = "NetCMD_DressEquip_Error",
 
 	/**
 	 * @param output {@link ITakeOffEquipOutput}
 	 * @param input {@link ITakeOffEquipInput}
 	 */
-	TakeOffEquip = "NetMsg_TakeOffEquip",
+	TakeOffEquip = "NetCMD_TakeOffEquip",
 
 	/**
 	 * @param output {@link ITakeOffEquipOutput}
 	 * @param input {@link ITakeOffEquipInput}
 	 */
-	TakeOffEquipError = "NetMsg_TakeOffEquip_Error",
+	TakeOffEquipError = "NetCMD_TakeOffEquip_Error",
 
 	/**
 	 * @param output {@link ISellEquipOutput}
 	 * @param input {@link ISellEquipInput}
 	 */
-	SellEquip = "NetMsg_SellEquip",
+	SellEquip = "NetCMD_SellEquip",
 
 	/**
 	 * @param output {@link ISellEquipOutput}
 	 * @param input {@link ISellEquipInput}
 	 */
-	SellEquipError = "NetMsg_SellEquip_Error",
+	SellEquipError = "NetCMD_SellEquip_Error",
 
 	/**
 	 * @param output {@link IDecomposeEquipOutput}
 	 * @param input {@link IDecomposeEquipInput}
 	 */
-	DecomposeEquip = "NetMsg_DecomposeEquip",
+	DecomposeEquip = "NetCMD_DecomposeEquip",
 
 	/**
 	 * @param output {@link IDecomposeEquipOutput}
 	 * @param input {@link IDecomposeEquipInput}
 	 */
-	DecomposeEquipError = "NetMsg_DecomposeEquip_Error",
+	DecomposeEquipError = "NetCMD_DecomposeEquip_Error",
 
 	/**
 	 * @param output {@link IEnterBattleOutput}
 	 * @param input {@link IEnterBattleInput}
 	 */
-	EnterBattle = "NetMsg_EnterBattle",
+	EnterBattle = "NetCMD_EnterBattle",
 
 	/**
 	 * @param output {@link IEnterBattleOutput}
 	 * @param input {@link IEnterBattleInput}
 	 */
-	EnterBattleError = "NetMsg_EnterBattle_Error",
+	EnterBattleError = "NetCMD_EnterBattle_Error",
 
 	/**
 	 * @param output {@link IExitBattleOutput}
 	 * @param input {@link IExitBattleInput}
 	 */
-	ExitBattle = "NetMsg_ExitBattle",
+	ExitBattle = "NetCMD_ExitBattle",
 
 	/**
 	 * @param output {@link IExitBattleOutput}
 	 * @param input {@link IExitBattleInput}
 	 */
-	ExitBattleError = "NetMsg_ExitBattle_Error",
+	ExitBattleError = "NetCMD_ExitBattle_Error",
 
 	/**
 	 * @param output {@link IStartGatherOutput}
 	 * @param input {@link IStartGatherInput}
 	 */
-	StartGather = "NetMsg_StartGather",
+	StartGather = "NetCMD_StartGather",
 
 	/**
 	 * @param output {@link IStartGatherOutput}
 	 * @param input {@link IStartGatherInput}
 	 */
-	StartGatherError = "NetMsg_StartGather_Error",
+	StartGatherError = "NetCMD_StartGather_Error",
 
 	/**
 	 * @param output {@link IBreakOffGatherOutput}
 	 * @param input {@link IBreakOffGatherInput}
 	 */
-	BreakOffGather = "NetMsg_BreakOffGather",
+	BreakOffGather = "NetCMD_BreakOffGather",
 
 	/**
 	 * @param output {@link IBreakOffGatherOutput}
 	 * @param input {@link IBreakOffGatherInput}
 	 */
-	BreakOffGatherError = "NetMsg_BreakOffGather_Error",
+	BreakOffGatherError = "NetCMD_BreakOffGather_Error",
 
 	/**
 	 * @param output {@link IAddFriendOutput}
 	 * @param input {@link IAddFriendInput}
 	 */
-	AddFriend = "NetMsg_AddFriend",
+	AddFriend = "NetCMD_AddFriend",
 
 	/**
 	 * @param output {@link IAddFriendOutput}
 	 * @param input {@link IAddFriendInput}
 	 */
-	AddFriendError = "NetMsg_AddFriend_Error",
+	AddFriendError = "NetCMD_AddFriend_Error",
 
 	/**
 	 * @param output {@link IFriendMsgOutput}
 	 * @param input {@link IFriendMsgInput}
 	 */
-	FriendMsg = "NetMsg_FriendMsg",
+	FriendMsg = "NetCMD_FriendMsg",
 
 	/**
 	 * @param output {@link IFriendMsgOutput}
 	 * @param input {@link IFriendMsgInput}
 	 */
-	FriendMsgError = "NetMsg_FriendMsg_Error",
+	FriendMsgError = "NetCMD_FriendMsg_Error",
 
 	/**
 	 * @param output {@link IBuyGoodsOutput}
 	 * @param input {@link IBuyGoodsInput}
 	 */
-	BuyGoods = "NetMsg_BuyGoods",
+	BuyGoods = "NetCMD_BuyGoods",
 
 	/**
 	 * @param output {@link IBuyGoodsOutput}
 	 * @param input {@link IBuyGoodsInput}
 	 */
-	BuyGoodsError = "NetMsg_BuyGoods_Error",
+	BuyGoodsError = "NetCMD_BuyGoods_Error",
 }

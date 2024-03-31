@@ -1,4 +1,4 @@
-import { NotifyType } from "../../../enum/NotifyType";
+import { NetNotify } from "../../../enum/NetNotify";
 import { NotifyController } from "../NotifyController";
 
 export class NotifyAccount extends NotifyController {
@@ -10,7 +10,7 @@ export class NotifyAccount extends NotifyController {
             this._delta = 0;
             if (this.connection.logined) {
                 if (this.user.checkOnlineNextDay())
-                    this.notify(NotifyType.OnlineNextDay);
+                    this.notify<INotifyOnlineNextDay>(NetNotify.NotifyOnlineNextDay);
             }
         }
     }

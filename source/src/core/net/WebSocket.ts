@@ -45,7 +45,7 @@ class WebSocket extends Observer {
 
     private dealResponse(output: IUserOutput) {
         const input = this._current;
-        let netMsg = `NetMsg_${ output.cmd[0].toUpperCase() + output.cmd.substring(1) }`;
+        let netMsg = `NetCMD_${ output.cmd[0].toUpperCase() + output.cmd.substring(1) }`;
         if (!output.error) {
             if (input && input.cmd != output.cmd) {
                 Logger.Error("message error", input, output);

@@ -26,6 +26,15 @@
                 "close": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "更新网络相关",
+            "type": "shell",
+            "command": "node ../../tool/bin/js/BatMain.js 6",
+            "presentation": {
+                "close": true
+            },
+            "problemMatcher": []
         }
     ]
 }

@@ -1,5 +1,4 @@
 import { Util } from "../../../../utils/Util";
-import { NotifyType } from "../../../enum/NotifyType";
 import { User } from "../../../userdata/User";
 import { CMDController, Command } from "../CMDController";
 import { AccountChecker } from "./AccountChecker";
