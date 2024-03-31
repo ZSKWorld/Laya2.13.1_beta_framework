@@ -1,13 +1,13 @@
 import { GameUtil } from "../../../../common/GameUtil";
 import { trainLogMgr } from "../../../../game/TrainLogManager";
-import { NetMessage } from "../../../../net/enum/NetMessage";
+import { NetCMD } from "../../../../net/enum/NetCMD";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { richStrMgr } from "../../../tool/RichStrManager";
 import { tipMgr } from "../../../tool/TipManager";
 import { UIMainCtrl } from "../controller/UIMainCtrl";
 
 export class UIMainProxy extends BaseProxy<UIMainCtrl> {
-    @RegisterEvent(NetMessage.DecomposeGem)
+    @RegisterEvent(NetCMD.DecomposeGem)
     decomposeGem(output: IDecomposeGemOutput, input: IDecomposeGemInput) {
         if (output.rewards?.length) {
             let logStr = richStrMgr.start(`分解${ input.level }级宝石获得`).break();
@@ -20,7 +20,7 @@ export class UIMainProxy extends BaseProxy<UIMainCtrl> {
         }
     }
 
-    @RegisterEvent(NetMessage.DecomposeEquip)
+    @RegisterEvent(NetCMD.DecomposeEquip)
     decomposeEquip(output: IDecomposeEquipOutput, input: IDecomposeEquipInput) {
         if (output.rewards?.length) {
             let logStr = richStrMgr.start(`分解${ input.star }星装备获得`).break();

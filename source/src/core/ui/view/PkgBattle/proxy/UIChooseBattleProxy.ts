@@ -1,12 +1,12 @@
 import { BattleType } from "../../../../net/enum/BattleEnums";
-import { NetMessage } from "../../../../net/enum/NetMessage";
+import { NetCMD } from "../../../../net/enum/NetCMD";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { ViewID } from "../../../core/ViewID";
 import { UIChooseBattleCtrl } from "../controller/UIChooseBattleCtrl";
 
 export class UIChooseBattleProxy extends BaseProxy<UIChooseBattleCtrl> {
 
-    @RegisterEvent(NetMessage.EnterBattle)
+    @RegisterEvent(NetCMD.EnterBattle)
     private enterBattle(output: IEnterBattleOutput, input: IEnterBattleInput) {
         this.viewCtrl.removeView(ViewID.UIBattleConfirmView);
         if (input.type != BattleType.Gather) {
@@ -15,12 +15,12 @@ export class UIChooseBattleProxy extends BaseProxy<UIChooseBattleCtrl> {
         }
     }
 
-    @RegisterEvent(NetMessage.EnterBattleError)
+    @RegisterEvent(NetCMD.EnterBattleError)
     private enterBattleError(output: IEnterBattleOutput, input: IEnterBattleInput) {
 
     }
 
-    @RegisterEvent(NetMessage.StartGather)
+    @RegisterEvent(NetCMD.StartGather)
     private startGather() {
         this.viewCtrl.removeView(ViewID.UIBattleConfirmView);
     }

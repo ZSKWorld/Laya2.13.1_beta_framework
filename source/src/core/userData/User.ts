@@ -1,4 +1,4 @@
-import { NetMessage } from "../net/enum/NetMessage";
+import { NetCMD } from "../net/enum/NetCMD";
 import { Account } from "./Account";
 import { Bag } from "./Bag";
 import { Base } from "./Base";
@@ -31,7 +31,7 @@ export class User extends DecodeObject<IUserData> implements IUser {
         return (<IDecodeObject<any, any>>this[key]).decode(data[key]);
     }
 
-    @RegisterEvent(NetMessage.SyncInfo)
+    @RegisterEvent(NetCMD.SyncInfo)
     private syncInfo(data: IUserData) {
         return this.decode(data);
     }

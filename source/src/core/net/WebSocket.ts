@@ -1,7 +1,7 @@
 import { GameEvent } from "../common/GameEvent";
 import { Observer } from "../game/event/Observer";
 import { MessageType } from "./enum/MessageType";
-import { NetMessage } from "./enum/NetMessage";
+import { NetCMD } from "./enum/NetCMD";
 
 class WebSocket extends Observer {
     private _url: string = "ws://192.168.71.245:8007";
@@ -52,7 +52,7 @@ class WebSocket extends Observer {
                 throw new Error();
             }
             if (output.syncInfo)
-                this.dispatch(NetMessage.SyncInfo, output.syncInfo);
+                this.dispatch(NetCMD.SyncInfo, output.syncInfo);
         } else {
             this.dispatch(GameEvent.NetMsgError, output);
             netMsg += `_Error`;
@@ -65,7 +65,7 @@ class WebSocket extends Observer {
 
     private dealNotify(output: IUserOutput) {
         if (output && output.syncInfo)
-            this.dispatch(NetMessage.SyncInfo, output.syncInfo);
+            this.dispatch(NetCMD.SyncInfo, output.syncInfo);
         this.dispatch(output.cmd, output);
         this._socket.input.clear();
     }
