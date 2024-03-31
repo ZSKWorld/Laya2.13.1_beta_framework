@@ -36,7 +36,7 @@ class WebSocket extends Observer {
     }
 
     private onSocketMessage(message: string): void {
-        const output: IUserOutput | IUserNotify = JSON.parse(message);
+        const output: IUserOutput = JSON.parse(message);
         switch (output.type) {
             case MessageType.Response: this.dealResponse(output); break;
             case MessageType.Notify: this.dealNotify(output); break;
@@ -63,7 +63,7 @@ class WebSocket extends Observer {
         this.executeWaitMsg();
     }
 
-    private dealNotify(output: IUserNotify) {
+    private dealNotify(output: IUserOutput) {
         if (output && output.syncInfo)
             this.dispatch(NetMessage.SyncInfo, output.syncInfo);
         this.dispatch(output.cmd, output);

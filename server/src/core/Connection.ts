@@ -4,17 +4,19 @@ import { Pool, PoolKey } from "../libs/pool/Pool";
 import { ProxyMgr } from "../utils/ProxyMgr";
 import { TimeUtil } from "../utils/TimeUtil";
 import { connectionMgr } from "./ConnectionMgr";
-import { Controller } from "./controller/Controller";
-import { AccouontController } from "./controller/account/AccouontController";
-import { BagController } from "./controller/bag/BagController";
-import { BaseController } from "./controller/base/BaseController";
-import { BattleController } from "./controller/battle/BattleController";
-import { FriendController } from "./controller/friend/FriendController";
-import { HeartController } from "./controller/heart/HeartController";
-import { ShopController } from "./controller/shop/ShopController";
+import { CMDController } from "./controller/cmd/CMDController";
+import { CMDAccouont } from "./controller/cmd/account/CMDAccouont";
+import { CMDBag } from "./controller/cmd/bag/CMDBag";
+import { CMDBattle } from "./controller/cmd/battle/CMDBattle";
+import { CMDFriend } from "./controller/cmd/friend/CMDFriend";
+import { CMDShop } from "./controller/cmd/shop/CMDShop";
+import { NotifyController } from "./controller/notify/NotifyController";
+import { NotifyAccount } from "./controller/notify/account/NotifyAccount";
+import { NotifyBase } from "./controller/notify/base/NotifyBase";
 import { ErrorCode } from "./enum/ErrorCode";
 import { MessageType } from "./enum/MessageType";
 import { User } from "./userdata/User";
+import { NotifyHeart } from "./controller/notify/heart/NotifyHeart";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -25,7 +27,8 @@ export class Connection {
 
     private _token: string;
     private _listener: EventDispatcher;
-    private _controllers: Controller[];
+    private _cmds: CMDController[];
+    private _notifies: NotifyController[];
     private _intervalId: NodeJS.Timer;
 
     private _logined: boolean;
@@ -50,16 +53,22 @@ export class Connection {
         if (!this._listener) {
             this._listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
         }
-        if (!this._controllers || !this._controllers.length) {
-            this._controllers = this._controllers || [];
-            this._controllers.push(
-                AccouontController.create(this),
-                BagController.create(this),
-                BaseController.create(this),
-                BattleController.create(this),
-                FriendController.create(this),
-                HeartController.create(this),
-                ShopController.create(this),
+        if (!this._cmds || !this._cmds.length) {
+            this._cmds = this._cmds || [];
+            this._cmds.push(
+                CMDAccouont.create(this),
+                CMDBag.create(this),
+                CMDBattle.create(this),
+                CMDFriend.create(this),
+                CMDShop.create(this),
+            );
+        }
+        if (!this._notifies || !this._notifies.length) {
+            this._notifies = this._notifies || [];
+            this._notifies.push(
+                NotifyAccount.create(this),
+                NotifyBase.create(this),
+                NotifyHeart.create(this),
             );
         }
 
@@ -77,7 +86,9 @@ export class Connection {
             let lastTime = TimeUtil.getTimeStamp();
             this._intervalId = setInterval(() => {
                 const time = TimeUtil.getTimeStamp();
-                this._controllers.forEach(v => v.update(time - lastTime));
+                const deltaTime = time - lastTime;
+                this._cmds.forEach(v => v.update(deltaTime));
+                this._notifies.forEach(v => v.update(deltaTime));
                 lastTime = time;
             }, 16);
         }
@@ -111,11 +122,11 @@ export class Connection {
         Pool.recover(PoolKey.EventDispatcher, this._listener);
         this._listener = null;
 
-        if (this._controllers) {
-            this._controllers.forEach(v => v.recover());
-            this._controllers.length = 0;
-        }
-        this._controllers = null;
+        if (this._cmds) this._cmds.forEach(v => v.recover());
+        this._cmds = null;
+
+        if (this._notifies) this._notifies.forEach(v => v.recover());
+        this._cmds = null;
 
         this._user?.save();
         this._user = null;
@@ -145,7 +156,8 @@ export class Connection {
             this._connection.off(ConnectionEvent.Message, this._onMessage);
         }
         this._connection = null;
-        this._controllers && this._controllers.forEach(v => v.close());
+        this._cmds && this._cmds.forEach(v => v.close());
+        this._notifies && this._notifies.forEach(v => v.close());
         this._user?.save();
         connectionMgr.connectionClosed(this._token, this);
     }

@@ -30,13 +30,13 @@ export const enum NetMessage {
 	LoginError = "NetMsg_Login_Error",
 
 	/**
-	 * @param output {@link SignInOutput}
+	 * @param output {@link ISignInOutput}
 	 * @param input {@link ISignInInput}
 	 */
 	SignIn = "NetMsg_SignIn",
 
 	/**
-	 * @param output {@link SignInOutput}
+	 * @param output {@link ISignInOutput}
 	 * @param input {@link ISignInInput}
 	 */
 	SignInError = "NetMsg_SignIn_Error",

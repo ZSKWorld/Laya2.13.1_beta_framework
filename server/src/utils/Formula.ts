@@ -1,4 +1,4 @@
-import { BaseHelper } from "../core/controller/base/BaseHelper";
+import { BaseHelper } from "../core/controller/cmd/base/BaseHelper";
 
 export class Formula {
 

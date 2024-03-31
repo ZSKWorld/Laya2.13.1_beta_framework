@@ -89,7 +89,6 @@ class Gather extends DecodeObject<IGatherData, IGather> implements IGather {
     }
 
     startGather(id: number, gatherTime: number) {
-        console.log(this.startTimeMap[ProxyKey as any])
         this.startTimeMap[id] = TimeUtil.getSecondStamp();
         this.gatherTimeMap[id] = gatherTime;
     }
