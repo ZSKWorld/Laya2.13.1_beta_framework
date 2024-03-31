@@ -42,25 +42,25 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
     /**心法数据 */
     citta: ICitta = new Citta();
     /**技能数据 */
-    skill: number[] = [ 5000 ];
+    skill: number[] = [5000];
     /**出战技能 */
-    usingSkill: number[] = [ 5000, 5000, 5000, 5000, 5000 ];
+    usingSkill: number[] = [5000, 5000, 5000, 5000, 5000];
 
     get signedIn() {
-        return TimeUtil.checkNetDay(this.signedInTime, TimeUtil.getTimeStamp());
+        return TimeUtil.checkNextDay(this.signedInTime, TimeUtil.getTimeStamp());
     }
 
     get maxVigro(): number {
         const { citta } = this;
         let xinFaJL = 0;
-        Object.keys(citta).forEach(v => xinFaJL += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorAddition));
+        Object.keys(citta).forEach(v => xinFaJL += (citta[v] * cfgMgr.XinFaBook[v].vigorAddition));
         return Math.floor(86400 + xinFaJL);
     }
 
     get vigorRecover(): number {
         const { citta } = this;
         let xinFaJLHF = 0;
-        Object.keys(citta).forEach(v => xinFaJLHF += (citta[ v ] * cfgMgr.XinFaBook[ v ].vigorRecoverAddition));
+        Object.keys(citta).forEach(v => xinFaJLHF += (citta[v] * cfgMgr.XinFaBook[v].vigorRecoverAddition));
         return 1 + xinFaJLHF;
     }
 
@@ -96,20 +96,20 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
 
     protected override onDecode(data: IBaseData, key: keyof IBaseData) {
         switch (key) {
-            case "citta": return this[ key ].decode(data[ key ]);;
+            case "citta": return this[key].decode(data[key]);;
             case "skill":
             case "usingSkill":
-                const skillArr = this[ key ];
+                const skillArr = this[key];
                 skillArr.length = 0;
-                skillArr.push(...data[ key ]);
+                skillArr.push(...data[key]);
                 return skillArr;
 
-            default: return data[ key ];
+            default: return data[key];
         }
     }
 
     private getUpgradeExp(): number {
-        if (!cfgMgr.JingJie[ this.jingJie + 1 ]) return 0;
+        if (!cfgMgr.JingJie[this.jingJie + 1]) return 0;
         else return Formula.exp(this.jingJie, this.cengJi);
     }
 
@@ -122,8 +122,8 @@ export class Base extends Decode<IBaseData, IBase> implements IBase {
                 this.exp -= this.getUpgradeExp();
                 this.cengJi++;
             };
-            const maxCengji = +cfgMgr.Const[ 1005 ].value;
-            if (cfgMgr.JingJie[ this.jingJie + 1 ]) {
+            const maxCengji = +cfgMgr.Const[1005].value;
+            if (cfgMgr.JingJie[this.jingJie + 1]) {
                 //升境界
                 if (this.cengJi > maxCengji) {
                     this.cengJi -= maxCengji;

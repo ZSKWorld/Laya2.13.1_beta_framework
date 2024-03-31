@@ -72,4 +72,8 @@ export const enum ErrorCode {
     CHALLENGE_COUNT_NOT_ENOUGH,
     /** 冷却未完成 */
     COOLDOWN_NOT_COMPLETE,
+    /** 战斗中 */
+    ALREADY_IN_BATTLE,
+    /** 未开始战斗 */
+    NOT_IN_BATTLE,
 }

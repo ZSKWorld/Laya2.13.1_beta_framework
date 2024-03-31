@@ -1,6 +1,6 @@
 import { SceneType } from "../../../../../scene/SceneDefine";
 import { sceneMgr } from "../../../../../scene/SceneManager";
-import { GameEvent } from "../../../../common/GameEvent";
+import { trainLogMgr } from "../../../../game/TrainLogManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UISphereToolMsg, UISphereToolView } from "../view/UISphereToolView";
 
@@ -56,7 +56,7 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 	}
 
 	private onBtnClearLogClick() {
-		this.dispatch(GameEvent.ClearExperienceLog);
+		trainLogMgr.clearLog();
 	}
 
 	private onBtnRecoverVigorClick() {

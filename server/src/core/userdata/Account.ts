@@ -17,13 +17,13 @@ export class Account extends Decode<IAccountData, IAccount> implements IAccount 
     get loginNextDay() {
         const { _lastLoginTime, _loginTime } = this;
         if (!_lastLoginTime || !_loginTime) return false;
-        return TimeUtil.checkNetDay(_lastLoginTime, _loginTime);
+        return TimeUtil.checkNextDay(_lastLoginTime, _loginTime);
     }
 
     get onlineNextDay() {
         if (!this._onlineTime) return false;
         const nowTime = TimeUtil.getTimeStamp();
-        const isNextDay = TimeUtil.checkNetDay(this._onlineTime, nowTime);
+        const isNextDay = TimeUtil.checkNextDay(this._onlineTime, nowTime);
         if (isNextDay) this._onlineTime = nowTime;
         return isNextDay;
     }

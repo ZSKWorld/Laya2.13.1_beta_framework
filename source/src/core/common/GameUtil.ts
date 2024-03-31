@@ -1,7 +1,6 @@
-import { eventMgr } from "../game/event/EventManager";
+import { trainLogMgr } from "../game/TrainLogManager";
 import { richStrMgr } from "../ui/tool/RichStrManager";
 import { tipMgr } from "../ui/tool/TipManager";
-import { GameEvent } from "./GameEvent";
 
 
 export class GameUtil {
@@ -39,7 +38,7 @@ export class GameUtil {
             tipMgr.showTip(`恭喜获得${ str }`);
             logStr.combineBreak(str);
         });
-        eventMgr.event(GameEvent.AddExperienceLog, logStr.end());
+        trainLogMgr.addLog(logStr.end());
     }
 
     /** 获取物品数量字符串 */

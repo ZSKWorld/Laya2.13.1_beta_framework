@@ -1,12 +1,12 @@
-import { GameEvent } from "../../../../common/GameEvent";
 import { GameUtil } from "../../../../common/GameUtil";
+import { trainLogMgr } from "../../../../game/TrainLogManager";
 import { NetMessage } from "../../../../net/enum/NetMessage";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { richStrMgr } from "../../../tool/RichStrManager";
 import { tipMgr } from "../../../tool/TipManager";
 import { UIMainCtrl } from "../controller/UIMainCtrl";
 
-export class UIMainProxy extends BaseProxy<UIMainCtrl>{
+export class UIMainProxy extends BaseProxy<UIMainCtrl> {
     @RegisterEvent(NetMessage.DecomposeGem)
     decomposeGem(output: DecomposeGemOutput, input: DecomposeGemInput) {
         if (output.rewards?.length) {
@@ -16,7 +16,7 @@ export class UIMainProxy extends BaseProxy<UIMainCtrl>{
                 tipMgr.showTip(`恭喜获得${ str }`);
                 logStr.combineBreak(str);
             });
-            this.dispatch(GameEvent.AddExperienceLog, logStr.end());
+            trainLogMgr.addLog(logStr.end());
         }
     }
 
@@ -29,7 +29,7 @@ export class UIMainProxy extends BaseProxy<UIMainCtrl>{
                 tipMgr.showTip(`恭喜获得${ str }`);
                 logStr.combineBreak(str);
             });
-            this.dispatch(GameEvent.AddExperienceLog, logStr.end());
+            trainLogMgr.addLog(logStr.end());
         }
     }
 }

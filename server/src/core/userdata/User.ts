@@ -34,9 +34,10 @@ export class User extends Decode<IUserData, IUser> implements IUser {
         if (timeOffset <= 5) return null;
         else {
             const { base } = this;
-            const recover = (base.vigorRecover * timeOffset) << 0;
-            base.changeItemCount(BaseDataType.Vigor, Math.min(recover, base.maxVigro - base.vigor));
-            return { offlineTime: timeOffset, vigor: recover };
+            const offlineVigor = (base.vigorRecover * timeOffset) << 0;
+            const recoveredVigor = Math.min(offlineVigor, base.maxVigro - base.vigor);
+            base.changeItemCount(BaseDataType.Vigor, recoveredVigor);
+            return { offlineTime: timeOffset, vigor: recoveredVigor };
         }
     }
 

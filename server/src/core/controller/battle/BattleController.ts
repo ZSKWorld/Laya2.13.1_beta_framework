@@ -42,8 +42,8 @@ export class BattleController extends Controller implements IBattleCtrl {
     }
 
     override recover(): void {
-        this._inBattle = false;
         super.recover();
+        this.close();
     }
 
 }

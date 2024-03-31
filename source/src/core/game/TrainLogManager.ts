@@ -18,20 +18,24 @@ class TrainLogManager extends Observer {
     private _logs: string[] = [];
     get logs() { return this._logs; }
 
+    /** 随机一条历练日志 */
     randomLog() {
         const logs = TrainLogManager.constLogs;
         this.addLog(logs[MathUtil.RandomInt(0, logs.length - 1)]);
     }
 
-    @RegisterEvent(GameEvent.AddExperienceLog)
-    private addLog(log: string | string[]) {
+    /**
+     * 添加历练日志
+     * @param log 
+     */
+    addLog(log: string | string[]) {
         if (Array.isArray(log)) this._logs.push(...log);
         else this._logs.push(log);
         Laya.timer.callLater(this, this.dispatch, [GameEvent.RefreshExperienceLog]);
     }
 
-    @RegisterEvent(GameEvent.ClearExperienceLog)
-    private clearLog() {
+    /** 清空历练日志 */
+    clearLog() {
         this._logs.length = 0;
         Laya.timer.callLater(this, this.dispatch, [GameEvent.RefreshExperienceLog]);
     }

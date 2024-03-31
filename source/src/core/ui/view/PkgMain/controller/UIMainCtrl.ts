@@ -1,7 +1,7 @@
-import { GameEvent } from "../../../../common/GameEvent";
 import { localData } from "../../../../game/localData/LocalData";
 import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { MathUtil } from "../../../../game/math/MathUtil";
+import { trainLogMgr } from "../../../../game/TrainLogManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { ViewID } from "../../../core/ViewID";
 import { richStrMgr } from "../../../tool/RichStrManager";
@@ -46,7 +46,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData> {
 		txt.combineBreak(richStrMgr.start("放置游戏，资源全开放，所有道具货币都可获取").size(60).color("#FFFFFF").end())
 			.combineBreak(richStrMgr.start("熬死大佬，你就是大佬!").size(60).color("#FF842E").end())
 			.combineBreak(`战斗速度调整为${ battleSpeed }倍速`, 0);
-		this.dispatch(GameEvent.AddExperienceLog, txt.end());
+		trainLogMgr.addLog(txt.end());
 	}
 
 	override onEnable() {
