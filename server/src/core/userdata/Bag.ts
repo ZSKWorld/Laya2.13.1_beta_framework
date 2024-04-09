@@ -12,6 +12,10 @@ export class Bag extends DecodeObject<IBag> implements IBag {
     book: IGoods[] = [];
     other: IGoods[] = [];
 
+    isCollect(id: number) {
+        return this.collect.includes(id);
+    }
+
     getItem(id: number) {
         const item = cfgMgr.Item[id];
         if (!item) return null;

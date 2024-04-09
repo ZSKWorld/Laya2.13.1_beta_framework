@@ -1,17 +1,19 @@
-/** 物品 */
-declare interface IGoods extends IDecodeObject<IGoods> {
+/** 基础物品 */
+declare interface IGoodsBase<T> extends IDecodeObject<T>{
     /** 物品id */
     id: number;
+}
+
+/** 物品 */
+declare interface IGoods extends IGoodsBase<IGoods> {
     /** 物品数量 */
     count: number;
 }
 
 /** 装备 */
-declare interface IEquipment extends IDecodeObject<IEquipment> {
+declare interface IEquipment extends IGoodsBase<IEquipment> {
     /** 装备uid，用于区分同id的不同装备 */
     uid: string;
-    /** 装备id */
-    id: number;
     /** 装备星级 */
     star: number;
     /** 强化等级 */

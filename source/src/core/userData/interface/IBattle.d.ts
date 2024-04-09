@@ -19,8 +19,8 @@ declare interface ISecret extends IDecodeObject<ISecret> {
 declare interface IBoss extends IDecodeObject<IBoss> {
     /** 各个boss上次挑战时间 */
     lastChallengeTime: KeyMap<number>;
-    /** 获取剩余冷却时间 */
-    lastCooldownTime(id: number): number;
+    /** 剩余冷却时间 */
+    lastCoolTime(id: number): number;
 }
 
 declare interface IGather extends IDecodeObject<IGather> {

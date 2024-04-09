@@ -5,11 +5,6 @@ import { BagHelper } from "./BagHelper";
 
 export class BagChecker {
 
-    /** 检查物品是否被收藏 */
-    static checkItemCollected(data: IUser, id: number): boolean {
-        return data.bag.collect.includes(id);
-    }
-
     /** 检查物品是否可使用 */
     static checkItemUsable(data: IUser, id: number, count: number): ErrorCode {
         if (count <= 0) return ErrorCode.NUMBER_ERROR;
@@ -45,8 +40,8 @@ export class BagChecker {
     /** 检查物品收藏 */
     static checkCollect(data: IUser, id: number, collect: boolean): ErrorCode {
         if (BagHelper.isEquip(id)) return ErrorCode.EQUIP_CAN_NOT_COLLECT;
-        if (collect && this.checkItemCollected(data, id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
-        if (!collect && !this.checkItemCollected(data, id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
+        if (collect && data.bag.isCollect(id)) return ErrorCode.ITEM_ALREADY_COLLECTED;
+        if (!collect && !data.bag.isCollect(id)) return ErrorCode.ITEM_DOES_NOT_COLLECT;
         return ErrorCode.NONE;
     }
 

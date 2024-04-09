@@ -1,11 +1,9 @@
-/** 物品 */
-declare interface IGoods extends IDecodeObject<IGoods> {
+/** 基础物品 */
+declare interface IGoodsBase<T> extends IDecodeObject<T>{
     /** 物品id */
     id: number;
-    /** 物品数量 */
-    count: number;
-    readonly name: string;
-    readonly colorName: string;
+    get name(): string;
+    get colorName(): string;
     get quality(): number;
     get color(): string;
     get description(): string;
@@ -14,8 +12,14 @@ declare interface IGoods extends IDecodeObject<IGoods> {
     get useRequireStr(): string;
 }
 
+/** 物品 */
+declare interface IGoods extends IGoodsBase<IGoods> {
+    /** 物品数量 */
+    count: number;
+}
+
 /** 装备 */
-declare interface IEquipment extends IDecodeObject<IEquipment> {
+declare interface IEquipment extends IGoodsBase<IEquipment> {
     /** 装备uid，用于区分同id的不同装备 */
     uid: string;
     /** 装备id */
@@ -36,15 +40,8 @@ declare interface IEquipment extends IDecodeObject<IEquipment> {
     secondAttri: number[];
     /** 体质属性 */
     bodyAttri: number[];
-    get name(): string;
-    get colorName(): string;
-    get quality(): number;
-    get color(): string;
-    get description(): string;
-    get salable(): number;
-    get useRequire(): CfgItemData2;
-    get useRequireStr(): string;
-    /** 类型 => EquipmentPart */
+
+    /** 装备部位 => EquipmentPart */
     get part(): number;
     get levelName(): string;
     get colorLevelName(): string;

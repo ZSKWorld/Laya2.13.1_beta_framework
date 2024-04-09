@@ -1,5 +1,4 @@
 declare interface IBag extends IDecodeObject<IBag> {
-    
     collect: number[];
     equipment: IEquipment[];
     gem: IGoods[];
@@ -7,6 +6,12 @@ declare interface IBag extends IDecodeObject<IBag> {
     material: IGoods[];
     book: IGoods[];
     other: IGoods[];
+
+    /**
+     * 是否已收藏
+     * @param id 物品id
+     */
+    isCollect(id: number): boolean;
 
     /**
      * 获取非装备物品

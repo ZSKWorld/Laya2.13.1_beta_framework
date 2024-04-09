@@ -2,7 +2,7 @@ import { GameUtil } from "../common/GameUtil";
 import { EquipmentPart } from "../net/enum/ItemEnum";
 import { ClassDontDispatch, ClassName, DecodeObject } from "./DecodeObject";
 import { UserUtil } from "./UserUtil";
-class Item<T> extends DecodeObject<T> {
+class GoodsBase<T> extends DecodeObject<T> implements IGoodsBase<T> {
     id: number;
 
     get name() { return cfgMgr.Item[this.id].name; }
@@ -17,13 +17,13 @@ class Item<T> extends DecodeObject<T> {
 
 @ClassDontDispatch
 @ClassName("GoodsData")
-export class Goods extends Item<IGoods> implements IGoods {
+export class Goods extends GoodsBase<IGoods> implements IGoods {
     count: number;
 
 }
 
 @ClassName("EquipmentData")
-export class Equipment extends Item<IEquipment> implements IEquipment {
+export class Equipment extends GoodsBase<IEquipment> implements IEquipment {
     //#region 字段
     uid: string;
     star: number;

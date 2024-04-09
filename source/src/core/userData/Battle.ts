@@ -34,7 +34,7 @@ class Secret extends MapData<ISecret> implements ISecret {
 class Boss extends MapData<IBoss> implements IBoss {
     lastChallengeTime: KeyMap<number> = {};
 
-    lastCooldownTime(id: number): number {
+    lastCoolTime(id: number): number {
         const lastTime = this.lastChallengeTime[id];
         if (!lastTime) return 0;
         const cfg = cfgMgr.Boss[id];

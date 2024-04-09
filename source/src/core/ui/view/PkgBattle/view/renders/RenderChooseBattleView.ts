@@ -49,7 +49,7 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
     }
 
     refreshBossCool(data: CfgBossData) {
-        const coolTime = userData.battle.boss.lastCooldownTime(data.id);
+        const coolTime = userData.battle.boss.lastCoolTime(data.id);
         const isEnd = coolTime <= 0;
         const { graph_light, graph_touch, txt_content1, txt_content5 } = this;
         graph_touch.touchable = isEnd;

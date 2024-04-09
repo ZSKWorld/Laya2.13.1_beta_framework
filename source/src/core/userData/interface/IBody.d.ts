@@ -39,10 +39,16 @@ declare interface IBody extends IDecodeObject<IBody> {
     amuletGems: number[];
     /** 鞋子上装备的宝石 */
     shoesGems: number[];
-
-    /** @param part {@link EquipmentPart } */
+    
+    /**
+     * 获取已穿戴装备
+     * @param part {@link EquipmentPart }
+     */
     getDressedEquip(part: number): IEquipment;
 
-    /** @param part {@link EquipmentPart } */
+    /**
+     * 获取装备部位宝石
+     * @param part {@link EquipmentPart }
+     */
     getEquipGems(part: number): number[];
 }

@@ -8,7 +8,9 @@ declare interface IOffline {
 }
 
 declare interface IUser extends IDecodeObject<IUser> {
+    /** 账号数据 */
     account: IAccount;
+    /** 基础数据 */
     base: IBase;
     /** 离线数据 */
     offline?: IOffline;
