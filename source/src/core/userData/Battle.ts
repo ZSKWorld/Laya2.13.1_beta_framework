@@ -53,7 +53,7 @@ class Gather extends MapData<IGather> implements IGather {
     }
 }
 
-@ClassName("BattleData")
+@ClassName("Battle")
 export class Battle extends DecodeObject<IBattle> implements IBattle {
     level = new Level();
     copy = new Copy();

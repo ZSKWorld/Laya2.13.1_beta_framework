@@ -2,7 +2,7 @@ import { EquipmentPart } from "../net/enum/ItemEnum";
 import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment } from "./Goods";
 
-@ClassName("BodyData")
+@ClassName("Body")
 export class Body extends DecodeObject<IBody> implements IBody {
     //#region 字段
     weapon: IEquipment;

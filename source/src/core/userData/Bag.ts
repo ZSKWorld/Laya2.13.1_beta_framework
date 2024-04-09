@@ -2,7 +2,7 @@ import { DataType, ItemBagType } from "../net/enum/ItemEnum";
 import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment, Goods } from "./Goods";
 
-@ClassName("BagData")
+@ClassName("Bag")
 export class Bag extends DecodeObject<IBag> implements IBag {
     collect: number[];
     equipment: IEquipment[];

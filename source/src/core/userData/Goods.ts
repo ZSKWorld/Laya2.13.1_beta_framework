@@ -16,13 +16,13 @@ class GoodsBase<T> extends DecodeObject<T> implements IGoodsBase<T> {
 }
 
 @ClassDontDispatch
-@ClassName("GoodsData")
+@ClassName("Goods")
 export class Goods extends GoodsBase<IGoods> implements IGoods {
     count: number;
 
 }
 
-@ClassName("EquipmentData")
+@ClassName("Equipment")
 export class Equipment extends GoodsBase<IEquipment> implements IEquipment {
     //#region 字段
     uid: string;

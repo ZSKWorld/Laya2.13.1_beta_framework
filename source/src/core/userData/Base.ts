@@ -2,7 +2,7 @@ import { BaseDataType, DataType } from "../net/enum/ItemEnum";
 import { ClassName, DecodeObject } from "./DecodeObject";
 import { UserUtil } from "./UserUtil";
 
-@ClassName("BaseData")
+@ClassName("Base")
 export class Base extends DecodeObject<IBase> implements IBase {
     //#region 字段
     signedInTime: number;

@@ -9,7 +9,7 @@ export interface ComGoodsInfoData {
 	buy?: boolean;
 }
 
-export class ComGoodsInfoCtrl extends BaseViewCtrl<ComGoodsInfoView, ComGoodsInfoData>{
+export class ComGoodsInfoCtrl extends BaseViewCtrl<ComGoodsInfoView, ComGoodsInfoData> {
 
 	override onAdded() {
 		this.addMessage(ComGoodsInfoMsg.OnBtnCollectClick, this.onBtnCollectClick);
@@ -23,7 +23,7 @@ export class ComGoodsInfoCtrl extends BaseViewCtrl<ComGoodsInfoView, ComGoodsInf
 		this.refreshContent();
 	}
 
-	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
+	@RegisterEvent(UserDataEvent.User_Bag_Changed)
 	refreshContent() {
 		const { id, buy } = this.data;
 		const haveCnt = buy ? 1 : userData.bag.getItemCount(id);

@@ -8,7 +8,7 @@ import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleVie
 import { RenderChooseBattleView } from "../view/renders/RenderChooseBattleView";
 import { RenderChooseBattleCtrl } from "./renders/RenderChooseBattleCtrl";
 
-export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType>{
+export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType> {
 	private items: BattleCfgData[];
 
 	override onAdded() {
@@ -31,7 +31,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 		});
 	}
 
-	@RegisterEvent(UserDataEvent.UserData_Battle_Changed)
+	@RegisterEvent(UserDataEvent.User_Battle_Changed)
 	private refreshList() {
 		this.view.setBattleType(this.data - 1);
 		let itemCfg: BattleCfg;

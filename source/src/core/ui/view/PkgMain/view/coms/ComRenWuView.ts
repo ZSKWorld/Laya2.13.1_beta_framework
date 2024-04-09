@@ -37,9 +37,9 @@ export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 		btn_faBao.onClick(this, this.sendMessage, [ComRenWuMsg.OnBtnFaBaoClick]);
 	}
 
-	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
-	@RegisterEvent(UserDataEvent.UserData_Base_Changed)
-	@RegisterEvent(UserDataEvent.UserData_Body_Changed)
+	@RegisterEvent(UserDataEvent.User_Bag_Changed)
+	@RegisterEvent(UserDataEvent.User_Base_Changed)
+	@RegisterEvent(UserDataEvent.User_Body_Changed)
 	refreshEquipInfo() {
 		const { account, base, friend, bag, body, battle } = userData;
 		const { weapon, helmet, necklace, clothes, ring, trousers, amulet, shoes, mount, hiddenWeeapon, fashion, magicWeapon } = body;

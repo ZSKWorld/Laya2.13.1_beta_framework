@@ -12,7 +12,7 @@ export interface ComGoodsData {
 
 }
 
-export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
+export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData> {
 	private items: (IGoods | IEquipment)[];
 	private showType: ItemBagType = ItemBagType.Collect;
 
@@ -32,7 +32,7 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData>{
 		this.refreshListByType(this.showType);
 	}
 
-	@RegisterEvent(UserDataEvent.UserData_Bag_Changed)
+	@RegisterEvent(UserDataEvent.User_Bag_Changed)
 	private refreshListByType(type: ItemBagType) {
 		this.showType = type ?? this.showType;
 		this.items = userData.bag.getItems(this.showType);

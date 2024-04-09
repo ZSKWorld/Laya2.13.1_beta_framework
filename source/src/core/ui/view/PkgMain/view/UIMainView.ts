@@ -37,8 +37,8 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		btn_sphere.draggable = true;
 	}
 
-	@RegisterEvent(UserDataEvent.AccountData_Nickname_Changed)
-	@RegisterEvent(UserDataEvent.UserData_Base_Changed)
+	@RegisterEvent(UserDataEvent.Account_Nickname_Changed)
+	@RegisterEvent(UserDataEvent.User_Base_Changed)
 	refreshPlayerInfo() {
 		this.txt_nickname.text = userData.account.nickname;
 		const { jingJie, cengJi, exp, coin, vcoin, sect } = userData.base;
