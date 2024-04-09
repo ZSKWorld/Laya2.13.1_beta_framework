@@ -1,14 +1,22 @@
-import { ProxyKey } from "../../utils/ProxyMgr";
 import { TimeUtil } from "../../utils/TimeUtil";
 import { cfgMgr } from "../config/CfgManager";
 import { BattleType } from "../enum/BattleEnums";
 import { DecodeObject } from "./DecodeObject";
-class Level extends DecodeObject<ILevelData, ILevel> implements ILevel {
-    enterBattle(id: number): void {
+class MapData<D, O> extends DecodeObject<D, O> {
+    protected override onDecode(data: D, key: keyof D): D[keyof D] {
+        const that = this as unknown as D;
+        Object.keys(data[key]).forEach(v => that[key][v] = data[key][v]);
+        return that[key];
     }
 }
 
-class Copy extends DecodeObject<ICopyData, ICopy> implements ICopy {
+class Level extends MapData<ILevelData, ILevel> implements ILevel {
+    enterBattle(id: number): void {
+        
+    }
+}
+
+class Copy extends MapData<ICopyData, ICopy> implements ICopy {
     usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
@@ -24,14 +32,9 @@ class Copy extends DecodeObject<ICopyData, ICopy> implements ICopy {
     reset(): void {
         this.usedMap = {};
     }
-
-    protected override onDecode(data: ICopyData, key: keyof ICopyData): KeyMap<number> {
-        Object.keys(data).forEach(v => this[key][v] = data[v]);
-        return this[key];
-    }
 }
 
-class Secret extends DecodeObject<ISecretData, ISecret> implements ISecret {
+class Secret extends MapData<ISecretData, ISecret> implements ISecret {
     usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
@@ -47,14 +50,9 @@ class Secret extends DecodeObject<ISecretData, ISecret> implements ISecret {
     reset(): void {
         this.usedMap = {};
     }
-
-    protected override onDecode(data: ISecretData, key: keyof ISecretData): KeyMap<number> {
-        Object.keys(data).forEach(v => this[key][v] = data[v]);
-        return this[key];
-    }
 }
 
-class Boss extends DecodeObject<IBossData, IBoss> implements IBoss {
+class Boss extends MapData<IBossData, IBoss> implements IBoss {
     lastChallengeTime: KeyMap<number> = {};
 
     lastCoolTime(id: number) {
@@ -71,14 +69,9 @@ class Boss extends DecodeObject<IBossData, IBoss> implements IBoss {
     reset(): void {
         this.lastChallengeTime = {};
     }
-
-    protected override onDecode(data: IBossData, key: keyof IBossData): KeyMap<number> {
-        Object.keys(data).forEach(v => this[key][v] = data[v]);
-        return this[key];
-    }
 }
 
-class Gather extends DecodeObject<IGatherData, IGather> implements IGather {
+class Gather extends MapData<IGatherData, IGather> implements IGather {
     startTimeMap: KeyMap<number> = {};
     gatherTimeMap: KeyMap<number> = {};
 
@@ -96,11 +89,6 @@ class Gather extends DecodeObject<IGatherData, IGather> implements IGather {
     breakOffGather(id: number): void {
         this.startTimeMap[id] = null;
         this.gatherTimeMap[id] = null;
-    }
-
-    protected override onDecode(data: IGatherData, key: keyof IGatherData): KeyMap<number> {
-        Object.keys(data).forEach(v => this[key][v] = data[v]);
-        return this[key];
     }
 }
 

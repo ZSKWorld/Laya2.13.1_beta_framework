@@ -1,35 +1,44 @@
 import { GameUtil } from "../common/GameUtil";
 import { ClassName, DecodeObject } from "./DecodeObject";
 
-class Level extends DecodeObject<ILevelData> implements ILevel {
+class MapData<T> extends DecodeObject<T> {
+    protected override onDecode(data: T, key: keyof T): T[keyof T] {
+        const that = this as unknown as T;
+        Object.keys(data[key]).forEach(v => that[key][v] = data[key][v]);
+        return that[key];
+    }
+}
+
+class Level extends MapData<ILevelData> implements ILevel {
 
 }
 
-class Copy extends DecodeObject<ICopyData> implements ICopy {
-    usedMap: KeyMap<number> = null;
+class Copy extends MapData<ICopyData> implements ICopy {
+    usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
         const cfg = cfgMgr.Copy[id];
-        if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[id] || 0);
     }
 }
 
-class Secret extends DecodeObject<ISecretData> implements ISecret {
-    usedMap: KeyMap<number> = null;
+let a = new Copy()
+a.decode(null)
+
+class Secret extends MapData<ISecretData> implements ISecret {
+    usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
         const cfg = cfgMgr.Secret[id];
-        if (!this.usedMap) return cfg.battleCount;
         return cfg.battleCount - (this.usedMap[id] || 0);
     }
+
 }
 
-class Boss extends DecodeObject<IBossData> implements IBoss {
-    lastChallengeTime: KeyMap<number> = null;
+class Boss extends MapData<IBossData> implements IBoss {
+    lastChallengeTime: KeyMap<number> = {};
 
     lastCooldownTime(id: number): number {
-        if (!this.lastChallengeTime) return 0;
         const lastTime = this.lastChallengeTime[id];
         if (!lastTime) return 0;
         const cfg = cfgMgr.Boss[id];
@@ -37,12 +46,11 @@ class Boss extends DecodeObject<IBossData> implements IBoss {
     }
 }
 
-class Gather extends DecodeObject<IGatherData> implements IGather {
-    startTimeMap: KeyMap<number> = null;
-    gatherTimeMap: KeyMap<number> = null;
+class Gather extends MapData<IGatherData> implements IGather {
+    startTimeMap: KeyMap<number> = {};
+    gatherTimeMap: KeyMap<number> = {};
 
     remainTime(id: number) {
-        if (!this.startTimeMap) return 0;
         const startTime = this.startTimeMap[id];
         if (!startTime) return 0;
         return Math.max(this.gatherTimeMap[id] - (GameUtil.GetSecondStamp() - startTime), 0);
