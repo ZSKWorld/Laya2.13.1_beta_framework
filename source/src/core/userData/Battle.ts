@@ -2,18 +2,18 @@ import { GameUtil } from "../common/GameUtil";
 import { ClassName, DecodeObject } from "./DecodeObject";
 
 class MapData<T> extends DecodeObject<T> {
-    protected override onDecode(data: T, key: keyof T): T[keyof T] {
+    protected override onDecode(data: T, key: OriginDataKeys<T>) {
         const that = this as unknown as T;
         Object.keys(data[key]).forEach(v => that[key][v] = data[key][v]);
         return that[key];
     }
 }
 
-class Level extends MapData<ILevelData> implements ILevel {
+class Level extends MapData<ILevel> implements ILevel {
 
 }
 
-class Copy extends MapData<ICopyData> implements ICopy {
+class Copy extends MapData<ICopy> implements ICopy {
     usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
@@ -22,20 +22,16 @@ class Copy extends MapData<ICopyData> implements ICopy {
     }
 }
 
-let a = new Copy()
-a.decode(null)
-
-class Secret extends MapData<ISecretData> implements ISecret {
+class Secret extends MapData<ISecret> implements ISecret {
     usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
         const cfg = cfgMgr.Secret[id];
         return cfg.battleCount - (this.usedMap[id] || 0);
     }
-
 }
 
-class Boss extends MapData<IBossData> implements IBoss {
+class Boss extends MapData<IBoss> implements IBoss {
     lastChallengeTime: KeyMap<number> = {};
 
     lastCooldownTime(id: number): number {
@@ -46,7 +42,7 @@ class Boss extends MapData<IBossData> implements IBoss {
     }
 }
 
-class Gather extends MapData<IGatherData> implements IGather {
+class Gather extends MapData<IGather> implements IGather {
     startTimeMap: KeyMap<number> = {};
     gatherTimeMap: KeyMap<number> = {};
 
@@ -58,14 +54,14 @@ class Gather extends MapData<IGatherData> implements IGather {
 }
 
 @ClassName("BattleData")
-export class Battle extends DecodeObject<IBattleData> implements IBattle {
+export class Battle extends DecodeObject<IBattle> implements IBattle {
     level = new Level();
     copy = new Copy();
     secret = new Secret();
     boss = new Boss();
     gather = new Gather();
 
-    protected override onDecode(data: IBattleData, key: keyof IBattleData) {
+    protected override onDecode(data: OriginData<IBattle>, key: OriginDataKeys<IBattle>) {
         return this[key].decode(data[key] as any);
     }
 

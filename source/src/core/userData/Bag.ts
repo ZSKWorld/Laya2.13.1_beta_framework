@@ -3,7 +3,7 @@ import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment, Goods } from "./Goods";
 
 @ClassName("BagData")
-export class Bag extends DecodeObject<IBagData> implements IBag {
+export class Bag extends DecodeObject<IBag> implements IBag {
     collect: number[];
     equipment: IEquipment[];
     gem: IGoods[];
@@ -49,7 +49,7 @@ export class Bag extends DecodeObject<IBagData> implements IBag {
         }
     }
 
-    protected override onDecode(data: IBagData, key: keyof IBagData) {
+    protected override onDecode(data: OriginData<IBag>, key: OriginDataKeys<IBag>) {
         switch (key) {
             case "equipment": return data[key].map(v => v instanceof Equipment ? v : new Equipment().decode(v));
             case "gem":

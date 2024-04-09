@@ -3,7 +3,7 @@ import { ClassName, DecodeObject } from "./DecodeObject";
 import { UserUtil } from "./UserUtil";
 
 @ClassName("BaseData")
-export class Base extends DecodeObject<IBaseData> implements IBase {
+export class Base extends DecodeObject<IBase> implements IBase {
     //#region 字段
     signedInTime: number;
     coin: number;

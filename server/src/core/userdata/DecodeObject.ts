@@ -1,34 +1,29 @@
-export abstract class DecodeObject<D, O> implements IDecodeObject<D, O> {
-
-    static encode<ED, EO>(data: DecodeObject<ED, EO>) {
-        data.onBeginEncode();
-        const result = {} as ED;
-        Object.keys(data).forEach(key => {
+export abstract class DecodeObject<T> implements IDecodeObject<T> {
+    encode() {
+        this.onBeginEncode();
+        const result = {} as T;
+        Object.keys(this).forEach(key => {
             //私有字段不保存
             if (key.startsWith("_")) return;
-            result[key] = data.onEncode(key as any);
+            result[key] = this.onEncode(key as any);
         });
-        data.onEndEncode();
+        this.onEndEncode();
         return result;
     }
 
-    static decode<DD, DO>(source: DD, target: DecodeObject<DD, DO>) {
-        if (!source) return target as unknown as DO;
-        target.onBeginDecode();
-        Object.keys(source).forEach((key) => {
-            target[key] = target.onDecode(source, key as any);
+    decode(data: OriginData<T>) {
+        if (!data) return <T><unknown>this;
+        this.onBeginDecode();
+        Object.keys(data).forEach((key) => {
+            this[key] = this.onDecode(data, key as any);
         });
-        target.onEndDecode();
-        return target as unknown as DO;
+        this.onEndDecode();
+        return <T><unknown>this;
     }
 
-    encode?() { return DecodeObject.encode(this); }
+    protected onEncode(key: OriginDataKeys<T>) { return (<T><unknown>this)[key]; }
 
-    decode?(data: D) { return DecodeObject.decode(data, this); }
-
-    protected onEncode(key: keyof D) { return (<D><unknown>this)[key]; }
-
-    protected onDecode(data: D, key: keyof D) { return data[key]; }
+    protected onDecode(data: OriginData<T>, key: OriginDataKeys<T>) { return data[key]; }
 
     protected onBeginEncode() { }
 

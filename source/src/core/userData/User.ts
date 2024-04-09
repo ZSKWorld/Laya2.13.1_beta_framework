@@ -14,7 +14,7 @@ class Offline extends DecodeObject<IOffline> implements IOffline {
 }
 
 @ClassName("UserData")
-export class User extends DecodeObject<IUserData> implements IUser {
+export class User extends DecodeObject<IUser> implements IUser {
 
     //#region Properties
     account = new Account();
@@ -26,13 +26,15 @@ export class User extends DecodeObject<IUserData> implements IUser {
     battle = new Battle();
     //#endregion
 
-    protected override onDecode(data: IUserData, key: keyof IUserData) {
-        if (key == "offline") return data[key];
-        return (<IDecodeObject<any, any>>this[key]).decode(data[key]);
+    protected override onDecode(data: OriginData<IUser>, key: OriginDataKeys<IUser>) {
+        switch (key) {
+            case "offline":return data[key];
+            default: return this[key].decode(data[key] as any);
+        }
     }
 
     @RegisterEvent(NetCMD.SyncInfo)
-    private syncInfo(data: IUserData) {
+    private syncInfo(data: OriginData<IUser>) {
         return this.decode(data);
     }
 }

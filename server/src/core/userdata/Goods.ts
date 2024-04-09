@@ -4,7 +4,7 @@ import { cfgMgr } from "../config/CfgManager";
 import { EquipmentPart } from "../enum/ItemEnum";
 import { CantSyncObject } from "./CantSyncObject";
 
-export class Goods extends CantSyncObject<IGoodsData, IGoods> implements IGoods {
+export class Goods extends CantSyncObject<IGoods> implements IGoods {
     id: number = 0;
     count: number = 0;
 
@@ -15,7 +15,7 @@ export class Goods extends CantSyncObject<IGoodsData, IGoods> implements IGoods 
     }
 }
 
-export class Equipment extends CantSyncObject<IEquipmentData, IEquipment> implements IEquipment {
+export class Equipment extends CantSyncObject<IEquipment> implements IEquipment {
     id: number = 0;
     uid: string = Util.CreateUID();
     star: number = 0;

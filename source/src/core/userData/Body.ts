@@ -3,7 +3,7 @@ import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment } from "./Goods";
 
 @ClassName("BodyData")
-export class Body extends DecodeObject<IBodyData> implements IBody {
+export class Body extends DecodeObject<IBody> implements IBody {
     //#region 字段
     weapon: IEquipment;
     helmet: IEquipment;
@@ -59,7 +59,7 @@ export class Body extends DecodeObject<IBodyData> implements IBody {
         }
     }
 
-    protected override onDecode(data: IBodyData, key: keyof IBodyData) {
+    protected override onDecode(data: OriginData<IBody>, key: OriginDataKeys<IBody>) {
         switch (key) {
             case "weapon":
             case "helmet":

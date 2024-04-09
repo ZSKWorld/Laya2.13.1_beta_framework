@@ -1,4 +1,4 @@
-declare interface IBody extends IBodyData, IDecodeObject<IBodyData, IBody> {
+declare interface IBody extends IDecodeObject<IBody> {
     /** 武器 */
     weapon: IEquipment;
     /** 头盔 */
@@ -23,6 +23,23 @@ declare interface IBody extends IBodyData, IDecodeObject<IBodyData, IBody> {
     fashion: IEquipment;
     /** 法宝 */
     magicWeapon: IEquipment;
+    /** 武器上装备的宝石 */
+    weaponGems: number[];
+    /** 头盔上装备的宝石 */
+    helmetGems: number[];
+    /** 项链上装备的宝石 */
+    necklaceGems: number[];
+    /** 衣服上装备的宝石 */
+    clothesGems: number[];
+    /** 戒指上装备的宝石 */
+    ringGems: number[];
+    /** 裤子上装备的宝石 */
+    trousersGems: number[];
+    /** 护符上装备的宝石 */
+    amuletGems: number[];
+    /** 鞋子上装备的宝石 */
+    shoesGems: number[];
+    
 
     /** 获取已穿戴装备 */
     getDressedEquip(part: number): IEquipment;

@@ -7,5 +7,5 @@ declare interface IUserOutput {
     type?: string;
     cmd?: string;
     error?: number;
-    syncInfo?: Partial<IUserData>;
+    syncInfo?: Partial<OriginData<IUser>>;
 }

@@ -76,7 +76,7 @@ export class Connection {
         connection.on(ConnectionEvent.Message, this._onMessage);
     }
 
-    userLogin(data: IUserData) {
+    userLogin(data: OriginData<IUser>) {
         if (!this._logined) {
             this._logined = true;
             this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));

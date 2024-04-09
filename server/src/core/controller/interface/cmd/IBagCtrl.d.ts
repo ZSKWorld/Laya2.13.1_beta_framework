@@ -28,7 +28,7 @@ declare interface IUseItemInput extends IUserInput {
 
 declare interface IUseItemOutput extends IUserOutput {
     /** 获得的奖励 */
-    rewards: IGoodsData[];
+    rewards: OriginData<IGoods>[];
 }
 
 declare interface ISellItemInput extends IUserInput {
@@ -40,7 +40,7 @@ declare interface ISellItemInput extends IUserInput {
 
 declare interface ISellItemOutput extends IUserOutput {
     /** 获得的奖励 */
-    rewards: IGoodsData[];
+    rewards: OriginData<IGoods>[];
 }
 
 declare interface IChangeCollectInput extends IUserInput {
@@ -60,7 +60,7 @@ declare interface IDecomposeGemInput extends IUserInput {
 
 declare interface IDecomposeGemOutput extends IUserOutput {
     /** 获得的奖励 */
-    rewards: IGoodsData[];
+    rewards: OriginData<IGoods>[];
 }
 
 declare interface IDressEquipInput extends IUserInput {
@@ -87,7 +87,7 @@ declare interface ISellEquipInput extends IUserInput {
 
 declare interface ISellEquipOutput extends IUserOutput {
     /** 获得的奖励 */
-    rewards: IGoodsData[];
+    rewards: OriginData<IGoods>[];
 }
 
 declare interface IDecomposeEquipInput extends IUserInput {
@@ -96,5 +96,5 @@ declare interface IDecomposeEquipInput extends IUserInput {
 
 declare interface IDecomposeEquipOutput extends IUserOutput {
     /** 获得的奖励 */
-    rewards: IGoodsData[];
+    rewards: OriginData<IGoods>[];
 }

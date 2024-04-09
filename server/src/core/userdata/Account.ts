@@ -2,7 +2,7 @@ import { TimeUtil } from "../../utils/TimeUtil";
 import { Util } from "../../utils/Util";
 import { DecodeObject } from "./DecodeObject";
 
-export class Account extends DecodeObject<IAccountData, IAccount> implements IAccount {
+export class Account extends DecodeObject<IAccount> implements IAccount {
     uid: string = Util.generateUUID();
     nickname: string = "";
     account: string = "";

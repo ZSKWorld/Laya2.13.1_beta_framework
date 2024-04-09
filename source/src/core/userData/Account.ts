@@ -1,7 +1,7 @@
 import { ClassName, DecodeObject } from "./DecodeObject";
 
 @ClassName("AccountData")
-export class Account extends DecodeObject<IAccountData> implements IAccount {
+export class Account extends DecodeObject<IAccount> implements IAccount {
     uid: string;
     nickname: string;
     account: string;
@@ -9,5 +9,4 @@ export class Account extends DecodeObject<IAccountData> implements IAccount {
     registerTime: number;
     lastLoginTime: number;
     lastOnlineTime: number;
-
 }

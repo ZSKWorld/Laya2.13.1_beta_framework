@@ -3,7 +3,7 @@ import { DataType, ItemBagType } from "../enum/ItemEnum";
 import { DecodeObject } from "./DecodeObject";
 import { Equipment, Goods } from "./Goods";
 
-export class Bag extends DecodeObject<IBagData, IBag> implements IBag {
+export class Bag extends DecodeObject<IBag> implements IBag {
     collect: number[] = [];
     equipment: IEquipment[] = [];
     gem: IGoods[] = [];
@@ -86,7 +86,7 @@ export class Bag extends DecodeObject<IBagData, IBag> implements IBag {
         return null;
     }
 
-    protected override onEncode(key: keyof IBagData) {
+    protected override onEncode(key: OriginDataKeys<IBag>) {
         const arr = this[key];
         if (key == "collect") return arr;
         const result = [];
@@ -103,7 +103,7 @@ export class Bag extends DecodeObject<IBagData, IBag> implements IBag {
         return result;
     }
 
-    protected override onDecode(data: IBagData, key: keyof IBagData) {
+    protected override onDecode(data: OriginData<IBag>, key: OriginDataKeys<IBag>) {
         const result = this[key] as any[];
         result.length = 0;
         switch (key) {

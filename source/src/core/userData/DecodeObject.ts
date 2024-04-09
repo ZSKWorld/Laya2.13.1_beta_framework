@@ -4,11 +4,11 @@ const ClassNameTag = "__className";
 const DontDispatchTag = "__dontDispatch";
 
 /** 基本数据 */
-export abstract class DecodeObject<D> extends Observer implements IDecodeObject<D, any> {
+export abstract class DecodeObject<T> extends Observer implements IDecodeObject<T> {
     private static dispatchArr = new Set<string>();
 
-    decode(data: D) {
-        if (!data) return this;
+    decode(data: OriginData<T>) {
+        if (!data) return this as unknown as T;
         Object.keys(data).forEach((key) => {
             //规定__开头的私有变量不进行decode
             if (key.startsWith("__")) return;
@@ -19,10 +19,10 @@ export abstract class DecodeObject<D> extends Observer implements IDecodeObject<
         });
         Laya.timer.callLater(DecodeObject, DecodeObject.dispatchEvent);
         this.afterDecode();
-        return this;
+        return this as unknown as T;
     }
 
-    protected onDecode(data: D, key: keyof D) {
+    protected onDecode(data: OriginData<T>, key: OriginDataKeys<T>) {
         return data[key];
     }
 

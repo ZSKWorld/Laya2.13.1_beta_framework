@@ -1,8 +1,13 @@
-declare interface IOffline extends IOfflineData {
-
+declare type OriginData<T> = Pick<T, NonReadonlyKeys<T> & NonMethodKeys<T>>;
+declare type OriginDataKeys<T> = NonReadonlyKeys<T> & NonMethodKeys<T>;
+declare interface IOffline {
+    /** 离线时长 */
+    offlineTime: number;
+    /** 获得的精力 */
+    vigor: number;
 }
 
-declare interface IUser extends IUserData, IDecodeObject<IUserData, IUser> {
+declare interface IUser extends IDecodeObject<IUser> {
     account: IAccount;
     base: IBase;
     /** 离线数据 */

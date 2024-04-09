@@ -4,11 +4,11 @@ import { cfgMgr } from "../config/CfgManager";
 import { BaseDataType } from "../enum/ItemEnum";
 import { CantSyncObject } from "./CantSyncObject";
 import { DecodeObject } from "./DecodeObject";
-class Citta extends CantSyncObject<ICittaData, ICitta> implements ICitta {
+class Citta extends CantSyncObject<ICitta> implements ICitta {
 
 }
 
-export class Base extends DecodeObject<IBaseData, IBase> implements IBase {
+export class Base extends DecodeObject<IBase> implements IBase {
     /**签到时间 */
     signedInTime: number = 0;
     /** 金币 */
@@ -94,7 +94,7 @@ export class Base extends DecodeObject<IBaseData, IBase> implements IBase {
         }
     }
 
-    protected override onDecode(data: IBaseData, key: keyof IBaseData) {
+    protected override onDecode(data: OriginData<IBase>, key: OriginDataKeys<IBase>) {
         switch (key) {
             case "citta": return this[key].decode(data[key]);;
             case "skill":

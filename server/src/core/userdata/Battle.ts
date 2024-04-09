@@ -2,21 +2,21 @@ import { TimeUtil } from "../../utils/TimeUtil";
 import { cfgMgr } from "../config/CfgManager";
 import { BattleType } from "../enum/BattleEnums";
 import { DecodeObject } from "./DecodeObject";
-class MapData<D, O> extends DecodeObject<D, O> {
-    protected override onDecode(data: D, key: keyof D): D[keyof D] {
-        const that = this as unknown as D;
+class MapData<T> extends DecodeObject<T> {
+    protected override onDecode(data: OriginData<T>, key: OriginDataKeys<T>) {
+        const that = this as unknown as T;
         Object.keys(data[key]).forEach(v => that[key][v] = data[key][v]);
         return that[key];
     }
 }
 
-class Level extends MapData<ILevelData, ILevel> implements ILevel {
+class Level extends MapData<ILevel> implements ILevel {
     enterBattle(id: number): void {
-        
+
     }
 }
 
-class Copy extends MapData<ICopyData, ICopy> implements ICopy {
+class Copy extends MapData<ICopy> implements ICopy {
     usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
@@ -34,7 +34,7 @@ class Copy extends MapData<ICopyData, ICopy> implements ICopy {
     }
 }
 
-class Secret extends MapData<ISecretData, ISecret> implements ISecret {
+class Secret extends MapData<ISecret> implements ISecret {
     usedMap: KeyMap<number> = {};
 
     getLastCount(id: number): number {
@@ -52,7 +52,7 @@ class Secret extends MapData<ISecretData, ISecret> implements ISecret {
     }
 }
 
-class Boss extends MapData<IBossData, IBoss> implements IBoss {
+class Boss extends MapData<IBoss> implements IBoss {
     lastChallengeTime: KeyMap<number> = {};
 
     lastCoolTime(id: number) {
@@ -71,7 +71,7 @@ class Boss extends MapData<IBossData, IBoss> implements IBoss {
     }
 }
 
-class Gather extends MapData<IGatherData, IGather> implements IGather {
+class Gather extends MapData<IGather> implements IGather {
     startTimeMap: KeyMap<number> = {};
     gatherTimeMap: KeyMap<number> = {};
 
@@ -92,7 +92,7 @@ class Gather extends MapData<IGatherData, IGather> implements IGather {
     }
 }
 
-export class Battle extends DecodeObject<IBattleData, IBattle> implements IBattle {
+export class Battle extends DecodeObject<IBattle> implements IBattle {
     /**关卡数据 */
     level = new Level();
     /**副本数据 */
@@ -145,7 +145,7 @@ export class Battle extends DecodeObject<IBattleData, IBattle> implements IBattl
         this.secret.reset();
     }
 
-    protected override onDecode(data: IBattleData, key: keyof IBattleData) {
+    protected override onDecode(data: OriginData<IBattle>, key: OriginDataKeys<IBattle>) {
         return this[key].decode(data[key] as any);
     }
 }

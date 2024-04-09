@@ -2,7 +2,7 @@ import { EquipmentPart } from "../enum/ItemEnum";
 import { DecodeObject } from "./DecodeObject";
 import { Equipment } from "./Goods";
 
-export class Body extends DecodeObject<IBodyData, IBody> implements IBody {
+export class Body extends DecodeObject<IBody> implements IBody {
     /** 武器 */
     weapon: IEquipment = null;
     /** 头盔 */
@@ -79,15 +79,26 @@ export class Body extends DecodeObject<IBodyData, IBody> implements IBody {
         }
     }
 
-    protected override onDecode(data: IBodyData, key: keyof IBodyData) {
-        const equips = ["weapon", "helmet", "necklace", "clothes", "ring", "trousers", "amulet", "shoes", "mount",
-            "hiddenWeeapon", "fashion", "magicWeapon",];
-        if (equips.includes(key)) return data[key] ? new Equipment().decode(data[key] as IEquipmentData) : null;
-        else {
-            const arr = this[key] as number[];
-            arr.length = 0;
-            arr.push(...(data[key] as number[]));
-            return arr;
+    protected override onDecode(data: OriginData<IBody>, key: OriginDataKeys<IBody>) {
+        switch (key) {
+            case "weapon":
+            case "helmet":
+            case "necklace":
+            case "clothes":
+            case "ring":
+            case "trousers":
+            case "amulet":
+            case "shoes":
+            case "mount":
+            case "hiddenWeeapon":
+            case "fashion":
+            case "magicWeapon": return data[key] ? new Equipment().decode(data[key] as IEquipment) : null;
+
+            default:
+                const arr = this[key] as number[];
+                arr.length = 0;
+                arr.push(...(data[key] as number[]));
+                return arr;
         }
     }
 }

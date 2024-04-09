@@ -1,3 +1,3 @@
-declare interface IDecodeObject<D, O> {
-    decode?(data: D): O;
+declare interface IDecodeObject<T> {
+    decode?(data: OriginData<T>): T;
 }

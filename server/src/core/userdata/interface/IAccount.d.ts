@@ -1,4 +1,4 @@
-declare interface IAccountData {
+declare interface IAccount extends IDecodeObject<IAccount> {
     uid: string;
     /** 昵称 */
     nickname: string;
@@ -12,4 +12,6 @@ declare interface IAccountData {
     lastLoginTime: number;
     /** 最后一次在线时间 */
     lastOnlineTime: number;
+    get loginNextDay(): boolean;
+    get onlineNextDay(): boolean;
 }

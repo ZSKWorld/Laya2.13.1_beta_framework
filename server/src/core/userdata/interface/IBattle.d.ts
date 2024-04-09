@@ -1,9 +1,11 @@
-declare interface ILevel extends ILevelData, IDecodeObject<ILevelData, ILevel> {
+declare interface ILevel extends IDecodeObject<ILevel> {
     /** 开始战斗 */
     enterBattle(id: number): void;
 }
 
-declare interface ICopy extends ICopyData, IDecodeObject<ICopyData, ICopy> {
+declare interface ICopy extends IDecodeObject<ICopy> {
+    /** 各个副本使用的次数 */
+    usedMap: KeyMap<number>;
     /** 获取副本剩余次数 */
     getLastCount(id: number): number;
     /** 开始战斗 */
@@ -11,7 +13,9 @@ declare interface ICopy extends ICopyData, IDecodeObject<ICopyData, ICopy> {
     reset(): void;
 }
 
-declare interface ISecret extends ISecretData, IDecodeObject<ISecretData, ISecret> {
+declare interface ISecret extends IDecodeObject<ISecret> {
+    /** 各个秘境使用的次数 */
+    usedMap: KeyMap<number>;
     /** 获取秘境剩余次数 */
     getLastCount(id: number): number;
     /** 开始战斗 */
@@ -19,7 +23,9 @@ declare interface ISecret extends ISecretData, IDecodeObject<ISecretData, ISecre
     reset(): void;
 }
 
-declare interface IBoss extends IBossData, IDecodeObject<IBossData, IBoss> {
+declare interface IBoss extends IDecodeObject<IBoss> {
+    /** 各个boss上次挑战时间 */
+    lastChallengeTime: KeyMap<number>;
     /** 剩余冷却时间 */
     lastCoolTime(id: number): number;
     /** 开始战斗 */
@@ -27,7 +33,11 @@ declare interface IBoss extends IBossData, IDecodeObject<IBossData, IBoss> {
     reset(): void;
 }
 
-declare interface IGather extends IGatherData, IDecodeObject<IGatherData, IGather> {
+declare interface IGather extends IDecodeObject<IGather> {
+    /** 各个采集点开始时间 */
+    startTimeMap: KeyMap<number>;
+    /** 各个采集点采集时长 */
+    gatherTimeMap: KeyMap<number>;
     /** 剩余采集时间 */
     remainTime(id: number): number;
     /** 开始采集 */
@@ -36,7 +46,7 @@ declare interface IGather extends IGatherData, IDecodeObject<IGatherData, IGathe
     breakOffGather(id: number): void;
 }
 
-declare interface IBattle extends IBattleData, IDecodeObject<IBattleData, IBattle> {
+declare interface IBattle extends IDecodeObject<IBattle> {
     /**关卡数据 */
     level: ILevel;
     /**副本数据 */

@@ -17,13 +17,13 @@ class Item<T> extends DecodeObject<T> {
 
 @ClassDontDispatch
 @ClassName("GoodsData")
-export class Goods extends Item<IGoodsData> implements IGoods {
+export class Goods extends Item<IGoods> implements IGoods {
     count: number;
 
 }
 
 @ClassName("EquipmentData")
-export class Equipment extends Item<IEquipmentData> implements IEquipment {
+export class Equipment extends Item<IEquipment> implements IEquipment {
     //#region 字段
     uid: string;
     star: number;

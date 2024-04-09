@@ -9,7 +9,7 @@ import { Body } from "./Body";
 import { DecodeObject } from "./DecodeObject";
 import { Friend } from "./Friend";
 
-export class User extends DecodeObject<IUserData, IUser> implements IUser {
+export class User extends DecodeObject<IUser> implements IUser {
     account: IAccount = null;
     base: IBase = null;
     offline?: IOffline = null;
@@ -52,12 +52,12 @@ export class User extends DecodeObject<IUserData, IUser> implements IUser {
         Util.saveData(this.encode());
     }
 
-    protected override onEncode(key: keyof IUserData) {
+    protected override onEncode(key: OriginDataKeys<IUser>) {
         if (key == "offline") return null;
         else return this[key].encode();
     }
 
-    protected override onDecode(data: IUserData, key: keyof IUserData) {
+    protected override onDecode(data: OriginData<IUser>, key: OriginDataKeys<IUser>) {
         switch (key) {
             case "offline": return null;
             default: return this[key].decode(data[key] as any);

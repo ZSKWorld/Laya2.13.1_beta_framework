@@ -1,11 +1,13 @@
-declare interface IGoodsData {
+/** 物品 */
+declare interface IGoods extends IDecodeObject<IGoods> {
     /** 物品id */
     id: number;
     /** 物品数量 */
     count: number;
 }
 
-declare interface IEquipmentData {
+/** 装备 */
+declare interface IEquipment extends IDecodeObject<IEquipment> {
     /** 装备uid，用于区分同id的不同装备 */
     uid: string;
     /** 装备id */
@@ -26,4 +28,9 @@ declare interface IEquipmentData {
     secondAttri: number[];
     /** 体质属性 */
     bodyAttri: number[];
+
+    /** 装备部位 => EquipmentPart */
+    get part(): number;
+
+    createAttribute(): IEquipment;
 }

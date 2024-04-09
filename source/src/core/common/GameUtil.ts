@@ -30,7 +30,7 @@ export class GameUtil {
         return richStrMgr.start(text).color(cfgMgr.Color[id].color).end();
     }
 
-    static ShowRewardsTip(title: string, rewards: IGoodsData[]) {
+    static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
         let logStr = richStrMgr.start(title);
         title && logStr.break();
         rewards.forEach(v => {
@@ -49,7 +49,7 @@ export class GameUtil {
     }
 
     /**获取多个物品字符串 */
-    static GetItemString(items: IGoodsData[], hasCount = true, color = false) {
+    static GetItemString(items: OriginData<IGoods>[], hasCount = true, color = false) {
         let str = "";
         items.forEach((v, index) => str += (color ? this.GetColorStr(cfgMgr.Item[v.id].quality, cfgMgr.Item[v.id].name) : cfgMgr.Item[v.id].name)
             + (hasCount ? `x${ v.count }` : "") + (index == items.length - 1 ? "" : "、"));
