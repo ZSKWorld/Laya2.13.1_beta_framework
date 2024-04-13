@@ -1,6 +1,10 @@
+import { GameUtil } from "../../common/GameUtil";
+import { trainLogMgr } from "../../game/TrainLogManager";
+import { richStrMgr } from "./RichStrManager";
+import { tipMgr } from "./TipManager";
 
 /** UI工具类 */
-export class UIUtility {
+export class UIUtil {
 	/**
 	 * 获取gui图集贴图
 	 * @param pkg 包名
@@ -62,6 +66,17 @@ export class UIUtility {
 		cmb.selectedIndex = index == -1 ? 0 : index;
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
 	}
+
+    static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
+        let logStr = richStrMgr.start(title);
+        title && logStr.break();
+        rewards.forEach(v => {
+            const str = GameUtil.GetItemCountStr(v.id, v.count);
+            tipMgr.showTip(`恭喜获得${ str }`);
+            logStr.combineBreak(str);
+        });
+        trainLogMgr.addLog(logStr.end());
+    }
 
 	static AnimAlphaIn(bg: fairygui.GObject, panel: fairygui.GObject) {
 		return new Promise<void>(resolve => {

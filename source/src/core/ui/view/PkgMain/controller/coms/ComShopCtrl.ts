@@ -1,6 +1,6 @@
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ViewID } from "../../../../core/ViewID";
-import { UIUtility } from "../../../../tool/UIUtility";
+import { UIUtil } from "../../../../tool/UIUtil";
 import { ComShopMsg, ComShopView } from "../../view/coms/ComShopView";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";
 import { UIGoodsInfoData } from "../UIGoodsInfoCtrl";
@@ -18,7 +18,7 @@ export interface ComShopData {
 
 }
 
-export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData>{
+export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData> {
 	private showType: SellType = SellType.Prop;
 	private items: CfgShopData[];
 
@@ -31,7 +31,7 @@ export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData>{
 		this.addMessage(ComShopMsg.OnBtnHeiShiClick, this.refreshListByType, [SellType.HeiShi]);
 		this.addMessage(ComShopMsg.OnBtnXianJieClick, this.refreshListByType, [SellType.XianJie]);
 
-		UIUtility.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
+		UIUtil.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
 
 	override onEnable() {

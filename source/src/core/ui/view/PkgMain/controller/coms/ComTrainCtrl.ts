@@ -4,7 +4,7 @@ import { GameEvent } from "../../../../../common/GameEvent";
 import { trainLogMgr } from "../../../../../game/TrainLogManager";
 import { BattleType } from "../../../../../net/enum/BattleEnums";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { UIUtility } from "../../../../tool/UIUtility";
+import { UIUtil } from "../../../../tool/UIUtil";
 import { ComTrainMsg, ComTrainView } from "../../view/coms/ComTrainView";
 import { RenderTextView } from "../../view/renders/RenderTextView";
 
@@ -12,7 +12,7 @@ export interface ComTrainData {
 
 }
 
-export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
+export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData> {
 
 	override onAdded() {
 		this.addMessage(ComTrainMsg.OnBtnLevelClick, this.enterBattle, [BattleType.Level]);
@@ -23,7 +23,7 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData>{
 		this.addMessage(ComTrainMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
 		this.addMessage(ComTrainMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
 
-		UIUtility.SetList(this.view.list_log, true, this, this.onListLogRenderer);
+		UIUtil.SetList(this.view.list_log, true, this, this.onListLogRenderer);
 	}
 
 	override onEnable() {

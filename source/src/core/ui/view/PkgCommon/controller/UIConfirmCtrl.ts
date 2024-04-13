@@ -1,5 +1,5 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { UIUtility } from "../../../tool/UIUtility";
+import { UIUtil } from "../../../tool/UIUtil";
 import { UIConfirmView } from "../view/UIConfirmView";
 
 export interface UIConfirmData {
@@ -10,7 +10,7 @@ export interface UIConfirmData {
 	onConfirm?: Laya.Handler;
 }
 
-export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData>{
+export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData> {
 
 	override onAdded() {
 
@@ -23,12 +23,12 @@ export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData>{
 
 	override onOpenAni() {
 		const { graph_bg, com_panel } = this.view;
-		return UIUtility.AnimAlphaIn(graph_bg, com_panel);
+		return UIUtil.AnimAlphaIn(graph_bg, com_panel);
 	}
 
 	override onCloseAni() {
 		const { graph_bg, com_panel } = this.view;
-		return UIUtility.AnimAlphaOut(graph_bg, com_panel);
+		return UIUtil.AnimAlphaOut(graph_bg, com_panel);
 	}
 
 }

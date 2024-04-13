@@ -1,5 +1,5 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { UIUtility } from "../../../tool/UIUtility";
+import { UIUtil } from "../../../tool/UIUtil";
 import { UIGoodsInfoView } from "../view/UIGoodsInfoView";
 import { ComGoodsInfoCtrl } from "./coms/ComGoodsInfoCtrl";
 
@@ -8,7 +8,7 @@ export interface UIGoodsInfoData {
 	buy?: boolean;
 }
 
-export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoData>{
+export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoData> {
 	private _panelCtrl: ComGoodsInfoCtrl;
 
 	override onAdded() {
@@ -25,12 +25,12 @@ export class UIGoodsInfoCtrl extends BaseViewCtrl<UIGoodsInfoView, UIGoodsInfoDa
 
 	override onOpenAni() {
 		const { graph_bg, com_panel } = this.view;
-		return UIUtility.AnimAlphaIn(graph_bg, com_panel);
+		return UIUtil.AnimAlphaIn(graph_bg, com_panel);
 	}
 
 	override onCloseAni() {
 		const { graph_bg, com_panel } = this.view;
-		return UIUtility.AnimAlphaOut(graph_bg, com_panel);
+		return UIUtil.AnimAlphaOut(graph_bg, com_panel);
 	}
 
 }

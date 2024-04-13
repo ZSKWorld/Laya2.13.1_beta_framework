@@ -3,7 +3,7 @@ import { sceneMgr } from "../../../../../scene/SceneManager";
 import { BattleType } from "../../../../net/enum/BattleEnums";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { UIUtility } from "../../../tool/UIUtility";
+import { UIUtil } from "../../../tool/UIUtil";
 import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleView";
 import { RenderChooseBattleView } from "../view/renders/RenderChooseBattleView";
 import { RenderChooseBattleCtrl } from "./renders/RenderChooseBattleCtrl";
@@ -14,7 +14,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	override onAdded() {
 		this.addMessage(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
 
-		UIUtility.SetList(this.view.list_battle, true, this, this.onListBattleRender);
+		UIUtil.SetList(this.view.list_battle, true, this, this.onListBattleRender);
 	}
 
 	override onEnable() {

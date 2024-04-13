@@ -2,7 +2,7 @@ import { ItemBagType } from "../../../../../net/enum/ItemEnum";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ViewID } from "../../../../core/ViewID";
-import { UIUtility } from "../../../../tool/UIUtility";
+import { UIUtil } from "../../../../tool/UIUtil";
 import { ComGoodsMsg, ComGoodsView } from "../../view/coms/ComGoodsView";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";
 import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
@@ -25,7 +25,7 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData> {
 		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.refreshListByType, [ItemBagType.Book]);
 		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.refreshListByType, [ItemBagType.Other]);
 
-		UIUtility.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
+		UIUtil.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
 
 	override onEnable() {

@@ -1,16 +1,7 @@
-import { trainLogMgr } from "../game/TrainLogManager";
 import { richStrMgr } from "../ui/tool/RichStrManager";
-import { tipMgr } from "../ui/tool/TipManager";
 
 
 export class GameUtil {
-    static GetTimeStamp() {
-        return Date.now();
-    }
-
-    static GetSecondStamp() {
-        return Math.floor(Date.now() / 1000);
-    }
 
     static GenerateUUID() {
         let d = new Date().getTime();
@@ -28,17 +19,6 @@ export class GameUtil {
 
     static GetColorStr(id: number, text: string) {
         return richStrMgr.start(text).color(cfgMgr.Color[id].color).end();
-    }
-
-    static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
-        let logStr = richStrMgr.start(title);
-        title && logStr.break();
-        rewards.forEach(v => {
-            const str = GameUtil.GetItemCountStr(v.id, v.count);
-            tipMgr.showTip(`恭喜获得${ str }`);
-            logStr.combineBreak(str);
-        });
-        trainLogMgr.addLog(logStr.end());
     }
 
     /** 获取物品数量字符串 */

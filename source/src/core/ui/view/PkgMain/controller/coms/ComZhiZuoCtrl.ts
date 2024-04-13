@@ -1,14 +1,14 @@
 import { GameUtil } from "../../../../../common/GameUtil";
 import { BagService } from "../../../../../net/Services";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { UIUtility } from "../../../../tool/UIUtility";
+import { UIUtil } from "../../../../tool/UIUtil";
 import { ComZhiZuoMsg, ComZhiZuoView } from "../../view/coms/ComZhiZuoView";
 
 export interface ComZhiZuoData {
 
 }
 
-export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
+export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData> {
 
 	override onAdded() {
 		this.addMessage(ComZhiZuoMsg.OnBtnJpylClick, this.onBtnJpylClick);
@@ -24,7 +24,7 @@ export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData>{
 		const fjzbArr: string[] = [];//this._fjzbArr.map(v => GetColorStr(v, `${v}星装备`));
 		for (let i = 1, max = +cfgMgr.Const[1010].value; i <= max; i++)
 			fjzbArr.push(GameUtil.GetColorStr(i, `${ i }星装备`));
-		UIUtility.SetCombox(this.view.cmb_fjzbdj, fjzbArr, fjzbArr, this, null, fjzbArr[0]);
+		UIUtil.SetCombox(this.view.cmb_fjzbdj, fjzbArr, fjzbArr, this, null, fjzbArr[0]);
 	}
 
 	private onBtnJpylClick() {
