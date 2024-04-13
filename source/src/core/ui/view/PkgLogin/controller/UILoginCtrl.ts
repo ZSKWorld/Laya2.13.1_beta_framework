@@ -1,7 +1,7 @@
-import { GameEvent } from "../../../../common/GameEvent";
 import { localData } from "../../../../game/localData/LocalData";
 import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { AccountService } from "../../../../net/Services";
+import { SocketEvent } from "../../../../net/WebSocket";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { tipMgr } from "../../../tool/TipManager";
 import { UILoginEvent } from "../event/UILoginEvent";
@@ -58,7 +58,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
         }
     }
 
-    @RegisterEvent(GameEvent.SocketClosed)
+    @RegisterEvent(SocketEvent.Close)
     @ViewMessage(UILoginEvent.OnLoginFailed)
     private onBtnCancelClick() {
         this.view.refreshStatus(UILoginStatus.Login);

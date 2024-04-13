@@ -17,6 +17,7 @@ import { ErrorCode } from "./enum/ErrorCode";
 import { MessageType } from "./enum/MessageType";
 import { User } from "./userdata/User";
 import { NotifyHeart } from "./controller/notify/heart/NotifyHeart";
+import { Color, Logger } from "../utils/Logger";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -49,6 +50,7 @@ export class Connection {
     setConnection(connection: websocket.connection) {
         if (!connection) return;
         if (this._connection) return;
+        Logger.log("set connection " + this._logined);
         this._connection = connection;
         if (!this._listener) {
             this._listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
@@ -109,13 +111,12 @@ export class Connection {
     }
 
     clear() {
+        Logger.log("connection clear", Color.red);
         clearInterval(this._intervalId);
         this._intervalId = null;
         this._logined = false;
-        if (this._connection) {
-            this._connection.off(ConnectionEvent.Close, this._onClose);
-            this._connection.off(ConnectionEvent.Message, this._onMessage);
-        }
+        this._connection?.off(ConnectionEvent.Close, this._onClose);
+        this._connection?.off(ConnectionEvent.Message, this._onMessage);
 
         this._connection = null;
 
@@ -123,11 +124,15 @@ export class Connection {
         Pool.recover(PoolKey.EventDispatcher, this._listener);
         this._listener = null;
 
-        if (this._cmds) this._cmds.forEach(v => v.recover());
-        this._cmds = null;
+        if (this._cmds) {
+            this._cmds.forEach(v => v.recover());
+            this._cmds.length = 0;
+        }
 
-        if (this._notifies) this._notifies.forEach(v => v.recover());
-        this._cmds = null;
+        if (this._notifies) {
+            this._notifies.forEach(v => v.recover());
+            this._notifies.length = 0;
+        }
 
         this._user?.save();
         this._user = null;
@@ -151,13 +156,12 @@ export class Connection {
     }
 
     private onConnectionClose() {
-        if (this._connection) {
-            this._connection.off(ConnectionEvent.Close, this._onClose);
-            this._connection.off(ConnectionEvent.Message, this._onMessage);
-        }
+        Logger.log("connection close", Color.red);
+        this._connection?.off(ConnectionEvent.Close, this._onClose);
+        this._connection?.off(ConnectionEvent.Message, this._onMessage);
         this._connection = null;
-        this._cmds && this._cmds.forEach(v => v.close());
-        this._notifies && this._notifies.forEach(v => v.close());
+        this._cmds?.forEach(v => v.close());
+        this._notifies?.forEach(v => v.close());
         this._user?.save();
         connectionMgr.connectionClosed(this._token, this);
     }

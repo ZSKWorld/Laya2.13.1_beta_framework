@@ -1,7 +1,6 @@
-import { GameEvent } from "../../core/common/GameEvent";
 import { ResPath } from "../../core/common/ResPath";
 import { CfgManager } from "../../core/config/CfgManager";
-import { websocket } from "../../core/net/WebSocket";
+import { SocketEvent, websocket } from "../../core/net/WebSocket";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { layerMgr } from "../../core/ui/core/LayerManager";
 import { sceneViewRegister } from "../../core/ui/core/SceneViewRegister";
@@ -82,14 +81,15 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 		});
 	}
 
-	@RegisterEvent(GameEvent.SocketOpened, false, [true])
-	@RegisterEvent(GameEvent.SocketClosed, false, [false])
+	@RegisterEvent(SocketEvent.ConnectSuccess, false, [true])
+	@RegisterEvent(SocketEvent.ReconnectSuccess, false, [true])
+	@RegisterEvent(SocketEvent.Close, false, [false])
 	private socketConnectChanged(open: boolean) {
 		if (open) uiMgr.removeView(ViewID.UIWaitingView);
 		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
 	}
 
-	@RegisterEvent(GameEvent.NetMsgError)
+	@RegisterEvent(SocketEvent.MsgError)
 	private netMsgError(msg: IUserOutput) {
 		tipMgr.showTip(cfgMgr.Error[msg.error].text);
 		if (msg.error == ErrorCode.NOT_LOGIN)

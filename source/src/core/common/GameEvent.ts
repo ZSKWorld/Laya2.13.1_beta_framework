@@ -7,15 +7,6 @@ export const enum GameEvent {
 	RedDotCompAwake = "RedDotCompAwake",
 	/** 红点组件销毁 */
 	RedDotCompDestroy = "RedDotCompDestroy",
-	/**
-	 * 网络消息错误
-	 * @param msg {@link IUserOutput} 错误消息
-	 */
-	NetMsgError = "NetMsgError",
-	/** socket连接 */
-	SocketOpened = "SocketOpened",
-	/** socket关闭 */
-	SocketClosed = "SocketClosed",
 
 	/** 刷新日志显示 */
 	RefreshExperienceLog = "RefreshExperienceLog",
