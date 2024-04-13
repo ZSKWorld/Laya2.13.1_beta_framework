@@ -4,51 +4,51 @@ import * as path from "path";
 
 class CfgManager {
 	/** 关卡 */
-	readonly Level: CfgLevel;
+	readonly Level: CfgData<CfgLevel>;
 	/** 副本 */
-	readonly Copy: CfgCopy;
+	readonly Copy: CfgData<CfgCopy>;
 	/** 秘境 */
-	readonly Secret: CfgSecret;
+	readonly Secret: CfgData<CfgSecret>;
 	/** Boss */
-	readonly Boss: CfgBoss;
+	readonly Boss: CfgData<CfgBoss>;
 	/** 采集 */
-	readonly Gather: CfgGather;
+	readonly Gather: CfgData<CfgGather>;
 	/** 怪物 */
-	readonly Enemy: CfgEnemy;
+	readonly Enemy: CfgData<CfgEnemy>;
 	/** 装备 */
-	readonly Equipment: CfgEquipment;
+	readonly Equipment: CfgData<CfgEquipment>;
 	/** 装备加成 */
-	readonly EquipmentAddition: CfgEquipmentAddition;
+	readonly EquipmentAddition: CfgData<CfgEquipmentAddition>;
 	/** 宝石 */
-	readonly Gem: CfgGem;
+	readonly Gem: CfgData<CfgGem>;
 	/** 道具 */
-	readonly Props: CfgProps;
+	readonly Props: CfgData<CfgProps>;
 	/** 材料 */
-	readonly Material: CfgMaterial;
+	readonly Material: CfgData<CfgMaterial>;
 	/** 食物 */
-	readonly Food: CfgFood;
+	readonly Food: CfgData<CfgFood>;
 	/** 技能书 */
-	readonly SkillBook: CfgSkillBook;
+	readonly SkillBook: CfgData<CfgSkillBook>;
 	/** 心法书 */
-	readonly XinFaBook: CfgXinFaBook;
+	readonly XinFaBook: CfgData<CfgXinFaBook>;
 	/** 固定文本 */
-	readonly Lang: CfgLang;
+	readonly Lang: CfgData<CfgLang>;
 	/** 物品 */
-	readonly Item: CfgItem;
+	readonly Item: CfgData<CfgItem>;
 	/** 境界 */
-	readonly JingJie: CfgJingJie;
+	readonly JingJie: CfgData<CfgJingJie>;
 	/** 常量 */
-	readonly Const: CfgConst;
+	readonly Const: CfgData<CfgConst>;
 	/** 称号 */
-	readonly Title: CfgTitle;
+	readonly Title: CfgData<CfgTitle>;
 	/** 门派 */
-	readonly Sect: CfgSect;
+	readonly Sect: CfgData<CfgSect>;
 	/** 商店 */
-	readonly Shop: CfgShop;
+	readonly Shop: CfgData<CfgShop>;
 	/** 颜色 */
-	readonly Color: CfgColor;
+	readonly Color: CfgData<CfgColor>;
 	/** 错误码 */
-	readonly Error: CfgError;
+	readonly Error: CfgData<CfgError>;
 
     load() {
 		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/config/Config.json")).toString());
@@ -83,17 +83,21 @@ class CfgManager {
 		});
 	}
 
-	private cfgExtension(cfg: ICfgExtension<any>) {
-		cfg[ "$data" ] = Object.keys(cfg).map(v => cfg[ v ]);
-		cfg.forEach = function (callbackfn: (value: any, index: number, array: any[]) => void) {
-			this.$data.forEach(callbackfn);
+	private cfgExtension(cfg: any) {
+		Object.defineProperty(cfg, "$data", {
+			value: Object.keys(cfg).map(v => cfg[v]),
+			enumerable: false,
+		});
+		const defineFun = (funName: string) => {
+			Object.defineProperty(cfg, funName, {
+				value: function (callbackfn: Function) { return this.$data[funName](callbackfn); },
+				enumerable: false,
+				configurable: false,
+			});
 		};
-		cfg.filter = function (predicate: (value: any, index: number, array: any[]) => unknown) {
-			return this.$data.filter(predicate);
-		};
-		cfg.find = function (predicate: (value: any, index: number, obj: any[]) => unknown) {
-			return this.$data.find(predicate);
-		};
+		[
+			"forEach", "filter", "find", "every", "findIndex", "includes", "indexOf", "lastIndexOf", "map", "reduce", "slice", "some",
+		].forEach(v => defineFun(v));
 	}
 }
 export const cfgMgr = new CfgManager();

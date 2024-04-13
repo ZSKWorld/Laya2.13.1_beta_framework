@@ -8,5 +8,6 @@ type MethodKeys<T> = { [P in keyof T]: T[P] extends Function ? P : never }[keyof
 /** 获取对象上所有非方法名 */
 type NonMethodKeys<T> = { [P in keyof T]: T[P] extends Function ? never : P }[keyof T];
 
+declare type ReadonlyAll<T> = { readonly [P in keyof T]: T[P] extends Function ? T[P] : ReadonlyAll<T[P]>; };
 declare type Class<T> = new (...args: any) => T;
 declare interface KeyMap<T> { [ key: string ]: T; }
