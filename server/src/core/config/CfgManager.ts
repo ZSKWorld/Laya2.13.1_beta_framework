@@ -4,51 +4,51 @@ import * as path from "path";
 
 class CfgManager {
 	/** 关卡 */
-	readonly Level: CfgData<CfgLevel>;
+	readonly Level: CfgLevel & CfgExtension<CfgData<CfgLevel>>;
 	/** 副本 */
-	readonly Copy: CfgData<CfgCopy>;
+	readonly Copy: CfgCopy & CfgExtension<CfgData<CfgCopy>>;
 	/** 秘境 */
-	readonly Secret: CfgData<CfgSecret>;
+	readonly Secret: CfgSecret & CfgExtension<CfgData<CfgSecret>>;
 	/** Boss */
-	readonly Boss: CfgData<CfgBoss>;
+	readonly Boss: CfgBoss & CfgExtension<CfgData<CfgBoss>>;
 	/** 采集 */
-	readonly Gather: CfgData<CfgGather>;
+	readonly Gather: CfgGather & CfgExtension<CfgData<CfgGather>>;
 	/** 怪物 */
-	readonly Enemy: CfgData<CfgEnemy>;
+	readonly Enemy: CfgEnemy & CfgExtension<CfgData<CfgEnemy>>;
 	/** 装备 */
-	readonly Equipment: CfgData<CfgEquipment>;
+	readonly Equipment: CfgEquipment & CfgExtension<CfgData<CfgEquipment>>;
 	/** 装备加成 */
-	readonly EquipmentAddition: CfgData<CfgEquipmentAddition>;
+	readonly EquipmentAddition: CfgEquipmentAddition & CfgExtension<CfgData<CfgEquipmentAddition>>;
 	/** 宝石 */
-	readonly Gem: CfgData<CfgGem>;
+	readonly Gem: CfgGem & CfgExtension<CfgData<CfgGem>>;
 	/** 道具 */
-	readonly Props: CfgData<CfgProps>;
+	readonly Props: CfgProps & CfgExtension<CfgData<CfgProps>>;
 	/** 材料 */
-	readonly Material: CfgData<CfgMaterial>;
+	readonly Material: CfgMaterial & CfgExtension<CfgData<CfgMaterial>>;
 	/** 食物 */
-	readonly Food: CfgData<CfgFood>;
+	readonly Food: CfgFood & CfgExtension<CfgData<CfgFood>>;
 	/** 技能书 */
-	readonly SkillBook: CfgData<CfgSkillBook>;
+	readonly SkillBook: CfgSkillBook & CfgExtension<CfgData<CfgSkillBook>>;
 	/** 心法书 */
-	readonly XinFaBook: CfgData<CfgXinFaBook>;
+	readonly XinFaBook: CfgXinFaBook & CfgExtension<CfgData<CfgXinFaBook>>;
 	/** 固定文本 */
-	readonly Lang: CfgData<CfgLang>;
+	readonly Lang: CfgLang & CfgExtension<CfgData<CfgLang>>;
 	/** 物品 */
-	readonly Item: CfgData<CfgItem>;
+	readonly Item: CfgItem & CfgExtension<CfgData<CfgItem>>;
 	/** 境界 */
-	readonly JingJie: CfgData<CfgJingJie>;
+	readonly JingJie: CfgJingJie & CfgExtension<CfgData<CfgJingJie>>;
 	/** 常量 */
-	readonly Const: CfgData<CfgConst>;
+	readonly Const: CfgConst & CfgExtension<CfgData<CfgConst>>;
 	/** 称号 */
-	readonly Title: CfgData<CfgTitle>;
+	readonly Title: CfgTitle & CfgExtension<CfgData<CfgTitle>>;
 	/** 门派 */
-	readonly Sect: CfgData<CfgSect>;
+	readonly Sect: CfgSect & CfgExtension<CfgData<CfgSect>>;
 	/** 商店 */
-	readonly Shop: CfgData<CfgShop>;
+	readonly Shop: CfgShop & CfgExtension<CfgData<CfgShop>>;
 	/** 颜色 */
-	readonly Color: CfgData<CfgColor>;
+	readonly Color: CfgColor & CfgExtension<CfgData<CfgColor>>;
 	/** 错误码 */
-	readonly Error: CfgData<CfgError>;
+	readonly Error: CfgError & CfgExtension<CfgData<CfgError>>;
 
     load() {
 		let cfgData = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../res/config/Config.json")).toString());
