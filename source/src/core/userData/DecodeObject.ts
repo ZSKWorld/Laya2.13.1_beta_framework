@@ -29,7 +29,7 @@ export abstract class DecodeObject<T> extends Observer implements IDecodeObject<
     protected afterDecode() { }
 
     private static dispatchEvent() {
-        this.dispatchArr.forEach(this.dispatch, this);
+        this.dispatchArr.forEach(v => this.dispatch(v));
         this.dispatchArr.clear();
     }
 }
