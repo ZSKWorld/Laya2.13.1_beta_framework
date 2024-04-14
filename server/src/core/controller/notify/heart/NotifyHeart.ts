@@ -10,7 +10,7 @@ export class NotifyHeart extends NotifyController {
         if (this._delta >= 10000) {
             this._delta = 0;
             if (this.connection.logined) {
-                this.notify<INotifyHeart>(NetNotify.NotifyHeart, { timeStamp: TimeUtil.getTimeStamp() });
+                this.notify<INotifyHeart>(NetNotify.NotifyHeart, { timeStamp: TimeUtil.milliSeconds() });
             }
         }
     }

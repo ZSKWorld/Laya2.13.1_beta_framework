@@ -47,7 +47,7 @@ export class Base extends DecodeObject<IBase> implements IBase {
     usingSkill: number[] = [5000, 5000, 5000, 5000, 5000];
 
     get signedIn() {
-        return TimeUtil.checkNextDay(this.signedInTime, TimeUtil.getTimeStamp());
+        return TimeUtil.checkNextDay(this.signedInTime, TimeUtil.milliSeconds());
     }
 
     get maxVigro(): number {

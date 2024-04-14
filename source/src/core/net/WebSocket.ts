@@ -46,35 +46,35 @@ class WebSocket extends Observer {
         const lastState = this._state;
         if (v == lastState) return;
         this._state = v;
-        let eventName = "";
+        let eventName: string[] = [];
         switch (lastState) {
             case SocketState.Disconnect:
                 switch (v) {
-                    case SocketState.Connecting: eventName = SocketEvent.Connecting; break;
-                    case SocketState.Reconnecting: eventName = SocketEvent.Reconnecting; break;
+                    case SocketState.Connecting: eventName = [SocketEvent.Connecting]; break;
+                    case SocketState.Reconnecting: eventName = [SocketEvent.Reconnecting]; break;
                     case SocketState.Connected: Logger.Error("状态错误 Disconnect => Connected"); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Connecting:
                 switch (v) {
-                    case SocketState.Disconnect: eventName = SocketEvent.ConnectFail; break;
+                    case SocketState.Disconnect: eventName = [SocketEvent.ConnectFail, SocketEvent.Close]; break;
                     case SocketState.Reconnecting: Logger.Error("状态错误 Connecting => Reconnecting"); break;
-                    case SocketState.Connected: eventName = SocketEvent.ConnectSuccess; break;
+                    case SocketState.Connected: eventName = [SocketEvent.ConnectSuccess]; break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Reconnecting:
                 switch (v) {
-                    case SocketState.Disconnect: eventName = SocketEvent.ReconnectFail; break;
+                    case SocketState.Disconnect: eventName = [SocketEvent.ReconnectFail, SocketEvent.Close]; break;
                     case SocketState.Connecting: Logger.Error("状态错误 Reconnecting => Connecting"); break;
-                    case SocketState.Connected: eventName = SocketEvent.ReconnectSuccess; break;
+                    case SocketState.Connected: eventName = [SocketEvent.ReconnectSuccess]; break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Connected:
                 switch (v) {
-                    case SocketState.Disconnect: eventName = SocketEvent.Close; break;
+                    case SocketState.Disconnect: eventName = [SocketEvent.Close]; break;
                     case SocketState.Connecting: Logger.Error("状态错误 Connected => Connecting"); break;
                     case SocketState.Reconnecting: Logger.Error("状态错误 Connected => Reconnecting"); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
@@ -82,7 +82,7 @@ class WebSocket extends Observer {
                 break;
             default: Logger.Error("未知的状态", lastState, v); break;
         }
-        eventName && this.dispatch(eventName);
+        eventName.forEach(v => this.dispatch(v));
     }
     get connected() { return this.state == SocketState.Connected; }
 

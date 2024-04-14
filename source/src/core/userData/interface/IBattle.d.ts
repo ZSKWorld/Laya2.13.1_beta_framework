@@ -33,6 +33,8 @@ declare interface IGather extends IDecodeObject<IGather> {
 }
 
 declare interface IBattle extends IDecodeObject<IBattle> {
+    /** 战斗速度 */
+    battleSpeed: number;
     /**关卡数据 */
     level: ILevel;
     /**副本数据 */

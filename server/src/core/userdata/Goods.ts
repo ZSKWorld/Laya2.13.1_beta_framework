@@ -1,5 +1,5 @@
+import { GameUtil } from "../../utils/GameUtil";
 import { MathUtil } from "../../utils/MathUtil";
-import { Util } from "../../utils/Util";
 import { cfgMgr } from "../config/CfgManager";
 import { EquipmentPart } from "../enum/ItemEnum";
 import { CantSyncObject } from "./CantSyncObject";
@@ -17,7 +17,7 @@ export class Goods extends CantSyncObject<IGoods> implements IGoods {
 
 export class Equipment extends CantSyncObject<IEquipment> implements IEquipment {
     id: number = 0;
-    uid: string = Util.CreateUID();
+    uid: string = GameUtil.CreateUID();
     star: number = 0;
     level: number = 0;
     mingKe: number = 0;
@@ -27,7 +27,7 @@ export class Equipment extends CantSyncObject<IEquipment> implements IEquipment 
     secondAttri: number[] = [];
     bodyAttri: number[] = [];
     get part(): EquipmentPart {
-        return cfgMgr.Equipment[ this.id ].part;
+        return cfgMgr.Equipment[this.id].part;
     }
 
     constructor(id: number = 0) {
@@ -36,12 +36,12 @@ export class Equipment extends CantSyncObject<IEquipment> implements IEquipment 
     }
 
     createAttribute(): IEquipment {
-        const { main, wuXing, second, body } = cfgMgr.EquipmentAddition[ this.part ];
-        this.star = MathUtil.RandomInt(1, +cfgMgr.Const[ 1010 ].value);
-        main && Equipment.randomAttribute([ ...main ], this.mainAttri, false).sort(Equipment.sortFunc);
-        wuXing && Equipment.randomAttribute([ ...wuXing ], this.wuXingAttri, true).sort(Equipment.sortFunc);
-        second && Equipment.randomAttribute([ ...second ], this.secondAttri, true).sort(Equipment.sortFunc);
-        body && Equipment.randomAttribute([ ...body ], this.bodyAttri, true).sort(Equipment.sortFunc);
+        const { main, wuXing, second, body } = cfgMgr.EquipmentAddition[this.part];
+        this.star = MathUtil.RandomInt(1, +cfgMgr.Const[1010].value);
+        main && Equipment.randomAttribute([...main], this.mainAttri, false).sort(Equipment.sortFunc);
+        wuXing && Equipment.randomAttribute([...wuXing], this.wuXingAttri, true).sort(Equipment.sortFunc);
+        second && Equipment.randomAttribute([...second], this.secondAttri, true).sort(Equipment.sortFunc);
+        body && Equipment.randomAttribute([...body], this.bodyAttri, true).sort(Equipment.sortFunc);
         return this;
     }
 

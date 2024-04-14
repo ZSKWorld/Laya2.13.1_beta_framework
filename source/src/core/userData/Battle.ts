@@ -1,4 +1,3 @@
-import { GameUtil } from "../common/GameUtil";
 import { TimeUtil } from "../common/TimeUtil";
 import { ClassName, DecodeObject } from "./DecodeObject";
 
@@ -56,6 +55,7 @@ class Gather extends MapData<IGather> implements IGather {
 
 @ClassName("Battle")
 export class Battle extends DecodeObject<IBattle> implements IBattle {
+    battleSpeed: number = 1;
     level = new Level();
     copy = new Copy();
     secret = new Secret();
@@ -63,7 +63,10 @@ export class Battle extends DecodeObject<IBattle> implements IBattle {
     gather = new Gather();
 
     protected override onDecode(data: OriginData<IBattle>, key: OriginDataKeys<IBattle>) {
-        return this[key].decode(data[key] as any);
+        switch (key) {
+            case "battleSpeed": return data[key];
+            default: return this[key].decode(data[key] as any);
+        }
     }
 
 }

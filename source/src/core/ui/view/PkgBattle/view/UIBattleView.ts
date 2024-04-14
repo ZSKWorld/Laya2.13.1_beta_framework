@@ -1,4 +1,6 @@
+import { GameUtil } from "../../../../common/GameUtil";
 import { ResPath } from "../../../../common/ResPath";
+import { BattleType } from "../../../../net/enum/BattleEnums";
 import UIBattle from "../../../ui/PkgBattle/UIBattle";
 
 export const enum UIBattleMsg {
@@ -15,6 +17,12 @@ export class UIBattleView extends ExtensionClass<IView, UIBattle>(UIBattle) {
 		btn_offline.onClick(this, this.sendMessage, [UIBattleMsg.OnBtnOfflineClick]);
 		btn_enemyInfo.onClick(this, this.sendMessage, [UIBattleMsg.OnBtnEnemyInfoClick]);
 		btn_quitBattle.onClick(this, this.sendMessage, [UIBattleMsg.OnBtnQuitBattleClick]);
+	}
+
+	refreshContent(data: BattleCfgData) {
+		const { txt_info } = this;
+		const dropStr = GameUtil.GetItemString(data.randomDrapOut ? data.baseDrapOut.concat(data.randomDrapOut) : data.baseDrapOut, false);
+		txt_info.text = `消耗：${ data.vigorCost }精力<br>掉落：${ dropStr }${ data.desc }`;
 	}
 
 }

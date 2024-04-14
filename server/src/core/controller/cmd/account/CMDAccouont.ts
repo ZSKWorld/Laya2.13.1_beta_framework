@@ -1,4 +1,4 @@
-import { Util } from "../../../../utils/Util";
+import { UserUtil } from "../../../../utils/UserUtil";
 import { User } from "../../../userdata/User";
 import { CMDController, Command } from "../CMDController";
 import { AccountChecker } from "./AccountChecker";
@@ -15,7 +15,7 @@ export class CMDAccouont extends CMDController implements IAccountCtrl {
             syncInfo.offline = this.user.getOffline();
             this.response<ILoginOutput>(data.cmd, { syncInfo });
         } else {
-            this.connection.userLogin(Util.getData(data.account));
+            this.connection.userLogin(UserUtil.getData(data.account));
             this.response<ILoginOutput>(data.cmd, { syncInfo: { offline: this.user.getOffline() } });
         }
     }
@@ -38,7 +38,7 @@ export class CMDAccouont extends CMDController implements IAccountCtrl {
     clearAccount(data: IClearAccountInput): void {
         const { account, password, nickname } = this.user.account;
         new User(account, password, nickname).save();
-        const newData = Util.getData(account);
+        const newData = UserUtil.getData(account);
         this.connection.user.decode(newData);
         this.response<IClearAccountOutput>(data.cmd);
     }

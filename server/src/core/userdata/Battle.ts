@@ -59,11 +59,11 @@ class Boss extends MapData<IBoss> implements IBoss {
         const lastTime = this.lastChallengeTime[id];
         if (!lastTime) return 0;
         const cfg = cfgMgr.Boss[id];
-        return Math.max(cfg.coolTime - (TimeUtil.getSecondStamp() - lastTime), 0);
+        return Math.max(cfg.coolTime - (TimeUtil.seconds() - lastTime), 0);
     }
 
     enterBattle(id: number) {
-        this.lastChallengeTime[id] = TimeUtil.getSecondStamp();
+        this.lastChallengeTime[id] = TimeUtil.seconds();
     }
 
     reset(): void {
@@ -78,11 +78,11 @@ class Gather extends MapData<IGather> implements IGather {
     remainTime(id: number) {
         const startTime = this.startTimeMap[id];
         if (!startTime) return 0;
-        return Math.max(this.gatherTimeMap[id] - (TimeUtil.getSecondStamp() - startTime), 0);
+        return Math.max(this.gatherTimeMap[id] - (TimeUtil.seconds() - startTime), 0);
     }
 
     startGather(id: number, gatherTime: number) {
-        this.startTimeMap[id] = TimeUtil.getSecondStamp();
+        this.startTimeMap[id] = TimeUtil.seconds();
         this.gatherTimeMap[id] = gatherTime;
     }
 
@@ -93,15 +93,11 @@ class Gather extends MapData<IGather> implements IGather {
 }
 
 export class Battle extends DecodeObject<IBattle> implements IBattle {
-    /**关卡数据 */
+    battleSpeed: number = 1;
     level = new Level();
-    /**副本数据 */
     copy = new Copy();
-    /**秘境数据 */
     secret = new Secret();
-    /**boss数据 */
     boss = new Boss();
-    /**采集数据 */
     gather = new Gather();
 
     getConfig(type: BattleType, id: number) {
@@ -146,6 +142,9 @@ export class Battle extends DecodeObject<IBattle> implements IBattle {
     }
 
     protected override onDecode(data: OriginData<IBattle>, key: OriginDataKeys<IBattle>) {
-        return this[key].decode(data[key] as any);
+        switch (key) {
+            case "battleSpeed": return data[key];
+            default: return this[key].decode(data[key] as any);
+        }
     }
 }

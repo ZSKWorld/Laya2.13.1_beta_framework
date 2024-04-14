@@ -3,6 +3,7 @@ import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
 import { cfgMgr } from "./core/config/CfgManager";
+import { Timer } from "./libs/timer/Timer";
 import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");
 cfgMgr.load();
@@ -39,6 +40,10 @@ wsServer.on("request", (request: websocket.request) => {
 wsServer.on("close", (connection, reson, desc) => {
     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 断开连接，剩余连接数量：${ wsServer.connections.length }。${ reson }-${ desc }`, Color.red);
 });
+
+setInterval(() => {
+    Timer.timer["_update"]();
+}, 1000 / 60);
 
 export function broadcastAll(msg: IUserInput) {
     wsServer.broadcastUTF(JSON.stringify(msg));

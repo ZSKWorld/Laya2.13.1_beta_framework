@@ -1,5 +1,5 @@
 import { TimeUtil } from "../../utils/TimeUtil";
-import { Util } from "../../utils/Util";
+import { UserUtil } from "../../utils/UserUtil";
 import { BaseDataType } from "../enum/ItemEnum";
 import { Account } from "./Account";
 import { Bag } from "./Bag";
@@ -18,7 +18,7 @@ export class User extends DecodeObject<IUser> implements IUser {
     bag: IBag = null;
     battle: IBattle = null;
 
-    constructor(account: string, password: string, nickname: string) {
+    constructor(account: string = "", password: string = "", nickname: string = "") {
         super();
         this.account = new Account(account, password, nickname);
         this.base = new Base();
@@ -30,7 +30,7 @@ export class User extends DecodeObject<IUser> implements IUser {
 
     getOffline() {
         if (!this.account.lastOnlineTime) return null;
-        const timeOffset = ((TimeUtil.getTimeStamp() - this.account.lastOnlineTime) / 1000) << 0;
+        const timeOffset = ((TimeUtil.milliSeconds() - this.account.lastOnlineTime) / 1000) << 0;
         if (timeOffset <= 5) return null;
         else {
             const { base } = this;
@@ -49,7 +49,7 @@ export class User extends DecodeObject<IUser> implements IUser {
     }
 
     save() {
-        Util.saveData(this.encode());
+        UserUtil.saveData(this.encode());
     }
 
     protected override onEncode(key: OriginDataKeys<IUser>) {

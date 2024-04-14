@@ -1,4 +1,5 @@
 import { Pool, PoolKey } from "../libs/pool/Pool";
+import { TimeUtil } from "../utils/TimeUtil";
 import { Connection } from "./Connection";
 class ClosedConnection {
     time: number;
@@ -24,7 +25,7 @@ class ConnectionMgr {
     connectionClosed(token: string, connection: Connection) {
         if (this.closedConnection[ token ]) return;
         const closedCon = Pool.get(PoolKey.ClosedConnection, ClosedConnection);
-        closedCon.time = Date.now();
+        closedCon.time = TimeUtil.milliSeconds();
         closedCon.connection = connection;
         this.closedConnection[ token ] = closedCon;
         delete this.connectionUidMap[ token ];
@@ -44,7 +45,7 @@ class ConnectionMgr {
     }
 
     private clearClosedConnection() {
-        const time = Date.now();
+        const time = TimeUtil.milliSeconds();
         const { closedConnection, ClosedConExistTime } = this;
         Object.keys(closedConnection).forEach(v => {
             const con = closedConnection[ v ];

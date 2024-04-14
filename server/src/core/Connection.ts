@@ -1,8 +1,9 @@
 import * as websocket from "websocket";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
 import { Pool, PoolKey } from "../libs/pool/Pool";
+import { Timer } from "../libs/timer/Timer";
+import { Color, Logger } from "../utils/Logger";
 import { ProxyMgr } from "../utils/ProxyMgr";
-import { TimeUtil } from "../utils/TimeUtil";
 import { connectionMgr } from "./ConnectionMgr";
 import { CMDController } from "./controller/cmd/CMDController";
 import { CMDAccouont } from "./controller/cmd/account/CMDAccouont";
@@ -13,11 +14,11 @@ import { CMDShop } from "./controller/cmd/shop/CMDShop";
 import { NotifyController } from "./controller/notify/NotifyController";
 import { NotifyAccount } from "./controller/notify/account/NotifyAccount";
 import { NotifyBase } from "./controller/notify/base/NotifyBase";
+import { NotifyHeart } from "./controller/notify/heart/NotifyHeart";
 import { ErrorCode } from "./enum/ErrorCode";
 import { MessageType } from "./enum/MessageType";
+import { BattleProcessor } from "./battle/BattleProcessor";
 import { User } from "./userdata/User";
-import { NotifyHeart } from "./controller/notify/heart/NotifyHeart";
-import { Color, Logger } from "../utils/Logger";
 const enum ConnectionEvent {
     Message = "message",
     Close = "close",
@@ -30,14 +31,15 @@ export class Connection {
     private _listener: EventDispatcher;
     private _cmds: CMDController[];
     private _notifies: NotifyController[];
-    private _intervalId: NodeJS.Timer;
 
     private _logined: boolean;
     private _user: IUser;
     private _connection: websocket.connection;
+    private _battleProcessor: BattleProcessor;
     get listener() { return this._listener; }
     get logined() { return !!this._logined; }
     get user() { return this._user; }
+    get battleProcessor() { return this._battleProcessor; }
 
     static startConnection(token: string, connection: websocket.connection, msg?: websocket.Message) {
         let con = connectionMgr.getClosedConnection(token);
@@ -73,6 +75,7 @@ export class Connection {
                 NotifyHeart.create(this),
             );
         }
+        if (!this._battleProcessor) this._battleProcessor = new BattleProcessor();
 
         connection.on(ConnectionEvent.Close, this._onClose);
         connection.on(ConnectionEvent.Message, this._onMessage);
@@ -81,18 +84,11 @@ export class Connection {
     userLogin(data: OriginData<IUser>) {
         if (!this._logined) {
             this._logined = true;
-            this._user = ProxyMgr.getProxy(data.account.uid, null, new User("", "", ""));
+            this._user = ProxyMgr.getProxy(data.account.uid, null, new User());
             connectionMgr.addConnection(data.account.uid, this);
             this._user.decode(data);
-            clearInterval(this._intervalId);
-            let lastTime = TimeUtil.getTimeStamp();
-            this._intervalId = setInterval(() => {
-                const time = TimeUtil.getTimeStamp();
-                const deltaTime = time - lastTime;
-                this._cmds.forEach(v => v.update(deltaTime));
-                this._notifies.forEach(v => v.update(deltaTime));
-                lastTime = time;
-            }, 16);
+            this._battleProcessor.user = this._user;
+            Timer.timer.frameLoop(1, this, this.update);
         }
     }
 
@@ -112,8 +108,7 @@ export class Connection {
 
     clear() {
         Logger.log("connection clear", Color.red);
-        clearInterval(this._intervalId);
-        this._intervalId = null;
+        Timer.timer.clearAll(this);
         this._logined = false;
         this._connection?.off(ConnectionEvent.Close, this._onClose);
         this._connection?.off(ConnectionEvent.Message, this._onMessage);
@@ -136,7 +131,14 @@ export class Connection {
 
         this._user?.save();
         this._user = null;
+        this._battleProcessor?.clear();
         Pool.recover(PoolKey.CommonConnection, this);
+    }
+
+    private update() {
+        const deltaTime = Timer.timer.delta;
+        this._cmds.forEach(v => v.update(deltaTime));
+        this._notifies.forEach(v => v.update(deltaTime));
     }
 
     private onConnectionMessage(message: websocket.Message) {
@@ -163,6 +165,7 @@ export class Connection {
         this._cmds?.forEach(v => v.close());
         this._notifies?.forEach(v => v.close());
         this._user?.save();
+        this._battleProcessor?.exit();
         connectionMgr.connectionClosed(this._token, this);
     }
 }

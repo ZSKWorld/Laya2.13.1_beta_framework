@@ -1,13 +1,13 @@
+import { GameUtil } from "../../utils/GameUtil";
 import { TimeUtil } from "../../utils/TimeUtil";
-import { Util } from "../../utils/Util";
 import { DecodeObject } from "./DecodeObject";
 
 export class Account extends DecodeObject<IAccount> implements IAccount {
-    uid: string = Util.generateUUID();
+    uid: string = GameUtil.generateUUID();
     nickname: string = "";
     account: string = "";
     password: string = "";
-    registerTime: number = TimeUtil.getTimeStamp();
+    registerTime: number = TimeUtil.milliSeconds();
     lastLoginTime: number = 0;
     lastOnlineTime: number = 0;
     private _loginTime: number;
@@ -22,7 +22,7 @@ export class Account extends DecodeObject<IAccount> implements IAccount {
 
     get onlineNextDay() {
         if (!this._onlineTime) return false;
-        const nowTime = TimeUtil.getTimeStamp();
+        const nowTime = TimeUtil.milliSeconds();
         const isNextDay = TimeUtil.checkNextDay(this._onlineTime, nowTime);
         if (isNextDay) this._onlineTime = nowTime;
         return isNextDay;
@@ -37,11 +37,11 @@ export class Account extends DecodeObject<IAccount> implements IAccount {
     }
 
     protected override onBeginEncode() {
-        this.lastOnlineTime = TimeUtil.getTimeStamp();
+        this.lastOnlineTime = TimeUtil.milliSeconds();
     }
 
     protected override onEndDecode() {
-        const nowTime = TimeUtil.getTimeStamp();
+        const nowTime = TimeUtil.milliSeconds();
         this._loginTime = nowTime;
         this._lastLoginTime = this.lastLoginTime;
 

@@ -1,4 +1,4 @@
-import { Util } from "../../../../utils/Util";
+import { UserUtil } from "../../../../utils/UserUtil";
 import { ErrorCode } from "../../../enum/ErrorCode";
 
 export class AccountChecker {
@@ -6,7 +6,7 @@ export class AccountChecker {
         if (logined) {
             if (user.account.password != data.password) return ErrorCode.PASSWORD_ERROR;
         } else {
-            let userData = Util.getData(data.account);
+            let userData = UserUtil.getData(data.account);
             if (!userData) return ErrorCode.USER_NOT_EXIST;
             else if (userData.account.password != data.password) return ErrorCode.PASSWORD_ERROR;
         }
@@ -14,7 +14,7 @@ export class AccountChecker {
     }
 
     static checkRegister(user: IUser, data: IRegisterInput) {
-        const userData = Util.getData(data.account);
+        const userData = UserUtil.getData(data.account);
         if (userData) return ErrorCode.USER_EXIST;
         else {
             if (!data.account) return ErrorCode.ACCOUNT_EMPTY;
