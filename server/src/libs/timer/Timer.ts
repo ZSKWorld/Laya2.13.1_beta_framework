@@ -11,6 +11,7 @@ class TimerHandle {
     delay: number = 0;
     exeTime: number = 0;
     jumpFrame: boolean = false;
+
     clear() {
         this.caller = null;
         this.method = null;
@@ -21,15 +22,14 @@ class TimerHandle {
         this.exeTime = 0;
         this.jumpFrame = false;
     }
-    run(withClear) {
-        var caller = this.caller;
+
+    run(withClear: boolean) {
+        const caller = this.caller;
         if (caller && caller.destroyed)
             return this.clear();
-        var method = this.method;
-        var args = this.args;
+        const { method, args } = this;
         withClear && this.clear();
-        if (method == null)
-            return;
+        if (method == null) return;
         args ? method.apply(caller, args) : method.call(caller);
     }
 }
@@ -51,35 +51,36 @@ export class Timer {
     constructor(autoActive = true) {
         autoActive && Timer.timer && Timer.timer.frameLoop(1, this, this._update);
     }
+
     get delta() {
         return this._delta;
     }
+
     private _update() {
         if (this.scale <= 0) {
             this._lastTimer = TimeUtil.milliSeconds();
             this._delta = 0;
             return;
         }
-        var frame = this.currFrame = this.currFrame + this.scale;
-        var now = TimeUtil.milliSeconds();
-        var awake = (now - this._lastTimer) > 30000;
+        const frame = this.currFrame = this.currFrame + this.scale;
+        const now = TimeUtil.milliSeconds();
+        const awake = (now - this._lastTimer) > 30000;
         this._delta = (now - this._lastTimer) * this.scale;
-        var timer = this.currTimer = this.currTimer + this._delta;
+        const timer = this.currTimer = this.currTimer + this._delta;
         this._lastTimer = now;
-        var handlers = this._handlers;
+        const handlers = this._handlers;
         this._count = 0;
-        for (var i = 0, n = handlers.length; i < n; i++) {
-            var handler = handlers[i];
+        for (let i = 0, n = handlers.length; i < n; i++) {
+            const handler = handlers[i];
             if (handler.method !== null) {
-                var t = handler.userFrame ? frame : timer;
+                const t = handler.userFrame ? frame : timer;
                 if (t >= handler.exeTime) {
                     if (handler.repeat) {
                         if (!handler.jumpFrame || awake) {
                             handler.exeTime += handler.delay;
                             handler.run(false);
-                            if (t > handler.exeTime) {
+                            if (t > handler.exeTime)
                                 handler.exeTime += Math.ceil((t - handler.exeTime) / handler.delay) * handler.delay;
-                            }
                         }
                         else {
                             while (t >= handler.exeTime) {
@@ -88,22 +89,21 @@ export class Timer {
                             }
                         }
                     }
-                    else {
+                    else
                         handler.run(true);
-                    }
                 }
             }
-            else {
+            else
                 this._count++;
-            }
         }
         if (this._count > 30 || frame % 200 === 0)
             this._clearHandlers();
     }
+
     private _clearHandlers() {
-        var handlers = this._handlers;
-        for (var i = 0, n = handlers.length; i < n; i++) {
-            var handler = handlers[i];
+        const handlers = this._handlers;
+        for (let i = 0, n = handlers.length; i < n; i++) {
+            const handler = handlers[i];
             if (handler.method !== null)
                 this._temp.push(handler);
             else
@@ -113,19 +113,22 @@ export class Timer {
         handlers.length = 0;
         this._temp = handlers;
     }
+
     private _recoverHandler(handler: TimerHandle) {
         if (this._map[handler.key] == handler)
             delete this._map[handler.key];
         handler.clear();
         Timer._pool.push(handler);
     }
-    private _create(useFrame, repeat, delay, caller, method, args, coverBefore) {
+
+    private _create(useFrame: boolean, repeat: boolean, delay: number, caller: any, method: Function, args: any[], coverBefore: boolean) {
         if (!delay) {
             method.apply(caller, args);
             return null;
         }
+        let handler: TimerHandle;
         if (coverBefore) {
-            var handler = this._getHandler(caller, method);
+            handler = this._getHandler(caller, method);
             if (handler) {
                 handler.repeat = repeat;
                 handler.userFrame = useFrame;
@@ -149,11 +152,12 @@ export class Timer {
         this._handlers.push(handler);
         return handler;
     }
+
     private _indexHandler(handler: TimerHandle) {
-        var caller = handler.caller;
-        var method = handler.method;
-        var cid = caller ? caller.$_GID || (caller.$_GID = GameUtil.getGID()) : 0;
-        var mid = method.$_TID || (method.$_TID = Timer._mid++);
+        const caller = handler.caller;
+        const method = handler.method;
+        const cid = caller ? caller.$_GID || (caller.$_GID = GameUtil.getGID()) : 0;
+        const mid = method.$_TID || (method.$_TID = Timer._mid++);
         handler.key = cid + "_" + mid;
         this._map[handler.key] = handler;
     }
@@ -163,9 +167,8 @@ export class Timer {
     }
 
     loop(delay: number, caller: any, method: Function, args: any[] = null, coverBefore: boolean = true, jumpFrame: boolean = false) {
-        var handler = this._create(false, true, delay, caller, method, args, coverBefore);
-        if (handler)
-            handler.jumpFrame = jumpFrame;
+        const handler = this._create(false, true, delay, caller, method, args, coverBefore);
+        if (handler) handler.jumpFrame = jumpFrame;
     }
 
     frameOnce(delay: number, caller: any, method: Function, args: any[] = null, coverBefore: boolean = true) {
@@ -175,44 +178,44 @@ export class Timer {
     frameLoop(delay: number, caller: any, method: Function, args: any[] = null, coverBefore: boolean = true) {
         this._create(true, true, delay, caller, method, args, coverBefore);
     }
+
     toString() {
         return " handlers:" + this._handlers.length + " pool:" + Timer._pool.length;
     }
 
     clear(caller: any, method: Function) {
-        var handler = this._getHandler(caller, method);
-        if (handler) {
-            handler.clear();
-        }
+        const handler = this._getHandler(caller, method);
+        if (handler) handler.clear();
     }
 
     clearAll(caller: any) {
-        if (!caller)
-            return;
-        for (var i = 0, n = this._handlers.length; i < n; i++) {
-            var handler = this._handlers[i];
-            if (handler.caller === caller) {
+        if (!caller) return;
+        for (let i = 0, n = this._handlers.length; i < n; i++) {
+            const handler = this._handlers[i];
+            if (handler.caller === caller)
                 handler.clear();
-            }
         }
     }
+
     private _getHandler(caller: any, method: TimerMethod) {
-        var cid = caller ? caller.$_GID || (caller.$_GID = GameUtil.getGID()) : 0;
-        var mid = method.$_TID || (method.$_TID = Timer._mid++);
-        var key = cid + "_" + mid;
+        const cid = caller ? caller.$_GID || (caller.$_GID = GameUtil.getGID()) : 0;
+        const mid = method.$_TID || (method.$_TID = Timer._mid++);
+        const key = cid + "_" + mid;
         return this._map[key];
     }
 
     runTimer(caller: any, method: TimerMethod) {
-        var handler = this._getHandler(caller, method);
+        const handler = this._getHandler(caller, method);
         if (handler && handler.method != null) {
             this._map[handler.key] = null;
             handler.run(true);
         }
     }
+
     pause() {
         this.scale = 0;
     }
+
     resume() {
         this.scale = 1;
     }
