@@ -2,6 +2,7 @@ import { ResPath } from "../../core/common/ResPath";
 import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewID } from "../../core/ui/core/ViewID";
 import { LogicSceneBase } from "../SceneBase";
+import { SceneType } from "../SceneDefine";
 
 export interface SceneLittleGameData {
 	
@@ -9,6 +10,7 @@ export interface SceneLittleGameData {
 
 /** 小游戏逻辑场景 */
 export class SceneLittleGame extends LogicSceneBase<SceneLittleGameData> {
+	override readonly type = SceneType.LittleGameScene;
 	protected override loadViewId = ViewID.UILoading1View;
 
 	protected override getNormalResArray() {

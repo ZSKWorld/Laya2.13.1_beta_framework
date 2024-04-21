@@ -13,11 +13,11 @@ export abstract class Observer extends Notifier {
         eventMgr.registerEvent(this);
     }
 
-    protected removeEvent(eventName: string, caller: any, callback: Function) {
+    protected off(eventName: string, caller: any, callback: Function) {
         eventMgr.off(eventName, caller, callback);
     }
 
-    protected removeAllEvent() {
+    protected offAll() {
         eventMgr.offAllCaller(this);
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <component id="n43_9hon" name="btn_back" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="25,25" size="120,120">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://vx9zwser9hon6m"/>
+    </component>
+    <component id="n44_nirt" name="com_container" src="nirt6n" fileName="Component/ComEmpty.xml" pkg="vx9zwser" xy="540,960" pivot="0.5,0.5" anchor="true" size="0,0">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <image id="n83_nirt" name="n83" src="qjdo2c" fileName="Texture/Pic_GouxuanBG.png" pkg="vx9zwser" xy="0,0" size="104,104" visible="false"/>
+    <component id="n80_nirt" name="n80" src="nirt9" fileName="Component/UI2048/ComItem2048.xml" xy="2,2" visible="false" touchable="false"/>
+    <graph id="n84_nirt" name="n84" xy="490,910" size="100,100" type="rect" lineSize="0">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </graph>
+  </displayList>
+</component>

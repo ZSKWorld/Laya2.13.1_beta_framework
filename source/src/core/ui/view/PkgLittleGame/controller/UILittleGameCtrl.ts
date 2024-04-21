@@ -13,7 +13,8 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 	override onAdded() {
 		this.addMessage(UILittleGameMsg.OnBtnBackClick, this.onBtnBackClick);
 		this.addMessage(UILittleGameMsg.OnBtnTenWaterClick, this.onBtnTenWaterClick);
-		this.addMessage(UILittleGameMsg.OnBtnTest3DClick, this.onBtnTest3DClick);
+		this.addMessage(UILittleGameMsg.OnBtnTest3dClick, this.onBtnTest3dClick);
+		this.addMessage(UILittleGameMsg.OnBtn2048Click, this.onBtn2048Click);
 	}
 
 	private onBtnBackClick() {
@@ -25,8 +26,13 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 		this.removeSelf();
 	}
 
-	private onBtnTest3DClick() {
+	private onBtnTest3dClick() {
 		this.showView(ViewID.UITest3DView);
+		this.removeSelf();
+	}
+
+	private onBtn2048Click() {
+		this.showView(ViewID.UI2048View);
 		this.removeSelf();
 	}
 

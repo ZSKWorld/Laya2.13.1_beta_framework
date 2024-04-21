@@ -101,7 +101,7 @@
     <image id="qjdo31" name="Frame_ItemBG03.png" path="/Texture/" exported="true"/>
     <image id="qjdo32" name="Frame_BiaoTiLan.png" path="/Texture/" exported="true"/>
     <image id="qjdo33" name="Frame_ItemBG04.png" path="/Texture/" exported="true"/>
-    <image id="qjdo34" name="Frame_NeiKuang02.png" path="/Texture/" exported="true"/>
+    <image id="qjdo34" name="Frame_NeiKuang02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="21,21,6,6"/>
     <image id="qjdo35" name="Frame_NeiKuang06.png" path="/Texture/" exported="true"/>
     <image id="qjdo36" name="Frame_NeiKuang07.png" path="/Texture/" exported="true"/>
     <image id="qjdo37" name="Frame_NeiKuang07_2.png" path="/Texture/" exported="true"/>
@@ -207,6 +207,7 @@
     <component id="shjv6k" name="UIConfirm.xml" path="/" exported="true"/>
     <component id="shjv6l" name="ComConfirm.xml" path="/Component/UIConfirm/"/>
     <image id="9hon6m" name="Pic_back.png" path="/Texture/" exported="true"/>
+    <component id="nirt6n" name="ComEmpty.xml" path="/Component/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

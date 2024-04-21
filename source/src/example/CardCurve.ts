@@ -54,8 +54,7 @@ module fight.duel {
         }
     }
 
-    export class CardCurve extends Laya.Script {
-        override readonly owner: Sprite3D;
+    export class CardCurve extends Laya.Script3D {
         private _datas: AnimationCurve[] = [];
         private _playing: boolean = false;
         private _time: number = 0;

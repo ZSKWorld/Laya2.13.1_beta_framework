@@ -20,6 +20,8 @@ import { ComGoodsCtrl } from "../view/PkgMain/controller/coms/ComGoodsCtrl";
 import { ComGoodsInfoCtrl } from "../view/PkgMain/controller/coms/ComGoodsInfoCtrl";
 import { ComGoodsInfoView } from "../view/PkgMain/view/coms/ComGoodsInfoView";
 import { ComGoodsView } from "../view/PkgMain/view/coms/ComGoodsView";
+import { ComItem2048Ctrl } from "../view/PkgLittleGame/controller/coms/ComItem2048Ctrl";
+import { ComItem2048View } from "../view/PkgLittleGame/view/coms/ComItem2048View";
 import { ComRenWuCtrl } from "../view/PkgMain/controller/coms/ComRenWuCtrl";
 import { ComRenWuView } from "../view/PkgMain/view/coms/ComRenWuView";
 import { ComSettingCtrl } from "../view/PkgMain/controller/coms/ComSettingCtrl";
@@ -50,6 +52,9 @@ import { RenderGoodsCtrl } from "../view/PkgMain/controller/renders/RenderGoodsC
 import { RenderGoodsView } from "../view/PkgMain/view/renders/RenderGoodsView";
 import { RenderTextCtrl } from "../view/PkgMain/controller/renders/RenderTextCtrl";
 import { RenderTextView } from "../view/PkgMain/view/renders/RenderTextView";
+import { UI2048Ctrl } from "../view/PkgLittleGame/controller/UI2048Ctrl";
+import { UI2048Proxy } from "../view/PkgLittleGame/proxy/UI2048Proxy";
+import { UI2048View } from "../view/PkgLittleGame/view/UI2048View";
 import { UIBattleConfirmCtrl } from "../view/PkgBattle/controller/UIBattleConfirmCtrl";
 import { UIBattleConfirmProxy } from "../view/PkgBattle/proxy/UIBattleConfirmProxy";
 import { UIBattleConfirmView } from "../view/PkgBattle/view/UIBattleConfirmView";
@@ -148,6 +153,7 @@ class ViewRegister {
 		register(ViewID.ComConfirmView, ComConfirmView, ComConfirmCtrl);
 		register(ViewID.ComTipInfoView, ComTipInfoView, ComTipInfoCtrl);
 		register(ViewID.ComWaitingView, ComWaitingView, ComWaitingCtrl);
+		register(ViewID.ComItem2048View, ComItem2048View, ComItem2048Ctrl);
 		register(ViewID.ComTenWaterView, ComTenWaterView, ComTenWaterCtrl);
 		register(ViewID.ComAbodeView, ComAbodeView, ComAbodeCtrl);
 		register(ViewID.ComCharView, ComCharView, ComCharCtrl);
@@ -169,6 +175,7 @@ class ViewRegister {
 		register(ViewID.UILoading1View, UILoading1View, UILoading1Ctrl, UILoading1Proxy);
 		register(ViewID.UILoading2View, UILoading2View, UILoading2Ctrl, UILoading2Proxy);
 		register(ViewID.UIWaitingView, UIWaitingView, UIWaitingCtrl, UIWaitingProxy);
+		register(ViewID.UI2048View, UI2048View, UI2048Ctrl, UI2048Proxy);
 		register(ViewID.UILittleGameView, UILittleGameView, UILittleGameCtrl, UILittleGameProxy);
 		register(ViewID.UITenWaterView, UITenWaterView, UITenWaterCtrl, UITenWaterProxy);
 		register(ViewID.UITest3DView, UITest3DView, UITest3DCtrl, UITest3DProxy);

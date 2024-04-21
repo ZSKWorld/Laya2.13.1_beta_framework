@@ -46,12 +46,12 @@ class Main {
 
 	private onConfigLoaded() {
 		sceneMgr.init([
-			[SceneType.PreScreen, new ScenePreScreen()],
-			[SceneType.InitScene, new SceneInit()],
-			[SceneType.LoginScene, new SceneLogin()],
-			[SceneType.MainScene, new SceneMain()],
-			[SceneType.GameScene, new SceneGame()],
-			[SceneType.LittleGameScene, new SceneLittleGame()],
+			new ScenePreScreen(),
+			new SceneInit(),
+			new SceneLogin(),
+			new SceneMain(),
+			new SceneGame(),
+			new SceneLittleGame(),
 		]);
 		sceneMgr.enterScene(SceneType.PreScreen);
 	}

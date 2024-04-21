@@ -3,7 +3,7 @@ import { skeletonMgr } from "../core/game/SkeletonMgr";
 import { Observer } from "../core/game/event/Observer";
 import { uiMgr } from "../core/ui/core/UIManager";
 import { ViewID } from "../core/ui/core/ViewID";
-import { IScene } from "./SceneDefine";
+import { IScene, SceneEvent, SceneType } from "./SceneDefine";
 
 const enum ResGroupType {
 	Normal,
@@ -11,17 +11,13 @@ const enum ResGroupType {
 	All,
 }
 
-type LoadViewData = { updateHandler?: Laya.Handler };
-
 /** 逻辑场景基类 */
-export abstract class LogicSceneBase<T> extends Observer implements IScene {
+export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
+	readonly type: SceneType;
+	data: T;
 	readonly views = new Set<ViewID>();
-	/** 场景参数 */
-	protected data: T;
 	/** 加载时显示的load页面id */
 	protected loadViewId: ViewID;
-	/** load页面数据 */
-	private _loadViewData: LoadViewData = {};
 	/** 资源加载进度更新回调 */
 	private _progressHandlers: Laya.Handler[] = [];
 	/** 资源加载进度 */
@@ -31,6 +27,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	get name() { return this.constructor.name; }
 
 	load() {
+		this.dispatch(SceneEvent.OnLoadBegin, this.type);
 		const resArr = this.getResGroup(ResGroupType.All);
 		const [uiRes, skeletonRes, otherRes] = resArr;
 		let loadCnt = this.setLoadProgres(resArr.length);
@@ -40,7 +37,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 			loadMgr.load(otherRes, null, this._progressHandlers[--loadCnt]),
 			//加个最短加载时间，避免loadjing页一闪而过
 			this.loadViewId ? new Promise(resolve => {
-				const tween = Laya.Tween.to(this._progresses, { [--loadCnt]: 1 }, 200, null, Laya.Handler.create(null, resolve), 0, true);
+				const tween = Laya.Tween.to(this._progresses, { [--loadCnt]: 1 }, 500, null, Laya.Handler.create(null, resolve), 0, true);
 				tween.update = this._progressHandlers[loadCnt];
 			}) : null,
 		]).then(
@@ -51,25 +48,22 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 				return Promise.reject<void>();
 			}
 		).finally(() => {
-			this._loadViewData.updateHandler = null;
 			this._progressHandlers.forEach(v => v.recover());
 			this._progressHandlers.length = 0;
+			this.dispatch(SceneEvent.OnLoadEnd, this.type);
 		});
-	}
-
-	preEnter() {
-		this.onPreEnter();
 	}
 
 	enter(data: T) {
 		this.data = data;
+		this.dispatch(SceneEvent.OnEnter, this.type);
 		this.onEnter();
 	}
 
 	exit() {
+		this.dispatch(SceneEvent.OnExit, this.type);
 		this.onExit();
 		if (this.loadViewId) {
-			this._loadViewData.updateHandler = null;
 			uiMgr.removeView(this.loadViewId);
 		}
 		this.views.forEach(v => uiMgr.destroyView(v));
@@ -96,8 +90,6 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	/** 不可卸载资源，加载后不会卸载，只能手动卸载 */
 	protected getConstResArray() { return [] as string[]; }
 
-	protected onPreEnter() { }
-
 	protected onEnter() { }
 
 	protected onExit() { }
@@ -105,7 +97,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 	private setLoadProgres(count: number) {
 		if (this.loadViewId) {
 			count++;
-			uiMgr.showView(this.loadViewId, this._loadViewData);
+			uiMgr.showView(this.loadViewId);
 		}
 		this._progresses.length = 0;
 		this._progressHandlers.forEach(v => v.recover());
@@ -120,14 +112,9 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene {
 
 	private onProgress(index: number, progress: number) {
 		progress != null && (this._progresses[index] = progress);
-		Laya.timer.callLater(this, this.updateProgres);
-	}
-
-	private updateProgres() {
-		if (this._loadViewData.updateHandler) {
-			const progress = this._progresses.reduce((pv, cv) => pv + cv, 0) / this._progresses.length;
-			this._loadViewData.updateHandler.runWith(progress);
-		}
+		let loadPro = this._progresses.reduce((pv, cv, i) => i > 0 ? pv + cv : pv, 0) / (this._progresses.length - 1);
+		loadPro *= this._progresses[0];
+		this.dispatch(SceneEvent.OnLoadProgress, loadPro);
 	}
 
 	/** 获取资源数组 */
