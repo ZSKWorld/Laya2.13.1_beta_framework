@@ -5,13 +5,17 @@
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://vx9zwser9hon6m"/>
     </component>
-    <component id="n44_nirt" name="com_container" src="nirt6n" fileName="Component/ComEmpty.xml" pkg="vx9zwser" xy="540,960" pivot="0.5,0.5" anchor="true" size="0,0">
+    <component id="n44_nirt" name="com_container" src="nirt6n" fileName="Component/ComEmpty.xml" pkg="vx9zwser" xy="540,960" pivot="0.5,0.5" anchor="true" size="100,100">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
-    <image id="n83_nirt" name="n83" src="qjdo2c" fileName="Texture/Pic_GouxuanBG.png" pkg="vx9zwser" xy="0,0" size="104,104" visible="false"/>
-    <component id="n80_nirt" name="n80" src="nirt9" fileName="Component/UI2048/ComItem2048.xml" xy="2,2" visible="false" touchable="false"/>
-    <graph id="n84_nirt" name="n84" xy="490,910" size="100,100" type="rect" lineSize="0">
-      <relation target="" sidePair="center-center,middle-middle"/>
-    </graph>
+    <component id="n85_nirt" name="btn_reset" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="20,1813" size="246,87" group="n89_nirt">
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="重置" titleFontSize="44"/>
+    </component>
+    <component id="n86_nirt" name="btn_add" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="286,1813" size="246,87" group="n89_nirt">
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="添加" titleFontSize="44"/>
+    </component>
+    <group id="n89_nirt" name="n89" xy="20,1813" size="512,87" advanced="true" layout="hz" colGap="20" excludeInvisibles="true"/>
   </displayList>
 </component>

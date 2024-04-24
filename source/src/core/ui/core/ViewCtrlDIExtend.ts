@@ -99,7 +99,7 @@ export class ViewCtrlDIExtend {
 		if (!__keyEventList) return;
 		let eventList = __keyEventList[e.type];
 		if (!eventList) return;
-		let list = eventList[e.keyCode];
+		let list = eventList[e.keyCode] || eventList[-1];
 		if (!list) return;
 		for (let i = 0, len = list.length; i < len; i++) {
 			const func = list[i];

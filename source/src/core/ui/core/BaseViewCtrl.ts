@@ -121,11 +121,11 @@ windowImmit("MouseEventType", MouseEventType);
 /**
  * 页面控制器键盘事件装饰器工厂
  * @param keyEventType {@link KeyEventType} 事件类型
- * @param key 触发事件的键值
+ * @param key 触发事件的键值，-1 所有键都可以触发
  * @param once 是否只监听一次
  * @return MethodDecorator
  */
-function ViewKeyEvent(keyEventType: KeyEventType, key: number, once?: boolean, args?: any[]): MethodDecorator {
+function ViewKeyEvent(keyEventType: KeyEventType, key: number = -1, once?: boolean, args?: any[]): MethodDecorator {
 	return function (target: DIViewCtrl, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
 		if (!target.__keyEventList) target.__keyEventList = {};
 		if (!target.__keyEventList[keyEventType]) target.__keyEventList[keyEventType] = {};

@@ -1,5 +1,5 @@
 import { Observer } from "../core/game/event/Observer";
-import { IScene, SceneEvent, SceneType } from "./SceneDefine";
+import { IScene, SceneType } from "./SceneDefine";
 
 /** 逻辑场景管理类 */
 class SceneManager extends Observer {
@@ -31,14 +31,6 @@ class SceneManager extends Observer {
 				});
 			});
 		}
-	}
-
-	@RegisterEvent(SceneEvent.OnLoadBegin, false, [SceneEvent.OnLoadBegin])
-	@RegisterEvent(SceneEvent.OnLoadEnd, false, [SceneEvent.OnLoadEnd])
-	@RegisterEvent(SceneEvent.OnEnter, false, [SceneEvent.OnEnter])
-	@RegisterEvent(SceneEvent.OnExit, false, [SceneEvent.OnExit])
-	private onEvent(...args) {
-		console.error(...args);
 	}
 }
 export const sceneMgr = new SceneManager();
