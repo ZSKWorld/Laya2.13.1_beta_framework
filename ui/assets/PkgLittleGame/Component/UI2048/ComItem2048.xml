@@ -2,6 +2,6 @@
 <component size="100,100">
   <displayList>
     <image id="n1_nirt" name="n1" src="qjdo4u" fileName="Texture/Frame_TongYong01.png" pkg="vx9zwser" xy="0,0" size="100,100"/>
-    <text id="n3_nirt" name="txt_num" xy="0,26" pivot="0.5,0.5" size="100,48" fontSize="35" align="center" vAlign="middle" leading="0" autoSize="shrink" text="2025648"/>
+    <text id="n3_nirt" name="txt_num" xy="0,26" pivot="0.5,0.5" size="100,48" fontSize="35" align="center" vAlign="middle" leading="0" autoSize="shrink" singleLine="true" text="2025648333"/>
   </displayList>
 </component>
