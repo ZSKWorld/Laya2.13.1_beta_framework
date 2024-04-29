@@ -27,7 +27,7 @@ export class ScenePreScreen extends LogicSceneBase<ScenePreScreenData> {
         this.showPreScreen();
         platformMgr.init();
         // Laya.stage.on(Laya.Event.CLICK, this, this.onStageClick);
-        Laya.timer.once(1000, sceneMgr, sceneMgr.enterScene, [SceneType.InitScene]);
+        Laya.timer.once(250, sceneMgr, sceneMgr.enterScene, [SceneType.InitScene]);
     }
 
     protected override onExit() {

@@ -6,7 +6,9 @@ import { PlatformType } from "./PlatformDefine";
 
 export class PlatformWeb extends PlatformBase {
     override get res() {
-        return [ResPath.FontPath.Font15];
+        return [
+            ResPath.FontPath.Font11,
+        ];
     }
     override get safeArea() {
         if (!this._safeArea) {
@@ -42,10 +44,10 @@ export class PlatformWeb extends PlatformBase {
         Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
         // Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_WIDTH;
         Laya.stage.screenMode = Laya.Stage.SCREEN_NONE;
-        // Laya.Text.defaultFont = ResPath.FontName.Font15;
-        // fgui.UIConfig.defaultFont = ResPath.FontName.Font15;
-        Laya.Text.defaultFont = "SimHei";
-        fgui.UIConfig.defaultFont = "SimHei";
+        Laya.Text.defaultFont = ResPath.FontName.Font11;
+        fgui.UIConfig.defaultFont = ResPath.FontName.Font11;
+        // Laya.Text.defaultFont = "SimHei";
+        // fgui.UIConfig.defaultFont = "SimHei";
         Laya.stage.on(Laya.Event.VISIBILITY_CHANGE, this, () => {
             if (Laya.stage.isVisibility) this.dispatch(GameEvent.OnGameShow);
             else this.dispatch(GameEvent.OnGameHide);

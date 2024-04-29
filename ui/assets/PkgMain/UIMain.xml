@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1080,1920" overflow="hidden" designImage="ui://n809nszxaa0z0" designImageOffsetX="-1084" designImageAlpha="100" designImageLayer="1" bgColorEnabled="true" bgColor="#000000">
-  <controller name="ctrlShow" pages="0,历练,1,角色,2,物品,3,商城,4,洞府" selected="3"/>
+  <controller name="ctrlShow" pages="0,历练,1,角色,2,物品,3,商城,4,洞府" selected="0"/>
   <displayList>
     <graph id="n67_7vow" name="n67" xy="10,345" size="1060,1414" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff000000">
       <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
@@ -32,7 +32,7 @@
     </component>
     <component id="n12_sbd0" name="btn_train" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="17,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0" values="#ffffff" default="#000000"/>
-      <Button title="历练" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="0"/>
+      <Button title="历练" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="0"/>
     </component>
     <component id="n14_sbd0" name="btn_char" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="192,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,1" values="#000000|#ffffff" default="#000000"/>
@@ -44,7 +44,7 @@
     </component>
     <component id="n16_sbd0" name="btn_shop" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="542,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,3" values="#000000|#ffffff" default="#000000"/>
-      <Button title="商城" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="3"/>
+      <Button title="商城" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="3"/>
     </component>
     <component id="n17_sbd0" name="btn_abode" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="717,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,4" values="#000000|#ffffff" default="#000000"/>
@@ -62,21 +62,21 @@
     <graph id="n53_sbd0" name="n53" xy="863,258" size="200,52" group="n37_sbd0" touchable="false" type="rect" lineSize="0" fillColor="#ff646464">
       <relation target="n54_sbd0" sidePair="width-width,height-height,right-right,top-top"/>
     </graph>
-    <text id="n54_sbd0" name="n54" xy="865,260" size="196,48" group="n37_sbd0" fontSize="35" color="#ffffff" text="24区3.6.3.8">
+    <text id="n54_sbd0" name="n54" xy="865,260" size="201,48" group="n37_sbd0" fontSize="35" color="#ffffff" text="24区3.6.3.8">
       <relation target="n35_sbd0" sidePair="right-right,bottom-bottom"/>
     </text>
-    <text id="n39_sbd0" name="txt_nickname" xy="275,69" size="249,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#ffffff" vAlign="middle" singleLine="true" text="爱你十分泪七分"/>
-    <text id="n41_sbd0" name="n41" xy="530,69" size="40,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#00ff00" vAlign="middle" singleLine="true" text="V1">
+    <text id="n39_sbd0" name="txt_nickname" xy="275,69" size="249,48" group="n57_sbd0" fontSize="35" color="#ffffff" vAlign="middle" singleLine="true" text="爱你十分泪七分"/>
+    <text id="n41_sbd0" name="n41" xy="530,69" size="40,48" group="n57_sbd0" fontSize="35" color="#00ff00" vAlign="middle" singleLine="true" text="V1">
       <relation target="n39_sbd0" sidePair="left-right"/>
     </text>
-    <text id="n38_sbd0" name="txt_level" xy="275,111" size="144,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#ffffff" vAlign="middle" singleLine="true" text="练气一层"/>
-    <text id="n40_sbd0" name="txt_exp" xy="429,111" size="166,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#ffffff" vAlign="middle" singleLine="true" text="(500.00%)">
+    <text id="n38_sbd0" name="txt_level" xy="275,111" size="144,48" group="n57_sbd0" fontSize="35" color="#ffffff" vAlign="middle" singleLine="true" text="练气一层"/>
+    <text id="n40_sbd0" name="txt_exp" xy="429,111" size="166,48" group="n57_sbd0" fontSize="35" color="#ffffff" vAlign="middle" singleLine="true" text="(500.00%)">
       <relation target="n38_sbd0" sidePair="left-right"/>
     </text>
-    <text id="n42_sbd0" name="txt_sect" xy="275,191" size="162,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#cc7f0b" vAlign="middle" singleLine="true" text="门派:天山"/>
-    <text id="n43_sbd0" name="n43" xy="275,234" size="217,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#ff0000" vAlign="middle" singleLine="true" text="战力:3.081万"/>
-    <text id="n44_sbd0" name="txt_coin" xy="519,191" size="289,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#ffff00" vAlign="middle" singleLine="true" text="金币:99999.999万"/>
-    <text id="n45_sbd0" name="txt_ingot" xy="519,234" size="253,48" group="n57_sbd0" font="SimHei" fontSize="35" color="#0099ff" vAlign="middle" singleLine="true" text="元宝:9999.99万"/>
+    <text id="n42_sbd0" name="txt_sect" xy="275,191" size="162,48" group="n57_sbd0" fontSize="35" color="#cc7f0b" vAlign="middle" singleLine="true" text="门派:天山"/>
+    <text id="n43_sbd0" name="n43" xy="275,234" size="217,48" group="n57_sbd0" fontSize="35" color="#ff0000" vAlign="middle" singleLine="true" text="战力:3.081万"/>
+    <text id="n44_sbd0" name="txt_coin" xy="519,191" size="289,48" group="n57_sbd0" fontSize="35" color="#ffff00" vAlign="middle" singleLine="true" text="金币:99999.999万"/>
+    <text id="n45_sbd0" name="txt_ingot" xy="519,234" size="253,48" group="n57_sbd0" fontSize="35" color="#0099ff" vAlign="middle" singleLine="true" text="元宝:9999.99万"/>
     <group id="n57_sbd0" name="n57" xy="275,69" size="533,213" group="n37_sbd0"/>
     <loader id="n36_sbd0" name="loader_head" xy="43,69" size="212,212" group="n37_sbd0" touchable="false" url="ui://vx9zwserqjdo4z" fill="scaleFree"/>
     <component id="n51_sbd0" name="btn_setting" src="fhzd5a" fileName="Component/BtnCircleIcon.xml" pkg="vx9zwser" xy="886,47" size="80,80" group="n37_sbd0">

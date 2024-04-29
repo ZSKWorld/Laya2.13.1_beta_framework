@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1060,1290" overflow="hidden" designImage="ui://n809nszxaa0zd" designImageOffsetX="-1080" designImageOffsetY="-465" designImageAlpha="100">
   <displayList>
-    <text id="n26_sbd0" name="n26" xy="348,179" size="324,54" font="SimHei" fontSize="40" color="#eb5858" vAlign="middle" text="预览极品满值属性"/>
-    <text id="n28_sbd0" name="n28" xy="348,288" size="644,54" font="SimHei" fontSize="40" color="#eb5858" vAlign="middle" text="特殊制作将消耗对应等级的材料一个"/>
-    <text id="n29_sbd0" name="n29" xy="348,398" size="324,54" font="SimHei" fontSize="40" color="#eb5858" vAlign="middle" text="游戏中的终极装备"/>
-    <text id="n30_sbd0" name="n30" xy="348,485" size="644,103" font="SimHei" fontSize="40" color="#eb5858" vAlign="middle" leading="0" text="重铸装备，星级不变，属性随机生成&#xA;注：强化和刻铭等级不保留"/>
-    <text id="n31_sbd0" name="n31" xy="348,619" size="664,54" font="SimHei" fontSize="40" color="#eb5858" vAlign="middle" text="3-5个低级宝石可以合成一个高级宝石"/>
-    <text id="n32_sbd0" name="n32" xy="348,704" size="684,103" font="SimHei" fontSize="40" color="#eb5858" vAlign="middle" leading="0" text="精金石可在副本获取，坦桑石可在boss&#xA;获取"/>
-    <component id="n11_sbd0" name="btn_jpyl" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,157" size="300,100" group="n34_aa0z" controller="ctrlBgColor,1">
+    <text id="n26_sbd0" name="n26" xy="348,179" size="324,54" fontSize="40" color="#eb5858" vAlign="middle" text="预览极品满值属性"/>
+    <text id="n28_sbd0" name="n28" xy="348,288" size="644,54" fontSize="40" color="#eb5858" vAlign="middle" text="特殊制作将消耗对应等级的材料一个"/>
+    <text id="n29_sbd0" name="n29" xy="348,398" size="324,54" fontSize="40" color="#eb5858" vAlign="middle" text="游戏中的终极装备"/>
+    <text id="n30_sbd0" name="n30" xy="348,485" size="644,103" fontSize="40" color="#eb5858" vAlign="middle" leading="0" text="重铸装备，星级不变，属性随机生成&#xA;注：强化和刻铭等级不保留"/>
+    <text id="n31_sbd0" name="n31" xy="348,619" size="664,54" fontSize="40" color="#eb5858" vAlign="middle" text="3-5个低级宝石可以合成一个高级宝石"/>
+    <text id="n32_sbd0" name="n32" xy="348,704" size="684,103" fontSize="40" color="#eb5858" vAlign="middle" leading="0" text="精金石可在副本获取，坦桑石可在boss&#xA;获取"/>
+    <component id="n11_sbd0" name="btn_jpyl" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,157" size="300,100" group="n34_aa0z" controller="ctrlBgColor,1">
       <Button title="极品预览" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n12_sbd0" name="btn_dzzb" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,267" size="300,100" group="n34_aa0z" controller="ctrlBgColor,2">
+    <component id="n12_sbd0" name="btn_dzzb" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,267" size="300,100" group="n34_aa0z" controller="ctrlBgColor,2">
       <Button title="打造装备" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n13_sbd0" name="btn_zjzb" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,377" size="300,100" group="n34_aa0z" controller="ctrlBgColor,6">
+    <component id="n13_sbd0" name="btn_zjzb" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,377" size="300,100" group="n34_aa0z" controller="ctrlBgColor,6">
       <Button title="终极装备" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n14_sbd0" name="btn_czzb" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,487" size="300,100" group="n34_aa0z" controller="ctrlBgColor,4">
+    <component id="n14_sbd0" name="btn_czzb" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,487" size="300,100" group="n34_aa0z" controller="ctrlBgColor,4">
       <Button title="重铸装备" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n19_sbd0" name="btn_bshc" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,597" size="300,100" group="n34_aa0z" controller="ctrlBgColor,0">
+    <component id="n19_sbd0" name="btn_bshc" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,597" size="300,100" group="n34_aa0z" controller="ctrlBgColor,0">
       <Button title="宝石合成" titleColor="#000000" titleFontSize="40"/>
     </component>
-    <component id="n20_sbd0" name="btn_zztz" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,707" size="300,100" group="n34_aa0z" controller="ctrlBgColor,7">
+    <component id="n20_sbd0" name="btn_zztz" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,707" size="300,100" group="n34_aa0z" controller="ctrlBgColor,7">
       <Button title="制作套装" titleColor="#000000" titleFontSize="40"/>
     </component>
     <group id="n34_aa0z" name="n34" xy="21,157" size="300,650" advanced="true" layout="vt" lineGap="10" excludeInvisibles="true"/>
-    <component id="n23_sbd0" name="btn_fjzb" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="20,1037" pivot="1,0.5" size="450,100" controller="ctrlBgColor,8">
+    <component id="n23_sbd0" name="btn_fjzb" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="20,1037" pivot="1,0.5" size="450,100" controller="ctrlBgColor,8">
       <Button title="点我分解装备" titleColor="#ffffff" titleFontSize="40"/>
     </component>
-    <component id="n21_sbd0" name="btn_fjbs" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="20,1158" pivot="1,0.5" size="450,100" controller="ctrlBgColor,8">
+    <component id="n21_sbd0" name="btn_fjbs" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="20,1158" pivot="1,0.5" size="450,100" controller="ctrlBgColor,8">
       <Button title="点我分解宝石" titleColor="#ffffff" titleFontSize="40"/>
     </component>
-    <component id="n25_sbd0" name="btn_yjhc" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="798,1156" size="242,100" controller="ctrlBgColor,1">
+    <component id="n25_sbd0" name="btn_yjhc" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="798,1156" size="242,100" controller="ctrlBgColor,1">
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button title="一键合成" titleColor="#000000" titleFontSize="40"/>
     </component>
