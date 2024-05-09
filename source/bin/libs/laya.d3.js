@@ -11589,7 +11589,6 @@
 	        return sh;
 	    }
 	    static CalGradientSH(skyColor, equatorColor, groundColor, isGamma = true) {
-	        console.time("Gradient SH");
 	        let skyPixels = this._tempSkyPixels;
 	        let equatorPixels = this._tempEquatorPixels;
 	        let groundPixels = this._tempGroundPixels;
@@ -11618,7 +11617,6 @@
 	        gradientPixles[exports.TextureCubeFace.PositiveZ] = equatorPixels;
 	        gradientPixles[exports.TextureCubeFace.NegativeZ] = equatorPixels;
 	        let sh = SphericalHarmonicsL2Generater.CalCubemapSH(gradientPixles, 3, this.GradientSimulateSize, false);
-	        console.timeEnd("Gradient SH");
 	        return sh;
 	    }
 	}
@@ -18783,7 +18781,6 @@
 	        this._reflectionCubeHDRParams = new Vector4();
 	        this._reflectionProbeManager = new ReflectionProbeManager();
 	        this.currentCreationLayer = Math.pow(2, 0);
-	        this.enableLight = true;
 	        this._key = new Laya.SubmitKey();
 	        this._pickIdToSprite = new Object();
 	        this._reflectionMode = 0;

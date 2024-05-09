@@ -8284,7 +8284,7 @@ window.Laya= (function (exports) {
                 CharRender_Canvas.canvas.height = 512;
                 CharRender_Canvas.canvas.style.left = "-10000px";
                 CharRender_Canvas.canvas.style.position = "absolute";
-                document.body.appendChild(CharRender_Canvas.canvas);
+                window.document.body.appendChild(CharRender_Canvas.canvas);
                 this.ctx = CharRender_Canvas.canvas.getContext('2d');
             }
         }
@@ -8350,6 +8350,7 @@ window.Laya= (function (exports) {
             ctx.save();
             ctx.textBaseline = "middle";
             if (lineWidth > 0) {
+                ctx.lineJoin = "round";
                 ctx.strokeStyle = strokeColStr;
                 ctx.lineWidth = lineWidth;
                 ctx.strokeText(char, margin_left, margin_top + sz / 2);
@@ -10572,7 +10573,7 @@ window.Laya= (function (exports) {
             var nOdy = ody / olen;
             var alpha = Math.acos(nOdx * ndx + nOdy * ndy);
             var halfAng = Math.PI / 2 - alpha;
-            len1 = r / Math.tan(halfAng);
+            len1 = r * Math.tan(halfAng);
             var ptx1 = len1 * ndx + x1;
             var pty1 = len1 * ndy + y1;
             var orilen = Math.sqrt(len1 * len1 + r * r);
@@ -11410,14 +11411,14 @@ window.Laya= (function (exports) {
                 document.body.appendChild(source);
             }
             this.initRender(Render._mainCanvas, width, height);
-            window.requestAnimationFrame(loop);
+            requestAnimationFrame(loop);
             function loop(stamp) {
                 ILaya.stage._loop();
                 if (!!Render._customRequestAnimationFrame && !!Render._loopFunction) {
                     Render._customRequestAnimationFrame(Render._loopFunction);
                 }
                 else
-                    window.requestAnimationFrame(loop);
+                    requestAnimationFrame(loop);
             }
             ILaya.stage.on("visibilitychange", this, this._onVisibilitychange);
         }
@@ -17447,7 +17448,6 @@ window.Laya= (function (exports) {
             }
             this.canvasRotation = rotation;
             var canvas = Render._mainCanvas;
-            var canvasStyle = canvas.source.style;
             var mat = this._canvasTransform.identity();
             var scaleMode = this._scaleMode;
             var scaleX = screenWidth / this.designWidth;
@@ -17550,16 +17550,20 @@ window.Laya= (function (exports) {
             mat.tx = this._formatData(mat.tx);
             mat.ty = this._formatData(mat.ty);
             super.set_transform(this.transform);
+            Stage._setStageStyle(canvas, canvasWidth, canvasHeight, mat);
+            if (this._safariOffsetY)
+                mat.translate(0, -this._safariOffsetY);
+            this.visible = true;
+            this._repaint |= SpriteConst.REPAINT_CACHE;
+            this.event(Event.RESIZE);
+        }
+        static _setStageStyle(mainCanv, canvasWidth, canvasHeight, mat) {
+            var canvasStyle = mainCanv.source.style;
             canvasStyle.transformOrigin = canvasStyle.webkitTransformOrigin = canvasStyle.msTransformOrigin = canvasStyle.mozTransformOrigin = canvasStyle.oTransformOrigin = "0px 0px 0px";
             canvasStyle.transform = canvasStyle.webkitTransform = canvasStyle.msTransform = canvasStyle.mozTransform = canvasStyle.oTransform = "matrix(" + mat.toString() + ")";
             canvasStyle.width = canvasWidth;
             canvasStyle.height = canvasHeight;
-            if (this._safariOffsetY)
-                mat.translate(0, -this._safariOffsetY);
             mat.translate(parseInt(canvasStyle.left) || 0, parseInt(canvasStyle.top) || 0);
-            this.visible = true;
-            this._repaint |= SpriteConst.REPAINT_CACHE;
-            this.event(Event.RESIZE);
         }
         _formatData(value) {
             if (Math.abs(value) < 0.000001)
@@ -17598,6 +17602,9 @@ window.Laya= (function (exports) {
                 this._wgColor = ColorUtils.create(value).arrColor;
             else
                 this._wgColor = null;
+            Stage._setStyleBgColor(value);
+        }
+        static _setStyleBgColor(value) {
             if (value) {
                 Render.canvas.style.background = value;
             }
@@ -17649,9 +17656,12 @@ window.Laya= (function (exports) {
         set visible(value) {
             if (this.visible !== value) {
                 super.set_visible(value);
-                var style = Render._mainCanvas.source.style;
-                style.visibility = value ? "visible" : "hidden";
+                Stage._setVisibleStyle(value);
             }
+        }
+        static _setVisibleStyle(value) {
+            var style = Render._mainCanvas.source.style;
+            style.visibility = value ? "visible" : "hidden";
         }
         get visible() {
             return super.visible;
@@ -22949,10 +22959,7 @@ window.Laya= (function (exports) {
             ArrayBuffer.prototype.slice || (ArrayBuffer.prototype.slice = Laya._arrayBufferSlice);
             Browser.__init__();
             var mainCanv = Browser.mainCanvas = new HTMLCanvas(true);
-            var style = mainCanv.source.style;
-            style.position = 'absolute';
-            style.top = style.left = "0px";
-            style.background = "#000000";
+            Laya._setStyleInfo(mainCanv);
             if (!Browser.onKGMiniGame && !Browser.onAlipayMiniGame) {
                 Browser.container.appendChild(mainCanv.source);
             }
@@ -23017,6 +23024,12 @@ window.Laya= (function (exports) {
             Value2D._initone(ShaderDefines2D.PRIMITIVE, PrimitiveSV);
             Value2D._initone(ShaderDefines2D.SKINMESH, SkinSV);
             return Render.canvas;
+        }
+        static _setStyleInfo(mainCanv) {
+            let style = mainCanv.source.style;
+            style.position = 'absolute';
+            style.top = style.left = "0px";
+            style.background = "#000000";
         }
         static createRender() {
             return new Render(0, 0, Browser.mainCanvas);
@@ -23132,7 +23145,7 @@ window.Laya= (function (exports) {
     Laya.lateTimer = null;
     Laya.timer = null;
     Laya.loader = null;
-    Laya.version = "2.13.3";
+    Laya.version = "2.13.5";
     Laya._isinit = false;
     Laya.isWXOpenDataContext = false;
     Laya.isWXPosMsg = false;

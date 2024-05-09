@@ -553,9 +553,18 @@ window.tbMiniGame = function (exports, Laya) {
             this._sound = MiniSound._createSound();
         }
         static __init__() {
+            for (let index = 0; index < 10; index++) {
+                let s = TBMiniAdapter.window.my.createInnerAudioContext();
+                MiniSound.cachePool.push(s);
+            }
         }
         static _createSound() {
-            return TBMiniAdapter.window.my.createInnerAudioContext();
+            if (MiniSound.cachePool.length) {
+                return MiniSound.cachePool.pop();
+            }
+            else {
+                return TBMiniAdapter.window.my.createInnerAudioContext();
+            }
         }
         load(url) {
             if (!MiniFileMgr.isLocalNativeZipFile(url) && MiniFileMgr.isNetFile(url)) {
@@ -691,8 +700,7 @@ window.tbMiniGame = function (exports, Laya) {
         }
         dispose() {
             if (this._sound) {
-                this._sound.destroy();
-                this._sound.src = "";
+                MiniSound.cachePool.push(this._sound);
                 this._sound = null;
                 this.readyUrl = this.url = null;
             }
@@ -732,37 +740,7 @@ window.tbMiniGame = function (exports, Laya) {
             ts.scale((Laya.Browser.width / Laya.Render.canvas.width / Laya.Browser.pixelRatio), Laya.Browser.height / Laya.Render.canvas.height / Laya.Browser.pixelRatio);
         }
         static wxinputFocus(e) {
-            var _inputTarget = Laya.Input['inputElement'].target;
-            if (_inputTarget && !_inputTarget.editable) {
-                return;
-            }
-            TBMiniAdapter.window.my.prompt({
-                title: '请在提示框中输入内容',
-                content: _inputTarget.text || "",
-                placeholder: _inputTarget.prompt || "",
-                success: (res) => {
-                    if (res.ok) {
-                        console.log('用户点击确定');
-                        var str = res ? res.inputValue : "";
-                        if (_inputTarget._restrictPattern) {
-                            str = str.replace(/\u2006|\x27/g, "");
-                            if (_inputTarget._restrictPattern.test(str)) {
-                                str = str.replace(_inputTarget._restrictPattern, "");
-                            }
-                        }
-                        _inputTarget.text = str;
-                        _inputTarget.miniGameTxt && _inputTarget.miniGameTxt(str);
-                        _inputTarget.event(Laya.Event.INPUT);
-                        MiniInput.inputEnter();
-                        _inputTarget.event("confirm");
-                        _inputTarget.event("enter");
-                    }
-                    else if (!res.ok) {
-                        console.log('用户点击取消');
-                        MiniInput.inputEnter();
-                    }
-                }
-            });
+            return;
         }
         static inputEnter() {
             Laya.Input['inputElement'].target.focus = false;
@@ -771,13 +749,7 @@ window.tbMiniGame = function (exports, Laya) {
             MiniInput.hideKeyboard();
         }
         static hideKeyboard() {
-            TBMiniAdapter.window.my.hideKeyboard({
-                success: function (res) {
-                    console.log('隐藏键盘');
-                }, fail: function (res) {
-                    console.log("隐藏键盘出错:" + (res ? res.errMsg : ""));
-                }
-            });
+            return;
         }
     }
 
@@ -1059,7 +1031,7 @@ window.tbMiniGame = function (exports, Laya) {
                 return;
             TBMiniAdapter._inited = true;
             TBMiniAdapter.window = window;
-            if (!("my" in TBMiniAdapter.window))
+            if (!TBMiniAdapter.window.hasOwnProperty("my"))
                 return;
             TBMiniAdapter.isZiYu = isSon;
             TBMiniAdapter.isPosMsgYu = isPosMsg;
@@ -1100,23 +1072,10 @@ window.tbMiniGame = function (exports, Laya) {
             Laya.Loader.prototype.complete = MiniLoader.prototype.complete;
             Laya.Loader.prototype._loadHttpRequestWhat = MiniLoader.prototype._loadHttpRequestWhat;
             Laya.Config.useRetinalCanvas = true;
-            Laya.Config.useWebGL2 = false;
             Laya.LocalStorage._baseClass = MiniLocalStorage;
             MiniLocalStorage.__init__();
             MiniSound.__init__();
             TBMiniAdapter.window.my.onMessage && TBMiniAdapter.window.my.onMessage(TBMiniAdapter._onMessage);
-            Laya.Laya._setStyleInfo = TBMiniAdapter._setStyleInfo;
-            Laya.Stage._setStageStyle = TBMiniAdapter._setStageStyle;
-            Laya.Stage._setStyleBgColor = TBMiniAdapter._setStyleBgColor;
-            Laya.Stage._setVisibleStyle = TBMiniAdapter._setVisibleStyle;
-        }
-        static _setVisibleStyle() {
-        }
-        static _setStyleBgColor(value) {
-        }
-        static _setStyleInfo(mainCanv) {
-        }
-        static _setStageStyle(mainCanv, canvasWidth, canvasHeight, mat) {
         }
         static _onMessage(data) {
             switch (data.type) {
@@ -1334,7 +1293,7 @@ window.tbMiniGame = function (exports, Laya) {
             if (type == "canvas") {
                 var _source;
                 if (TBMiniAdapter.idx == 1) {
-                    _source = TBMiniAdapter.window.screencanvas;
+                    _source = TBMiniAdapter.window.canvas.getRealCanvas();
                     if (!my.isIDE) {
                         var originfun = _source.getContext;
                         _source.getContext = function (type) {
@@ -1424,7 +1383,7 @@ window.tbMiniGame = function (exports, Laya) {
     TBMiniAdapter.subNativeheads = [];
     TBMiniAdapter.subMaps = [];
     TBMiniAdapter.AutoCacheDownFile = false;
-    TBMiniAdapter.baseDir = "";
+    TBMiniAdapter.baseDir = "pages/index/";
     TBMiniAdapter.parseXMLFromString = function (value) {
         var rst;
         value = value.replace(/>\s+</g, '><');
