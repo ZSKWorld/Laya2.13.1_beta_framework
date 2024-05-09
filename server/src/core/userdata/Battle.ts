@@ -5,6 +5,7 @@ import { DecodeObject } from "./DecodeObject";
 class MapData<T> extends DecodeObject<T> {
     protected override onDecode(data: OriginData<T>, key: OriginDataKeys<T>) {
         const that = this as unknown as T;
+        Object.keys(that[key]).forEach(v => that[key][v] = null);
         Object.keys(data[key]).forEach(v => that[key][v] = data[key][v]);
         return that[key];
     }
