@@ -13,7 +13,7 @@ class MapData<T> extends DecodeObject<T> {
 
 class Level extends MapData<ILevel> implements ILevel {
     enterBattle(id: number): void {
-
+        
     }
 }
 
