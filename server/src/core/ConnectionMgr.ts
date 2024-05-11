@@ -1,4 +1,4 @@
-import { Pool, PoolKey } from "../libs/pool/Pool";
+import { Pool, PoolKey } from "../libs/Pool";
 import { TimeUtil } from "../utils/TimeUtil";
 import { Connection } from "./Connection";
 class ClosedConnection {
@@ -8,37 +8,37 @@ class ClosedConnection {
 
 class ConnectionMgr {
     private readonly ClosedConExistTime = 30000;
-    private closedConnection: { [ key: string ]: ClosedConnection } = {};
-    private connectionUidMap: { [ uid: string ]: Connection } = {};
+    private closedConnection: { [key: string]: ClosedConnection } = {};
+    private connectionUidMap: { [uid: string]: Connection } = {};
     constructor() {
         setInterval(() => this.clearClosedConnection(), 1000);
     }
 
     addConnection(uid: string, connection: Connection) {
-        this.connectionUidMap[ uid ] = connection;
+        this.connectionUidMap[uid] = connection;
     }
 
     getConnection(uid: string) {
-        return this.connectionUidMap[ uid ];
+        return this.connectionUidMap[uid];
     }
 
     connectionClosed(token: string, connection: Connection) {
-        if (this.closedConnection[ token ]) return;
+        if (this.closedConnection[token]) return;
         const closedCon = Pool.get(PoolKey.ClosedConnection, ClosedConnection);
         closedCon.time = TimeUtil.milliSeconds();
         closedCon.connection = connection;
-        this.closedConnection[ token ] = closedCon;
-        delete this.connectionUidMap[ token ];
+        this.closedConnection[token] = closedCon;
+        delete this.connectionUidMap[token];
     }
 
     getClosedConnection(token: string) {
-        const closedCon = this.closedConnection[ token ];
+        const closedCon = this.closedConnection[token];
         if (closedCon) {
             const con = closedCon.connection;
             closedCon.time = 0;
             closedCon.connection = null;
             Pool.recover(PoolKey.ClosedConnection, closedCon);
-            delete this.closedConnection[ token ];
+            delete this.closedConnection[token];
             return con;
         }
         return null;
@@ -48,11 +48,11 @@ class ConnectionMgr {
         const time = TimeUtil.milliSeconds();
         const { closedConnection, ClosedConExistTime } = this;
         Object.keys(closedConnection).forEach(v => {
-            const con = closedConnection[ v ];
+            const con = closedConnection[v];
             if (time - con.time > ClosedConExistTime) {
                 con.connection.clear();
                 Pool.recover(PoolKey.ClosedConnection, con);
-                delete closedConnection[ v ];
+                delete closedConnection[v];
             }
         });
     }

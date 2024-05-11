@@ -1,4 +1,4 @@
-import { Pool, PoolKey } from "../libs/pool/Pool";
+import { Pool, PoolKey } from "../libs/Pool";
 
 export class TimeUtil {
     /** 获取毫秒级时间戳 */
@@ -6,6 +6,12 @@ export class TimeUtil {
     /** 获取秒级时间戳 */
     static seconds() { return Math.floor(Date.now() / 1000); }
 
+    /**
+     * 检测是否是下一天
+     * @param lastTime 
+     * @param nowTime 
+     * @returns 
+     */
     static checkNextDay(lastTime: number, nowTime: number) {
         const lastDate = Pool.get(PoolKey.Date, Date);
         const nowDate = Pool.get(PoolKey.Date, Date);

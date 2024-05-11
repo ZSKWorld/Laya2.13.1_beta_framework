@@ -21,4 +21,5 @@ const removeDir = function (dir) {
 }
 
 removeDir(path.resolve(__dirname, "../bin/declare"));
-childProcess.exec("tsc ./src/Main.ts --outDir ./bin/js --sourcemap");
+// childProcess.exec("tsc ./src/Main.ts --outDir ./bin/js --sourcemap");
+childProcess.exec("tsc -p tsconfig.json");

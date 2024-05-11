@@ -1,8 +1,13 @@
+
 export class BattleProcessor {
-    user: IUser;
+    private _user: IUser;
     private _inBattle: Boolean = false;
     private _battleInfo: IEnterBattleInput;
     get inBattle() { return this._inBattle; }
+
+    init(user: IUser) {
+        this._user = user;
+    }
 
     start(info: IEnterBattleInput) {
         if (this._inBattle) return;
@@ -17,6 +22,6 @@ export class BattleProcessor {
 
     clear() {
         this.exit();
-        this.user = null;
+        this._user = null;
     }
 }

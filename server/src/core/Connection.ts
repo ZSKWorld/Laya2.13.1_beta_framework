@@ -1,10 +1,10 @@
 import * as websocket from "websocket";
+import { Pool, PoolKey } from "../libs/Pool";
+import { Timer } from "../libs/Timer";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
-import { Pool, PoolKey } from "../libs/pool/Pool";
-import { Timer } from "../libs/timer/Timer";
-import { Color, Logger } from "../utils/Logger";
 import { ProxyMgr } from "../utils/ProxyMgr";
 import { connectionMgr } from "./ConnectionMgr";
+import { BattleProcessor } from "./battle/BattleProcessor";
 import { CMDController } from "./controller/cmd/CMDController";
 import { CMDAccouont } from "./controller/cmd/account/CMDAccouont";
 import { CMDBag } from "./controller/cmd/bag/CMDBag";
@@ -17,7 +17,6 @@ import { NotifyBase } from "./controller/notify/base/NotifyBase";
 import { NotifyHeart } from "./controller/notify/heart/NotifyHeart";
 import { ErrorCode } from "./enum/ErrorCode";
 import { MessageType } from "./enum/MessageType";
-import { BattleProcessor } from "./battle/BattleProcessor";
 import { User } from "./userdata/User";
 const enum ConnectionEvent {
     Message = "message",
@@ -52,7 +51,6 @@ export class Connection {
     setConnection(connection: websocket.connection) {
         if (!connection) return;
         if (this._connection) return;
-        Logger.log("set connection " + this._logined);
         this._connection = connection;
         if (!this._listener) {
             this._listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
@@ -87,7 +85,7 @@ export class Connection {
             this._user = ProxyMgr.getProxy(data.account.uid, null, new User());
             connectionMgr.addConnection(data.account.uid, this);
             this._user.decode(data);
-            this._battleProcessor.user = this._user;
+            this._battleProcessor.init(this._user);
             Timer.timer.frameLoop(1, this, this.update);
         }
     }
@@ -107,7 +105,6 @@ export class Connection {
     }
 
     clear() {
-        Logger.log("connection clear", Color.red);
         Timer.timer.clearAll(this);
         this._logined = false;
         this._connection?.off(ConnectionEvent.Close, this._onClose);
@@ -158,7 +155,6 @@ export class Connection {
     }
 
     private onConnectionClose() {
-        Logger.log("connection close", Color.red);
         this._connection?.off(ConnectionEvent.Close, this._onClose);
         this._connection?.off(ConnectionEvent.Message, this._onMessage);
         this._connection = null;

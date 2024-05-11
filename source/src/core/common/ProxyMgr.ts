@@ -27,7 +27,7 @@ export class ProxyMgr {
             return target;
     }
 
-    private static setSyncFunc(target, uid) {
+    private static setSyncFunc(target: object, uid: string) {
         Object.defineProperty(target, "getSyncInfo", {
             value: function () {
                 const result = {};

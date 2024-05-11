@@ -1,11 +1,12 @@
-export const ProxyKey = Symbol(111);
+export const CantSyncKey = Symbol("CantSyncKey");
+export const HadSyncKey = Symbol("HadSyncKey");
 export class ProxyMgr {
     private static proxyMap: { [uid: string]: any } = {};
 
     static getProxy<T extends object>(uid: string, dataKey: string, target: T, addSyncFunc: boolean = true) {
         dataKey = dataKey || "";
-        if (target != null && typeof target === "object" && !target[ProxyKey] && !target["cantSyncObj"]) {
-            target[ProxyKey] = true;
+        if (target != null && typeof target === "object" && !target[HadSyncKey] && !target[CantSyncKey]) {
+            target[HadSyncKey] = true;
             Object.keys(target).forEach(key => target[key] = this.getProxy(uid, `${ dataKey }.${ key }`, target[key], false));
             if (addSyncFunc) {
                 Object.defineProperty(target, "getSyncInfo", {

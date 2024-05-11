@@ -23,7 +23,7 @@ export class CMDController extends Controller {
     }
 }
 
-export function Command(_: any, context: ClassMethodDecoratorContext) {
+export function CMD(_: any, context: ClassMethodDecoratorContext) {
     context.addInitializer(function () {
         const _this = this as any;
         _this._cmds = _this._cmds || {};

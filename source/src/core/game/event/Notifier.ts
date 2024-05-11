@@ -1,9 +1,5 @@
 import { eventMgr } from "./EventManager";
 
-/**
- * 简单的消息发送对象
- * @author wizardc
- */
 export abstract class Notifier {
     /**
      * 派发事件。

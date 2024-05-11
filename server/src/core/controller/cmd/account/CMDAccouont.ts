@@ -1,11 +1,11 @@
 import { UserUtil } from "../../../../utils/UserUtil";
 import { User } from "../../../userdata/User";
-import { CMDController, Command } from "../CMDController";
+import { CMD, CMDController } from "../CMDController";
 import { AccountChecker } from "./AccountChecker";
 
 export class CMDAccouont extends CMDController implements IAccountCtrl {
 
-    @Command
+    @CMD
     login(data: ILoginInput): void {
         const logined = this.connection.logined;
         const errorCode = AccountChecker.checkLogin(this.user, data, logined);
@@ -20,7 +20,7 @@ export class CMDAccouont extends CMDController implements IAccountCtrl {
         }
     }
 
-    @Command
+    @CMD
     register(data: IRegisterInput): void {
         const errorCode = AccountChecker.checkRegister(this.user, data);
         if (errorCode) return this.response(data.cmd, null, errorCode);
@@ -34,7 +34,7 @@ export class CMDAccouont extends CMDController implements IAccountCtrl {
         this.response(data.cmd);
     }
 
-    @Command
+    @CMD
     clearAccount(data: IClearAccountInput): void {
         const { account, password, nickname } = this.user.account;
         new User(account, password, nickname).save();

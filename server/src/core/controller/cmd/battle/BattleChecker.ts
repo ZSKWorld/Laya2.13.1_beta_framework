@@ -1,13 +1,15 @@
+import { Connection } from "../../../Connection";
 import { BattleType } from "../../../enum/BattleEnums";
 import { ErrorCode } from "../../../enum/ErrorCode";
 
 export class BattleChecker {
-    static checkEnterBattle(user: IUser, data: IEnterBattleInput, inBattle: boolean) {
+    static checkEnterBattle(connection: Connection, data: IEnterBattleInput) {
+        const { user, battleProcessor } = connection;
         switch (data.type) {
             case BattleType.Level:
             case BattleType.Copy:
             case BattleType.Secret:
-            case BattleType.Boss: if (inBattle) return ErrorCode.ALREADY_IN_BATTLE; break;
+            case BattleType.Boss: if (battleProcessor.inBattle) return ErrorCode.ALREADY_IN_BATTLE; break;
             default: return ErrorCode.UNKNOWN_BATTLE_TYPE;
         }
         const battle = user.battle;
@@ -18,8 +20,9 @@ export class BattleChecker {
         return ErrorCode.NONE;
     }
 
-    static checkExitBattle(user: IUser, data: IExitBattleInput, inBattle: boolean) {
-        if (!inBattle) return ErrorCode.NOT_IN_BATTLE;
+    static checkExitBattle(connection: Connection, data: IExitBattleInput) {
+        const { battleProcessor } = connection;
+        if (!battleProcessor.inBattle) return ErrorCode.NOT_IN_BATTLE;
         return ErrorCode.NONE;
     }
 

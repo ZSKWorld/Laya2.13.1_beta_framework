@@ -1,9 +1,9 @@
 import { connectionMgr } from "../../../ConnectionMgr";
 import { ErrorCode } from "../../../enum/ErrorCode";
-import { CMDController, Command } from "../CMDController";
+import { CMD, CMDController } from "../CMDController";
 
 export class CMDFriend extends CMDController implements IFriendCtrl {
-    @Command
+    @CMD
     addFriend(data: IAddFriendInput): void {
         const { user } = this;
         if (user.friend.friend.includes(data.friendUid))
@@ -13,7 +13,7 @@ export class CMDFriend extends CMDController implements IFriendCtrl {
     }
 
 
-    @Command
+    @CMD
     friendMsg(data: IFriendMsgInput): void {
         if (!this.user.friend.friend.includes(data.friendUid))
             return this.response(data.cmd, null, ErrorCode.NOT_FRIEND);

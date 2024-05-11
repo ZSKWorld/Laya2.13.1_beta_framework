@@ -1,8 +1,10 @@
+import { Connection } from "../../../Connection";
 import { BattleType } from "../../../enum/BattleEnums";
 import { BaseDataType } from "../../../enum/ItemEnum";
 
 export class BattleHandle {
-    static enterBattle(user: IUser, data: IEnterBattleInput) {
+    static enterBattle(connection: Connection, data: IEnterBattleInput) {
+        const { user, battleProcessor } = connection;
         switch (data.type) {
             case BattleType.Level: user.battle.level.enterBattle(data.id); break;
             case BattleType.Copy: user.battle.copy.enterBattle(data.id); break;
@@ -10,6 +12,12 @@ export class BattleHandle {
             case BattleType.Boss: user.battle.boss.enterBattle(data.id); break;
         }
         user.base.changeItemCount(BaseDataType.Vigor, -user.battle.getVigorCost(data.type, data.id));
+        battleProcessor.start(data);
+    }
+
+    static exitBattle(connection: Connection, data: IExitBattleInput) {
+        const { battleProcessor } = connection;
+        battleProcessor.exit();
     }
 
     static startGather(user: IUser, data: IStartGatherInput): void {

@@ -1,10 +1,6 @@
 import { eventMgr } from "./EventManager";
 import { Notifier } from "./Notifier";
 
-/**
- * 一个简单的观察者
- * @author wizardc
- */
 export abstract class Observer extends Notifier {
     protected __eventMap: KeyMap<Function[]>;
 

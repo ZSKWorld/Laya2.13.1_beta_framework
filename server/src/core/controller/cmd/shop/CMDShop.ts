@@ -1,9 +1,9 @@
-import { CMDController, Command } from "../CMDController";
+import { CMD, CMDController } from "../CMDController";
 import { ShopChecker } from "./ShopChecker";
 import { ShopHandle } from "./ShopHandle";
 
 export class CMDShop extends CMDController implements IShopCtrl {
-    @Command
+    @CMD
     buyGoods(data: IBuyGoodsInput): void {
         const { user } = this;
         const errorCode = ShopChecker.checkItemPurchasable(user, data.id, data.count);

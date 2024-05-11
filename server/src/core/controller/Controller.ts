@@ -1,4 +1,4 @@
-import { Pool } from "../../libs/pool/Pool";
+import { Pool } from "../../libs/Pool";
 import { Connection } from "../Connection";
 
 export class Controller {
@@ -7,17 +7,27 @@ export class Controller {
     get user() { return this._connection.user; }
 
     static create<T>(connection: Connection) {
-        const result = Pool.get(this.prototype.constructor.name as any, this);
+        const result = Pool.get(this.prototype.constructor.name, this);
         result._connection = connection;
         return result as T;
     }
 
-    update(delta: number) {}
+    update(delta: number) { }
 
-    close() {}
+    close() { }
 
     recover() {
         this._connection = null;
-        Pool.recover(this.constructor.name as any, this);
+        Pool.recover(this.constructor.name, this);
+    }
+}
+
+export function CtrlLoop(interval: number) {
+    return function (target: any, context: ClassMethodDecoratorContext) {
+        context.addInitializer(function () {
+            const _this = this as any;
+            _this._cmds = _this._cmds || {};
+            _this._cmds[context.name] = context.name;
+        });
     }
 }

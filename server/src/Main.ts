@@ -3,7 +3,7 @@ import { AddressInfo } from "net";
 import * as websocket from "websocket";
 import { Connection } from "./core/Connection";
 import { cfgMgr } from "./core/config/CfgManager";
-import { Timer } from "./libs/timer/Timer";
+import { Timer } from "./libs/Timer";
 import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");
 cfgMgr.load();

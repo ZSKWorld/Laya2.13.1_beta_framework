@@ -1,9 +1,9 @@
-import { CMDController, Command } from "../CMDController";
+import { CMD, CMDController } from "../CMDController";
 import { BagChecker } from "./BagChecker";
 import { BagHandle } from "./BagHandle";
 
 export class CMDBag extends CMDController implements IBagCtrl {
-    @Command
+    @CMD
     useItem(data: IUseItemInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkItemUsable(user, data.id, data.count);
@@ -12,7 +12,7 @@ export class CMDBag extends CMDController implements IBagCtrl {
         this.response<IUseItemOutput>(data.cmd, { rewards });
     }
 
-    @Command
+    @CMD
     sellItem(data: ISellItemInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkItemSalable(user, data.id, data.count);
@@ -21,7 +21,7 @@ export class CMDBag extends CMDController implements IBagCtrl {
         this.response<ISellItemOutput>(data.cmd, { rewards });
     }
 
-    @Command
+    @CMD
     changeCollect(data: IChangeCollectInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkCollect(user, data.id, data.collect);
@@ -30,13 +30,13 @@ export class CMDBag extends CMDController implements IBagCtrl {
         this.response(data.cmd);
     }
 
-    @Command
+    @CMD
     decomposeGem(data: IDecomposeGemInput): void {
         const rewards = BagHandle.decomposeGemByLevel(this.user, data.level);
         this.response<IDecomposeGemOutput>(data.cmd, { rewards });
     }
 
-    @Command
+    @CMD
     dressEquip(data: IDressEquipInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkEquipDressable(user, data.uid);
@@ -45,7 +45,7 @@ export class CMDBag extends CMDController implements IBagCtrl {
         this.response(data.cmd);
     }
 
-    @Command
+    @CMD
     takeOffEquip(data: ITakeOffEquipInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkEquipTakeOff(user, data.part);
@@ -54,7 +54,7 @@ export class CMDBag extends CMDController implements IBagCtrl {
         this.response(data.cmd);
     }
 
-    @Command
+    @CMD
     sellEquip(data: ISellEquipInput): void {
         const { user } = this;
         const errorCode = BagChecker.checkEquipSalable(user, data.uid);
@@ -63,7 +63,7 @@ export class CMDBag extends CMDController implements IBagCtrl {
         this.response<ISellEquipOutput>(data.cmd, { rewards });
     }
 
-    @Command
+    @CMD
     decomposeEquip(data: IDecomposeEquipInput): void {
         const rewards = BagHandle.decomposeEquipByStar(this.user, data.star);
         this.response<IDecomposeEquipOutput>(data.cmd, { rewards });
