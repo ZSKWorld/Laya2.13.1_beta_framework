@@ -3,7 +3,7 @@ import { TimeUtil } from "../../utils/TimeUtil";
 import { DecodeObject } from "./DecodeObject";
 
 export class Account extends DecodeObject<IAccount> implements IAccount {
-    uid: string = GameUtil.generateUUID();
+    uid: string = GameUtil.getUUID();
     nickname: string = "";
     account: string = "";
     password: string = "";

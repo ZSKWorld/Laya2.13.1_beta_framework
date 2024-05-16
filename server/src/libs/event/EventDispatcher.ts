@@ -1,24 +1,35 @@
+import { GameUtil } from "../../utils/GameUtil";
+import { Pool } from "../Pool";
 import { EventHandler } from "./EventHandler";
 
 export class EventDispatcher {
+    private static readonly PoolKey = GameUtil.getUUID();
     private _events: any;
-    
+
+    static create() {
+        return Pool.get(this.PoolKey, this);
+    }
+
+    static recover(event: EventDispatcher) {
+        Pool.recover(this.PoolKey, event);
+    }
+
     hasListener(type: string) {
-        return !!(this._events && this._events[ type ]);
+        return !!(this._events && this._events[type]);
     }
 
     event(type: string, data: any = null) {
-        if (!this._events || !this._events[ type ])
+        if (!this._events || !this._events[type])
             return false;
-        const listeners = this._events[ type ];
+        const listeners = this._events[type];
         if (listeners.run) {
             if (listeners.once)
-                delete this._events[ type ];
+                delete this._events[type];
             data != null ? listeners.runWith(data) : listeners.run();
         }
         else {
             for (let i = 0, n = listeners.length; i < n; i++) {
-                const listener = listeners[ i ];
+                const listener = listeners[i];
                 if (listener) {
                     (data != null) ? listener.runWith(data) : listener.run();
                 }
@@ -28,8 +39,8 @@ export class EventDispatcher {
                     n--;
                 }
             }
-            if (listeners.length === 0 && this._events && this._events[ type ] && !this._events[ type ].run)
-                delete this._events[ type ];
+            if (listeners.length === 0 && this._events && this._events[type] && !this._events[type].run)
+                delete this._events[type];
         }
         return true;
     }
@@ -43,32 +54,32 @@ export class EventDispatcher {
     }
 
     off(type: string, caller: any, listener: Function, onceOnly: boolean = false) {
-        if (!this._events || !this._events[ type ])
+        if (!this._events || !this._events[type])
             return this;
-        var listeners = this._events[ type ];
+        var listeners = this._events[type];
         if (listeners != null) {
             if (listeners.run) {
                 if ((!caller || listeners.caller === caller) && (listener == null || listeners.method === listener) && (!onceOnly || listeners.once)) {
-                    delete this._events[ type ];
+                    delete this._events[type];
                     listeners.recover();
                 }
             }
             else {
                 var count = 0;
                 for (var i = 0, n = listeners.length; i < n; i++) {
-                    var item = listeners[ i ];
+                    var item = listeners[i];
                     if (!item) {
                         count++;
                         continue;
                     }
                     if (item && (!caller || item.caller === caller) && (listener == null || item.method === listener) && (!onceOnly || item.once)) {
                         count++;
-                        listeners[ i ] = null;
+                        listeners[i] = null;
                         item.recover();
                     }
                 }
                 if (count === n)
-                    delete this._events[ type ];
+                    delete this._events[type];
             }
         }
         return this;
@@ -79,12 +90,12 @@ export class EventDispatcher {
         if (!events)
             return this;
         if (type) {
-            this._recoverHandlers(events[ type ]);
-            delete events[ type ];
+            this._recoverHandlers(events[type]);
+            delete events[type];
         }
         else {
             for (var name in events) {
-                this._recoverHandlers(events[ name ]);
+                this._recoverHandlers(events[name]);
             }
             this._events = null;
         }
@@ -105,13 +116,13 @@ export class EventDispatcher {
         var handler = EventHandler.create(caller || this, listener, args, once);
         this._events || (this._events = {});
         var events = this._events;
-        if (!events[ type ])
-            events[ type ] = handler;
+        if (!events[type])
+            events[type] = handler;
         else {
-            if (!events[ type ].run)
-                events[ type ].push(handler);
+            if (!events[type].run)
+                events[type].push(handler);
             else
-                events[ type ] = [ events[ type ], handler ];
+                events[type] = [events[type], handler];
         }
         return this;
     }
@@ -124,9 +135,9 @@ export class EventDispatcher {
         }
         else {
             for (var i = arr.length - 1; i > -1; i--) {
-                if (arr[ i ]) {
-                    arr[ i ].recover();
-                    arr[ i ] = null;
+                if (arr[i]) {
+                    arr[i].recover();
+                    arr[i] = null;
                 }
             }
         }

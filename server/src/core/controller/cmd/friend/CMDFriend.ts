@@ -17,10 +17,6 @@ export class CMDFriend extends CMDController implements IFriendCtrl {
     friendMsg(data: IFriendMsgInput): void {
         if (!this.user.friend.friend.includes(data.friendUid))
             return this.response(data.cmd, null, ErrorCode.NOT_FRIEND);
-        const friendCon = connectionMgr.getConnection(data.friendUid);
-        if (friendCon) {
-            // friendCon.notify({ cmd: data.cmd, data: data.chatMsg });
-        }
         this.response(data.cmd);
     }
 }

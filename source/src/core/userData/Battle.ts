@@ -38,7 +38,7 @@ class Boss extends MapData<IBoss> implements IBoss {
         const lastTime = this.lastChallengeTime[id];
         if (!lastTime) return 0;
         const cfg = cfgMgr.Boss[id];
-        return Math.max(cfg.coolTime - (TimeUtil.GetSecondStamp() - lastTime), 0);
+        return Math.max(cfg.coolTime - (TimeUtil.second() - lastTime), 0);
     }
 }
 
@@ -49,7 +49,7 @@ class Gather extends MapData<IGather> implements IGather {
     remainTime(id: number) {
         const startTime = this.startTimeMap[id];
         if (!startTime) return 0;
-        return Math.max(this.gatherTimeMap[id] - (TimeUtil.GetSecondStamp() - startTime), 0);
+        return Math.max(this.gatherTimeMap[id] - (TimeUtil.second() - startTime), 0);
     }
 }
 

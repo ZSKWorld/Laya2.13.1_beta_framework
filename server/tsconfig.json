@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "noEmitHelpers": true,
+    "noEmitHelpers": false,
     "sourceMap": true,
     "outDir": "./bin/js",
     "noImplicitOverride": true,
-    "removeComments": false
+    "removeComments": false,
+    "experimentalDecorators": false
   },
   "exclude": [
     "node_modules",

@@ -1,3 +1,4 @@
+import { TimeUtil } from "../../../../common/TimeUtil";
 import { localData } from "../../../../game/localData/LocalData";
 import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { MathUtil } from "../../../../game/math/MathUtil";
@@ -32,9 +33,10 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData> {
 			.combineBreak("正在构建游戏世界")
 			.combineBreak("正在计算离线收益")
 			.combineBreak("初始化完毕");
+
 		const offlineConfirmTxt = richStrMgr.start()
 			.combineBreak("欢迎回来")
-			.combineBreak(`你最后一次在线时间为:${ new Date(account.lastOnlineTime).toLocaleString() }`);
+			.combineBreak(`你最后一次在线时间为:${ TimeUtil.milliSecond2YMDHMS(account.lastOnlineTime) }`);
 		if (offline) {
 			offlineConfirmTxt.combineBreak(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`)
 				.combineBreak(`获得精力${ offline.vigor }点`);

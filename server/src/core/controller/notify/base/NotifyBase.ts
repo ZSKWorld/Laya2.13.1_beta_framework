@@ -1,15 +1,13 @@
 import { BaseDataType } from "../../../enum/ItemEnum";
 import { NetNotify } from "../../../enum/NetNotify";
+import { CtrlLoop } from "../../Controller";
 import { NotifyController } from "../NotifyController";
 
 export class NotifyBase extends NotifyController {
-    private _delta: number = 0;
 
-    override update(delta: number) {
+    @CtrlLoop(10000)
+    private vigorRecover() {
         if (!this.connection.logined) return;
-        this._delta += delta;
-        if (this._delta < 10000) return;
-        this._delta = 0;
         const base = this.user.base;
         const { vigor, maxVigro, vigorRecover } = base;
         if (vigor >= maxVigro) return;

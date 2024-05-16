@@ -39,8 +39,8 @@ export class Logger {
     private static _enable: boolean = true;
     static setEnable(enable: boolean) { this._enable = enable; }
 
-    static log(txt: string, color: Color = Color.white) {
+    static log(txt: any, color: Color = Color.white) {
         if (!this._enable) return;
-        console.log(colors[ color ](txt));
+        console.log(colors[ color ](String(txt)));
     }
 }

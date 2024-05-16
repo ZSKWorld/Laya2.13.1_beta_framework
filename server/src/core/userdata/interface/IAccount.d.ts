@@ -1,4 +1,5 @@
 declare interface IAccount extends IDecodeObject<IAccount> {
+    /** 用户uid */
     uid: string;
     /** 昵称 */
     nickname: string;

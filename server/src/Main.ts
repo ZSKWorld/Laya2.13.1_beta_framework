@@ -8,34 +8,46 @@ import { Color, Logger } from "./utils/Logger";
 require("../libs/extends.js");
 cfgMgr.load();
 Logger.setEnable(true);
-const originConnection: { [key: string]: websocket.connection } = {};
-const originConOnMessage = function (conKey: string, msg: websocket.Message) {
-    const connect = originConnection[conKey];
-    delete originConnection[conKey];
+const originConOnMessage = function (connection: websocket.connection, msg: websocket.Message) {
     if (msg.type === 'utf8') {
-        const data: IUserInput = JSON.parse(msg.utf8Data);
-        Connection.startConnection(data.token, connect, msg);
-    } else connect.close();
+        const input: IUserInput = JSON.parse(msg.utf8Data);
+        Connection.startConnection(input, connection, msg);
+    } else {
+        connection.removeAllListeners("message");
+        connection.close();
+    }
 }
 
-const server = http.createServer().listen({ host: "192.168.71.16", port: 8007 }, function () {
-    const { address, port } = server.address() as AddressInfo;
+const httpServer = http.createServer().listen({ host: "192.168.71.123", port: 8007 }, function () {
+    const { address, port } = httpServer.address() as AddressInfo;
     Logger.log(`服务器已启动：${ address }:${ port }`, Color.green);
 });
 
-const wsServer = new websocket.server({ httpServer: server, autoAcceptConnections: false });
+const wsServer = new websocket.server({ httpServer });
 
 wsServer.on("request", (request: websocket.request) => {
     const connection = request.accept();
     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 已连接，连接数量：${ wsServer.connections.length }`, Color.green);
 
-    const conKey = request.key;
-    originConnection[conKey] = connection;
-    connection.once("message", (msg) => originConOnMessage(conKey, msg));
-    connection.once("close", () => delete originConnection[conKey]);
+    connection.on("message", (msg) => originConOnMessage(connection, msg));
 });
 
-// wsServer.on("connect", (connection: websocket.connection) => {});
+// wsServer.on("connect", (connection: websocket.connection) => {
+//     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 已连接，连接数量：${ wsServer.connections.length }`, Color.green);
+//     connection.addListener("message", (msg) => {
+//         if (msg.type == "utf8") {
+//             const data: ILoginInput = JSON.parse(msg.utf8Data);
+//             if (data.cmd == "login") {
+//                 const user = UserUtil.getData(data.account);
+//                 if (!user) return connection.send(JSON.stringify({cmd:data.cmd, error:ErrorCode.USER_EXIST}));
+//                 if (data.password != user.account.password)
+//                     return connection.send(JSON.stringify({cmd:data.cmd, error:ErrorCode.PASSWORD_ERROR}));
+//                 connection.removeAllListeners();
+//                 Connection.startConnection()
+//             }
+//         } else connection.close();
+//     });
+// });
 
 wsServer.on("close", (connection, reson, desc) => {
     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 断开连接，剩余连接数量：${ wsServer.connections.length }。${ reson }-${ desc }`, Color.red);

@@ -1,5 +1,6 @@
 import { ResPath } from "../../core/common/ResPath";
 import { CfgManager } from "../../core/config/CfgManager";
+import { AccountService } from "../../core/net/Services";
 import { SocketEvent, websocket } from "../../core/net/WebSocket";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { layerMgr } from "../../core/ui/core/LayerManager";
@@ -42,11 +43,15 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 		sceneMgr.enterScene(SceneType.LoginScene);
 	}
 
-	@RegisterEvent(SocketEvent.ConnectSuccess, false, [true])
-	@RegisterEvent(SocketEvent.ReconnectSuccess, false, [true])
-	@RegisterEvent(SocketEvent.Close, false, [false])
-	private socketConnectChanged(open: boolean) {
-		if (open) uiMgr.removeView(ViewID.UIWaitingView);
+	@RegisterEvent(SocketEvent.ConnectSuccess, false, [true, SocketEvent.ConnectSuccess])
+	@RegisterEvent(SocketEvent.ReconnectSuccess, false, [true, SocketEvent.ReconnectSuccess])
+	@RegisterEvent(SocketEvent.Close, false, [false, SocketEvent.Close])
+	private socketConnectChanged(open: boolean, eventName: string) {
+		if (open) {
+			uiMgr.removeView(ViewID.UIWaitingView);
+			if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
+				AccountService.Inst.login({ account: userData.account.account, password: userData.account.password });
+		}
 		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
 	}
 

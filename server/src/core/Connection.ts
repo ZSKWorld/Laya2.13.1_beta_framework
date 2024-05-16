@@ -1,8 +1,11 @@
 import * as websocket from "websocket";
-import { Pool, PoolKey } from "../libs/Pool";
+import { Pool } from "../libs/Pool";
 import { Timer } from "../libs/Timer";
 import { EventDispatcher } from "../libs/event/EventDispatcher";
+import { GameUtil } from "../utils/GameUtil";
+import { Logger } from "../utils/Logger";
 import { ProxyMgr } from "../utils/ProxyMgr";
+import { UserUtil } from "../utils/UserUtil";
 import { connectionMgr } from "./ConnectionMgr";
 import { BattleProcessor } from "./battle/BattleProcessor";
 import { CMDController } from "./controller/cmd/CMDController";
@@ -23,15 +26,16 @@ const enum ConnectionEvent {
     Close = "close",
 }
 export class Connection {
-    private _onClose = () => this.onConnectionClose();
+    private static readonly PoolKey = GameUtil.getUUID();
     private _onMessage = (message) => this.onConnectionMessage(message);
-
-    private _token: string;
-    private _listener: EventDispatcher;
-    private _cmds: CMDController[];
-    private _notifies: NotifyController[];
+    private _onClose = () => this.onConnectionClose();
 
     private _logined: boolean;
+    private _token: string;
+    private _listener: EventDispatcher;
+    private _cmds: CMDController[] = [];
+    private _notifies: NotifyController[] = [];
+
     private _user: IUser;
     private _connection: websocket.connection;
     private _battleProcessor: BattleProcessor;
@@ -40,23 +44,68 @@ export class Connection {
     get user() { return this._user; }
     get battleProcessor() { return this._battleProcessor; }
 
-    static startConnection(token: string, connection: websocket.connection, msg?: websocket.Message) {
-        let con = connectionMgr.getClosedConnection(token);
-        if (!con) con = Pool.get(PoolKey.CommonConnection, Connection);
+    private static checkLogin(data: ILoginInput) {
+        if (!UserUtil.userExist(data.account)) return ErrorCode.USER_NOT_EXIST;
+        const userData = UserUtil.getData(data.account);
+        if (userData.account.password != data.password) return ErrorCode.PASSWORD_ERROR;
+        return ErrorCode.NONE;
+    }
+
+    private static checkRegister(data: IRegisterInput) {
+        if (UserUtil.userExist(data.account)) return ErrorCode.USER_EXIST;
+        if (!data.account) return ErrorCode.ACCOUNT_EMPTY;
+        else if (!data.password) return ErrorCode.PASSWORD_EMPTY;
+        else if (!data.nickname) return ErrorCode.NICKNAME_EMPTY;
+        return ErrorCode.NONE;
+    }
+
+    static startConnection(input: IUserInput, connection: websocket.connection, msg?: websocket.Message) {
+        let token: string;
+        let con: Connection;
+        if (input.cmd == "login") {
+            const loginInput = input as ILoginInput;
+            token = GameUtil.base64encode(loginInput.account + loginInput.password);
+            con = connectionMgr.getConnection(token);
+            if (!con) {
+                const errorCode = this.checkLogin(loginInput);
+                if (errorCode) return connection.sendUTF(JSON.stringify({
+                    type: MessageType.Response,
+                    cmd: loginInput.cmd,
+                    error: errorCode
+                }));
+            }
+        } else if (input.cmd == "register") {
+            const registerInput = input as IRegisterInput;
+            const errorCode = this.checkRegister(registerInput);
+            if (errorCode) {
+                return connection.sendUTF(JSON.stringify({
+                    type: MessageType.Response,
+                    cmd: registerInput.cmd,
+                    error: errorCode,
+                }));
+            }
+        } else return connection.sendUTF(JSON.stringify({
+            type: MessageType.Response,
+            cmd: input.cmd,
+            error: ErrorCode.NOT_LOGIN
+        }));
+        con ||= Pool.get(this.PoolKey, Connection);
         con._token = token;
         con.setConnection(connection);
         con.onConnectionMessage(msg);
+        Logger.log("start connection");
+    }
+
+    constructor() {
+        Logger.log("new connection");
     }
 
     setConnection(connection: websocket.connection) {
         if (!connection) return;
         if (this._connection) return;
         this._connection = connection;
-        if (!this._listener) {
-            this._listener = Pool.get(PoolKey.EventDispatcher, EventDispatcher);
-        }
-        if (!this._cmds || !this._cmds.length) {
-            this._cmds = this._cmds || [];
+        this._listener ||= EventDispatcher.create();
+        if (!this._cmds.length) {
             this._cmds.push(
                 CMDAccouont.create(this),
                 CMDBag.create(this),
@@ -65,29 +114,27 @@ export class Connection {
                 CMDShop.create(this),
             );
         }
-        if (!this._notifies || !this._notifies.length) {
-            this._notifies = this._notifies || [];
+        if (!this._notifies.length) {
             this._notifies.push(
                 NotifyAccount.create(this),
                 NotifyBase.create(this),
                 NotifyHeart.create(this),
             );
         }
-        if (!this._battleProcessor) this._battleProcessor = new BattleProcessor();
+        this._battleProcessor ||= new BattleProcessor();
 
-        connection.on(ConnectionEvent.Close, this._onClose);
+        connection.removeAllListeners(ConnectionEvent.Message);
         connection.on(ConnectionEvent.Message, this._onMessage);
+        connection.on(ConnectionEvent.Close, this._onClose);
+        Logger.log("set connection");
     }
 
     userLogin(data: OriginData<IUser>) {
-        if (!this._logined) {
-            this._logined = true;
-            this._user = ProxyMgr.getProxy(data.account.uid, null, new User());
-            connectionMgr.addConnection(data.account.uid, this);
-            this._user.decode(data);
-            this._battleProcessor.init(this._user);
-            Timer.timer.frameLoop(1, this, this.update);
-        }
+        this._logined = true;
+        this._user ||= ProxyMgr.getProxy(data.account.uid, null, new User());
+        this._user.decode(data);
+        this._battleProcessor.init(this._user);
+        Timer.timer.frameLoop(1, this, this.update);
     }
 
     sendMessage(type: MessageType, data: IUserOutput) {
@@ -105,31 +152,27 @@ export class Connection {
     }
 
     clear() {
+        Logger.log("clear connection");
         Timer.timer.clearAll(this);
+
         this._logined = false;
-        this._connection?.off(ConnectionEvent.Close, this._onClose);
-        this._connection?.off(ConnectionEvent.Message, this._onMessage);
-
-        this._connection = null;
-
+        this._token = null;
         this._listener.offAll();
-        Pool.recover(PoolKey.EventDispatcher, this._listener);
+        EventDispatcher.recover(this._listener);
         this._listener = null;
 
-        if (this._cmds) {
-            this._cmds.forEach(v => v.recover());
-            this._cmds.length = 0;
-        }
-
-        if (this._notifies) {
-            this._notifies.forEach(v => v.recover());
-            this._notifies.length = 0;
-        }
+        this._cmds.forEach(v => v.recover());
+        this._cmds.length = 0;
+        this._notifies.forEach(v => v.recover());
+        this._notifies.length = 0;
 
         this._user?.save();
         this._user = null;
+        this._connection?.off(ConnectionEvent.Close, this._onClose);
+        this._connection?.off(ConnectionEvent.Message, this._onMessage);
+        this._connection = null;
         this._battleProcessor?.clear();
-        Pool.recover(PoolKey.CommonConnection, this);
+        Pool.recover(Connection.PoolKey, this);
     }
 
     private update() {
@@ -158,10 +201,10 @@ export class Connection {
         this._connection?.off(ConnectionEvent.Close, this._onClose);
         this._connection?.off(ConnectionEvent.Message, this._onMessage);
         this._connection = null;
-        this._cmds?.forEach(v => v.close());
-        this._notifies?.forEach(v => v.close());
+        this._cmds.forEach(v => v.close());
+        this._notifies.forEach(v => v.close());
         this._user?.save();
         this._battleProcessor?.exit();
-        connectionMgr.connectionClosed(this._token, this);
+        connectionMgr.closeConnection(this._token, this);
     }
 }

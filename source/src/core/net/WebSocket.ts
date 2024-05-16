@@ -36,7 +36,7 @@ export const enum SocketEvent {
 }
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.71.16:8007";
+    private _url: string = "ws://192.168.71.123:8007";
     private _socket: Laya.Socket;
     private _state: SocketState = SocketState.Disconnect;
     private _waitList: IUserInput[];
@@ -46,35 +46,35 @@ class WebSocket extends Observer {
         const lastState = this._state;
         if (v == lastState) return;
         this._state = v;
-        let eventName: string[] = [];
+        let eventNames: string[] = [];
         switch (lastState) {
             case SocketState.Disconnect:
                 switch (v) {
-                    case SocketState.Connecting: eventName = [SocketEvent.Connecting]; break;
-                    case SocketState.Reconnecting: eventName = [SocketEvent.Reconnecting]; break;
+                    case SocketState.Connecting: eventNames = [SocketEvent.Connecting]; break;
+                    case SocketState.Reconnecting: eventNames = [SocketEvent.Reconnecting]; break;
                     case SocketState.Connected: Logger.Error("状态错误 Disconnect => Connected"); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Connecting:
                 switch (v) {
-                    case SocketState.Disconnect: eventName = [SocketEvent.ConnectFail, SocketEvent.Close]; break;
+                    case SocketState.Disconnect: eventNames = [SocketEvent.ConnectFail, SocketEvent.Close]; break;
                     case SocketState.Reconnecting: Logger.Error("状态错误 Connecting => Reconnecting"); break;
-                    case SocketState.Connected: eventName = [SocketEvent.ConnectSuccess]; break;
+                    case SocketState.Connected: eventNames = [SocketEvent.ConnectSuccess]; break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Reconnecting:
                 switch (v) {
-                    case SocketState.Disconnect: eventName = [SocketEvent.ReconnectFail, SocketEvent.Close]; break;
+                    case SocketState.Disconnect: eventNames = [SocketEvent.ReconnectFail, SocketEvent.Close]; break;
                     case SocketState.Connecting: Logger.Error("状态错误 Reconnecting => Connecting"); break;
-                    case SocketState.Connected: eventName = [SocketEvent.ReconnectSuccess]; break;
+                    case SocketState.Connected: eventNames = [SocketEvent.ReconnectSuccess]; break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Connected:
                 switch (v) {
-                    case SocketState.Disconnect: eventName = [SocketEvent.Close]; break;
+                    case SocketState.Disconnect: eventNames = [SocketEvent.Close]; break;
                     case SocketState.Connecting: Logger.Error("状态错误 Connected => Connecting"); break;
                     case SocketState.Reconnecting: Logger.Error("状态错误 Connected => Reconnecting"); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
@@ -82,7 +82,7 @@ class WebSocket extends Observer {
                 break;
             default: Logger.Error("未知的状态", lastState, v); break;
         }
-        eventName.forEach(v => this.dispatch(v));
+        eventNames.forEach(v => this.dispatch(v));
     }
     get connected() { return this.state == SocketState.Connected; }
 
@@ -93,9 +93,18 @@ class WebSocket extends Observer {
             this._socket.on(Laya.Event.OPEN, this, this.onOpen);
             this._socket.on(Laya.Event.MESSAGE, this, this.onMessage);
             this._socket.on(Laya.Event.CLOSE, this, this.onClose);
-            this._socket.connectByUrl(this._url);
-            this.state = SocketState.Connecting;
+            this.connect();
         }
+    }
+
+    connect() {
+        this.state = SocketState.Connecting;
+        this._socket.connectByUrl(this._url);
+    }
+
+    close() {
+        this.state = SocketState.Disconnect;
+        this._socket.close();
     }
 
     sendMsg(msg: IUserInput) {
@@ -120,6 +129,7 @@ class WebSocket extends Observer {
     }
 
     private onClose() {
+        if (this.state == SocketState.Disconnect) return;
         this.state = SocketState.Disconnect;
         this._current = null;
         this._waitList.length = 0;
@@ -129,7 +139,6 @@ class WebSocket extends Observer {
     private executeWaitMsg() {
         if (this.connected && !this._current && this._waitList.length > 0) {
             this._current = this._waitList.shift();
-            this._current.token = this._current.token || userData.account.account;
             this._socket.send(JSON.stringify(this._current));
         }
     }
@@ -163,8 +172,8 @@ class WebSocket extends Observer {
 
     private reconnect() {
         if (!this._socket) return;
-        this._socket.connectByUrl(this._url);
         this.state = SocketState.Reconnecting;
+        this._socket.connectByUrl(this._url);
     }
 }
 

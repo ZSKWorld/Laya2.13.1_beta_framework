@@ -1,6 +1,6 @@
-import { Pool, PoolKey } from "../libs/Pool";
-
 export class TimeUtil {
+    private static readonly lastDate = new Date();
+    private static readonly nowDate = new Date();
     /** 获取毫秒级时间戳 */
     static milliSeconds() { return Date.now(); }
     /** 获取秒级时间戳 */
@@ -13,8 +13,7 @@ export class TimeUtil {
      * @returns 
      */
     static checkNextDay(lastTime: number, nowTime: number) {
-        const lastDate = Pool.get(PoolKey.Date, Date);
-        const nowDate = Pool.get(PoolKey.Date, Date);
+        const { lastDate, nowDate } = this;
         lastDate.setTime(lastTime);
         nowDate.setTime(nowTime);
         const lastY = lastDate.getFullYear();
@@ -31,8 +30,6 @@ export class TimeUtil {
                 if (nowD > lastD) result = true;
             }
         }
-        Pool.recover(PoolKey.Date, lastDate);
-        Pool.recover(PoolKey.Date, nowDate);
         return result;
     }
 }

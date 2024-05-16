@@ -15,11 +15,9 @@ export class CMDController extends Controller {
     }
 
     protected response<T>(cmd: string, data?: T, error: number = ErrorCode.NONE) {
-        if (this.connection) {
-            let args: IUserOutput = { cmd, error };
-            if (data) Object.assign(args, data);
-            this.connection.sendMessage(MessageType.Response, args);
-        }
+        let args: IUserOutput = { cmd, error };
+        if (data) Object.assign(args, data);
+        this.connection.sendMessage(MessageType.Response, args);
     }
 }
 

@@ -17,7 +17,7 @@ export class Goods extends CantSyncObject<IGoods> implements IGoods {
 
 export class Equipment extends CantSyncObject<IEquipment> implements IEquipment {
     id: number = 0;
-    uid: string = GameUtil.CreateUID();
+    uid: string = GameUtil.getUID();
     star: number = 0;
     level: number = 0;
     mingKe: number = 0;

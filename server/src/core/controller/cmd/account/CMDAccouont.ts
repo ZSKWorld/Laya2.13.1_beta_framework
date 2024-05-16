@@ -10,14 +10,8 @@ export class CMDAccouont extends CMDController implements IAccountCtrl {
         const logined = this.connection.logined;
         const errorCode = AccountChecker.checkLogin(this.user, data, logined);
         if (errorCode) return this.response(data.cmd, null, errorCode);
-        if (logined) {
-            const syncInfo = { ...this.user };
-            syncInfo.offline = this.user.getOffline();
-            this.response<ILoginOutput>(data.cmd, { syncInfo });
-        } else {
-            this.connection.userLogin(UserUtil.getData(data.account));
-            this.response<ILoginOutput>(data.cmd, { syncInfo: { offline: this.user.getOffline() } });
-        }
+        this.connection.userLogin(UserUtil.getData(data.account));
+        this.response<ILoginOutput>(data.cmd, { syncInfo: { offline: this.user.getOffline() } });
     }
 
     @CMD

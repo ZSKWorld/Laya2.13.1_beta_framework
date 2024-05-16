@@ -1,11 +1,5 @@
-export const enum PoolKey {
-    Date = "Date",
-    EventDispatcher = "EventDispatcher",
-    ClosedConnection = "ClosedConnection",
-    CommonConnection = "CommonConnection",
-}
 export class Pool {
-    private static _pool: { [key in PoolKey]?: any[] } = {};
+    private static _pool: { [key: string]: any[] } = {};
 
     public static get<T>(key: string, cls: new (...args: any) => T): T {
         const pool = this._pool[key];

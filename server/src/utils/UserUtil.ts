@@ -1,6 +1,11 @@
 import * as fs from "fs";
 import * as path from "path";
 export class UserUtil {
+    static userExist(account:string) {
+        const filePath = this.getDataPath(account);
+        return fs.existsSync(filePath);
+    }
+
     static getData(account: string): OriginData<IUser> {
         const filePath = this.getDataPath(account);
         if (fs.existsSync(filePath) == false) return null;

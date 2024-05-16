@@ -21,6 +21,7 @@ declare interface ILoginInput extends IUserInput {
 }
 
 declare interface ILoginOutput extends IUserOutput {
+    token: string;
 }
 
 declare interface ISignInInput extends IUserInput {

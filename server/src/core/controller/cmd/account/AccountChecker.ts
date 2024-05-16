@@ -6,21 +6,20 @@ export class AccountChecker {
         if (logined) {
             if (user.account.password != data.password) return ErrorCode.PASSWORD_ERROR;
         } else {
-            let userData = UserUtil.getData(data.account);
-            if (!userData) return ErrorCode.USER_NOT_EXIST;
-            else if (userData.account.password != data.password) return ErrorCode.PASSWORD_ERROR;
+            const userExist = UserUtil.userExist(data.account);
+            if(!userExist) return ErrorCode.USER_NOT_EXIST;
+            const userData = UserUtil.getData(data.account);
+            if (userData.account.password != data.password) return ErrorCode.PASSWORD_ERROR;
         }
         return ErrorCode.NONE;
     }
 
     static checkRegister(user: IUser, data: IRegisterInput) {
-        const userData = UserUtil.getData(data.account);
-        if (userData) return ErrorCode.USER_EXIST;
-        else {
-            if (!data.account) return ErrorCode.ACCOUNT_EMPTY;
-            else if (!data.password) return ErrorCode.PASSWORD_EMPTY;
-            else if (!data.nickname) return ErrorCode.NICKNAME_EMPTY;
-        }
+        const userExist = UserUtil.userExist(data.account);
+        if(userExist) return ErrorCode.USER_EXIST;
+        if (!data.account) return ErrorCode.ACCOUNT_EMPTY;
+        else if (!data.password) return ErrorCode.PASSWORD_EMPTY;
+        else if (!data.nickname) return ErrorCode.NICKNAME_EMPTY;
         return ErrorCode.NONE;
     }
 

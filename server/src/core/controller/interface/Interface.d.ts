@@ -1,6 +1,5 @@
 declare interface IUserInput {
     cmd?: string;
-    token?: string;
 }
 
 declare interface IUserOutput {
