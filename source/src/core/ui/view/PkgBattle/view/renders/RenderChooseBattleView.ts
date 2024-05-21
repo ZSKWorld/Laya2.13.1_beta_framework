@@ -61,8 +61,8 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
     }
 
     refreshGatherCool(data: CfgGatherData) {
+        const isEnd = !userData.battle.gather.startTimeMap[data.id];
         const lastTime = userData.battle.gather.remainTime(data.id);
-        const isEnd = lastTime <= 0;
         const { txt_content2, txt_content3, txt_content4, btn_break, graph_touch, graph_light } = this;
         graph_light.visible = isEnd;
         graph_touch.touchable = isEnd;
