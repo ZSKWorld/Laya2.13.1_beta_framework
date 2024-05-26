@@ -18,7 +18,7 @@ const originConOnMessage = function (connection: websocket.connection, msg: webs
     }
 }
 
-const httpServer = http.createServer().listen({ host: "192.168.71.123", port: 8007 }, function () {
+const httpServer = http.createServer().listen({ host: "192.168.71.77", port: 8007 }, function () {
     const { address, port } = httpServer.address() as AddressInfo;
     Logger.log(`服务器已启动：${ address }:${ port }`, Color.green);
 });
@@ -32,22 +32,7 @@ wsServer.on("request", (request: websocket.request) => {
     connection.on("message", (msg) => originConOnMessage(connection, msg));
 });
 
-// wsServer.on("connect", (connection: websocket.connection) => {
-//     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 已连接，连接数量：${ wsServer.connections.length }`, Color.green);
-//     connection.addListener("message", (msg) => {
-//         if (msg.type == "utf8") {
-//             const data: ILoginInput = JSON.parse(msg.utf8Data);
-//             if (data.cmd == "login") {
-//                 const user = UserUtil.getData(data.account);
-//                 if (!user) return connection.send(JSON.stringify({cmd:data.cmd, error:ErrorCode.USER_EXIST}));
-//                 if (data.password != user.account.password)
-//                     return connection.send(JSON.stringify({cmd:data.cmd, error:ErrorCode.PASSWORD_ERROR}));
-//                 connection.removeAllListeners();
-//                 Connection.startConnection()
-//             }
-//         } else connection.close();
-//     });
-// });
+wsServer.on("connect", (connection: websocket.connection) => { });
 
 wsServer.on("close", (connection, reson, desc) => {
     Logger.log(`${ connection.remoteAddress }:${ connection.socket.remotePort } 断开连接，剩余连接数量：${ wsServer.connections.length }。${ reson }-${ desc }`, Color.red);

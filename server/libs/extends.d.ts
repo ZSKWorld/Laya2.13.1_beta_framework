@@ -98,24 +98,7 @@ declare interface Array<T> {
 
 }
 
-declare class Date {
-    /**
-     * 格式化当前日期
-     * 月(M), 日(d), 小时(h), 分(m), 秒(s), 季度(q)可以用 1-2 个占位符, 年(y)可以用 1-4 个占位符, 毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
-     */
-    format(template: string): string;
-}
-
 declare interface ArrayConstructor {
     from<T, U>(arrayLike: ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): Array<U>;
     from<T>(arrayLike: ArrayLike<T>): Array<T>;
-}
-
-declare interface Array<T> {
-    fill(value: T, start?: number, end?: number): this;
-}
-
-declare interface String {
-    startsWith(searchString: string, position?: number): boolean;
-    endsWith(searchString: string, endPosition?: number): boolean;
 }

@@ -51,55 +51,6 @@
             };
         } ());
     }
-    
-    if (!Array.prototype.fill) {
-        Object.defineProperty(Array.prototype, 'fill', {
-            value: function (value) {
-                if (this == null) {
-                    throw new TypeError('this is null or not defined');
-                }
-                let O = Object(this);
-                let len = O.length >>> 0;
-                let start = arguments[1];
-                let relativeStart = start >> 0;
-                let k = relativeStart < 0 ?
-                    Math.max(len + relativeStart, 0) :
-                    Math.min(relativeStart, len);
-                let end = arguments[2];
-                let relativeEnd = end === undefined ?
-                    len : end >> 0;
-                let final = relativeEnd < 0 ?
-                    Math.max(len + relativeEnd, 0) :
-                    Math.min(relativeEnd, len);
-                while (k < final) {
-                    O[k] = value;
-                    k++;
-                }
-                return O;
-            }
-        });
-    }
-    
-    if (!String.prototype.startsWith) {
-        Object.defineProperty(Array.prototype, 'startsWith', {
-            value: function (search, pos) {
-                return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
-            }
-        });
-    }
-    
-    if (!String.prototype.endsWith) {
-        Object.defineProperty(Array.prototype, 'endsWith', {
-            value: function (search, pos) {
-                if (pos === undefined || pos > this.length) {
-                    pos = this.length;
-                }
-                return this.substring(pos - search.length, pos) === search;
-            }
-        });
-    }
-    
-
 
     let f, p;
 
@@ -341,38 +292,4 @@
             enumerable: false
         }
     });
-
-
-    p = Date.prototype;
-    Object.defineProperties(p, {
-        format: {
-            /**
-             * @param {string} template 
-             */
-            value: function (template) {
-                let map = {
-                    "M+": this.getMonth() + 1,
-                    "d+": this.getDate(),
-                    "h+": this.getHours(),
-                    "m+": this.getMinutes(),
-                    "s+": this.getSeconds(),
-                    "q+": Math.floor((this.getMonth() + 3) / 3),
-                    "S": this.getMilliseconds()
-                };
-                if (/(y+)/.test(template)) {
-                    template = template.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-                }
-                for (var k in map) {
-                    if (new RegExp("(" + k + ")").test(template)) {
-                        template = template.replace(RegExp.$1, (RegExp.$1.length == 1) ? (map[k]) : (("00" + map[k]).substr(("" + map[k]).length)));
-                    }
-                }
-                return template;
-            },
-            enumerable: false
-        },
-    });
-
-    
-
 })();
