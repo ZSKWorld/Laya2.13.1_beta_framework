@@ -94,6 +94,15 @@
             "problemMatcher": []
         },
         {
+            "label": "更新ExcelDeclare",
+            "type": "shell",
+            "command": "node ../../tool/bin/js/BatMain.js 7",
+            "presentation": {
+                "close": true
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "tsc监视",
             "type": "typescript",
             "tsconfig": "tsconfig.json",
