@@ -112,6 +112,12 @@
                 "tsc监视"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "leb",
+            "type": "shell",
+            "command": "leb",
+            "problemMatcher": []
         }
     ]
 }

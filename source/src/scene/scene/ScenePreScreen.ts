@@ -53,7 +53,7 @@ export class ScenePreScreen extends LogicSceneBase<ScenePreScreenData> {
         if (type) {
             if (type == SceneType.InitScene) {
                 this.off(SceneEvent.OnEnter, this, this.showConfirm);
-                windowImmit("showConfirm", (title, msg, cancel) => new Promise<boolean>(resolve => {
+                windowImmit("showConfirm", (title, msg, cancel = true) => new Promise<boolean>(resolve => {
                     uiMgr.showView(ViewID.UIConfirmView, {
                         title,
                         content: msg,
