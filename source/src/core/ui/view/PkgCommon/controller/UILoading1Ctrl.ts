@@ -3,7 +3,7 @@ import { MathUtil } from "../../../../game/math/MathUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UILoading1View } from "../view/UILoading1View";
 
-export class UILoading1Ctrl<V extends IView & Partial<UILoading1View>> extends BaseViewCtrl<V, null> {
+export class UILoading1Ctrl<V extends IView & Partial<UILoading1View> = UILoading1View> extends BaseViewCtrl<V, null> {
     private _tips = [];
     protected curTime = 0;
     protected deltaTime = 2000;
