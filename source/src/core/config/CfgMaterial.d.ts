@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgMaterial {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgMaterial {
 	readonly [key: string]: CfgMaterialData;
 	/** 碎石头 */
 	readonly 3000: CfgMaterialData;

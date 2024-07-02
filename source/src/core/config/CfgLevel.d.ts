@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgLevel {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgLevel {
 	readonly [key: string]: CfgLevelData;
 	/** 小树林 */
 	readonly 10001: CfgLevelData;

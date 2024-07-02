@@ -33,8 +33,4 @@ export const enum SceneEvent {
 	OnLoadProgress = "SceneEvent_OnLoadProgress",
 	/** 场景加载结束 */
 	OnLoadEnd = "SceneEvent_OnLoadEnd",
-	/** 场景进入 */
-	OnEnter = "SceneEvent_OnEnter",
-	/** 场景退出 */
-	OnExit = "SceneEvent_OnExit",
 }

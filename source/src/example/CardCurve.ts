@@ -132,8 +132,7 @@ module fight.duel {
             }
         }
 
-        private hermiteInterpolate(curve: KeyFrame[], t: number, defaultValue: number) {
-            defaultValue ||= 0;
+        private hermiteInterpolate(curve: KeyFrame[], t: number, defaultValue = 0) {
             if (!curve) return defaultValue;
             const n = curve.length;
             if (n < 1) return defaultValue;

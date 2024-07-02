@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgColor {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgColor {
 	readonly [key: string]: CfgColorData;
 	/** #7D8180 */
 	readonly 1: CfgColorData;

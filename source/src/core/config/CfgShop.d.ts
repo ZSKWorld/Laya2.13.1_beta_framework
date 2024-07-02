@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgShop {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgShop {
 	readonly [key: string]: CfgShopData;
 	/** 2000 */
 	readonly 1000: CfgShopData;

@@ -1,5 +1,4 @@
 import { ResPath } from "../../core/common/ResPath";
-import { CfgManager } from "../../core/config/CfgManager";
 import { AccountService } from "../../core/net/Services";
 import { SocketEvent, websocket } from "../../core/net/WebSocket";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
@@ -9,7 +8,6 @@ import { uiMgr } from "../../core/ui/core/UIManager";
 import { ViewID } from "../../core/ui/core/ViewID";
 import { viewRegister } from "../../core/ui/core/ViewRegister";
 import { tipMgr } from "../../core/ui/tool/TipManager";
-import { User } from "../../core/userData/User";
 import { platformMgr } from "../../platform/PlatformManager";
 import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";
@@ -33,8 +31,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 	}
 
 	protected override onEnter() {
-		windowImmit("cfgMgr", new CfgManager());
-		windowImmit("userData", new User());
+		cfgMgr.init();
 		layerMgr.init();
 		uiMgr.init();
 		viewRegister.init();

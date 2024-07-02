@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgCopy {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgCopy {
 	readonly [key: string]: CfgCopyData;
 	/** 墓穴 */
 	readonly 10001: CfgCopyData;

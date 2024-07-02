@@ -114,5 +114,3 @@ export class Logger {
 
     private setEnable(enable: boolean) { this._enable = enable; return this; }
 }
-
-windowImmit("Logger", Logger);

@@ -57,4 +57,3 @@ export class GameUtil {
         return Math.round(y / (Laya.stage.height / Laya.Browser.clientHeight));
     }
 }
-windowImmit("GameUtil", GameUtil);

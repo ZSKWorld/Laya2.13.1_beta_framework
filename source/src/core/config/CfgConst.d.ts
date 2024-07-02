@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgConst {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgConst {
 	readonly [key: string]: CfgConstData;
 	/**  */
 	readonly 1001: CfgConstData;

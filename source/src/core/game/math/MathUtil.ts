@@ -168,5 +168,3 @@ export class MathUtil {
             + b.toString(16).padStart(2, "0");
     }
 }
-
-windowImmit("MathUtil", MathUtil);

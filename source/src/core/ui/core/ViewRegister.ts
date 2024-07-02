@@ -191,4 +191,3 @@ class ViewRegister {
 	}
 }
 export const viewRegister = new ViewRegister();
-windowImmit("viewRegister", viewRegister);

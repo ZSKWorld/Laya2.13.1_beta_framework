@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgSkillBook {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgSkillBook {
 	readonly [key: string]: CfgSkillBookData;
 	/** 技能·基本剑术 */
 	readonly 5000: CfgSkillBookData;

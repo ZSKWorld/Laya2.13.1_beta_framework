@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgXinFaBook {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgXinFaBook {
 	readonly [key: string]: CfgXinFaBookData;
 	/** 心法·天机卷 */
 	readonly 6000: CfgXinFaBookData;

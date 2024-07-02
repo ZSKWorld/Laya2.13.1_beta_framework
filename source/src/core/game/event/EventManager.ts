@@ -23,33 +23,3 @@ class EventManager extends Laya.EventDispatcher {
     }
 }
 export const eventMgr = new EventManager();
-windowImmit("eventMgr", eventMgr);
-
-/**
- * @description: 添加全局事件监听
- * @param eventName 事件名
- * @param once 是否只监听一次
- * @param args 参数
- * @return MethodDecorator
- */
-function RegisterEvent(eventName: string, once?: boolean, args?: any[]): MethodDecorator {
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        if (!target.__eventMap) target.__eventMap = {};
-        if (!target.__eventMap[eventName]) target.__eventMap[eventName] = [];
-
-        const func = descriptor.value;
-        const list: Function[] = target.__eventMap[eventName];
-        if (list.indexOf(func) == -1) {
-            list.push(func);
-            if (once) {
-                func[eventName] = func[eventName] || {};
-                func[eventName].__once = once;
-            }
-            if (args) {
-                func[eventName] = func[eventName] || {};
-                func[eventName].__args = args;
-            }
-        }
-    };
-}
-windowImmit("RegisterEvent", RegisterEvent);

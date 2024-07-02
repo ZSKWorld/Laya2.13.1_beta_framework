@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgEquipment {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgEquipment {
 	readonly [key: string]: CfgEquipmentData;
 	/** 新手武器 */
 	readonly 40000: CfgEquipmentData;

@@ -1,5 +1,4 @@
-import GameConfig from "./GameConfig";
-import { Logger } from "./core/game/Logger";
+import Global from "./Global";
 import { ViewExtend } from "./core/ui/core/ViewExtend";
 import { FGUIExtension } from "./engine/FGUIExtension";
 import { FGUIRepair } from "./engine/FGUIRepair";
@@ -16,11 +15,24 @@ import { ScenePreScreen } from "./scene/scene/ScenePreScreen";
 
 class Main {
 	constructor() {
+		const GameConfig = {
+			width: 1080,
+			height: 1920,
+			scaleMode: "showall",
+			screenMode: "none",
+			alignV: "middle",
+			alignH: "center",
+			startScene: "",
+			sceneRoot: "",
+			debug: false,
+			stat: true,
+			physicsDebug: false,
+			exportSceneToJson: true,
+		}
 		//根据IDE设置初始化引擎
-		if (window["Laya3D"]) Laya3D.init(GameConfig.width, GameConfig.height);
-		else Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);
-		Laya["Physics"] && Laya["Physics"].enable();
-		Laya["DebugPanel"] && Laya["DebugPanel"].enable();
+		if (Laya3D) Laya3D.init(GameConfig.width, GameConfig.height);
+		else Laya.init(GameConfig.width, GameConfig.height, Laya.WebGL);
+		Laya.Physics && Laya.Physics.enable();
 		Laya.stage.scaleMode = GameConfig.scaleMode;
 		Laya.stage.screenMode = GameConfig.screenMode;
 		Laya.stage.alignV = GameConfig.alignV;
@@ -28,12 +40,19 @@ class Main {
 		//兼容微信不支持加载scene后缀场景
 		Laya.URL.exportSceneToJson = GameConfig.exportSceneToJson;
 
+		//打开调试面板（通过IDE设置调试模式，或者url地址增加debug=true参数，均可打开调试面板）
+		if (GameConfig.debug || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();
+		if (GameConfig.physicsDebug && Laya.PhysicsDebugDraw) Laya.PhysicsDebugDraw.enable();
+		if (GameConfig.stat) Laya.Stat.show();
+		// Laya.alertGlobalError(true);
+
 		LayaRepair.Fix();
 		LayaExtension.Init();
 		FGUIRepair.Fix();
 		FGUIExtension.Init();
 		ViewExtend.Init();
 		fgui.UIConfig.packageFileExtension = "zip";
+		Global.Init();
 
 		//激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
 		Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
@@ -55,42 +74,7 @@ class Main {
 		]);
 		sceneMgr.enterScene(SceneType.PreScreen);
 	}
-
 }
 
 //激活启动类
 new Main();
-windowImmit("Logger", Logger);
-
-// /* Cursor */
-// div.cursor {
-// 	animation: 25s linear infinite alternate bp-animation;
-// 	background: linear-gradient( rgb(226, 84, 84), yellow, lime, cyan, rgb(182, 110, 255));
-// 	background-size: 100% 1000%;
-// 	border-radius: 2px;
-// 	overflow: visible !important;
-// }
-
-// div.cursor::after {
-// 	content: "";
-// 	position: absolute;
-// 	top: 0;
-// 	left: 0;
-// 	width: 100%;
-// 	height: 100%;
-// 	background: inherit;
-// 	background-size: 100% 1000%;
-// 	border-radius: 3px;
-// 	transform: scale(140%, 120%);
-// 	filter: blur(4px) brightness(200%);
-// 	z-index: -1;
-// }
-	
-// @keyframes bp-animation {
-// 	0% {background-position: 0 0;}
-// 	20% {background-position: 0 200%;}
-// 	40% {background-position: 0 400%;}
-// 	60% {background-position: 0 600%;}
-// 	80% {background-position: 0 800%;}
-// 	100% {background-position: 0 1000%;}
-// }

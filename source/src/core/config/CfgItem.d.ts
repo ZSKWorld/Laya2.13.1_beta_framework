@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgItem {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgItem {
 	readonly [key: string]: CfgItemData;
 	/** 金币 */
 	readonly 1001: CfgItemData;

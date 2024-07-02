@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgProps {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgProps {
 	readonly [key: string]: CfgPropsData;
 	/** 1百万金币 */
 	readonly 2000: CfgPropsData;

@@ -95,7 +95,7 @@ class Chessboard2048 extends Observer {
 						moveSuccess = this.checkMove(i, j, dir) || moveSuccess;
 				break;
 		}
-		this._moving ||= moveSuccess;
+		this._moving = this._moving || moveSuccess;
 		this._moving && Laya.timer.once(100, this, this.onMoveCompleted);
 		this._moving && Laya.timer.once(20, this, this.addRandom, [1]);
 		return moveSuccess;

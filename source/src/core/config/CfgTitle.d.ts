@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgTitle {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgTitle {
 	readonly [key: string]: CfgTitleData;
 	/** 无名小卒 */
 	readonly 101: CfgTitleData;

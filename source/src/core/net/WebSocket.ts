@@ -178,4 +178,3 @@ class WebSocket extends Observer {
 }
 
 export const websocket = new WebSocket();
-windowImmit("websocket", websocket);

@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgError {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgError {
 	readonly [key: string]: CfgErrorData;
 	/** 未知的命令 */
 	readonly 1000: CfgErrorData;

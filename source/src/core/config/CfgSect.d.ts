@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgSect {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgSect {
 	readonly [key: string]: CfgSectData;
 	/** 少林 */
 	readonly 101: CfgSectData;

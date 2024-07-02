@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgJingJie {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgJingJie {
 	readonly [key: string]: CfgJingJieData;
 	/** 炼体 */
 	readonly 1: CfgJingJieData;

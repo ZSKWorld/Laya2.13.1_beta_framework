@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgBoss {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgBoss {
 	readonly [key: string]: CfgBossData;
 	/** 独孤求败[color=#ff0000][绝对魔防][/color] */
 	readonly 10001: CfgBossData;

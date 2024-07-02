@@ -17,6 +17,7 @@ interface CfgExtension<T> {
 }
 
 declare interface ICfgManager {
+	init():void;
 	/** 关卡 */
 	readonly Level: CfgLevel & CfgExtension<CfgData<CfgLevel>>;
 	/** 副本 */
@@ -63,5 +64,4 @@ declare interface ICfgManager {
 	readonly Color: CfgColor & CfgExtension<CfgData<CfgColor>>;
 	/** 错误码 */
 	readonly Error: CfgError & CfgExtension<CfgData<CfgError>>;
-
 }

@@ -26,5 +26,4 @@ export const RDDefineInit = function () {
         map.MainSkill4Upgrade = create(map.Shop, "Bottom.UIMainView.com_shop.com_item13", [RDTriggerType.UpgradeMainSkill4]);
     }
 }
-windowImmit("RDMap", map);
 export const RDMap = map;

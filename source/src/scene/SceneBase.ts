@@ -56,12 +56,10 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
 
 	enter(data: T) {
 		this.data = data;
-		this.dispatch(SceneEvent.OnEnter, this.type);
 		this.onEnter();
 	}
 
 	exit() {
-		this.dispatch(SceneEvent.OnExit, this.type);
 		this.onExit();
 		if (this.loadViewId) {
 			uiMgr.removeView(this.loadViewId);

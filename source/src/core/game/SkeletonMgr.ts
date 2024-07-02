@@ -114,4 +114,3 @@ class SkeletonMgr {
     }
 }
 export const skeletonMgr = new SkeletonMgr();
-windowImmit("skeletonMgr", skeletonMgr);

@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgSecret {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgSecret {
 	readonly [key: string]: CfgSecretData;
 	/** 无尽深渊[普通] */
 	readonly 10001: CfgSecretData;

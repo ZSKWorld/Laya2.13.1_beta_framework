@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgEnemy {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgEnemy {
 	readonly [key: string]: CfgEnemyData;
 	/** 野牛 */
 	readonly 10001: CfgEnemyData;

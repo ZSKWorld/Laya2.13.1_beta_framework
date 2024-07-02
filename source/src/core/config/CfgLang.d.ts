@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgLang {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgLang {
 	readonly [key: string]: CfgLangData;
 	/** 账号已存在 */
 	readonly 1001: CfgLangData;

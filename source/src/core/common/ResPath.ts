@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */export namespace ResPath {
+/** This script is generated automatically, Please do not any modify! */
+export namespace ResPath {
 	export const enum UnclassifiedPath {}
 
 	// res/config/

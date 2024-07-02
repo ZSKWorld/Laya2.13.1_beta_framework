@@ -1,3 +1,4 @@
+import { eventMgr } from "../game/event/EventManager";
 import { NetCMD } from "../net/enum/NetCMD";
 import { Account } from "./Account";
 import { Bag } from "./Bag";
@@ -20,6 +21,11 @@ export class User extends DecodeObject<IUser> implements IUser {
     battle = new Battle();
     //#endregion
 
+    constructor() {
+        super();
+        eventMgr.on(NetCMD.SyncInfo, this, this.syncInfo);
+    }
+
     protected override onDecode(data: OriginData<IUser>, key: OriginDataKeys<IUser>) {
         switch (key) {
             case "offline": return data[key];
@@ -27,7 +33,6 @@ export class User extends DecodeObject<IUser> implements IUser {
         }
     }
 
-    @RegisterEvent(NetCMD.SyncInfo)
     private syncInfo(data: OriginData<IUser>) {
         return this.decode(data);
     }

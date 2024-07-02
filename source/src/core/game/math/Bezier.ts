@@ -172,4 +172,3 @@ export class Bezier {
         return cc;
     }
 }
-windowImmit("Bezier", Bezier);

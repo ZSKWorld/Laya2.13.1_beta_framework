@@ -66,4 +66,3 @@ export class ProxyMgr {
         });
     }
 }
-windowImmit("ProxyMgr", ProxyMgr)

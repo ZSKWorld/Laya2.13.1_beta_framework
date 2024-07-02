@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgFood {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgFood {
 	readonly [key: string]: CfgFoodData;
 	/** 面包 */
 	readonly 4000: CfgFoodData;

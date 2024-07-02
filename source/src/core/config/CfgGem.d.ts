@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgGem {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgGem {
 	readonly [key: string]: CfgGemData;
 	/** 一级攻击宝石 */
 	readonly 7000: CfgGemData;

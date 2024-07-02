@@ -1,4 +1,5 @@
-/** This script is generated automatically, Please do not any modify! */declare interface CfgGather {
+/** This script is generated automatically, Please do not any modify! */
+declare interface CfgGather {
 	readonly [key: string]: CfgGatherData;
 	/** 云罗山脉 */
 	readonly 10001: CfgGatherData;

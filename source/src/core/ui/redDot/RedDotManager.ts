@@ -38,4 +38,3 @@ class RedDotManager extends Laya.EventDispatcher {
     }
 }
 export const redDotMgr = new RedDotManager();
-windowImmit("redDotMgr", redDotMgr);
