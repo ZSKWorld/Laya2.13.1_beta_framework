@@ -23,3 +23,4 @@ class EventManager extends Laya.EventDispatcher {
     }
 }
 export const eventMgr = new EventManager();
+windowImmit("eventMgr", eventMgr);

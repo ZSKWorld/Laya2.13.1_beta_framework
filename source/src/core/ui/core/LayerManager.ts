@@ -59,3 +59,4 @@ class LayerManager {
 
 }
 export const layerMgr = new LayerManager();
+windowImmit("layerMgr", layerMgr);

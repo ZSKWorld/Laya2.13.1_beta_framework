@@ -29,3 +29,4 @@ class PlatformManager {
     }
 }
 export const platformMgr = new PlatformManager();
+windowImmit("platformMgr", platformMgr);

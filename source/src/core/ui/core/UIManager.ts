@@ -208,3 +208,4 @@ class UIManager extends Observer {
 	}
 }
 export const uiMgr = new UIManager();
+windowImmit("uiMgr", uiMgr);
