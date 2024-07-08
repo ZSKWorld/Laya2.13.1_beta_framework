@@ -16,3 +16,4 @@ class LocalData {
     }
 }
 export const localData = new LocalData();
+windowImmit("localData", localData);

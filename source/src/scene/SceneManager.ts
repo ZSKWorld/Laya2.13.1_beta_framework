@@ -34,4 +34,4 @@ class SceneManager extends Observer {
 	}
 }
 export const sceneMgr = new SceneManager();
-windowImmit("logicSceneMgr", sceneMgr);
+windowImmit("sceneMgr", sceneMgr);

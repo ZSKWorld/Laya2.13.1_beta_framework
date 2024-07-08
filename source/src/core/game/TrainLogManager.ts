@@ -41,3 +41,4 @@ class TrainLogManager extends Observer {
     }
 }
 export const trainLogMgr = new TrainLogManager();
+windowImmit("trainLogMgr", trainLogMgr);
