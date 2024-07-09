@@ -3,7 +3,11 @@
   "auxline1": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
-    "ui://vx9zwseryz4q6o"
+    "ui://vx9zwseryz4q6o",
+    "ui://vx9zwsershjv6k",
+    "ui://vx9zwsershjv6l",
+    "ui://vx9zwsersbd05i",
+    "ui://vx9zwserirlv60"
   ],
   "libview.syncEditor": 1,
   "test.device": "iPhone 8 Plus",
@@ -16,6 +20,10 @@
     "/",
     "vx9zwser",
     "/Component/",
+    "vx9zwser",
+    "/Component/UIConfirm/",
+    "vx9zwser",
+    "/Texture/",
     "vs9845at",
     "/",
     "vith2b66",
