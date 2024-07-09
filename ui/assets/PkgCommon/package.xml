@@ -208,6 +208,8 @@
     <component id="shjv6l" name="ComConfirm.xml" path="/Component/UIConfirm/"/>
     <image id="9hon6m" name="Pic_back.png" path="/Texture/" exported="true"/>
     <component id="nirt6n" name="ComEmpty.xml" path="/Component/" exported="true"/>
+    <component id="yz4q6o" name="ComRedDot.xml" path="/Component/" exported="true"/>
+    <component id="i9gm6p" name="BtnNormal.xml" path="/Component/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="750,336">
   <displayList>
-    <graph id="n2_aqq0" name="n2" xy="0,0" pivot="0.5,0" size="750,336" type="rect" lineSize="0" fillColor="#ffffeac6" corner="15">
+    <image id="n2_aqq0" name="n2" src="qjdo2z" fileName="Texture/Frame_ItemBG01.png" xy="0,0" pivot="0.5,0" size="750,336">
       <relation target="n9_izot" sidePair="height-height"/>
-    </graph>
+    </image>
     <graph id="n10_izot" name="n10" xy="25,101" size="700,118" type="rect" lineSize="0" fillColor="#ffd9c7a8" corner="20">
       <relation target="n9_izot" sidePair="height-height"/>
     </graph>
     <text id="n8_izot" name="txt_title" xy="323,14" pivot="0.5,0.5" size="104,66" fontSize="50" bold="true" text="提示"/>
     <richtext id="n9_izot" name="txt_content" xy="40,136" size="669,48" fontSize="35" ubb="true" autoSize="height" autoClearText="true" text="场景资源加载失败，是否重试？"/>
-    <component id="n1_aqq0" name="btn_cancel" src="sbd05i" fileName="Component/BtnTxt.xml" xy="105,245" size="204,70" group="n11_dnfc" controller="ctrlBgColor,3">
-      <Button title="取消" titleColor="#ffffff" titleFontSize="40" icon="ui://vx9zwser10au31s"/>
+    <component id="n1_aqq0" name="btn_cancel" src="i9gm6p" fileName="Component/BtnNormal.xml" xy="115,245" size="204,70" group="n11_dnfc">
+      <Button title="取消" titleColor="#ffffff" titleFontSize="40" icon="ui://vx9zwserqjdo3r"/>
     </component>
-    <component id="n6_izot" name="btn_confirm" src="sbd05i" fileName="Component/BtnTxt.xml" xy="542,280" pivot="0.5,0.5" anchor="true" size="204,70" group="n11_dnfc" controller="ctrlBgColor,4">
-      <Button title="确认" titleColor="#ffffff" titleFontSize="40" icon="ui://vx9zwser10au31r"/>
+    <component id="n6_izot" name="btn_confirm" src="i9gm6p" fileName="Component/BtnNormal.xml" xy="531,280" pivot="0.5,0.5" anchor="true" size="204,70" group="n11_dnfc">
+      <Button title="确认" titleColor="#000000" titleFontSize="40" icon="ui://vx9zwserqjdo3q"/>
     </component>
-    <group id="n11_dnfc" name="n11" xy="105,245" size="539,70" advanced="true" layout="hz" colGap="131" excludeInvisibles="true">
+    <group id="n11_dnfc" name="n11" xy="115,245" size="518,70" advanced="true" layout="hz" colGap="110" excludeInvisibles="true">
       <relation target="" sidePair="center-center,bottom-bottom"/>
     </group>
   </displayList>

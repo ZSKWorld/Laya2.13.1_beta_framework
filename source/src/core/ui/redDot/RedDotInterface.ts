@@ -4,6 +4,7 @@ import { RedDotNode } from "./RedDotNode";
 export interface IRedDotData {
     readonly id: number;
     enable: boolean;
+    readonly path: string;
     readonly names: string[];
     readonly node: RedDotNode;
     parent: IRedDotData;

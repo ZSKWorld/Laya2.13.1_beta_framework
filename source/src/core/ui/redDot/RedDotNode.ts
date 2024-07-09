@@ -20,7 +20,6 @@ export class RedDotNode {
                 }
                 if (target) {
                     this._comp = <fgui.GComponent>target.getChild("com_redDot");
-                    if (!this._comp) this._comp = <fgui.GComponent>target.getChild("ComRedDotView");
                 }
             }
         }

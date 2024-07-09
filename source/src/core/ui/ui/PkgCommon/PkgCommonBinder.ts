@@ -17,6 +17,8 @@ import UIConfirm from "./UIConfirm";
 import { UIConfirmView } from "../../view/PkgCommon/view/UIConfirmView";
 import ComConfirm from "./ComConfirm";
 import { ComConfirmView } from "../../view/PkgCommon/view/coms/ComConfirmView";
+import ComRedDot from "./ComRedDot";
+import { ComRedDotView } from "../../view/PkgCommon/view/coms/ComRedDotView";
 
 export default class PkgCommonBinder {
 	public static bindAll(): void {
@@ -29,5 +31,6 @@ export default class PkgCommonBinder {
 		fgui.UIObjectFactory.setExtension(Pro1.URL, Pro1);
 		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirmView);
 		fgui.UIObjectFactory.setExtension(ComConfirm.URL, ComConfirmView);
+		fgui.UIObjectFactory.setExtension(ComRedDot.URL, ComRedDotView);
 	}
 }

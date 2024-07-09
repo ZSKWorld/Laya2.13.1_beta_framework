@@ -7,6 +7,7 @@ export class RedDotData implements IRedDotData {
     private static gid: number = 0;
     private _id: number = ++RedDotData.gid;
     private _enable: boolean;
+    private _path: string;
     private _names: string[];
     private _node: RedDotNode;
     private _parent: RedDotData;
@@ -22,27 +23,31 @@ export class RedDotData implements IRedDotData {
         return this._enable && (this._parent ? this._parent.enable : true);
     }
     set enable(value: boolean) { this._enable = value; }
+    get path() { return this._path; }
+    get names() { return this._names; }
+    get node() { return this._node; }
     get parent() { return this._parent; }
     set parent(parent: RedDotData) {
         if (parent) parent.addChild(this);
         else this.removeSelf();
     }
     get childs() { return this._childs; }
-    get node() { return this._node; }
-    get names() { return this._names; }
     get hasTrigger() { return this._triggers && this._triggers.length > 0; }
     get triggers() { return this._triggers; }
     get displayType() { return this._displayType; }
     get rdCount() { return this._rdCount; }
 
+    private constructor() { }
+
     static Create(parent: IRedDotData, path: string, triggers?: RDTriggerType[], displayType = RDDisplayType.Normal): IRedDotData {
-        const data = Laya.Pool.createByClass(RedDotData);
+        const data = Laya.Pool.createByClass(RedDotData as any) as RedDotData;
         data._enable = true;
         data._childs = [];
         data._rdCount = 0;
         data._node = Laya.Pool.createByClass(RedDotNode);
         data._node.data = data;
 
+        data._path = path;
         data._names = path ? path.split(".") : null;
         data._triggers = triggers;
         data._displayType = displayType;

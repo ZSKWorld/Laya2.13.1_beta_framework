@@ -9,7 +9,7 @@ import { platformMgr } from "./platform/PlatformManager";
 windowImmit("ResPath", ResPathEnum);
 windowImmit("ViewID", ViewIDEnum);
 
-windowImmit("showConfirm", (title: string, msg: string) => {
+windowImmit("showConfirm", (title: string, msg: string, cancel = true) => {
     if (Laya.loader.getRes(ResPath.PkgPath.PkgCommon + ".zip")) {
         windowImmit("showConfirm", (title: string, msg: string, cancel = true) => new Promise<boolean>(resolve => {
             uiMgr.showView(ViewID.UIConfirmView, {
@@ -20,7 +20,7 @@ windowImmit("showConfirm", (title: string, msg: string) => {
                 onConfirm: Laya.Handler.create(null, resolve, [true]),
             });
         }));
-        return showConfirm(title, msg);
+        return showConfirm(title, msg, cancel);
     } else
         return platformMgr.showConfirm(title, msg);
 });

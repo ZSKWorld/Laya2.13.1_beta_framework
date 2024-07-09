@@ -22,6 +22,8 @@ import { ComGoodsInfoView } from "../view/PkgMain/view/coms/ComGoodsInfoView";
 import { ComGoodsView } from "../view/PkgMain/view/coms/ComGoodsView";
 import { ComItem2048Ctrl } from "../view/PkgLittleGame/controller/coms/ComItem2048Ctrl";
 import { ComItem2048View } from "../view/PkgLittleGame/view/coms/ComItem2048View";
+import { ComRedDotCtrl } from "../view/PkgCommon/controller/coms/ComRedDotCtrl";
+import { ComRedDotView } from "../view/PkgCommon/view/coms/ComRedDotView";
 import { ComRenWuCtrl } from "../view/PkgMain/controller/coms/ComRenWuCtrl";
 import { ComRenWuView } from "../view/PkgMain/view/coms/ComRenWuView";
 import { ComSettingCtrl } from "../view/PkgMain/controller/coms/ComSettingCtrl";
@@ -150,6 +152,7 @@ class ViewRegister {
 		//Coms
 		register(ViewID.ComBattleConfirmView, ComBattleConfirmView, ComBattleConfirmCtrl);
 		register(ViewID.ComConfirmView, ComConfirmView, ComConfirmCtrl);
+		register(ViewID.ComRedDotView, ComRedDotView, ComRedDotCtrl);
 		register(ViewID.ComTipInfoView, ComTipInfoView, ComTipInfoCtrl);
 		register(ViewID.ComWaitingView, ComWaitingView, ComWaitingCtrl);
 		register(ViewID.ComItem2048View, ComItem2048View, ComItem2048Ctrl);

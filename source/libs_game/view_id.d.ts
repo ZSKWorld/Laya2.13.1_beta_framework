@@ -14,6 +14,7 @@ declare enum ViewID {
 	/**Coms */
 	ComBattleConfirmView = "ComBattleConfirmView",
 	ComConfirmView = "ComConfirmView",
+	ComRedDotView = "ComRedDotView",
 	ComTipInfoView = "ComTipInfoView",
 	ComWaitingView = "ComWaitingView",
 	ComItem2048View = "ComItem2048View",
