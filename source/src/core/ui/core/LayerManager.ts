@@ -1,5 +1,5 @@
 /** UI层级 */
-export enum Layer {
+enum Layer {
     Game = "Game",
     Bottom = "Bottom",
     Middle = "Middle",
@@ -8,6 +8,7 @@ export enum Layer {
     Alert = "Alert",
     Lock = "Lock",
 }
+windowImmit("Layer", Layer);
 
 /** UI层级管理 */
 class LayerManager {

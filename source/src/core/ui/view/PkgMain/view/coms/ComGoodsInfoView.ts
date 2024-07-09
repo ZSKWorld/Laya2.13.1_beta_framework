@@ -1,5 +1,4 @@
 import { GameUtil } from "../../../../../common/GameUtil";
-import { ResPath } from "../../../../../common/ResPath";
 import { UserUtil } from "../../../../../userData/UserUtil";
 import ComGoodsInfo from "../../../../ui/PkgMain/ComGoodsInfo";
 

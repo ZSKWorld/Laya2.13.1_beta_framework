@@ -1,7 +1,6 @@
 import { BagService, ShopService } from "../../../../../net/Services";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { ViewID } from "../../../../core/ViewID";
 import { ComGoodsInfoMsg, ComGoodsInfoView } from "../../view/coms/ComGoodsInfoView";
 
 export interface ComGoodsInfoData {

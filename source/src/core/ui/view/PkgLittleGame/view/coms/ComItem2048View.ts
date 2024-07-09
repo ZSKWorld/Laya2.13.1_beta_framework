@@ -1,5 +1,4 @@
 import ComItem2048 from "../../../../ui/PkgLittleGame/ComItem2048";
-import { ResPath } from "../../../../../common/ResPath";
 
 export const enum ComItem2048Msg {
 

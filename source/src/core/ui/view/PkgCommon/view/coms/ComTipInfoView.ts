@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComTipInfo from "../../../../ui/PkgCommon/ComTipInfo";
 
 export const enum ComTipInfoMsg {

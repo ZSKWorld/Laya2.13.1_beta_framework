@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import { UserUtil } from "../../../../userData/UserUtil";
 import UIEquipmentInfo from "../../../ui/PkgMain/UIEquipmentInfo";
 

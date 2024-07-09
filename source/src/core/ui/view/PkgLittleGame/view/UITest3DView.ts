@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UITest3D from "../../../ui/PkgLittleGame/UITest3D";
 
 export const enum UITest3DMsg {

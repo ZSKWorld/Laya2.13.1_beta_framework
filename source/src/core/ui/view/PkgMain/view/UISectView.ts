@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UISect from "../../../ui/PkgMain/UISect";
 
 export const enum UISectMsg {

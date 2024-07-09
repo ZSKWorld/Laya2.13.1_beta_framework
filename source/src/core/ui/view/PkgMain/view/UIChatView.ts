@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UIChat from "../../../ui/PkgMain/UIChat";
 
 export const enum UIChatMsg {

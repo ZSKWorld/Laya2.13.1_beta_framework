@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComSkill from "../../../../ui/PkgMain/ComSkill";
 
 export const enum ComSkillMsg {

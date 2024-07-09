@@ -1,7 +1,6 @@
 import { GameUtil } from "../../../../common/GameUtil";
 import { NetCMD } from "../../../../net/enum/NetCMD";
 import { BaseProxy } from "../../../core/BaseProxy";
-import { ViewID } from "../../../core/ViewID";
 import { richStrMgr } from "../../../tool/RichStrManager";
 import { UIUtil } from "../../../tool/UIUtil";
 import { UIGoodsInfoCtrl } from "../controller/UIGoodsInfoCtrl";

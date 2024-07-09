@@ -1,7 +1,6 @@
 import { NetCMD } from "../../../../net/enum/NetCMD";
 import { SocketEvent } from "../../../../net/WebSocket";
 import { BaseProxy } from "../../../core/BaseProxy";
-import { ViewID } from "../../../core/ViewID";
 import { UIBattleCtrl } from "../controller/UIBattleCtrl";
 
 export class UIBattleProxy extends BaseProxy<UIBattleCtrl> {

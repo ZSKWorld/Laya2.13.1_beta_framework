@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UISphereTool from "../../../ui/PkgMain/UISphereTool";
 
 export const enum UISphereToolMsg {

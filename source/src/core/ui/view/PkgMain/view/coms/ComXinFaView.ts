@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComXinFa from "../../../../ui/PkgMain/ComXinFa";
 
 export const enum ComXinFaMsg {

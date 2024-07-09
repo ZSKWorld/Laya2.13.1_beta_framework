@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComGoods from "../../../../ui/PkgMain/ComGoods";
 
 export const enum ComGoodsMsg {

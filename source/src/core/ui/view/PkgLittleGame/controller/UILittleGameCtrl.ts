@@ -1,7 +1,6 @@
 import { SceneType } from "../../../../../scene/SceneDefine";
 import { sceneMgr } from "../../../../../scene/SceneManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { ViewID } from "../../../core/ViewID";
 import { UILittleGameMsg, UILittleGameView } from "../view/UILittleGameView";
 
 export interface UILittleGameData {

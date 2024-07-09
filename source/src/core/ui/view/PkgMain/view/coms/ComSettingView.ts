@@ -1,5 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
-import { ViewID } from "../../../../core/ViewID";
 import ComSetting from "../../../../ui/PkgMain/ComSetting";
 
 export const enum ComSettingMsg {

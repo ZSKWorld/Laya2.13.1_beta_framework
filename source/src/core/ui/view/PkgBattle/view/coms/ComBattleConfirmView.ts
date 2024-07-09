@@ -1,5 +1,4 @@
 import { GameUtil } from "../../../../../common/GameUtil";
-import { ResPath } from "../../../../../common/ResPath";
 import { BattleType } from "../../../../../net/enum/BattleEnums";
 import ComBattleConfirm from "../../../../ui/PkgBattle/ComBattleConfirm";
 

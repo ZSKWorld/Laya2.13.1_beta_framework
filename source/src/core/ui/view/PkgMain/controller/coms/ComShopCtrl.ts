@@ -1,5 +1,4 @@
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { ViewID } from "../../../../core/ViewID";
 import { UIUtil } from "../../../../tool/UIUtil";
 import { ComShopMsg, ComShopView } from "../../view/coms/ComShopView";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";

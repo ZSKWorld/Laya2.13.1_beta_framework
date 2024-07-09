@@ -1,8 +1,7 @@
 import { loadMgr } from "../../game/LoadManager";
 import { Observer } from "../../game/event/Observer";
-import { Layer, layerMgr } from "./LayerManager";
+import { layerMgr } from "./LayerManager";
 import { ViewEvent } from "./UIDefine";
-import { ViewID } from "./ViewID";
 
 /** 页面缓存 */
 class UICache {

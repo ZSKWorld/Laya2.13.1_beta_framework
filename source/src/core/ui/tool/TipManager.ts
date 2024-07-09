@@ -1,6 +1,5 @@
-import { Layer, layerMgr } from "../core/LayerManager";
+import { layerMgr } from "../core/LayerManager";
 import { uiMgr } from "../core/UIManager";
-import { ViewID } from "../core/ViewID";
 import { UIPoolKey } from "./UIPoolKey";
 
 /** 文本提示管理器 */

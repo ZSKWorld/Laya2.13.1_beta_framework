@@ -1,7 +1,6 @@
 import { CameraController } from "../../../../3d/CameraController";
 import { RotateAround } from "../../../../3d/RotateAround";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { ViewID } from "../../../core/ViewID";
 import { UITest3DMsg, UITest3DView } from "../view/UITest3DView";
 
 export interface UITest3DData {

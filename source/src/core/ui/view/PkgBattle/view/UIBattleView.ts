@@ -1,6 +1,4 @@
 import { GameUtil } from "../../../../common/GameUtil";
-import { ResPath } from "../../../../common/ResPath";
-import { BattleType } from "../../../../net/enum/BattleEnums";
 import UIBattle from "../../../ui/PkgBattle/UIBattle";
 
 export const enum UIBattleMsg {

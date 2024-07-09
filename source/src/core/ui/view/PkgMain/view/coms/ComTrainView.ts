@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComTrain from "../../../../ui/PkgMain/ComTrain";
 
 export const enum ComTrainMsg {

@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UILogin from "../../../ui/PkgLogin/UILogin";
 
 export const enum UILoginMsg {

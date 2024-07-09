@@ -1,5 +1,4 @@
 import BtnCheck from "../../../../ui/PkgMain/BtnCheck";
-import { ResPath } from "../../../../../common/ResPath";
 
 export const enum BtnCheckMsg {
 

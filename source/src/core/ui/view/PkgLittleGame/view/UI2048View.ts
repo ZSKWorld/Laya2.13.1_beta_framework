@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UI2048 from "../../../ui/PkgLittleGame/UI2048";
 
 export const enum UI2048Msg {

@@ -1,10 +1,13 @@
-import { ResPath } from "./core/common/ResPath";
+import { ResPath as ResPathEnum } from "./core/common/ResPath";
 import { CfgManager } from "./core/config/CfgManager";
 import { Logger } from "./core/game/Logger";
 import { uiMgr } from "./core/ui/core/UIManager";
-import { ViewID } from "./core/ui/core/ViewID";
+import { ViewID as ViewIDEnum } from "./core/ui/core/ViewID";
 import { User } from "./core/userData/User";
 import { platformMgr } from "./platform/PlatformManager";
+
+windowImmit("ResPath", ResPathEnum);
+windowImmit("ViewID", ViewIDEnum);
 
 windowImmit("showConfirm", (title: string, msg: string) => {
     if (Laya.loader.getRes(ResPath.PkgPath.PkgCommon + ".zip")) {

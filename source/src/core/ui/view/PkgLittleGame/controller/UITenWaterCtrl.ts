@@ -1,5 +1,4 @@
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { ViewID } from "../../../core/ViewID";
 import { UITenWaterMsg, UITenWaterView } from "../view/UITenWaterView";
 import { ComTenWaterCtrl } from "./coms/ComTenWaterCtrl";
 

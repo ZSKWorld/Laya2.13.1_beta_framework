@@ -1,5 +1,4 @@
 
-import { ResPath } from "../core/common/ResPath";
 import Sprite = Laya.Sprite;
 import Stage = Laya.Stage;
 import Event = Laya.Event;

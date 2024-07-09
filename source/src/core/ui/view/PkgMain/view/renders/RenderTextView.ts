@@ -1,5 +1,4 @@
 import RenderText from "../../../../ui/PkgMain/RenderText";
-import { ResPath } from "../../../../../common/ResPath";
 
 export const enum RenderTextMsg {
 

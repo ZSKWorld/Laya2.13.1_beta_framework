@@ -1,5 +1,4 @@
 import UITenWater from "../../../ui/PkgLittleGame/UITenWater";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum UITenWaterMsg {
 	OnBtnBackClick = "UITenWater_OnBtnBackClick",

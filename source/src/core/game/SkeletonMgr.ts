@@ -1,5 +1,3 @@
-import { ResPath } from "../common/ResPath";
-
 class SkeletonMgr {
     /** 动画模板 */
     private _templetMap = new Map<string, Laya.Templet>();

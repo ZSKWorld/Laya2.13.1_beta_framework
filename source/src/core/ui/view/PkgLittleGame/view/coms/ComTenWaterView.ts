@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComTenWater from "../../../../ui/PkgLittleGame/ComTenWater";
 
 export const enum ComTenWaterMsg {

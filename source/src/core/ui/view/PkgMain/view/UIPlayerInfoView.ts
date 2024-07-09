@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UIPlayerInfo from "../../../ui/PkgMain/UIPlayerInfo";
 
 export const enum UIPlayerInfoMsg {

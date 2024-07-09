@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import { UserUtil } from "../../../../../userData/UserUtil";
 import RenderGoods from "../../../../ui/PkgMain/RenderGoods";
 

@@ -2,7 +2,6 @@ import { loadMgr } from "../core/game/LoadManager";
 import { skeletonMgr } from "../core/game/SkeletonMgr";
 import { Observer } from "../core/game/event/Observer";
 import { uiMgr } from "../core/ui/core/UIManager";
-import { ViewID } from "../core/ui/core/ViewID";
 import { IScene, SceneEvent, SceneType } from "./SceneDefine";
 
 const enum ResGroupType {

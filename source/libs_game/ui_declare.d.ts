@@ -51,6 +51,16 @@ declare enum MouseEventType {
     StageClick = "stageclick",
 }
 
+declare enum Layer {
+    Game = "Game",
+    Bottom = "Bottom",
+    Middle = "Middle",
+    Top = "Top",
+    Dialog = "Dialog",
+    Alert = "Alert",
+    Lock = "Lock",
+}
+
 /**页面及控制器扩展 */
 declare interface IViewExtend {
     readonly viewId: ViewID;

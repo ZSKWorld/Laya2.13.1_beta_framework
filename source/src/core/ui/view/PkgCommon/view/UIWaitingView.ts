@@ -1,6 +1,4 @@
 import UIWaiting from "../../../ui/PkgCommon/UIWaiting";
-import { ResPath } from "../../../../common/ResPath";
-import { Layer } from "../../../core/LayerManager";
 
 export const enum UIWaitingMsg {
 

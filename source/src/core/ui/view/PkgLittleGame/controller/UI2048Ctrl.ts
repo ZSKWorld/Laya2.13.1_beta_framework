@@ -1,7 +1,6 @@
 import { Observer } from "../../../../game/event/Observer";
 import { MathUtil } from "../../../../game/math/MathUtil";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { ViewID } from "../../../core/ViewID";
 import { UI2048Msg, UI2048View } from "../view/UI2048View";
 import { ComItem2048Ctrl } from "./coms/ComItem2048Ctrl";
 

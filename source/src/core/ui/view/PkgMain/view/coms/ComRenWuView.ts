@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import { MathUtil } from "../../../../../game/math/MathUtil";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import ComRenWu from "../../../../ui/PkgMain/ComRenWu";

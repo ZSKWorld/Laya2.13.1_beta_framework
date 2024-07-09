@@ -1,5 +1,4 @@
 import UIConfirm from "../../../ui/PkgCommon/UIConfirm";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum UIConfirmMsg {
 

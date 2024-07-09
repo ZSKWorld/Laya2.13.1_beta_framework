@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UIChooseBattle from "../../../ui/PkgBattle/UIChooseBattle";
 
 export const enum UIChooseBattleMsg {

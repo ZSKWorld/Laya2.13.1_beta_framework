@@ -1,5 +1,4 @@
 import UILittleGame from "../../../ui/PkgLittleGame/UILittleGame";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum UILittleGameMsg {
 	OnBtnBackClick = "UILittleGame_OnBtnBackClick",

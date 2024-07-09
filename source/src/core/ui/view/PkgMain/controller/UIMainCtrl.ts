@@ -4,7 +4,6 @@ import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { MathUtil } from "../../../../game/math/MathUtil";
 import { trainLogMgr } from "../../../../game/TrainLogManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { ViewID } from "../../../core/ViewID";
 import { richStrMgr } from "../../../tool/RichStrManager";
 import { UIMainMsg, UIMainView } from "../view/UIMainView";
 

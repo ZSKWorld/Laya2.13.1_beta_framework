@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UIGoodsInfo from "../../../ui/PkgMain/UIGoodsInfo";
 
 export const enum UIGoodsInfoMsg {

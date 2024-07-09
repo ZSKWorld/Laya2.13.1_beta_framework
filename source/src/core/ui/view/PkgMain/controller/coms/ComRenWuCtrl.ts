@@ -1,6 +1,5 @@
 import { EquipmentPart } from "../../../../../net/enum/ItemEnum";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { ViewID } from "../../../../core/ViewID";
 import { tipMgr } from "../../../../tool/TipManager";
 import { ComRenWuMsg, ComRenWuView } from "../../view/coms/ComRenWuView";
 import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";

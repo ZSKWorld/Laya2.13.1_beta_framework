@@ -1,14 +1,14 @@
 /** This script is generated automatically, Please do not any modify! */
-export namespace ResPath {
-	export enum UnclassifiedPath {}
+declare namespace ResPath {
+	enum UnclassifiedPath {}
 
 	// res/config/
-	export enum ConfigPath {
+	enum ConfigPath {
 		Config = "res/config/Config.json",
 	}
 
 	// res/font/
-	export enum FontName {
+	enum FontName {
 		Font01 = "Font01",
 		Font02 = "Font02",
 		Font03 = "Font03",
@@ -26,7 +26,7 @@ export namespace ResPath {
 		Font15 = "Font15",
 	}
 
-	export enum FontPath {
+	enum FontPath {
 		Font01 = "res/font/Font01.ttf",
 		Font02 = "res/font/Font02.ttf",
 		Font03 = "res/font/Font03.ttf",
@@ -45,12 +45,12 @@ export namespace ResPath {
 	}
 
 	// res/prescreen/
-	export enum PrescreenPath {
+	enum PrescreenPath {
 		Prescreen = "res/prescreen/prescreen.png",
 	}
 
 	// res/skeleton/
-	export enum SkeletonPath {
+	enum SkeletonPath {
 		Bianhua = "res/skeleton/bianhua.sk",
 		Biaoqing = "res/skeleton/biaoqing.sk",
 		Biaoti = "res/skeleton/biaoti.sk",
@@ -109,7 +109,7 @@ export namespace ResPath {
 	}
 
 	// res/sound/
-	export enum SoundPath {
+	enum SoundPath {
 		Button1 = "res/sound/Button1.wav",
 		Button10 = "res/sound/Button10.wav",
 		Button11 = "res/sound/Button11.wav",
@@ -162,12 +162,12 @@ export namespace ResPath {
 	}
 
 	// res/texture/
-	export enum TexturePath {
+	enum TexturePath {
 		Aaaa = "res/texture/aaaa.png",
 	}
 
 	// res/ui/
-	export enum PkgName {
+	enum PkgName {
 		PkgBattle = "PkgBattle",
 		PkgCommon = "PkgCommon",
 		PkgDesign = "PkgDesign",
@@ -176,7 +176,7 @@ export namespace ResPath {
 		PkgMain = "PkgMain",
 	}
 
-	export enum PkgPath {
+	enum PkgPath {
 		PkgBattle = "res/ui/PkgBattle",
 		PkgCommon = "res/ui/PkgCommon",
 		PkgDesign = "res/ui/PkgDesign",

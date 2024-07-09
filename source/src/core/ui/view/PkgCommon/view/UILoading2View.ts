@@ -1,5 +1,4 @@
 import UILoading2 from "../../../ui/PkgCommon/UILoading2";
-import { ResPath } from "../../../../common/ResPath";
 
 export const enum UILoading2Msg {
 

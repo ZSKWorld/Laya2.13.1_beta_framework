@@ -1,7 +1,6 @@
 import { ItemBagType } from "../../../../../net/enum/ItemEnum";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { ViewID } from "../../../../core/ViewID";
 import { UIUtil } from "../../../../tool/UIUtil";
 import { ComGoodsMsg, ComGoodsView } from "../../view/coms/ComGoodsView";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";

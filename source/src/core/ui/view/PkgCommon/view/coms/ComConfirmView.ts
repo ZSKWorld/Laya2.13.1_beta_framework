@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComConfirm from "../../../../ui/PkgCommon/ComConfirm";
 
 export const enum ComConfirmMsg {

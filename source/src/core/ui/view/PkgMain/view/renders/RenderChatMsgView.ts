@@ -1,5 +1,4 @@
 import RenderChatMsg from "../../../../ui/PkgMain/RenderChatMsg";
-import { ResPath } from "../../../../../common/ResPath";
 
 export const enum RenderChatMsgMsg {
 

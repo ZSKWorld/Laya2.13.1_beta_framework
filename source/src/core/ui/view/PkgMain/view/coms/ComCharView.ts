@@ -1,5 +1,4 @@
 import ComChar from "../../../../ui/PkgMain/ComChar";
-import { ResPath } from "../../../../../common/ResPath";
 
 export const enum ComCharMsg {
 

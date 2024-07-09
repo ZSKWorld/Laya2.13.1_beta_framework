@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../common/ResPath";
 import UISetting from "../../../ui/PkgMain/UISetting";
 
 export const enum UISettingMsg {

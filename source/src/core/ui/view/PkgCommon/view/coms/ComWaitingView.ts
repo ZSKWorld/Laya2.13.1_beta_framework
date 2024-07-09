@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComWaiting from "../../../../ui/PkgCommon/ComWaiting";
 
 export const enum ComWaitingMsg {

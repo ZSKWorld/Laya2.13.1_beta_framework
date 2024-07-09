@@ -1,5 +1,4 @@
 import BtnTxt from "../../../../ui/PkgCommon/BtnTxt";
-import { ResPath } from "../../../../../common/ResPath";
 
 export const enum BtnTxtMsg {
 

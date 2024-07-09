@@ -1,4 +1,3 @@
-import { ResPath } from "../../core/common/ResPath";
 import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";
 import { sceneMgr } from "../SceneManager";

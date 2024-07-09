@@ -1,5 +1,4 @@
 import { GameEvent } from "../core/common/GameEvent";
-import { ResPath } from "../core/common/ResPath";
 import { PlatformBase } from "./PlatformBase";
 import { PlatformType } from "./PlatformDefine";
 

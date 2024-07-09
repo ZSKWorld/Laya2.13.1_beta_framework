@@ -1,6 +1,5 @@
 import { SceneType } from "../../../scene/SceneDefine";
 import { sceneMgr } from "../../../scene/SceneManager";
-import { ViewID } from "./ViewID";
 
 class SceneViewRegister {
     init() {

@@ -1,5 +1,4 @@
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { ViewID } from "../../../../core/ViewID";
 import { ComConfirmMsg, ComConfirmView } from "../../view/coms/ComConfirmView";
 
 export interface ComConfirmData {

@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import RenderFriend from "../../../../ui/PkgMain/RenderFriend";
 
 export const enum RenderFriendMsg {

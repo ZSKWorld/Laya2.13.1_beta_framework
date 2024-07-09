@@ -114,7 +114,6 @@ import { UITest3DView } from "../view/PkgLittleGame/view/UITest3DView";
 import { UIWaitingCtrl } from "../view/PkgCommon/controller/UIWaitingCtrl";
 import { UIWaitingProxy } from "../view/PkgCommon/proxy/UIWaitingProxy";
 import { UIWaitingView } from "../view/PkgCommon/view/UIWaitingView";
-import { ViewID } from "./ViewID";
 import { uiMgr } from "./UIManager";
 
 

@@ -1,4 +1,3 @@
-import { ResPath } from "../../../../../common/ResPath";
 import ComZhiZuo from "../../../../ui/PkgMain/ComZhiZuo";
 
 export const enum ComZhiZuoMsg {
