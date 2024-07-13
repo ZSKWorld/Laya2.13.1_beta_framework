@@ -58,6 +58,15 @@ export class ViewExtend {
 			const _this = this as IView;
 			_this.viewCtrl = null;
 		}
+		prototype.getPath = function () {
+			let obj = this;
+			let path = obj.name;
+			while (obj.parent) {
+				obj = obj.parent;
+				path = (obj.name ? obj.name + "." : "") + path;
+			}
+			return path;
+		}
 	}
 
 	private static BaseCtrlExtend() {

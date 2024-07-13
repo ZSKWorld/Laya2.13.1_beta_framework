@@ -24,28 +24,14 @@ export class RedDotTrigger extends Observer {
         }
     }
 
-    @RedDotEvent(RDTriggerType.UnlockFaction)
-    private checkUnlockFaction(type: RDTriggerType, triggerId?: number) {
-        const triggered = false;
-        this.doTrigger(type, triggered, triggerId);
-    }
-
-    @RedDotEvent(RDTriggerType.UnlockPuppet)
-    private checkUnlockPuppet(type: RDTriggerType, triggerId?: number) {
-        const triggered = false;
-        this.doTrigger(type, triggered, triggerId);
-    }
-
-    @RedDotEvent(RDTriggerType.UpgradeMainSkill1)
-    @RedDotEvent(RDTriggerType.UpgradeMainSkill2)
-    @RedDotEvent(RDTriggerType.UpgradeMainSkill3)
-    @RedDotEvent(RDTriggerType.UpgradeMainSkill4)
+    @RedDotEvent(RDTriggerType.Test)
     private checkMainSkill(type: RDTriggerType, triggerId?: number) {
-        const triggered = false;
+        const triggered = true;
         this.doTrigger(type, triggered, triggerId);
     }
 
     private doTrigger(type: RDTriggerType, triggered: boolean, triggerId?: number) {
+        Logger.Error(type, triggered);
         this._eventCenter.event(type, [type, triggered, triggerId]);
     }
 }

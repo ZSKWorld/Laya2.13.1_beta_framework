@@ -12,7 +12,7 @@ export class UIChatCtrl extends BaseViewCtrl<UIChatView, UIChatData>{
     }
 
 	private onBtnSendClick() {
-
+		
 	}
 
 }

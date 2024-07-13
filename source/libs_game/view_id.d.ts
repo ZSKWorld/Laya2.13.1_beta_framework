@@ -3,6 +3,7 @@ declare enum ViewID {
 	/**Btns */
 	BtnTxtView = "BtnTxtView",
 	BtnCheckView = "BtnCheckView",
+	BtnMainKindView = "BtnMainKindView",
 
 	/**Renders */
 	RenderChooseBattleView = "RenderChooseBattleView",

@@ -34,6 +34,7 @@
     <component id="roh22e" name="RenderFriend.xml" path="/Component/UIChat/"/>
     <component id="awbv2f" name="ComGoodsInfo.xml" path="/Component/UIGoodsInfo/"/>
     <component id="g59f2g" name="ComSetting.xml" path="/Component/UISetting/"/>
+    <component id="olc42h" name="BtnMainKind.xml" path="/Component/UIMain/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

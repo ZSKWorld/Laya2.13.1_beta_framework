@@ -5,7 +5,7 @@ import { ComCharView } from "../../view/PkgMain/view/coms/ComCharView";
 import { ComGoodsView } from "../../view/PkgMain/view/coms/ComGoodsView";
 import { ComShopView } from "../../view/PkgMain/view/coms/ComShopView";
 import { ComAbodeView } from "../../view/PkgMain/view/coms/ComAbodeView";
-import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
+import { BtnMainKindView } from "../../view/PkgMain/view/btns/BtnMainKindView";
 
 export default class UIMain extends fgui.GComponent {
 
@@ -15,12 +15,12 @@ export default class UIMain extends fgui.GComponent {
 	public com_goods: ComGoodsView;
 	public com_shop: ComShopView;
 	public com_abode: ComAbodeView;
-	public btn_train: BtnTxtView;
-	public btn_char: BtnTxtView;
-	public btn_goods: BtnTxtView;
-	public btn_shop: BtnTxtView;
-	public btn_abode: BtnTxtView;
-	public btn_chat: BtnTxtView;
+	public btn_train: BtnMainKindView;
+	public btn_char: BtnMainKindView;
+	public btn_goods: BtnMainKindView;
+	public btn_shop: BtnMainKindView;
+	public btn_abode: BtnMainKindView;
+	public btn_chat: BtnMainKindView;
 	public graph_info: fgui.GGraph;
 	public txt_nickname: fgui.GTextField;
 	public txt_level: fgui.GTextField;
@@ -45,12 +45,12 @@ export default class UIMain extends fgui.GComponent {
 		this.com_goods = <ComGoodsView>(this.getChildAt(4));
 		this.com_shop = <ComShopView>(this.getChildAt(5));
 		this.com_abode = <ComAbodeView>(this.getChildAt(6));
-		this.btn_train = <BtnTxtView>(this.getChildAt(7));
-		this.btn_char = <BtnTxtView>(this.getChildAt(8));
-		this.btn_goods = <BtnTxtView>(this.getChildAt(9));
-		this.btn_shop = <BtnTxtView>(this.getChildAt(10));
-		this.btn_abode = <BtnTxtView>(this.getChildAt(11));
-		this.btn_chat = <BtnTxtView>(this.getChildAt(12));
+		this.btn_train = <BtnMainKindView>(this.getChildAt(7));
+		this.btn_char = <BtnMainKindView>(this.getChildAt(8));
+		this.btn_goods = <BtnMainKindView>(this.getChildAt(9));
+		this.btn_shop = <BtnMainKindView>(this.getChildAt(10));
+		this.btn_abode = <BtnMainKindView>(this.getChildAt(11));
+		this.btn_chat = <BtnMainKindView>(this.getChildAt(12));
 		this.graph_info = <fgui.GGraph>(this.getChildAt(14));
 		this.txt_nickname = <fgui.GTextField>(this.getChildAt(17));
 		this.txt_level = <fgui.GTextField>(this.getChildAt(19));

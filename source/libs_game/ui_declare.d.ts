@@ -108,6 +108,7 @@ declare interface IViewExtend {
 
     /** 移除当前页面，只有UI界面才能移除自身，其他Com，Btn，Render之类的无效 */
     removeSelf(): void;
+    getPath(): string;
 }
 
 /**页面实例类型 */

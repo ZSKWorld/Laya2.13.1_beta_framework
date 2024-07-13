@@ -10,6 +10,8 @@ export class RedDotNode implements IRedDotNode {
     private _text: fgui.GTextField;
 
     get comp() {
+        if (this._comp && this._comp.isDisposed)
+            this._comp = null;
         if (!this._comp) {
             const names = this.data.names;
             if (names && names.length) {
@@ -34,6 +36,8 @@ export class RedDotNode implements IRedDotNode {
     }
 
     get text() {
+        if (this._text && this._text.isDisposed)
+            this._text = null;
         if (!this._text && this.comp) {
             this._text = <fgui.GTextField>this.comp.getChild("txt_count");
         }

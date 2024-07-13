@@ -105,6 +105,7 @@ export class FGUIExtension {
 			const eventLockMap = this.__eventLockMap;
 			if (eventLockMap && (eventLockMap["$LockAll"] || eventLockMap[type]))
 				return;
+			if (type == "click" && this.$owner && this.$owner.getPath) Logger.Error(this.$owner.getPath());
 			return oldEvent.call(this, type, data);
 		}
 

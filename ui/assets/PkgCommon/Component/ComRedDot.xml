@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="38,38">
   <displayList>
-    <image id="n0_yz4q" name="n0" src="qjdoh" fileName="Texture/Icon_Wonder.png" xy="0,0"/>
-    <text id="n1_yz4q" name="txt_count" xy="2,-2" size="34,42" fontSize="30" bold="true" strokeColor="#ffffff" text="15"/>
+    <image id="n0_yz4q" name="n0" src="qjdoh" fileName="Texture/Icon_Wonder.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n1_yz4q" name="txt_count" xy="2,-2" size="34,42" fontSize="30" bold="true" strokeColor="#ffffff" text="15">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
   </displayList>
 </component>

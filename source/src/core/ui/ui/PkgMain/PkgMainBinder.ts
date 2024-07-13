@@ -21,6 +21,8 @@ import BtnCheck from "./BtnCheck";
 import { BtnCheckView } from "../../view/PkgMain/view/btns/BtnCheckView";
 import UIChat from "./UIChat";
 import { UIChatView } from "../../view/PkgMain/view/UIChatView";
+import BtnMainKind from "./BtnMainKind";
+import { BtnMainKindView } from "../../view/PkgMain/view/btns/BtnMainKindView";
 import UIMain from "./UIMain";
 import { UIMainView } from "../../view/PkgMain/view/UIMainView";
 import RenderFriend from "./RenderFriend";
@@ -66,6 +68,7 @@ export default class PkgMainBinder {
 		fgui.UIObjectFactory.setExtension(RenderChatMsg.URL, RenderChatMsgView);
 		fgui.UIObjectFactory.setExtension(BtnCheck.URL, BtnCheckView);
 		fgui.UIObjectFactory.setExtension(UIChat.URL, UIChatView);
+		fgui.UIObjectFactory.setExtension(BtnMainKind.URL, BtnMainKindView);
 		fgui.UIObjectFactory.setExtension(UIMain.URL, UIMainView);
 		fgui.UIObjectFactory.setExtension(RenderFriend.URL, RenderFriendView);
 		fgui.UIObjectFactory.setExtension(ComSkill.URL, ComSkillView);

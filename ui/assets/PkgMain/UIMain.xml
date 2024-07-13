@@ -30,27 +30,27 @@
       <gearDisplay controller="ctrlShow" pages="4"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n12_sbd0" name="btn_train" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="17,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
+    <component id="n12_sbd0" name="btn_train" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="17,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0" values="#ffffff" default="#000000"/>
       <Button title="历练" titleColor="#ffffff" titleFontSize="55" controller="ctrlShow" page="0"/>
     </component>
-    <component id="n14_sbd0" name="btn_char" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="192,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
+    <component id="n14_sbd0" name="btn_char" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="192,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,1" values="#000000|#ffffff" default="#000000"/>
       <Button title="角色" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="1"/>
     </component>
-    <component id="n15_sbd0" name="btn_goods" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="367,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
+    <component id="n15_sbd0" name="btn_goods" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="367,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,2" values="#000000|#ffffff" default="#000000"/>
       <Button title="物品" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="2"/>
     </component>
-    <component id="n16_sbd0" name="btn_shop" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="542,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
+    <component id="n16_sbd0" name="btn_shop" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="542,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,3" values="#000000|#ffffff" default="#000000"/>
       <Button title="商城" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="3"/>
     </component>
-    <component id="n17_sbd0" name="btn_abode" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="717,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
+    <component id="n17_sbd0" name="btn_abode" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="717,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <gearColor controller="ctrlShow" pages="0,4" values="#000000|#ffffff" default="#000000"/>
       <Button title="洞府" titleColor="#000000" titleFontSize="55" controller="ctrlShow" page="4"/>
     </component>
-    <component id="n69_o772" name="btn_chat" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="892,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
+    <component id="n69_o772" name="btn_chat" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="892,1792" size="170,101" group="n71_o772" controller="ctrlBgColor,13">
       <Button title="好友" titleFontSize="55"/>
     </component>
     <group id="n71_o772" name="n71" xy="17,1792" size="1045,101" advanced="true" layout="hz" colGap="5" excludeInvisibles="true">

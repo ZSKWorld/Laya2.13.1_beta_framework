@@ -6,6 +6,8 @@ import PkgLoginBinder from "../ui/PkgLogin/PkgLoginBinder";
 import PkgMainBinder from "../ui/PkgMain/PkgMainBinder";
 import { BtnCheckCtrl } from "../view/PkgMain/controller/btns/BtnCheckCtrl";
 import { BtnCheckView } from "../view/PkgMain/view/btns/BtnCheckView";
+import { BtnMainKindCtrl } from "../view/PkgMain/controller/btns/BtnMainKindCtrl";
+import { BtnMainKindView } from "../view/PkgMain/view/btns/BtnMainKindView";
 import { BtnTxtCtrl } from "../view/PkgCommon/controller/btns/BtnTxtCtrl";
 import { BtnTxtView } from "../view/PkgCommon/view/btns/BtnTxtView";
 import { ComAbodeCtrl } from "../view/PkgMain/controller/coms/ComAbodeCtrl";
@@ -141,6 +143,7 @@ class ViewRegister {
 		//Btns
 		register(ViewID.BtnTxtView, BtnTxtView, BtnTxtCtrl);
 		register(ViewID.BtnCheckView, BtnCheckView, BtnCheckCtrl);
+		register(ViewID.BtnMainKindView, BtnMainKindView, BtnMainKindCtrl);
 
 		//Renders
 		register(ViewID.RenderChooseBattleView, RenderChooseBattleView, RenderChooseBattleCtrl);
