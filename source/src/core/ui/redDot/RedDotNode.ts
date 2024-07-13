@@ -1,7 +1,7 @@
-import { RDDisplayType } from "./RedDotConst";
-import { IRedDotData } from "./RedDotInterface";
+import { RDDisplayType } from "./RedDotEnum";
+import { IRedDotData, IRedDotNode } from "./RedDotInterface";
 
-export class RedDotNode {
+export class RedDotNode implements IRedDotNode {
     /** 红点数据 */
     data: IRedDotData;
     /** 红点组件 */
@@ -39,6 +39,8 @@ export class RedDotNode {
         }
         return this._text;
     }
+
+    private constructor() { }
 
     refresh() {
         const { comp, text, data } = this;

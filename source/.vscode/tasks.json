@@ -6,7 +6,7 @@
         {
             "label": "编译项目",
             "type": "shell",
-            "command": "nvm use 16.20.0",
+            "command": "nvm use 22.4.1",
             "dependsOn": [
                 "切换node_10_24_1",
                 "编译"

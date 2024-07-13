@@ -1,5 +1,5 @@
-import { RDDisplayType, RDName, RDTriggerType } from "./RedDotConst";
 import { RedDotData } from "./RedDotData";
+import { RDDisplayType, RDName, RDTriggerType } from "./RedDotEnum";
 import { IRedDotData } from "./RedDotInterface";
 
 const map: { [key in RDName]: IRedDotData } = {} as any;

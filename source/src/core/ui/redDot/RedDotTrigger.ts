@@ -1,5 +1,5 @@
 import { Observer } from "../../game/event/Observer";
-import { RDTriggerType } from "./RedDotConst";
+import { RDTriggerType } from "./RedDotEnum";
 
 function RedDotEvent(eventName: RDTriggerType) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {

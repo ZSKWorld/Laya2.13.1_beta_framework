@@ -8,6 +8,33 @@ export class FGUIExtension {
 	/** GObject扩展 */
 	private static GObjectExtension() {
 		const prototype = fgui.GObject.prototype;
+		prototype.tweenMove = function(endX: number, endY: number, duration: number){
+			return fgui.GTween.to2(this.x, this.y, endX, endY, duration).setTarget(this, this.setXY);
+		}
+		prototype.tweenMoveX = function(endX: number, duration: number){
+			return fgui.GTween.to(this.x, endX, duration).setTarget(this, "x");
+		}
+		prototype.tweenMoveY = function(endY: number, duration: number){
+			return fgui.GTween.to(this.y, endY, duration).setTarget(this, "y");
+		}
+		prototype.tweenScale = function(endX: number, endY: number, duration: number){
+			return fgui.GTween.to2(this.scaleX, this.scaleY, endX, endY, duration).setTarget(this, this.setScale);
+		}
+		prototype.tweenScaleX = function(endX: number, duration: number){
+			return fgui.GTween.to(this.scaleX, endX, duration).setTarget(this, "scaleX");
+		}
+		prototype.tweenScaleY = function(endY: number, duration: number){
+			return fgui.GTween.to(this.scaleY, endY, duration).setTarget(this, "scaleY");
+		}
+		prototype.tweenResize = function(endW: number, endH: number, duration: number){
+			return fgui.GTween.to2(this.width, this.height, endW, endH, duration).setTarget(this, this.setSize);
+		}
+		prototype.tweenFade = function(endValue: number, duration: number){
+			return fgui.GTween.to(this.alpha, endValue, duration).setTarget(this, "alpha");
+		}
+		prototype.tweenRotate = function(endValue: number, duration: number){
+			return fgui.GTween.to(this.rotation, endValue, duration).setTarget(this, "rotation");
+		}
 		prototype.addComponentIntance = function (component) {
 			return this._displayObject.addComponentIntance(component);
 		}

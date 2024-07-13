@@ -62,6 +62,16 @@ declare namespace Laya {
 
 declare namespace fgui {
     interface GObject {
+        tweenMove(endX: number, endY: number, duration: number): GTweener;
+        tweenMoveX(endX: number, duration: number): GTweener;
+        tweenMoveY(endY: number, duration: number): GTweener;
+        tweenScale(endX: number, endY: number, duration: number): GTweener;
+        tweenScaleX(endX: number, duration: number): GTweener;
+        tweenScaleY(endY: number, duration: number): GTweener;
+        tweenResize(endW: number, endH: number, duration: number): GTweener;
+        tweenFade(endValue: number, duration: number): GTweener;
+        tweenRotate(endValue: number, duration: number): GTweener;
+        
         addComponentIntance<T extends Laya.Component>(component: T): T;
         addComponent<T extends Laya.Component>(componentType: Class<T>): T;
         getComponent<T extends Laya.Component>(componentType: Class<T>): T;

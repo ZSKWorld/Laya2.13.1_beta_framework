@@ -1,5 +1,5 @@
-import { RDDisplayType, RDTriggerType } from "./RedDotConst";
-import { IRedDotData } from "./RedDotInterface";
+import { RDDisplayType, RDTriggerType } from "./RedDotEnum";
+import { IRedDotData, IRedDotNode } from "./RedDotInterface";
 import { RedDotNode } from "./RedDotNode";
 
 export class RedDotData implements IRedDotData {
@@ -9,7 +9,7 @@ export class RedDotData implements IRedDotData {
     private _enable: boolean;
     private _path: string;
     private _names: string[];
-    private _node: RedDotNode;
+    private _node: IRedDotNode;
     private _parent: RedDotData;
     private _childs: RedDotData[];
     private _triggers: RDTriggerType[];
@@ -44,7 +44,7 @@ export class RedDotData implements IRedDotData {
         data._enable = true;
         data._childs = [];
         data._rdCount = 0;
-        data._node = Laya.Pool.createByClass(RedDotNode);
+        data._node = Laya.Pool.createByClass(RedDotNode as any) as IRedDotNode;
         data._node.data = data;
 
         data._path = path;
