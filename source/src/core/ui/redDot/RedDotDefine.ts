@@ -11,7 +11,7 @@ const create = function (parent: IRedDotData, path: string, triggers?: RDTrigger
 export const RDDefineInit = function () {
     if (!map.Root) {
         map.Root = create(null, null);
-        map.Train = create(map.Root, "Bottom.UIMainView.btn_train", [RDTriggerType.Test]);
+        map.Train = create(map.Root, "Bottom.UIMainView.btn_train");
         map.Character = create(map.Root, "Bottom.UIMainView.btn_char");
         map.Goods = create(map.Root, "Bottom.UIMainView.btn_goods");
         map.Shop = create(map.Root, "Bottom.UIMainView.btn_shop");

@@ -24,10 +24,8 @@ export class RedDotTrigger extends Observer {
         }
     }
 
-    @RedDotEvent(RDTriggerType.Test)
-    private checkMainSkill(type: RDTriggerType, triggerId?: number) {
-        const triggered = true;
-        this.doTrigger(type, triggered, triggerId);
+    private checkEquipmentCanWear(type:RDTriggerType, triggerId?:number) {
+        
     }
 
     private doTrigger(type: RDTriggerType, triggered: boolean, triggerId?: number) {
