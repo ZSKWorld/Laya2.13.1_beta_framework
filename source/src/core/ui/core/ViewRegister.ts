@@ -106,6 +106,9 @@ import { UISectView } from "../view/PkgMain/view/UISectView";
 import { UISettingCtrl } from "../view/PkgMain/controller/UISettingCtrl";
 import { UISettingProxy } from "../view/PkgMain/proxy/UISettingProxy";
 import { UISettingView } from "../view/PkgMain/view/UISettingView";
+import { UISnakeCtrl } from "../view/PkgLittleGame/controller/UISnakeCtrl";
+import { UISnakeProxy } from "../view/PkgLittleGame/proxy/UISnakeProxy";
+import { UISnakeView } from "../view/PkgLittleGame/view/UISnakeView";
 import { UISphereToolCtrl } from "../view/PkgMain/controller/UISphereToolCtrl";
 import { UISphereToolProxy } from "../view/PkgMain/proxy/UISphereToolProxy";
 import { UISphereToolView } from "../view/PkgMain/view/UISphereToolView";
@@ -182,6 +185,7 @@ class ViewRegister {
 		register(ViewID.UIWaitingView, UIWaitingView, UIWaitingCtrl, UIWaitingProxy);
 		register(ViewID.UI2048View, UI2048View, UI2048Ctrl, UI2048Proxy);
 		register(ViewID.UILittleGameView, UILittleGameView, UILittleGameCtrl, UILittleGameProxy);
+		register(ViewID.UISnakeView, UISnakeView, UISnakeCtrl, UISnakeProxy);
 		register(ViewID.UITenWaterView, UITenWaterView, UITenWaterCtrl, UITenWaterProxy);
 		register(ViewID.UITest3DView, UITest3DView, UITest3DCtrl, UITest3DProxy);
 		register(ViewID.UILoginView, UILoginView, UILoginCtrl, UILoginProxy);

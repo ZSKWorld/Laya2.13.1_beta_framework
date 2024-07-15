@@ -6,6 +6,8 @@ import ComTenWater from "./ComTenWater";
 import { ComTenWaterView } from "../../view/PkgLittleGame/view/coms/ComTenWaterView";
 import UITest3D from "./UITest3D";
 import { UITest3DView } from "../../view/PkgLittleGame/view/UITest3DView";
+import UISnake from "./UISnake";
+import { UISnakeView } from "../../view/PkgLittleGame/view/UISnakeView";
 import UI2048 from "./UI2048";
 import { UI2048View } from "../../view/PkgLittleGame/view/UI2048View";
 import ComItem2048 from "./ComItem2048";
@@ -18,6 +20,7 @@ export default class PkgLittleGameBinder {
 		fgui.UIObjectFactory.setExtension(UITenWater.URL, UITenWaterView);
 		fgui.UIObjectFactory.setExtension(ComTenWater.URL, ComTenWaterView);
 		fgui.UIObjectFactory.setExtension(UITest3D.URL, UITest3DView);
+		fgui.UIObjectFactory.setExtension(UISnake.URL, UISnakeView);
 		fgui.UIObjectFactory.setExtension(UI2048.URL, UI2048View);
 		fgui.UIObjectFactory.setExtension(ComItem2048.URL, ComItem2048View);
 		fgui.UIObjectFactory.setExtension(UILittleGame.URL, UILittleGameView);

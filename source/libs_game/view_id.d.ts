@@ -42,6 +42,7 @@ declare enum ViewID {
 	UIWaitingView = "UIWaitingView",
 	UI2048View = "UI2048View",
 	UILittleGameView = "UILittleGameView",
+	UISnakeView = "UISnakeView",
 	UITenWaterView = "UITenWaterView",
 	UITest3DView = "UITest3DView",
 	UILoginView = "UILoginView",

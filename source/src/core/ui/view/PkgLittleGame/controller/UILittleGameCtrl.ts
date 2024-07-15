@@ -14,6 +14,7 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 		this.addMessage(UILittleGameMsg.OnBtnTenWaterClick, this.onBtnTenWaterClick);
 		this.addMessage(UILittleGameMsg.OnBtnTest3dClick, this.onBtnTest3dClick);
 		this.addMessage(UILittleGameMsg.OnBtn2048Click, this.onBtn2048Click);
+		this.addMessage(UILittleGameMsg.OnBtnSnakeClick, this.onBtnSnakeClick);
 	}
 
 	private onBtnBackClick() {
@@ -35,4 +36,8 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 		this.removeSelf();
 	}
 
+	private onBtnSnakeClick() {
+		this.showView(ViewID.UISnakeView);
+		this.removeSelf();
+	}
 }

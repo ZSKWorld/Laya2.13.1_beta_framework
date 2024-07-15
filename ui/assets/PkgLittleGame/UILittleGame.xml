@@ -5,16 +5,19 @@
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://vx9zwser9hon6m"/>
     </component>
-    <component id="n0_yfsi" name="btn_tenWater" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,809" size="402,87" group="n3_f5ii">
+    <component id="n0_yfsi" name="btn_tenWater" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,756" size="402,87" group="n3_f5ii">
       <Button title="十滴水" titleFontSize="47"/>
     </component>
-    <component id="n2_f5ii" name="btn_test3d" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,916" size="402,87" group="n3_f5ii">
+    <component id="n2_f5ii" name="btn_test3d" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,863" size="402,87" group="n3_f5ii">
       <Button title="3D测试" titleFontSize="47"/>
     </component>
-    <component id="n4_nirt" name="btn_2048" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,1023" size="402,87" group="n3_f5ii">
+    <component id="n4_nirt" name="btn_2048" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,970" size="402,87" group="n3_f5ii">
       <Button title="2048" titleFontSize="47"/>
     </component>
-    <group id="n3_f5ii" name="n3" xy="339,809" size="402,301" advanced="true" layout="vt" lineGap="20" excludeInvisibles="true">
+    <component id="n5_mzzo" name="btn_snake" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="339,1077" size="402,87" group="n3_f5ii">
+      <Button title="贪吃蛇" titleFontSize="47"/>
+    </component>
+    <group id="n3_f5ii" name="n3" xy="339,756" size="402,408" advanced="true" layout="vt" lineGap="20" excludeInvisibles="true">
       <relation target="" sidePair="center-center,middle-middle"/>
     </group>
   </displayList>
