@@ -136,6 +136,10 @@ export class MathUtil {
         return (Math.sin(x * Math.PI - Math.PI / 2) + 1) / 2;
     }
 
+    static Lerp(a: number, b: number, t: number) {
+        return a + t * (b - a);
+    }
+
     static TimeFormat(seconds: number, keepHour: boolean = true) {
         const hours = Math.floor(seconds / 3600);
         const mins = Math.floor((seconds - hours * 3600) / 60);

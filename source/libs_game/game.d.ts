@@ -24,6 +24,7 @@ declare namespace Laya {
     }
     interface Script {
         readonly owner: Laya.Sprite;
+        readonly gowner: fgui.GObject;
         /**
          * 组件被挂载后执行，此方法只执行一次
          * 此方法为虚方法，使用时重写覆盖即可

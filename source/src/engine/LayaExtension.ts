@@ -13,6 +13,7 @@ export class LayaExtension {
 		const _onAdded = prototype._onAdded;
 		prototype._onAdded = function () {
 			_onAdded.call(this);
+			this.gowner = this.owner.$owner;
 			this.onAdded();
 		}
 		prototype.onAdded = function () { }
