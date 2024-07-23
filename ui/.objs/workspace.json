@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "auxline1": true,
+  "gridSize": 10,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vx9zwseryz4q6o",
@@ -13,7 +13,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vx9zwseryz4q6o",
+  "doc.activeDoc": "ui://vx9zwsershjv6l",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "vx9zwser",
@@ -34,6 +34,6 @@
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 10,
+  "auxline1": true,
   "gridColor": 42
 }

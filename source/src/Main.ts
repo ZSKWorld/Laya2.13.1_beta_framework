@@ -45,6 +45,7 @@ class Main {
 		if (GameConfig.physicsDebug && Laya.PhysicsDebugDraw) Laya.PhysicsDebugDraw.enable();
 		if (GameConfig.stat) Laya.Stat.show();
 		// Laya.alertGlobalError(true);
+		Laya.Browser.document.bgColor = "#666666";
 
 		LayaRepair.Fix();
 		LayaExtension.Init();
