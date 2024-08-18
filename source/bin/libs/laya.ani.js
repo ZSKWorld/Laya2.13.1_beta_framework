@@ -2958,6 +2958,7 @@
                         }
                     }
                     this._graphicsCache[i].length = 0;
+                    this._graphicsCache[i] = [];
                 }
             }
         }

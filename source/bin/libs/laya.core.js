@@ -8392,10 +8392,10 @@ window.Laya= (function (exports) {
             h = Math.min(h, this.maxTexH);
             CharRender_Canvas.canvas.width = Math.min(w + 1, this.maxTexW);
             CharRender_Canvas.canvas.height = Math.min(h + 1, this.maxTexH);
-            ctx.font = font;
             ctx.clearRect(0, 0, w + 1 + lineWidth, h + 1 + lineWidth);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.save();
+            ctx.font = font;
             if (this.scaleFontSize) {
                 ctx.scale(this.lastScaleX, this.lastScaleY);
             }
@@ -8805,16 +8805,27 @@ window.Laya= (function (exports) {
                 this.charRender.fontsz = font._size;
                 imgdt = this.charRender.getCharBmp(str, this.fontStr, lineWidth, color, strokeColor, ri, margin, margin, margin, margin, TextRender.imgdtRect);
                 if (imgdt) {
-                    atlas = this.addBmpData(imgdt, ri);
-                    if (TextRender.isWan1Wan) {
+                    if (imgdt.width > TextRender.atlasWidth || imgdt.height > TextRender.atlasWidth) {
+                        var tex = TextTexture.getTextTexture(imgdt.width, imgdt.height);
+                        tex.addChar(imgdt, 0, 0, ri.uv);
+                        ri.tex = tex;
                         ri.orix = margin;
                         ri.oriy = margin;
+                        tex.ri = ri;
+                        this.isoTextures.push(tex);
                     }
                     else {
-                        ri.orix = (this.fontSizeOffX + lineExt);
-                        ri.oriy = (this.fontSizeOffY + lineExt);
+                        atlas = this.addBmpData(imgdt, ri);
+                        if (TextRender.isWan1Wan) {
+                            ri.orix = margin;
+                            ri.oriy = margin;
+                        }
+                        else {
+                            ri.orix = (this.fontSizeOffX + lineExt);
+                            ri.oriy = (this.fontSizeOffY + lineExt);
+                        }
+                        atlas.charMaps[key] = ri;
                     }
-                    atlas.charMaps[key] = ri;
                 }
             }
             return ri;
@@ -23145,7 +23156,7 @@ window.Laya= (function (exports) {
     Laya.lateTimer = null;
     Laya.timer = null;
     Laya.loader = null;
-    Laya.version = "2.13.6";
+    Laya.version = "2.13.7";
     Laya._isinit = false;
     Laya.isWXOpenDataContext = false;
     Laya.isWXPosMsg = false;
