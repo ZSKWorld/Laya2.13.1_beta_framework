@@ -18,7 +18,7 @@ const originConOnMessage = function (connection: websocket.connection, msg: webs
     }
 }
 
-const httpServer = http.createServer().listen({ host: "192.168.71.209", port: 8007 }, function () {
+const httpServer = http.createServer().listen({ host: "192.168.71.252", port: 8007 }, function () {
     const { address, port } = httpServer.address() as AddressInfo;
     Logger.log(`服务器已启动：${ address }:${ port }`, Color.green);
 });
