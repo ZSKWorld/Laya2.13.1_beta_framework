@@ -438,12 +438,12 @@ class AtlasGenerator:
                     }
                     # drawImageBorder(texInfo.texture)
                     image.paste(texInfo.texture, (texInfo.x, texInfo.y))
-                # drawAreasBorder(image, atlasGrids[i].freeAreas)
                 if config.cutAtlasEmpty:
                     bbox = image.getbbox()
                     imageCut = image.crop((0, 0, bbox[2], bbox[3]))
                     image.close()
                     image = imageCut
+                # drawAreasBorder(image, atlasGrids[i].freeAreas)
                 image.save(os.path.join(config.outputDir, config.name + ("" if i == 0 else str(i)) + ".png"))
                 image.close()
 
@@ -456,16 +456,6 @@ class AtlasGenerator:
             AtlasGrid.recover(v)
         atlasGrids.clear()
         return canPack
-
-def quickSort(arr, compare_func):
-    """快排"""
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if compare_func(x, pivot) < 0]
-    middle = [x for x in arr if compare_func(x, pivot) == 0]
-    right = [x for x in arr if compare_func(x, pivot) > 0]
-    return quickSort(left, compare_func) + middle + quickSort(right, compare_func)
 
 def createDir(dir:str):
     if (os.path.exists(dir) == False):
@@ -488,8 +478,14 @@ def drawAreasBorder(image:Image, areas:list[Rect]):
     draw = ImageDraw.Draw(image, image.mode)
     color = (46 if image.mode == "P" else (0,255,0,255))
     for free in areas:
-        if free.xMax() - 1 > 0 and free.yMax() - 1 > 0:
-            draw.rectangle((free.get_x(), free.get_y(), free.xMax() - 1, free.yMax() - 1), None, color)
+        x = free.get_x()
+        y = free.get_y()
+        if x >= image.width or y >= image.height:
+            continue
+        xMax = min(image.width, free.xMax())
+        yMax = min(image.height, free.yMax())
+        if xMax - 1 > 0 and yMax - 1 > 0:
+            draw.rectangle((x, y, xMax - 1, yMax - 1), None, color)
 
 def colorStr(text:str, color:int = 255):
     color = min(max(color, 0), 255)
@@ -503,7 +499,7 @@ makeRecOnly = "-r" in argv or "-R" in argv
 config = AtlasConfig()
 config.maxSize = 1024
 config.maxSingleSize = 1024
-config.padding = 2
+config.padding = 1
 config.power2 = False
 config.squared = False
 config.cutTexEmpty = True
@@ -513,7 +509,7 @@ inputRootDir = "../../laya/assets"
 outputRootDir = rectifyPath(os.path.join("../../bin", ""))
 outputAtlasDir = rectifyPath(os.path.join(outputRootDir, "res/atlas"))
 recFilePath = rectifyPath(os.path.join(outputAtlasDir, ".rec"))
-unpackFilePath = rectifyPath(os.path.join("../../bin", "unpack.json"))
+unpackFilePath = rectifyPath(os.path.join(outputRootDir, "unpack.json"))
 
 unpackData:list[str]
 if os.path.exists(unpackFilePath):
@@ -656,3 +652,4 @@ try:
 except Exception as err:
     print(err)
     input(colorStr("报错啦，联系开发人员", 196))
+
