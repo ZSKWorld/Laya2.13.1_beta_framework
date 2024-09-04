@@ -74,7 +74,7 @@ class UIManager extends Observer {
 		this._lockPanel.makeFullScreen();
 		this._lockPanel.drawRect(0, "", "#00000000");
 		this._lockPanel.sortingOrder = 999;
-		layerMgr.addObject(this._lockPanel, Layer.Bottom);
+		layerMgr.addObject(this._lockPanel, Layer.UITop);
 
 		//延迟100防止频繁触发
 		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.callLater(this, this.onResize));
@@ -194,7 +194,7 @@ class UIManager extends Observer {
 			const doOpenAni = openIndex != 0;
 			openIndex > 0 && this._openedCtrls.splice(openIndex, 1);
 			doOpenAni && this._openedCtrls.unshift(viewCtrl);
-			doOpenAni && layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.Bottom);
+			doOpenAni && layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.UIBottom);
 			viewCtrl.sendMessage(ViewEvent.OnForeground);
 			doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
 		} else onFinally();

@@ -52,10 +52,10 @@ declare enum MouseEventType {
 }
 
 declare enum Layer {
-    Game = "Game",
-    Bottom = "Bottom",
-    Middle = "Middle",
-    Top = "Top",
+    Scene = "Scene",
+    UIBottom = "UIBottom",
+    UIMiddle = "UIMiddle",
+    UITop = "UITop",
     Dialog = "Dialog",
     Alert = "Alert",
     Lock = "Lock",

@@ -44,7 +44,7 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
         this._timeToRemove = false;
         view.setXY(Laya.stage.width + view.width / 2, Laya.stage.height / 2);
         view.setContent(data.text, data.color);
-        Laya.Tween.to(view, { x: Laya.stage.width / 2 }, Math.log((view.height - 30) / 35 + 2) * 300, Laya.Ease.backOut, Laya.Handler.create(this, () => this._timeToRemove = true));
+        Laya.Tween.to(view, { x: Laya.stage.width / 2 }, Math.log((view.height - 30) / 35 + 2) * 200, Laya.Ease.backOut, Laya.Handler.create(this, () => this._timeToRemove = true));
         ComTipInfoCtrl.displayTips.push(this);
         ComTipInfoCtrl.CorrectTipPosY();
     }
@@ -59,7 +59,7 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
             if (_time > 0) this._time -= Laya.timer.delta;
             else {
                 this._timeToRemove = false;
-                Laya.Tween.to(view, { x: -view.width / 2 }, 300, Laya.Ease.backIn, Laya.Handler.create(view, view.removeFromParent));
+                Laya.Tween.to(view, { x: -view.width / 2 }, 200, Laya.Ease.backIn, Laya.Handler.create(view, view.removeFromParent));
             }
         }
     }
