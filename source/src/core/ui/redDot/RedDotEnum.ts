@@ -1,12 +1,3 @@
-/** 红点显示类型枚举 */
-export const enum RDDisplayType {
-    None,
-    /** 显示红点 */
-    Normal,
-    /** 显示数量 */
-    Number,
-}
-
 /** 红点检测类型枚举 */
 export const enum RDTriggerType {
     /**有武器可穿戴 */

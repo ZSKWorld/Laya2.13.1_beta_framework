@@ -1,11 +1,11 @@
-import { RedDotData } from "./RedDotData";
-import { RDDisplayType, RDName, RDTriggerType } from "./RedDotEnum";
-import { IRedDotData } from "./RedDotInterface";
+import { RDName, RDTriggerType } from "./RedDotEnum";
+import { IRedDotNode } from "./RedDotInterface";
+import { RedDotNode } from "./RedDotNode";
 
-const map: { [key in RDName]: IRedDotData } = {} as any;
+const map: { [key in RDName]: IRedDotNode } = {} as any;
 
-const create = function (parent: IRedDotData, path: string, triggers?: RDTriggerType[], displayType = RDDisplayType.Normal) {
-    return RedDotData.Create(parent, path, triggers, displayType);
+const create = function (parent: IRedDotNode, path: string, triggers?: RDTriggerType[]) {
+    return RedDotNode.Create(parent, path, triggers);
 }
 
 export const RDDefineInit = function () {

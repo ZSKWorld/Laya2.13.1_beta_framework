@@ -1,15 +1,15 @@
 import { GameEvent } from "../../common/GameEvent";
 import { eventMgr } from "../../game/event/EventManager";
-import { RedDotData } from "./RedDotData";
 import { RDDefineInit, RDMap } from "./RedDotDefine";
-import { IRedDotData } from "./RedDotInterface";
+import { IRedDotNode } from "./RedDotInterface";
+import { RedDotNode } from "./RedDotNode";
 import { RedDotTrigger } from "./RedDotTrigger";
 
 class RedDotManager extends Laya.EventDispatcher {
     private _trigger: RedDotTrigger;
 
     init() {
-        RedDotData.eventCenter = this;
+        RedDotNode.eventCenter = this;
         this._trigger = new RedDotTrigger(this);
         RDDefineInit();
         eventMgr.on(GameEvent.RedDotCompAwake, this, this.onRedDotCompAwake);
@@ -18,7 +18,7 @@ class RedDotManager extends Laya.EventDispatcher {
 
     private onRedDotCompAwake(comp: fgui.GComponent) {
         const data = this.getRDByComp(RDMap.Root, comp);
-        data && data.node.refresh();
+        data && data.refresh();
     }
 
     private onRedDotCompDestroy(comp: fgui.GComponent) {
@@ -26,9 +26,9 @@ class RedDotManager extends Laya.EventDispatcher {
         data && data.recover();
     }
 
-    private getRDByComp(data: IRedDotData, comp: fgui.GComponent): IRedDotData {
+    private getRDByComp(data: IRedDotNode, comp: fgui.GComponent): IRedDotNode {
         if (!data || !comp) return null;
-        if (data.node.comp == comp) return data;
+        if (data.comp == comp) return data;
         const childs = data.childs;
         for (let i = 0, cnt = childs.length; i < cnt; i++) {
             const result = this.getRDByComp(childs[i], comp);
