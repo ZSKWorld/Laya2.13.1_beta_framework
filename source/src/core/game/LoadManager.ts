@@ -69,4 +69,4 @@ class LoadManager {
 	}
 }
 export const loadMgr = new LoadManager();
-windowImmit("loadMgr", loadMgr);
+WindowImmit("loadMgr", loadMgr);

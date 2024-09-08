@@ -1,4 +1,4 @@
-import { EquipmentPart } from "../../../../../net/enum/ItemEnum";
+import { EquipmentPart } from "../../../../../userData/const/ItemEnum";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { tipMgr } from "../../../../tool/TipManager";
 import { ComRenWuMsg, ComRenWuView } from "../../view/coms/ComRenWuView";
@@ -8,7 +8,7 @@ export interface ComRenWuData {
 
 }
 
-export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData>{
+export class ComRenWuCtrl extends BaseViewCtrl<ComRenWuView, ComRenWuData> {
 
 	override onAdded() {
 		this.addMessage(ComRenWuMsg.OnBtnWuQiClick, this.showEquipmentInfo, [EquipmentPart.Weapon]);

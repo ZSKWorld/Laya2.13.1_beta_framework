@@ -1,5 +1,5 @@
 import { GameUtil } from "../common/GameUtil";
-import { EquipmentPart } from "../net/enum/ItemEnum";
+import { EquipmentPart } from "./const/ItemEnum";
 import { ClassDontDispatch, ClassName, DecodeObject } from "./DecodeObject";
 import { UserUtil } from "./UserUtil";
 class GoodsBase<T> extends DecodeObject<T> implements IGoodsBase<T> {
@@ -54,4 +54,5 @@ export class Equipment extends GoodsBase<IEquipment> implements IEquipment {
         ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, UserUtil.GetAttributeName(v)) + "<br>").join("") }
         `;
     }
+    get score() { return 0; }
 }

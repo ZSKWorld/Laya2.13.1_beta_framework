@@ -1,5 +1,5 @@
 import { MathUtil } from "../../../../../game/math/MathUtil";
-import { BattleType } from "../../../../../net/enum/BattleEnums";
+import { BattleType } from "../../../../../userData/const/BattleEnums";
 import RenderChooseBattle from "../../../../ui/PkgBattle/RenderChooseBattle";
 
 export const enum RenderChooseBattleMsg {

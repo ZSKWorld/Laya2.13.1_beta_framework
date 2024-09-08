@@ -1,5 +1,5 @@
-import { BattleType } from "../../core/net/enum/BattleEnums";
 import { uiMgr } from "../../core/ui/core/UIManager";
+import { BattleType } from "../../core/userData/const/BattleEnums";
 import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";
 

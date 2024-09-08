@@ -1,4 +1,4 @@
-import { EquipmentPart } from "../net/enum/ItemEnum";
+import { EquipmentPart } from "./const/ItemEnum";
 import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment } from "./Goods";
 

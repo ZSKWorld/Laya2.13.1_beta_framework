@@ -65,7 +65,8 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
     }
 
     override onDisable() {
-        ComTipInfoCtrl.displayTips.remove(this);
+        const index = ComTipInfoCtrl.displayTips.indexOf(this);
+        if (index > -1) ComTipInfoCtrl.displayTips.splice(index, 1);
         Laya.Pool.recover(UIPoolKey.TipInfo, this);
         ComTipInfoCtrl.CorrectTipPosY();
     }

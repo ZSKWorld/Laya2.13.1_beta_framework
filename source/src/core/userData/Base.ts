@@ -1,4 +1,4 @@
-import { BaseDataType, DataType } from "../net/enum/ItemEnum";
+import { BaseDataType, DataType } from "./const/ItemEnum";
 import { ClassName, DecodeObject } from "./DecodeObject";
 import { UserUtil } from "./UserUtil";
 

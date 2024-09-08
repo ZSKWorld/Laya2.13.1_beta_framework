@@ -14,6 +14,7 @@ export class UIEquipmentInfoProxy extends BaseProxy<UIEquipmentInfoCtrl> {
     }
 
     @RegisterEvent(NetCMD.DressEquip)
+    @RegisterEvent(NetCMD.TakeOffEquip)
     private dressEquip(output: IDressEquipOutput, input: IDressEquipInput) {
         this.viewCtrl.removeSelf();
     }

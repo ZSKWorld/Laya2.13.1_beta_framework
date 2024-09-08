@@ -281,6 +281,6 @@ export class UI2048Ctrl extends BaseViewCtrl<UI2048View, UI2048Data> {
 
 	@RegisterEvent(ChessboardEvent.GameOver)
 	private onGameOver() {
-		showConfirm("游戏结束", "游戏结束");
+		ShowConfirm("游戏结束", "游戏结束");
 	}
 }

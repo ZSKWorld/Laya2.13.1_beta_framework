@@ -1,5 +1,5 @@
-import { BattleType } from "../../../../net/enum/BattleEnums";
 import { NetCMD } from "../../../../net/enum/NetCMD";
+import { BattleType } from "../../../../userData/const/BattleEnums";
 import { BaseProxy } from "../../../core/BaseProxy";
 import { UIBattleConfirmCtrl } from "../controller/UIBattleConfirmCtrl";
 import { UIBattleData } from "../controller/UIBattleCtrl";

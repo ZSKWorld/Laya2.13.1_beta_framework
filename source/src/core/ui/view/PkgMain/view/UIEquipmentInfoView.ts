@@ -8,13 +8,14 @@ export const enum UIEquipmentInfoMsg {
 	OnBtnInlayClick = "UIEquipmentInfo_OnBtnInlayClick",
 	OnBtnEngraveClick = "UIEquipmentInfo_OnBtnEngraveClick",
 	OnBtnBlessClick = "UIEquipmentInfo_OnBtnBlessClick",
+	OnBtnTakeOffClick = "UIEquipmentInfo_OnBtnTakeOffClick",
 }
 
 export class UIEquipmentInfoView extends ExtensionClass<IView, UIEquipmentInfo>(UIEquipmentInfo) {
 	static readonly PkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
-		const { graph_bg, btn_sell, btn_dress, btn_intensify, btn_inlay, btn_engrave, btn_bless } = this;
+		const { graph_bg, btn_sell, btn_dress, btn_intensify, btn_inlay, btn_engrave, btn_bless, btn_takeoff } = this;
 		graph_bg.onClick(this, this.removeSelf);
 		btn_sell.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnSellClick]);
 		btn_dress.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnDressClick]);
@@ -22,6 +23,7 @@ export class UIEquipmentInfoView extends ExtensionClass<IView, UIEquipmentInfo>(
 		btn_inlay.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnInlayClick]);
 		btn_engrave.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnEngraveClick]);
 		btn_bless.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnBlessClick]);
+		btn_takeoff.onClick(this, this.sendMessage, [UIEquipmentInfoMsg.OnBtnTakeOffClick]);
 	}
 
 	refreshEquipInfo(equip1: IEquipment, equip2: IEquipment, hasGem: boolean) {

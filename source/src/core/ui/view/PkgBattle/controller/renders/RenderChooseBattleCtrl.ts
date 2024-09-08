@@ -1,5 +1,5 @@
-import { BattleType } from "../../../../../net/enum/BattleEnums";
 import { BattleService } from "../../../../../net/Services";
+import { BattleType } from "../../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { RenderChooseBattleMsg, RenderChooseBattleView } from "../../view/renders/RenderChooseBattleView";
 import { UIBattleConfirmData } from "../UIBattleConfirmCtrl";

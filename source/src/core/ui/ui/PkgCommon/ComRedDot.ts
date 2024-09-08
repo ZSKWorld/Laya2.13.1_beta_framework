@@ -2,7 +2,7 @@
 
 export default class ComRedDot extends fgui.GComponent {
 
-	public txt_count: fgui.GTextField;
+	public img_redDot: fgui.GImage;
 	public static URL: string = "ui://vx9zwseryz4q6o";
 
 	public static createInstance(): ComRedDot {
@@ -10,6 +10,6 @@ export default class ComRedDot extends fgui.GComponent {
 	}
 
 	protected override onConstruct(): void {
-		this.txt_count = <fgui.GTextField>(this.getChildAt(1));
+		this.img_redDot = <fgui.GImage>(this.getChildAt(0));
 	}
 }

@@ -33,7 +33,7 @@ export class UITenWaterCtrl extends BaseViewCtrl<UITenWaterView, UITenWaterData>
 
 	private onBtnCalculateClick() {
 		const canUseWater = +this.view.input_canUse.text;
-		if (canUseWater == 0) return showConfirm("提示", "无可用水滴，可用水滴数量为0", false);
+		if (canUseWater == 0) return ShowConfirm("提示", "无可用水滴，可用水滴数量为0", false);
 		let [startX, startY, maxWater] = [0, 0, 0];
 		this._waters.forEach((v, x) => v.forEach((v1, y) => {
 			if (v1.waterStatus > maxWater) {

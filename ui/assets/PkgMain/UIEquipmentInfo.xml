@@ -8,40 +8,43 @@
     <graph id="n1_sbd0" name="n1" xy="20,27" size="1040,1877" touchable="false" type="rect" lineSize="4" lineColor="#ff6a6b6e" fillColor="#ff111318">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <richtext id="n5_sbd0" name="txt_equipInfo1" xy="44,51" size="491,1709" touchable="false" fontSize="40" color="#16e3b5" leading="15" ubb="true" autoSize="none" text="神木衣的❀&#xA;✧✦★●○◆◇"/>
-    <richtext id="n11_whk3" name="txt_equipInfo2" xy="546,51" size="491,1709" touchable="false" fontSize="40" color="#16e3b5" leading="15" ubb="true" autoSize="none" text="神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀"/>
-    <graph id="n2_sbd0" name="n2" xy="20,1780" size="1040,124" touchable="false" type="rect" lineSize="4" lineColor="#ff6a6b6e" fillColor="#ff272b37">
+    <graph id="n2_sbd0" name="n2" xy="20,1704" size="1040,200" touchable="false" type="rect" lineSize="4" lineColor="#ff6a6b6e" fillColor="#ff272b37">
+      <gearSize controller="ctrlType" pages="0" values="1040,200,1,1" default="1040,110,1,1"/>
       <relation target="" sidePair="width-width,bottom-bottom"/>
     </graph>
-    <component id="n12_whk3" name="btn_sell" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="40,1802" size="244,80" controller="ctrlBgColor,10">
+    <component id="n12_whk3" name="btn_sell" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="36,1809" size="244,80" controller="ctrlBgColor,10">
       <gearDisplay controller="ctrlType" pages="1"/>
-      <relation target="" sidePair="bottom-bottom"/>
       <Button title="出售" titleColor="#ffffff" titleFontSize="55"/>
     </component>
-    <component id="n9_whk3" name="btn_dress" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="292,1802" size="244,80" controller="ctrlBgColor,10">
+    <component id="n9_whk3" name="btn_dress" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="290,1809" size="244,80" controller="ctrlBgColor,10">
       <gearDisplay controller="ctrlType" pages="1"/>
-      <relation target="" sidePair="bottom-bottom"/>
       <Button title="穿戴" titleColor="#ffffff" titleFontSize="55"/>
     </component>
-    <component id="n13_whk3" name="btn_intensify" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="40,1802" size="244,80" controller="ctrlBgColor,10">
+    <component id="n13_whk3" name="btn_intensify" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="36,1719" size="245,80" controller="ctrlBgColor,10">
       <gearDisplay controller="ctrlType" pages="0"/>
-      <relation target="" sidePair="bottom-bottom"/>
       <Button title="强化" titleColor="#ffffff" titleFontSize="55"/>
     </component>
-    <component id="n14_whk3" name="btn_inlay" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="292,1802" size="244,80" controller="ctrlBgColor,10">
+    <component id="n14_whk3" name="btn_inlay" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="291,1719" size="245,80" controller="ctrlBgColor,10">
       <gearDisplay controller="ctrlType" pages="0"/>
-      <relation target="" sidePair="bottom-bottom"/>
       <Button title="镶嵌" titleColor="#ffffff" titleFontSize="55"/>
     </component>
-    <component id="n15_whk3" name="btn_engrave" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="544,1802" size="244,80" controller="ctrlBgColor,10">
+    <component id="n15_whk3" name="btn_engrave" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="545,1719" size="245,80" controller="ctrlBgColor,10">
       <gearDisplay controller="ctrlType" pages="0"/>
-      <relation target="" sidePair="bottom-bottom"/>
       <Button title="铭刻" titleColor="#ffffff" titleFontSize="55"/>
     </component>
-    <component id="n16_whk3" name="btn_bless" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="796,1802" size="244,80" controller="ctrlBgColor,10">
+    <component id="n16_whk3" name="btn_bless" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="799,1719" size="245,80" controller="ctrlBgColor,10">
       <gearDisplay controller="ctrlType" pages="0"/>
-      <relation target="" sidePair="bottom-bottom"/>
       <Button title="神佑" titleColor="#ffffff" titleFontSize="55"/>
     </component>
+    <component id="n18_mfnw" name="btn_takeoff" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="36,1809" size="245,80" controller="ctrlBgColor,10">
+      <gearDisplay controller="ctrlType" pages="0"/>
+      <Button title="卸下" titleColor="#ffffff" titleFontSize="55"/>
+    </component>
+    <richtext id="n5_sbd0" name="txt_equipInfo1" xy="44,51" size="491,1619" touchable="false" fontSize="40" color="#16e3b5" leading="15" ubb="true" autoSize="none" text="神木衣的❀&#xA;✧✦★●○◆◇">
+      <gearSize controller="ctrlType" pages="0" values="491,1619,1,1" default="491,1709,1,1"/>
+    </richtext>
+    <richtext id="n11_whk3" name="txt_equipInfo2" xy="546,51" size="491,1619" touchable="false" fontSize="40" color="#16e3b5" leading="15" ubb="true" autoSize="none" text="神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀&#xA;神木衣的❀">
+      <gearSize controller="ctrlType" pages="0,1" values="491,1619,1,1|491,1709,1,1"/>
+    </richtext>
   </displayList>
 </component>

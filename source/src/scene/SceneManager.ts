@@ -25,7 +25,7 @@ class SceneManager extends Observer {
 				this._currentType = type;
 				newScene.enter(data);
 			}, () => {
-				showConfirm("提示", `${ type } 场景加载失败，是否重试?`).then(result => {
+				ShowConfirm("提示", `${ type } 场景加载失败，是否重试?`).then(result => {
 					if (result) this.enterScene(type, data);
 					else newScene.exit();
 				});
@@ -34,4 +34,4 @@ class SceneManager extends Observer {
 	}
 }
 export const sceneMgr = new SceneManager();
-windowImmit("sceneMgr", sceneMgr);
+WindowImmit("sceneMgr", sceneMgr);

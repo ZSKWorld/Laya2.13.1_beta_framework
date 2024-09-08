@@ -6,12 +6,12 @@ import { ViewID as ViewIDEnum } from "./core/ui/core/ViewID";
 import { User } from "./core/userData/User";
 import { platformMgr } from "./platform/PlatformManager";
 
-windowImmit("ResPath", ResPathEnum);
-windowImmit("ViewID", ViewIDEnum);
+WindowImmit("ResPath", ResPathEnum);
+WindowImmit("ViewID", ViewIDEnum);
 
-windowImmit("showConfirm", (title: string, msg: string, cancel = true) => {
+WindowImmit("ShowConfirm", (title: string, msg: string, cancel = true) => {
     if (Laya.loader.getRes(ResPath.PkgPath.PkgCommon + ".zip")) {
-        windowImmit("showConfirm", (title: string, msg: string, cancel = true) => new Promise<boolean>(resolve => {
+        WindowImmit("ShowConfirm", (title: string, msg: string, cancel = true) => new Promise<boolean>(resolve => {
             uiMgr.showView(ViewID.UIConfirmView, {
                 title,
                 content: msg,
@@ -20,7 +20,7 @@ windowImmit("showConfirm", (title: string, msg: string, cancel = true) => {
                 onConfirm: Laya.Handler.create(null, resolve, [true]),
             });
         }));
-        return showConfirm(title, msg, cancel);
+        return ShowConfirm(title, msg, cancel);
     } else
         return platformMgr.showConfirm(title, msg);
 });
@@ -52,7 +52,7 @@ function RegisterEvent(eventName: string, once?: boolean, args?: any[]): MethodD
         }
     };
 }
-windowImmit("RegisterEvent", RegisterEvent);
+WindowImmit("RegisterEvent", RegisterEvent);
 
 /** 按键事件类型 */
 enum KeyEventType {
@@ -60,7 +60,7 @@ enum KeyEventType {
     KeyPress = "keypress",
     KeyUp = "keyup",
 }
-windowImmit("KeyEventType", KeyEventType);
+WindowImmit("KeyEventType", KeyEventType);
 
 /** 鼠标事件类型 */
 enum MouseEventType {
@@ -77,7 +77,7 @@ enum MouseEventType {
     StageMouseUp = "stagemouseup",
     StageClick = "stageclick",
 }
-windowImmit("MouseEventType", MouseEventType);
+WindowImmit("MouseEventType", MouseEventType);
 
 /**
  * 页面控制器键盘事件装饰器工厂
@@ -107,7 +107,7 @@ function ViewKeyEvent(keyEventType: KeyEventType, key: number = -1, once?: boole
         }
     }
 }
-windowImmit("ViewKeyEvent", ViewKeyEvent);
+WindowImmit("ViewKeyEvent", ViewKeyEvent);
 
 /**
  * 页面控制器鼠标事件装饰器工厂
@@ -135,7 +135,7 @@ function ViewMouseEvent(mouseEventType: MouseEventType, once?: boolean, args?: a
         }
     }
 }
-windowImmit("ViewMouseEvent", ViewMouseEvent);
+WindowImmit("ViewMouseEvent", ViewMouseEvent);
 
 /**
  * 页面控制器消息装饰器工厂
@@ -164,13 +164,13 @@ function ViewMessage(name: string, once?: boolean, args?: any[]): MethodDecorato
         }
     }
 }
-windowImmit("ViewMessage", ViewMessage);
+WindowImmit("ViewMessage", ViewMessage);
 
 export default class Global {
     static Init() {
-        windowImmit("Logger", Logger);
-        windowImmit("cfgMgr", new CfgManager());
-        windowImmit("userData", new User());
+        WindowImmit("Logger", Logger);
+        WindowImmit("cfgMgr", new CfgManager());
+        WindowImmit("userData", new User());
         platformMgr.init();
     }
 }

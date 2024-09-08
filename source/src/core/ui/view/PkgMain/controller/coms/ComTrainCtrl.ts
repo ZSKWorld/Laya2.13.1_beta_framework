@@ -2,7 +2,7 @@ import { SceneType } from "../../../../../../scene/SceneDefine";
 import { sceneMgr } from "../../../../../../scene/SceneManager";
 import { GameEvent } from "../../../../../common/GameEvent";
 import { trainLogMgr } from "../../../../../game/TrainLogManager";
-import { BattleType } from "../../../../../net/enum/BattleEnums";
+import { BattleType } from "../../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../../tool/UIUtil";
 import { ComTrainMsg, ComTrainView } from "../../view/coms/ComTrainView";

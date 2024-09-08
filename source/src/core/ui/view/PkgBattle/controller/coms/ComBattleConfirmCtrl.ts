@@ -1,5 +1,5 @@
-import { BattleType } from "../../../../../net/enum/BattleEnums";
 import { BattleService } from "../../../../../net/Services";
+import { BattleType } from "../../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ComBattleConfirmMsg, ComBattleConfirmView } from "../../view/coms/ComBattleConfirmView";
 export interface ComBattleConfirmData {

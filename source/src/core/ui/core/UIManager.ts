@@ -126,7 +126,7 @@ class UIManager extends Observer {
 				loadMgr.loadPackage(this._viewClsMap[viewId].PkgRes).then(() => {
 					this.showView2(this.createView(viewId, true), data, callback);
 				}, () => {
-					showConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
+					ShowConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
 						if (result) this.showView(viewId, data, callback);
 						else this.showView2(null, data, callback);
 					});
@@ -144,15 +144,16 @@ class UIManager extends Observer {
 	 * @param viewId 页面id
 	 */
 	removeView(viewId: ViewID) {
-		const hideView = this._openedCtrls.find(v => v.viewId == viewId);
-		if (!hideView) return;
+		const index = this._openedCtrls.findIndex(v => v.viewId == viewId);
+		if (index <= -1) return;
+		const hideView = this._openedCtrls[index];
 		if (!hideView.view.parent) {
-			this._openedCtrls.remove(hideView);
+			this._openedCtrls.splice(index, 1);
 			this._cache.cacheView(hideView);
 			return;
 		}
 		this.lockMark++;
-		this._openedCtrls.remove(hideView);
+		this._openedCtrls.splice(index, 1);
 		hideView.onCloseAni().then(() => {
 			hideView.view.removeFromParent();
 			hideView.sendMessage(ViewEvent.OnBackground);
@@ -207,4 +208,4 @@ class UIManager extends Observer {
 	}
 }
 export const uiMgr = new UIManager();
-windowImmit("uiMgr", uiMgr);
+WindowImmit("uiMgr", uiMgr);

@@ -1,6 +1,6 @@
 import { GameUtil } from "../common/GameUtil";
 import { MathUtil } from "../game/math/MathUtil";
-import { AttributeEnum } from "../net/enum/AttributeEnum";
+import { AttributeEnum } from "./const/AttributeEnum";
 /** 玩家数值计算公式 */
 export class UserDataFormula {
 

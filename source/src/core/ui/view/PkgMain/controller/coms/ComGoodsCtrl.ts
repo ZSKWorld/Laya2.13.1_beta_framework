@@ -1,4 +1,4 @@
-import { ItemBagType } from "../../../../../net/enum/ItemEnum";
+import { ItemBagType } from "../../../../../userData/const/ItemEnum";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../../tool/UIUtil";

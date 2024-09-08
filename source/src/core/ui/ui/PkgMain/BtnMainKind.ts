@@ -6,7 +6,6 @@ export default class BtnMainKind extends fgui.GButton {
 
 	public ctrlBgColor: fgui.Controller;
 	public com_redDot: ComRedDotView;
-	public t0: fgui.Transition;
 	public static URL: string = "ui://vith2b66olc42h";
 
 	public static createInstance(): BtnMainKind {
@@ -16,6 +15,5 @@ export default class BtnMainKind extends fgui.GButton {
 	protected override onConstruct(): void {
 		this.ctrlBgColor = this.getControllerAt(1);
 		this.com_redDot = <ComRedDotView>(this.getChildAt(2));
-		this.t0 = this.getTransitionAt(0);
 	}
 }

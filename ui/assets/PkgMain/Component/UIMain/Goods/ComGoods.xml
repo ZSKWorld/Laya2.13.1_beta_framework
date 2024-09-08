@@ -2,25 +2,25 @@
 <component size="1060,1410" overflow="hidden" designImage="ui://n809nszxaa0ze" designImageOffsetX="-1080" designImageOffsetY="-345" designImageAlpha="100" designImageLayer="1" bgColorEnabled="true" bgColor="#000000">
   <controller name="ctrlSelectType" pages="0,,1,,2,,3,,4,,5,,6," selected="0"/>
   <displayList>
-    <component id="n19_sbd0" name="btn_shouCang" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="21,25" size="121,76">
+    <component id="n19_sbd0" name="btn_shouCang" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="21,25" size="121,76">
       <Button title="收藏" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="0"/>
     </component>
-    <component id="n20_sbd0" name="btn_equip" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="152,25" size="121,76">
+    <component id="n20_sbd0" name="btn_equip" src="olc42h" fileName="Component/UIMain/BtnMainKind.xml" xy="152,25" size="121,76">
       <Button title="装备" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="1"/>
     </component>
-    <component id="n21_sbd0" name="btn_prop" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="283,25" size="121,76">
+    <component id="n21_sbd0" name="btn_prop" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="283,25" size="121,76">
       <Button title="道具" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="2"/>
     </component>
-    <component id="n22_sbd0" name="btn_gem" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="414,25" size="121,76">
+    <component id="n22_sbd0" name="btn_gem" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="414,25" size="121,76">
       <Button title="宝石" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="3"/>
     </component>
-    <component id="n23_sbd0" name="btn_material" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="545,25" size="121,76">
+    <component id="n23_sbd0" name="btn_material" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="545,25" size="121,76">
       <Button title="材料" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="4"/>
     </component>
-    <component id="n24_sbd0" name="btn_book" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="676,25" size="121,76">
+    <component id="n24_sbd0" name="btn_book" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="676,25" size="121,76">
       <Button title="书籍" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="5"/>
     </component>
-    <component id="n25_sbd0" name="btn_other" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="807,25" size="121,76">
+    <component id="n25_sbd0" name="btn_other" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="807,25" size="121,76">
       <Button title="其他" titleColor="#000000" titleFontSize="40" controller="ctrlSelectType" page="6"/>
     </component>
     <graph id="n37_9f1k" name="n37" xy="20,25" size="121,76" touchable="false" type="rect" lineSize="4" lineColor="#ffffffff" fillColor="#00ffffff">

@@ -1,4 +1,4 @@
-import { BattleType } from "../../../../net/enum/BattleEnums";
+import { BattleType } from "../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../tool/UIUtil";
 import { UIBattleConfirmView } from "../view/UIBattleConfirmView";

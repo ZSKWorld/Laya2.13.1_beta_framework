@@ -1,11 +1,11 @@
 import { SceneType } from "../../../../../scene/SceneDefine";
 import { sceneMgr } from "../../../../../scene/SceneManager";
-import { BattleType } from "../../../../net/enum/BattleEnums";
+import { BattleType } from "../../../../userData/const/BattleEnums";
 import { UserDataEvent } from "../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../tool/UIUtil";
-import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleView";
 import { RenderChooseBattleView } from "../view/renders/RenderChooseBattleView";
+import { UIChooseBattleMsg, UIChooseBattleView } from "../view/UIChooseBattleView";
 import { RenderChooseBattleCtrl } from "./renders/RenderChooseBattleCtrl";
 
 export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleType> {

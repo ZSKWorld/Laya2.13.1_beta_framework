@@ -8,7 +8,7 @@ enum Layer {
     Alert = "Alert",
     Lock = "Lock",
 }
-windowImmit("Layer", Layer);
+WindowImmit("Layer", Layer);
 
 /** UI层级管理 */
 class LayerManager {
@@ -60,4 +60,4 @@ class LayerManager {
 
 }
 export const layerMgr = new LayerManager();
-windowImmit("layerMgr", layerMgr);
+WindowImmit("layerMgr", layerMgr);

@@ -1,4 +1,4 @@
-import { DataType, ItemBagType } from "../net/enum/ItemEnum";
+import { DataType, ItemBagType } from "./const/ItemEnum";
 import { ClassName, DecodeObject } from "./DecodeObject";
 import { Equipment, Goods } from "./Goods";
 

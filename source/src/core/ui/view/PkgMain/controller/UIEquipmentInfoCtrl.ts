@@ -8,7 +8,7 @@ export interface UIEquipmentInfoData {
 	fromBag?: boolean;
 }
 
-export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEquipmentInfoData>{
+export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEquipmentInfoData> {
 
 	override onAdded() {
 		this.addMessage(UIEquipmentInfoMsg.OnBtnSellClick, this.onBtnSellClick);
@@ -17,6 +17,7 @@ export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEqu
 		this.addMessage(UIEquipmentInfoMsg.OnBtnInlayClick, this.onBtnInlayClick);
 		this.addMessage(UIEquipmentInfoMsg.OnBtnEngraveClick, this.onBtnEngraveClick);
 		this.addMessage(UIEquipmentInfoMsg.OnBtnBlessClick, this.onBtnBlessClick);
+		this.addMessage(UIEquipmentInfoMsg.OnBtnTakeOffClick, this.onBtnTakeOffClick);
 	}
 
 	override onEnable() {
@@ -47,6 +48,10 @@ export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEqu
 
 	private onBtnBlessClick() {
 
+	}
+
+	private onBtnTakeOffClick() {
+		BagService.Inst.takeOffEquip({ part: this.data.equip1.part });
 	}
 
 }

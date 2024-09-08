@@ -36,7 +36,7 @@ export const enum SocketEvent {
 }
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.71.9:8007";
+    private _url: string = "ws://192.168.71.13:8007";
     private _socket: Laya.Socket;
     private _state: SocketState = SocketState.Disconnect;
     private _waitList: IUserInput[];
@@ -178,4 +178,4 @@ class WebSocket extends Observer {
 }
 
 export const websocket = new WebSocket();
-windowImmit("websocket", websocket);
+WindowImmit("websocket", websocket);

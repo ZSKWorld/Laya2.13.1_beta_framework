@@ -6,8 +6,6 @@ export class RedDotNode implements IRedDotNode {
     data: IRedDotData;
     /** 红点组件 */
     private _comp: fgui.GComponent;
-    /** 红点文本 */
-    private _text: fgui.GTextField;
 
     get comp() {
         if (this._comp && this._comp.isDisposed)
@@ -31,32 +29,19 @@ export class RedDotNode implements IRedDotNode {
     set comp(value: fgui.GComponent) {
         if (this._comp == value) return;
         this._comp = value;
-        this._text = null;
         this.data.doTrigger();
-    }
-
-    get text() {
-        if (this._text && this._text.isDisposed)
-            this._text = null;
-        if (!this._text && this.comp) {
-            this._text = <fgui.GTextField>this.comp.getChild("txt_count");
-        }
-        return this._text;
     }
 
     private constructor() { }
 
     refresh() {
-        const { comp, text, data } = this;
+        const { comp, data } = this;
         comp && (comp.visible = data.rdCount > 0 && data.displayType != RDDisplayType.None && data.enable);
-        text && (text.visible = data.displayType == RDDisplayType.Number);
-        text && text.visible && (text.text = data.rdCount.toString());
     }
 
     recover() {
         this.data = null;
         this._comp = null;
-        this._text = null;
         Laya.Pool.recoverByClass(this);
     }
 }

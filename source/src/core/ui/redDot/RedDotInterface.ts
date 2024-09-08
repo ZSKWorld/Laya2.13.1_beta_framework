@@ -15,9 +15,6 @@ export interface IRedDotData {
 
     doTrigger(): void;
 
-    /** 计算红点数量 */
-    calculateRD(force?: boolean): void;
-
     addChild(child: IRedDotData): void;
 
     getChild(id: number): IRedDotData;
@@ -32,7 +29,6 @@ export interface IRedDotData {
 export interface IRedDotNode {
     data: IRedDotData;
     comp: fgui.GComponent;
-    readonly text: fgui.GTextField;
     refresh(): void;
     recover(): void;
 }

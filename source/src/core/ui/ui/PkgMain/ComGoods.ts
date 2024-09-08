@@ -1,12 +1,13 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+import { BtnMainKindView } from "../../view/PkgMain/view/btns/BtnMainKindView";
 import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 
 export default class ComGoods extends fgui.GComponent {
 
 	public ctrlSelectType: fgui.Controller;
 	public btn_shouCang: BtnTxtView;
-	public btn_equip: BtnTxtView;
+	public btn_equip: BtnMainKindView;
 	public btn_prop: BtnTxtView;
 	public btn_gem: BtnTxtView;
 	public btn_material: BtnTxtView;
@@ -22,7 +23,7 @@ export default class ComGoods extends fgui.GComponent {
 	protected override onConstruct(): void {
 		this.ctrlSelectType = this.getControllerAt(0);
 		this.btn_shouCang = <BtnTxtView>(this.getChildAt(0));
-		this.btn_equip = <BtnTxtView>(this.getChildAt(1));
+		this.btn_equip = <BtnMainKindView>(this.getChildAt(1));
 		this.btn_prop = <BtnTxtView>(this.getChildAt(2));
 		this.btn_gem = <BtnTxtView>(this.getChildAt(3));
 		this.btn_material = <BtnTxtView>(this.getChildAt(4));

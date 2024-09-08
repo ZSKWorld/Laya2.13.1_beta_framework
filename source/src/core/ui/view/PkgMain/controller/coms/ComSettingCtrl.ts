@@ -6,7 +6,7 @@ export interface ComSettingData {
 
 }
 
-export class ComSettingCtrl extends BaseViewCtrl<ComSettingView, ComSettingData>{
+export class ComSettingCtrl extends BaseViewCtrl<ComSettingView, ComSettingData> {
 
 	override onAdded() {
 		this.addMessage(ComSettingMsg.OnBtnMuteClick, this.onBtnMuteClick);
@@ -28,7 +28,7 @@ export class ComSettingCtrl extends BaseViewCtrl<ComSettingView, ComSettingData>
 	}
 
 	private onBtnClearAccountClick() {
-		showConfirm("提示", "确认清理账号？").then(result => result && AccountService.Inst.clearAccount({}));
+		ShowConfirm("提示", "确认清理账号？").then(result => result && AccountService.Inst.clearAccount({}));
 	}
 
 }

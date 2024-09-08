@@ -18,7 +18,7 @@ class RedDotManager extends Laya.EventDispatcher {
 
     private onRedDotCompAwake(comp: fgui.GComponent) {
         const data = this.getRDByComp(RDMap.Root, comp);
-        data && data.doTrigger();
+        data && data.node.refresh();
     }
 
     private onRedDotCompDestroy(comp: fgui.GComponent) {
@@ -38,4 +38,4 @@ class RedDotManager extends Laya.EventDispatcher {
     }
 }
 export const redDotMgr = new RedDotManager();
-windowImmit("redDotMgr", redDotMgr);
+WindowImmit("redDotMgr", redDotMgr);

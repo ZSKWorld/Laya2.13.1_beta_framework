@@ -1,5 +1,5 @@
 import { GameUtil } from "../../../../../common/GameUtil";
-import { BattleType } from "../../../../../net/enum/BattleEnums";
+import { BattleType } from "../../../../../userData/const/BattleEnums";
 import ComBattleConfirm from "../../../../ui/PkgBattle/ComBattleConfirm";
 
 export const enum ComBattleConfirmMsg {

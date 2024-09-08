@@ -14,23 +14,17 @@ export class RedDotData implements IRedDotData {
     private _childs: RedDotData[];
     private _triggers: RDTriggerType[];
     private _displayType: RDDisplayType;
-
     private _rdCount: number;
     private _triggeredMap: KeyMap<number>;
 
     get id() { return this._id; }
-    get enable() {
-        return this._enable && (this._parent ? this._parent.enable : true);
-    }
+    get enable() { return this._enable && (this._parent ? this._parent.enable : true); }
     set enable(value: boolean) { this._enable = value; }
     get path() { return this._path; }
     get names() { return this._names; }
     get node() { return this._node; }
     get parent() { return this._parent; }
-    set parent(parent: RedDotData) {
-        if (parent) parent.addChild(this);
-        else this.removeSelf();
-    }
+    set parent(parent: RedDotData) { parent ? parent.addChild(this) : this.removeSelf(); }
     get childs() { return this._childs; }
     get hasTrigger() { return this._triggers && this._triggers.length > 0; }
     get triggers() { return this._triggers; }
@@ -58,23 +52,8 @@ export class RedDotData implements IRedDotData {
             });
         }
         data.parent = parent as any;
+        data.doTrigger();
         return data;
-    }
-
-    calculateRD(force?: boolean) {
-        const { hasTrigger, _triggeredMap, _rdCount, _childs, node, _parent } = this;
-        let count = 0;
-        if (hasTrigger) {
-            for (const key in _triggeredMap) {
-                count += _triggeredMap[key];
-            }
-        }
-        _childs.forEach(v => count += Math.max(v.rdCount, 0));
-        if (force || count != _rdCount) {
-            this._rdCount = count;
-            node.refresh();
-            _parent && _parent.calculateCountLater();
-        }
     }
 
     /** 触发当前节点红点检测事件 */
@@ -171,6 +150,22 @@ export class RedDotData implements IRedDotData {
 
     private calculateCountLater(force?: boolean) {
         Laya.timer.callLater(this, this.calculateRD, [force]);
+    }
+
+    private calculateRD(force?: boolean) {
+        const { hasTrigger, _triggeredMap, _rdCount, _childs, node, _parent } = this;
+        let count = 0;
+        if (hasTrigger) {
+            for (const key in _triggeredMap) {
+                count += _triggeredMap[key];
+            }
+        }
+        _childs.forEach(v => count += Math.max(v.rdCount, 0));
+        if (force || count != _rdCount) {
+            this._rdCount = count;
+            node.refresh();
+            _parent && _parent.calculateCountLater();
+        }
     }
 }
 

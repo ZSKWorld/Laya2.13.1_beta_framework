@@ -46,4 +46,5 @@ declare interface IEquipment extends IGoodsBase<IEquipment> {
     get levelName(): string;
     get colorLevelName(): string;
     get infoStr(): string;
+    get score(): number;
 }

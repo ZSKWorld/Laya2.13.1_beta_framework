@@ -33,6 +33,8 @@ export const enum RDTriggerType {
     HiddenWeeaponCanWear = "RDType_HiddenWeeaponCanWear",
     /**有法宝可穿戴 */
     MagicWeaponCanWear = "RDType_MagicWeaponCanWear",
+    /**有装备可穿戴 */
+    EquipCanWear = "RDType_EquipCanWear",
 }
 
 export const enum RDName {
@@ -40,6 +42,7 @@ export const enum RDName {
     Train = "Train",
     Character = "Character",
     Goods = "Goods",
+    Goods_Equip = "Goods_Equip",
     Shop = "Shop",
     Abode = "Abode",
     Friend = "Friend",

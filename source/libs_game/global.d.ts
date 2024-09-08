@@ -17,14 +17,14 @@ declare class Logger {
 }
 
 /** 注入全局变量 */
-declare function windowImmit(name: string, obj: any): void;
+declare function WindowImmit(name: string, obj: any): void;
 /**
  * 确认弹窗
  * @param title
  * @param msg
  * @param cancel 默认true
  */
-declare function showConfirm(title: string, msg: string, cancel?: boolean): Promise<boolean>;
+declare function ShowConfirm(title: string, msg: string, cancel?: boolean): Promise<boolean>;
 
 /**
  * 扩展类字段，用于在外部定义的字段在内部可读，扩展的字段或方法不能在构造期间调用

@@ -33,4 +33,4 @@ class TipManager {
     }
 }
 export const tipMgr = new TipManager();
-windowImmit("tipMgr", tipMgr);
+WindowImmit("tipMgr", tipMgr);
