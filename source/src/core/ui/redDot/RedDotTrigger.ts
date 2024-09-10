@@ -87,7 +87,6 @@ export class RedDotTrigger extends Observer {
         const index = this._triggereds.findIndex(v => v == type);
         if (index > -1) return true;
         this._triggereds.push(type);
-        Laya.timer.callLater(this, this.clearTrigger);
         return false;
     }
 
@@ -96,13 +95,12 @@ export class RedDotTrigger extends Observer {
         Laya.timer.callLater(this, this.callTrigger);
     }
 
-    private clearTrigger() { this._triggereds.length = 0; }
-
     private callTrigger() {
-        const { _triggers, _eventCenter } = this;
+        const { _triggers, _triggereds, _eventCenter } = this;
         for (let i = 0, n = _triggers.length; i < n; i += 2) {
             _eventCenter.event(_triggers[i] as RDTriggerType, [_triggers[i], _triggers[i + 1]]);
         }
         _triggers.length = 0;
+        _triggereds.length = 0;
     }
 }

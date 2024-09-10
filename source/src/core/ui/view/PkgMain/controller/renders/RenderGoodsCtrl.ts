@@ -25,6 +25,7 @@ export class RenderGoodsCtrl extends BaseViewCtrl<RenderGoodsView, RenderGoodsDa
 
     refreshSkill(skillID: number, unlock: boolean, sect: number) {
         this.view.refreshSkill(skillID, unlock, sect);
+        this.refreshRedDot(false);
     }
 
     override onDisable() {
