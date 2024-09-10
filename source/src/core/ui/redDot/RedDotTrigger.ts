@@ -5,7 +5,7 @@ import { RDTriggerType } from "./RedDotEnum";
 
 function RDTriggerEvent(eventName: RDTriggerType) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        const eventMap: KeyMap<Function[]> = target._triggerMap = target._triggerMap || {};
+        const eventMap: KeyMap<Function[]> = target._triggerEventMap = target._triggerEventMap || {};
         const func = descriptor.value;
         if (eventMap[eventName])
             eventMap[eventName].push(func);
@@ -15,53 +15,61 @@ function RDTriggerEvent(eventName: RDTriggerType) {
 }
 
 export class RedDotTrigger extends Observer {
-    private _triggerMap: KeyMap<Function[]>;
+    private _equipMap: { [key in RDTriggerType]?: EquipmentPart } = {
+        [RDTriggerType.WeaponCanWear]: EquipmentPart.Weapon,
+        [RDTriggerType.HelmetCanWear]: EquipmentPart.Helmet,
+        [RDTriggerType.NecklaceCanWear]: EquipmentPart.Necklace,
+        [RDTriggerType.ClothesCanWear]: EquipmentPart.Clothes,
+        [RDTriggerType.RingCanWear]: EquipmentPart.Ring,
+        [RDTriggerType.TrousersCanWear]: EquipmentPart.Trousers,
+        [RDTriggerType.AmuletCanWear]: EquipmentPart.Amulet,
+        [RDTriggerType.ShoesCanWear]: EquipmentPart.Shoes,
+        [RDTriggerType.MountCanWear]: EquipmentPart.Mount,
+        [RDTriggerType.FashionCanWear]: EquipmentPart.Fashion,
+        [RDTriggerType.HiddenWeeaponCanWear]: EquipmentPart.HiddenWeeapon,
+        [RDTriggerType.MagicWeaponCanWear]: EquipmentPart.MagicWeapon,
+    };
+    private _triggers: (RDTriggerType | boolean)[] = [];
+    private _triggereds: RDTriggerType[] = [];
+    private _triggerEventMap: KeyMap<Function[]>;
     private _eventCenter: Laya.EventDispatcher;
     constructor(event: Laya.EventDispatcher) {
         super();
         this._eventCenter = event;
-        const triggerMap = this._triggerMap;
-        for (const key in triggerMap) {
-            triggerMap[key].forEach(func => event.on("Trigger" + key, this, func, [key]));
+        const triggerEventMap = this._triggerEventMap;
+        for (const key in triggerEventMap) {
+            triggerEventMap[key].forEach(func => event.on("Trigger" + key, this, func, [key]));
         }
     }
-
+    @RDTriggerEvent(RDTriggerType.AmuletCanWear)
+    @RDTriggerEvent(RDTriggerType.WeaponCanWear)
+    @RDTriggerEvent(RDTriggerType.HelmetCanWear)
+    @RDTriggerEvent(RDTriggerType.NecklaceCanWear)
+    @RDTriggerEvent(RDTriggerType.ClothesCanWear)
+    @RDTriggerEvent(RDTriggerType.RingCanWear)
+    @RDTriggerEvent(RDTriggerType.TrousersCanWear)
+    @RDTriggerEvent(RDTriggerType.AmuletCanWear)
+    @RDTriggerEvent(RDTriggerType.ShoesCanWear)
+    @RDTriggerEvent(RDTriggerType.MountCanWear)
+    @RDTriggerEvent(RDTriggerType.FashionCanWear)
+    @RDTriggerEvent(RDTriggerType.HiddenWeeaponCanWear)
+    @RDTriggerEvent(RDTriggerType.MagicWeaponCanWear)
     @RDTriggerEvent(RDTriggerType.EquipCanWear)
-    @RegisterEvent(UserDataEvent.Bag_Equipment_Changed)
-    private checkAnyEquipCanWear(type: RDTriggerType = RDTriggerType.EquipCanWear, triggerId?: number) {
+    @RegisterEvent(UserDataEvent.Bag_Equipment_Changed, false, [RDTriggerType.EquipCanWear])
+    private checkAnyEquipCanWear(type: RDTriggerType) {
+        if (this.hadTriggered(type)) return;
         let triggered = false;
         if (type == RDTriggerType.EquipCanWear) {
-            triggered = this.checkEquipCanWear(EquipmentPart.Weapon) ||
-                this.checkEquipCanWear(EquipmentPart.Helmet) ||
-                this.checkEquipCanWear(EquipmentPart.Necklace) ||
-                this.checkEquipCanWear(EquipmentPart.Clothes) ||
-                this.checkEquipCanWear(EquipmentPart.Ring) ||
-                this.checkEquipCanWear(EquipmentPart.Trousers) ||
-                this.checkEquipCanWear(EquipmentPart.Amulet) ||
-                this.checkEquipCanWear(EquipmentPart.Shoes) ||
-                this.checkEquipCanWear(EquipmentPart.Mount) ||
-                this.checkEquipCanWear(EquipmentPart.Fashion) ||
-                this.checkEquipCanWear(EquipmentPart.HiddenWeeapon) ||
-                this.checkEquipCanWear(EquipmentPart.MagicWeapon);
-        } else {
-            switch (type) {
-                case RDTriggerType.AmuletCanWear: triggered = this.checkEquipCanWear(EquipmentPart.Amulet); break;
-                case RDTriggerType.WeaponCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Weapon); break;
-                case RDTriggerType.HelmetCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Helmet); break;
-                case RDTriggerType.NecklaceCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Necklace); break;
-                case RDTriggerType.ClothesCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Clothes); break;
-                case RDTriggerType.RingCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Ring); break;
-                case RDTriggerType.TrousersCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Trousers); break;
-                case RDTriggerType.AmuletCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Amulet); break;
-                case RDTriggerType.ShoesCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Shoes); break;
-                case RDTriggerType.MountCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Mount); break;
-                case RDTriggerType.FashionCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.Fashion); break;
-                case RDTriggerType.HiddenWeeaponCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.HiddenWeeapon); break;
-                case RDTriggerType.MagicWeaponCanWear:  triggered = this.checkEquipCanWear(EquipmentPart.MagicWeapon); break;
-                default: break;
+            for (const triggerType in this._equipMap) {
+                const part = <EquipmentPart>this._equipMap[triggerType];
+                const triggered2 = this.checkEquipCanWear(part);
+                triggered ||= triggered2;
+                this.addTrigger(<RDTriggerType>triggerType, triggered2);
             }
+        } else {
+            triggered = this.checkEquipCanWear(this._equipMap[type]);
         }
-        this.doTrigger(type, triggered, triggerId);
+        this.addTrigger(type, triggered);
     }
 
     private checkEquipCanWear(part: EquipmentPart) {
@@ -75,8 +83,26 @@ export class RedDotTrigger extends Observer {
         }
     }
 
-    private doTrigger(type: RDTriggerType, triggered: boolean, triggerId?: number) {
-        Logger.Error(type, triggered);
-        this._eventCenter.event(type, [type, triggered, triggerId]);
+    private hadTriggered(type: RDTriggerType) {
+        const index = this._triggereds.findIndex(v => v == type);
+        if (index > -1) return true;
+        this._triggereds.push(type);
+        Laya.timer.callLater(this, this.clearTrigger);
+        return false;
+    }
+
+    private addTrigger(type: RDTriggerType, triggered: boolean) {
+        this._triggers.push(type, triggered);
+        Laya.timer.callLater(this, this.callTrigger);
+    }
+
+    private clearTrigger() { this._triggereds.length = 0; }
+
+    private callTrigger() {
+        const { _triggers, _eventCenter } = this;
+        for (let i = 0, n = _triggers.length; i < n; i += 2) {
+            _eventCenter.event(_triggers[i] as RDTriggerType, [_triggers[i], _triggers[i + 1]]);
+        }
+        _triggers.length = 0;
     }
 }

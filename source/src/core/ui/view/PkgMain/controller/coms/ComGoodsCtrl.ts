@@ -4,6 +4,7 @@ import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../../tool/UIUtil";
 import { ComGoodsMsg, ComGoodsView } from "../../view/coms/ComGoodsView";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";
+import { RenderGoodsCtrl } from "../renders/RenderGoodsCtrl";
 import { UIEquipmentInfoData } from "../UIEquipmentInfoCtrl";
 import { UIGoodsInfoData } from "../UIGoodsInfoCtrl";
 
@@ -40,7 +41,7 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData> {
 	}
 
 	private onListRenderer(index: number, item: RenderGoodsView) {
-		item.refreshGoods(this.items[index]);
+		(<RenderGoodsCtrl>item.viewCtrl).refreshGoods(this.items[index], this.showType == ItemBagType.Equip);
 	}
 
 	private onListClick(item: any) {

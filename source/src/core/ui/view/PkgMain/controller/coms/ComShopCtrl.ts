@@ -2,6 +2,7 @@ import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../../tool/UIUtil";
 import { ComShopMsg, ComShopView } from "../../view/coms/ComShopView";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";
+import { RenderGoodsCtrl } from "../renders/RenderGoodsCtrl";
 import { UIGoodsInfoData } from "../UIGoodsInfoCtrl";
 export const enum SellType {
 	Prop = 1,
@@ -44,7 +45,7 @@ export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData> {
 		this.view.list_item.numItems = this.items.length;
 	}
 	private onListRenderer(index: number, item: RenderGoodsView) {
-		item.refreshShop(this.items[index].sellID);
+		(<RenderGoodsCtrl>item.viewCtrl).refreshShop(this.items[index].sellID);
 	}
 	private onListClick(item: RenderGoodsView) {
 		const list = this.view.list_item;

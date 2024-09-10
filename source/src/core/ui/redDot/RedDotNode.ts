@@ -6,9 +6,9 @@ export class RedDotNode implements IRedDotNode {
     private static gid: number = 0;
     private _id: number = ++RedDotNode.gid;
     private _enable: boolean = false;
-    private _names: string[];
+    private _nameList: string[];
     private _parent: RedDotNode;
-    private _childs: RedDotNode[];
+    private _childs: RedDotNode[] = [];
     private _triggers: RDTriggerType[];
     private _rdCount: number = 0;
     private _triggeredMap: KeyMap<number>;
@@ -21,7 +21,7 @@ export class RedDotNode implements IRedDotNode {
     get parent() { return this._parent; }
     set parent(parent: RedDotNode) { parent ? parent.addChild(this) : this.removeSelf(); }
     get childs() { return this._childs; }
-    get hasTrigger() { return this._triggers && this._triggers.length > 0; }
+    private get hasTrigger() { return this._triggers && this._triggers.length > 0; }
     get triggers() { return this._triggers; }
     set triggers(value) {
         RedDotNode.eventCenter.offAllCaller(this);
@@ -29,17 +29,16 @@ export class RedDotNode implements IRedDotNode {
         this._triggeredMap = value ? {} : null;
         if (this.hasTrigger)
             value.forEach(v => RedDotNode.eventCenter.on(v, this, this.onTrigger));
-        this.doTrigger();
+        this.trigger();
     }
     get comp() {
-        if (this._comp && this._comp.isDisposed)
-            this._comp = null;
+        if (this._comp && this._comp.isDisposed) this._comp = null;
         if (!this._comp) {
-            const names = this._names;
-            if (names && names.length) {
+            const nameList = this._nameList;
+            if (nameList && nameList.length) {
                 let target: fgui.GComponent = fgui.GRoot.inst;
-                for (let i = 0, cnt = names.length; i < cnt; i++) {
-                    target = target.getChild(names[i]) as fgui.GComponent;
+                for (let i = 0, cnt = nameList.length; i < cnt; i++) {
+                    target = <fgui.GComponent>target.getChild(nameList[i]);
                     if (!target) break;
                 }
                 if (target) {
@@ -53,37 +52,34 @@ export class RedDotNode implements IRedDotNode {
     set comp(value: fgui.GComponent) {
         if (this._comp == value) return;
         this._comp = value;
-        this.doTrigger();
+        this.trigger();
     }
 
     private constructor() { }
 
-    static Create(parent: IRedDotNode, path: string, triggers?: RDTriggerType[]): IRedDotNode {
+    static Create(parent?: IRedDotNode, path: string = "", triggers?: RDTriggerType[]) {
         const data = Laya.Pool.createByClass(RedDotNode as any) as RedDotNode;
         data._enable = true;
-        data._childs = [];
-        data._rdCount = 0;
 
-        data._names = path ? path.split(".") : null;
+        data._nameList = path ? path.split(".") : null;
         data.parent = parent as any;
         data.triggers = triggers;
-        return data;
-    }
-
-    /** 触发当前节点红点检测事件 */
-    doTrigger() {
-        if (this.hasTrigger) {
-            const id = this.id;
-            this.triggers.forEach(v => {
-                RedDotNode.eventCenter.event("Trigger" + v, id);
-            });
-        } else {
-            this.calculateCountLater();
-        }
+        return data as IRedDotNode;
     }
 
     refresh() {
         this.comp && (this.comp.visible = this._rdCount > 0 && this.enable);
+    }
+
+    /** 触发当前节点红点检测事件 */
+    trigger() {
+        if (this.hasTrigger) {
+            this.triggers.forEach(v => {
+                RedDotNode.eventCenter.event("Trigger" + v);
+            });
+        } else {
+            this.calculateCountLater();
+        }
     }
 
     addChild(child: RedDotNode) {
@@ -92,7 +88,7 @@ export class RedDotNode implements IRedDotNode {
         child.removeSelf();
         child._parent = this;
         this._childs.push(child);
-        child.calculateCountLater(true);
+        child.calculateCountLater();
     }
 
     /**
@@ -126,7 +122,6 @@ export class RedDotNode implements IRedDotNode {
             }
         }
         if (child) {
-            child.calculateCountLater(true);
             this.calculateCountLater();
         }
         return child;
@@ -144,7 +139,7 @@ export class RedDotNode implements IRedDotNode {
         this._enable = false;
         this._parent = null;
         this._triggers = null;
-        this._childs = null;
+        this._childs.length = 0;
         this._triggeredMap = null;
         this._comp = null;
         Laya.Pool.recoverByClass(this);
@@ -155,34 +150,31 @@ export class RedDotNode implements IRedDotNode {
      * 红点事件触发回调
      * @param type 事件类型
      * @param triggered 是否检测出了红点
-     * @param id 触发事件的node id，不为空时只触发对应id的node的刷新
      */
-    private onTrigger(type: RDTriggerType, triggered: boolean, id?: number) {
+    private onTrigger(type: RDTriggerType, triggered: boolean) {
         if (!this.hasTrigger) return;
-        if (id == this.id || this.triggers.indexOf(type) >= 0) {
+        if (this.triggers.indexOf(type) >= 0) {
             this._triggeredMap[type] = +!!triggered;
-            this.calculateCountLater(id == this.id);
+            this.calculateCountLater();
         }
     }
 
-    private calculateCountLater(force?: boolean) {
-        Laya.timer.callLater(this, this.calculateRD, [force]);
+    private calculateCountLater() {
+        Laya.timer.callLater(this, this.calculateRD);
     }
 
-    private calculateRD(force?: boolean) {
+    private calculateRD() {
         const { hasTrigger, _triggeredMap, _rdCount, _childs } = this;
         let count = 0;
-        if (hasTrigger) {
+        if (hasTrigger && _childs.length == 0) {
             for (const key in _triggeredMap) {
                 count += _triggeredMap[key];
             }
         }
         _childs.forEach(v => count += Math.max(v._rdCount, 0));
-        if (force || count != _rdCount) {
-            this._rdCount = count;
-            this.refresh();
-            this._parent && this._parent.calculateCountLater();
-        }
+        this._rdCount = count;
+        this.refresh();
+        this._parent && this._parent.calculateCountLater();
     }
 }
 

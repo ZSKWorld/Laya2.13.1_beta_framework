@@ -5,12 +5,11 @@ export interface IRedDotNode {
     enable: boolean;
     parent: IRedDotNode;
     readonly childs: IRedDotNode[];
-    readonly hasTrigger: boolean;
     triggers: RDTriggerType[];
     comp: fgui.GComponent;
 
-    doTrigger(): void;
     refresh(): void;
+    trigger(): void;
     addChild(child: IRedDotNode): void;
     getChild(id: number): IRedDotNode;
     removeChild(id: number): IRedDotNode;

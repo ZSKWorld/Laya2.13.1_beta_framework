@@ -9,6 +9,7 @@
       <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true" duration=".5"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
+    <component id="n7_mfnw" name="com_redDot" src="yz4q6o" fileName="Component/ComRedDot.xml" pkg="vx9zwser" xy="230,0"/>
     <image id="n6_dnfc" name="img_collect" src="qjdob" fileName="Texture/Bg_XingXing01.png" pkg="vx9zwser" xy="204,-3" size="45,44" aspect="true" visible="false">
       <relation target="" sidePair="right-right"/>
     </image>

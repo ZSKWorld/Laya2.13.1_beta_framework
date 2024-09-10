@@ -82,9 +82,9 @@ export class UIUtil {
 		return new Promise<void>(resolve => {
 			bg.alpha = panel.alpha = 0;
 			panel.setScale(0, 0);
-			Laya.Tween.to(bg, { alpha: 0.8 }, 250, Laya.Ease.quadOut);
-			Laya.Tween.to(panel, { alpha: 1 }, 250, Laya.Ease.quadOut);
-			Laya.Tween.to(panel, { scaleX: 1, scaleY: 1 }, 250, Laya.Ease.backOut, Laya.Handler.create(null, resolve), 0, false);
+			Laya.Tween.to(bg, { alpha: 0.8 }, 150, Laya.Ease.quadOut);
+			Laya.Tween.to(panel, { alpha: 1 }, 150, Laya.Ease.quadOut);
+			Laya.Tween.to(panel, { scaleX: 1, scaleY: 1 }, 150, Laya.Ease.backOut, Laya.Handler.create(null, resolve), 0, false);
 		});
 	}
 
@@ -93,9 +93,9 @@ export class UIUtil {
 			bg.alpha = 0.8;
 			panel.alpha = 1;
 			panel.setScale(1, 1);
-			Laya.Tween.to(bg, { alpha: 0 }, 100, Laya.Ease.linearNone, null, 150);
-			Laya.Tween.to(panel, { alpha: 0.4 }, 150, Laya.Ease.linearNone, null, 100);
-			Laya.Tween.to(panel, { scaleX: 0, scaleY: 0 }, 250, Laya.Ease.backIn, Laya.Handler.create(null, resolve), 0, false);
+			Laya.Tween.to(bg, { alpha: 0 }, 150, Laya.Ease.linearNone);
+			Laya.Tween.to(panel, { alpha: 0.4 }, 150, Laya.Ease.linearNone);
+			Laya.Tween.to(panel, { scaleX: 0, scaleY: 0 }, 150, Laya.Ease.backIn, Laya.Handler.create(null, resolve), 0, false);
 		});
 	}
 }
