@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "snapToGrid": true,
+  "auxline1": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vx9zwsershjv6k",
@@ -8,8 +8,8 @@
     "ui://vx9zwser7vow63",
     "ui://vith2b66qjdo0",
     "ui://vith2b66sbd02",
+    "ui://vith2b66sbd0z",
     "ui://vith2b66olc42h",
-    "ui://vx9zwseryz4q6o",
     "ui://vith2b66j87q1w",
     "ui://vx9zwsersbd05i",
     "ui://vith2b66awbv2f"
@@ -18,7 +18,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vx9zwsershjv6k",
+  "doc.activeDoc": "ui://vith2b66sbd0z",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "vx9zwser",
@@ -43,10 +43,10 @@
     "/Component/UISphereTool/"
   ],
   "showGrid": false,
-  "gridSize": 10,
+  "snapToGrid": true,
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "auxline1": true,
+  "gridSize": 10,
   "gridColor": 42
 }

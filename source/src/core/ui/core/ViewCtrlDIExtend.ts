@@ -1,7 +1,7 @@
 
 type FuncCfg = { __once: boolean, __done: boolean, __args: any[] };
 type CfgFunction = Function & { [key: string]: FuncCfg; };
-export type DIViewCtrl = IViewCtrl & {
+type DIViewCtrl = IViewCtrl & {
 	__keyEventList?: KeyMap<KeyMap<CfgFunction[]>>;
 	__mouseEventList?: KeyMap<CfgFunction[]>,
 }

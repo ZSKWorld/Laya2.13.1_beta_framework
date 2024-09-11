@@ -57,7 +57,7 @@ class Chessboard2048 extends Observer {
 			const addIndex = MathUtil.RandomInt(0, rowArr.length - 1);
 			const random = MathUtil.Random();
 			const value = random < 2 / 3 ? 1 : 2;
-			const cell = ComItem2048Ctrl.get(value, rowArr[addIndex], colArr[addIndex]);
+			const cell = ComItem2048Ctrl.create(value, rowArr[addIndex], colArr[addIndex]);
 			const bg = _cellBgs[rowArr[addIndex]][colArr[addIndex]];
 			cell.view.setXY(bg.x, bg.y);
 			_container.addChild(cell.view);
@@ -120,7 +120,7 @@ class Chessboard2048 extends Observer {
 		const oldCell = _cells[row][col];
 		if (oldCell) throw "add repeated";
 		const bg = _cellBgs[row][col];
-		const cell = ComItem2048Ctrl.get(value, row, col);
+		const cell = ComItem2048Ctrl.create(value, row, col);
 		cell.view.setXY(bg.x, bg.y);
 		_container.addChild(cell.view);
 		_cells[row][col] = cell;

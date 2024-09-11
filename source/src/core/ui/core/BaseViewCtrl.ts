@@ -1,6 +1,6 @@
 import { eventMgr } from "../../game/event/EventManager";
 import { ViewEvent } from "./UIDefine";
-import { DIViewCtrl, ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
+import { ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
 
 /**
  * UI控制器脚本基类，用来处理页面各种逻辑，刷新逻辑在页面View中执行，可挂在任何Laya.Node（GUI的displayObject）上。

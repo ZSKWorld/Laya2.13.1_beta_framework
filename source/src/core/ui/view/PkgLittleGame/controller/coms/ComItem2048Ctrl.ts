@@ -3,7 +3,7 @@ import { uiMgr } from "../../../../core/UIManager";
 import { ComItem2048View } from "../../view/coms/ComItem2048View";
 
 export interface ComItem2048Data {
-    
+
 }
 
 export class ComItem2048Ctrl extends BaseViewCtrl<ComItem2048View, ComItem2048Data> {
@@ -21,7 +21,7 @@ export class ComItem2048Ctrl extends BaseViewCtrl<ComItem2048View, ComItem2048Da
     }
     get mergeValue() { return this._mergeValue; }
     static count = 0;
-    static get(value: number, row: number, col: number) {
+    static create(value: number, row: number, col: number) {
         const item: ComItem2048Ctrl = Laya.Pool.getItemByCreateFun("ComItem2048Ctrl", () => {
             const result = uiMgr.createView(ViewID.ComItem2048View);
             result.view.setPivot(0.5, 0.5, true);

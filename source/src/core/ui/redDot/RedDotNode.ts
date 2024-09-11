@@ -97,13 +97,7 @@ export class RedDotNode implements IRedDotNode {
      * @returns
      */
     getChild(id: number) {
-        const { _childs } = this;
-        let child: IRedDotNode;
-        for (let i = 0, cnt = _childs.length; i < cnt; i++) {
-            child = _childs[i];
-            if (child.id == id) break;
-        }
-        return child;
+        return this._childs.find(v => v.id == id);
     }
 
     /**
@@ -112,16 +106,11 @@ export class RedDotNode implements IRedDotNode {
      */
     removeChild(id: number) {
         const { _childs } = this;
-        let child: RedDotNode;
-        for (let i = _childs.length - 1; i >= 0; i--) {
-            child = _childs[i];
-            if (child.id == id) {
-                child._parent = null;
-                _childs.splice(i, 1);
-                break;
-            }
-        }
+        const index = _childs.findIndex(v => v.id == id);
+        const child = _childs[index];
         if (child) {
+            child._parent = null;
+            _childs.splice(index, 1);
             this.calculateCountLater();
         }
         return child;
