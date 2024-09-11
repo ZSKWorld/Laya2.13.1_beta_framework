@@ -211,6 +211,7 @@
     <component id="yz4q6o" name="ComRedDot.xml" path="/Component/" exported="true"/>
     <component id="i9gm6p" name="BtnNormal.xml" path="/Component/" exported="true"/>
     <image id="mfnw6q" name="Pic_red_dot.png" path="/Texture/" exported="true"/>
+    <image id="b6ap6r" name="image_870.png" path="/Texture/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

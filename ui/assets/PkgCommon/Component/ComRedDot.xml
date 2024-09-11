@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="16,16">
+<component size="30,30">
   <displayList>
-    <image id="n0_yz4q" name="img_redDot" src="mfnw6q" fileName="Texture/Pic_red_dot.png" xy="0,0" size="16,16">
-      <relation target="" sidePair="width-width,height-height"/>
-    </image>
+    <image id="n2_b6ap" name="img_redDot" src="b6ap6r" fileName="Texture/image_870.png" xy="-2,-2" pivot="0.5,0.5" size="35,35" color="#ff0000"/>
   </displayList>
+  <transition name="trans_anim" options="2" frameRate="60">
+    <item time="0" type="Color" target="n2_b6ap" tween="true" startValue="#ff0000" endValue="#ffff00" duration="60"/>
+    <item time="60" type="Color" target="n2_b6ap" tween="true" startValue="#ffff00" endValue="#ff0000" duration="60"/>
+  </transition>
 </component>

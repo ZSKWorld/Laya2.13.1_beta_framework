@@ -1,6 +1,6 @@
 import { GameEvent } from "../../../../../common/GameEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { ComRedDotMsg, ComRedDotView } from "../../view/coms/ComRedDotView";
+import { ComRedDotView } from "../../view/coms/ComRedDotView";
 
 export interface ComRedDotData {
 
@@ -9,11 +9,19 @@ export interface ComRedDotData {
 export class ComRedDotCtrl extends BaseViewCtrl<ComRedDotView, ComRedDotData> {
 
     override onAdded() {
-        
+
     }
 
     override onAwake() {
         this.dispatch(GameEvent.RedDotCompAwake, this.view);
+    }
+
+    override onEnable() {
+        this.view.trans_anim.play(null, -1);
+    }
+
+    override onDisable() {
+        this.view.trans_anim.stop(false);
     }
 
     override onDestroy() {

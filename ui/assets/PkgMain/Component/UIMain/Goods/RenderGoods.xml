@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="246,100" pivot="0.5,0.5" extention="Button" designImageOffsetX="-631" designImageOffsetY="-335" designImageAlpha="100">
+<component size="246,100" pivot="0.5,0.5" overflow="hidden" extention="Button" designImageOffsetX="-631" designImageOffsetY="-335" designImageAlpha="100">
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <displayList>
     <graph id="n5_pogd" name="bg" xy="0,0" size="246,100" touchable="false" type="rect" lineSize="0" fillColor="#ff171921">
@@ -9,16 +9,16 @@
       <gearLook controller="button" pages="0,1,2,3" values="0,0,0,0|1,0,0,0|1,0,0,0|1,0,0,0" tween="true" duration=".5"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n7_mfnw" name="com_redDot" src="yz4q6o" fileName="Component/ComRedDot.xml" pkg="vx9zwser" xy="230,0"/>
-    <image id="n6_dnfc" name="img_collect" src="qjdob" fileName="Texture/Bg_XingXing01.png" pkg="vx9zwser" xy="204,-3" size="45,44" aspect="true" visible="false">
-      <relation target="" sidePair="right-right"/>
-    </image>
     <text id="n1_sbd0" name="txt_name" xy="123,46" pivot="0.5,0.5" anchor="true" size="214,48" fontSize="35" color="#ffffff" vAlign="middle" leading="1" text="五级体力宝石">
       <relation target="" sidePair="center-center,middle-middle"/>
     </text>
     <text id="n2_sbd0" name="txt_count" xy="208,58" size="34,42" fontSize="30" color="#77f7d1" autoClearText="true" text="99">
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </text>
+    <component id="n7_mfnw" name="com_redDot" src="yz4q6o" fileName="Component/ComRedDot.xml" pkg="vx9zwser" xy="216,0" touchable="false"/>
+    <image id="n6_dnfc" name="img_collect" src="qjdob" fileName="Texture/Bg_XingXing01.png" pkg="vx9zwser" xy="208,-6" size="45,44" aspect="true" visible="false">
+      <relation target="" sidePair="right-right"/>
+    </image>
   </displayList>
   <Button/>
 </component>
