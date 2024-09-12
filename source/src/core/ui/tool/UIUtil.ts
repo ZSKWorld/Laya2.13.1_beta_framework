@@ -69,25 +69,25 @@ export class UIUtil {
 
 	static SetInputCheck(input: fairygui.GTextInput, onInput: Laya.Handler) {
 		let duringComposition = false;
-		const onCompositionstart = (event) => {
+		const onCompositionStart = (event) => {
 			// 输入中文开始
 			duringComposition = true;
 		};
-		const onCompositionend = (event) => {
+		const onCompositionEnd = (event) => {
 			// 输入中文结束
 			duringComposition = false;
-			onInput.run();
+			onInput && onInput.run();
 		};
-		input.on('focus', null, () => {
-			input.nativeInput.nativeInput.addEventListener('compositionstart', onCompositionstart);
-			input.nativeInput.nativeInput.addEventListener('compositionend', onCompositionend);
+		input.on(Laya.Event.FOCUS, null, () => {
+			input.nativeInput.nativeInput.addEventListener('compositionstart', onCompositionStart);
+			input.nativeInput.nativeInput.addEventListener('compositionend', onCompositionEnd);
 		});
-		input.on('blur', null, () => {
-			input.nativeInput.nativeInput.removeEventListener('compositionstart', onCompositionstart);
-			input.nativeInput.nativeInput.removeEventListener('compositionend', onCompositionend);
+		input.on(Laya.Event.BLUR, null, () => {
+			input.nativeInput.nativeInput.removeEventListener('compositionstart', onCompositionStart);
+			input.nativeInput.nativeInput.removeEventListener('compositionend', onCompositionEnd);
 		});
-
-		input.on('input', null, () => !duringComposition && onInput.run());
+		Event.BUBBLING_PHASE
+		input.on(Laya.Event.INPUT, null, () => !duringComposition && onInput && onInput.run());
 	}
 
 	static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
