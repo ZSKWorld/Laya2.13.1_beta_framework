@@ -67,16 +67,39 @@ export class UIUtil {
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
 	}
 
-    static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
-        let logStr = richStrMgr.start(title);
-        title && logStr.break();
-        rewards.forEach(v => {
-            const str = GameUtil.GetItemCountStr(v.id, v.count);
-            tipMgr.showTip(`恭喜获得${ str }`);
-            logStr.combineBreak(str);
-        });
-        trainLogMgr.addLog(logStr.end());
-    }
+	static SetInputCheck(input: fairygui.GTextInput, onInput: Laya.Handler) {
+		let duringComposition = false;
+		const onCompositionstart = (event) => {
+			// 输入中文开始
+			duringComposition = true;
+		};
+		const onCompositionend = (event) => {
+			// 输入中文结束
+			duringComposition = false;
+			onInput.run();
+		};
+		input.on('focus', null, () => {
+			input.nativeInput.nativeInput.addEventListener('compositionstart', onCompositionstart);
+			input.nativeInput.nativeInput.addEventListener('compositionend', onCompositionend);
+		});
+		input.on('blur', null, () => {
+			input.nativeInput.nativeInput.removeEventListener('compositionstart', onCompositionstart);
+			input.nativeInput.nativeInput.removeEventListener('compositionend', onCompositionend);
+		});
+
+		input.on('input', null, () => !duringComposition && onInput.run());
+	}
+
+	static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
+		let logStr = richStrMgr.start(title);
+		title && logStr.break();
+		rewards.forEach(v => {
+			const str = GameUtil.GetItemCountStr(v.id, v.count);
+			tipMgr.showTip(`恭喜获得${ str }`);
+			logStr.combineBreak(str);
+		});
+		trainLogMgr.addLog(logStr.end());
+	}
 
 	static AnimAlphaIn(bg: fairygui.GObject, panel: fairygui.GObject) {
 		return new Promise<void>(resolve => {
