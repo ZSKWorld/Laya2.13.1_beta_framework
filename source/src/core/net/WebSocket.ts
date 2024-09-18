@@ -36,7 +36,7 @@ export const enum SocketEvent {
 }
 
 class WebSocket extends Observer {
-    private _url: string = "ws://192.168.71.13:8007";
+    private _url: string = "ws://192.168.71.15:8007";
     private _socket: Laya.Socket;
     private _state: SocketState = SocketState.Disconnect;
     private _waitList: IUserInput[];
@@ -46,35 +46,35 @@ class WebSocket extends Observer {
         const lastState = this._state;
         if (v == lastState) return;
         this._state = v;
-        let eventNames: string[] = [];
+        const events: SocketEvent[] = [];
         switch (lastState) {
             case SocketState.Disconnect:
                 switch (v) {
-                    case SocketState.Connecting: eventNames = [SocketEvent.Connecting]; break;
-                    case SocketState.Reconnecting: eventNames = [SocketEvent.Reconnecting]; break;
+                    case SocketState.Connecting: events.push(SocketEvent.Connecting); break;
+                    case SocketState.Reconnecting: events.push(SocketEvent.Reconnecting); break;
                     case SocketState.Connected: Logger.Error("状态错误 Disconnect => Connected"); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Connecting:
                 switch (v) {
-                    case SocketState.Disconnect: eventNames = [SocketEvent.ConnectFail, SocketEvent.Close]; break;
+                    case SocketState.Disconnect: events.push(SocketEvent.ConnectFail, SocketEvent.Close); break;
                     case SocketState.Reconnecting: Logger.Error("状态错误 Connecting => Reconnecting"); break;
-                    case SocketState.Connected: eventNames = [SocketEvent.ConnectSuccess]; break;
+                    case SocketState.Connected: events.push(SocketEvent.ConnectSuccess); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Reconnecting:
                 switch (v) {
-                    case SocketState.Disconnect: eventNames = [SocketEvent.ReconnectFail, SocketEvent.Close]; break;
+                    case SocketState.Disconnect: events.push(SocketEvent.ReconnectFail, SocketEvent.Close); break;
                     case SocketState.Connecting: Logger.Error("状态错误 Reconnecting => Connecting"); break;
-                    case SocketState.Connected: eventNames = [SocketEvent.ReconnectSuccess]; break;
+                    case SocketState.Connected: events.push(SocketEvent.ReconnectSuccess); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
                 }
                 break;
             case SocketState.Connected:
                 switch (v) {
-                    case SocketState.Disconnect: eventNames = [SocketEvent.Close]; break;
+                    case SocketState.Disconnect: events.push(SocketEvent.Close); break;
                     case SocketState.Connecting: Logger.Error("状态错误 Connected => Connecting"); break;
                     case SocketState.Reconnecting: Logger.Error("状态错误 Connected => Reconnecting"); break;
                     default: Logger.Error("未知的状态", lastState, v); break;
@@ -82,7 +82,7 @@ class WebSocket extends Observer {
                 break;
             default: Logger.Error("未知的状态", lastState, v); break;
         }
-        eventNames.forEach(v => this.dispatch(v));
+        events.forEach(v => this.dispatch(v));
     }
     get connected() { return this.state == SocketState.Connected; }
 
