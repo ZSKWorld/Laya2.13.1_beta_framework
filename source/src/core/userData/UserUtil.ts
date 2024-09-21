@@ -76,8 +76,8 @@ export class UserUtil {
         if (equip) {
             const dressed = userData.body.getDressedEquip(equip.part) == equip;
             str = `
-                ${ equip.colorLevelName }${ dressed ? "&nbsp;(已装备)" : "" }<br>
-			    ${ this.getEquipStartStr(equip.star) }<br>
+                ${ equip.colorLevelName }${ dressed ? "&nbsp;(已装备)" : "" }<br/>
+			    ${ this.getEquipStartStr(equip.star) }<br/>
                 ${ equip.infoStr }
             `;
             const gems = hasGem ? userData.body.getEquipGems(equip.part) : null;
@@ -89,10 +89,10 @@ export class UserUtil {
                 const { quality: quality2, name: name2 } = gem2 ? tableItem[gem2] : {} as any;
                 const { quality: quality3, name: name3 } = gem3 ? tableItem[gem3] : {} as any;
                 str += `
-                    孔1:${ gem0 ? GameUtil.GetColorStr(quality0, name0) : "空" }<br>
-                    孔2:${ gem1 ? GameUtil.GetColorStr(quality1, name1) : "空" }<br>
-                    孔3:${ gem2 ? GameUtil.GetColorStr(quality2, name2) : "空" }<br>
-                    孔4:${ gem3 ? GameUtil.GetColorStr(quality3, name3) : "空" }<br>
+                    孔1:${ gem0 ? GameUtil.GetColorStr(quality0, name0) : "空" }<br/>
+                    孔2:${ gem1 ? GameUtil.GetColorStr(quality1, name1) : "空" }<br/>
+                    孔3:${ gem2 ? GameUtil.GetColorStr(quality2, name2) : "空" }<br/>
+                    孔4:${ gem3 ? GameUtil.GetColorStr(quality3, name3) : "空" }<br/>
                 `;
             }
             str += "评分:2.5万";

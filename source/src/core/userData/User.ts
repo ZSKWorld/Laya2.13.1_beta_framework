@@ -1,4 +1,3 @@
-import { eventMgr } from "../game/event/EventManager";
 import { NetCMD } from "../net/enum/NetCMD";
 import { Account } from "./Account";
 import { Bag } from "./Bag";

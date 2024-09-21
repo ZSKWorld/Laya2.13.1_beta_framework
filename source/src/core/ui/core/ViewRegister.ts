@@ -105,7 +105,6 @@ import { UISettingCtrl } from "../view/PkgMain/controller/UISettingCtrl";
 import { UISettingProxy } from "../view/PkgMain/proxy/UISettingProxy";
 import { UISphereToolView } from "../view/PkgMain/view/UISphereToolView";
 import { UISphereToolCtrl } from "../view/PkgMain/controller/UISphereToolCtrl";
-import { uiMgr } from "./UIManager";
 
 class ViewRegister {
 

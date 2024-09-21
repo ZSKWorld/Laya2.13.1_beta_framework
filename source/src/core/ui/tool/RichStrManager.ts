@@ -16,7 +16,7 @@ class RichStr {
 
     /** 添加换行 */
     break(num: number = 1) {
-        this._str += new Array(num).fill("<br>").join("");
+        this._str += new Array(num).fill("<br/>").join("");
         return this;
     }
 
@@ -38,7 +38,7 @@ class RichStr {
     }
 
     combineBreak(str: string, num: number = 1) {
-        this._str += str + new Array(num).fill("<br>").join("");
+        this._str += str + new Array(num).fill("<br/>").join("");
         return this;
     }
 

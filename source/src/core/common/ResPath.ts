@@ -24,6 +24,17 @@ export namespace ResPath {
 		Font13 = "Font13",
 		Font14 = "Font14",
 		Font15 = "Font15",
+		Font16 = "Font16",
+		Font17 = "Font17",
+		Font18 = "Font18",
+		Font19 = "Font19",
+		Font20 = "Font20",
+		Font21 = "Font21",
+		Font22 = "Font22",
+		Font23 = "Font23",
+		Font24 = "Font24",
+		Font25 = "Font25",
+		Font26 = "Font26",
 	}
 
 	export enum FontPath {
@@ -42,6 +53,17 @@ export namespace ResPath {
 		Font13 = "res/font/Font13.ttf",
 		Font14 = "res/font/Font14.ttf",
 		Font15 = "res/font/Font15.ttf",
+		Font16 = "res/font/Font16.ttf",
+		Font17 = "res/font/Font17.ttf",
+		Font18 = "res/font/Font18.ttf",
+		Font19 = "res/font/Font19.ttf",
+		Font20 = "res/font/Font20.ttf",
+		Font21 = "res/font/Font21.ttf",
+		Font22 = "res/font/Font22.ttf",
+		Font23 = "res/font/Font23.ttf",
+		Font24 = "res/font/Font24.ttf",
+		Font25 = "res/font/Font25.ttf",
+		Font26 = "res/font/Font26.ttf",
 	}
 
 	// res/prescreen/
@@ -71,6 +93,7 @@ export namespace ResPath {
 		Guanjiahuode = "res/skeleton/guanjiahuode.sk",
 		Gx = "res/skeleton/gx.sk",
 		Haidao = "res/skeleton/haidao.sk",
+		Huangjinhufu_2 = "res/skeleton/huangjinhufu_2.sk",
 		Huodejiangli = "res/skeleton/huodejiangli.sk",
 		Jiajuhuanren = "res/skeleton/jiajuhuanren.sk",
 		Jiajuhuode = "res/skeleton/jiajuhuode.sk",

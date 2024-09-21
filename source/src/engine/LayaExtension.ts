@@ -5,6 +5,8 @@ export class LayaExtension {
 		this.ScriptExtend();
 		this.Script3DExtend();
 		this.Vector2Extend();
+		this.TempletExtend();
+		this.SkeletonExtend();
 	}
 
 	/** Laya.Script完善 */
@@ -115,5 +117,26 @@ export class LayaExtension {
 				}
 			}
 		});
+	}
+
+	private static TempletExtend() {
+		const prototype = Laya.Templet.prototype;
+		Object.defineProperties(prototype, {
+			skBufferUrl: {
+				get() { return this._skBufferUrl; },
+			}
+		});
+	}
+
+	private static SkeletonExtend() {
+		const prototype = Laya.Skeleton.prototype;
+		const init = prototype.init;
+		prototype.init = function (templet: Laya.Templet, aniMode = 0) {
+			init.call(this, templet, aniMode);
+            this._player.on(Laya.Event.COMPLETE, this, this._onComplete);
+		};
+		prototype["_onComplete"] = function () {
+			this.event(Laya.Event.COMPLETE);
+		};
 	}
 }

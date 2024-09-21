@@ -1,7 +1,10 @@
 import { ResPath as ResPathEnum } from "./core/common/ResPath";
 import { CfgManager } from "./core/config/CfgManager";
+import { EventManager } from "./core/game/event/EventManager";
+import { LoadManager } from "./core/game/LoadManager";
 import { Logger } from "./core/game/Logger";
-import { uiMgr } from "./core/ui/core/UIManager";
+import { SkeletonMgr } from "./core/game/SkeletonMgr";
+import { UIManager } from "./core/ui/core/UIManager";
 import { ViewID as ViewIDEnum } from "./core/ui/core/ViewID";
 import { User } from "./core/userData/User";
 import { platformMgr } from "./platform/PlatformManager";
@@ -166,11 +169,16 @@ function ViewMessage(name: string, once?: boolean, args?: any[]): MethodDecorato
 }
 WindowImmit("ViewMessage", ViewMessage);
 
+WindowImmit("Logger", Logger);
+WindowImmit("loadMgr", new LoadManager());
+WindowImmit("skeletonMgr", new SkeletonMgr());
+WindowImmit("cfgMgr", new CfgManager());
+WindowImmit("eventMgr", new EventManager());
+WindowImmit("userData", new User());
+WindowImmit("uiMgr", new UIManager());
+
 export default class Global {
     static Init() {
-        WindowImmit("Logger", Logger);
-        WindowImmit("cfgMgr", new CfgManager());
-        WindowImmit("userData", new User());
         platformMgr.init();
     }
 }

@@ -1,6 +1,4 @@
-import { eventMgr } from "./EventManager";
-
-export abstract class Notifier {
+export abstract class Notifier implements INotifier{
     /**
      * 派发事件。
      * @param eventName 事件类型。

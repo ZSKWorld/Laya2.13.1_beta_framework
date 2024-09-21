@@ -7,39 +7,39 @@
     <graph id="n55_sbd0" name="n55" xy="4,604" size="1052,692" type="rect" lineSize="0" lineColor="#ff6d6f74" fillColor="#ff101115">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <richtext id="n16_sbd0" name="txt_jingLi" xy="29,29" size="464,54" group="n34_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="精力：7456.2万/8789.6万"/>
-    <richtext id="n35_sbd0" name="txt_jinAtk" xy="29,89" size="324,54" group="n34_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="金攻：[color=#EFEF00]7123456785[/color]"/>
-    <richtext id="n36_sbd0" name="txt_muAtk" xy="29,149" size="164,54" group="n34_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="木攻：[color=#028803]75[/color]"/>
-    <richtext id="n37_sbd0" name="txt_shuiAtk" xy="29,209" size="184,54" group="n34_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="水攻：[color=#00BDF5]528[/color]"/>
-    <richtext id="n38_sbd0" name="txt_huoAtk" xy="29,269" size="164,54" group="n34_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="火攻：[color=#A20203]58[/color]"/>
-    <richtext id="n39_sbd0" name="txt_tuAtk" xy="29,329" size="164,54" group="n34_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="土攻：[color=#B55310]58[/color]"/>
-    <richtext id="n40_sbd0" name="txt_moHe" xy="29,389" size="164,54" group="n34_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="魔核：55"/>
-    <richtext id="n41_sbd0" name="txt_moBi" xy="29,449" size="164,54" group="n34_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="魔币：20"/>
-    <richtext id="n42_sbd0" name="txt_lingShi" xy="29,509" size="164,54" group="n34_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="灵石：45"/>
+    <richtext id="n16_sbd0" name="txt_jingLi" xy="29,29" size="464,54" group="n34_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="精力：7456.2万/8789.6万"/>
+    <richtext id="n35_sbd0" name="txt_jinAtk" xy="29,89" size="324,54" group="n34_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="金攻：[color=#EFEF00]7123456785[/color]"/>
+    <richtext id="n36_sbd0" name="txt_muAtk" xy="29,149" size="164,54" group="n34_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="木攻：[color=#028803]75[/color]"/>
+    <richtext id="n37_sbd0" name="txt_shuiAtk" xy="29,209" size="184,54" group="n34_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="水攻：[color=#00BDF5]528[/color]"/>
+    <richtext id="n38_sbd0" name="txt_huoAtk" xy="29,269" size="164,54" group="n34_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="火攻：[color=#A20203]58[/color]"/>
+    <richtext id="n39_sbd0" name="txt_tuAtk" xy="29,329" size="164,54" group="n34_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="土攻：[color=#B55310]58[/color]"/>
+    <richtext id="n40_sbd0" name="txt_moHe" xy="29,389" size="164,54" group="n34_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="魔核：55"/>
+    <richtext id="n41_sbd0" name="txt_moBi" xy="29,449" size="164,54" group="n34_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="魔币：20"/>
+    <richtext id="n42_sbd0" name="txt_lingShi" xy="29,509" size="164,54" group="n34_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="灵石：45"/>
     <group id="n34_sbd0" name="n34" xy="29,29" size="464,534"/>
-    <richtext id="n43_sbd0" name="txt_jingLiHF" xy="562,29" size="404,54" group="n52_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="精力恢复：391.00点/s"/>
-    <richtext id="n44_sbd0" name="txt_jinDef" xy="562,89" size="324,54" group="n52_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="金防：[color=#EFEF00]7235659845[/color]"/>
-    <richtext id="n45_sbd0" name="txt_muDef" xy="562,149" size="164,54" group="n52_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="木防：[color=#028803]75[/color]"/>
-    <richtext id="n46_sbd0" name="txt_shuiDef" xy="562,209" size="184,54" group="n52_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="水防：[color=#00BDF5]528[/color]"/>
-    <richtext id="n47_sbd0" name="txt_huoDef" xy="562,269" size="164,54" group="n52_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="火防：[color=#A20203]58[/color]"/>
-    <richtext id="n48_sbd0" name="txt_tuDef" xy="562,329" size="164,54" group="n52_sbd0" touchable="false" font="SimHei" fontSize="40" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="土防：[color=#B55310]58[/color]"/>
-    <richtext id="n49_sbd0" name="txt_hunPo" xy="562,389" size="164,54" group="n52_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="魂魄：55"/>
-    <richtext id="n50_sbd0" name="txt_gemScore" xy="562,449" size="224,54" group="n52_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="宝石积分：0"/>
-    <richtext id="n51_sbd0" name="txt_exp" xy="562,509" size="324,54" group="n52_sbd0" font="SimHei" fontSize="40" color="#9d9d9d" bold="true" singleLine="true" text="升级经验：49.0万"/>
+    <richtext id="n43_sbd0" name="txt_jingLiHF" xy="562,29" size="404,54" group="n52_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="精力恢复：391.00点/s"/>
+    <richtext id="n44_sbd0" name="txt_jinDef" xy="562,89" size="324,54" group="n52_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="金防：[color=#EFEF00]7235659845[/color]"/>
+    <richtext id="n45_sbd0" name="txt_muDef" xy="562,149" size="164,54" group="n52_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="木防：[color=#028803]75[/color]"/>
+    <richtext id="n46_sbd0" name="txt_shuiDef" xy="562,209" size="184,54" group="n52_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="水防：[color=#00BDF5]528[/color]"/>
+    <richtext id="n47_sbd0" name="txt_huoDef" xy="562,269" size="164,54" group="n52_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="火防：[color=#A20203]58[/color]"/>
+    <richtext id="n48_sbd0" name="txt_tuDef" xy="562,329" size="164,54" group="n52_sbd0" touchable="false" fontSize="40" color="#9d9d9d" ubb="true" singleLine="true" text="土防：[color=#B55310]58[/color]"/>
+    <richtext id="n49_sbd0" name="txt_hunPo" xy="562,389" size="164,54" group="n52_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="魂魄：55"/>
+    <richtext id="n50_sbd0" name="txt_gemScore" xy="562,449" size="224,54" group="n52_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="宝石积分：0"/>
+    <richtext id="n51_sbd0" name="txt_exp" xy="562,509" size="324,54" group="n52_sbd0" fontSize="40" color="#9d9d9d" singleLine="true" text="升级经验：49.0万"/>
     <group id="n52_sbd0" name="n52" xy="562,29" size="404,534"/>
-    <text id="n132_sbd0" name="n132" xy="81,676" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" vAlign="middle" bold="true" singleLine="true" text="武器:"/>
-    <text id="n133_sbd0" name="n133" xy="81,785" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" vAlign="middle" bold="true" singleLine="true" text="项链:"/>
-    <text id="n134_sbd0" name="n134" xy="81,894" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" vAlign="middle" bold="true" singleLine="true" text="戒指:"/>
-    <text id="n135_sbd0" name="n135" xy="81,1003" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" vAlign="middle" bold="true" singleLine="true" text="护符:"/>
-    <text id="n136_sbd0" name="n136" xy="81,1112" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" vAlign="middle" bold="true" singleLine="true" text="坐骑:"/>
-    <text id="n137_sbd0" name="n137" xy="81,1221" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" vAlign="middle" bold="true" singleLine="true" text="暗器:"/>
+    <text id="n132_sbd0" name="n132" xy="81,676" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" fontSize="40" color="#a0a0a0" vAlign="middle" singleLine="true" text="武器:"/>
+    <text id="n133_sbd0" name="n133" xy="81,785" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" fontSize="40" color="#a0a0a0" vAlign="middle" singleLine="true" text="项链:"/>
+    <text id="n134_sbd0" name="n134" xy="81,894" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" fontSize="40" color="#a0a0a0" vAlign="middle" singleLine="true" text="戒指:"/>
+    <text id="n135_sbd0" name="n135" xy="81,1003" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" fontSize="40" color="#a0a0a0" vAlign="middle" singleLine="true" text="护符:"/>
+    <text id="n136_sbd0" name="n136" xy="81,1112" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" fontSize="40" color="#a0a0a0" vAlign="middle" singleLine="true" text="坐骑:"/>
+    <text id="n137_sbd0" name="n137" xy="81,1221" pivot="0.5,0.5" anchor="true" size="104,54" group="n161_kyy0" fontSize="40" color="#a0a0a0" vAlign="middle" singleLine="true" text="暗器:"/>
     <group id="n161_kyy0" name="n161" xy="29,649" size="104,599"/>
-    <text id="n144_sbd0" name="n144" xy="599,676" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" bold="true" singleLine="true" text="头盔:"/>
-    <text id="n145_sbd0" name="n145" xy="599,785" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" bold="true" singleLine="true" text="衣服:"/>
-    <text id="n146_sbd0" name="n146" xy="599,894" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" bold="true" singleLine="true" text="下装:"/>
-    <text id="n147_sbd0" name="n147" xy="599,1003" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" bold="true" singleLine="true" text="鞋子:"/>
-    <text id="n148_sbd0" name="n148" xy="599,1112" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" bold="true" singleLine="true" text="时装:"/>
-    <text id="n149_sbd0" name="n149" xy="599,1221" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" font="SimHei" fontSize="40" color="#a0a0a0" bold="true" singleLine="true" text="法宝:"/>
+    <text id="n144_sbd0" name="n144" xy="599,676" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" fontSize="40" color="#a0a0a0" singleLine="true" text="头盔:"/>
+    <text id="n145_sbd0" name="n145" xy="599,785" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" fontSize="40" color="#a0a0a0" singleLine="true" text="衣服:"/>
+    <text id="n146_sbd0" name="n146" xy="599,894" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" fontSize="40" color="#a0a0a0" singleLine="true" text="下装:"/>
+    <text id="n147_sbd0" name="n147" xy="599,1003" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" fontSize="40" color="#a0a0a0" singleLine="true" text="鞋子:"/>
+    <text id="n148_sbd0" name="n148" xy="599,1112" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" fontSize="40" color="#a0a0a0" singleLine="true" text="时装:"/>
+    <text id="n149_sbd0" name="n149" xy="599,1221" pivot="0.5,0.5" anchor="true" size="104,54" group="n162_kyy0" fontSize="40" color="#a0a0a0" singleLine="true" text="法宝:"/>
     <group id="n162_kyy0" name="n162" xy="547,649" size="104,599"/>
     <component id="n138_sbd0" name="btn_wuQi" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="330,676" pivot="0.5,0.5" anchor="true" size="350,90" group="n159_kyy0" controller="ctrlBgColor,3">
       <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="40"/>

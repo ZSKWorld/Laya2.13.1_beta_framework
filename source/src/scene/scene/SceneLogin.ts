@@ -1,4 +1,3 @@
-import { uiMgr } from "../../core/ui/core/UIManager";
 import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";
 

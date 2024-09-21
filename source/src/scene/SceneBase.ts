@@ -1,7 +1,4 @@
-import { loadMgr } from "../core/game/LoadManager";
-import { skeletonMgr } from "../core/game/SkeletonMgr";
 import { Observer } from "../core/game/event/Observer";
-import { uiMgr } from "../core/ui/core/UIManager";
 import { IScene, SceneEvent, SceneType } from "./SceneDefine";
 
 const enum ResGroupType {
@@ -128,7 +125,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
 		}
 		resArr.forEach(res => {
 			if (res.startsWith("res/ui/")) uiRes.push(res);
-			else if (res.startsWith("res/skeleton/")) skeletonRes.push(res);
+			else if (res.endsWith(".sk")) skeletonRes.push(res);
 			else otherRes.push(res);
 		});
 		return [uiRes, skeletonRes, otherRes];

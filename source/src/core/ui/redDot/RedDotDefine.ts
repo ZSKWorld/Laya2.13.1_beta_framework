@@ -1,6 +1,5 @@
 import { RDName, RDTriggerType } from "./RedDotEnum";
-import { IRedDotNode } from "./RedDotInterface";
-import { RedDotNode } from "./RedDotNode";
+import { IRedDotNode, RedDotNode } from "./RedDotNode";
 
 const map: { [key in RDName]: IRedDotNode } = {} as any;
 

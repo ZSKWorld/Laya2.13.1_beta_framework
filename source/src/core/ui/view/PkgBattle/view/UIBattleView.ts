@@ -20,7 +20,7 @@ export class UIBattleView extends ExtensionClass<IView, UIBattle>(UIBattle) {
 	refreshContent(data: BattleCfgData) {
 		const { txt_info } = this;
 		const dropStr = GameUtil.GetItemString(data.randomDrapOut ? data.baseDrapOut.concat(data.randomDrapOut) : data.baseDrapOut, false);
-		txt_info.text = `消耗：${ data.vigorCost }精力<br>掉落：${ dropStr }${ data.desc }`;
+		txt_info.text = `消耗：${ data.vigorCost }精力<br/>掉落：${ dropStr }${ data.desc }`;
 	}
 
 }

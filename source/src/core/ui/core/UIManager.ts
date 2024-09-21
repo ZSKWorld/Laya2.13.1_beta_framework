@@ -1,4 +1,3 @@
-import { loadMgr } from "../../game/LoadManager";
 import { Observer } from "../../game/event/Observer";
 import { layerMgr } from "./LayerManager";
 import { ViewEvent } from "./UIDefine";
@@ -41,9 +40,9 @@ class UICache {
 }
 
 /** UI管理类 */
-class UIManager extends Observer {
+export class UIManager extends Observer implements IUIManager{
 	/** 页面类映射 */
-	private _viewClsMap: { [key: string]: Class<IView> & { createInstance?(): IView, readonly PkgRes?: string } } = {};
+	private _viewClsMap: { [key: string]: IViewClass } = {};
 	/** 页面控制器类映射 */
 	private _ctrlClsMap: { [key: string]: Class<IViewCtrl> } = {};
 	/** 页面控制器网络代理类映射 */
@@ -103,7 +102,7 @@ class UIManager extends Observer {
 	 * @param viewId 页面id
 	 * @param fullScreen 是否全屏
 	 */
-	createView(viewId: ViewID, fullScreen: boolean = false): IViewCtrl {
+	createView(viewId: ViewID, fullScreen: boolean = false) {
 		const viewInst = this._viewClsMap[viewId].createInstance();
 		viewInst.name = viewId;
 		fullScreen && viewInst.makeFullScreen();
@@ -207,5 +206,3 @@ class UIManager extends Observer {
 		this._cache.onResize();
 	}
 }
-export const uiMgr = new UIManager();
-WindowImmit("uiMgr", uiMgr);

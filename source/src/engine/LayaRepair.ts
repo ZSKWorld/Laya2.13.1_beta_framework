@@ -3,6 +3,7 @@ export class LayaRepair {
     static Fix() {
         this.FixLayaPoolSign();
         this.FixTTFLoaderCallback();
+        this.FixSkeletonLoadEvent();
     }
 
     /** 修复Laya.Pool._getClassSign方法，原方法会导致子类和父类回收到一个对象池中 */
@@ -46,5 +47,33 @@ export class LayaRepair {
             ttfLoader.err = Laya.Handler.create(this, this.onError);
             ttfLoader.load(url);
         }
+    }
+
+    private static FixSkeletonLoadEvent() {
+        const prototype = Laya.Skeleton.prototype;
+        const _onLoaded = prototype["_onLoaded"];
+        prototype["_onLoaded"] = function () {
+            var arraybuffer = Laya.Loader.getRes(this._aniPath);
+            if (arraybuffer == null) {
+                this._parseFail();
+                return;
+            }
+            _onLoaded.call(this);
+        };
+
+        prototype["_parseComplete"] = function () {
+            var tTemple = Laya.Templet["TEMPLET_DICTIONARY"][this._aniPath];
+            if (tTemple) {
+                this.init(tTemple, this._loadAniMode);
+                this.play(0, true);
+            }
+            this._complete && this._complete.runWith(this);
+            this.event(Laya.Event.COMPLETE);
+        }
+        prototype["_parseFail"] = function () {
+            console.log("[Error]:" + this._aniPath + "解析失败");
+            this.event(Laya.Event.ERROR);
+        }
+
     }
 }

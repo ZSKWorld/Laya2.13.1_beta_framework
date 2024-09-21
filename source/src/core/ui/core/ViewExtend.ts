@@ -1,6 +1,4 @@
-import { eventMgr } from "../../game/event/EventManager";
 import { BaseViewCtrl } from "./BaseViewCtrl";
-import { uiMgr } from "./UIManager";
 
 /** 页面及控制器扩展 */
 export class ViewExtend {

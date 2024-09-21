@@ -1,4 +1,3 @@
-import { uiMgr } from "../../core/ui/core/UIManager";
 import { redDotMgr } from "../../core/ui/redDot/RedDotManager";
 import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";

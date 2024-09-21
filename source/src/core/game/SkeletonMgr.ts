@@ -1,18 +1,14 @@
-class SkeletonMgr {
+export class SkeletonMgr implements ISkeletonMgr{
     /** 动画模板 */
     private _templetMap = new Map<string, Laya.Templet>();
     /** 动画对象池 */
     private _skeletonPool = new Map<string, Laya.Skeleton[]>();
 
-    /**
-     * 加载骨骼动画模板
-     * @param urls 动画路径 {@link ResPath.SkeletonPath}[]
-     */
     loadSkeleton(urls: string[], progress?: Laya.Handler) {
-        return new Promise<boolean>(resolve => {
+        return new Promise<void>((resolve, reject) => {
             if (!urls || urls.length == 0) {
                 if (progress) progress.runWith(1);
-                return resolve(true);
+                return resolve();
             }
             const loadCnt = urls.length;
             let loadedCnt = 0;
@@ -22,94 +18,84 @@ class SkeletonMgr {
                 if (!loadStat) success = false;
                 if (progress) progress.runWith(loadedCnt / loadCnt);
                 if (loadedCnt == loadCnt)
-                    resolve(success);
+                    success ? resolve() : reject();
             }
             urls.forEach(url => {
                 let templet = this._templetMap.get(url);
-                if (!templet || !templet.isParserComplete) {
-                    if (!templet) {
-                        templet = new Laya.Templet();
-                        templet.loadAni(url);
+                if (!templet) {
+                    if (Laya.Templet["TEMPLET_DICTIONARY"] && Laya.Templet["TEMPLET_DICTIONARY"][url]) {
+                        templet = Laya.Templet["TEMPLET_DICTIONARY"][url];
                         this._templetMap.set(url, templet);
                     }
-                    templet.once(Laya.Event.COMPLETE, null, () => {
-                        templet.offAll(Laya.Event.ERROR);
+                }
+                if (templet) {
+                    if (templet.isParseFail) loadComplete(false);
+                    else if (templet.isParserComplete) loadComplete(true);
+                    else {
+                        templet.once(Laya.Event.COMPLETE, this, () => {
+                            templet.offAll(Laya.Event.ERROR);
+                            loadComplete(true);
+                        });
+                        templet.once(Laya.Event.ERROR, this, () => {
+                            this._templetMap.delete(url);
+                            !templet.destroyed && templet.destroy();
+                            loadComplete(false);
+                        });
+                    }
+                } else {
+                    const skeleton = new Laya.Skeleton();
+                    skeleton.load(url);
+                    skeleton.once(Laya.Event.COMPLETE, this, () => {
+                        skeleton.offAll(Laya.Event.ERROR);
+                        this._templetMap.set(url, skeleton.templet);
+                        this.recoverSkeleton(skeleton);
                         loadComplete(true);
                     });
-                    templet.once(Laya.Event.ERROR, null, () => {
-                        templet.offAll(Laya.Event.COMPLETE);
+                    skeleton.once(Laya.Event.ERROR, this, () => {
+                        !skeleton.destroyed && skeleton.destroy();
                         loadComplete(false);
                     });
-                } else loadComplete(true);
+                }
             });
         });
 
     }
 
-    /**
-     * 获取一个骨骼动画
-     * @param url 动画路径 {@link ResPath.SkeletonPath}
-     * @param enableSkin 是否开启换装
-     * @returns
-     */
-    getSkeleton(url: string, enableSkin: boolean = false) {
-        let skeleton: Laya.Skeleton;
+    createSkeleton(url: string, enableSkin: boolean = false) {
         const skeletonPool = this._skeletonPool.get(url);
         if (skeletonPool && skeletonPool.length)
-            skeleton = skeletonPool.pop();
+            return skeletonPool.pop();
         else {
             const templet = this._templetMap.get(url);
             if (templet) {
-                skeleton = templet.buildArmature(+!!enableSkin);
-                //新skeletion首次添加到舞台上不会显示，播放一下才会显示
-                skeleton.play(0, false);
-                skeleton.stop();
+                return templet.buildArmature(+!!enableSkin);
             }
         }
-        return skeleton;
+        return null;
     }
 
-    /**
-     * 回收骨骼动画到对象池
-     */
     recoverSkeleton(skeleton: Laya.Skeleton) {
         if (!skeleton) return;
-        const url = skeleton.url;
-        //如果已经回收了就返回
-        let poolArr = this._skeletonPool.get(url);
+        const url = skeleton.templet.skBufferUrl;
+        const poolArr = this._skeletonPool.get(url);
         if (poolArr && poolArr.includes(skeleton)) return;
         skeleton.removeSelf();
-        if (!poolArr) {
-            poolArr = [skeleton];
-            this._skeletonPool.set(url, poolArr);
-        } else poolArr.push(skeleton);
+        if (poolArr) poolArr.push(skeleton);
+        else this._skeletonPool.set(url, [skeleton]);
     }
 
-    /**
-     * 清除动画对象池
-     * @param url
-     */
     clearSkeletons(url: string) {
         const poolArr = this._skeletonPool.get(url);
-        if (poolArr) {
-            if (poolArr) {
-                poolArr.forEach(v => v.destroy());
-                poolArr.length = 0;
-            }
-        }
+        if (!poolArr) return;
+        poolArr.forEach(v => v.destroy());
+        poolArr.length = 0;
     }
 
-    /**
-     * 释放动画资源
-     */
     disposeSkeleton(url: string) {
-        const templet = this._templetMap.get(url);
-        if (templet) {
-            templet.destroy();
-            this._templetMap.delete(url);
-        }
         this.clearSkeletons(url);
+        const templet = this._templetMap.get(url);
+        if (!templet) return;
+        templet.destroy();
+        this._templetMap.delete(url);
     }
 }
-export const skeletonMgr = new SkeletonMgr();
-WindowImmit("skeletonMgr", skeletonMgr);

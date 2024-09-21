@@ -1,5 +1,4 @@
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
-import { uiMgr } from "../../../../core/UIManager";
 import { ComItem2048View } from "../../view/coms/ComItem2048View";
 
 export interface ComItem2048Data {

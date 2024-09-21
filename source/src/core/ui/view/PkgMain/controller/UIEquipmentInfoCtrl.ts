@@ -30,6 +30,7 @@ export class UIEquipmentInfoCtrl extends BaseViewCtrl<UIEquipmentInfoView, UIEqu
 		BagService.Inst.sellEquip({ id: equip.id, uid: equip.uid });
 	}
 
+	@ViewKeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ENTER)
 	private onBtnDressClick() {
 		BagService.Inst.dressEquip({ uid: this.data.equip1.uid });
 	}

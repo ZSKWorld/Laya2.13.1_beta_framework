@@ -1,5 +1,5 @@
 /** 事件监听器 */
-class EventManager extends Laya.EventDispatcher {
+export class EventManager extends Laya.EventDispatcher implements IEventManager {
     /**注册监听事件 */
     registerEvent(caller: any) {
         if (!caller) return;
@@ -22,5 +22,3 @@ class EventManager extends Laya.EventDispatcher {
         }
     }
 }
-export const eventMgr = new EventManager();
-WindowImmit("eventMgr", eventMgr);

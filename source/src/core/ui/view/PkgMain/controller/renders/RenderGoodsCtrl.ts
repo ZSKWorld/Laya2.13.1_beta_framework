@@ -2,8 +2,7 @@ import { EquipmentPart } from "../../../../../userData/const/ItemEnum";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { RDMap } from "../../../../redDot/RedDotDefine";
 import { RDTriggerType } from "../../../../redDot/RedDotEnum";
-import { IRedDotNode } from "../../../../redDot/RedDotInterface";
-import { RedDotNode } from "../../../../redDot/RedDotNode";
+import { IRedDotNode, RedDotNode } from "../../../../redDot/RedDotNode";
 import { RenderGoodsView } from "../../view/renders/RenderGoodsView";
 
 export interface RenderGoodsData {

@@ -39,7 +39,6 @@ declare namespace Laya {
          */
         onAdded(): void;
     }
-
     interface Vector2 {
         get length(): number;
         get lengthSquared(): number;
@@ -59,6 +58,9 @@ declare namespace Laya {
         lerp(v2: Vector2, t: number): Vector2;
         slerp(end: Vector2, t: number): Vector2;
     }
+    interface Templet {
+        skBufferUrl: string;
+    }
 }
 
 declare namespace fgui {
@@ -72,7 +74,7 @@ declare namespace fgui {
         tweenResize(endW: number, endH: number, duration: number): GTweener;
         tweenFade(endValue: number, duration: number): GTweener;
         tweenRotate(endValue: number, duration: number): GTweener;
-        
+
         addComponentIntance<T extends Laya.Component>(component: T): T;
         addComponent<T extends Laya.Component>(componentType: Class<T>): T;
         getComponent<T extends Laya.Component>(componentType: Class<T>): T;
@@ -101,6 +103,72 @@ declare namespace fgui {
         /**移除所有事件锁 */
         removeAllEventLock(): void;
     }
+}
+
+declare class Logger {
+    private constructor(name: string, enable?: boolean);
+    static Create(name: string, enable?: boolean): Logger;
+    static SetEnable(enable: boolean): void;
+    static Log(...args: any[]): void;
+    static Warn(...args: any[]): void;
+    static Error(...args: any[]): void;
+    static Assert(assert: boolean, tipText?: string): void;
+    log(...args: any[]): void;
+    warn(...args: any[]): void;
+    error(...args: any[]): void;
+    assert(assert: boolean, tipText?: string): void;
+}
+
+declare interface ILoadManager {
+    load(
+        url: string | (string | Laya.loadItem)[],
+        complete?: Laya.Handler | null,
+        progress?: Laya.Handler | null,
+        type?: string | null,
+        priority?: number,
+        cache?: boolean,
+        group?: string | null,
+        ignoreCache?: boolean,
+        useWorkerLoader?: boolean
+    ): Promise<any>;
+    create(
+        url: string | (string | Laya.createItem)[],
+        complete?: Laya.Handler | null,
+        progress?: Laya.Handler | null,
+        type?: string | null,
+        constructParams?: any[] | null,
+        propertyParams?: any,
+        priority?: number,
+        cache?: boolean
+    ): Promise<any>;
+    loadPackage(resKey: string | string[], complete?: Laya.Handler, progress?: Laya.Handler): Promise<any>;
+}
+
+declare interface ISkeletonMgr {
+    /**
+     * 加载骨骼动画模板
+     * @param urls 动画路径 {@link ResPath.SkeletonPath}[]
+     */
+    loadSkeleton(urls: string[], progress?: Laya.Handler): Promise<void>;
+    /**
+     * 获取一个骨骼动画
+     * @param url 动画路径 {@link ResPath.SkeletonPath}
+     * @param enableSkin 是否开启换装
+     */
+    createSkeleton(url: string, enableSkin?: boolean): Laya.Skeleton;
+    /**
+     * 回收骨骼动画到对象池
+     */
+    recoverSkeleton(skeleton: Laya.Skeleton): void;
+    /**
+     * 清除动画对象池
+     * @param url
+     */
+    clearSkeletons(url: string): void;
+    /**
+     * 销毁动画并释放内存
+     */
+    disposeSkeleton(url: string): void;
 }
 
 declare interface IPoint {

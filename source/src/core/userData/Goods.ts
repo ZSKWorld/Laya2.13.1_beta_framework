@@ -44,14 +44,14 @@ export class Equipment extends GoodsBase<IEquipment> implements IEquipment {
             "", "武器[攻击]", "头盔[防御]", "项链[特殊]", "衣服[防御]", "戒指[攻击]", "裤子[防御]", "护符[攻击]", "鞋子[防御]",
             "坐骑[特殊]", "时装[特殊]", "暗器[特殊]", "法宝[特殊]",
         ];
-        return `类别:${ typeStr[this.part] }<br>
-        境界需求:${ this.useRequireStr }<br>
-        铭刻:0/100<br>
-        ${ this.shenYou }阶神佑加成: ${ (/**equip.shenYouAddition */0 * 100).toFixed(2) }%<br>
-        ${ this.mainAttri.map(v => GameUtil.GetColorStr(this.quality, UserUtil.GetAttributeName(v)) + "<br>").join("") }
-        ${ this.wuXingAttri.map(v => GameUtil.GetColorStr(4, UserUtil.GetAttributeName(v)) + "<br>").join("") }
-        ${ this.secondAttri.map(v => GameUtil.GetColorStr(5, UserUtil.GetAttributeName(v)) + "<br>").join("") }
-        ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, UserUtil.GetAttributeName(v)) + "<br>").join("") }
+        return `类别:${ typeStr[this.part] }<br/>
+        境界需求:${ this.useRequireStr }<br/>
+        铭刻:0/100<br/>
+        ${ this.shenYou }阶神佑加成: ${ (/**equip.shenYouAddition */0 * 100).toFixed(2) }%<br/>
+        ${ this.mainAttri.map(v => GameUtil.GetColorStr(this.quality, UserUtil.GetAttributeName(v)) + "<br/>").join("") }
+        ${ this.wuXingAttri.map(v => GameUtil.GetColorStr(4, UserUtil.GetAttributeName(v)) + "<br/>").join("") }
+        ${ this.secondAttri.map(v => GameUtil.GetColorStr(5, UserUtil.GetAttributeName(v)) + "<br/>").join("") }
+        ${ this.bodyAttri.map(v => GameUtil.GetColorStr(8, UserUtil.GetAttributeName(v)) + "<br/>").join("") }
         `;
     }
     get score() { return 0; }

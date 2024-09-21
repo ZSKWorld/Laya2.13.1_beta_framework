@@ -12,7 +12,7 @@ class TrainLogManager extends Observer {
         "[color=#FF0000]★手工装备★时装坐骑★[/color]",
         "[color=#FF0000]★法宝暗器★良心放置★[/color]",
         "[color=#FF0000]副本通关三次无条件扫荡[/color]",
-        "[color=#FF0000]我们的口号是：[/color]<br>[color=#FF0000]上线10分钟，挂机24小时[/color]",
+        "[color=#FF0000]我们的口号是：[/color]<br/>[color=#FF0000]上线10分钟，挂机24小时[/color]",
         "[color=#FF0000]一时修仙一爽，一直修仙一直爽[/color]",
     ];
     private _logs: string[] = [];

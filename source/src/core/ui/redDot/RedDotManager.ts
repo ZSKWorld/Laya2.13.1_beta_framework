@@ -1,8 +1,6 @@
 import { GameEvent } from "../../common/GameEvent";
-import { eventMgr } from "../../game/event/EventManager";
 import { RDDefineInit, RDMap } from "./RedDotDefine";
-import { IRedDotNode } from "./RedDotInterface";
-import { RedDotNode } from "./RedDotNode";
+import { IRedDotNode, RedDotNode } from "./RedDotNode";
 import { RedDotTrigger } from "./RedDotTrigger";
 
 class RedDotManager extends Laya.EventDispatcher {

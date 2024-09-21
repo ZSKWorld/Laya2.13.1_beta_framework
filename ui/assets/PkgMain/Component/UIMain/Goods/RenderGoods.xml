@@ -15,7 +15,9 @@
     <text id="n2_sbd0" name="txt_count" xy="208,58" size="34,42" fontSize="30" color="#77f7d1" autoClearText="true" text="99">
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </text>
-    <component id="n7_mfnw" name="com_redDot" src="yz4q6o" fileName="Component/ComRedDot.xml" pkg="vx9zwser" xy="216,0" touchable="false"/>
+    <component id="n7_mfnw" name="com_redDot" src="yz4q6o" fileName="Component/ComRedDot.xml" pkg="vx9zwser" xy="216,0" visible="false" touchable="false">
+      <relation target="" sidePair="right-right"/>
+    </component>
     <image id="n6_dnfc" name="img_collect" src="qjdob" fileName="Texture/Bg_XingXing01.png" pkg="vx9zwser" xy="208,-6" size="45,44" aspect="true" visible="false">
       <relation target="" sidePair="right-right"/>
     </image>

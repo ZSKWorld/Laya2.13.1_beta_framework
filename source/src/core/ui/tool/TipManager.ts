@@ -1,5 +1,4 @@
 import { layerMgr } from "../core/LayerManager";
-import { uiMgr } from "../core/UIManager";
 import { UIPoolKey } from "./UIPoolKey";
 
 /** 文本提示管理器 */

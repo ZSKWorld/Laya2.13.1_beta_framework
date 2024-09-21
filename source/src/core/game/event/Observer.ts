@@ -1,4 +1,3 @@
-import { eventMgr } from "./EventManager";
 import { Notifier } from "./Notifier";
 
 export abstract class Observer extends Notifier {

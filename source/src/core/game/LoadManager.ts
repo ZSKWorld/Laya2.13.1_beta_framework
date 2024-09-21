@@ -1,5 +1,5 @@
 /** 资源加载管理 */
-class LoadManager {
+export class LoadManager implements ILoadManager {
 	load(
 		url: string | (string | Laya.loadItem)[],
 		complete?: Laya.Handler | null,
@@ -43,11 +43,7 @@ class LoadManager {
 		});
 	}
 
-	loadPackage(
-		resKey: string | string[],
-		complete?: Laya.Handler,
-		progress?: Laya.Handler
-	) {
+	loadPackage(resKey: string | string[], complete?: Laya.Handler, progress?: Laya.Handler) {
 		return new Promise<any>((resolve, reject) => {
 			if (!resKey || (Array.isArray(resKey) && resKey.length == 0)) {
 				progress && progress.runWith(1);
@@ -68,5 +64,3 @@ class LoadManager {
 		}
 	}
 }
-export const loadMgr = new LoadManager();
-WindowImmit("loadMgr", loadMgr);

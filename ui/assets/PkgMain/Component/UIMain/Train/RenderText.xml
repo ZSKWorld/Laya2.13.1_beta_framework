@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="690,48">
   <displayList>
-    <richtext id="n0_sbd0" name="title" xy="10,0" size="670,48" fontSize="35" leading="10" ubb="true" autoSize="height" bold="true" text="士大夫撒大苏打给 的分公司的">
+    <richtext id="n0_sbd0" name="title" xy="10,0" size="670,48" fontSize="35" leading="10" ubb="true" autoSize="height" text="士大夫撒大苏打给 的分公司的">
       <relation target="" sidePair="width-width"/>
     </richtext>
   </displayList>

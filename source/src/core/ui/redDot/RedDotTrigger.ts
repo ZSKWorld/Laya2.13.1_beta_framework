@@ -75,12 +75,8 @@ export class RedDotTrigger extends Observer {
     private checkEquipCanWear(part: EquipmentPart) {
         const wearedEquip = userData.body.getDressedEquip(part);
         const equips = userData.bag.equipment.filter(v => v.part == part);
-        if (wearedEquip) {
-            if (equips.length == 0) return false;
-            else return equips.find(v => v.score > wearedEquip.score) != null;
-        } else {
-            return equips.length > 0;
-        }
+        if (!wearedEquip) return equips.length > 0;
+        return equips.length > 0 && equips.find(v => v.score > wearedEquip.score) != null;
     }
 
     private hadTriggered(type: RDTriggerType) {
