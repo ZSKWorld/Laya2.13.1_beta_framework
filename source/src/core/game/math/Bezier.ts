@@ -1,4 +1,10 @@
 import Vector3 = Laya.Vector3;
+
+interface IPoint {
+    x: number;
+    y: number;
+}
+
 /** 匀速贝塞尔曲线，文档：https://www.freesion.com/article/2280255606/ */
 export class Bezier {
     /** 普通2d贝塞尔点 */
