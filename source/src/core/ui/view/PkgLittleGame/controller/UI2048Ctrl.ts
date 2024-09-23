@@ -55,7 +55,7 @@ class Chessboard2048 extends Observer {
 		if (rowArr.length < addCnt) return false;
 		for (let i = 0; i < addCnt; i++) {
 			const addIndex = MathUtil.RandomInt(0, rowArr.length - 1);
-			const random = MathUtil.Random();
+			const random = Math.random();
 			const value = random < 2 / 3 ? 1 : 2;
 			const cell = ComItem2048Ctrl.create(value, rowArr[addIndex], colArr[addIndex]);
 			const bg = _cellBgs[rowArr[addIndex]][colArr[addIndex]];

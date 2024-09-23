@@ -11,24 +11,12 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 
 	override onAdded() {
 		this.addMessage(UILittleGameMsg.OnBtnBackClick, this.onBtnBackClick);
-		this.addMessage(UILittleGameMsg.OnBtnTenWaterClick, this.onBtnTenWaterClick);
-		this.addMessage(UILittleGameMsg.OnBtnTest3dClick, this.onBtnTest3dClick);
 		this.addMessage(UILittleGameMsg.OnBtn2048Click, this.onBtn2048Click);
 		this.addMessage(UILittleGameMsg.OnBtnSnakeClick, this.onBtnSnakeClick);
 	}
 
 	private onBtnBackClick() {
 		sceneMgr.enterScene(SceneType.MainScene);
-	}
-
-	private onBtnTenWaterClick() {
-		this.showView(ViewID.UITenWaterView);
-		this.removeSelf();
-	}
-
-	private onBtnTest3dClick() {
-		this.showView(ViewID.UITest3DView);
-		this.removeSelf();
 	}
 
 	private onBtn2048Click() {

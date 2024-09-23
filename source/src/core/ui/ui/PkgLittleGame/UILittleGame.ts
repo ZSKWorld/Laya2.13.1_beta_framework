@@ -5,8 +5,6 @@ import { BtnTxtView } from "../../view/PkgCommon/view/btns/BtnTxtView";
 export default class UILittleGame extends fgui.GComponent {
 
 	public btn_back: fgui.GButton;
-	public btn_tenWater: BtnTxtView;
-	public btn_test3d: BtnTxtView;
 	public btn_2048: BtnTxtView;
 	public btn_snake: BtnTxtView;
 	public static URL: string = "ui://1gl1luityfsi0";
@@ -17,9 +15,7 @@ export default class UILittleGame extends fgui.GComponent {
 
 	protected override onConstruct(): void {
 		this.btn_back = <fgui.GButton>(this.getChildAt(0));
-		this.btn_tenWater = <BtnTxtView>(this.getChildAt(1));
-		this.btn_test3d = <BtnTxtView>(this.getChildAt(2));
-		this.btn_2048 = <BtnTxtView>(this.getChildAt(3));
-		this.btn_snake = <BtnTxtView>(this.getChildAt(4));
+		this.btn_2048 = <BtnTxtView>(this.getChildAt(1));
+		this.btn_snake = <BtnTxtView>(this.getChildAt(2));
 	}
 }

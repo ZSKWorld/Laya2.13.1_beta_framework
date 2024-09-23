@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<component size="1080,1920">
-  <displayList>
-    <component id="n43_9hon" name="btn_back" src="irlv60" fileName="Component/BtnIcon.xml" pkg="vx9zwser" xy="25,25" size="120,120">
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://vx9zwser9hon6m"/>
-    </component>
-  </displayList>
-</component>

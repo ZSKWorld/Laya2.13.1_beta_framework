@@ -2,13 +2,7 @@
 <packageDescription id="1gl1luit">
   <resources>
     <component id="yfsi0" name="UILittleGame.xml" path="/" exported="true"/>
-    <component id="9hon1" name="UITenWater.xml" path="/" exported="true"/>
     <component id="9hon2" name="ComTenWater.xml" path="/Component/UITenWater/"/>
-    <image id="9hon3" name="icon2.png" path="/Texture/" exported="true"/>
-    <image id="9hon4" name="icon3.png" path="/Texture/" exported="true"/>
-    <image id="9hon5" name="icon4.png" path="/Texture/" exported="true"/>
-    <image id="9hon6" name="icon1.png" path="/Texture/" exported="true"/>
-    <component id="f5ii7" name="UITest3D.xml" path="/" exported="true"/>
     <component id="nirt8" name="UI2048.xml" path="/" exported="true"/>
     <component id="nirt9" name="ComItem2048.xml" path="/Component/UI2048/" exported="true"/>
     <component id="mzzoa" name="UISnake.xml" path="/" exported="true"/>

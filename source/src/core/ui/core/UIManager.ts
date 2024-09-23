@@ -40,7 +40,7 @@ class UICache {
 }
 
 /** UI管理类 */
-export class UIManager extends Observer implements IUIManager{
+export class UIManager extends Observer implements IUIManager {
 	/** 页面类映射 */
 	private _viewClsMap: { [key: string]: IViewClass } = {};
 	/** 页面控制器类映射 */
@@ -115,6 +115,8 @@ export class UIManager extends Observer implements IUIManager{
 	 * @param callback {@link Laya.Handler} 回调
 	 */
 	showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler) {
+		const ViewClass = this._viewClsMap[viewId];
+		if (!ViewClass) return;
 		this.lockMark++;
 		let openedIndex = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (openedIndex == -1) {
@@ -122,14 +124,15 @@ export class UIManager extends Observer implements IUIManager{
 			const viewCtrl = this._cache.getView(viewId);
 			if (viewCtrl) this.showView2(viewCtrl, data, callback);
 			else {
-				loadMgr.loadPackage(this._viewClsMap[viewId].PkgRes).then(() => {
-					this.showView2(this.createView(viewId, true), data, callback);
-				}, () => {
-					ShowConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
-						if (result) this.showView(viewId, data, callback);
-						else this.showView2(null, data, callback);
-					});
-				});
+				loadMgr.loadPackage(ViewClass.PkgRes).then(
+					() => this.showView2(this.createView(viewId, true), data, callback),
+					() => {
+						ShowConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
+							if (result) this.showView(viewId, data, callback);
+							else this.showView2(null, data, callback);
+						});
+					}
+				);
 			}
 		} else {
 			this.showView2(this._openedCtrls[openedIndex], data, callback);

@@ -72,7 +72,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
 		const [uiRes, skeletonRes, otherRes] = this.getResGroup(type);
 		uiRes.forEach(v => {
 			const res = fgui.UIPackage.getById(v);
-			res && res.dispose();
+			res && res.unloadAssets();
 		});
 		skeletonRes.forEach(v => skeletonMgr.disposeSkeleton(v));
 		otherRes.forEach(v => Laya.loader.clearRes(v));

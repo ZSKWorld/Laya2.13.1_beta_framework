@@ -82,10 +82,6 @@ export class MathUtil {
         return parseFloat(num) * (10 ** sign);
     }
 
-    static Random() {
-        return Math.random();
-    }
-
     /**
      * 返回min-max之间得随机整数
      * @param min 最小值整数(包含)
