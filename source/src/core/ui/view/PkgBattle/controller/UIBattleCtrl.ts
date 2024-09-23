@@ -1,4 +1,3 @@
-import { BattleService } from "../../../../net/Services";
 import { BattleType } from "../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { UIBattleMsg, UIBattleView } from "../view/UIBattleView";
@@ -36,7 +35,7 @@ export class UIBattleCtrl extends BaseViewCtrl<UIBattleView, UIBattleData> {
 
 	@ViewKeyEvent(KeyEventType.KeyUp, Laya.Keyboard.ESCAPE)
 	private onBtnQuitBattleClick() {
-		BattleService.Inst.exitBattle({});
+		netService.exitBattle({});
 	}
 
 }

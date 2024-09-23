@@ -4,6 +4,7 @@ import { EventManager } from "./core/game/event/EventManager";
 import { LoadManager } from "./core/game/LoadManager";
 import { Logger } from "./core/game/Logger";
 import { SkeletonMgr } from "./core/game/SkeletonMgr";
+import { NetService } from "./core/net/NetService";
 import { UIManager } from "./core/ui/core/UIManager";
 import { ViewID as ViewIDEnum } from "./core/ui/core/ViewID";
 import { User } from "./core/userData/User";
@@ -176,6 +177,7 @@ WindowImmit("cfgMgr", new CfgManager());
 WindowImmit("eventMgr", new EventManager());
 WindowImmit("userData", new User());
 WindowImmit("uiMgr", new UIManager());
+WindowImmit("netService", NetService);
 
 export default class Global {
     static Init() {

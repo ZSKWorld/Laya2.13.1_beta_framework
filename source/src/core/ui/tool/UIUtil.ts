@@ -1,6 +1,6 @@
 import { GameUtil } from "../../common/GameUtil";
 import { trainLogMgr } from "../../game/TrainLogManager";
-import { richStrMgr } from "./RichStrManager";
+import { richTextMgr } from "./RichStrManager";
 import { tipMgr } from "./TipManager";
 
 /** UI工具类 */
@@ -91,12 +91,12 @@ export class UIUtil {
 	}
 
 	static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
-		let logStr = richStrMgr.start(title);
+		let logStr = richTextMgr.start(title);
 		title && logStr.break();
 		rewards.forEach(v => {
 			const str = GameUtil.GetItemCountStr(v.id, v.count);
 			tipMgr.showTip(`恭喜获得${ str }`);
-			logStr.combineBreak(str);
+			logStr.append(str).break();
 		});
 		trainLogMgr.addLog(logStr.end());
 	}

@@ -1,4 +1,3 @@
-import { BattleService } from "../../../../../net/Services";
 import { BattleType } from "../../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { RenderChooseBattleMsg, RenderChooseBattleView } from "../../view/renders/RenderChooseBattleView";
@@ -40,7 +39,7 @@ export class RenderChooseBattleCtrl extends BaseViewCtrl<RenderChooseBattleView,
 	}
 
 	private onBtnBreakClick() {
-		BattleService.Inst.breakOffGather({ id: this._cfgData.id });
+		netService.breakOffGather({ id: this._cfgData.id });
 	}
 
 }

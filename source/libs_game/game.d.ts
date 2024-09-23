@@ -105,20 +105,6 @@ declare namespace fgui {
     }
 }
 
-declare class Logger {
-    private constructor(name: string, enable?: boolean);
-    static Create(name: string, enable?: boolean): Logger;
-    static SetEnable(enable: boolean): void;
-    static Log(...args: any[]): void;
-    static Warn(...args: any[]): void;
-    static Error(...args: any[]): void;
-    static Assert(assert: boolean, tipText?: string): void;
-    log(...args: any[]): void;
-    warn(...args: any[]): void;
-    error(...args: any[]): void;
-    assert(assert: boolean, tipText?: string): void;
-}
-
 declare interface ILoadManager {
     load(
         url: string | (string | Laya.loadItem)[],

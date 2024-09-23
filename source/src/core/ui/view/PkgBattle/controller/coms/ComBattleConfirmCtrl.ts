@@ -1,4 +1,3 @@
-import { BattleService } from "../../../../../net/Services";
 import { BattleType } from "../../../../../userData/const/BattleEnums";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ComBattleConfirmMsg, ComBattleConfirmView } from "../../view/coms/ComBattleConfirmView";
@@ -36,8 +35,8 @@ export class ComBattleConfirmCtrl extends BaseViewCtrl<ComBattleConfirmView, Com
 		const { data, type } = this.data;
 		if (type == BattleType.Gather) {
 			const gatherTime = Math.floor(this.view.slider_num.value * 3600);
-			BattleService.Inst.startGather({ id: data.id, gatherTime });
-		} else BattleService.Inst.enterBattle({ type: type, id: data.id });
+			netService.startGather({ id: data.id, gatherTime });
+		} else netService.enterBattle({ type: type, id: data.id });
 	}
 
 }

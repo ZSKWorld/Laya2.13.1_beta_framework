@@ -1,4 +1,3 @@
-import { AccountService } from "../../../../../net/Services";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ComSettingMsg, ComSettingView } from "../../view/coms/ComSettingView";
 
@@ -28,7 +27,7 @@ export class ComSettingCtrl extends BaseViewCtrl<ComSettingView, ComSettingData>
 	}
 
 	private onBtnClearAccountClick() {
-		ShowConfirm("提示", "确认清理账号？").then(result => result && AccountService.Inst.clearAccount({}));
+		ShowConfirm("提示", "确认清理账号？").then(result => result && netService.clearAccount({}));
 	}
 
 }

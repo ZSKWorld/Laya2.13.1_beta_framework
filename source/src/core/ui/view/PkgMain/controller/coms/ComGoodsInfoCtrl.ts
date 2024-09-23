@@ -1,4 +1,3 @@
-import { BagService, ShopService } from "../../../../../net/Services";
 import { UserDataEvent } from "../../../../../userData/UserDataEvent";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { ComGoodsInfoMsg, ComGoodsInfoView } from "../../view/coms/ComGoodsInfoView";
@@ -33,22 +32,22 @@ export class ComGoodsInfoCtrl extends BaseViewCtrl<ComGoodsInfoView, ComGoodsInf
 
 	private onBtnCollectClick() {
 		const isCollect = userData.bag.isCollect(this.data.id);
-		BagService.Inst.changeCollect({ id: this.data.id, collect: !isCollect });
+		netService.changeCollect({ id: this.data.id, collect: !isCollect });
 	}
 
 	private onBtnUseClick() {
 		const count = +this.view.input_num.text;
-		BagService.Inst.useItem({ id: this.data.id, count });
+		netService.useItem({ id: this.data.id, count });
 	}
 
 	private onBtnSellClick() {
 		const count = +this.view.input_num.text;
-		BagService.Inst.sellItem({ id: this.data.id, count });
+		netService.sellItem({ id: this.data.id, count });
 	}
 
 	private onBtnBuyClick() {
 		const count = +this.view.input_num.text;
-		ShopService.Inst.buyGoods({ id: this.data.id, count });
+		netService.buyGoods({ id: this.data.id, count });
 	}
 
 	private checkNumInput() {

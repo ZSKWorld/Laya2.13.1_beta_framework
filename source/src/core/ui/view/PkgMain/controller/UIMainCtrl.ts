@@ -4,7 +4,7 @@ import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
 import { MathUtil } from "../../../../game/math/MathUtil";
 import { trainLogMgr } from "../../../../game/TrainLogManager";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
-import { richStrMgr } from "../../../tool/RichStrManager";
+import { richTextMgr } from "../../../tool/RichStrManager";
 import { UIMainMsg, UIMainView } from "../view/UIMainView";
 
 export interface UIMainData {
@@ -28,25 +28,25 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData> {
 		this.addMessage(UIMainMsg.OnBtnSphereDraged, this.onBtnSphereDraged);
 
 		const { offline, account } = userData;
-		const txt = richStrMgr.start()
-			.combineBreak("正在构建游戏世界")
-			.combineBreak("正在计算离线收益")
-			.combineBreak("初始化完毕");
+		const txt = richTextMgr.start()
+			.append("正在构建游戏世界").break()
+			.append("正在计算离线收益").break()
+			.append("初始化完毕").break();
 
-		const offlineConfirmTxt = richStrMgr.start()
-			.combineBreak("欢迎回来")
-			.combineBreak(`你最后一次在线时间为:${ TimeUtil.milliSecond2YMDHMS(account.lastOnlineTime) }`);
+		const offlineConfirmTxt = richTextMgr.start()
+			.append("欢迎回来").break()
+			.append(`你最后一次在线时间为:${ TimeUtil.milliSecond2YMDHMS(account.lastOnlineTime) }`).break();
 		if (offline) {
-			offlineConfirmTxt.combineBreak(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`)
-				.combineBreak(`获得精力${ offline.vigor }点`);
-			Laya.timer.callLater(null, ShowConfirm, ["离线详情", offlineConfirmTxt.getStr(), false]);
+			offlineConfirmTxt.append(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`).break()
+				.append(`获得精力${ offline.vigor }点`).break();
+			Laya.timer.callLater(null, ShowConfirm, ["离线详情", offlineConfirmTxt.text, false]);
 		}
-		txt.combineBreak(offlineConfirmTxt.end());
+		txt.append(offlineConfirmTxt.end()).break();
 		const battleSpeed = localData.get(LocalDataKey.BattleSpeed) || 1;
 		localData.set(LocalDataKey.BattleSpeed, battleSpeed);
-		txt.combineBreak(richStrMgr.start("放置游戏，资源全开放，所有道具货币都可获取").size(60).color("#FFFFFF").end())
-			.combineBreak(richStrMgr.start("熬死大佬，你就是大佬!").size(60).color("#FF842E").end())
-			.combineBreak(`战斗速度调整为${ battleSpeed }倍速`, 0);
+		txt.append(richTextMgr.start("放置游戏，资源全开放，所有道具货币都可获取").size(60).color("#FFFFFF").end()).break()
+			.append(richTextMgr.start("熬死大佬，你就是大佬!").size(60).color("#FF842E").end()).break()
+			.append(`战斗速度调整为${ battleSpeed }倍速`);
 		trainLogMgr.addLog(txt.end());
 	}
 

@@ -1,69 +1,89 @@
-class RichStr {
-    private _str: string = "";
+class RichText {
+    private _text: string = "";
+
+    get text() { return this._text; }
 
     start(text: string = "") {
-        this._str = text;
+        this._text = text;
         return this;
     }
 
-    getStr() { return this._str; }
+    /** 添加超链接 */
+    href(url: string) {
+        this._text = `[url=${ url }]${ this._text }[/url]`;
+        return this;
+    }
+
+    /** 添加图片 */
+    img(url: string, width?: number, height?: number) {
+        if (width && height)
+            this._text += `<img src="${ url }" width="${ width }" height="${ height }">`;
+        else
+            this._text += `<img src="${ url }">`;
+        return this;
+    }
+
+    /** 粗体 */
+    bold() {
+        this._text = `[b]${ this._text }[/b]`;
+        return this;
+    }
+
+    /** 斜体 */
+    italic() {
+        this._text = `[i]${ this._text }[/i]`;
+        return this;
+    }
+
+    /** 下划线 */
+    underline() {
+        this._text = `[u]${ this._text }[/u]`;
+        return this;
+    }
 
     /** 添加空格 */
     space(num: number = 1) {
-        this._str += new Array(num).fill("&nbsp;").join("");
+        if (num > 0)
+            this._text += new Array(num).fill("&nbsp;").join("");
         return this;
     }
 
     /** 添加换行 */
     break(num: number = 1) {
-        this._str += new Array(num).fill("<br/>").join("");
+        if (num > 0)
+            this._text += new Array(num).fill("<br/>").join("");
         return this;
     }
 
     /** 设置大小 */
     size(size: number) {
-        this._str = `[size=${ size }]${ this._str }[/size]`;
+        this._text = `[size=${ size }]${ this._text }[/size]`;
         return this;
     }
 
     /** 设置颜色 */
     color(color: string) {
-        this._str = `[color=${ color }]${ this._str }[/color]`;
+        this._text = `[color=${ color }]${ this._text }[/color]`;
         return this;
     }
 
-    combineSpace(str: string, num: number = 1) {
-        this._str += str + new Array(num).fill("&nbsp;").join("");
-        return this;
-    }
-
-    combineBreak(str: string, num: number = 1) {
-        this._str += str + new Array(num).fill("<br/>").join("");
-        return this;
-    }
-
-    combineSize(str: string, size: number) {
-        this._str += `[size=${ size }]${ str }[/size]`;
-        return this;
-    }
-
-    combineColor(str: string, color: string) {
-        this._str += `[color=${ color }]${ str }[/color]`;
+    /** 追加文本 */
+    append(text: string) {
+        this._text += text;
         return this;
     }
 
     end() {
         Laya.Pool.recoverByClass(this);
-        return this._str;
+        const str = this._text;
+        this._text = "";
+        return str;
     }
 }
-class RichStrManager {
-
+class RichTextManager {
     start(text: string = "") {
-        const richStr = Laya.Pool.createByClass(RichStr);
-        richStr.start(text);
-        return richStr;
+        return Laya.Pool.createByClass(RichText).start(text);
     }
 }
 
-export const richStrMgr = new RichStrManager();
+export const richTextMgr = new RichTextManager();

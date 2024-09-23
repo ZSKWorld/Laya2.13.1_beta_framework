@@ -1,6 +1,5 @@
 import { localData } from "../../../../game/localData/LocalData";
 import { LocalDataKey } from "../../../../game/localData/LocalDataKey";
-import { AccountService } from "../../../../net/Services";
 import { SocketEvent } from "../../../../net/WebSocket";
 import { BaseViewCtrl } from "../../../core/BaseViewCtrl";
 import { tipMgr } from "../../../tool/TipManager";
@@ -39,7 +38,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
             this.view.refreshStatus(UILoginStatus.BeLogin);
             Laya.timer.once(1000, this, () => {
                 const param = { account: input_account.text, password: input_password.text };
-                AccountService.Inst.login(param);
+                netService.login(param);
             });
         }
     }
@@ -50,7 +49,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
         else if (!input_rPassword.text.trim()) tipMgr.showTip("请输入密码");
         else if (!input_rName.text.trim()) tipMgr.showTip("请输入昵称");
         else {
-            AccountService.Inst.register({
+            netService.register({
                 account: input_rAccount.text,
                 password: input_rPassword.text,
                 nickname: input_rName.text

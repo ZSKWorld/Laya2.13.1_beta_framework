@@ -1,5 +1,4 @@
 import { GameUtil } from "../../../../../common/GameUtil";
-import { BagService } from "../../../../../net/Services";
 import { BaseViewCtrl } from "../../../../core/BaseViewCtrl";
 import { UIUtil } from "../../../../tool/UIUtil";
 import { ComZhiZuoMsg, ComZhiZuoView } from "../../view/coms/ComZhiZuoView";
@@ -52,11 +51,11 @@ export class ComZhiZuoCtrl extends BaseViewCtrl<ComZhiZuoView, ComZhiZuoData> {
 	}
 
 	private onBtnFjzbClick() {
-		BagService.Inst.decomposeEquip({ star: this.view.cmb_fjzbdj.selectedIndex + 1 });
+		netService.decomposeEquip({ star: this.view.cmb_fjzbdj.selectedIndex + 1 });
 	}
 
 	private onBtnFjbsClick() {
-		BagService.Inst.decomposeGem({ level: this.view.cmb_fjbsdj.selectedIndex + 1 });
+		netService.decomposeGem({ level: this.view.cmb_fjbsdj.selectedIndex + 1 });
 	}
 
 	private onBtnYjhcClick() {

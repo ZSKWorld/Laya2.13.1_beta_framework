@@ -1,5 +1,4 @@
-import { AccountService } from "../../core/net/Services";
-import { SocketEvent, websocket } from "../../core/net/WebSocket";
+import { SocketEvent, WebSocket } from "../../core/net/WebSocket";
 import { ErrorCode } from "../../core/net/enum/ErrorCode";
 import { layerMgr } from "../../core/ui/core/LayerManager";
 import { sceneViewRegister } from "../../core/ui/core/SceneViewRegister";
@@ -32,7 +31,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 		layerMgr.init();
 		uiMgr.init();
 		viewRegister.init();
-		websocket.init();
+		WebSocket.Inst.init();
 		sceneViewRegister.init();
 		sceneMgr.enterScene(SceneType.LoginScene);
 	}
@@ -44,7 +43,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 		if (open) {
 			uiMgr.removeView(ViewID.UIWaitingView);
 			if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
-				AccountService.Inst.login({ account: userData.account.account, password: userData.account.password });
+				netService.login({ account: userData.account.account, password: userData.account.password });
 		}
 		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
 	}

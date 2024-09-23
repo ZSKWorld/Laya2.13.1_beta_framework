@@ -1,4 +1,4 @@
-import { richStrMgr } from "../ui/tool/RichStrManager";
+import { richTextMgr } from "../ui/tool/RichStrManager";
 import { TimeUtil } from "./TimeUtil";
 
 
@@ -19,14 +19,14 @@ export class GameUtil {
     }
 
     static GetColorStr(id: number, text: string) {
-        return richStrMgr.start(text).color(cfgMgr.Color[id].color).end();
+        return richTextMgr.start(text).color(cfgMgr.Color[id].color).end();
     }
 
     /** 获取物品数量字符串 */
     static GetItemCountStr(id: number, count?: number) {
         const { name, quality } = cfgMgr.Item[id];
         const color = GameUtil.GetColorStr(quality, name);
-        return richStrMgr.start().space().combineSpace(`${ color }${ count != null ? " x" + count : "" }`).space().end();
+        return richTextMgr.start().space().append(`${ color }${ count != null ? " x" + count : "" }`).space().end();
     }
 
     /**获取多个物品字符串 */

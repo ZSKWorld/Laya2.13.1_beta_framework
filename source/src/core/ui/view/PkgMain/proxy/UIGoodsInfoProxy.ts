@@ -1,7 +1,7 @@
 import { GameUtil } from "../../../../common/GameUtil";
 import { NetCMD } from "../../../../net/enum/NetCMD";
 import { BaseProxy } from "../../../core/BaseProxy";
-import { richStrMgr } from "../../../tool/RichStrManager";
+import { richTextMgr } from "../../../tool/RichStrManager";
 import { UIUtil } from "../../../tool/UIUtil";
 import { UIGoodsInfoCtrl } from "../controller/UIGoodsInfoCtrl";
 
@@ -21,10 +21,10 @@ export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl> {
 
     @RegisterEvent(NetCMD.BuyGoods)
     private buyGoods(output: IBuyGoodsOutput, input: IBuyGoodsInput) {
-        let titleStr = richStrMgr.start("消耗");
+        let titleStr = richTextMgr.start("消耗");
         const item = cfgMgr.Shop[input.id];
-        item.sellPrice.forEach(v => titleStr.combineSpace(GameUtil.GetItemCountStr(v.id, v.count * input.count)));
-        titleStr.combineSpace("购买");
+        item.sellPrice.forEach(v => titleStr.append(GameUtil.GetItemCountStr(v.id, v.count * input.count)));
+        titleStr.append("购买");
         UIUtil.ShowRewardsTip(titleStr.end(), output.rewards);
     }
 

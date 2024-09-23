@@ -35,8 +35,11 @@ export const enum SocketEvent {
     Close = "SocketEvent_Close",
 }
 
-class WebSocket extends Observer {
-    private _url: string = "ws://192.168.1.103:8007";
+export class WebSocket extends Observer {
+    private static _inst: WebSocket;
+    static get Inst() { return this._inst || (this._inst = new WebSocket()); }
+
+    private _url: string = "ws://192.168.1.105:8007";
     private _socket: Laya.Socket;
     private _state: SocketState = SocketState.Disconnect;
     private _waitList: IUserInput[];
@@ -85,6 +88,8 @@ class WebSocket extends Observer {
         events.forEach(v => this.dispatch(v));
     }
     get connected() { return this.state == SocketState.Connected; }
+
+    private constructor() { super(); }
 
     init() {
         if (!this._socket) {
@@ -176,6 +181,3 @@ class WebSocket extends Observer {
         this._socket.connectByUrl(this._url);
     }
 }
-
-export const websocket = new WebSocket();
-WindowImmit("websocket", websocket);
