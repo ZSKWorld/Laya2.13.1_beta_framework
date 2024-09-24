@@ -63,7 +63,7 @@ export class RedDotTrigger extends Observer {
             for (const triggerType in this._equipMap) {
                 const part = <EquipmentPart>this._equipMap[triggerType];
                 const triggered2 = this.checkEquipCanWear(part);
-                triggered ||= triggered2;
+                triggered = triggered || triggered2;
                 this.addTrigger(<RDTriggerType>triggerType, triggered2);
             }
         } else {
