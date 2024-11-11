@@ -74,6 +74,8 @@ class Main {
 			new SceneLittleGame(),
 		]);
 		sceneMgr.enterScene(SceneType.PreScreen);
+
+		// CustomSpriteManager.Init();
 	}
 }
 

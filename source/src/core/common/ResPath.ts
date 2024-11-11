@@ -858,6 +858,11 @@ export namespace ResPath {
 	// res/texture/
 	export enum TexturePath {
 		Aaaa = "res/texture/aaaa.png",
+		Image_1232 = "res/texture/image_1232.png",
+		Image_2007 = "res/texture/image_2007.png",
+		Image_597 = "res/texture/image_597.png",
+		Image_6401 = "res/texture/image_6401.png",
+		Image_645 = "res/texture/image_645.png",
 	}
 
 	// res/ui/
