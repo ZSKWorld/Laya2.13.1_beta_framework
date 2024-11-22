@@ -34,7 +34,7 @@ export default class ComRenWu extends fgui.GComponent {
 	public btn_xieZi: BtnTxtView;
 	public btn_shiZhuang: BtnTxtView;
 	public btn_faBao: BtnTxtView;
-	public static URL: string = "ui://vith2b66whk31d";
+	public static url: string = "ui://vith2b66whk31d";
 
 	public static createInstance(): ComRenWu {
 		return <ComRenWu>(fgui.UIPackage.createObject("PkgMain", "ComRenWu"));

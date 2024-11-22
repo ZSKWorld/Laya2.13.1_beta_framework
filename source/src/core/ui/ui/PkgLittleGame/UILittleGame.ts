@@ -7,7 +7,7 @@ export default class UILittleGame extends fgui.GComponent {
 	public btn_back: fgui.GButton;
 	public btn_2048: BtnTxtView;
 	public btn_snake: BtnTxtView;
-	public static URL: string = "ui://1gl1luityfsi0";
+	public static url: string = "ui://1gl1luityfsi0";
 
 	public static createInstance(): UILittleGame {
 		return <UILittleGame>(fgui.UIPackage.createObject("PkgLittleGame", "UILittleGame"));

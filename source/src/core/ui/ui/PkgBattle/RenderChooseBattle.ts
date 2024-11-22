@@ -13,7 +13,7 @@ export default class RenderChooseBattle extends fgui.GButton {
 	public txt_content4: fgui.GTextField;
 	public txt_content5: fgui.GTextField;
 	public btn_break: BtnTxtView;
-	public static URL: string = "ui://va1qbl3hsbd0u";
+	public static url: string = "ui://va1qbl3hsbd0u";
 
 	public static createInstance(): RenderChooseBattle {
 		return <RenderChooseBattle>(fgui.UIPackage.createObject("PkgBattle", "RenderChooseBattle"));

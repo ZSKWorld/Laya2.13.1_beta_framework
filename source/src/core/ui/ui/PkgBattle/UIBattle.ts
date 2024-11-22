@@ -21,7 +21,7 @@ export default class UIBattle extends fgui.GComponent {
 	public cmb_beiSu: CmbDongFu;
 	public graph_closeInfo: fgui.GGraph;
 	public txt_enemy: fgui.GTextField;
-	public static URL: string = "ui://va1qbl3hsbd00";
+	public static url: string = "ui://va1qbl3hsbd00";
 
 	public static createInstance(): UIBattle {
 		return <UIBattle>(fgui.UIPackage.createObject("PkgBattle", "UIBattle"));

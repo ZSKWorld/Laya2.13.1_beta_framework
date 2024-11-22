@@ -11,7 +11,7 @@ export const enum ComTrainMsg {
 }
 
 export class ComTrainView extends ExtensionClass<IView, ComTrain>(ComTrain) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_level, btn_copy, btn_secret, btn_boss, btn_gather, btn_gongLue, btn_waiYu } = this;

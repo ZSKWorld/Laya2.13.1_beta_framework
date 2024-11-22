@@ -19,8 +19,8 @@ export interface IRedDotNode {
 
 export class RedDotNode implements IRedDotNode {
     static eventCenter: Laya.EventDispatcher;
-    private static gid: number = 0;
-    private _id: number = ++RedDotNode.gid;
+    private static _gid: number = 0;
+    private _id: number = ++RedDotNode._gid;
     private _enable: boolean = false;
     private _nameList: string[];
     private _parent: RedDotNode;
@@ -73,7 +73,7 @@ export class RedDotNode implements IRedDotNode {
 
     private constructor() { }
 
-    static Create(parent?: IRedDotNode, path: string = "", triggers?: RDTriggerType[]) {
+    static create(parent?: IRedDotNode, path: string = "", triggers?: RDTriggerType[]) {
         const data = Laya.Pool.createByClass(RedDotNode as any) as RedDotNode;
         data._enable = true;
 

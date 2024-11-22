@@ -7,7 +7,7 @@ export default class RenderFriend extends fgui.GComponent {
 	public txt_account: fgui.GTextField;
 	public txt_state: fgui.GTextField;
 	public btn_chat: fgui.GButton;
-	public static URL: string = "ui://vith2b66roh22e";
+	public static url: string = "ui://vith2b66roh22e";
 
 	public static createInstance(): RenderFriend {
 		return <RenderFriend>(fgui.UIPackage.createObject("PkgMain", "RenderFriend"));

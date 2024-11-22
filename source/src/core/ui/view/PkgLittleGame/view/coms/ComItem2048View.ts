@@ -5,10 +5,10 @@ export const enum ComItem2048Msg {
 }
 
 export class ComItem2048View extends ExtensionClass<IView, ComItem2048>(ComItem2048) {
-    static readonly PkgRes = ResPath.PkgPath.PkgLittleGame;
+    static readonly pkgRes = ResPath.PkgPath.PkgLittleGame;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
     refreshValue(value: number) {

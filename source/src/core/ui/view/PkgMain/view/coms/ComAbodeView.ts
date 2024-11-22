@@ -10,7 +10,7 @@ export const enum ComAbodeMsg {
 }
 
 export class ComAbodeView extends ExtensionClass<IView, ComAbode>(ComAbode) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_create, btn_about, btn_setting, btn_meet, btn_pet, btn_repair } = this;

@@ -14,7 +14,7 @@ export const enum ComSkillMsg {
 }
 
 export class ComSkillView extends ExtensionClass<IView, ComSkill>(ComSkill) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_normal0, btn_normal1, btn_normal2, btn_normal3, btn_normal4, btn_xian0, btn_xian1, btn_xian2, btn_xian3, btn_xian4 } = this;

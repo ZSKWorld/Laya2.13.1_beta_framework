@@ -6,7 +6,7 @@ export const enum RenderGoodsMsg {
 }
 
 export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGoods) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+    static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
     override onCreate() {
 
@@ -23,7 +23,7 @@ export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGo
 
     refreshGoods(data: IGoods | IEquipment) {
         const { txt_name, txt_count, img_collect } = this;
-        if (UserUtil.IsEquip(data.id)) {
+        if (UserUtil.isEquip(data.id)) {
             data = <IEquipment>data;
             txt_name.text = data.name + " +" + data.level;
             txt_count.text = "";

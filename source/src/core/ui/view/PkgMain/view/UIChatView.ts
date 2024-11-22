@@ -5,7 +5,7 @@ export const enum UIChatMsg {
 }
 
 export class UIChatView extends ExtensionClass<IView, UIChat>(UIChat) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_send, btn_back } = this;

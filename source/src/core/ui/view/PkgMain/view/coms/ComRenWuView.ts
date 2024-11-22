@@ -18,7 +18,7 @@ export const enum ComRenWuMsg {
 }
 
 export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_wuQi, btn_xiangLian, btn_jieZhi, btn_huFu, btn_zuoQi, btn_anQi, btn_touKui, btn_yiFu, btn_xiaZhuang, btn_xieZi, btn_shiZhuang, btn_faBao } = this;
@@ -96,7 +96,7 @@ export class ComRenWuView extends ExtensionClass<IView, ComRenWu>(ComRenWu) {
 		txt_tuDef.text = "土防：" + tuFang;
 		txt_hunPo.text = "魂魄：" + soul;
 		txt_gemScore.text = "宝石积分：" + gemScore;
-		txt_exp.text = "升级经验：" + MathUtil.ToGroupNumber(upgradeExp);
+		txt_exp.text = "升级经验：" + MathUtil.toGroupNumber(upgradeExp);
 	}
 
 }

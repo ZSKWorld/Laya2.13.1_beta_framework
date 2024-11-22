@@ -1,15 +1,15 @@
 /** FGUI修复 */
 export class FGUIRepair {
-	static Fix() {
-		this.UbbTagI();
-		this.PlayTransitionAction();
-		this.FixGUIInputSingleLine();
-		this.FixGUILoadPackgeProgressError();
-		this.FixGUIRichTextAlignError();
+	static fix() {
+		this.ubbTagI();
+		this.playTransitionAction();
+		this.fixGUIInputSingleLine();
+		this.fixGUILoadPackgeProgressError();
+		this.fixGUIRichTextAlignError();
 	}
 
 	/**修复GUI粗体不生效 */
-	private static UbbTagI() {
+	private static ubbTagI() {
 		const inst = fgui.UBBParser.inst as any;
 		inst._handlers["i"] = function onTag_I(tagName, end, attr) {
 			return end ? ("</span>") : ("<span style='italic:true'>");
@@ -21,7 +21,7 @@ export class FGUIRepair {
 	}
 
 	/** 修改控制器动效播放机制为每次都从头播放 */
-	private static PlayTransitionAction() {
+	private static playTransitionAction() {
 		const prototype = fgui.PlayTransitionAction.prototype;
 		prototype["enter"] = function (controller: fgui.Controller) {
 			if (!this._currentTransition) {
@@ -32,7 +32,7 @@ export class FGUIRepair {
 	}
 
 	/** 修复gui 输入框自动换行 */
-	private static FixGUIInputSingleLine() {
+	private static fixGUIInputSingleLine() {
 		const prototype = fgui.GTextInput.prototype;
 		Object.defineProperty(prototype, "singleLine", {
 			get() {
@@ -46,7 +46,7 @@ export class FGUIRepair {
 	}
 
 	/** 修复gui加载错误不触发失败回调的bug */
-	private static FixGUILoadPackgeProgressError() {
+	private static fixGUILoadPackgeProgressError() {
 		const UIPackage: any = fgui.UIPackage;
 		UIPackage.loadPackage = function (resKey, completeHandler, progressHandler) {
 			let loadKeyArr = [];
@@ -130,7 +130,7 @@ export class FGUIRepair {
 		}
 	}
 
-	private static FixGUIRichTextAlignError() {
+	private static fixGUIRichTextAlignError() {
 		const prototype = fgui.GRichTextField.prototype;
 		prototype["correctDivXY"] = function () {
 			if (!this._div) return;
@@ -174,7 +174,7 @@ export class FGUIRepair {
 					}
 				}
 				catch (err) {
-					Logger.Log("laya reports html error:" + err);
+					Logger.log("laya reports html error:" + err);
 				}
 			},
 		})

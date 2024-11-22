@@ -11,7 +11,7 @@ export const enum ComGoodsMsg {
 }
 
 export class ComGoodsView extends ExtensionClass<IView, ComGoods>(ComGoods) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_shouCang, btn_equip, btn_prop, btn_gem, btn_material, btn_book, btn_other } = this;

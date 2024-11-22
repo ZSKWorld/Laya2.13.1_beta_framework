@@ -4,7 +4,7 @@ import { MathUtil } from "./math/MathUtil";
 
 /** 历练日志管理器 */
 class TrainLogManager extends Observer {
-    private static constLogs = [
+    private static _constLogs = [
         "[color=#FF0000]欢迎回来~[/color]",
         "[color=#FF0000]签到送V零充满V不是梦[/color]",
         "[color=#FF0000]★帮会跑商★宝石合成★[/color]",
@@ -20,8 +20,8 @@ class TrainLogManager extends Observer {
 
     /** 随机一条历练日志 */
     randomLog() {
-        const logs = TrainLogManager.constLogs;
-        this.addLog(logs[MathUtil.RandomInt(0, logs.length - 1)]);
+        const logs = TrainLogManager._constLogs;
+        this.addLog(logs[MathUtil.randomInt(0, logs.length - 1)]);
     }
 
     /**

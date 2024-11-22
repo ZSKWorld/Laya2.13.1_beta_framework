@@ -53,7 +53,7 @@ export class RenderGoodsCtrl extends BaseViewCtrl<RenderGoodsView, RenderGoodsDa
                 case EquipmentPart.MagicWeapon: triggers.push(RDTriggerType.MagicWeaponCanWear); break;
             }
             if (!this._redDot) {
-                this._redDot = RedDotNode.Create(RDMap.Goods_Equip, "", triggers);
+                this._redDot = RedDotNode.create(RDMap.Goods_Equip, "", triggers);
                 this._redDot.comp = this.view.com_redDot;
             } else this._redDot.triggers = triggers;
         } else this.view.com_redDot.visible = false;

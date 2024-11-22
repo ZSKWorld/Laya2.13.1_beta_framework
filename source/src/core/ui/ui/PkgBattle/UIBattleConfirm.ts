@@ -6,7 +6,7 @@ export default class UIBattleConfirm extends fgui.GComponent {
 
 	public graph_bg: fgui.GGraph;
 	public com_panel: ComBattleConfirmView;
-	public static URL: string = "ui://va1qbl3hawbvv";
+	public static url: string = "ui://va1qbl3hawbvv";
 
 	public static createInstance(): UIBattleConfirm {
 		return <UIBattleConfirm>(fgui.UIPackage.createObject("PkgBattle", "UIBattleConfirm"));

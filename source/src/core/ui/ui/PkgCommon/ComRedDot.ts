@@ -4,7 +4,7 @@ export default class ComRedDot extends fgui.GComponent {
 
 	public img_redDot: fgui.GImage;
 	public trans_anim: fgui.Transition;
-	public static URL: string = "ui://vx9zwseryz4q6o";
+	public static url: string = "ui://vx9zwseryz4q6o";
 
 	public static createInstance(): ComRedDot {
 		return <ComRedDot>(fgui.UIPackage.createObject("PkgCommon", "ComRedDot"));

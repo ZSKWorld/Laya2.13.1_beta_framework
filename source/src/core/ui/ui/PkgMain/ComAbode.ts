@@ -13,7 +13,7 @@ export default class ComAbode extends fgui.GComponent {
 	public btn_pet: BtnTxtView;
 	public btn_repair: BtnTxtView;
 	public com_zhiZuo: ComZhiZuoView;
-	public static URL: string = "ui://vith2b66sbd05";
+	public static url: string = "ui://vith2b66sbd05";
 
 	public static createInstance(): ComAbode {
 		return <ComAbode>(fgui.UIPackage.createObject("PkgMain", "ComAbode"));

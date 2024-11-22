@@ -5,10 +5,10 @@ export const enum UIWaitingMsg {
 }
 
 export class UIWaitingView extends ExtensionClass<IView, UIWaiting>(UIWaiting) {
-    static readonly PkgRes = ResPath.PkgPath.PkgCommon;
+    static readonly pkgRes = ResPath.PkgPath.PkgCommon;
     override readonly layer = Layer.Alert;
 
-	override onCreate() {
+    override onCreate() {
 
     }
 

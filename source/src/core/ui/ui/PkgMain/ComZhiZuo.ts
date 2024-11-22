@@ -19,7 +19,7 @@ export default class ComZhiZuo extends fgui.GComponent {
 	public cmb_detail: CmbDongFu;
 	public cmb_fjzbdj: CmbDongFu;
 	public cmb_fjbsdj: CmbDongFu;
-	public static URL: string = "ui://vith2b669f1k1h";
+	public static url: string = "ui://vith2b669f1k1h";
 
 	public static createInstance(): ComZhiZuo {
 		return <ComZhiZuo>(fgui.UIPackage.createObject("PkgMain", "ComZhiZuo"));

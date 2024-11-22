@@ -32,7 +32,7 @@ export default class UIMain extends fgui.GComponent {
 	public btn_setting: fgui.GButton;
 	public btn_rank: fgui.GButton;
 	public btn_sphere: fgui.GButton;
-	public static URL: string = "ui://vith2b66qjdo0";
+	public static url: string = "ui://vith2b66qjdo0";
 
 	public static createInstance(): UIMain {
 		return <UIMain>(fgui.UIPackage.createObject("PkgMain", "UIMain"));

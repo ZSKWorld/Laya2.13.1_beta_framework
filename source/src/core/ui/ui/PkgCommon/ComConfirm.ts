@@ -6,7 +6,7 @@ export default class ComConfirm extends fgui.GComponent {
 	public txt_content: fgui.GRichTextField;
 	public btn_cancel: fgui.GButton;
 	public btn_confirm: fgui.GButton;
-	public static URL: string = "ui://vx9zwsershjv6l";
+	public static url: string = "ui://vx9zwsershjv6l";
 
 	public static createInstance(): ComConfirm {
 		return <ComConfirm>(fgui.UIPackage.createObject("PkgCommon", "ComConfirm"));

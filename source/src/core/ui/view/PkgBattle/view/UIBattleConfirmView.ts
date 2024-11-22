@@ -5,7 +5,7 @@ export const enum UIBattleConfirmMsg {
 }
 
 export class UIBattleConfirmView extends ExtensionClass<IView, UIBattleConfirm>(UIBattleConfirm) {
-    static readonly PkgRes = ResPath.PkgPath.PkgBattle;
+    static readonly pkgRes = ResPath.PkgPath.PkgBattle;
 
     override onCreate() {
         const { graph_bg } = this;

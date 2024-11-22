@@ -6,7 +6,7 @@ export default class UIConfirm extends fgui.GComponent {
 
 	public graph_bg: fgui.GGraph;
 	public com_panel: ComConfirmView;
-	public static URL: string = "ui://vx9zwsershjv6k";
+	public static url: string = "ui://vx9zwsershjv6k";
 
 	public static createInstance(): UIConfirm {
 		return <UIConfirm>(fgui.UIPackage.createObject("PkgCommon", "UIConfirm"));

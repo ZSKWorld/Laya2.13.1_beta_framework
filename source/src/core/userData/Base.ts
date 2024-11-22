@@ -25,7 +25,7 @@ export class Base extends DecodeObject<IBase> implements IBase {
     usingSkill: number[];
     //#endregion
 
-    get upgradeExp() { return UserUtil.GetUpgradExp(this.jingJie, this.cengJi); }
+    get upgradeExp() { return UserUtil.getUpgradExp(this.jingJie, this.cengJi); }
 
     get maxVigro() {
         let xinFaJL = 0;

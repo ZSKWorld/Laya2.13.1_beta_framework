@@ -4,7 +4,7 @@ export const enum UIGoodsInfoMsg {
 }
 
 export class UIGoodsInfoView extends ExtensionClass<IView, UIGoodsInfo>(UIGoodsInfo) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { graph_bg } = this;

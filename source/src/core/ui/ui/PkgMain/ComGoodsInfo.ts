@@ -11,7 +11,7 @@ export default class ComGoodsInfo extends fgui.GComponent {
 	public btn_use: BtnTxtView;
 	public btn_sell: BtnTxtView;
 	public btn_buy: BtnTxtView;
-	public static URL: string = "ui://vith2b66awbv2f";
+	public static url: string = "ui://vith2b66awbv2f";
 
 	public static createInstance(): ComGoodsInfo {
 		return <ComGoodsInfo>(fgui.UIPackage.createObject("PkgMain", "ComGoodsInfo"));

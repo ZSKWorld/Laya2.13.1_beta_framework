@@ -45,7 +45,7 @@ export const enum UISphereToolMsg {
 }
 
 export class UISphereToolView extends ExtensionClass<IView, UISphereTool>(UISphereTool) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { graph_bg, btn_clearLog, btn_recoverVigor, btn_littleGame, btn_create, btn_clear, btn_percent, btn_check1, btn_check2,

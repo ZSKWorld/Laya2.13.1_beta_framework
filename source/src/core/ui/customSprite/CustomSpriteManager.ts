@@ -3,8 +3,8 @@ import { CustomSprite1 } from "./CustomSprite1";
 import { PS_CS2, SpriteVS } from "./CustomSpriteConst";
 
 export class CustomSpriteManager {
-    static Init() {
-        Laya.Shader.preCompile2D(0, CustomSprite1.MainID, SpriteVS, PS_CS2, null);
+    static init() {
+        Laya.Shader.preCompile2D(0, CustomSprite1.mainID, SpriteVS, PS_CS2, null);
         this.test();
     }
 
@@ -32,7 +32,7 @@ export class CustomSpriteManager {
                     } else {
                         return;
                     }
-                    value = MathUtil.Clamp01(value);
+                    value = MathUtil.clamp01(value);
                     spe.setDissolveThreshold(value);
                 });
             }));

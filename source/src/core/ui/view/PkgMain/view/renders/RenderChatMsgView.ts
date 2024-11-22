@@ -5,10 +5,10 @@ export const enum RenderChatMsgMsg {
 }
 
 export class RenderChatMsgView extends ExtensionClass<IView, RenderChatMsg>(RenderChatMsg) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+    static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
 }

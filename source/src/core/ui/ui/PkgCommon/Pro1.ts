@@ -5,7 +5,7 @@ export default class Pro1 extends fgui.GProgressBar {
 	public ctrlColor: fgui.Controller;
 	public ctrlFontSize: fgui.Controller;
 	public ctrlText: fgui.Controller;
-	public static URL: string = "ui://vx9zwsersbd05t";
+	public static url: string = "ui://vx9zwsersbd05t";
 
 	public static createInstance(): Pro1 {
 		return <Pro1>(fgui.UIPackage.createObject("PkgCommon", "Pro1"));

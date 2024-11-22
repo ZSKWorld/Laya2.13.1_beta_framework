@@ -2,12 +2,12 @@ import { BaseViewCtrl } from "./BaseViewCtrl";
 
 /** 页面及控制器扩展 */
 export class ViewExtend {
-	static Init() {
-		this.FGUIGComponentExtend();
-		this.BaseCtrlExtend();
+	static init() {
+		this.fguiGComponentExtend();
+		this.baseCtrlExtend();
 	}
 
-	private static FGUIGComponentExtend() {
+	private static fguiGComponentExtend() {
 		let prototype = fgui.GComponent.prototype as IView;
 		prototype.dispatch = function (...args) { eventMgr.event(...args); }
 		prototype.sendMessage = function (...args) { (<IView>this).viewCtrl.sendMessage(...args); }
@@ -67,7 +67,7 @@ export class ViewExtend {
 		}
 	}
 
-	private static BaseCtrlExtend() {
+	private static baseCtrlExtend() {
 		let prototype = BaseViewCtrl.prototype as IViewCtrl;
 		prototype.dispatch = function (...args) { eventMgr.event(...args); }
 		prototype.addMessage = function (type, callback, args?, once?) {

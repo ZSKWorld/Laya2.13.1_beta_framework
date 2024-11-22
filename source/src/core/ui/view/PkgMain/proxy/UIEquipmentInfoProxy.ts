@@ -9,7 +9,7 @@ export class UIEquipmentInfoProxy extends BaseProxy<UIEquipmentInfoCtrl> {
     private sellEquip(output: ISellEquipOutput, input: ISellEquipInput) {
         this.viewCtrl.removeSelf();
         if (output.rewards?.length) {
-            UIUtil.ShowRewardsTip(`出售${ GameUtil.GetItemCountStr(input.id) }获得`, output.rewards);
+            UIUtil.showRewardsTip(`出售${ GameUtil.getItemCountStr(input.id) }获得`, output.rewards);
         }
     }
 

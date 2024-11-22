@@ -3,7 +3,7 @@
 export default class ComWaiting extends fgui.GComponent {
 
 	public t1: fgui.Transition;
-	public static URL: string = "ui://vx9zwser7vow61";
+	public static url: string = "ui://vx9zwser7vow61";
 
 	public static createInstance(): ComWaiting {
 		return <ComWaiting>(fgui.UIPackage.createObject("PkgCommon", "ComWaiting"));

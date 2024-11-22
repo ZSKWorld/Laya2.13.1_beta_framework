@@ -20,7 +20,7 @@ export default class UISect extends fgui.GComponent {
 	public pro_4: Pro1;
 	public pro_5: Pro1;
 	public pro_6: Pro1;
-	public static URL: string = "ui://vith2b66btv51q";
+	public static url: string = "ui://vith2b66btv51q";
 
 	public static createInstance(): UISect {
 		return <UISect>(fgui.UIPackage.createObject("PkgMain", "UISect"));

@@ -39,8 +39,8 @@ class Snake extends Laya.Script {
 			const { x: dx, y: dy } = _direction;
 			_direction.setValue(mouseX - headPos.x + index * 100, mouseY - headPos.y);
 			_direction.normalize();
-			_direction.x = MathUtil.Lerp(dx, _direction.x, 0.3);
-			_direction.y = MathUtil.Lerp(dy, _direction.y, 0.3);
+			_direction.x = MathUtil.lerp(dx, _direction.x, 0.3);
+			_direction.y = MathUtil.lerp(dy, _direction.y, 0.3);
 			_direction.normalize();
 			const dirLenSquared = (_direction.x * moveDelta) ** 2 + (_direction.y * moveDelta) ** 2;
 			if (dirLenSquared >= _bodyDelta) {
@@ -68,7 +68,7 @@ class Snake extends Laya.Script {
 		const body = new fgui.GGraph();
 		body.setSize(50, 50);
 		body.setPivot(0.5, 0.5, true);
-		if (randomColor) body.drawEllipse(1, "#000000", MathUtil.RandomColor());
+		if (randomColor) body.drawEllipse(1, "#000000", MathUtil.randomColor());
 		else body.drawEllipse(1, "#000000", "#ffffff");
 		return body;
 	}

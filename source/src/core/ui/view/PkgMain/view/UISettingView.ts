@@ -4,7 +4,7 @@ export const enum UISettingMsg {
 }
 
 export class UISettingView extends ExtensionClass<IView, UISetting>(UISetting) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+    static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
     override onCreate() {
 

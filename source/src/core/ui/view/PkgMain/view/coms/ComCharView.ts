@@ -5,10 +5,10 @@ export const enum ComCharMsg {
 }
 
 export class ComCharView extends ExtensionClass<IView, ComChar>(ComChar) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+    static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
 }

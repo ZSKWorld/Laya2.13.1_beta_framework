@@ -17,7 +17,7 @@ export const enum UIMainMsg {
 }
 
 export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_train, btn_char, btn_goods, btn_shop, btn_abode, btn_chat, btn_setting, btn_rank, btn_sphere } = this;
@@ -42,11 +42,11 @@ export class UIMainView extends ExtensionClass<IView, UIMain>(UIMain) {
 		this.txt_nickname.text = userData.account.nickname;
 		const { jingJie, cengJi, exp, coin, vcoin, sect } = userData.base;
 
-		const nextJingJieExp = UserUtil.GetUpgradExp(jingJie, cengJi);
-		this.txt_level.text = UserUtil.GetJingJieStr(jingJie, cengJi);
-		this.txt_exp.text = nextJingJieExp == 0 ? "(最高境界)" : (MathUtil.ToGroupNumber(exp) + "/" + MathUtil.ToGroupNumber(nextJingJieExp));
-		this.txt_coin.text = "金币:" + MathUtil.ToGroupNumber(coin);
-		this.txt_ingot.text = "元宝:" + MathUtil.ToGroupNumber(vcoin);
+		const nextJingJieExp = UserUtil.getUpgradExp(jingJie, cengJi);
+		this.txt_level.text = UserUtil.getJingJieStr(jingJie, cengJi);
+		this.txt_exp.text = nextJingJieExp == 0 ? "(最高境界)" : (MathUtil.toGroupNumber(exp) + "/" + MathUtil.toGroupNumber(nextJingJieExp));
+		this.txt_coin.text = "金币:" + MathUtil.toGroupNumber(coin);
+		this.txt_ingot.text = "元宝:" + MathUtil.toGroupNumber(vcoin);
 		this.txt_sect.text = "门派：" + (cfgMgr.Sect[sect]?.name || "无");
 	}
 

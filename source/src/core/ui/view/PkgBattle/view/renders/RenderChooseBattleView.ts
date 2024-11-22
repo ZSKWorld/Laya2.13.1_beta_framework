@@ -8,7 +8,7 @@ export const enum RenderChooseBattleMsg {
 }
 
 export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBattle>(RenderChooseBattle) {
-    static readonly PkgRes = ResPath.PkgPath.PkgBattle;
+    static readonly pkgRes = ResPath.PkgPath.PkgBattle;
 
     override onCreate() {
         const { graph_touch, btn_break } = this;
@@ -56,7 +56,7 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
         graph_light.visible = isEnd;
         txt_content1.grayed = !isEnd;
         txt_content5.grayed = !isEnd;
-        txt_content5.text = isEnd ? "" : MathUtil.TimeFormat(coolTime);
+        txt_content5.text = isEnd ? "" : MathUtil.timeFormat(coolTime);
     }
 
     refreshGatherCool(data: CfgGatherData) {
@@ -70,7 +70,7 @@ export class RenderChooseBattleView extends ExtensionClass<IView, RenderChooseBa
         txt_content3.text = "";
         txt_content4.visible = !isEnd;
         txt_content4.grayed = !isEnd;
-        !isEnd && (txt_content4.text = `采集中：${ MathUtil.TimeFormat(lastTime) }`);
+        !isEnd && (txt_content4.text = `采集中：${ MathUtil.timeFormat(lastTime) }`);
         btn_break.visible = !isEnd;
     }
 }

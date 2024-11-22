@@ -31,7 +31,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		this._proxy = null;
 		Laya.Pool.recoverByClass(_listener);
 		Laya.Pool.recoverByClass(_proxy);
-		ViewCtrlDIExtend.OffDeviceEvent(this);
+		ViewCtrlDIExtend.offDeviceEvent(this);
 	}
 
 	/** Laya.Script私有方法重写 */
@@ -43,7 +43,7 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 			this._proxy.viewCtrl = this;
 		}
 		this._registerMessage();
-		ViewCtrlDIExtend.RegisterDeviceEvent(this);
+		ViewCtrlDIExtend.registerDeviceEvent(this);
 		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
 		this.addMessage(ViewEvent.OnForeground, this._onForeground);
 		this.addMessage(ViewEvent.OnBackground, this._onBackground);

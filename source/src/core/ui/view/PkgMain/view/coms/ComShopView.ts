@@ -11,7 +11,7 @@ export const enum ComShopMsg {
 }
 
 export class ComShopView extends ExtensionClass<IView, ComShop>(ComShop) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_prop, btn_gem, btn_material, btn_miJi, btn_other, btn_heiShi, btn_xianJie } = this;

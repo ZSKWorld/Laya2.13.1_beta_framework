@@ -3,7 +3,7 @@
 export default class RenderChatMsg extends fgui.GComponent {
 
 	public txt_msg: fgui.GTextField;
-	public static URL: string = "ui://vith2b66j0ry2d";
+	public static url: string = "ui://vith2b66j0ry2d";
 
 	public static createInstance(): RenderChatMsg {
 		return <RenderChatMsg>(fgui.UIPackage.createObject("PkgMain", "RenderChatMsg"));

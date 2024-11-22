@@ -6,13 +6,13 @@ export class MathUtil {
     static readonly Radian = Math.PI / 180;
 
     /** 角度转弧度 */
-    static AngleToRadian(angle: number) { return angle * this.Radian; }
+    static angleToRadian(angle: number) { return angle * this.Radian; }
 
     /** 弧度转角度 */
-    static RadianToAngle(radian: number) { return radian / this.Radian; }
+    static radianToAngle(radian: number) { return radian / this.Radian; }
 
     /**数字转中文数字 */
-    static ToChineseNum(num: number) {
+    static toChineseNum(num: number) {
         const arr1 = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
         const arr2 = ["", "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千", "万", "十", "百", "千", "亿"];
         if (!num || isNaN(num)) return "零";
@@ -35,7 +35,7 @@ export class MathUtil {
     }
 
     /**数字转组合数字 */
-    static ToGroupNumber(num: number, fixed: number = 2) {
+    static toGroupNumber(num: number, fixed: number = 2) {
         if (num < 1e4) return num.toString();
         else if (num < 1e8) return (num / 1e4).toFixed(fixed) + "万";
         else if (num < 1e12) return (num / 1e8).toFixed(fixed) + "亿";
@@ -88,7 +88,7 @@ export class MathUtil {
      * @param max 最大值整数(包含)
      * @returns
      */
-    static RandomInt(min: number, max: number) {
+    static randomInt(min: number, max: number) {
         min = Math.floor(min);
         max = Math.floor(max) + 1;
         if (min >= max) return min;
@@ -101,7 +101,7 @@ export class MathUtil {
      * @param max 最大值(不包含)
      * @returns
      */
-    static RandomFloat(min: number, max: number) {
+    static randomFloat(min: number, max: number) {
         if (min >= max) return min;
         return min + (max - min) * Math.random();
     }
@@ -113,7 +113,7 @@ export class MathUtil {
      * @param max
      * @returns
      */
-    static Clamp(value: number, min: number, max: number) {
+    static clamp(value: number, min: number, max: number) {
         return Math.min(Math.max(value, min), max);
     }
 
@@ -122,21 +122,21 @@ export class MathUtil {
      * @param value
      * @returns
      */
-    static Clamp01(value: number) {
-        return this.Clamp(value, 0, 1);
+    static clamp01(value: number) {
+        return this.clamp(value, 0, 1);
     }
 
     /** x从0平滑过渡到1 */
-    public static SmoothStep(x: number) {
-        x = this.Clamp01(x);
+    static smoothStep(x: number) {
+        x = this.clamp01(x);
         return (Math.sin(x * Math.PI - Math.PI / 2) + 1) / 2;
     }
 
-    static Lerp(a: number, b: number, t: number) {
+    static lerp(a: number, b: number, t: number) {
         return a + t * (b - a);
     }
 
-    static TimeFormat(seconds: number, keepHour: boolean = true) {
+    static timeFormat(seconds: number, keepHour: boolean = true) {
         const hours = Math.floor(seconds / 3600);
         const mins = Math.floor((seconds - hours * 3600) / 60);
         const secs = seconds - hours * 3600 - mins * 60;
@@ -151,7 +151,7 @@ export class MathUtil {
             return "00:" + secsStr;
     }
 
-    static TimeFormatChinese(seconds: number) {
+    static timeFormatChinese(seconds: number) {
         const hours = Math.floor(seconds / 3600);
         const mins = Math.floor((seconds - hours * 3600) / 60);
         const secs = seconds - hours * 3600 - mins * 60;
@@ -159,7 +159,7 @@ export class MathUtil {
     }
 
     /** 随机颜色字符串 */
-    static RandomColor() {
+    static randomColor() {
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);

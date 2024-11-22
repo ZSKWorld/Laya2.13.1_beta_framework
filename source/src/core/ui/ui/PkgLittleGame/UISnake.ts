@@ -3,7 +3,7 @@
 export default class UISnake extends fgui.GComponent {
 
 	public btn_back: fgui.GButton;
-	public static URL: string = "ui://1gl1luitmzzoa";
+	public static url: string = "ui://1gl1luitmzzoa";
 
 	public static createInstance(): UISnake {
 		return <UISnake>(fgui.UIPackage.createObject("PkgLittleGame", "UISnake"));

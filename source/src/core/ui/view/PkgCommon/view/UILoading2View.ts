@@ -5,10 +5,10 @@ export const enum UILoading2Msg {
 }
 
 export class UILoading2View extends ExtensionClass<IView, UILoading2>(UILoading2) {
-    static readonly PkgRes = ResPath.PkgPath.PkgCommon;
+    static readonly pkgRes = ResPath.PkgPath.PkgCommon;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
 }

@@ -8,7 +8,7 @@ export const enum UIBattleMsg {
 }
 
 export class UIBattleView extends ExtensionClass<IView, UIBattle>(UIBattle) {
-	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
+	static readonly pkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate() {
 		const { btn_offline, btn_enemyInfo, btn_quitBattle } = this;
@@ -19,7 +19,7 @@ export class UIBattleView extends ExtensionClass<IView, UIBattle>(UIBattle) {
 
 	refreshContent(data: BattleCfgData) {
 		const { txt_info } = this;
-		const dropStr = GameUtil.GetItemString(data.randomDrapOut ? data.baseDrapOut.concat(data.randomDrapOut) : data.baseDrapOut, false);
+		const dropStr = GameUtil.getItemString(data.randomDrapOut ? data.baseDrapOut.concat(data.randomDrapOut) : data.baseDrapOut, false);
 		txt_info.text = `消耗：${ data.vigorCost }精力<br/>掉落：${ dropStr }${ data.desc }`;
 	}
 

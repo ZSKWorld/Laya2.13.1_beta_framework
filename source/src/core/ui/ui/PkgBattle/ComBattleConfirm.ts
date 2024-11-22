@@ -13,7 +13,7 @@ export default class ComBattleConfirm extends fgui.GComponent {
 	public btn_saoDang: BtnTxtView;
 	public btn_battle: BtnTxtView;
 	public group_btns: fgui.GGroup;
-	public static URL: string = "ui://va1qbl3hawbvw";
+	public static url: string = "ui://va1qbl3hawbvw";
 
 	public static createInstance(): ComBattleConfirm {
 		return <ComBattleConfirm>(fgui.UIPackage.createObject("PkgBattle", "ComBattleConfirm"));

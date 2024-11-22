@@ -8,7 +8,7 @@ export const enum UIPlayerInfoMsg {
 }
 
 export class UIPlayerInfoView extends ExtensionClass<IView, UIPlayerInfo>(UIPlayerInfo) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_explain, btn_back, btn_copyID, btn_gift } = this;

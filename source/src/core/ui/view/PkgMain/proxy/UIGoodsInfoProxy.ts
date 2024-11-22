@@ -11,21 +11,21 @@ export class UIGoodsInfoProxy extends BaseProxy<UIGoodsInfoCtrl> {
         if (input.id == 2010)
             this.viewCtrl.showView(ViewID.UISectView);
         else
-            UIUtil.ShowRewardsTip(`使用${ GameUtil.GetItemCountStr(input.id, input.count) }获得`, output.rewards);
+            UIUtil.showRewardsTip(`使用${ GameUtil.getItemCountStr(input.id, input.count) }获得`, output.rewards);
     }
 
     @RegisterEvent(NetCMD.SellItem)
     private sellItem(output: ISellItemOutput, input: ISellItemInput) {
-        UIUtil.ShowRewardsTip(`出售${ GameUtil.GetItemCountStr(input.id, input.count) }获得`, output.rewards);
+        UIUtil.showRewardsTip(`出售${ GameUtil.getItemCountStr(input.id, input.count) }获得`, output.rewards);
     }
 
     @RegisterEvent(NetCMD.BuyGoods)
     private buyGoods(output: IBuyGoodsOutput, input: IBuyGoodsInput) {
         let titleStr = richTextMgr.start("消耗");
         const item = cfgMgr.Shop[input.id];
-        item.sellPrice.forEach(v => titleStr.append(GameUtil.GetItemCountStr(v.id, v.count * input.count)));
+        item.sellPrice.forEach(v => titleStr.append(GameUtil.getItemCountStr(v.id, v.count * input.count)));
         titleStr.append("购买");
-        UIUtil.ShowRewardsTip(titleStr.end(), output.rewards);
+        UIUtil.showRewardsTip(titleStr.end(), output.rewards);
     }
 
     @RegisterEvent(NetCMD.ChangeCollect)

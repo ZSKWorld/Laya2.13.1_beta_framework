@@ -13,7 +13,7 @@ export const enum UILoginStatus {
 }
 
 export class UILoginView extends ExtensionClass<IView, UILogin>(UILogin) {
-	static readonly PkgRes = ResPath.PkgPath.PkgLogin;
+	static readonly pkgRes = ResPath.PkgPath.PkgLogin;
 
 	override onCreate() {
 		const { btn_login, btn_register, btn_cancel } = this;

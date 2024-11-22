@@ -12,7 +12,7 @@ export const enum UIEquipmentInfoMsg {
 }
 
 export class UIEquipmentInfoView extends ExtensionClass<IView, UIEquipmentInfo>(UIEquipmentInfo) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { graph_bg, btn_sell, btn_dress, btn_intensify, btn_inlay, btn_engrave, btn_bless, btn_takeoff } = this;

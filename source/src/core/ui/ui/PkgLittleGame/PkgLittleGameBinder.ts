@@ -11,9 +11,9 @@ import { UILittleGameView } from "../../view/PkgLittleGame/view/UILittleGameView
 
 export default class PkgLittleGameBinder {
 	public static bindAll(): void {
-		fgui.UIObjectFactory.setExtension(UISnake.URL, UISnakeView);
-		fgui.UIObjectFactory.setExtension(UI2048.URL, UI2048View);
-		fgui.UIObjectFactory.setExtension(ComItem2048.URL, ComItem2048View);
-		fgui.UIObjectFactory.setExtension(UILittleGame.URL, UILittleGameView);
+		fgui.UIObjectFactory.setExtension(UISnake.url, UISnakeView);
+		fgui.UIObjectFactory.setExtension(UI2048.url, UI2048View);
+		fgui.UIObjectFactory.setExtension(ComItem2048.url, ComItem2048View);
+		fgui.UIObjectFactory.setExtension(UILittleGame.url, UILittleGameView);
 	}
 }

@@ -1,6 +1,6 @@
 {
   "libview.firstColumnWidth": 424,
-  "auxline1": true,
+  "gridSize": 10,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://vx9zwsershjv6k",
@@ -8,6 +8,7 @@
     "ui://vx9zwser7vow63",
     "ui://vith2b66qjdo0",
     "ui://vith2b66sbd02",
+    "ui://vith2b66sbd04",
     "ui://vith2b66sbd0z",
     "ui://vith2b66olc42h",
     "ui://vith2b66j87q1w",
@@ -18,7 +19,7 @@
   "test.device": "iPhone 8 Plus",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://vith2b66sbd0z",
+  "doc.activeDoc": "ui://vith2b66sbd04",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "vx9zwser",
@@ -36,6 +37,8 @@
     "vith2b66",
     "/Component/UIMain/",
     "vith2b66",
+    "/Component/UIMain/Char/",
+    "vith2b66",
     "/Component/UIMain/Goods/",
     "vith2b66",
     "/Component/UIMain/Train/",
@@ -47,6 +50,6 @@
   "test.orientation": "portriait",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 10,
+  "auxline1": true,
   "gridColor": 42
 }

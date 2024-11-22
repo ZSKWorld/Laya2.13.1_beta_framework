@@ -3,7 +3,7 @@
 export default class BtnTxt extends fgui.GButton {
 
 	public ctrlBgColor: fgui.Controller;
-	public static URL: string = "ui://vx9zwsersbd05i";
+	public static url: string = "ui://vx9zwsersbd05i";
 
 	public static createInstance(): BtnTxt {
 		return <BtnTxt>(fgui.UIPackage.createObject("PkgCommon", "BtnTxt"));

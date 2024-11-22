@@ -7,13 +7,13 @@ export const enum UILittleGameMsg {
 }
 
 export class UILittleGameView extends ExtensionClass<IView, UILittleGame>(UILittleGame) {
-    static readonly PkgRes = ResPath.PkgPath.PkgLittleGame;
+	static readonly pkgRes = ResPath.PkgPath.PkgLittleGame;
 
 	override onCreate() {
-        const { btn_back, btn_2048,btn_snake } = this;
+		const { btn_back, btn_2048, btn_snake } = this;
 		btn_back.onClick(this, this.sendMessage, [UILittleGameMsg.OnBtnBackClick]);
 		btn_2048.onClick(this, this.sendMessage, [UILittleGameMsg.OnBtn2048Click]);
 		btn_snake.onClick(this, this.sendMessage, [UILittleGameMsg.OnBtnSnakeClick]);
-    }
+	}
 
 }

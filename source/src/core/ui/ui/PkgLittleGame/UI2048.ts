@@ -8,7 +8,7 @@ export default class UI2048 extends fgui.GComponent {
 	public com_container: fgui.GComponent;
 	public btn_reset: BtnTxtView;
 	public btn_add: BtnTxtView;
-	public static URL: string = "ui://1gl1luitnirt8";
+	public static url: string = "ui://1gl1luitnirt8";
 
 	public static createInstance(): UI2048 {
 		return <UI2048>(fgui.UIPackage.createObject("PkgLittleGame", "UI2048"));

@@ -11,7 +11,7 @@ export default class UIPlayerInfo extends fgui.GComponent {
 	public btn_back: BtnTxtView;
 	public btn_copyID: BtnTxtView;
 	public btn_gift: BtnTxtView;
-	public static URL: string = "ui://vith2b66sbd010";
+	public static url: string = "ui://vith2b66sbd010";
 
 	public static createInstance(): UIPlayerInfo {
 		return <UIPlayerInfo>(fgui.UIPackage.createObject("PkgMain", "UIPlayerInfo"));

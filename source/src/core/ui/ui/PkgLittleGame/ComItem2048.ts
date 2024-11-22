@@ -3,7 +3,7 @@
 export default class ComItem2048 extends fgui.GComponent {
 
 	public txt_num: fgui.GTextField;
-	public static URL: string = "ui://1gl1luitnirt9";
+	public static url: string = "ui://1gl1luitnirt9";
 
 	public static createInstance(): ComItem2048 {
 		return <ComItem2048>(fgui.UIPackage.createObject("PkgLittleGame", "ComItem2048"));

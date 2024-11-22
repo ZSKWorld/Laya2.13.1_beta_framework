@@ -8,7 +8,7 @@ export const enum ComSettingMsg {
 }
 
 export class ComSettingView extends ExtensionClass<IView, ComSetting>(ComSetting) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_mute, btn_signIn, btn_help, btn_clearAccount, btn_back } = this;

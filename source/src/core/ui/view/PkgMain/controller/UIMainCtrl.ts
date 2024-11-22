@@ -37,7 +37,7 @@ export class UIMainCtrl extends BaseViewCtrl<UIMainView, UIMainData> {
 			.append("欢迎回来").break()
 			.append(`你最后一次在线时间为:${ TimeUtil.milliSecond2YMDHMS(account.lastOnlineTime) }`).break();
 		if (offline) {
-			offlineConfirmTxt.append(`离线时长${ MathUtil.TimeFormatChinese(offline.offlineTime) }`).break()
+			offlineConfirmTxt.append(`离线时长${ MathUtil.timeFormatChinese(offline.offlineTime) }`).break()
 				.append(`获得精力${ offline.vigor }点`).break();
 			Laya.timer.callLater(null, ShowConfirm, ["离线详情", offlineConfirmTxt.text, false]);
 		}

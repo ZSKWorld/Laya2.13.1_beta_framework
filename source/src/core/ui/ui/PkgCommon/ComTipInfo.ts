@@ -4,7 +4,7 @@ export default class ComTipInfo extends fgui.GComponent {
 
 	public txt_title: fgui.GRichTextField;
 	public t0: fgui.Transition;
-	public static URL: string = "ui://vx9zwsersbd05c";
+	public static url: string = "ui://vx9zwsersbd05c";
 
 	public static createInstance(): ComTipInfo {
 		return <ComTipInfo>(fgui.UIPackage.createObject("PkgCommon", "ComTipInfo"));

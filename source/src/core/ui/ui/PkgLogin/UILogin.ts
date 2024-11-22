@@ -17,7 +17,7 @@ export default class UILogin extends fgui.GComponent {
 	public btn_cancel: BtnTxtView;
 	public t0: fgui.Transition;
 	public t1: fgui.Transition;
-	public static URL: string = "ui://vs9845atqjdo0";
+	public static url: string = "ui://vs9845atqjdo0";
 
 	public static createInstance(): UILogin {
 		return <UILogin>(fgui.UIPackage.createObject("PkgLogin", "UILogin"));

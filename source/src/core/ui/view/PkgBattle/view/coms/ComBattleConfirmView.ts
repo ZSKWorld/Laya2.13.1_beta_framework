@@ -10,7 +10,7 @@ export const enum ComBattleConfirmMsg {
 }
 
 export class ComBattleConfirmView extends ExtensionClass<IView, ComBattleConfirm>(ComBattleConfirm) {
-	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
+	static readonly pkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate() {
 		const { btn_buyFood, btn_buyTimes, btn_saoDang, btn_battle } = this;
@@ -29,7 +29,7 @@ export class ComBattleConfirmView extends ExtensionClass<IView, ComBattleConfirm
 		}
 		else {
 			txt_title.text = data.name + "Lv." + data.enemyLevel;
-			const dropStr = GameUtil.GetItemString(data.randomDrapOut ? data.baseDrapOut.concat(data.randomDrapOut) : data.baseDrapOut, false);
+			const dropStr = GameUtil.getItemString(data.randomDrapOut ? data.baseDrapOut.concat(data.randomDrapOut) : data.baseDrapOut, false);
 			txt_content.text = `消耗：${ data.vigorCost }精力<br/>掉落：${ dropStr }${ data.desc }`;
 		}
 	}

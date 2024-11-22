@@ -6,7 +6,7 @@ export const enum ComConfirmMsg {
 }
 
 export class ComConfirmView extends ExtensionClass<IView, ComConfirm>(ComConfirm) {
-	static readonly PkgRes = ResPath.PkgPath.PkgCommon;
+	static readonly pkgRes = ResPath.PkgPath.PkgCommon;
 
 	override onCreate() {
 		const { btn_cancel, btn_confirm } = this;

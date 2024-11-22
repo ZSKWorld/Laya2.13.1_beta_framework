@@ -16,7 +16,7 @@ export default class ComChar extends fgui.GComponent {
 	public XinFaOut: fgui.Transition;
 	public SkillIn: fgui.Transition;
 	public SkillOut: fgui.Transition;
-	public static URL: string = "ui://vith2b66sbd04";
+	public static url: string = "ui://vith2b66sbd04";
 
 	public static createInstance(): ComChar {
 		return <ComChar>(fgui.UIPackage.createObject("PkgMain", "ComChar"));

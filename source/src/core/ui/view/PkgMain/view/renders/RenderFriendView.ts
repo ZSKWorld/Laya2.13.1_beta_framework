@@ -5,7 +5,7 @@ export const enum RenderFriendMsg {
 }
 
 export class RenderFriendView extends ExtensionClass<IView, RenderFriend>(RenderFriend) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+    static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
     override onCreate() {
         const { btn_chat } = this;

@@ -8,18 +8,18 @@ export interface ComTipInfoData {
 }
 
 export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>{
-    private static displayTips: ComTipInfoCtrl[] = [];
-    private static readonly showTime: number = 2000;
-    private static readonly moveUpSpeed: number = 10;
-    private static readonly tipSpace: number = 3;
+    private static _displayTips: ComTipInfoCtrl[] = [];
+    private static readonly _showTime: number = 2000;
+    private static readonly _moveUpSpeed: number = 10;
+    private static readonly _tipSpace: number = 3;
     /** 剩余显示时间 */
     private _time: number;
     private _targetY: number;
     /** 是否到时该移除了 */
     private _timeToRemove: boolean;
 
-    private static CorrectTipPosY() {
-        const { displayTips, tipSpace } = ComTipInfoCtrl;
+    private static correctTipPosY() {
+        const { _displayTips: displayTips, _tipSpace: tipSpace } = ComTipInfoCtrl;
         if (displayTips.length == 0) return;
         const cnt = displayTips.length - 1;
         let startY = Laya.stage.height / 2;
@@ -40,18 +40,18 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
 
     override onEnable() {
         const { view, data } = this;
-        this._time = ComTipInfoCtrl.showTime;
+        this._time = ComTipInfoCtrl._showTime;
         this._timeToRemove = false;
         view.setXY(Laya.stage.width + view.width / 2, Laya.stage.height / 2);
         view.setContent(data.text, data.color);
         Laya.Tween.to(view, { x: Laya.stage.width / 2 }, Math.log((view.height - 30) / 35 + 2) * 200, Laya.Ease.backOut, Laya.Handler.create(this, () => this._timeToRemove = true));
-        ComTipInfoCtrl.displayTips.push(this);
-        ComTipInfoCtrl.CorrectTipPosY();
+        ComTipInfoCtrl._displayTips.push(this);
+        ComTipInfoCtrl.correctTipPosY();
     }
 
     override onUpdate() {
         const { view, _targetY, _time, _timeToRemove } = this;
-        const moveUpSpeed = ComTipInfoCtrl.moveUpSpeed;
+        const moveUpSpeed = ComTipInfoCtrl._moveUpSpeed;
         const subY = _targetY - view.y;
         if (subY != 0)
             view.y += Math.abs(subY) > moveUpSpeed ? (Math.abs(subY) / subY * moveUpSpeed) : subY;
@@ -65,9 +65,9 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
     }
 
     override onDisable() {
-        const index = ComTipInfoCtrl.displayTips.indexOf(this);
-        if (index > -1) ComTipInfoCtrl.displayTips.splice(index, 1);
+        const index = ComTipInfoCtrl._displayTips.indexOf(this);
+        if (index > -1) ComTipInfoCtrl._displayTips.splice(index, 1);
         Laya.Pool.recover(UIPoolKey.TipInfo, this);
-        ComTipInfoCtrl.CorrectTipPosY();
+        ComTipInfoCtrl.correctTipPosY();
     }
 }

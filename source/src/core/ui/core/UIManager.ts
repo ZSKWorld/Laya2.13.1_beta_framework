@@ -124,7 +124,7 @@ export class UIManager extends Observer implements IUIManager {
 			const viewCtrl = this._cache.getView(viewId);
 			if (viewCtrl) this.showView2(viewCtrl, data, callback);
 			else {
-				loadMgr.loadPackage(ViewClass.PkgRes).then(
+				loadMgr.loadPackage(ViewClass.pkgRes).then(
 					() => this.showView2(this.createView(viewId, true), data, callback),
 					() => {
 						ShowConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {

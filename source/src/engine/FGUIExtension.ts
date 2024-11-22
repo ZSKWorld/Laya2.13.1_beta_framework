@@ -1,38 +1,38 @@
 /** FGUI扩展 */
 export class FGUIExtension {
-	static Init() {
-		this.GObjectExtension();
-		this.AddGUIObjectEventLockable();
+	static init() {
+		this.gobjectExtension();
+		this.addGUIObjectEventLockable();
 	}
 
 	/** GObject扩展 */
-	private static GObjectExtension() {
+	private static gobjectExtension() {
 		const prototype = fgui.GObject.prototype;
-		prototype.tweenMove = function(endX: number, endY: number, duration: number){
+		prototype.tweenMove = function (endX: number, endY: number, duration: number) {
 			return fgui.GTween.to2(this.x, this.y, endX, endY, duration).setTarget(this, this.setXY);
 		}
-		prototype.tweenMoveX = function(endX: number, duration: number){
+		prototype.tweenMoveX = function (endX: number, duration: number) {
 			return fgui.GTween.to(this.x, endX, duration).setTarget(this, "x");
 		}
-		prototype.tweenMoveY = function(endY: number, duration: number){
+		prototype.tweenMoveY = function (endY: number, duration: number) {
 			return fgui.GTween.to(this.y, endY, duration).setTarget(this, "y");
 		}
-		prototype.tweenScale = function(endX: number, endY: number, duration: number){
+		prototype.tweenScale = function (endX: number, endY: number, duration: number) {
 			return fgui.GTween.to2(this.scaleX, this.scaleY, endX, endY, duration).setTarget(this, this.setScale);
 		}
-		prototype.tweenScaleX = function(endX: number, duration: number){
+		prototype.tweenScaleX = function (endX: number, duration: number) {
 			return fgui.GTween.to(this.scaleX, endX, duration).setTarget(this, "scaleX");
 		}
-		prototype.tweenScaleY = function(endY: number, duration: number){
+		prototype.tweenScaleY = function (endY: number, duration: number) {
 			return fgui.GTween.to(this.scaleY, endY, duration).setTarget(this, "scaleY");
 		}
-		prototype.tweenResize = function(endW: number, endH: number, duration: number){
+		prototype.tweenResize = function (endW: number, endH: number, duration: number) {
 			return fgui.GTween.to2(this.width, this.height, endW, endH, duration).setTarget(this, this.setSize);
 		}
-		prototype.tweenFade = function(endValue: number, duration: number){
+		prototype.tweenFade = function (endValue: number, duration: number) {
 			return fgui.GTween.to(this.alpha, endValue, duration).setTarget(this, "alpha");
 		}
-		prototype.tweenRotate = function(endValue: number, duration: number){
+		prototype.tweenRotate = function (endValue: number, duration: number) {
 			return fgui.GTween.to(this.rotation, endValue, duration).setTarget(this, "rotation");
 		}
 		prototype.addComponentIntance = function (component) {
@@ -62,7 +62,7 @@ export class FGUIExtension {
 	}
 
 	/**扩展添加ui节点事件锁 */
-	private static AddGUIObjectEventLockable() {
+	private static addGUIObjectEventLockable() {
 		const touchMgrPrototype = Laya.TouchManager.prototype;
 		const lockChildMap = new Map<number, boolean>();
 		//拦截触摸事件派发，处理事件锁

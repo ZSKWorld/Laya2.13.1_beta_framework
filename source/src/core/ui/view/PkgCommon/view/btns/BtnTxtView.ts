@@ -5,10 +5,10 @@ export const enum BtnTxtMsg {
 }
 
 export class BtnTxtView extends ExtensionClass<IView, BtnTxt>(BtnTxt) {
-    static readonly PkgRes = ResPath.PkgPath.PkgCommon;
+    static readonly pkgRes = ResPath.PkgPath.PkgCommon;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
 }

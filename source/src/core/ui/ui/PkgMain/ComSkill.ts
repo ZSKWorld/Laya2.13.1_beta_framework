@@ -16,7 +16,7 @@ export default class ComSkill extends fgui.GComponent {
 	public btn_xian3: BtnTxtView;
 	public btn_xian4: BtnTxtView;
 	public list_skill: fgui.GList;
-	public static URL: string = "ui://vith2b66rwel1r";
+	public static url: string = "ui://vith2b66rwel1r";
 
 	public static createInstance(): ComSkill {
 		return <ComSkill>(fgui.UIPackage.createObject("PkgMain", "ComSkill"));

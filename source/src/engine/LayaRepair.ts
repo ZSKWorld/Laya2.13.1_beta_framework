@@ -1,13 +1,13 @@
 /** Laya修复 */
 export class LayaRepair {
-    static Fix() {
-        this.FixLayaPoolSign();
-        this.FixTTFLoaderCallback();
-        this.FixSkeletonLoadEvent();
+    static fix() {
+        this.fixLayaPoolSign();
+        this.fixTTFLoaderCallback();
+        this.fixSkeletonLoadEvent();
     }
 
     /** 修复Laya.Pool._getClassSign方法，原方法会导致子类和父类回收到一个对象池中 */
-    private static FixLayaPoolSign() {
+    private static fixLayaPoolSign() {
         const pool = Laya.Pool;
         pool["_getClassSign"] = function (cla: any) {
             var className = cla["__className"] || (Object.prototype.hasOwnProperty.call(cla, "_$gid") ? cla["_$gid"] : null);
@@ -27,7 +27,7 @@ export class LayaRepair {
     }
 
     /** 修复ttf字体浏览器下加载失败不触发加载失败回调的bug */
-    private static FixTTFLoaderCallback() {
+    private static fixTTFLoaderCallback() {
         const ttfProto = Laya.TTFLoader.prototype;
         ttfProto["_loadWithFontFace"] = function () {
             var fontFace = new window.FontFace(this.fontName, "url('" + this._url + "')");
@@ -49,7 +49,7 @@ export class LayaRepair {
         }
     }
 
-    private static FixSkeletonLoadEvent() {
+    private static fixSkeletonLoadEvent() {
         const prototype = Laya.Skeleton.prototype;
         const _onLoaded = prototype["_onLoaded"];
         prototype["_onLoaded"] = function () {

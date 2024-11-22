@@ -4,7 +4,7 @@ export default class BtnCheck extends fgui.GButton {
 
 	public t0: fgui.Transition;
 	public t1: fgui.Transition;
-	public static URL: string = "ui://vith2b66j87q1w";
+	public static url: string = "ui://vith2b66j87q1w";
 
 	public static createInstance(): BtnCheck {
 		return <BtnCheck>(fgui.UIPackage.createObject("PkgMain", "BtnCheck"));

@@ -85,7 +85,7 @@ export default class UISphereTool extends fgui.GComponent {
 	public cmb_item: CmbDongFu;
 	public input_30: fgui.GTextInput;
 	public input_29: fgui.GTextInput;
-	public static URL: string = "ui://vith2b66e3vt1v";
+	public static url: string = "ui://vith2b66e3vt1v";
 
 	public static createInstance(): UISphereTool {
 		return <UISphereTool>(fgui.UIPackage.createObject("PkgMain", "UISphereTool"));

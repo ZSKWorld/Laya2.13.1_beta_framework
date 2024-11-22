@@ -6,7 +6,7 @@ export const enum UI2048Msg {
 }
 
 export class UI2048View extends ExtensionClass<IView, UI2048>(UI2048) {
-	static readonly PkgRes = ResPath.PkgPath.PkgLittleGame;
+	static readonly pkgRes = ResPath.PkgPath.PkgLittleGame;
 
 	override onCreate() {
 		const { btn_back, btn_reset } = this;

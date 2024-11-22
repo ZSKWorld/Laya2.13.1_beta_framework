@@ -14,7 +14,7 @@ export class UIChooseBattleCtrl extends BaseViewCtrl<UIChooseBattleView, BattleT
 	override onAdded() {
 		this.addMessage(UIChooseBattleMsg.OnBtnBackClick, this.onBtnBackClick);
 
-		UIUtil.SetList(this.view.list_battle, true, this, this.onListBattleRender);
+		UIUtil.setList(this.view.list_battle, true, this, this.onListBattleRender);
 	}
 
 	override onEnable() {

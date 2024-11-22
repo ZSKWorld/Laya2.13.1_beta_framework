@@ -23,7 +23,7 @@ export class ComTrainCtrl extends BaseViewCtrl<ComTrainView, ComTrainData> {
 		this.addMessage(ComTrainMsg.OnBtnGongLueClick, this.onBtnGongLueClick);
 		this.addMessage(ComTrainMsg.OnBtnWaiYuClick, this.onBtnWaiYuClick);
 
-		UIUtil.SetList(this.view.list_log, true, this, this.onListLogRenderer);
+		UIUtil.setList(this.view.list_log, true, this, this.onListLogRenderer);
 	}
 
 	override onEnable() {

@@ -9,7 +9,7 @@ export default class RenderGoods extends fgui.GButton {
 	public txt_count: fgui.GTextField;
 	public com_redDot: ComRedDotView;
 	public img_collect: fgui.GImage;
-	public static URL: string = "ui://vith2b66sbd0z";
+	public static url: string = "ui://vith2b66sbd0z";
 
 	public static createInstance(): RenderGoods {
 		return <RenderGoods>(fgui.UIPackage.createObject("PkgMain", "RenderGoods"));

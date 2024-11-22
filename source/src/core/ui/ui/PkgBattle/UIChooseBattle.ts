@@ -7,7 +7,7 @@ export default class UIChooseBattle extends fgui.GComponent {
 	public ctrl_openType: fgui.Controller;
 	public btn_back: BtnTxtView;
 	public list_battle: fgui.GList;
-	public static URL: string = "ui://va1qbl3hsbd0s";
+	public static url: string = "ui://va1qbl3hsbd0s";
 
 	public static createInstance(): UIChooseBattle {
 		return <UIChooseBattle>(fgui.UIPackage.createObject("PkgBattle", "UIChooseBattle"));

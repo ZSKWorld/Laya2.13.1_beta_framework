@@ -12,7 +12,7 @@ export default class ComTrain extends fgui.GComponent {
 	public btn_gongLue: BtnTxtView;
 	public btn_waiYu: BtnTxtView;
 	public list_log: fgui.GList;
-	public static URL: string = "ui://vith2b66sbd01";
+	public static url: string = "ui://vith2b66sbd01";
 
 	public static createInstance(): ComTrain {
 		return <ComTrain>(fgui.UIPackage.createObject("PkgMain", "ComTrain"));

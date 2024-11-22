@@ -13,10 +13,10 @@ import { RenderChooseBattleView } from "../../view/PkgBattle/view/renders/Render
 
 export default class PkgBattleBinder {
 	public static bindAll(): void {
-		fgui.UIObjectFactory.setExtension(UIBattleConfirm.URL, UIBattleConfirmView);
-		fgui.UIObjectFactory.setExtension(ComBattleConfirm.URL, ComBattleConfirmView);
-		fgui.UIObjectFactory.setExtension(UIBattle.URL, UIBattleView);
-		fgui.UIObjectFactory.setExtension(UIChooseBattle.URL, UIChooseBattleView);
-		fgui.UIObjectFactory.setExtension(RenderChooseBattle.URL, RenderChooseBattleView);
+		fgui.UIObjectFactory.setExtension(UIBattleConfirm.url, UIBattleConfirmView);
+		fgui.UIObjectFactory.setExtension(ComBattleConfirm.url, ComBattleConfirmView);
+		fgui.UIObjectFactory.setExtension(UIBattle.url, UIBattleView);
+		fgui.UIObjectFactory.setExtension(UIChooseBattle.url, UIChooseBattleView);
+		fgui.UIObjectFactory.setExtension(RenderChooseBattle.url, RenderChooseBattleView);
 	}
 }

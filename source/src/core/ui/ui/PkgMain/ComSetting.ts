@@ -10,7 +10,7 @@ export default class ComSetting extends fgui.GComponent {
 	public btn_clearAccount: BtnTxtView;
 	public btn_back: BtnTxtView;
 	public trans_show: fgui.Transition;
-	public static URL: string = "ui://vith2b66g59f2g";
+	public static url: string = "ui://vith2b66g59f2g";
 
 	public static createInstance(): ComSetting {
 		return <ComSetting>(fgui.UIPackage.createObject("PkgMain", "ComSetting"));

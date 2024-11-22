@@ -5,6 +5,6 @@ import { UILoginView } from "../../view/PkgLogin/view/UILoginView";
 
 export default class PkgLoginBinder {
 	public static bindAll(): void {
-		fgui.UIObjectFactory.setExtension(UILogin.URL, UILoginView);
+		fgui.UIObjectFactory.setExtension(UILogin.url, UILoginView);
 	}
 }

@@ -13,7 +13,7 @@ export const enum ComZhiZuoMsg {
 }
 
 export class ComZhiZuoView extends ExtensionClass<IView, ComZhiZuo>(ComZhiZuo) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_jpyl, btn_dzzb, btn_zjzb, btn_czzb, btn_bshc, btn_zztz, btn_fjzb, btn_fjbs, btn_yjhc } = this;

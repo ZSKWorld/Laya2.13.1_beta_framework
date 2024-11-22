@@ -31,7 +31,7 @@ export class ComShopCtrl extends BaseViewCtrl<ComShopView, ComShopData> {
 		this.addMessage(ComShopMsg.OnBtnHeiShiClick, this.refreshListByType, [SellType.HeiShi]);
 		this.addMessage(ComShopMsg.OnBtnXianJieClick, this.refreshListByType, [SellType.XianJie]);
 
-		UIUtil.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
+		UIUtil.setList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
 
 	override onEnable() {

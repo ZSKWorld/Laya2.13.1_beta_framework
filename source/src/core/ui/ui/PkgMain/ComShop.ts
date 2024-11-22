@@ -13,7 +13,7 @@ export default class ComShop extends fgui.GComponent {
 	public btn_heiShi: BtnTxtView;
 	public btn_xianJie: BtnTxtView;
 	public list_item: fgui.GList;
-	public static URL: string = "ui://vith2b66sbd03";
+	public static url: string = "ui://vith2b66sbd03";
 
 	public static createInstance(): ComShop {
 		return <ComShop>(fgui.UIPackage.createObject("PkgMain", "ComShop"));

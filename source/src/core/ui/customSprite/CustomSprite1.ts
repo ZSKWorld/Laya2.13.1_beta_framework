@@ -11,11 +11,11 @@ class DissValue2D extends Laya.Value2D {
 export class CustomSprite1 extends BaseCustomSprite<DissValue2D> {
 
     //定义一个shaderid  用于laya在查找shader 时使用
-    static MainID: number = 1000;
+    static readonly mainID: number = 1000;
 
     constructor() {
         super();
-        this.shaderValue = new DissValue2D(CustomSprite1.MainID, 0);
+        this.shaderValue = new DissValue2D(CustomSprite1.mainID, 0);
     }
 
     /**

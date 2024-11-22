@@ -5,7 +5,7 @@ export const enum UIChooseBattleMsg {
 }
 
 export class UIChooseBattleView extends ExtensionClass<IView, UIChooseBattle>(UIChooseBattle) {
-	static readonly PkgRes = ResPath.PkgPath.PkgBattle;
+	static readonly pkgRes = ResPath.PkgPath.PkgBattle;
 
 	override onCreate() {
 		const { btn_back } = this;

@@ -22,15 +22,15 @@ import { ComRedDotView } from "../../view/PkgCommon/view/coms/ComRedDotView";
 
 export default class PkgCommonBinder {
 	public static bindAll(): void {
-		fgui.UIObjectFactory.setExtension(ComWaiting.URL, ComWaitingView);
-		fgui.UIObjectFactory.setExtension(UIWaiting.URL, UIWaitingView);
-		fgui.UIObjectFactory.setExtension(UILoading1.URL, UILoading1View);
-		fgui.UIObjectFactory.setExtension(UILoading2.URL, UILoading2View);
-		fgui.UIObjectFactory.setExtension(ComTipInfo.URL, ComTipInfoView);
-		fgui.UIObjectFactory.setExtension(BtnTxt.URL, BtnTxtView);
-		fgui.UIObjectFactory.setExtension(Pro1.URL, Pro1);
-		fgui.UIObjectFactory.setExtension(UIConfirm.URL, UIConfirmView);
-		fgui.UIObjectFactory.setExtension(ComConfirm.URL, ComConfirmView);
-		fgui.UIObjectFactory.setExtension(ComRedDot.URL, ComRedDotView);
+		fgui.UIObjectFactory.setExtension(ComWaiting.url, ComWaitingView);
+		fgui.UIObjectFactory.setExtension(UIWaiting.url, UIWaitingView);
+		fgui.UIObjectFactory.setExtension(UILoading1.url, UILoading1View);
+		fgui.UIObjectFactory.setExtension(UILoading2.url, UILoading2View);
+		fgui.UIObjectFactory.setExtension(ComTipInfo.url, ComTipInfoView);
+		fgui.UIObjectFactory.setExtension(BtnTxt.url, BtnTxtView);
+		fgui.UIObjectFactory.setExtension(Pro1.url, Pro1);
+		fgui.UIObjectFactory.setExtension(UIConfirm.url, UIConfirmView);
+		fgui.UIObjectFactory.setExtension(ComConfirm.url, ComConfirmView);
+		fgui.UIObjectFactory.setExtension(ComRedDot.url, ComRedDotView);
 	}
 }

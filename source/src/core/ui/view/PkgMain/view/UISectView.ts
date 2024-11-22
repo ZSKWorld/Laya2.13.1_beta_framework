@@ -11,7 +11,7 @@ export const enum UISectMsg {
 }
 
 export class UISectView extends ExtensionClass<IView, UISect>(UISect) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_sect0, btn_sect1, btn_sect2, btn_sect3, btn_sect4, btn_sect5, btn_submit } = this;

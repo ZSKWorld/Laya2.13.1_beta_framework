@@ -15,7 +15,7 @@ export default class UIEquipmentInfo extends fgui.GComponent {
 	public btn_takeoff: BtnTxtView;
 	public txt_equipInfo1: fgui.GRichTextField;
 	public txt_equipInfo2: fgui.GRichTextField;
-	public static URL: string = "ui://vith2b66sbd01b";
+	public static url: string = "ui://vith2b66sbd01b";
 
 	public static createInstance(): UIEquipmentInfo {
 		return <UIEquipmentInfo>(fgui.UIPackage.createObject("PkgMain", "UIEquipmentInfo"));

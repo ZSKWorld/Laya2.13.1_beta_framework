@@ -1,15 +1,15 @@
 import UISnake from "../../../ui/PkgLittleGame/UISnake";
 
 export const enum UISnakeMsg {
-	OnBtnBackClick = "UISnake_OnBtnBackClick",
+    OnBtnBackClick = "UISnake_OnBtnBackClick",
 }
 
 export class UISnakeView extends ExtensionClass<IView, UISnake>(UISnake) {
-    static readonly PkgRes = ResPath.PkgPath.PkgLittleGame;
+    static readonly pkgRes = ResPath.PkgPath.PkgLittleGame;
 
-	override onCreate() {
+    override onCreate() {
         const { btn_back } = this;
-		btn_back.onClick(this, this.sendMessage, [UISnakeMsg.OnBtnBackClick]);
+        btn_back.onClick(this, this.sendMessage, [UISnakeMsg.OnBtnBackClick]);
     }
 
 }

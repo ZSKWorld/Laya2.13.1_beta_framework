@@ -1,4 +1,4 @@
-declare type IViewClass = Class<IView> & { createInstance?(): IView, readonly PkgRes?: string };
+declare type IViewClass = Class<IView> & { createInstance?(): IView, readonly pkgRes?: string };
 
 /**
  * 页面控制器键盘事件装饰器工厂

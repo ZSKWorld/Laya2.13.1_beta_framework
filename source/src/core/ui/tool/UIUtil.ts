@@ -11,7 +11,7 @@ export class UIUtil {
 	 * @param name 贴图名字
 	 * @returns
 	 */
-	static GetFGUITexture(pkg: string, name: string): Laya.Texture {
+	static getFGUITexture(pkg: string, name: string): Laya.Texture {
 		let temp = fgui.UIPackage.getItemByURL(fgui.UIPackage.getItemURL(pkg, name)).getBranch();
 		temp = temp.getHighResolution();
 		temp.load();
@@ -26,7 +26,7 @@ export class UIUtil {
 	 * @param renderFunc 渲染回调
 	 * @param clickFunc 点击回调
 	 */
-	static SetList(
+	static setList(
 		list: fgui.GList,
 		virtual: boolean = true,
 		caller?: any,
@@ -50,7 +50,7 @@ export class UIUtil {
 	 * @param defaultValue 默认值
 	 * @param showItemCount 下拉显示数量
 	 */
-	static SetCombox(
+	static setCombox(
 		cmb: fgui.GComboBox,
 		items: string[],
 		values: any[],
@@ -67,7 +67,7 @@ export class UIUtil {
 		cmb.visibleItemCount = Math.floor(showItemCount) > 0 ? Math.floor(showItemCount) : items.length;
 	}
 
-	static SetInputCheck(input: fairygui.GTextInput, onInput: Laya.Handler) {
+	static setInputCheck(input: fairygui.GTextInput, onInput: Laya.Handler) {
 		let duringComposition = false;
 		const onCompositionStart = (event) => {
 			// 输入中文开始
@@ -90,18 +90,18 @@ export class UIUtil {
 		input.on(Laya.Event.INPUT, null, () => !duringComposition && onInput && onInput.run());
 	}
 
-	static ShowRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
+	static showRewardsTip(title: string, rewards: OriginData<IGoods>[]) {
 		let logStr = richTextMgr.start(title);
 		title && logStr.break();
 		rewards.forEach(v => {
-			const str = GameUtil.GetItemCountStr(v.id, v.count);
+			const str = GameUtil.getItemCountStr(v.id, v.count);
 			tipMgr.showTip(`恭喜获得${ str }`);
 			logStr.append(str).break();
 		});
 		trainLogMgr.addLog(logStr.end());
 	}
 
-	static AnimAlphaIn(bg: fairygui.GObject, panel: fairygui.GObject) {
+	static animAlphaIn(bg: fairygui.GObject, panel: fairygui.GObject) {
 		return new Promise<void>(resolve => {
 			bg.alpha = panel.alpha = 0;
 			panel.setScale(0, 0);
@@ -111,7 +111,7 @@ export class UIUtil {
 		});
 	}
 
-	static AnimAlphaOut(bg: fairygui.GObject, panel: fairygui.GObject) {
+	static animAlphaOut(bg: fairygui.GObject, panel: fairygui.GObject) {
 		return new Promise<void>(resolve => {
 			bg.alpha = 0.8;
 			panel.alpha = 1;

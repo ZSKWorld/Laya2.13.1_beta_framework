@@ -26,7 +26,7 @@ export default class ComXinFa extends fgui.GComponent {
 	public btn_upgrade0: BtnTxtView;
 	public btn_upgrade1: BtnTxtView;
 	public btn_upgrade2: BtnTxtView;
-	public static URL: string = "ui://vith2b66btv51i";
+	public static url: string = "ui://vith2b66btv51i";
 
 	public static createInstance(): ComXinFa {
 		return <ComXinFa>(fgui.UIPackage.createObject("PkgMain", "ComXinFa"));

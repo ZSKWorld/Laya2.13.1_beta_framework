@@ -25,7 +25,7 @@ export class ComGoodsCtrl extends BaseViewCtrl<ComGoodsView, ComGoodsData> {
 		this.addMessage(ComGoodsMsg.OnBtnBookClick, this.refreshListByType, [ItemBagType.Book]);
 		this.addMessage(ComGoodsMsg.OnBtnOtherClick, this.refreshListByType, [ItemBagType.Other]);
 
-		UIUtil.SetList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
+		UIUtil.setList(this.view.list_item, true, this, this.onListRenderer, this.onListClick);
 	}
 
 	override onEnable() {

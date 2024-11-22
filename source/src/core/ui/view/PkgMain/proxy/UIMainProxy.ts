@@ -12,7 +12,7 @@ export class UIMainProxy extends BaseProxy<UIMainCtrl> {
         if (output.rewards?.length) {
             let logStr = richTextMgr.start(`分解${ input.level }级宝石获得`).break();
             output.rewards.forEach(v => {
-                const str = GameUtil.GetItemCountStr(v.id, v.count);
+                const str = GameUtil.getItemCountStr(v.id, v.count);
                 tipMgr.showTip(`恭喜获得${ str }`);
                 logStr.append(str).break();
             });
@@ -25,7 +25,7 @@ export class UIMainProxy extends BaseProxy<UIMainCtrl> {
         if (output.rewards?.length) {
             let logStr = richTextMgr.start(`分解${ input.star }星装备获得`).break();
             output.rewards?.forEach(v => {
-                const str = GameUtil.GetItemCountStr(v.id, v.count);
+                const str = GameUtil.getItemCountStr(v.id, v.count);
                 tipMgr.showTip(`恭喜获得${ str }`);
                 logStr.append(str).break();
             });

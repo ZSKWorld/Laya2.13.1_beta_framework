@@ -20,7 +20,7 @@ export const enum ComXinFaMsg {
 }
 
 export class ComXinFaView extends ExtensionClass<IView, ComXinFa>(ComXinFa) {
-	static readonly PkgRes = ResPath.PkgPath.PkgMain;
+	static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
 	override onCreate() {
 		const { btn_xinFa0, btn_xinFa1, btn_xinFa2, btn_xinFa3, btn_xinFa4, btn_xinFa5, btn_xinFa6, btn_xinFa7, btn_xinFa8, btn_skill0, btn_skill1, btn_skill2, btn_skill3, btn_upgrade0, btn_upgrade1, btn_upgrade2 } = this;

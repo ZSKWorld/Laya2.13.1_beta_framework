@@ -6,7 +6,7 @@ export default class UIWaiting extends fgui.GComponent {
 
 	public com_waitting: ComWaitingView;
 	public txt_info: fgui.GTextField;
-	public static URL: string = "ui://vx9zwser7vow63";
+	public static url: string = "ui://vx9zwser7vow63";
 
 	public static createInstance(): UIWaiting {
 		return <UIWaiting>(fgui.UIPackage.createObject("PkgCommon", "UIWaiting"));

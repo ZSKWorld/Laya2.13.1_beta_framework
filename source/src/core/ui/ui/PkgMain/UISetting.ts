@@ -6,7 +6,7 @@ export default class UISetting extends fgui.GComponent {
 
 	public graph_bg: fgui.GGraph;
 	public com_panel: ComSettingView;
-	public static URL: string = "ui://vith2b66sbd0x";
+	public static url: string = "ui://vith2b66sbd0x";
 
 	public static createInstance(): UISetting {
 		return <UISetting>(fgui.UIPackage.createObject("PkgMain", "UISetting"));

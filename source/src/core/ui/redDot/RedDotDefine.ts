@@ -4,7 +4,7 @@ import { IRedDotNode, RedDotNode } from "./RedDotNode";
 const map: { [key in RDName]: IRedDotNode } = {} as any;
 
 const create = function (parent?: IRedDotNode, path?: string, triggers?: RDTriggerType[]) {
-    return RedDotNode.Create(parent, path, triggers);
+    return RedDotNode.create(parent, path, triggers);
 }
 
 export const RDDefineInit = function () {

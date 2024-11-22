@@ -5,9 +5,9 @@ export const enum UIConfirmMsg {
 }
 
 export class UIConfirmView extends ExtensionClass<IView, UIConfirm>(UIConfirm) {
-    static readonly PkgRes = ResPath.PkgPath.PkgCommon;
+    static readonly pkgRes = ResPath.PkgPath.PkgCommon;
 
-	override onCreate() {
+    override onCreate() {
 
     }
 

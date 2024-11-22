@@ -5,10 +5,10 @@ export const enum BtnMainKindMsg {
 }
 
 export class BtnMainKindView extends ExtensionClass<IView, BtnMainKind>(BtnMainKind) {
-    static readonly PkgRes = ResPath.PkgPath.PkgMain;
+    static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
-	override onCreate() {
-        
+    override onCreate() {
+
     }
 
 }

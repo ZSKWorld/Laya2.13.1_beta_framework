@@ -20,7 +20,7 @@ export class UILoading1Ctrl<V extends IView & Partial<UILoading1View> = UILoadin
         if (this.curTime >= this.deltaTime) {
             this.curTime = 0;
             if (this._tips.length)
-                this.view.txt_tip.text = this._tips[MathUtil.RandomInt(0, this._tips.length - 1)];
+                this.view.txt_tip.text = this._tips[MathUtil.randomInt(0, this._tips.length - 1)];
         }
     }
 

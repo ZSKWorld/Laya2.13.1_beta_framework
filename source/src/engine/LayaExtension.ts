@@ -1,16 +1,16 @@
 
 /** Laya扩展 */
 export class LayaExtension {
-	static Init() {
-		this.ScriptExtend();
-		this.Script3DExtend();
-		this.Vector2Extend();
-		this.TempletExtend();
-		this.SkeletonExtend();
+	static init() {
+		this.scriptExtend();
+		this.script3DExtend();
+		this.vector2Extend();
+		this.templetExtend();
+		this.skeletonExtend();
 	}
 
 	/** Laya.Script完善 */
-	private static ScriptExtend() {
+	private static scriptExtend() {
 		const prototype: Laya.Script & { _onAdded?: () => void } = Laya.Script.prototype;
 		const _onAdded = prototype._onAdded;
 		prototype._onAdded = function () {
@@ -21,7 +21,7 @@ export class LayaExtension {
 		prototype.onAdded = function () { }
 	}
 
-	private static Script3DExtend() {
+	private static script3DExtend() {
 		if (!Laya.Script3D) return;
 		const prototype: Laya.Script3D & { _onAdded?: () => void } = Laya.Script3D.prototype;
 		const _onAdded = prototype._onAdded;
@@ -33,7 +33,7 @@ export class LayaExtension {
 	}
 
 	/** Laya.Vector2扩展 */
-	private static Vector2Extend() {
+	private static vector2Extend() {
 		if (!Laya.Vector2) return;
 		const prototype = Laya.Vector2.prototype;
 		Object.defineProperties(prototype, {
@@ -119,7 +119,7 @@ export class LayaExtension {
 		});
 	}
 
-	private static TempletExtend() {
+	private static templetExtend() {
 		const prototype = Laya.Templet.prototype;
 		Object.defineProperties(prototype, {
 			skBufferUrl: {
@@ -128,12 +128,12 @@ export class LayaExtension {
 		});
 	}
 
-	private static SkeletonExtend() {
+	private static skeletonExtend() {
 		const prototype = Laya.Skeleton.prototype;
 		const init = prototype.init;
 		prototype.init = function (templet: Laya.Templet, aniMode = 0) {
 			init.call(this, templet, aniMode);
-            this._player.on(Laya.Event.COMPLETE, this, this._onComplete);
+			this._player.on(Laya.Event.COMPLETE, this, this._onComplete);
 		};
 		prototype["_onComplete"] = function () {
 			this.event(Laya.Event.COMPLETE);

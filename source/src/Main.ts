@@ -47,13 +47,13 @@ class Main {
 		// Laya.alertGlobalError(true);
 		Laya.Browser.document.bgColor = "#666666";
 
-		LayaRepair.Fix();
-		LayaExtension.Init();
-		FGUIRepair.Fix();
-		FGUIExtension.Init();
-		ViewExtend.Init();
+		LayaRepair.fix();
+		LayaExtension.init();
+		FGUIRepair.fix();
+		FGUIExtension.init();
+		ViewExtend.init();
 		fgui.UIConfig.packageFileExtension = "zip";
-		Global.Init();
+		Global.init();
 
 		//激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
 		Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);

@@ -8,7 +8,7 @@ interface IPoint {
 /** 匀速贝塞尔曲线，文档：https://www.freesion.com/article/2280255606/ */
 export class Bezier {
     /** 普通2d贝塞尔点 */
-    static BezierPoint2D(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
+    static bezierPoint2D(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
         const u = 1 - t;
         const tt = t * t;
         const uu = u * u;
@@ -28,16 +28,16 @@ export class Bezier {
      * @param pointNum 点数量
      * @returns
      */
-    static BezierPoints2D(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
+    static bezierPoints2D(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
         const points: IPoint[] = [];
         for (let i = 0; i <= pointNum; i++) {
-            points.push(this.BezierPoint2D(start, end, control, i / pointNum))
+            points.push(this.bezierPoint2D(start, end, control, i / pointNum))
         }
         return points;
     }
 
     /** 匀速2d贝塞尔点 */
-    static UniformBezierPoint2D(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
+    static uniformBezierPoint2D(start: IPoint, end: IPoint, control: IPoint, t: number, out?: IPoint) {
         let ax = start.x - 2 * control.x + end.x;
         let ay = start.y - 2 * control.y + end.y;
         let bx = 2 * control.x - 2 * start.x;
@@ -48,11 +48,11 @@ export class Bezier {
         let C = bx * bx + by * by;
 
         //曲线总长度
-        const total_length = this.GetLength(A, B, C, 1);
+        const total_length = this.getLength(A, B, C, 1);
         //按照线形增长,此时对应的曲线长度
         let l = t * total_length;
         //根据 L 函数的反函数，求得 l 对应的 t 值
-        t = this.InvertLength(A, B, C, t, l);
+        t = this.invertLength(A, B, C, t, l);
         let _1_t = (1 - t) * (1 - t), _2_1_t = 2 * (1 - t) * t, tt = t * t;
         //根据贝塞尔曲线函数，求得取得此时的x,y坐标
         let x = _1_t * start.x + _2_1_t * control.x + tt * end.x;
@@ -71,7 +71,7 @@ export class Bezier {
      * @param pointNum 点数量
      * @returns
      */
-    static UniformBezierPoints2D(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
+    static uniformBezierPoints2D(start: IPoint, end: IPoint, control: IPoint, pointNum: number) {
         let ax = start.x - 2 * control.x + end.x;
         let ay = start.y - 2 * control.y + end.y;
         let bx = 2 * control.x - 2 * start.x;
@@ -83,13 +83,13 @@ export class Bezier {
 
         const points: IPoint[] = [];
         //曲线总长度
-        const total_length = this.GetLength(A, B, C, 1);
+        const total_length = this.getLength(A, B, C, 1);
         for (let i = 0; i <= pointNum; i++) {
             let t = i / pointNum;
             //按照线形增长,此时对应的曲线长度
             let l = t * total_length;
             //根据 L 函数的反函数，求得 l 对应的 t 值
-            t = this.InvertLength(A, B, C, t, l);
+            t = this.invertLength(A, B, C, t, l);
             let _1_t = (1 - t) * (1 - t);
             let _2_1_t = 2 * (1 - t) * t;
             let tt = t * t;
@@ -101,7 +101,7 @@ export class Bezier {
         return points;
     }
 
-    private static GetLength(a: number, b: number, c: number, t: number) {
+    private static getLength(a: number, b: number, c: number, t: number) {
         let temp1 = Math.sqrt(c + t * (b + a * t));
         let temp2 = (2 * a * t * temp1 + b * (temp1 - Math.sqrt(c)));
         let temp3 = Math.log(b + 2 * Math.sqrt(a) * Math.sqrt(c));
@@ -111,10 +111,10 @@ export class Bezier {
         return (temp5 + temp6) / (8 * Math.pow(a, 1.5));
     }
 
-    private static InvertLength(a: number, b: number, c: number, t: number, l: number) {
+    private static invertLength(a: number, b: number, c: number, t: number, l: number) {
         let t1 = t, t2: number;
         do {
-            t2 = t1 - (this.GetLength(a, b, c, t1) - l) / this.GetSpeed(a, b, c, t1);
+            t2 = t1 - (this.getLength(a, b, c, t1) - l) / this.getSpeed(a, b, c, t1);
             if (Math.abs(t1 - t2) < 0.000001) // 如果几乎不再变化，即收敛
                 break;
             t1 = t2;
@@ -123,15 +123,15 @@ export class Bezier {
     }
 
     /**速度函数 s(t_) = Sqrt[A*t*t+B*t+C] */
-    private static GetSpeed(a: number, b: number, c: number, t: number) {
+    private static getSpeed(a: number, b: number, c: number, t: number) {
         return Math.sqrt(a * t * t + b * t + c);
     }
 
-    private static tempV30 = new Vector3();
-    private static tempV31 = new Vector3();
+    private static _tempV30 = new Vector3();
+    private static _tempV31 = new Vector3();
     /** 二阶贝塞尔曲线 */
-    static BezierPoint3D(startPos: Vector3, ctrlPos: Vector3, endPos: Vector3, t: number, out: Vector3) {
-        const { tempV30 } = this;
+    static bezierPoint3D(startPos: Vector3, ctrlPos: Vector3, endPos: Vector3, t: number, out: Vector3) {
+        const { _tempV30: tempV30 } = this;
         Vector3.subtract(ctrlPos, startPos, tempV30);
         Vector3.scale(tempV30, t, tempV30);
         Vector3.add(startPos, tempV30, tempV30);
@@ -147,8 +147,8 @@ export class Bezier {
     }
 
     /** 三阶贝塞尔曲线 */
-    static CubicBezierPoint3D(a: Vector3, b: Vector3, c: Vector3, d: Vector3, t: number, cc: Vector3) {
-        const { tempV30: aa, tempV31: bb } = this;
+    static cubicBezierPoint3D(a: Vector3, b: Vector3, c: Vector3, d: Vector3, t: number, cc: Vector3) {
+        const { _tempV30: aa, _tempV31: bb } = this;
 
         Vector3.subtract(b, a, aa);
         Vector3.scale(aa, t, aa);

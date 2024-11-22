@@ -180,7 +180,7 @@ WindowImmit("uiMgr", new UIManager());
 WindowImmit("netService", NetService);
 
 export default class Global {
-    static Init() {
+    static init() {
         platformMgr.init();
     }
 }

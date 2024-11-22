@@ -3,7 +3,7 @@
 export default class ItemXinFa extends fgui.GLabel {
 
 	public c1: fgui.Controller;
-	public static URL: string = "ui://vith2b66btv51j";
+	public static url: string = "ui://vith2b66btv51j";
 
 	public static createInstance(): ItemXinFa {
 		return <ItemXinFa>(fgui.UIPackage.createObject("PkgMain", "ItemXinFa"));
