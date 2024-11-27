@@ -1,6 +1,6 @@
 /** Laya修复 */
 export class LayaRepair {
-    static fix() {
+    static repair() {
         this.fixLayaPoolSign();
         this.fixTTFLoaderCallback();
         this.fixSkeletonLoadEvent();

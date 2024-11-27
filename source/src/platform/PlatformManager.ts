@@ -1,5 +1,6 @@
 import { IPlatform, PlatformType } from "./PlatformDefine";
 import { PlatformWeb } from "./PlatformWeb";
+import { PlatformWX } from "./PlatformWX";
 
 class PlatformManager {
     private _platform: IPlatform;
@@ -12,7 +13,7 @@ class PlatformManager {
 
     init() {
         if (!this._platform) {
-            if (Laya.Browser.onPC) this._platform = new PlatformWeb();
+            if (Laya.Browser.onMiniGame) this._platform = new PlatformWX();
             else this._platform = new PlatformWeb();
             this._platform.init();
         }

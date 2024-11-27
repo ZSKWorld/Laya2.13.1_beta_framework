@@ -1,6 +1,6 @@
 /** FGUI修复 */
 export class FGUIRepair {
-	static fix() {
+	static repair() {
 		this.ubbTagI();
 		this.playTransitionAction();
 		this.fixGUIInputSingleLine();

@@ -1,7 +1,7 @@
 
 /** Laya扩展 */
 export class LayaExtension {
-	static init() {
+	static extends() {
 		this.scriptExtend();
 		this.script3DExtend();
 		this.vector2Extend();
