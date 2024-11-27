@@ -5,7 +5,7 @@ import { PlatformType } from "./PlatformDefine";
 export class PlatformWeb extends PlatformBase {
     override get res() {
         return [
-            ResPath.FontPath.Font16,
+            ResPath.FontPath.Font08,
         ];
     }
     override get safeArea() {
@@ -36,8 +36,8 @@ export class PlatformWeb extends PlatformBase {
         Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
         // Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_WIDTH;
         Laya.stage.screenMode = Laya.Stage.SCREEN_NONE;
-        Laya.Text.defaultFont = ResPath.FontName.Font16;
-        fgui.UIConfig.defaultFont = ResPath.FontName.Font16;
+        Laya.Text.defaultFont = ResPath.FontName.Font08;
+        fgui.UIConfig.defaultFont = ResPath.FontName.Font08;
         // Laya.Text.defaultFont = "SimHei";
         // fgui.UIConfig.defaultFont = "SimHei";
         Laya.stage.on(Laya.Event.VISIBILITY_CHANGE, this, () => {

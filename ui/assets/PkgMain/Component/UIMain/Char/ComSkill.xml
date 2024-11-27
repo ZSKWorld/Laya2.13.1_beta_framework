@@ -43,7 +43,7 @@
     <group id="n196_pogd" name="n196" xy="100,165" size="860,1096" advanced="true">
       <gearDisplay controller="ctrlState" pages="0"/>
     </group>
-    <list id="n193_pogd" name="list_skill" xy="10,10" size="1040,1186" group="n195_pogd" layout="flow_hz" overflow="scroll" scrollBarFlags="128" lineGap="10" colGap="10" lineItemCount="4" defaultItem="ui://vith2b66sbd0z" autoItemSize="true">
+    <list id="n193_pogd" name="list_skill" xy="15,20" size="1029,1166" group="n195_pogd" layout="flow_hz" overflow="scroll" scrollBarFlags="128" lineGap="15" colGap="15" lineItemCount="4" defaultItem="ui://vith2b66sbd0z">
       <item/>
       <item/>
       <item/>
@@ -58,10 +58,10 @@
       <item/>
       <item/>
     </list>
-    <component id="n194_pogd" name="n194" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="808,1206" size="242,80" group="n195_pogd" controller="ctrlBgColor,1">
+    <component id="n194_pogd" name="n194" src="sbd05i" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="803,1201" size="242,80" group="n195_pogd" controller="ctrlBgColor,1">
       <Button title="返回" titleColor="#ffffff" titleFontSize="45" controller="ctrlState" page="0"/>
     </component>
-    <group id="n195_pogd" name="n195" xy="10,10" size="1040,1276" advanced="true">
+    <group id="n195_pogd" name="n195" xy="15,20" size="1030,1261" advanced="true">
       <gearDisplay controller="ctrlState" pages="1"/>
     </group>
   </displayList>
