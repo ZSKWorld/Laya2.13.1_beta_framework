@@ -1,0 +1,6 @@
+import { BaseProxy } from "#baseProxyPath#";
+import { #viewCtrl# } from "#viewCtrlPath#";
+
+export class #proxyName# extends BaseProxy<#viewCtrl#> {
+    
+}

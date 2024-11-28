@@ -1,0 +1,166 @@
+{
+    "enums":[
+        [["DuelDiscardType"], ["Attacker", "", 1], ["Defender"]],
+        [["DuelCamp"], ["Red", "", 1], ["Black"]],
+        [["EDecorateSaveType"], ["LobbyBackground", "", 1], ["GameBackground"], ["Effects"], ["CardFaces"]],
+        [["ESeasonState"], ["Running", "", 1], ["Settlement"], ["End"]],
+        [["EPokerGameMode"], ["Normal", "", 1], ["BuXiPai"], ["Laizi"]],
+        [["EEffectType"], ["Chuntian", "", 1], ["Huojian"], ["Zhadan"], ["Feiji"], ["Liandui"], ["Shunzi"]],
+        [["ECardFaceType"], ["RedJoker", "", 1], ["BlackJoker"], ["A"], ["K"], ["Q"], ["J"], ["Number"], ["Bg", "", 100]],
+        [["TexasCamp"], ["Persia", "", 1], ["Rome"]],
+        [["LeaderBoardType"], ["Season", "", 0], ["LostMoneyMost"], ["SadLandlord"], ["PiggyBank"], ["Clown"]],
+        [["EClownDeskStatus", "小丑牌对局状态"], ["None", "", 0], ["Battle", "战斗中"], ["BattleWin", "战斗胜利"], ["Shop", "商店中"], ["ChooseGoods", "选择物品中"], ["GameOver", "游戏结束"]],
+        [["EClownCardType", "小丑牌牌面类型"], ["None", "无", 0], ["SoulCard", "手牌"], ["JokerCard", "小丑牌"], ["ItemCard", "道具"], ["PackCard", "卡包"]],
+        [["EClownMaterial", "小丑牌材质类型"], ["None", "无", 0], ["Increase", "升值"], ["Double", "加倍"], ["BlackGold", "黑金"], ["Customization", "定制"], ["Metal", "金属"], ["Gold", "黄金"]],
+        [["EClownEdition", "小丑牌卡面类型"], ["None", "无", 0], ["Flash", "闪光"], ["Laser", "镭射"], ["Rainbow", "彩虹"], ["Transparent", "透明"]],
+        [["EClownSeal", "小丑牌印章类型"], ["None", "无", 0], ["Golden", "金色章"], ["Red", "红色章"], ["Purple", "紫色章"]],
+        [["EClownEffectChange", "小丑牌出牌生效的变化类型"], ["BasePoint", "底分变化", 1], ["Ratio", "倍率变化"], ["Other", "其他变化"]],
+        [["EClownOtherChange", "小丑牌出牌生效的其他变化类型"], ["None", "无变化", 0], ["Enhance", "卡牌材质变化"], ["Destroy", "卡牌被摧毁"], ["AddCoin", "增加金币"], ["AddProp", "获得道具"], ["DealCard", "抽牌"], ["DropCard", "弃牌"], ["AddHandCard", "凭空加入手牌"]],
+        [["EClownNumberChange", "小丑牌出牌生效的数值的变化类型"], ["None", "无", 0], ["Addition", "加法变化"], ["Multiplication", "乘法变化"]]
+    ],
+    //omissible 是否是可选字段
+    "client": {},
+    "poker.auth": {},
+    "poker.event": {
+        "GameRecord": {
+            "events": { "type": "IEvent" },
+            "rule": { "omissible": true }
+        },
+        "Event": {
+            "buffer": { "type": "any" }
+        },
+        "EventWaitDuelDiscard":{
+            "discard_type":{ "type":"DuelDiscardType" }
+        }
+    },
+    "poker.game": {
+        "NotifyWaitDuelDiscard":{
+            "discard_type":{ "type":"DuelDiscardType" }
+        },
+        "PlayerStageStart":{
+            "camp":{ "tsType": "DuelCamp & TexasCamp", "luaType":"DuelCamp | TexasCamp" }
+        }
+    },
+    "poker.lobby": {
+        "NotifyAccountGameEnd": {
+            "uuid": { "omissible": true },
+            "game_create_time": { "omissible": true },
+            "game_end_time": { "omissible": true },
+            "settlement_end_time": { "omissible": true }
+        },
+        "ReqSaveDecoration":{
+            "save_type":{ "type":"EDecorateSaveType" },
+            "lobby_background":{"omissible":true},
+            "game_background":{"omissible":true},
+            "effects":{"omissible":true},
+            "card_faces":{"omissible":true}
+        },
+        "AccountDecorationUpdate":{
+            "lobby_background":{"omissible":true},
+            "game_background":{"omissible":true},
+            "effects":{"omissible":true},
+            "card_faces":{"omissible":true}
+        },
+        "AccountSeasonResult":{
+            "season_state":{ "type":"ESeasonState" }
+        }
+    },
+    "poker.match": {},
+    "poker.payment": {},
+    "poker.room": {},
+    "poker.share": {
+        "LandlordPlaySetting": {
+            "game_mode": { 
+                "omissible": true,
+                "type": "EPokerGameMode"
+            },
+            "dev": { "omissible": true }
+        },
+        "DuelPlaySetting": {
+            "dev": { "omissible": true }
+        },
+        "T3CPlaySetting": {
+            "dev": { "omissible": true }
+        },
+        "PlayRuleSetting": {
+            "rule": { "omissible": true },
+            "landlord":{ "omissible":true },
+            "duel":{ "omissible":true },
+            "t3c":{ "omissible":true }
+        },
+        "Item": {
+            "update_time": { "omissible": true },
+            "replace": { "omissible": true }
+        },
+        "DevPlaySetting": {
+            "cheat_mode": { "omissible": true }
+        },
+        "CardUnion": {
+            "entity_primary": { "omissible": true },
+            "entity_secondary": { "omissible": true }
+        },
+        "Multiple": {
+            "open_hand": { "omissible": true },
+            "grab_lord": { "omissible": true },
+            "boom": { "omissible": true },
+            "spring": { "omissible": true },
+            "critical_hits": { "omissible": true },
+            "four_king": { "omissible": true },
+            "straight_flush": { "omissible": true },
+            "royal_flush": { "omissible": true },
+            "destroyed_tower": { "omissible": true },
+            "dizhu": { "omissible": true }
+        },
+        "EffectData":{
+            "type":{ "type":"EEffectType" }
+        },
+        "CardFaceData":{
+            "type":{ "type":"ECardFaceType" }
+        },
+        "AccountDecoration":{
+            "lobby_background":{"omissible":true},
+            "game_background":{"omissible":true},
+            "effect_main_group":{"omissible":true},
+            "effects":{"omissible":true},
+            "card_face_main_group":{"omissible":true},
+            "card_faces":{"omissible":true}
+        },
+        "PlayerStageEndSnap":{
+            "hp":{ "omissible":true },
+            "tower_hp":{ "omissible":true }
+        }
+    },
+    "poker.trigger": {
+        "GameEffect": {
+            "buffer": { "type": "IEvent" }
+        }
+    },
+    "poker.gameshare":{
+        "JokDesktop":{
+            "status":{ "type":"EClownDeskStatus" }
+        },
+        "JokGoods":{
+            "type":{"type":"EClownCardType"}
+        },
+        "JokPackResult":{
+            "type":{"type":"EClownCardType"}
+        },
+        "JokCardEnhance":{
+            "material": {"type":"EClownMaterial"},
+            "edition": {"type":"EClownEdition"},
+            "seal": {"type":"EClownSeal"}
+        },
+        "JokCardEffect": {
+            "change_type":{"type":"EClownEffectChange"}
+        },
+        "JokCardUnionEffect": {
+            "change_type":{"type":"EClownEffectChange"}
+        },
+        "JokNumberChange": {
+            "type":{"type":"EClownNumberChange"}
+        },
+        "JokOtherChange": {
+            "type":{"type":"EClownOtherChange"}
+        }
+    }
+}

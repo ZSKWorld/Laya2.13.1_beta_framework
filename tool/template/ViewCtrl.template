@@ -1,0 +1,15 @@
+import { BaseViewCtrl } from "#baseViewCtrlPath#";
+import { #viewMsg#, #viewClass# } from "#viewPath#";
+
+export interface #dataName# {
+
+}
+
+export class #className# extends BaseViewCtrl<#viewClass#, #dataName#> {
+
+    override onAdded() {
+#btnMessage#
+    }
+
+#btnFunctions#
+}

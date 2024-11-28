@@ -51,7 +51,7 @@
         {
             "label": "创建 View & ViewCtrl & ViewProxy",
             "type": "shell",
-            "command": "node ../../tool/bin/js/BatMain.js 0",
+            "command": "node ../tool/bin/js/BatMain.js 0",
             "presentation": {
                 "close": true
             },
@@ -60,7 +60,7 @@
         {
             "label": "导出表配置",
             "type": "shell",
-            "command": "node ../../tool/bin/js/BatMain.js 1",
+            "command": "node ../tool/bin/js/BatMain.js 1",
             "presentation": {
                 "close": true
             },
@@ -69,7 +69,7 @@
         {
             "label": "更新资源路径",
             "type": "shell",
-            "command": "node ../../tool/bin/js/BatMain.js 2",
+            "command": "node ../tool/bin/js/BatMain.js 2",
             "presentation": {
                 "close": true
             },
@@ -78,7 +78,7 @@
         {
             "label": "用户数据事件",
             "type": "shell",
-            "command": "node ../../tool/bin/js/BatMain.js 3",
+            "command": "node ../tool/bin/js/BatMain.js 3",
             "presentation": {
                 "close": true
             },
@@ -87,7 +87,7 @@
         {
             "label": "更新网络相关",
             "type": "shell",
-            "command": "node ../../tool/bin/js/BatMain.js 4",
+            "command": "node ../tool/bin/js/BatMain.js 4",
             "presentation": {
                 "close": true
             },

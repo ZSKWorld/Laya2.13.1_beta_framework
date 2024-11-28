@@ -1,0 +1,7 @@
+1. npm i layabox-esbuild -g   //安装layabox-esbuild 
+2. layabox-esbuild -s  //构建项目
+
+//文档网址 https://gitee.com/yayaluoya/layabox-esbuild
+注意事项：
+1. 不可用declare 声明的 const enum， 会报错
+2. 识别不了自定义shader的.vs .fs文件，会报错

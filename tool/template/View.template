@@ -1,0 +1,14 @@
+import #fileName# from "#viewPath#";
+
+export const enum #fileName#Msg {
+#messages#
+}
+
+export class #className# extends ExtensionClass<IView, #fileName#>(#fileName#) {
+    static readonly pkgRes = ResPath.PkgPath.#packageName#;
+
+	override onCreate() {
+        #allComp#
+    }
+
+}

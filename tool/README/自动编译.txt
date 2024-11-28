@@ -1,0 +1,8 @@
+1. npm gulp
+2. npm i gulp browser-sync --save-dev
+3. 创建 gulpfile.js
+4. 修改package.json
+    "main": "gulpfile.js",
+    "scripts": {
+        "start": "gulp",
+    },
