@@ -5,6 +5,7 @@ import { WebSocket } from "./WebSocket";
 export class NetService {
 
 }
+WindowImmit("netService", NetService);
 
 const serviceKeys = [#serviceKeys#];
 serviceKeys.forEach(key => {
