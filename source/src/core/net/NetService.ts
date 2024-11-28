@@ -5,6 +5,7 @@ import { WebSocket } from "./WebSocket";
 export class NetService {
 
 }
+WindowImmit("netService", NetService);
 
 const serviceKeys = ["register", "login", "signIn", "clearAccount", "useItem", "sellItem", "changeCollect", "decomposeGem", "dressEquip", "takeOffEquip", "sellEquip", "decomposeEquip", "enterBattle", "exitBattle", "startGather", "breakOffGather", "addFriend", "friendMsg", "buyGoods"];
 serviceKeys.forEach(key => {
@@ -17,5 +18,3 @@ serviceKeys.forEach(key => {
         }
     })
 });
-
-WindowImmit("netService", NetService);
