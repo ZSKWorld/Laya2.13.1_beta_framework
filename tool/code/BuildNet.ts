@@ -32,8 +32,7 @@ export class BuildNet extends BuildBase {
     }
 
     private buildNetCMD() {
-        const matches: string[] = [];
-        Object.keys(this._allCMDCtrls).forEach(v => matches.push(...this._allCMDCtrls[v]));
+        const matches: string[] = Object.values(this._allCMDCtrls).flat();
         let data = TS_MODIFY_TIP + "\nexport const enum NetCMD {\n";
         matches.unshift("syncInfo(data: IUser): void");
         matches.forEach(match => {
@@ -70,15 +69,25 @@ export class BuildNet extends BuildBase {
     }
 
     private buildService() {
+        const methods: string[] = [];
         const serviceKeys: string[] = [];
         const netServiceDeclareInterfaces: string[] = [];
-        Object.keys(this._allCMDCtrls).forEach(v => {
+        const { _allCMDCtrls, _serviceTemp, _serviceDeclareTemp } = this;
+        Object.keys(_allCMDCtrls).forEach(v => {
             netServiceDeclareInterfaces.push(v);
-            this._allCMDCtrls[v].forEach(func => serviceKeys.push(`"${ func.substring(0, func.indexOf("(")) }"`));
+            _allCMDCtrls[v].forEach(func => {
+                const left = func.indexOf("(");
+                const right = func.indexOf(")");
+                serviceKeys.push(`"${ func.substring(0, left) }"`);
+                const type = func.substring(left + 1, right).split(":")[1].trim().replace("Input", "Output");
+                methods.push(`\t${ func.substring(0, right + 1) }: Promise<${ type }>;`);
+            });
         });
-        const netService = this._serviceTemp.replace(/#serviceKeys#/g, serviceKeys.join(", "));
+        const netService = _serviceTemp.replace(/#serviceKeys#/g, serviceKeys.join(", "));
         fs.writeFileSync(NetServicePath, netService.trim());
-        const netServiceDeclare = this._serviceDeclareTemp.replace(/#interfaces#/g, netServiceDeclareInterfaces.join(", "));
+        const netServiceDeclare = _serviceDeclareTemp
+            .replace(/#methods#/g, methods.join("\n"))
+            .replace(/#interfaces#/g, netServiceDeclareInterfaces.join(", "));
         fs.writeFileSync(NetServiceDeclarePath, netServiceDeclare);
     }
 

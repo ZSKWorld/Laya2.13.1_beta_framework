@@ -26,7 +26,7 @@ declare interface ILoginOutput extends IUserOutput {
 declare interface ISignInInput extends IUserInput {
 }
 
-declare interface ISignInput extends IUserOutput {
+declare interface ISignInOutput extends IUserOutput {
 }
 
 declare interface IClearAccountInput extends IUserInput {
