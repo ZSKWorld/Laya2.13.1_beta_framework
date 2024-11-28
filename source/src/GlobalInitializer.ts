@@ -39,14 +39,13 @@ WindowImmit("ShowConfirm", (title: string, msg: string, cancel = true) => {
         return platform.showConfirm(title, msg);
 });
 
-export default class Global {
-    static init() {
-        let platform: IPlatform;
-        switch (GameConfig.platform) {
-            case PlatformType.Web: platform = new PlatformWeb(); break;
-            case PlatformType.Wechat: platform = new PlatformWX(); break;
-        }
-        platform.init();
-        WindowImmit("platform", platform);
+export function GlobalInitialize() {
+    let platform: IPlatform;
+    switch (GameConfig.platform) {
+        case PlatformType.Web: platform = new PlatformWeb(); break;
+        case PlatformType.Wechat: platform = new PlatformWX(); break;
+        default: platform = new PlatformWeb(); break;
     }
+    platform.init();
+    WindowImmit("platform", platform);
 }

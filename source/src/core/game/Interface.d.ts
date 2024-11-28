@@ -14,28 +14,28 @@ declare interface IEventManager extends Laya.EventDispatcher {
 }
 
 declare interface ILoadManager {
-    load(
-        url: string | (string | Laya.loadItem)[],
-        complete?: Laya.Handler | null,
-        progress?: Laya.Handler | null,
-        type?: string | null,
+    load<T extends string | string[] | Laya.loadItem[]>(
+        url: T,
+        complete?: Laya.Handler,
+        progress?: Laya.Handler,
+        type?: string,
         priority?: number,
         cache?: boolean,
-        group?: string | null,
+        group?: string,
         ignoreCache?: boolean,
         useWorkerLoader?: boolean
-    ): Promise<any>;
-    create(
-        url: string | (string | Laya.createItem)[],
-        complete?: Laya.Handler | null,
-        progress?: Laya.Handler | null,
-        type?: string | null,
-        constructParams?: any[] | null,
+    ): Promise<T extends string ? any : any[]>;
+    create<T extends string | string[] | Laya.createItem[]>(
+        url: T,
+        complete?: Laya.Handler,
+        progress?: Laya.Handler,
+        type?: string,
+        constructParams?: any[],
         propertyParams?: any,
         priority?: number,
         cache?: boolean
-    ): Promise<any>;
-    loadPackage(resKey: string | string[], complete?: Laya.Handler, progress?: Laya.Handler): Promise<any>;
+    ): Promise<T extends string ? any : any[]>;
+    loadPackage<T extends string | string[]>(resKey: T, complete?: Laya.Handler, progress?: Laya.Handler): Promise<T extends string ? fgui.UIPackage : fgui.UIPackage[]>;
 }
 
 declare class Logger {

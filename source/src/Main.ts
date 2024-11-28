@@ -1,5 +1,5 @@
 import { GameConfig } from "./GameConfig";
-import Global from "./Global";
+import { GlobalInitialize } from "./GlobalInitializer";
 import { ViewExtend } from "./core/ui/core/ViewExtend";
 import { FGUIExtend } from "./engine/FGUIExtend";
 import { FGUIRepair } from "./engine/FGUIRepair";
@@ -44,12 +44,11 @@ class Main {
 		Laya.AtlasInfoManager.enable("fileconfig.json", Laya.Handler.create(this, this.onFileConfigLoaded));
 	}
 
-	private onFileConfigLoaded() {
-		loadMgr.load("gameconfig.json", Laya.Handler.create(this, (data: any) => {
-			GameConfig.init(data);
-			Global.init();
-			this.enterGame();
-		}));
+	private async onFileConfigLoaded() {
+		const data = await loadMgr.load("gameconfig.json");
+		GameConfig.init(data);
+		GlobalInitialize();
+		this.enterGame();
 	}
 
 	private enterGame() {
