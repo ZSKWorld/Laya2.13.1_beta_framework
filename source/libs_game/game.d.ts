@@ -13,6 +13,33 @@ declare type PartialAll<T> = { [P in keyof T]?: Partial<T[P]>; };
 declare type KeyMap<T> = { [key: string]: T; };
 declare type Class<T> = new (...args: any) => T;
 
+/** 注入全局变量 */
+declare function WindowImmit(name: string, obj: any): void;
+
+/**
+ * 扩展类字段，用于在外部定义的字段在内部可读，扩展的字段或方法不能在构造期间调用
+ * @param cls 要扩展的类
+ * @returns 扩展后的类
+ */
+declare function ExtensionClass<E, T>(cls: Class<T>): Class<T & E>;
+
+/**
+ * 确认弹窗
+ * @param title
+ * @param msg
+ * @param cancel 默认true
+ */
+declare function ShowConfirm(title: string, msg: string, cancel?: boolean): Promise<boolean>;
+
+/**
+ * @description: 添加全局事件监听
+ * @param eventName 事件名
+ * @param once 是否只监听一次
+ * @param args 参数
+ * @return MethodDecorator
+ */
+declare function RegisterEvent(eventName: string, once?: boolean, args?: any[]): MethodDecorator;
+
 declare namespace Laya {
     interface Node extends Laya.EventDispatcher {
         addChild<T extends Node>(node: T): T;

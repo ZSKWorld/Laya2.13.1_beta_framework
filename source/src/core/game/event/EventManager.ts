@@ -22,3 +22,4 @@ export class EventManager extends Laya.EventDispatcher implements IEventManager 
         }
     }
 }
+WindowImmit("eventMgr", new EventManager());

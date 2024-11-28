@@ -209,3 +209,4 @@ export class UIManager extends Observer implements IUIManager {
 		this._cache.onResize();
 	}
 }
+WindowImmit("uiMgr", new UIManager());

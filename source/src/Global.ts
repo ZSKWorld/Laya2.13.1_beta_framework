@@ -13,17 +13,16 @@ import { PlatformType } from "./platform/PlatformDefine";
 import { PlatformWeb } from "./platform/PlatformWeb";
 import { PlatformWX } from "./platform/PlatformWX";
 
-WindowImmit("ResPath", ResPath);
-WindowImmit("ViewID", ViewID);
+WindowImmit("User", User);
 WindowImmit("Logger", Logger);
-WindowImmit("loadMgr", new LoadManager());
-WindowImmit("skeletonMgr", new SkeletonMgr());
-WindowImmit("cfgMgr", new CfgManager());
-WindowImmit("eventMgr", new EventManager());
-WindowImmit("userData", new User());
-WindowImmit("uiMgr", new UIManager());
-WindowImmit("netService", NetService);
-
+WindowImmit("ViewID", ViewID);
+WindowImmit("ResPath", ResPath);
+WindowImmit("NetService", NetService);
+WindowImmit("UIManager", UIManager);
+WindowImmit("CfgManager", CfgManager);
+WindowImmit("SkeletonMgr", SkeletonMgr);
+WindowImmit("LoadManager", LoadManager);
+WindowImmit("EventManager", EventManager);
 WindowImmit("ShowConfirm", (title: string, msg: string, cancel = true) => {
     if (fgui.UIPackage.getByName(ResPath.PkgName.PkgCommon)) {
         WindowImmit("ShowConfirm", (title: string, msg: string, cancel = true) => new Promise<boolean>(resolve => {

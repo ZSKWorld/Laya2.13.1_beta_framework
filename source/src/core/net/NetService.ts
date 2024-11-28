@@ -17,3 +17,5 @@ serviceKeys.forEach(key => {
         }
     })
 });
+
+WindowImmit("netService", NetService);

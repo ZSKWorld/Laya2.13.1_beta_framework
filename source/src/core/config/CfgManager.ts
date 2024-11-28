@@ -100,3 +100,4 @@ export class CfgManager implements ICfgManager {
 		].forEach(v => defineFun(v));
 	}
 }
+WindowImmit("cfgMgr", new CfgManager());

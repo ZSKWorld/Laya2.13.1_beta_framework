@@ -99,3 +99,4 @@ export class SkeletonMgr implements ISkeletonMgr{
         this._templetMap.delete(url);
     }
 }
+WindowImmit("skeletonMgr", new SkeletonMgr());

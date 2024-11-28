@@ -36,3 +36,4 @@ export class User extends DecodeObject<IUser> implements IUser {
         return this.decode(data);
     }
 }
+WindowImmit("userData", new User());

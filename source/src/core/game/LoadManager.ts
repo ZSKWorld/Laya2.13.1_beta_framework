@@ -64,3 +64,4 @@ export class LoadManager implements ILoadManager {
 		}
 	}
 }
+WindowImmit("loadMgr", new LoadManager());

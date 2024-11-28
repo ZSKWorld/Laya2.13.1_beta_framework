@@ -45,7 +45,7 @@ class Main {
 	}
 
 	private onFileConfigLoaded() {
-		loadMgr.load(ResPath.ConfigPath.GameConfig, Laya.Handler.create(this, (data: any) => {
+		loadMgr.load("gameconfig.json", Laya.Handler.create(this, (data: any) => {
 			GameConfig.init(data);
 			Global.init();
 			this.enterGame();
