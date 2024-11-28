@@ -45,13 +45,9 @@ class Main {
 	}
 
 	private onFileConfigLoaded() {
-		Global.init();
 		loadMgr.load(ResPath.ConfigPath.GameConfig, Laya.Handler.create(this, (data: any) => {
 			GameConfig.init(data);
-			Laya.stage.scaleMode = GameConfig.scaleMode;
-			Laya.stage.screenMode = GameConfig.screenMode;
-			Laya.stage.alignV = GameConfig.alignV;
-			Laya.stage.alignH = GameConfig.alignH;
+			Global.init();
 			this.enterGame();
 		}));
 	}

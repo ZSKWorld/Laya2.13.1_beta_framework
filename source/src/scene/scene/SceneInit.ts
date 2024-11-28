@@ -4,7 +4,6 @@ import { layerMgr } from "../../core/ui/core/LayerManager";
 import { sceneViewRegister } from "../../core/ui/core/SceneViewRegister";
 import { viewRegister } from "../../core/ui/core/ViewRegister";
 import { tipMgr } from "../../core/ui/tool/TipManager";
-import { platformMgr } from "../../platform/PlatformManager";
 import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";
 import { sceneMgr } from "../SceneManager";
@@ -22,7 +21,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 			ResPath.ConfigPath.Config,
 			ResPath.PkgPath.PkgCommon,
 		];
-		resArray.push(...platformMgr.platform.res);
+		resArray.push(...platform.res);
 		return resArray;
 	}
 
@@ -40,12 +39,12 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 	@RegisterEvent(SocketEvent.ReconnectSuccess, false, [true, SocketEvent.ReconnectSuccess])
 	@RegisterEvent(SocketEvent.Close, false, [false, SocketEvent.Close])
 	private socketConnectChanged(open: boolean, eventName: string) {
-		if (open) {
-			uiMgr.removeView(ViewID.UIWaitingView);
-			if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
-				netService.login({ account: userData.account.account, password: userData.account.password });
-		}
-		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
+		// if (open) {
+		// 	uiMgr.removeView(ViewID.UIWaitingView);
+		// 	if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
+		// 		netService.login({ account: userData.account.account, password: userData.account.password });
+		// }
+		// else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
 	}
 
 	@RegisterEvent(SocketEvent.MsgError)

@@ -33,9 +33,13 @@ export class PlatformWeb extends PlatformBase {
     protected onInit() {
         this._platform = PlatformType.Web;
 
+        Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+        Laya.stage.screenMode = Laya.Stage.SCREEN_NONE;
+        Laya.stage.alignV = Laya.Stage.ALIGN_MIDDLE;
+        Laya.stage.alignH = Laya.Stage.ALIGN_CENTER;
         Laya.Text.defaultFont = ResPath.FontName.Font08;
         fgui.UIConfig.defaultFont = ResPath.FontName.Font08;
-        
+
         Laya.stage.on(Laya.Event.VISIBILITY_CHANGE, this, () => {
             if (Laya.stage.isVisibility) this.dispatch(GameEvent.OnGameShow);
             else this.dispatch(GameEvent.OnGameHide);

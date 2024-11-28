@@ -1,8 +1,4 @@
 {
     "released": false,
-    "platform": "web",
-    "scaleMode": "showall",
-    "screenMode": "none",
-    "alignV": "middle",
-    "alignH": "center"
+    "platform": "web"
 }

@@ -34,7 +34,7 @@ export class ScenePreScreen extends LogicSceneBase<ScenePreScreenData> {
     private showPreScreen() {
         if (!this._prescreen) {
             const pscreen = this._prescreen = new fgui.GLoader();
-            pscreen.url = ResPath.PrescreenPath.Prescreen;
+            // pscreen.url = ResPath.PrescreenPath.Prescreen;
             pscreen.setSize(Laya.stage.width, Laya.stage.height);
             // pscreen.addRelation(groot, fgui.RelationType.Size);
             pscreen.fill = fgui.LoaderFillType.ScaleFree;
