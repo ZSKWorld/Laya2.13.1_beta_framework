@@ -5,7 +5,6 @@ declare namespace ResPath {
 	// res/config/
 	enum ConfigPath {
 		Config = "res/config/Config.json",
-		GameConfig = "res/config/GameConfig.json",
 	}
 
 	// res/font/
