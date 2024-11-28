@@ -1,6 +1,6 @@
 
 /** Laya扩展 */
-export class LayaExtension {
+export class LayaExtend {
 	static extends() {
 		this.scriptExtend();
 		this.script3DExtend();

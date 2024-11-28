@@ -1,5 +1,5 @@
 /** FGUI扩展 */
-export class FGUIExtension {
+export class FGUIExtend {
 	static extends() {
 		this.gobjectExtension();
 		this.addGUIObjectEventLockable();

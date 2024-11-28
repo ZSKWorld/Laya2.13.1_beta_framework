@@ -1,3 +1,4 @@
+declare const platform: IPlatform;
 declare const netService: INetService;
 declare const userData: IUser;
 declare const cfgMgr: ICfgManager;

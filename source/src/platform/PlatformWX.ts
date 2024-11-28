@@ -96,9 +96,9 @@ export class PlatformWX extends PlatformBase {
     }
 
     protected onInit(): void {
+        Laya.URL.exportSceneToJson = true;
         this._platform = PlatformType.Wechat;
-        Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_AUTO;
-        Laya.stage.screenMode = Laya.Stage.SCREEN_VERTICAL;
+        
         Laya.Text.defaultFont = "SimHei";
         fgui.UIConfig.defaultFont = "SimHei";
         Laya.Stat.show(0, this.safeArea.top);

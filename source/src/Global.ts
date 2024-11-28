@@ -8,7 +8,11 @@ import { NetService } from "./core/net/NetService";
 import { UIManager } from "./core/ui/core/UIManager";
 import { ViewID as ViewIDEnum } from "./core/ui/core/ViewID";
 import { User } from "./core/userData/User";
+import { GameConfig } from "./GameConfig";
+import { PlatformType } from "./platform/PlatformDefine";
 import { platformMgr } from "./platform/PlatformManager";
+import { PlatformWeb } from "./platform/PlatformWeb";
+import { PlatformWX } from "./platform/PlatformWX";
 
 WindowImmit("ResPath", ResPathEnum);
 WindowImmit("ViewID", ViewIDEnum);
@@ -181,6 +185,12 @@ WindowImmit("netService", NetService);
 
 export default class Global {
     static init() {
-        platformMgr.init();
+        let platform: IPlatform;
+        switch (GameConfig.platform) {
+            case PlatformType.Web: platform = new PlatformWeb(); break;
+            case PlatformType.Wechat: platform = new PlatformWX(); break;
+        }
+        platform.init();
+        WindowImmit("platform", platform);
     }
 }

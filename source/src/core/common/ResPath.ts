@@ -5,6 +5,7 @@ export namespace ResPath {
 	// res/config/
 	export enum ConfigPath {
 		Config = "res/config/Config.json",
+		GameConfig = "res/config/GameConfig.json",
 	}
 
 	// res/font/

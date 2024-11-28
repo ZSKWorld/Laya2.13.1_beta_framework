@@ -2,7 +2,7 @@ import { BaseViewCtrl } from "./BaseViewCtrl";
 
 /** 页面及控制器扩展 */
 export class ViewExtend {
-	static init() {
+	static extends() {
 		this.fguiGComponentExtend();
 		this.baseCtrlExtend();
 	}
