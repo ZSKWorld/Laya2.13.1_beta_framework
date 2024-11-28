@@ -14,7 +14,7 @@ serviceKeys.forEach(key => {
         enumerable: false,
         value: function (data: IUserInput) {
             data.cmd = key;
-            WebSocket.Inst.sendMsg(data);
+            return WebSocket.Inst.send(data);
         }
     })
 });

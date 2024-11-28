@@ -42,8 +42,9 @@ export class WebSocket extends Observer {
     private _url: string = "ws://192.168.1.105:8007";
     private _socket: Laya.Socket;
     private _state: SocketState = SocketState.Disconnect;
-    private _waitList: IUserInput[];
+    private _waitList: (IUserInput | Function)[] = [];
     private _current: IUserInput;
+    private _curCb: Function;
     get state() { return this._state; }
     private set state(v) {
         const lastState = this._state;
@@ -93,7 +94,6 @@ export class WebSocket extends Observer {
 
     init() {
         if (!this._socket) {
-            this._waitList = [];
             this._socket = new Laya.Socket();
             this._socket.on(Laya.Event.OPEN, this, this.onOpen);
             this._socket.on(Laya.Event.MESSAGE, this, this.onMessage);
@@ -112,12 +112,20 @@ export class WebSocket extends Observer {
         this._socket.close();
     }
 
-    sendMsg(msg: IUserInput) {
+    async send(input: IUserInput) {
+        const data = await this.sendMsg(input);
+        return data;
+    }
+
+    private sendMsg(msg: IUserInput) {
         const { _current, _waitList } = this;
         if (_current && msg.cmd == _current.cmd) return;
-        if (_waitList.length && _waitList.find(v => v.cmd == msg.cmd)) return;
-        _waitList.push(msg);
-        this.executeWaitMsg();
+        if (_waitList.length && _waitList.find((v: any) => v.cmd == msg.cmd)) return;
+
+        return new Promise<IUserOutput>(resolve => {
+            _waitList.push(msg, resolve);
+            this.executeWaitMsg();
+        });
     }
 
     private onOpen() {
@@ -137,14 +145,17 @@ export class WebSocket extends Observer {
         if (this.state == SocketState.Disconnect) return;
         this.state = SocketState.Disconnect;
         this._current = null;
+        this._curCb = null;
         this._waitList.length = 0;
         Laya.timer.once(1000, this, this.reconnect);
     }
 
     private executeWaitMsg() {
-        if (this.connected && !this._current && this._waitList.length > 0) {
-            this._current = this._waitList.shift();
-            this._socket.send(JSON.stringify(this._current));
+        const { connected, _current, _waitList, _socket} = this;
+        if (connected && !_current && _waitList.length > 0) {
+            this._current = <IUserInput>_waitList.shift();
+            this._curCb = <Function>_waitList.shift();
+            _socket.send(JSON.stringify(this._current));
         }
     }
 
@@ -152,19 +163,27 @@ export class WebSocket extends Observer {
         const input = this._current;
         let netMsg = `NetCMD_${ output.cmd[0].toUpperCase() + output.cmd.substring(1) }`;
         if (!output.error) {
-            if (input && input.cmd != output.cmd) {
+            this.dispatch(NetCMD.SyncInfo, output.syncInfo);
+            if (input && input.cmd == output.cmd) {
+                this.dispatch(netMsg, [output, input]);
+                this._curCb?.(output);
+                this._current = null;
+                this._curCb = null;
+            } else {
                 Logger.error("message error", input, output);
-                throw new Error();
             }
-            if (output.syncInfo)
-                this.dispatch(NetCMD.SyncInfo, output.syncInfo);
         } else {
             this.dispatch(SocketEvent.MsgError, output);
-            netMsg += `_Error`;
+            if (input && input.cmd == output.cmd) {
+                this.dispatch(`${netMsg}_Error`, [output, input]);
+                this._curCb?.(output);
+                this._current = null;
+                this._curCb = null;
+            } else {
+                Logger.error("message error", input, output);
+            }
         }
-        this.dispatch(netMsg, [output, input]);
         this._socket.input.clear();
-        this._current = null;
         this.executeWaitMsg();
     }
 

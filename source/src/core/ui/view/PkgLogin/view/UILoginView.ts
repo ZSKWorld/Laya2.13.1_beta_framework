@@ -20,16 +20,6 @@ export class UILoginView extends ExtensionClass<IView, UILogin>(UILogin) {
 		btn_login.onClick(this, this.sendMessage, [UILoginMsg.OnBtnLoginClick]);
 		btn_register.onClick(this, this.sendMessage, [UILoginMsg.OnBtnRegisterClick]);
 		btn_cancel.onClick(this, this.sendMessage, [UILoginMsg.OnBtnCancelClick]);
-
-		this.getChild("n5").visible = false;
-		this.getChild("n6").visible = false;
-		this.getChild("n10").visible = false;
-		this.getChild("n12").visible = false;
-		this.getChild("n14").visible = false;
-		this.btn_login.visible = false;
-		this.btn_loginRegister.visible = false;
-		this.input_account.visible = false;
-		this.input_password.visible = false;
 	}
 
 	refreshLoginInfo(account: string, password: string) {

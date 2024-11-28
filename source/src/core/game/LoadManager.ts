@@ -1,15 +1,8 @@
 /** 资源加载管理 */
 export class LoadManager implements ILoadManager {
 	load<T extends string | string[] | Laya.loadItem[]>(
-		url: T,
-		complete?: Laya.Handler,
-		progress?: Laya.Handler,
-		type?: string,
-		priority?: number,
-		cache?: boolean,
-		group?: string,
-		ignoreCache?: boolean,
-		useWorkerLoader?: boolean
+		url: T, complete?: Laya.Handler, progress?: Laya.Handler, type?: string,
+		priority?: number, cache?: boolean, group?: string, ignoreCache?: boolean, useWorkerLoader?: boolean
 	) {
 		return new Promise<any>(resolve => {
 			const isArr = Array.isArray(url);
@@ -24,14 +17,8 @@ export class LoadManager implements ILoadManager {
 	}
 
 	create<T extends string | string[] | Laya.createItem[]>(
-		url: T,
-		complete?: Laya.Handler,
-		progress?: Laya.Handler,
-		type?: string,
-		constructParams?: any[],
-		propertyParams?: any,
-		priority?: number,
-		cache?: boolean
+		url: T, complete?: Laya.Handler, progress?: Laya.Handler,
+		type?: string, constructParams?: any[], propertyParams?: any, priority?: number, cache?: boolean
 	) {
 		return new Promise<any>(resolve => {
 			const isArr = Array.isArray(url);
