@@ -39,12 +39,12 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 	@RegisterEvent(SocketEvent.ReconnectSuccess, false, [true, SocketEvent.ReconnectSuccess])
 	@RegisterEvent(SocketEvent.Close, false, [false, SocketEvent.Close])
 	private socketConnectChanged(open: boolean, eventName: string) {
-		// if (open) {
-		// 	uiMgr.removeView(ViewID.UIWaitingView);
-		// 	if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
-		// 		netService.login({ account: userData.account.account, password: userData.account.password });
-		// }
-		// else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
+		if (open) {
+			uiMgr.removeView(ViewID.UIWaitingView);
+			if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
+				netService.login({ account: userData.account.account, password: userData.account.password });
+		}
+		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
 	}
 
 	@RegisterEvent(SocketEvent.MsgError)

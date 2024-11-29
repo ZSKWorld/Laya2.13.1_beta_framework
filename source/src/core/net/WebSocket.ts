@@ -97,6 +97,7 @@ export class WebSocket extends Observer {
             this._socket = new Laya.Socket();
             this._socket.on(Laya.Event.OPEN, this, this.onOpen);
             this._socket.on(Laya.Event.MESSAGE, this, this.onMessage);
+            this._socket.on(Laya.Event.ERROR, this, this.onError);
             this._socket.on(Laya.Event.CLOSE, this, this.onClose);
             this.connect();
         }
@@ -128,7 +129,7 @@ export class WebSocket extends Observer {
         });
     }
 
-    private onOpen() {
+    private onOpen(e: Event) {
         this.state = SocketState.Connected;
         this.executeWaitMsg();
     }
@@ -138,10 +139,15 @@ export class WebSocket extends Observer {
         switch (output.type) {
             case MessageType.Response: this.dealResponse(output); break;
             case MessageType.Notify: this.dealNotify(output); break;
+            default: Logger.error("unknown message type: ", output); break;
         }
     }
 
-    private onClose() {
+    private onError(e: Event) {
+
+    }
+
+    private onClose(e: Event) {
         if (this.state == SocketState.Disconnect) return;
         this.state = SocketState.Disconnect;
         this._current = null;
