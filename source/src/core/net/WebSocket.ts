@@ -151,7 +151,7 @@ export class WebSocket extends Observer {
     }
 
     private executeWaitMsg() {
-        const { connected, _current, _waitList, _socket} = this;
+        const { connected, _current, _waitList, _socket } = this;
         if (connected && !_current && _waitList.length > 0) {
             this._current = <IUserInput>_waitList.shift();
             this._curCb = <Function>_waitList.shift();
@@ -161,28 +161,22 @@ export class WebSocket extends Observer {
 
     private dealResponse(output: IUserOutput) {
         const input = this._current;
-        let netMsg = `NetCMD_${ output.cmd[0].toUpperCase() + output.cmd.substring(1) }`;
-        if (!output.error) {
-            this.dispatch(NetCMD.SyncInfo, output.syncInfo);
-            if (input && input.cmd == output.cmd) {
+        if (input && input.cmd == output.cmd) {
+            const netMsg = `NetCMD_${ output.cmd[0].toUpperCase() + output.cmd.substring(1) }`;
+            if (!output.error) {
+                this.dispatch(NetCMD.SyncInfo, output.syncInfo);
                 this.dispatch(netMsg, [output, input]);
-                this._curCb?.(output);
-                this._current = null;
-                this._curCb = null;
             } else {
-                Logger.error("message error", input, output);
+                this.dispatch(SocketEvent.MsgError, output);
+                this.dispatch(`${ netMsg }_Error`, [output, input]);
             }
         } else {
-            this.dispatch(SocketEvent.MsgError, output);
-            if (input && input.cmd == output.cmd) {
-                this.dispatch(`${netMsg}_Error`, [output, input]);
-                this._curCb?.(output);
-                this._current = null;
-                this._curCb = null;
-            } else {
-                Logger.error("message error", input, output);
-            }
+            Logger.error("message error", input, output);
         }
+        this._curCb?.(output);
+        this._current = null;
+        this._curCb = null;
+
         this._socket.input.clear();
         this.executeWaitMsg();
     }
