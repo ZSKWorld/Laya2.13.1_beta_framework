@@ -12,13 +12,8 @@ export interface UIConfirmData {
 
 export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData> {
 
-	override onAdded() {
-
-	}
-
-	override onForeground() {
+	override onEnable() {
 		this.view.com_panel.viewCtrl.data = this.data;
-		this.view.com_panel.viewCtrl.onForeground();
 	}
 
 	override onOpenAni() {

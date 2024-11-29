@@ -19,9 +19,10 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
     }
 
     override onEnable() {
+        const autoLogin = localData.get<boolean>(LocalDataKey.AutoLogin);
         const data = localData.get<ILoginInput>(LocalDataKey.LastLoginAccount);
         data && this.view.refreshLoginInfo(data.account, data.password);
-        data && this.login(data);
+        autoLogin && data && this.login(data);
     }
 
     @ViewMessage(UILoginEvent.Login)
@@ -35,6 +36,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
         if (!input_account.text.trim()) tipMgr.showTip("请输入账号");
         else if (!input_password.text.trim()) tipMgr.showTip("请输入密码");
         else {
+            localData.set(LocalDataKey.AutoLogin, true);
             this.view.refreshStatus(UILoginStatus.BeLogin);
             Laya.timer.once(1000, this, () => {
                 const param = { account: input_account.text, password: input_password.text };
@@ -60,6 +62,7 @@ export class UILoginCtrl extends BaseViewCtrl<UILoginView, UILoginData> {
     @RegisterEvent(SocketEvent.Close)
     @ViewMessage(UILoginEvent.OnLoginFailed)
     private onBtnCancelClick() {
+        localData.set(LocalDataKey.AutoLogin, false);
         this.view.refreshStatus(UILoginStatus.Login);
         Laya.timer.clearAll(this);
     }

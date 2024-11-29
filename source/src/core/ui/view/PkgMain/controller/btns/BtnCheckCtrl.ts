@@ -7,9 +7,4 @@ export interface BtnCheckData {
 
 export class BtnCheckCtrl extends BaseViewCtrl<BtnCheckView, BtnCheckData>{
 
-    override onAdded() {
-
-    }
-
-
 }

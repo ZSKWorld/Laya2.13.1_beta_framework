@@ -8,10 +8,6 @@ export const enum RenderGoodsMsg {
 export class RenderGoodsView extends ExtensionClass<IView, RenderGoods>(RenderGoods) {
     static readonly pkgRes = ResPath.PkgPath.PkgMain;
 
-    override onCreate() {
-
-    }
-
     refreshShop(id: number) {
         const { txt_name, txt_count } = this;
         const { name, quality } = cfgMgr.Item[id];

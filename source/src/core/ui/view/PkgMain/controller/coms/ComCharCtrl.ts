@@ -7,9 +7,4 @@ export interface ComCharData {
 
 export class ComCharCtrl extends BaseViewCtrl<ComCharView, ComCharData>{
 
-    override onAdded() {
-
-    }
-
-
 }

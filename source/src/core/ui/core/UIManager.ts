@@ -1,6 +1,5 @@
 import { Observer } from "../../game/event/Observer";
 import { layerMgr } from "./LayerManager";
-import { ViewEvent } from "./UIDefine";
 
 /** 页面缓存 */
 class UICache {
@@ -158,7 +157,6 @@ export class UIManager extends Observer implements IUIManager {
 		this._openedCtrls.splice(index, 1);
 		hideView.onCloseAni().then(() => {
 			hideView.view.removeFromParent();
-			hideView.sendMessage(ViewEvent.OnBackground);
 			this._cache.cacheView(hideView);
 			this.showView2(this.topCtrl, this.topCtrl?.data);
 		});
@@ -167,10 +165,7 @@ export class UIManager extends Observer implements IUIManager {
 	/** 移除所有页面 */
 	removeAllView() {
 		this._openedCtrls.forEach(v => {
-			if (v.view.parent) {
-				v.view.removeFromParent();
-				v.sendMessage(ViewEvent.OnBackground);
-			}
+			v.view.parent && v.view.removeFromParent();
 			this._cache.cacheView(v);
 		});
 		this._openedCtrls.length = 0;
@@ -198,7 +193,6 @@ export class UIManager extends Observer implements IUIManager {
 			openIndex > 0 && this._openedCtrls.splice(openIndex, 1);
 			doOpenAni && this._openedCtrls.unshift(viewCtrl);
 			doOpenAni && layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.UIBottom);
-			viewCtrl.sendMessage(ViewEvent.OnForeground);
 			doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
 		} else onFinally();
 	}

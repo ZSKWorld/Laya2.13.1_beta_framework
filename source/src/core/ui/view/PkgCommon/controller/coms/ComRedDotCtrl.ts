@@ -8,10 +8,6 @@ export interface ComRedDotData {
 
 export class ComRedDotCtrl extends BaseViewCtrl<ComRedDotView, ComRedDotData> {
 
-    override onAdded() {
-
-    }
-
     override onAwake() {
         this.dispatch(GameEvent.RedDotCompAwake, this.view);
     }

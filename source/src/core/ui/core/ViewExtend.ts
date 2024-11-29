@@ -3,35 +3,24 @@ import { BaseViewCtrl } from "./BaseViewCtrl";
 /** 页面及控制器扩展 */
 export class ViewExtend {
 	static extends() {
+		this.viewExtend(BaseViewCtrl.prototype);
+		this.viewExtend(fgui.GComponent.prototype as IView);
 		this.fguiGComponentExtend();
-		this.baseCtrlExtend();
 	}
 
 	private static fguiGComponentExtend() {
-		let prototype = fgui.GComponent.prototype as IView;
-		prototype.dispatch = function (...args) { eventMgr.event(...args); }
-		prototype.sendMessage = function (...args) { (<IView>this).viewCtrl.sendMessage(...args); }
+		const prototype = fgui.GComponent.prototype as IView;
+		prototype.sendMessage = function (...args) {
+			const viewCtrl = (<IView>this).viewCtrl;
+			viewCtrl && viewCtrl.sendMessage(...args);
+		}
 		prototype.addMessage = function (type, callback, args?, once?) {
-			const _this = <IView>this;
-			const viewCtrl = _this.viewCtrl;
-			if (viewCtrl) {
-				if (once) viewCtrl.listener.once(type, _this, callback, args);
-				else viewCtrl.listener.on(type, _this, callback, args);
-			}
+			const viewCtrl = (<IView>this).viewCtrl;
+			viewCtrl && viewCtrl.addMessage(type, callback, args, once);
 		}
 		prototype.removeMessage = function (type, listener, onceOnly?) {
-			const _this = <IView>this;
-			if (_this.viewCtrl)
-				_this.viewCtrl.listener.off(type, _this, listener, onceOnly);
-		}
-		prototype.createView = function (...args) { return uiMgr.createView(...args); }
-		prototype.showView = function (...args) { uiMgr.showView(...args); }
-		prototype.removeTopView = function () { uiMgr.removeTopView(); }
-		prototype.removeAllView = function () { uiMgr.removeAllView(); }
-		prototype.removeView = function (...args) { uiMgr.removeView(...args); }
-		prototype.removeSelf = function () {
-			const viewId = (<IView>this).viewId;
-			viewId.startsWith("UI") && uiMgr.removeView(viewId);
+			const viewCtrl = (<IView>this).viewCtrl;
+			viewCtrl && viewCtrl.removeMessage(type, listener, onceOnly);
 		}
 
 		const constructFromResource = prototype.constructFromResource;
@@ -67,32 +56,17 @@ export class ViewExtend {
 		}
 	}
 
-	private static baseCtrlExtend() {
-		let prototype = BaseViewCtrl.prototype as IViewCtrl;
+	private static viewExtend(prototype: IViewExtend) {
 		prototype.dispatch = function (...args) { eventMgr.event(...args); }
-		prototype.addMessage = function (type, callback, args?, once?) {
-			const _this = this as IViewCtrl;
-			if (once) _this.listener.once(type, _this, callback, args);
-			else _this.listener.on(type, _this, callback, args);
-		}
-		prototype.removeMessage = function (type, listener, onceOnly?) {
-			const _this = this as IViewCtrl;
-			_this.listener.off(type, _this, listener, onceOnly);
-		}
-		prototype.sendMessage = function (...args) { (<IViewCtrl>this).listener.event(...args); }
-		prototype.onForeground = function () { }
-		prototype.onBackground = function () { }
 		prototype.createView = function (...args) { return uiMgr.createView(...args); }
 		prototype.showView = function (...args) { uiMgr.showView(...args); }
 		prototype.removeTopView = function () { uiMgr.removeTopView(); }
 		prototype.removeAllView = function () { uiMgr.removeAllView(); }
 		prototype.removeView = function (...args) { uiMgr.removeView(...args); }
 		prototype.removeSelf = function () {
-			const viewId = (<IViewCtrl>this).view.viewId;
+			const viewId = (<IViewExtend>this).viewId;
 			//只有UI界面才能移除自身
 			viewId.startsWith("UI") && uiMgr.removeView(viewId);
 		}
-		prototype.onOpenAni = function () { return Promise.resolve(); }
-		prototype.onCloseAni = function () { return Promise.resolve(); }
 	}
 }

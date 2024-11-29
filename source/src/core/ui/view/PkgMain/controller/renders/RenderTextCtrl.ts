@@ -7,9 +7,4 @@ export interface RenderTextData {
 
 export class RenderTextCtrl extends BaseViewCtrl<RenderTextView, RenderTextData>{
 
-    override onAdded() {
-
-    }
-
-
 }

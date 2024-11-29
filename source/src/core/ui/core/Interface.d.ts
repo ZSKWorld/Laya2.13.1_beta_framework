@@ -136,18 +136,6 @@ declare interface IViewCtrl<V extends IView = IView, D = any> extends Laya.Scrip
     readonly ProxyClass: Class<IViewProxy>;
 
     /**
-     * 每次面板前置调用该方法，onEnable之后调用。
-     * 该方法为虚方法，使用时重写即可
-     */
-    onForeground(): void;
-
-    /**
-     * 每次面板后置调用该方法，onDisable之后调用。
-     * 该方法为虚方法，使用时重写即可
-     */
-    onBackground(): void;
-
-    /**
      * 页面打开动画
      * 该方法为虚方法，使用时重写即可
      */

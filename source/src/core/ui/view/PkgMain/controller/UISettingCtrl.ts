@@ -7,9 +7,6 @@ export interface UISettingData {
 
 export class UISettingCtrl extends BaseViewCtrl<UISettingView, UISettingData>{
 
-    override onAdded() {
-    }
-
 	override onOpenAni() {
 		return new Promise<void>(resolve => this.view.com_panel.trans_show.play(Laya.Handler.create(null, resolve)));
 	}

@@ -16,7 +16,7 @@ export class ComConfirmCtrl extends BaseViewCtrl<ComConfirmView, ComConfirmData>
 		this.addMessage(ComConfirmMsg.OnBtnConfirmClick, this.onBtnConfirmClick);
 	}
 
-	override onForeground() {
+	override onEnable() {
 		const { title, content, cancel } = this.data;
 		this.view.refreshContent(title, content, cancel);
 	}

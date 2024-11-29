@@ -9,10 +9,6 @@ export interface UIBattleConfirmData {
 
 export class UIBattleConfirmCtrl extends BaseViewCtrl<UIBattleConfirmView, UIBattleConfirmData> {
 
-    override onAdded() {
-
-    }
-
     override onEnable() {
         this.view.com_panel.viewCtrl.data = this.data;
     }

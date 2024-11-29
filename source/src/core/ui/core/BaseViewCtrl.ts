@@ -1,9 +1,8 @@
-import { ViewEvent } from "./UIDefine";
 import { ViewCtrlDIExtend } from "./ViewCtrlDIExtend";
 
 /**
  * UI控制器脚本基类，用来处理页面各种逻辑，刷新逻辑在页面View中执行，可挂在任何Laya.Node（GUI的displayObject）上。
- * 该组件为可回收组件。鼠标、键盘交互事件可使用装饰器注册 => InsertKeyEvent、InsertMouseEvent
+ * 该组件为可回收组件。鼠标、键盘交互事件可使用装饰器注册 => ViewKeyEvent、ViewMouseEvent
  */
 export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends ExtensionClass<IViewCtrl, Laya.Script>(Laya.Script) {
 	override data: D;
@@ -20,6 +19,19 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 	override get name() { return this.constructor.name; }
 	override get view() { return this._view; }
 	override get listener() { return this._listener; }
+
+	override onOpenAni() { return Promise.resolve(); }
+	override onCloseAni() { return Promise.resolve(); }
+	override addMessage(type: string, listener: Function, args?: any[], once?: boolean) {
+		if (once) this.listener.once(type, this, listener, args);
+		else this.listener.on(type, this, listener, args);
+	}
+	override removeMessage(type: string, listener: Function, onceOnly?: boolean) {
+		this.listener.off(type, this, listener, onceOnly);
+	}
+	override sendMessage(type: string, data?: any) {
+		this.listener.event(type, data);
+	}
 
 	override onReset() {
 		const { _listener, _proxy } = this;
@@ -44,9 +56,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		}
 		this._registerMessage();
 		ViewCtrlDIExtend.registerDeviceEvent(this);
-		//这里不能用Message装饰器注册消息，不然所有BaseViewCtrl子类会变成共用一个__messageMap
-		this.addMessage(ViewEvent.OnForeground, this._onForeground);
-		this.addMessage(ViewEvent.OnBackground, this._onBackground);
 		super["_onAdded"]();
 	}
 
@@ -64,14 +73,6 @@ export abstract class BaseViewCtrl<V extends IView = IView, D = any> extends Ext
 		eventMgr.offAllCaller(this._view);
 		eventMgr.offAllCaller(this._proxy);
 		super["_onDisable"]();
-	}
-
-	private _onForeground() {
-		this.onForeground();
-	}
-
-	private _onBackground() {
-		this.onBackground();
 	}
 
 	/** 注册页面消息 */

@@ -7,9 +7,4 @@ export interface ComWaitingData {
 
 export class ComWaitingCtrl extends BaseViewCtrl<ComWaitingView, ComWaitingData>{
 
-    override onAdded() {
-
-    }
-
-
 }

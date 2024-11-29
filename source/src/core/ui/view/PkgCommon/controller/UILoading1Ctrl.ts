@@ -8,9 +8,6 @@ export class UILoading1Ctrl<V extends IView & Partial<UILoading1View> = UILoadin
     protected curTime = 0;
     protected deltaTime = 2000;
 
-    override onAwake() {
-    }
-
     override onEnable() {
         this.curTime = this.deltaTime;
     }

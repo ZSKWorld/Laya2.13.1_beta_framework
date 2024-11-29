@@ -7,9 +7,4 @@ export interface RenderChatMsgData {
 
 export class RenderChatMsgCtrl extends BaseViewCtrl<RenderChatMsgView, RenderChatMsgData>{
 
-    override onAdded() {
-
-    }
-
-
 }

@@ -7,8 +7,4 @@ export const enum ComRedDotMsg {
 export class ComRedDotView extends ExtensionClass<IView, ComRedDot>(ComRedDot) {
     static readonly pkgRes = ResPath.PkgPath.PkgCommon;
 
-    override onCreate() {
-
-    }
-
 }

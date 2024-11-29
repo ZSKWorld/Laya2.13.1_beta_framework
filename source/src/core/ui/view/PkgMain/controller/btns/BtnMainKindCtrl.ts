@@ -7,9 +7,4 @@ export interface BtnMainKindData {
 
 export class BtnMainKindCtrl extends BaseViewCtrl<BtnMainKindView, BtnMainKindData> {
 
-    override onAdded() {
-
-    }
-
-
 }

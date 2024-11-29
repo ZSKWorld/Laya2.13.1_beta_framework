@@ -7,9 +7,4 @@ export interface BtnTxtData {
 
 export class BtnTxtCtrl extends BaseViewCtrl<BtnTxtView, BtnTxtData>{
 
-    override onAdded() {
-
-    }
-
-
 }

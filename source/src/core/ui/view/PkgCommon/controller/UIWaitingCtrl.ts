@@ -5,14 +5,7 @@ export class UIWaitingCtrl extends BaseViewCtrl<UIWaitingView, string>{
     private _curIndex: number;
     private _speed: number;
 
-    override onAwake() {
-
-    }
-
     override onEnable() {
-    }
-
-    override onForeground() {
         if (this.data == null) this.data = "请稍后...";
         this._curIndex = 0;
         this._speed = 100;
