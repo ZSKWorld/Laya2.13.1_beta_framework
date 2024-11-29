@@ -24,6 +24,7 @@ function gtEqVersion(v1: string, v2: string) { return cmpVersion(v1, v2) == 1 ||
 function ltEqVersion(v1: string, v2: string) { return cmpVersion(v1, v2) == -1 || cmpVersion(v1, v2) == 0; }
 
 export class PlatformWX extends PlatformBase {
+    protected override _platform = PlatformType.Wechat;
     override get safeArea() {
         if (!this._safeArea) {
             const safeArea = wx.getWindowInfo().safeArea;
@@ -96,15 +97,15 @@ export class PlatformWX extends PlatformBase {
     }
 
     protected onInit(): void {
-        Laya.URL.exportSceneToJson = true;
-        this._platform = PlatformType.Wechat;
-        
+
         Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_AUTO;
         Laya.stage.screenMode = Laya.Stage.SCREEN_VERTICAL;
         Laya.stage.alignV = Laya.Stage.ALIGN_MIDDLE;
         Laya.stage.alignH = Laya.Stage.ALIGN_CENTER;
         Laya.Text.defaultFont = "SimHei";
         fgui.UIConfig.defaultFont = "SimHei";
+
+        Laya.URL.exportSceneToJson = true;
         Laya.Stat.show(0, this.safeArea.top);
         wx.onShow((res) => {
             this.dispatch(GameEvent.OnGameShow);

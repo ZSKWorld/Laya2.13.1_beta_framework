@@ -22,11 +22,12 @@ class Main {
 		Laya.Physics && Laya.Physics.enable();
 
 		//打开调试面板（通过IDE设置调试模式，或者url地址增加debug=true参数，均可打开调试面板）
-		if (false || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();
-		if (false && Laya.PhysicsDebugDraw) Laya.PhysicsDebugDraw.enable();
-		if (true) Laya.Stat.show();
+		// if (false || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();
+		// if (false && Laya.PhysicsDebugDraw) Laya.PhysicsDebugDraw.enable();
 		// Laya.alertGlobalError(true);
-		Laya.Browser.document.bgColor = "#666666";
+		document.body.style.backgroundColor = "#666666";
+		document.body.style.backgroundImage = `url(${ ResPath.TexturePath.Background })`;
+
 
 		LayaRepair.repair();
 		LayaExtend.extends();
