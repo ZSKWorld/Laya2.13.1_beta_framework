@@ -86,7 +86,6 @@ export class UIUtil {
 			input.nativeInput.nativeInput.removeEventListener('compositionstart', onCompositionStart);
 			input.nativeInput.nativeInput.removeEventListener('compositionend', onCompositionEnd);
 		});
-		Event.BUBBLING_PHASE
 		input.on(Laya.Event.INPUT, null, () => !duringComposition && onInput && onInput.run());
 	}
 
