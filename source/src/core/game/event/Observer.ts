@@ -8,6 +8,11 @@ export abstract class Observer extends Notifier {
         eventMgr.registerEvent(this);
     }
 
+
+    protected on(type: string, caller: any, listener: Function, args?: any[]) {
+        return eventMgr.on(type, caller, listener, args);
+    }
+
     protected off(eventName: string, caller: any, callback: Function) {
         eventMgr.off(eventName, caller, callback);
     }

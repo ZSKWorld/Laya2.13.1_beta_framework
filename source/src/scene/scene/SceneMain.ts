@@ -20,7 +20,5 @@ export class SceneMain extends LogicSceneBase<SceneMainData> {
 		redDotMgr.init();
 		uiMgr.showView(ViewID.UIMainView);
 	}
-
-	protected override onExit() {
-	}
+	
 }

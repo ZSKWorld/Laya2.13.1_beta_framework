@@ -53,6 +53,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
 	enter(data: T) {
 		this.data = data;
 		this.onEnter();
+		this.dispatch(SceneEvent.OnEnterScene, this.type);
 	}
 
 	exit() {

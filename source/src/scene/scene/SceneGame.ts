@@ -21,8 +21,4 @@ export class SceneGame extends LogicSceneBase<SceneGameData> {
 		uiMgr.showView(ViewID.UIChooseBattleView, this.data.battleType);
 	}
 
-	protected override onExit() {
-
-	}
-
 }

@@ -18,7 +18,4 @@ export class SceneLogin extends LogicSceneBase<SceneLoginData> {
 		uiMgr.showView(ViewID.UILoginView);
 	}
 
-	protected override onExit() {
-	}
-
 }

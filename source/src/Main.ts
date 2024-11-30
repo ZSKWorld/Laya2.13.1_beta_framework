@@ -26,7 +26,7 @@ class Main {
 		// if (false && Laya.PhysicsDebugDraw) Laya.PhysicsDebugDraw.enable();
 		// Laya.alertGlobalError(true);
 		document.body.style.backgroundColor = "#666666";
-		document.body.style.backgroundImage = `url(${ ResPath.TexturePath.Background })`;
+		// document.body.style.backgroundImage = `url(${ ResPath.TexturePath.Background })`;
 
 
 		LayaRepair.repair();

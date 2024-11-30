@@ -20,8 +20,4 @@ export class SceneLittleGame extends LogicSceneBase<SceneLittleGameData> {
 		uiMgr.showView(ViewID.UILittleGameView);
 	}
 
-	protected override onExit() {
-
-	}
-
 }
