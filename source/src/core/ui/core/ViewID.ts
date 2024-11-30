@@ -41,7 +41,6 @@ export enum ViewID {
 	UIWaitingView = "UIWaitingView",
 	UI2048View = "UI2048View",
 	UILittleGameView = "UILittleGameView",
-	UISnakeView = "UISnakeView",
 	UILoginView = "UILoginView",
 	UIChatView = "UIChatView",
 	UIEquipmentInfoView = "UIEquipmentInfoView",

@@ -219,4 +219,17 @@ export class UISphereToolCtrl extends BaseViewCtrl<UISphereToolView, UISphereToo
 
 	}
 
+	override onOpenAni() {
+		return new Promise<void>(resolve => {
+			this.view.alpha = 0;
+			Laya.Tween.to(this.view, { alpha: 1 }, 150, null, Laya.Handler.create(this, resolve), 0, true);
+		});
+	}
+
+	override onCloseAni() {
+		return new Promise<void>(resolve => {
+			Laya.Tween.to(this.view, { alpha: 0 }, 150, null, Laya.Handler.create(this, resolve), 0, true);
+		});
+	}
+
 }

@@ -12,7 +12,6 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 	override onAdded() {
 		this.addMessage(UILittleGameMsg.OnBtnBackClick, this.onBtnBackClick);
 		this.addMessage(UILittleGameMsg.OnBtn2048Click, this.onBtn2048Click);
-		this.addMessage(UILittleGameMsg.OnBtnSnakeClick, this.onBtnSnakeClick);
 	}
 
 	private onBtnBackClick() {
@@ -21,11 +20,6 @@ export class UILittleGameCtrl extends BaseViewCtrl<UILittleGameView, UILittleGam
 
 	private onBtn2048Click() {
 		this.showView(ViewID.UI2048View);
-		this.removeSelf();
-	}
-
-	private onBtnSnakeClick() {
-		this.showView(ViewID.UISnakeView);
 		this.removeSelf();
 	}
 }

@@ -74,8 +74,6 @@ import { UI2048View } from "../view/PkgLittleGame/view/UI2048View";
 import { UI2048Ctrl } from "../view/PkgLittleGame/controller/UI2048Ctrl";
 import { UILittleGameView } from "../view/PkgLittleGame/view/UILittleGameView";
 import { UILittleGameCtrl } from "../view/PkgLittleGame/controller/UILittleGameCtrl";
-import { UISnakeView } from "../view/PkgLittleGame/view/UISnakeView";
-import { UISnakeCtrl } from "../view/PkgLittleGame/controller/UISnakeCtrl";
 import { UILoginView } from "../view/PkgLogin/view/UILoginView";
 import { UILoginCtrl } from "../view/PkgLogin/controller/UILoginCtrl";
 import { UILoginProxy } from "../view/PkgLogin/proxy/UILoginProxy";
@@ -160,7 +158,6 @@ class ViewRegister {
 		register(ViewID.UIWaitingView, UIWaitingView, UIWaitingCtrl);
 		register(ViewID.UI2048View, UI2048View, UI2048Ctrl);
 		register(ViewID.UILittleGameView, UILittleGameView, UILittleGameCtrl);
-		register(ViewID.UISnakeView, UISnakeView, UISnakeCtrl);
 		register(ViewID.UILoginView, UILoginView, UILoginCtrl, UILoginProxy);
 		register(ViewID.UIChatView, UIChatView, UIChatCtrl);
 		register(ViewID.UIEquipmentInfoView, UIEquipmentInfoView, UIEquipmentInfoCtrl, UIEquipmentInfoProxy);

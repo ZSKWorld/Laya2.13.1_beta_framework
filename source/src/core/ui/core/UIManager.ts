@@ -90,17 +90,16 @@ export class UIManager extends Observer implements IUIManager {
 			this._proxyClsMap[viewId] = proxyCls;
 		}
 	}
-
 	getViewClass(viewId: ViewID) { return this._viewClsMap[viewId]; }
-
 	getCtrlClass(viewId: ViewID) { return this._ctrlClsMap[viewId]; }
-
 	getProxyClass(viewId: ViewID) { return this._proxyClsMap[viewId]; }
 
-	/** 创建页面
-	 * @param viewId 页面id
-	 * @param fullScreen 是否全屏
-	 */
+	isTopView(view:IViewCtrl | IView) {
+		if (!view) return false;
+		if (!this._openedCtrls[0]) return false;
+		return this._openedCtrls[0] == view || this._openedCtrls[0].view == view;
+	}
+
 	createView(viewId: ViewID, fullScreen: boolean = false) {
 		const viewInst = this._viewClsMap[viewId].createInstance();
 		viewInst.name = viewId;
@@ -108,11 +107,6 @@ export class UIManager extends Observer implements IUIManager {
 		return viewInst.getComponent(this.getCtrlClass(viewId));
 	}
 
-	/** 添加页面
-	 * @param viewId 页面id
-	 * @param data 页面数据
-	 * @param callback {@link Laya.Handler} 回调
-	 */
 	showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler) {
 		const ViewClass = this._viewClsMap[viewId];
 		if (!ViewClass) return;
@@ -138,12 +132,8 @@ export class UIManager extends Observer implements IUIManager {
 		}
 	}
 
-	/** 移除顶层页面 */
 	removeTopView() { this.topCtrl && this.removeView(this.topCtrl.viewId); }
 
-	/** 移除页面
-	 * @param viewId 页面id
-	 */
 	removeView(viewId: ViewID) {
 		const index = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (index <= -1) return;
@@ -162,7 +152,6 @@ export class UIManager extends Observer implements IUIManager {
 		});
 	}
 
-	/** 移除所有页面 */
 	removeAllView() {
 		this._openedCtrls.forEach(v => {
 			v.view.parent && v.view.removeFromParent();

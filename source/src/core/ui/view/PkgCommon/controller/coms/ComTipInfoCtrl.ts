@@ -28,14 +28,6 @@ export class ComTipInfoCtrl extends BaseViewCtrl<ComTipInfoView, ComTipInfoData>
             tip._targetY = startY - (i == cnt ? 0 : tip.view.height / 2);
             startY = tip._targetY - tip.view.height / 2 - tipSpace;
         }
-        // const totalH = displayTips.reduce((pv, v) => pv + v.view.height, 0) + cnt * tipSpace;
-        // let lastTip: ComTipInfoCtrl;
-        // const startY = (Laya.stage.height - totalH) / 2;
-        // for (let i = 0; i <= cnt; i++) {
-        //     const tip = displayTips[ i ];
-        //     tip._targetY = (lastTip ? (lastTip._targetY + lastTip.view.height / 2 + tipSpace) : startY) + tip.view.height / 2;
-        //     lastTip = tip;
-        // }
     }
 
     override onEnable() {

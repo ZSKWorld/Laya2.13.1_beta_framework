@@ -17,13 +17,11 @@ export class UIConfirmCtrl extends BaseViewCtrl<UIConfirmView, UIConfirmData> {
 	}
 
 	override onOpenAni() {
-		const { graph_bg, com_panel } = this.view;
-		return UIUtil.animAlphaIn(graph_bg, com_panel);
+		return UIUtil.animAlphaIn(this.view.graph_bg, this.view.com_panel);
 	}
 
 	override onCloseAni() {
-		const { graph_bg, com_panel } = this.view;
-		return UIUtil.animAlphaOut(graph_bg, com_panel);
+		return UIUtil.animAlphaOut(this.view.graph_bg, this.view.com_panel);
 	}
 
 }

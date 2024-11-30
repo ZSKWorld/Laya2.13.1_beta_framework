@@ -95,7 +95,9 @@ export class ViewCtrlDIExtend {
 	/**处理键盘事件 */
 	private static doKeyEvent(e: Laya.Event) {
 		//这里的this是BaseViewCtrl
-		const __keyEventList = (this as unknown as DIViewCtrl).__keyEventList;
+		const caller = this as unknown as DIViewCtrl;
+		if (!uiMgr.isTopView(caller)) return;
+		const __keyEventList = caller.__keyEventList;
 		if (!__keyEventList) return;
 		let eventList = __keyEventList[e.type];
 		if (!eventList) return;

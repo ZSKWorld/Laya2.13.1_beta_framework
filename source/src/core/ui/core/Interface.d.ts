@@ -156,16 +156,14 @@ declare interface IViewProxy<T extends IViewCtrl = IViewCtrl> {
 }
 
 declare interface IUIManager extends INotifier {
-
     init(): void;
-
     registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>): void;
-
     getViewClass(viewId: ViewID): IViewClass;
-
     getCtrlClass(viewId: ViewID): Class<IViewCtrl>;
-
     getProxyClass(viewId: ViewID): Class<IViewProxy>;
+
+    /** 是否是最顶层ui */
+    isTopView(view: IViewCtrl | IView): boolean;
 
     /** 创建页面
      * @param viewId 页面id
