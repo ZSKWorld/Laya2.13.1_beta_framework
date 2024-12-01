@@ -10,6 +10,7 @@ export class UILoading1Ctrl<V extends IView & Partial<UILoading1View> = UILoadin
 
     override onEnable() {
         this.curTime = this.deltaTime;
+        this.onProgress(0);
     }
 
     override onUpdate() {
@@ -21,16 +22,12 @@ export class UILoading1Ctrl<V extends IView & Partial<UILoading1View> = UILoadin
         }
     }
 
-    override onDisable() {
-
-    }
-
-    override onDestroy() {
-
-    }
-
     @RegisterEvent(SceneEvent.OnLoadProgress)
-    private onProgress(progress: number) {
+    private onLoadProgress(progress: number) {
+        this.onProgress(progress);
+    }
+
+    protected onProgress(progress: number) {
         this.view.pro_loading.value = progress * 100;
     }
 

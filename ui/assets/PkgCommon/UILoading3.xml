@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <graph id="n0_7vow" name="n0" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n27_os01" name="n27" xy="490,1085" pivot="0.5,-1" size="100,100" rotation="90" type="eclipse" lineSize="0"/>
+    <graph id="n28_os01" name="n28" xy="640,1085" pivot="0.5,-1" size="100,100" rotation="90" type="eclipse" lineSize="0"/>
+    <graph id="n29_os01" name="n29" xy="790,1085" pivot="0.5,-1" size="100,100" rotation="90" type="eclipse" lineSize="0"/>
+    <text id="n26_j859" name="txt_tip" xy="418,720" size="244,54" fontSize="40" color="#ffffff" text="冷知识冷知识">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+  </displayList>
+  <transition name="t0" options="2" autoPlay="true" autoPlayRepeat="-1" frameRate="60">
+    <item time="0" type="Rotation" target="n27_os01" tween="true" startValue="90" endValue="270" duration="17" ease="Linear"/>
+    <item time="0" type="Rotation" target="n28_os01" value="90"/>
+    <item time="0" type="Rotation" target="n29_os01" value="90"/>
+    <item time="0" type="XY" target="n27_os01" value="490,-"/>
+    <item time="0" type="XY" target="n28_os01" tween="true" startValue="640,-" endValue="490,-" duration="17" ease="Linear"/>
+    <item time="0" type="XY" target="n29_os01" tween="true" startValue="790,-" endValue="640,-" duration="17" ease="Linear"/>
+    <item time="18" type="Rotation" target="n27_os01" value="90"/>
+    <item time="18" type="Rotation" target="n28_os01" tween="true" startValue="90" endValue="-90" duration="17" ease="Linear"/>
+    <item time="18" type="XY" target="n27_os01" tween="true" startValue="790,-" endValue="640,-" duration="17" ease="Linear"/>
+    <item time="18" type="XY" target="n29_os01" tween="true" startValue="640,-" endValue="490,-" duration="17" ease="Linear"/>
+    <item time="36" type="Rotation" target="n28_os01" value="90"/>
+    <item time="36" type="Rotation" target="n29_os01" tween="true" startValue="90" endValue="270" duration="17" ease="Linear"/>
+    <item time="36" type="XY" target="n27_os01" tween="true" startValue="640,-" endValue="490,-" duration="17" ease="Linear"/>
+    <item time="36" type="XY" target="n28_os01" tween="true" startValue="790,-" endValue="640,-" duration="17" ease="Linear"/>
+    <item time="54" type="Rotation" target="n27_os01" tween="true" startValue="90" endValue="-90" duration="17" ease="Linear"/>
+    <item time="54" type="Rotation" target="n29_os01" value="90"/>
+    <item time="54" type="XY" target="n28_os01" tween="true" startValue="640,-" endValue="490,-" duration="17" ease="Linear"/>
+    <item time="54" type="XY" target="n29_os01" tween="true" startValue="790,-" endValue="640,-" duration="17" ease="Linear"/>
+    <item time="72" type="Rotation" target="n27_os01" value="90"/>
+    <item time="72" type="Rotation" target="n28_os01" tween="true" startValue="90" endValue="270" duration="17" ease="Linear"/>
+    <item time="72" type="XY" target="n27_os01" tween="true" startValue="790,-" endValue="640,-" duration="17" ease="Linear"/>
+    <item time="72" type="XY" target="n29_os01" tween="true" startValue="640,-" endValue="490,-" duration="17" ease="Linear"/>
+    <item time="90" type="Rotation" target="n28_os01" value="90"/>
+    <item time="90" type="Rotation" target="n29_os01" tween="true" startValue="90" endValue="-90" duration="17" ease="Linear"/>
+    <item time="90" type="XY" target="n27_os01" tween="true" startValue="640,-" endValue="490,-" duration="17" ease="Linear"/>
+    <item time="90" type="XY" target="n28_os01" tween="true" startValue="790,-" endValue="640,-" duration="17" ease="Linear"/>
+    <item time="108" type="Rotation" target="n29_os01" value="90"/>
+    <item time="108" type="XY" target="n29_os01" value="790,-"/>
+  </transition>
+</component>

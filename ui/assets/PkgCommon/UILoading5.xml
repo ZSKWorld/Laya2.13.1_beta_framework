@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <graph id="n0_7vow" name="n999" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n26_j859" name="txt_tip" xy="418,891" size="244,54" fontSize="40" color="#ffffff" text="冷知识冷知识">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <graph id="n84_os01" name="n84" xy="74,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n90_os01" name="n90" xy="146,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n91_os01" name="n91" xy="218,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n92_os01" name="n92" xy="290,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n93_os01" name="n93" xy="362,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n94_os01" name="n94" xy="434,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n95_os01" name="n95" xy="506,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n96_os01" name="n96" xy="578,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n97_os01" name="n97" xy="650,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n98_os01" name="n98" xy="722,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n99_os01" name="n99" xy="794,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n100_os01" name="n100" xy="866,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <graph id="n101_os01" name="n101" xy="938,998" size="68,68" group="n102_os01" type="eclipse" lineSize="0" fillColor="#ff00cc33"/>
+    <group id="n102_os01" name="n102" xy="74,998" size="932,68" advanced="true" layout="hz" colGap="4" excludeInvisibles="true"/>
+    <image id="n89_os01" name="img_mask" src="os016z" fileName="Texture/image_1965.png" xy="1008,996" size="936,72" scale="-1,1" alpha="0.93" color="#000000"/>
+  </displayList>
+</component>

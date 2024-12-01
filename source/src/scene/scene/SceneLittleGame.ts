@@ -8,7 +8,7 @@ export interface SceneLittleGameData {
 /** 小游戏逻辑场景 */
 export class SceneLittleGame extends LogicSceneBase<SceneLittleGameData> {
 	override readonly type = SceneType.LittleGameScene;
-	protected override loadViewId = ViewID.UILoading1View;
+	protected override loadViewId = ViewID.UILoading4View;
 
 	protected override getNormalResArray() {
 		return [

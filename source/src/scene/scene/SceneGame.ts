@@ -9,7 +9,7 @@ export interface SceneGameData {
 /** 游戏逻辑场景 */
 export class SceneGame extends LogicSceneBase<SceneGameData> {
 	override readonly type = SceneType.GameScene;
-	protected override loadViewId = ViewID.UILoading1View;
+	protected override loadViewId = ViewID.UILoading4View;
 
 	protected override getNormalResArray() {
 		return [

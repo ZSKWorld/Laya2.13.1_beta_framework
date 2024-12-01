@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <graph id="n0_7vow" name="n999" xy="0,0" size="1080,1920" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n26_j859" name="txt_tip" xy="418,891" size="244,54" fontSize="40" color="#ffffff" text="冷知识冷知识">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <graph id="n30_os01" name="n0" xy="45,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n32_os01" name="n1" xy="65,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n33_os01" name="n2" xy="85,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n34_os01" name="n3" xy="105,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n35_os01" name="n4" xy="125,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n37_os01" name="n5" xy="145,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n38_os01" name="n6" xy="165,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n39_os01" name="n7" xy="185,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n40_os01" name="n8" xy="205,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n41_os01" name="n9" xy="225,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n42_os01" name="n10" xy="245,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n43_os01" name="n11" xy="265,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n44_os01" name="n12" xy="285,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n45_os01" name="n13" xy="305,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n46_os01" name="n14" xy="325,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n47_os01" name="n15" xy="345,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n48_os01" name="n16" xy="365,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n49_os01" name="n17" xy="385,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n50_os01" name="n18" xy="405,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n51_os01" name="n19" xy="425,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n52_os01" name="n20" xy="445,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n53_os01" name="n21" xy="465,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n54_os01" name="n22" xy="485,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n55_os01" name="n23" xy="505,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n56_os01" name="n24" xy="525,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n57_os01" name="n25" xy="545,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n58_os01" name="n26" xy="565,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n59_os01" name="n27" xy="585,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n60_os01" name="n28" xy="605,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n61_os01" name="n29" xy="625,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n62_os01" name="n30" xy="645,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n63_os01" name="n31" xy="665,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n64_os01" name="n32" xy="685,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n65_os01" name="n33" xy="705,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n66_os01" name="n34" xy="725,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n67_os01" name="n35" xy="745,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n68_os01" name="n36" xy="765,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n69_os01" name="n37" xy="785,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n70_os01" name="n38" xy="805,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n71_os01" name="n39" xy="825,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n72_os01" name="n40" xy="845,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n73_os01" name="n41" xy="865,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n74_os01" name="n42" xy="885,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n75_os01" name="n43" xy="905,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n76_os01" name="n44" xy="925,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n77_os01" name="n45" xy="945,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n78_os01" name="n46" xy="965,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n79_os01" name="n47" xy="985,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n80_os01" name="n48" xy="1005,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <graph id="n81_os01" name="n49" xy="1025,979" pivot="0,1" size="10,50" group="n36_os01" type="rect" lineSize="0"/>
+    <group id="n36_os01" name="n998" xy="45,979" size="990,50" advanced="true"/>
+  </displayList>
+</component>

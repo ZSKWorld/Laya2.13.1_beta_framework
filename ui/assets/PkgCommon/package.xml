@@ -212,6 +212,10 @@
     <component id="i9gm6p" name="BtnNormal.xml" path="/Component/" exported="true"/>
     <image id="mfnw6q" name="Pic_red_dot.png" path="/Texture/" exported="true"/>
     <image id="b6ap6r" name="image_870.png" path="/Texture/"/>
+    <component id="os016t" name="UILoading3.xml" path="/" exported="true"/>
+    <component id="os016u" name="UILoading4.xml" path="/" exported="true"/>
+    <component id="os016v" name="UILoading5.xml" path="/" exported="true"/>
+    <image id="os016z" name="image_1965.png" path="/Texture/" scale="tile"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
