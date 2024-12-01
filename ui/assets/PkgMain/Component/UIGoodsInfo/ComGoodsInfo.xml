@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="803,420">
-  <controller name="ctrlState" pages="0,无,1,使用,3,使用出售,2,购买" selected="2"/>
+  <controller name="ctrlState" pages="0,无,1,使用,3,使用出售,2,购买" selected="1"/>
   <displayList>
     <graph id="n1_irlv" name="n1" xy="0,0" size="803,420" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115">
       <relation target="n5_irlv" sidePair="height-height"/>
@@ -12,7 +12,7 @@
     <graph id="n3_irlv" name="n3" xy="0,310" size="803,110" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
       <relation target="n1_irlv" sidePair="width-width,left-left,bottom-bottom"/>
     </graph>
-    <graph id="n10_irlv" name="n10" xy="18,334" size="427,62" touchable="false" type="rect">
+    <graph id="n10_irlv" name="n10" xy="18,334" size="600,62" touchable="false" type="rect" lineSize="2" fillColor="#ff666666">
       <gearDisplay controller="ctrlState" pages="1,3,2"/>
       <relation target="n9_irlv" sidePair="width-width,height-height,left-left,bottom-bottom"/>
     </graph>
@@ -22,7 +22,7 @@
     <text id="n6_irlv" name="n6" xy="24,22" size="124,79" fontSize="60" color="#ffffff" text="提示">
       <relation target="n1_irlv" sidePair="left-left,top-top"/>
     </text>
-    <text id="n9_irlv" name="input_num" xy="19,335" size="425,60" fontSize="45" vAlign="middle" autoSize="none" singleLine="true" text="1" input="true" restrict="[0-9]">
+    <text id="n9_irlv" name="input_num" xy="19,335" size="598,60" fontSize="45" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="1" input="true" restrict="[0-9]">
       <gearDisplay controller="ctrlState" pages="1,3,2"/>
       <gearSize controller="ctrlState" pages="1,2" values="598,60,1,1|600,60,1,1" default="425,60,1,1"/>
       <relation target="n1_irlv" sidePair="left-left,bottom-bottom"/>
