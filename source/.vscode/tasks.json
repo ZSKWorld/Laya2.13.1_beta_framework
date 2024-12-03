@@ -1,9 +1,7 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {
+        { //编译项目
             "label": "编译项目",
             "type": "shell",
             "command": "nvm use 22.4.1",
@@ -17,7 +15,7 @@
             },
             "problemMatcher": []
         },
-        {
+        { //切换node_10_24_1
             "label": "切换node_10_24_1",
             "type": "shell",
             "command": "nvm use 10.24.1",
@@ -26,7 +24,7 @@
                 "close": true
             }
         },
-        {
+        { //编译
             "label": "编译",
             "type": "shell",
             "command": "layaair2-cmd compile",
@@ -35,7 +33,7 @@
                 "close": true
             }
         },
-        {
+        { //执行所有工具
             "label": "执行所有工具",
             "type": "shell",
             "dependsOn": [
@@ -48,7 +46,7 @@
             "dependsOrder": "parallel",
             "problemMatcher": []
         },
-        {
+        { //创建 View & ViewCtrl & ViewProxy
             "label": "创建 View & ViewCtrl & ViewProxy",
             "type": "shell",
             "command": "node ../tool/bin/js/BatMain.js 0",
@@ -57,7 +55,7 @@
             },
             "problemMatcher": []
         },
-        {
+        { //导出表配置
             "label": "导出表配置",
             "type": "shell",
             "command": "node ../tool/bin/js/BatMain.js 1",
@@ -66,7 +64,7 @@
             },
             "problemMatcher": []
         },
-        {
+        { //更新资源路径
             "label": "更新资源路径",
             "type": "shell",
             "command": "node ../tool/bin/js/BatMain.js 2",
@@ -75,7 +73,7 @@
             },
             "problemMatcher": []
         },
-        {
+        { //用户数据事件
             "label": "用户数据事件",
             "type": "shell",
             "command": "node ../tool/bin/js/BatMain.js 3",
@@ -84,7 +82,7 @@
             },
             "problemMatcher": []
         },
-        {
+        { //更新网络相关
             "label": "更新网络相关",
             "type": "shell",
             "command": "node ../tool/bin/js/BatMain.js 4",
@@ -93,7 +91,7 @@
             },
             "problemMatcher": []
         },
-        {
+        { //tsc监视
             "label": "tsc监视",
             "type": "typescript",
             "tsconfig": "tsconfig.json",
@@ -104,7 +102,7 @@
             "group": "build",
             "hide": true
         },
-        {
+        { //监视&端口刷新
             "label": "监视&端口刷新",
             "type": "shell",
             "command": "gulp",
@@ -113,7 +111,7 @@
             ],
             "problemMatcher": []
         },
-        {
+        { //leb
             "label": "leb",
             "type": "shell",
             "command": "leb",

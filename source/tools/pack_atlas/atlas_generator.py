@@ -145,6 +145,8 @@ class TextureInfo(FileInfo):
         self.sourceH = 0
         self.spriteSourceX = 0
         self.spriteSourceY = 0
+        self.borderW = 0
+        self.borderH = 0
         self.cutEmpty = cutEmpty
         return self
 
@@ -161,7 +163,7 @@ class TextureInfo(FileInfo):
         self.sourceW = self.texture.width
         self.sourceH = self.texture.height
         
-        if self.cutEmpty:
+        if self.cutEmpty and self.texture.mode == "RGBA":
             bbox = self.texture.getbbox()
             if bbox:
                 if bbox[0] > 0 or bbox[1] or bbox[2] < self.texture.width or bbox[3] < self.texture.height:
@@ -170,6 +172,28 @@ class TextureInfo(FileInfo):
                     self.texture = cropTex
                     self.spriteSourceX = bbox[0]
                     self.spriteSourceY = bbox[1]
+
+    def createBorder(self, borderW:int, borderH:int):
+        borderW = borderW if borderW and borderW > 0 else 0
+        borderH = borderH if borderH and borderH > 0 else 0
+        self.borderW = borderW
+        self.borderH = borderH
+        if borderW or borderH:
+            newW = self.get_w() + borderW * 2
+            newH = self.get_h() + borderH * 2
+            tempTex = ImageModule.new("RGBA", (newW, newH))
+            #左右
+            for i in range(borderW):
+                tempTex.paste(self.texture, (i, borderW))
+                tempTex.paste(self.texture, (borderW + borderW - i, borderW))
+            #上下
+            for i in range(borderH):
+                tempTex.paste(self.texture, (borderW, i))
+                tempTex.paste(self.texture, (borderW, borderW + borderW - i))
+            tempTex.paste(self.texture, (borderW, borderH))
+            self.texture.close()
+            self.texture = tempTex
+        pass
 
     def reset(self):
         super().reset()
@@ -183,6 +207,8 @@ class TextureInfo(FileInfo):
         self.sourceH = 0
         self.spriteSourceX = 0
         self.spriteSourceY = 0
+        self.borderW = 0
+        self.borderH = 0
         self.cutEmpty = False
         return self
 
@@ -373,6 +399,7 @@ class AtlasConfig:
         self.squared = False
         self.cutTexEmpty = False
         self.cutAtlasEmpty = False
+        self.borderWidth = 0
 
 class AtlasGenerator:
     _inst = None
@@ -389,17 +416,24 @@ class AtlasGenerator:
         canPack = True
         atlasGrids = self.atlasGrids
 
-        for v in texInfos: v.createTex()
+        borderWidth = config.borderWidth
+        for v in texInfos:
+            borderW, borderH = borderWidth, borderWidth
+            if v.get_w() + borderWidth * 2 > config.maxSize:
+                borderW = max(int((config.maxSize - v.get_w()) / 2), 0)
+            if v.get_h() + borderWidth * 2 > config.maxSize:
+                borderH = max(int((config.maxSize - v.get_h()) / 2), 0)
+            v.createBorder(borderW, borderH)
         texInfos.sort(key=lambda x: x.get_w(), reverse=True)
 
         for ti in tqdm(range(len(texInfos)), unit="img", desc="计算图集位置", colour="#22FF22"):
             texInfo = texInfos[ti]
             if texInfo.get_w() > config.maxSize or texInfo.get_h() > config.maxSize:
-                print(colorStr("贴图尺寸超过图集最大尺寸，打包失败！！！", 196))
+                print(colorStr("贴图尺寸超过图集最大尺寸，打包失败！！！" + texInfo.filePath, 196))
                 canPack = False
                 break
             if texInfo.get_w() > config.maxSingleSize or texInfo.get_h() > config.maxSingleSize:
-                print(colorStr("贴图尺寸超过单图最大尺寸，打包失败！！！", 196))
+                print(colorStr("贴图尺寸超过单图最大尺寸，打包失败！！！" + texInfo.filePath, 196))
                 canPack = False
                 break
             success = False
@@ -432,7 +466,7 @@ class AtlasGenerator:
                 # totalUseRatio = totalUseRatio + atlasGrids[i].useRatio()
                 for texInfo in atlasGrids[i].textures:
                     frames[texInfo.extName] = {
-                        "frame":{"x": texInfo.x, "y": texInfo.y, "w": texInfo.get_w(), "h": texInfo.get_h(), "idx": i},
+                        "frame":{"x": texInfo.x + texInfo.borderW, "y": texInfo.y + texInfo.borderH, "w": texInfo.get_w() - texInfo.borderW * 2, "h": texInfo.get_h() - texInfo.borderH * 2, "idx": i},
                         "sourceSize":{"w":texInfo.sourceW, "h":texInfo.sourceH},
                         "spriteSourceSize":{"x":texInfo.spriteSourceX, "y":texInfo.spriteSourceY}
                     }
@@ -495,6 +529,8 @@ argv  = sys.argv
 argv.pop(0)
 # 只记录 rec 版本
 makeRecOnly = "-r" in argv or "-R" in argv
+# 强制打包，忽略rec版本号
+forcePack = "-f" in argv or "-F" in argv
 
 config = AtlasConfig()
 config.maxSize = 1024
@@ -504,6 +540,7 @@ config.power2 = False
 config.squared = False
 config.cutTexEmpty = True
 config.cutAtlasEmpty = True
+config.borderWidth = 1
 
 inputRootDir = "../../laya/assets"
 outputRootDir = rectifyPath(os.path.join("../../bin", ""))
@@ -522,6 +559,7 @@ else:
 packTexSuffixs = ["png", "jpg"]
 # 排除得目录
 exincludeDirs = ["设计稿"]
+packDirInfo = dict()
 
 def isUnpackDir(dirRelPath:str):
     unpackDir = False
@@ -565,7 +603,17 @@ def pack_dir_atlas(dir:str, recData:dict[str, dict[str, str]]):
     if makeRecOnly:
         print(colorStr("rec 搜集 => ", 243) + colorStr(dirRelPath, 247))
     else:
-        needPackAtlas = True if not oldPackRec or len(oldPackRec.items()) != len(packTexInfos) else False
+        for i in range(len(packTexInfos) - 1, -1, -1):
+            v = packTexInfos[i]
+            v.createTex()
+            if v.get_w() > config.maxSize or v.get_h() > config.maxSize:
+                packTexInfos.pop(i)
+                newPackRec.pop(v.extName)
+                newUnpackRec[v.extName] = v.md5
+                if not oldUnpackRec or not oldUnpackRec.get(v.extName) or oldUnpackRec.get(v.extName) != v.md5:
+                    unpackFileInfos.append(v)
+                    
+        needPackAtlas = True if forcePack or not oldPackRec or len(oldPackRec.items()) != len(packTexInfos) else False
         for v in packTexInfos:
             if not needPackAtlas:
                 needPackAtlas = oldPackRec.get(v.extName) != v.md5
@@ -652,4 +700,3 @@ try:
 except Exception as err:
     print(err)
     input(colorStr("报错啦，联系开发人员", 196))
-
