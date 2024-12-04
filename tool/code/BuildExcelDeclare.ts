@@ -8,7 +8,12 @@ const enum ExportType {
     Group = "group",
     Unique = "unique",
     NoKey = "nokey",
+    KV = "kv",
 }
+
+const xlsxDir = PaiHun_ExcelDir;
+const modify_tip = LUA_MODIFY_TIP;
+const outputPath = PaiHun_ExcelDeclarePath;
 
 export class BuildExcelDeclare extends BuildBase {
     private typeMap = {
@@ -18,21 +23,24 @@ export class BuildExcelDeclare extends BuildBase {
         "string": "string",
     };
 
-    doBuild(): void {
+    doBuild() {
         this.createTableEnum();
     }
 
     private createTableEnum() {
         let declareContent = "";
         const tableNameMap = {}, tableSheetInfo = {}, sheetRepeatInfo = {}, tableSheetInfo2 = {};
-        fs.readdirSync(PaiHun_ExcelDir).forEach(file => {
-            if (file.endsWith(".xlsx")) {
+        fs.readdirSync(xlsxDir).forEach(file => {
+            const filepath = path.resolve(xlsxDir, file);
+            if (!fs.statSync(filepath).isFile()) return;
+            if (!this.hasChinese(file) && file.endsWith(".xlsx")) {
+                console.log("处理表 " + file);
                 const tableName = file.replace(".xlsx", "");
                 const tableUpperName = this.upperFirst(tableName, ["_"], "");
                 tableNameMap[tableUpperName] = tableName;
                 tableSheetInfo[tableName] ||= {};
                 tableSheetInfo2[tableName] ||= {};
-                const sheets: { name: string, data: string[][] }[] = xlsx.parse(path.resolve(PaiHun_ExcelDir, file)).filter(v => !this.hasChinese(v.name)) as any;
+                const sheets: { name: string, data: string[][] }[] = xlsx.parse(filepath).filter(v => !this.hasChinese(v.name)) as any;
                 const exportSheet = sheets.shift();
                 exportSheet?.data.shift();
                 //导出类型映射
@@ -79,16 +87,16 @@ export class BuildExcelDeclare extends BuildBase {
                     types.shift();
                     comments && comments.shift();
 
-                    declareContent += `---${ tableExportType } sheet${ tableComment ? " | " + tableComment : "" }\n---@class ${ sheetDataType }\n`;
+                    declareContent += `---${ tableExportType } sheet${ tableComment ? " " + tableComment : "" }\n---@class ${ sheetDataType }\n`;
                     declareContent += this.getSheetFieldsContent(fields, types, comments);
                     const keyFieldIndex = fields.findIndex(v => v == tableExportKey);
                     const keyType = this.typeMap[types[keyFieldIndex]] || "string";
                     declareContent += `\n---${ tableExportType } data\n---@alias ${ dataType } ${ sheetDataType }${ this.exportTableDataType(tableExportType) }`;
                     declareContent += `\n---${ tableExportType } table<${ tableExportKey }, ${ dataType }>\n---@alias ${ tableType } table<${ keyType }, ${ dataType }>\n\n`;
                 });
-            }
+            } else console.log("跳过处理：\t" + file);
         });
-        let enumContent = `${ LUA_MODIFY_TIP }\n---表名枚举\n---@enum ExcelName\nExcelName = {\n`;
+        let enumContent = `${ modify_tip }\n\n---表名枚举\n---@enum ExcelName\nExcelName = {\n`;
         Object.keys(tableNameMap).forEach(v => {
             enumContent += `\t${ v } = "${ tableNameMap[v] }",\n`
         });
@@ -121,8 +129,9 @@ export class BuildExcelDeclare extends BuildBase {
         //
         enumContent = enumContent.trim() + "\n}";
         const content = enumContent + "\n\n" + declareContent;
-        fs.writeFileSync(PaiHun_ExcelDeclarePath, content.trim());
+        fs.writeFileSync(outputPath, content.trim());
     }
+
     private hasChinese(str: string) {
         const reg = /[\u4e00-\u9fa5|\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/;
         return reg.test(str);
@@ -171,10 +180,11 @@ export class BuildExcelDeclare extends BuildBase {
                 result[v].comments.push("unknown field type");
             }
             const comments = result[v].isArray ? this.getArrConnectStr(result[v].comments) : result[v].comments[0];
-            content += `---@field public ${ v } ${ result[v].type }${ comments ? " @ " + comments : "" }\n`;
+            content += `---@field public ${ v } ${ result[v].type }${ comments ? " @ " + comments.replace(/\n/g, "") : "" }\n`;
         });
         return content;
     }
+
     private getArrConnectStr(arr: string[]) {
         if (!arr || !arr.length) return "";
         return arr.map(v => "[" + v + "]").join(", ");
