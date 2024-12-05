@@ -429,11 +429,11 @@ class AtlasGenerator:
         for ti in tqdm(range(len(texInfos)), unit="img", desc="计算图集位置", colour="#22FF22"):
             texInfo = texInfos[ti]
             if texInfo.get_w() > config.maxSize or texInfo.get_h() > config.maxSize:
-                print(colorStr("贴图尺寸超过图集最大尺寸，打包失败！！！" + texInfo.filePath, 196))
+                print(colorStr("贴图尺寸超过图集最大尺寸，打包失败！！！" + texInfo.filePath + " " + str(texInfo.get_w()) + " " + str(texInfo.get_h()), 196))
                 canPack = False
                 break
-            if texInfo.get_w() > config.maxSingleSize or texInfo.get_h() > config.maxSingleSize:
-                print(colorStr("贴图尺寸超过单图最大尺寸，打包失败！！！" + texInfo.filePath, 196))
+            if borderWidth <= 0 and (texInfo.get_w() > config.maxSingleSize or texInfo.get_h() > config.maxSingleSize):
+                print(colorStr("贴图尺寸超过单图最大尺寸，打包失败！！！" + texInfo.filePath + " " + str(texInfo.get_w()) + " " + str(texInfo.get_h()), 196))
                 canPack = False
                 break
             success = False
@@ -606,7 +606,7 @@ def pack_dir_atlas(dir:str, recData:dict[str, dict[str, str]]):
         for i in range(len(packTexInfos) - 1, -1, -1):
             v = packTexInfos[i]
             v.createTex()
-            if v.get_w() > config.maxSize or v.get_h() > config.maxSize:
+            if v.get_w() > config.maxSingleSize or v.get_h() > config.maxSingleSize:
                 packTexInfos.pop(i)
                 newPackRec.pop(v.extName)
                 newUnpackRec[v.extName] = v.md5
