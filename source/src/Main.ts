@@ -13,6 +13,7 @@ import { SceneLittleGame } from "./scene/scene/SceneLittleGame";
 import { SceneLogin } from "./scene/scene/SceneLogin";
 import { SceneMain } from "./scene/scene/SceneMain";
 import { ScenePreScreen } from "./scene/scene/ScenePreScreen";
+import { MyRender } from "./webgl/MyRender";
 
 class Main {
 	constructor() {
@@ -61,9 +62,10 @@ class Main {
 			new SceneGame(),
 			new SceneLittleGame(),
 		]);
-		sceneMgr.enterScene(SceneType.PreScreen);
+		// sceneMgr.enterScene(SceneType.PreScreen);
 
 		// CustomSpriteManager.Init();
+		new MyRender();
 	}
 }
 
