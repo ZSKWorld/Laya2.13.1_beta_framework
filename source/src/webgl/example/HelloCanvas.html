@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Clear Canvas</title>
+</head>
+
+<body onload="main()">
+    <canvas id="webgl" width="400" height="400"></canvas>
+    <script src="lib/webgl-utils.js"></script>
+    <script src="lib/webgl-debug.js"></script>
+    <script src="lib/cuon-utils.js"></script>
+    <!-- <script src="HelloCanvas.js"></script> -->
+    <script>
+        const VSHADER_SOURCE = `
+                attribute vec4 a_Position;
+                attribute float a_PointSize;
+                void main(){
+                    gl_Position = a_Position;
+                    gl_PointSize = a_PointSize;
+                }
+            `;
+        const FSHADER_SOURCE = `
+                precision mediump float;
+                uniform vec4 u_FragColor;
+                void main(){
+                    gl_FragColor = u_FragColor;
+                }
+            `;
+        function getWebGLContext(canvas) {
+            return canvas.getContext("webgl");
+        }
+
+        /**
+         *@param {WebGLRenderingContext} gl
+         */
+        function loadShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            if (shader == null) {
+                console.error("unable to create shader");
+                return null;
+            }
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error("compile shader error: " + gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        /**
+         *@param {WebGLRenderingContext} gl
+         */
+        function createProgram(gl, vShaderSource, fShaderSource) {
+            const vShader = loadShader(gl, gl.VERTEX_SHADER, vShaderSource);
+            if (!vShader) {
+                console.error("Failed to load vertex shader! ");
+                return null;
+            }
+            const fShader = loadShader(gl, gl.FRAGMENT_SHADER, fShaderSource);
+            if (!fShader) {
+                console.error("Failed to load fragment shader! ");
+                return null;
+            }
+
+            const program = gl.createProgram();
+            if (program == null) {
+                console.error("unable to create program");
+                return null;
+            }
+            gl.attachShader(program, vShader);
+            gl.attachShader(program, fShader);
+            gl.linkProgram(program);
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error("program link error: " + gl.getProgramInfoLog(program));
+                return false;
+            }
+            return program;
+        }
+
+        const g_points = [];
+        const g_colors = [];
+        /**
+         *@param {MouseEvent} ev 
+         *@param {WebGLRenderingContext} gl
+         *@param {HTMLCanvasElement} canvas
+         */
+        function click(ev, gl, canvas, a_Position, u_FragColor) {
+            let x = ev.clientX;
+            let y = ev.clientY;
+            const rect = ev.target.getBoundingClientRect();
+
+            x = ((x - rect.left) - canvas.width / 2) / (canvas.width / 2);
+            y = (canvas.height / 2 - (y - rect.top)) / (canvas.height / 2);
+
+            g_points.push([x, y]);
+            if (x >= 0.0 && y >= 0.0) g_colors.push([1, 0, 0, 1]);
+            else if (x < 0 && y < 0) g_colors.push([0, 1, 0, 1]);
+            else g_colors.push([1, 1, 1, 1]);
+
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            const len = g_points.length;
+            for (let i = 0; i < len; i++) {
+                const xy = g_points[i];
+                const rgba = g_colors[i];
+                gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0);
+                gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
+                gl.drawArrays(gl.POINTS, 0, 1);
+            }
+        }
+
+        /**
+         *@param {WebGLRenderingContext} gl
+         */
+        function initVertexBuffers(gl, a_Position) {
+            const buffer = gl.createBuffer();
+            if (!buffer) {
+                console.error("Failed to create buffer.");
+                return -1;
+            }
+            const data = [];
+            for (let x = 0; x < 400; x += 10) {
+                for (let y = 0; y < 400; y += 10) {
+                    data.
+                }
+            }
+            const vertices = new Float32Array(data);
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(a_Position);
+            return vertices.length / 3;
+        }
+
+        function main() {
+            const canvas = document.getElementById("webgl");
+            // canvas.onmousedown = function(ev){click(ev, gl, canvas, a_Position, u_FragColor);}
+            /**@type {WebGLRenderingContext} */
+            const gl = getWebGLContext(canvas);
+            if (!gl) {
+                console.warn("Failed to get the rendering context for WebGL");
+                return;
+            }
+
+            const program = createProgram(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+            if (!program) {
+                console.error("Failed to create program.");
+                return;
+            }
+            gl.useProgram(program);
+
+            const a_Position = gl.getAttribLocation(program, "a_Position");
+            const a_PointSize = gl.getAttribLocation(program, "a_PointSize");
+            gl.vertexAttrib1f(a_PointSize, 5);
+            const u_FragColor = gl.getUniformLocation(program, "u_FragColor");
+            gl.uniform4f(u_FragColor, 1, 0, 0, 1);
+
+            const n = initVertexBuffers(gl, a_Position);
+
+            gl.clearColor(0, 0, 0, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.POINTS, 0, n);
+        }
+    </script>
+</body>
+
+</html>
