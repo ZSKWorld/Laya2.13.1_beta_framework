@@ -43,9 +43,9 @@ export class UIManager extends Observer implements IUIManager {
 	/** 页面类映射 */
 	private _viewClsMap: { [key: string]: IViewClass } = {};
 	/** 页面控制器类映射 */
-	private _ctrlClsMap: { [key: string]: Class<IViewCtrl> } = {};
+	private _ctrlClsMap: { [key: string]: IViewCtrlClass } = {};
 	/** 页面控制器网络代理类映射 */
-	private _proxyClsMap: { [key: string]: Class<IViewProxy> } = {};
+	private _proxyClsMap: { [key: string]: IViewProxyClass } = {};
 
 	/** 缓存池 */
 	private _cache: UICache;
@@ -78,57 +78,47 @@ export class UIManager extends Observer implements IUIManager {
 		Laya.stage.on(Laya.Event.RESIZE, this, () => Laya.timer.callLater(this, this.onResize));
 	}
 
-	registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>) {
+	registView(viewId: ViewID, viewCls: IViewClass, ctrlCls?: IViewCtrlClass, proxyCls?: IViewProxyClass) {
 		if (!viewCls) throw new Error("参数不能为空！");
-		if (!this._viewClsMap[viewId]) {
-			viewCls && (viewCls.prototype.viewId = viewId);
-			ctrlCls && (ctrlCls.prototype.viewId = viewId);
-			ctrlCls && (ctrlCls.prototype.ProxyClass = proxyCls);
-			proxyCls && (proxyCls.prototype.viewId = viewId);
-			this._viewClsMap[viewId] = viewCls;
-			this._ctrlClsMap[viewId] = ctrlCls;
-			this._proxyClsMap[viewId] = proxyCls;
-		}
+		viewCls && (viewCls.prototype.viewId = viewId);
+		ctrlCls && (ctrlCls.prototype.viewId = viewId);
+		ctrlCls && (ctrlCls.prototype.ProxyClass = proxyCls);
+		proxyCls && (proxyCls.prototype.viewId = viewId);
+		this._viewClsMap[viewId] = viewCls;
+		this._ctrlClsMap[viewId] = ctrlCls;
+		this._proxyClsMap[viewId] = proxyCls;
 	}
 	getViewClass(viewId: ViewID) { return this._viewClsMap[viewId]; }
 	getCtrlClass(viewId: ViewID) { return this._ctrlClsMap[viewId]; }
 	getProxyClass(viewId: ViewID) { return this._proxyClsMap[viewId]; }
 
-	isTopView(view:IViewCtrl | IView) {
+	isTopView(view: IViewCtrl | IView) {
 		if (!view) return false;
 		if (!this._openedCtrls[0]) return false;
 		return this._openedCtrls[0] == view || this._openedCtrls[0].view == view;
 	}
 
 	createView(viewId: ViewID, fullScreen: boolean = false) {
-		const viewInst = this._viewClsMap[viewId].createInstance();
+		const viewInst = this.getViewClass(viewId).createInstance();
 		viewInst.name = viewId;
 		fullScreen && viewInst.makeFullScreen();
 		return viewInst.getComponent(this.getCtrlClass(viewId));
 	}
 
-	showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler) {
-		const ViewClass = this._viewClsMap[viewId];
-		if (!ViewClass) return;
+	showView<T = any>(viewId: ViewID, data?: T) {
 		this.lockMark++;
 		let openedIndex = this._openedCtrls.findIndex(v => v.viewId == viewId);
 		if (openedIndex == -1) {
-			//先尝试从缓存池中获取
 			const viewCtrl = this._cache.getView(viewId);
-			if (viewCtrl) this.showView2(viewCtrl, data, callback);
+			if (viewCtrl) return this.showView2(viewCtrl, data);
 			else {
-				loadMgr.loadPackage(ViewClass.pkgRes).then(
-					() => this.showView2(this.createView(viewId, true), data, callback),
-					() => {
-						ShowConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`).then(result => {
-							if (result) this.showView(viewId, data, callback);
-							else this.showView2(null, data, callback);
-						});
-					}
+				return loadMgr.loadPackage(this.getViewClass(viewId).pkgRes).then(
+					() => this.showView2(this.createView(viewId, true), data),
+					() => { ShowConfirm("提示", `界面 ${ viewId } 加载失败，是否重试?`) },
 				);
 			}
 		} else {
-			this.showView2(this._openedCtrls[openedIndex], data, callback);
+			return this.showView2(this._openedCtrls[openedIndex], data);
 		}
 	}
 
@@ -170,10 +160,10 @@ export class UIManager extends Observer implements IUIManager {
 		}
 	}
 
-	private showView2(viewCtrl: IViewCtrl, data: any, callback?: Laya.Handler) {
+	private showView2(viewCtrl: IViewCtrl, data: any) {
 		const onFinally = () => {
-			callback && callback.run();
 			this.lockMark--;
+			return Promise.resolve();
 		};
 		if (viewCtrl) {
 			viewCtrl.data = data || viewCtrl.data;
@@ -182,8 +172,8 @@ export class UIManager extends Observer implements IUIManager {
 			openIndex > 0 && this._openedCtrls.splice(openIndex, 1);
 			doOpenAni && this._openedCtrls.unshift(viewCtrl);
 			doOpenAni && layerMgr.addObject(viewCtrl.view, viewCtrl.view.layer || Layer.UIBottom);
-			doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
-		} else onFinally();
+			return doOpenAni ? viewCtrl.onOpenAni().finally(onFinally) : onFinally();
+		} else return onFinally();
 	}
 
 	private onResize() {

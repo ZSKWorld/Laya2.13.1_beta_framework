@@ -18,7 +18,7 @@ export class SceneGame extends LogicSceneBase<SceneGameData> {
 	}
 
 	protected override onEnter() {
-		uiMgr.showView(ViewID.UIChooseBattleView, this.data.battleType);
+		this.showView(ViewID.UIChooseBattleView, this.data.battleType);
 	}
 
 }

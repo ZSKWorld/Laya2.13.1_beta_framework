@@ -1,4 +1,6 @@
 declare type IViewClass = Class<IView> & { createInstance?(): IView, readonly pkgRes?: string };
+declare type IViewCtrlClass = Class<IViewCtrl>;
+declare type IViewProxyClass = Class<IViewProxy>;
 
 /**
  * 页面控制器键盘事件装饰器工厂
@@ -61,8 +63,28 @@ declare enum Layer {
     Lock = "Lock",
 }
 
+interface IViewMethod {
+    /** 创建页面
+     * @param viewId 页面id
+     * @param fullScreen 是否全屏 默认：false
+     */
+    createView(viewId: ViewID, fullScreen?: boolean): IViewCtrl;
+
+    /**
+     * 打开页面
+     * @param viewId 页面id
+     * @param data 传入参数
+     */
+    showView<T = any>(viewId: ViewID, data?: T): Promise<void>;
+
+    /** 移除页面
+     * @param viewId 页面id
+     */
+    removeView(viewId: ViewID): void;
+}
+
 /**页面及控制器扩展 */
-declare interface IViewExtend {
+declare interface IViewExtend extends IViewMethod {
     readonly viewId: ViewID;
 
     /**
@@ -81,33 +103,9 @@ declare interface IViewExtend {
     /** 派发页面消息 */
     sendMessage(type: string, data?: any): void;
 
-    /** 创建页面
-     * @param viewId 页面id
-     * @param fullScreen 是否全屏 默认：false
-     */
-    createView(viewId: ViewID, fullScreen?: boolean): IViewCtrl;
-
-    /**
-     * 打开页面
-     * @param viewId 页面id
-     * @param data 传入参数
-     * @param callback 打开后回调
-     */
-    showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler): void;
-
-    /**移除最上层页面 */
-    removeTopView(): void;
-
-    /**移除所有页面 */
-    removeAllView(): void;
-
-    /** 移除页面
-     * @param viewId 页面id
-     */
-    removeView(viewId: ViewID): void;
-
     /** 移除当前页面，只有UI界面才能移除自身，其他Com，Btn，Render之类的无效 */
     removeSelf(): void;
+
     getPath(): string;
 }
 
@@ -133,7 +131,7 @@ declare interface IViewCtrl<V extends IView = IView, D = any> extends Laya.Scrip
     /** 页面消息监听器 */
     get listener(): Laya.EventDispatcher;
     /** 网络代理类 */
-    readonly ProxyClass: Class<IViewProxy>;
+    readonly ProxyClass: IViewProxyClass;
 
     /**
      * 页面打开动画
@@ -155,36 +153,18 @@ declare interface IViewProxy<T extends IViewCtrl = IViewCtrl> {
     destroy(): void;
 }
 
-declare interface IUIManager extends INotifier {
+declare interface IUIManager extends INotifier, IViewMethod {
     init(): void;
-    registView(viewId: ViewID, viewCls: Class<IView>, ctrlCls?: Class<IViewCtrl>, proxyCls?: Class<IViewProxy>): void;
+    registView(viewId: ViewID, viewCls: IViewClass, ctrlCls?: IViewCtrlClass, proxyCls?: IViewProxyClass): void;
     getViewClass(viewId: ViewID): IViewClass;
-    getCtrlClass(viewId: ViewID): Class<IViewCtrl>;
-    getProxyClass(viewId: ViewID): Class<IViewProxy>;
+    getCtrlClass(viewId: ViewID): IViewCtrlClass;
+    getProxyClass(viewId: ViewID): IViewProxyClass;
 
     /** 是否是最顶层ui */
     isTopView(view: IViewCtrl | IView): boolean;
 
-    /** 创建页面
-     * @param viewId 页面id
-     * @param fullScreen 是否全屏，默认false
-     */
-    createView(viewId: ViewID, fullScreen?: boolean): IViewCtrl;
-
-    /** 添加页面
-     * @param viewId 页面id
-     * @param data 页面数据
-     * @param callback {@link Laya.Handler} 回调
-     */
-    showView<T = any>(viewId: ViewID, data?: T, callback?: Laya.Handler): void;
-
     /** 移除顶层页面 */
     removeTopView(): void;
-
-    /** 移除页面
-     * @param viewId 页面id
-     */
-    removeView(viewId: ViewID): void;
 
     /** 移除所有页面 */
     removeAllView(): void;

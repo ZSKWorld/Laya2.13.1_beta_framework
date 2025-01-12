@@ -62,10 +62,10 @@ class Main {
 			new SceneGame(),
 			new SceneLittleGame(),
 		]);
-		// sceneMgr.enterScene(SceneType.PreScreen);
+		sceneMgr.enterScene(SceneType.PreScreen);
 
 		// CustomSpriteManager.Init();
-		new MyRender();
+		// new MyRender();
 	}
 }
 

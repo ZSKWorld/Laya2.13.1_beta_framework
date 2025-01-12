@@ -65,6 +65,10 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
 		this.clearRes(ResGroupType.Normal);
 	}
 
+	protected showView(viewId: ViewID, data?: any) {
+		return uiMgr.showView(viewId, data);
+	}
+
 	/**
 	 * 清理场景资源
 	 * @param type 要清理的资源类型
@@ -92,7 +96,7 @@ export abstract class LogicSceneBase<T> extends Observer implements IScene<T> {
 	private setLoadProgres(count: number) {
 		if (this.loadViewId) {
 			count++;
-			uiMgr.showView(this.loadViewId);
+			this.showView(this.loadViewId);
 		}
 		this._progresses.length = 0;
 		this._progressHandlers.forEach(v => v.recover());

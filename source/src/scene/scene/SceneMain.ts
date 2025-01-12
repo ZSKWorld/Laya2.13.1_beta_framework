@@ -18,7 +18,7 @@ export class SceneMain extends LogicSceneBase<SceneMainData> {
 
 	protected override onEnter() {
 		redDotMgr.init();
-		uiMgr.showView(ViewID.UIMainView);
+		this.showView(ViewID.UIMainView);
 	}
-	
+
 }

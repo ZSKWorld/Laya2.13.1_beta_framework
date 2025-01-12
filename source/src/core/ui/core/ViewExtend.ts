@@ -57,12 +57,10 @@ export class ViewExtend {
 	}
 
 	private static viewExtend(prototype: IViewExtend) {
-		prototype.dispatch = function (...args) { eventMgr.event(...args); }
+		prototype.dispatch = function (...args) { return eventMgr.event(...args); }
 		prototype.createView = function (...args) { return uiMgr.createView(...args); }
-		prototype.showView = function (...args) { uiMgr.showView(...args); }
-		prototype.removeTopView = function () { uiMgr.removeTopView(); }
-		prototype.removeAllView = function () { uiMgr.removeAllView(); }
-		prototype.removeView = function (...args) { uiMgr.removeView(...args); }
+		prototype.showView = function (...args) { return uiMgr.showView(...args); }
+		prototype.removeView = function (...args) { return uiMgr.removeView(...args); }
 		prototype.removeSelf = function () {
 			const viewId = (<IViewExtend>this).viewId;
 			//只有UI界面才能移除自身

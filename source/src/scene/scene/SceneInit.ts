@@ -44,7 +44,7 @@ export class SceneInit extends LogicSceneBase<SceneInitData> {
 			if (eventName == SocketEvent.ReconnectSuccess && userData.account.account)
 				netService.login({ account: userData.account.account, password: userData.account.password });
 		}
-		else uiMgr.showView(ViewID.UIWaitingView, "网络已断开");
+		else this.showView(ViewID.UIWaitingView, "网络已断开");
 	}
 
 	@RegisterEvent(SocketEvent.MsgError)

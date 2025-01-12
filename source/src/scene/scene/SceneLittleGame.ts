@@ -2,7 +2,7 @@ import { LogicSceneBase } from "../SceneBase";
 import { SceneType } from "../SceneDefine";
 
 export interface SceneLittleGameData {
-	
+
 }
 
 /** 小游戏逻辑场景 */
@@ -17,7 +17,7 @@ export class SceneLittleGame extends LogicSceneBase<SceneLittleGameData> {
 	}
 
 	protected override onEnter() {
-		uiMgr.showView(ViewID.UILittleGameView);
+		this.showView(ViewID.UILittleGameView);
 	}
 
 }

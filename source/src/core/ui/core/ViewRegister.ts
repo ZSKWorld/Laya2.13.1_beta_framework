@@ -122,7 +122,7 @@ class ViewRegister {
 
     /**页面注册 */
     private registerView() {
-		const register = uiMgr.registView.bind(uiMgr);
+		const register = uiMgr.registView.bind(uiMgr) as typeof uiMgr.registView;
 		//Btns
 		register(ViewID.BtnTxtView, BtnTxtView, BtnTxtCtrl);
 		register(ViewID.BtnCheckView, BtnCheckView, BtnCheckCtrl);
